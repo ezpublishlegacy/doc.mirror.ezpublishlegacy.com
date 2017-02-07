@@ -1,0 +1,140 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.7/Concepts-and-basics/Workflows by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:38:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Workflows / Concepts and basics / 4.7 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Workflows</h1>
+</div>
+
+<p>This section explains the workflow capabilities of eZ Publish. The system comes with an integrated workflow mechanism that makes it possible to perform different tasks with or without user interaction. The workflow implementation is based on the following components:</p>
+<ul>
+<li><div> Events </div></li><li><div> Workflows </div></li><li><div> Workflow groups </div></li><li><div> Triggers </div></li>
+</ul>
+<p>The following illustration shows the relations between the elements in the list above.</p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/concepts_and_basics/workflow_system/1250-3-eng-GB/workflow_system_doc.png" alt="The workflow system." />
+ <p>The workflow system.</p>
+
+
+
+
+
+
+
+</div><p>An <i>event</i> is the smallest entity of the workflow system, it carries out a specific task. eZ Publish comes with a collection of events that cover the needs of typical everyday tasks. For example, the built-in approve event makes it possible to have the contents of an object approved by an editor (a user) before it is published. The built-in events are documented in the <a href="../../4.x/Reference/Workflow-events.html" target="_self">&quot;Workflow events&quot;</a> section of the &quot;Reference&quot; chapter. It is possible to extend the system by creating custom events for special needs. Custom workflow events have to be programmed in PHP.</p><p>A <i>workflow</i> is a collection of events. In other words, it defines an ordered sequence of actions that will be executed when the workflow is running. The workflows can be placed in different groups. A <i>workflow group</i> is nothing more than a collection of workflows. A workflow is initiated by a <i>trigger</i>. Although a trigger is only capable of initiating a single workflow, several other workflows can be started through the built-in multiplexer event (from within the workflow that was originally initiated by the trigger). A trigger is associated with a function of a module. It will start the specified workflow either before or after that the function has completed. The following table gives an overview of the standard/built-in triggers.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th  class="tight">  <p>ID</p>
+  </th><th >  <p>Module</p>
+  </th><th >  <p>Function</p>
+  </th><th >  <p>Connection type</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>1</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>publish</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>before</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>publish</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>after</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>3</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>shop</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>confirmorder</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>before</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>4</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>shop</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>checkout</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>before</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>5</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>shop</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>checkout</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>after</p>
+  </td>
+
+</tr>
+
+</table>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.7/Concepts-and-basics/Workflows by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:38:17 GMT -->
+</html>

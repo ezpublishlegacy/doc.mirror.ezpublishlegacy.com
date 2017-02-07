@@ -1,0 +1,64 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Concepts-and-basics/Content-management/Object-relations by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Object relations / Content management / Concepts and basics / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Object relations</h1>
+</div>
+
+ <p>The content model of eZ publish makes it possible to create relations between different objects. Any type of object can be connected to any other type of object. This feature is typically useful in situations when there is a need to bind and/or reuse information that is scattered around in the system.</p> <p>For example, the concept of related objects makes it possible to add images to news articles. Instead of using a fixed set of image attributes, the images are stored as separate objects outside the article. These objects can then be related to the article and used directly in attributes represented by the <a href="../../Reference/Datatypes/XML-block.html" target="_self">&quot;XML block&quot;</a> datatype. This approach is quite flexible because it does not enforce any limitations when it comes to the amount and the type of information that is to be included.</p>  <a name="eztoc75036_1" id="eztoc75036_1"></a><h2>Relation types</h2> <p>A relation between two objects can be created either at the object level or at the object attribute level. The system stores the different types of relations using the same database table. An object can not have a relation to itself. <a name="object"></a>
+ </p>  <a name="eztoc75036_1_1" id="eztoc75036_1_1"></a><h3>Relations at the object level</h3> <p>In eZ Publish 3.8 and earlier versions, the relations at the object level were generic and could not be grouped in any way. From 3.9, there are three types of relations at the object level:</p>
+<ul>
+ <li><div> Common </div></li> <li><div> XML linked </div></li> <li><div> XML embedded </div></li> 
+</ul>
+<p> <a name="common"></a>
+ </p>  <a name="eztoc75036_1_1_1" id="eztoc75036_1_1_1"></a><h4>Common</h4> <p>A relation of the &quot;common&quot; type is created when a user manually adds a content object to the related object list of another object. (In most cases, this is done by using the &quot;<a href="../../../../User-manual/3.9/The-administration-interface/The-object-edit-interface/Related-objects.html" target="_self">Related objects</a>&quot; window in the object edit interface.) This method is always available for use. <a name="linked"></a>
+ </p>   <a name="eztoc75036_1_1_2" id="eztoc75036_1_1_2"></a><h4>XML linked</h4> <p>Whenever an internal link (a link to other node or object) is inserted into an attribute represented by the &quot;<a href="../../Reference/Datatypes/XML-block.html" target="_self">XML block</a>&quot; datatype, the system will automatically create a relation of the &quot;XML linked&quot; type. Note that a relation of this type is automatically removed from the system when the corresponding &quot;link&quot; tag is removed from the content.</p> <p> <a name="embedded"></a>
+ </p>   <a name="eztoc75036_1_1_3" id="eztoc75036_1_1_3"></a><h4>XML embedded</h4> <p>Whenever an &quot;embed&quot; tag is inserted into an attribute of the &quot;<a href="../../Reference/Datatypes/XML-block.html" target="_self">XML block</a>&quot; datatype, the system will automatically create a relation of the &quot;XML embedded&quot; type, i.e. relate the embedded object to the one that is being edited. Note that a relation of this type is automatically removed from the system when the corresponding &quot;embed&quot; tag is removed. <a name="attribute"></a>
+ </p>    <a name="eztoc75036_1_2" id="eztoc75036_1_2"></a><h3>Relations at the attribute level</h3> <p>Relations of this type will be automatically generated whenever the <a href="../../Reference/Datatypes/Object-relation.html" target="_self">&quot;Object relation&quot;</a> or the <a href="../../Reference/Datatypes/Object-relations.html" target="_self">&quot;Object relations&quot;</a> datatypes are used. While the first one allows only a single relation, the second allows multiple relations. There is no grouping of the relations. However, by making use of several attributes that are represented by one of these datatypes, it is possible to create a custom structure with grouped relations.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Concepts-and-basics/Content-management/Object-relations by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:29 GMT -->
+</html>

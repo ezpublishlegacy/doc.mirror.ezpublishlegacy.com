@@ -1,0 +1,230 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/1.4/Installation/Configuring-eZ-Publish by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Configuring eZ Publish / Installation / 1.4 / eZ Publish Extension for Oracle® database / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Configuring eZ Publish</h1>
+</div>
+
+ <p>Once you have created a clean eZ Publish database on the Oracle server, you need to configure eZ Publish in order to create a site that runs on the newly created database. Configuration is done manually using the command line interface of the target operating system. The following steps will work on both UNIX/Linux and Windows environments.</p>  <a name="eztoc35604_1" id="eztoc35604_1"></a><h2>File permissions</h2> <p>Windows users can skip this part. If eZ Publish is installed on a UNIX/Linux based system, some of the file permissions need to be changed. There exists a shell script that takes care of this. This script must be run, otherwise eZ Publish will not function properly. The script needs to be run from within the eZ Publish directory:</p> <pre class="wordwrap"><span class="line">$ cd /opt/ezpublish/3.x</span>
+<span class="line">$ bin/modfix.sh</span>
+</pre> <p>Replace the &quot;/opt/ezpublish/3.x&quot; by the full path to the root directory of your eZ Publish installation.</p> <p>The modfix script recursively alters the permission settings of the following directories inside the eZ Publish installation:</p> 
+<ul>
+ <li><div> var/* </div></li> <li><div> settings/* </div></li> <li><div> design/* </div></li> 
+</ul>
+ <p>If you know the user and group of the web server, it is recommended to use a different set of permissions:</p> <pre class="wordwrap"><span class="line"># chown -R user.usergroup var/</span>
+<span class="line"># chmod -R 770 var/</span>
+</pre> <p>Change the &quot;user.usergroup&quot; to the user and group used by the web server (Apache).</p>   <a name="eztoc35604_2" id="eztoc35604_2"></a><h2>Configuring eZ Publish</h2> <p>The &quot;site.ini.append.php&quot; configuration file located in the &quot;settings/override&quot; directory of your eZ Publish installation must be changed, otherwise eZ Publish will not function properly. This file is the global override for the <a href="../../../../../eZ-Publish/Technical-manual/3.8/Reference/Configuration-files/site.html" target="_self">site.ini</a> configuration file. There are a lot of things that need to be configured (database, mail transport system, var directory, etc.). The following text shows a generic example of a configuration that can be used:</p> <pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /* #?ini charset=&quot;iso-8859-1&quot;?</span>
+<span class="line">&nbsp;</span>
+<span class="line">[ExtensionSettings]</span>
+<span class="line">ActiveExtensions[]=ezoracle</span>
+<span class="line">&nbsp;</span>
+<span class="line">[DatabaseSettings]</span>
+<span class="line">DatabaseImplementation=ezoracle</span>
+<span class="line">User=scott</span>
+<span class="line">Password=tiger</span>
+<span class="line">Database=ORCL</span>
+<span class="line">&nbsp;</span>
+<span class="line">[FileSettings]</span>
+<span class="line">VarDir=var/example</span>
+<span class="line">&nbsp;</span>
+<span class="line">[Session]</span>
+<span class="line">SessionNameHandler=custom</span>
+<span class="line">&nbsp;</span>
+<span class="line">[SiteSettings]</span>
+<span class="line">DefaultAccess=example</span>
+<span class="line">SiteList[]</span>
+<span class="line">SiteList[]=example</span>
+<span class="line">&nbsp;</span>
+<span class="line">[SiteAccessSettings]</span>
+<span class="line">CheckValidity=false</span>
+<span class="line">AvailableSiteAccessList[]</span>
+<span class="line">AvailableSiteAccessList[]=example</span>
+<span class="line">AvailableSiteAccessList[]=example_admin</span>
+<span class="line">MatchOrder=host;uri</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Host matching</span>
+<span class="line">HostMatchMapItems[]=www.example.com;example</span>
+<span class="line">HostMatchMapItems[]=admin.example.com;example_admin</span>
+<span class="line">&nbsp;</span>
+<span class="line">[InformationCollectionSettings]</span>
+<span class="line">EmailReceiver=webmaster@example.com</span>
+<span class="line">&nbsp;</span>
+<span class="line">[MailSettings]</span>
+<span class="line">Transport=sendmail</span>
+<span class="line">AdminEmail=webmaster@example.com</span>
+<span class="line">EmailSender=test@example.com</span>
+<span class="line">&nbsp;</span>
+<span class="line">[RegionalSettings]</span>
+<span class="line">Locale=eng-GB</span>
+<span class="line">ContentObjectLocale=eng-GB</span>
+<span class="line">TextTranslation=disabled</span>
+<span class="line">&nbsp;</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /* #?ini charset=&quot;iso-8859-1&quot;?\r\n\r\n[ExtensionSettings]\r\nActiveExtensions[]=ezoracle\r\n\r\n[DatabaseSettings]\r\nDatabaseImplementation=ezoracle\r\nUser=scott\r\nPassword=tiger\r\nDatabase=ORCL\r\n\r\n[FileSettings]\r\nVarDir=var/example\r\n\r\n[Session]\r\nSessionNameHandler=custom\r\n\r\n[SiteSettings]\r\nDefaultAccess=example\r\nSiteList[]\r\nSiteList[]=example\r\n\r\n[SiteAccessSettings]\r\nCheckValidity=false\r\nAvailableSiteAccessList[]\r\nAvailableSiteAccessList[]=example\r\nAvailableSiteAccessList[]=example_admin\r\nMatchOrder=host;uri\r\n\r\n# Host matching\r\nHostMatchMapItems[]=www.example.com;example\r\nHostMatchMapItems[]=admin.example.com;example_admin\r\n\r\n[InformationCollectionSettings]\r\nEmailReceiver=webmaster@example.com\r\n\r\n[MailSettings]\r\nTransport=sendmail\r\nAdminEmail=webmaster@example.com\r\nEmailSender=test@example.com\r\n\r\n[RegionalSettings]\r\nLocale=eng-GB\r\nContentObjectLocale=eng-GB\r\nTextTranslation=disabled\r\n\r\n*/ ?&gt;' ); return false;" /></p>
+<![endif]--> <p>In the example above, the &quot;AvailableSiteAccessList[]&quot; array located in the &quot;[SiteAccessSettings]&quot; section of this file defines the available <a href="../../../../../eZ-Publish/Technical-manual/3.8/Concepts-and-basics/Configuration/Site-management.html" target="_self">siteaccesses</a> called &quot;example&quot; and &quot;example_admin&quot;. The &quot;CheckValidity&quot; setting located in the same section should be set to false, so that the setup wizard will not be initiated when trying to access the site. (Please note that the setup wizard does not support interaction with an Oracle database server.)</p> <p>In addition, two siteaccess configurations must be created, a public siteaccess (&quot;example&quot;) and an administration siteaccess (&quot;example_admin&quot;). The following subdirectories have to be created in the root of your eZ Publish installation:</p>
+<ul>
+ <li><div> settings/siteaccess/example </div></li> <li><div> settings/siteaccess/example_admin </div></li> 
+</ul>
+ <p>Both siteaccesses must have a file called &quot;site.ini.append.php&quot;.</p>   <a name="eztoc35604_2_0_1" id="eztoc35604_2_0_1"></a><h4>The public siteaccess</h4> <p>The following text shows a generic solution for the &quot;example&quot; siteaccess:</p> <pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /* #?ini charset=&quot;iso-8859-1&quot;?</span>
+<span class="line">&nbsp;</span>
+<span class="line">[SiteSettings]</span>
+<span class="line">SiteName=Example</span>
+<span class="line">SiteURL=www.example.com</span>
+<span class="line">LoginPage=embedded</span>
+<span class="line">&nbsp;</span>
+<span class="line">[SiteAccessSettings]</span>
+<span class="line">RequireUserLogin=false</span>
+<span class="line">ShowHiddenNodes=false</span>
+<span class="line">&nbsp;</span>
+<span class="line">[DesignSettings]</span>
+<span class="line">SiteDesign=example</span>
+<span class="line">&nbsp;</span>
+<span class="line">[ContentSettings]</span>
+<span class="line">ViewCaching=disabled</span>
+<span class="line">&nbsp;</span>
+<span class="line">[TemplateSettings]</span>
+<span class="line">TemplateCache=disabled</span>
+<span class="line">TemplateCompile=disabled</span>
+<span class="line">#ShowXHTMLCode=enabled</span>
+<span class="line">#Debug=enabled</span>
+<span class="line">&nbsp;</span>
+<span class="line">[DebugSettings]</span>
+<span class="line">DebugOutput=disabled</span>
+<span class="line">Debug=inline</span>
+<span class="line">#DebugRedirection=enabled</span>
+<span class="line">&nbsp;</span>
+<span class="line"># the following settings can only be used in eZ Publish 3.8 and later versions:</span>
+<span class="line">[RegionalSettings]</span>
+<span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=eng-GB</span>
+<span class="line">ShowUntranslatedObjects=disabled</span>
+<span class="line">&nbsp;</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /* #?ini charset=&quot;iso-8859-1&quot;?\r\n\r\n[SiteSettings]\r\nSiteName=Example\r\nSiteURL=www.example.com\r\nLoginPage=embedded\r\n\r\n[SiteAccessSettings]\r\nRequireUserLogin=false\r\nShowHiddenNodes=false\r\n\r\n[DesignSettings]\r\nSiteDesign=example\r\n\r\n[ContentSettings]\r\nViewCaching=disabled\r\n\r\n[TemplateSettings]\r\nTemplateCache=disabled\r\nTemplateCompile=disabled\r\n#ShowXHTMLCode=enabled\r\n#Debug=enabled\r\n\r\n[DebugSettings]\r\nDebugOutput=disabled\r\nDebug=inline\r\n#DebugRedirection=enabled\r\n\r\n# the following settings can only be used in eZ Publish 3.8 and later versions:\r\n[RegionalSettings]\r\nSiteLanguageList[]\r\nSiteLanguageList[]=eng-GB\r\nShowUntranslatedObjects=disabled\r\n\r\n*/ ?&gt;' ); return false;" /></p>
+<![endif]-->     <a name="eztoc35604_2_0_2" id="eztoc35604_2_0_2"></a><h4>The admin siteaccess</h4> <p>The following text shows a generic solution for the &quot;example_admin&quot; siteaccess:</p> <pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /* #?ini charset=&quot;iso-8859-1&quot;?</span>
+<span class="line">&nbsp;</span>
+<span class="line">[SiteSettings]</span>
+<span class="line">SiteName=Example</span>
+<span class="line">SiteURL=admin.example.com</span>
+<span class="line">LoginPage=custom</span>
+<span class="line">&nbsp;</span>
+<span class="line">[SiteAccessSettings]</span>
+<span class="line">RequireUserLogin=true</span>
+<span class="line">ShowHiddenNodes=true</span>
+<span class="line">&nbsp;</span>
+<span class="line">[DesignSettings]</span>
+<span class="line">SiteDesign=admin</span>
+<span class="line">&nbsp;</span>
+<span class="line">[ContentSettings]</span>
+<span class="line">CachedViewPreferences[full]=admin_navigation_content=0;admin_navigation_details=0;admin_navigation_languages=0;admin_navigation_locations=</span>
+<span class="line">0;admin_navigation_relations=0;admin_navigation_roles=0;admin_navigation_policies=0;admin_navigation_content=0;admin_navigation_translatio</span>
+<span class="line">ns=0;admin_children_viewmode=list;admin_list_limit=1;admin_edit_show_locations=0;admin_url_list_limit=10;admin_url_view_limit=10;admin_sec</span>
+<span class="line">tion_list_limit=1;admin_orderlist_sortfield=user_name;admin_orderlist_sortorder=desc;admin_search_stats_limit=1;admin_treemenu=1;admin_boo</span>
+<span class="line">kmarkmenu=1;admin_left_menu_width=13</span>
+<span class="line">&nbsp;</span>
+<span class="line">[DebugSettings]</span>
+<span class="line">DebugOutput=enabled</span>
+<span class="line">Debug=inline</span>
+<span class="line">&nbsp;</span>
+<span class="line"># the following settings can only be used in eZ Publish 3.8 and later versions:</span>
+<span class="line">[RegionalSettings]</span>
+<span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=eng-GB</span>
+<span class="line">ShowUntranslatedObjects=enabled</span>
+<span class="line">&nbsp;</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /* #?ini charset=&quot;iso-8859-1&quot;?\r\n\r\n[SiteSettings]\r\nSiteName=Example\r\nSiteURL=admin.example.com\r\nLoginPage=custom\r\n\r\n[SiteAccessSettings]\r\nRequireUserLogin=true\r\nShowHiddenNodes=true\r\n\r\n[DesignSettings]\r\nSiteDesign=admin\r\n\r\n[ContentSettings]\r\nCachedViewPreferences[full]=admin_navigation_content=0;admin_navigation_details=0;admin_navigation_languages=0;admin_navigation_locations=\r\n0;admin_navigation_relations=0;admin_navigation_roles=0;admin_navigation_policies=0;admin_navigation_content=0;admin_navigation_translatio\r\nns=0;admin_children_viewmode=list;admin_list_limit=1;admin_edit_show_locations=0;admin_url_list_limit=10;admin_url_view_limit=10;admin_sec\r\ntion_list_limit=1;admin_orderlist_sortfield=user_name;admin_orderlist_sortorder=desc;admin_search_stats_limit=1;admin_treemenu=1;admin_boo\r\nkmarkmenu=1;admin_left_menu_width=13\r\n\r\n[DebugSettings]\r\nDebugOutput=enabled\r\nDebug=inline\r\n\r\n# the following settings can only be used in eZ Publish 3.8 and later versions:\r\n[RegionalSettings]\r\nSiteLanguageList[]\r\nSiteLanguageList[]=eng-GB\r\nShowUntranslatedObjects=enabled\r\n\r\n*/ ?&gt;' ); return false;" /></p>
+<![endif]--> <p>Please note that database settings, mail settings, regional and other settings defined in &quot;settings/override/site.ini.append.php&quot; will be used for each siteaccess regardless of what is specified in the siteaccess settings. In the example above, the &quot;Database=ORCL&quot; is specified under the &quot;[DatabaseSettings]&quot; section of this file so this database will be used for both &quot;example&quot; and &quot;example_admin&quot; siteaccesses. Please refer to the &quot;<a href="../../../../../eZ-Publish/Technical-manual/3.8/Concepts-and-basics/Configuration/Site-management.html" target="_self">Site management</a>&quot; and &quot;<a href="../../../../../eZ-Publish/Technical-manual/3.8/Concepts-and-basics/Configuration.html" target="_self">Configuration</a>&quot; sections of the &quot;Concepts and basics&quot; chapter for more information.</p>     <a name="eztoc35604_3" id="eztoc35604_3"></a><h2>Unicode support</h2> <p>If your Oracle database uses Unicode character set and PHP is compiled with multibyte string support, create the file called &quot;i18n.ini.append.php&quot; in the &quot;settings/override/&quot; directory of your eZ Publish installation and make sure that it contains the following lines:</p> <pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /* #?ini charset=&quot;iso-8859-1&quot;?</span>
+<span class="line">&nbsp;</span>
+<span class="line">[CharacterSettings]</span>
+<span class="line">Charset=utf-8</span>
+<span class="line">MBStringExtension=enabled</span>
+<span class="line">&nbsp;</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /* #?ini charset=&quot;iso-8859-1&quot;?\r\n\r\n[CharacterSettings]\r\nCharset=utf-8\r\nMBStringExtension=enabled\r\n\r\n*/ ?&gt;' ); return false;" /></p>
+<![endif]--> <p>
+Issue the following SQL query to determine the character set encoding used by your database:<br /></p><pre class="wordwrap"><span class="line">SELECT value FROM nls_database_parameters WHERE parameter = 'NLS_CHARACTERSET'</span>
+</pre><p>&nbsp;</p>   <a name="eztoc35604_4" id="eztoc35604_4"></a><h2>Toolbars in the admin interface</h2> <p>
+The right section of the administration interface allows you to use the toolbar system. In order to make it work, create the file called &quot;toolbar.ini.append.php&quot; in the &quot;settings/override/example_admin/&quot; directory and make sure that it contains the following lines: <br /></p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /* #?ini charset=&quot;iso-8859-1&quot;?</span>
+<span class="line">&nbsp;</span>
+<span class="line">[Toolbar]</span>
+<span class="line">AvailableToolBarArray[]</span>
+<span class="line">AvailableToolBarArray[]=admin_right</span>
+<span class="line">AvailableToolBarArray[]=admin_developer</span>
+<span class="line">&nbsp;</span>
+<span class="line">[Tool]</span>
+<span class="line">AvailableToolArray[]</span>
+<span class="line">AvailableToolArray[]=admin_current_user</span>
+<span class="line">AvailableToolArray[]=admin_bookmarks</span>
+<span class="line">AvailableToolArray[]=admin_clear_cache</span>
+<span class="line">AvailableToolArray[]=admin_quick_settings</span>
+<span class="line">&nbsp;</span>
+<span class="line">[Toolbar_admin_right]</span>
+<span class="line">Tool[]</span>
+<span class="line">Tool[]=admin_current_user</span>
+<span class="line">Tool[]=admin_bookmarks</span>
+<span class="line">&nbsp;</span>
+<span class="line">[Toolbar_admin_developer]</span>
+<span class="line">Tool[]</span>
+<span class="line">Tool[]=admin_clear_cache</span>
+<span class="line">Tool[]=admin_quick_settings</span>
+<span class="line">&nbsp;</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /* #?ini charset=&quot;iso-8859-1&quot;?\r\n\r\n[Toolbar]\r\nAvailableToolBarArray[]\r\nAvailableToolBarArray[]=admin_right\r\nAvailableToolBarArray[]=admin_developer\r\n \r\n[Tool]\r\nAvailableToolArray[]\r\nAvailableToolArray[]=admin_current_user\r\nAvailableToolArray[]=admin_bookmarks\r\nAvailableToolArray[]=admin_clear_cache\r\nAvailableToolArray[]=admin_quick_settings\r\n \r\n[Toolbar_admin_right]\r\nTool[]\r\nTool[]=admin_current_user\r\nTool[]=admin_bookmarks\r\n \r\n[Toolbar_admin_developer]\r\nTool[]\r\nTool[]=admin_clear_cache\r\nTool[]=admin_quick_settings\r\n\r\n*/ ?&gt;' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p>   <a name="eztoc35604_5" id="eztoc35604_5"></a><h2>Languages</h2> <p>A clean Oracle database created using the &quot;db_data.dba&quot; file contains only one language (British English, eng-GB). Please note that if you are using eZ Publish 3.7 (or earlier versions), the default primary language will be set to eng-GB as well and objects will have to be created in the primary language before they could be translated to additional languages.</p> <p>All other languages should be added using &quot;Setup - Languages&quot; (or &quot;Setup - Translations&quot; in 3.7 and earlier versions) in the administration interface (http://admin.example.com in the example above).</p>   <a name="eztoc35604_6" id="eztoc35604_6"></a><h2>Default username and password</h2> <p>The following username/password combination is specified in the &quot;db_data.dba&quot; file. Use it to log into the administration interface.</p> 
+<ul>
+ <li><div> Username: admin </div></li> <li><div> Password: publish </div></li> 
+</ul>
+ <p>Once the configuration is done, you can finish the installation process by following the <a href="../Installation.html#restart_apache" target="_self">last step</a>.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/1.4/Installation/Configuring-eZ-Publish by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:51 GMT -->
+</html>

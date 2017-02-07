@@ -1,0 +1,81 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.1.0/Advanced-Configuration/Boosting-Dedicated-Functions by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:28:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Boosting Dedicated Functions / Advanced Configuration / eZ Find LS 5.1.0 / eZ Find / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Boosting Dedicated Functions</h1>
+</div>
+
+<a name="eztoc135775_0_0_1" id="eztoc135775_0_0_1"></a><h4>Fetch Function Parameter: boost_functions</h4><p>Boosts can be passed as function boosts which should be done according to the Solr function query syntax.</p><p>The fetch parameter should be specified as:</p><pre class="wordwrap copytoclipboard"><span class="line">{set $search=fetch( ezfind,search,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'query', $search_text,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... ,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'boost_functions', hash('functions',</span>
+<span class="line">array('&lt;boostfunction n&gt;', ...)),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{set $search=fetch( ezfind,search,\r\n        hash( \'query\', $search_text, \r\n        ... , \r\n        \'boost_functions\', hash(\'functions\', \r\narray(\'&lt;boostfunction n&gt;\', ...)),\r\n        ...' ); return false;" /></p>
+<![endif]--><p>where 'boost function n' should adhere to technical syntax of Solr functions.</p><p><b>Note: </b>The Solr query syntax is quite elaborate but powerful, and documented on the Solr wiki pages:&nbsp;<a href="http://wiki.apache.org/solr/FunctionQuery" target="_self">http://wiki.apache.org/solr/FunctionQuery</a></p><p>For example, the following boost function will favor more recent pages over older ones:</p><pre class="wordwrap copytoclipboard"><span class="line">{set $search=fetch( 'ezfind', 'search',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'query', $search_text,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'offset', $view_parameters.offset,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'limit', $page_limit,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sort_by', hash( 'score', 'desc' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'boost_functions', hash('functions',</span>
+<span class="line">array('recip(ms(NOW/HOUR,meta_published_dt),4e-12,1000,2)')) ))}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{set $search=fetch( \'ezfind\', \'search\', \r\n       hash( \'query\', $search_text,\r\n            \'offset\', $view_parameters.offset,\r\n            \'limit\', $page_limit,\r\n            \'sort_by\', hash( \'score\', \'desc\' ),\r\n            \'boost_functions\', hash(\'functions\', \r\narray(\'recip(ms(NOW/HOUR,meta_published_dt),4e-12,1000,2)\')) ))}' ); return false;" /></p>
+<![endif]--><p>As of eZ Find LS 5.0.0 the <i>mfunctions</i> boost function has been added. The usage is similar to the <i>functions</i> boost function. Here's a usage example:</p><pre class="wordwrap copytoclipboard"><span class="line">{set $search=fetch( 'ezfind', 'search',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;hash( 'query', $search_text,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'offset', $view_parameters.offset,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'limit', $page_limit,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sort_by', hash( 'score', 'desc' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'boost_functions', hash('mfunctions',</span>
+<span class="line">&nbsp;array('recip(ms(NOW/DAY,meta_published_dt),3.16e-11,0.5,0.5)' )) ))}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{set $search=fetch( \'ezfind\', \'search\', \r\n    hash( \'query\', $search_text,\r\n       \'offset\', $view_parameters.offset,\r\n       \'limit\', $page_limit,\r\n       \'sort_by\', hash( \'score\', \'desc\' ),\r\n       \'boost_functions\', hash(\'mfunctions\',\r\n array(\'recip(ms(NOW/DAY,meta_published_dt),3.16e-11,0.5,0.5)\' )) ))}\r\n' ); return false;" /></p>
+<![endif]--><p><b>Note:</b> Alternatively the&nbsp;<a href="../Basic-Configuration/Configuration-settings-eZ-Find.html#queryboost" title="Configuration settings on eZ Find" target="_blank">RawBoostQueries</a> ezfind.ini setting can also be used in order to achieve the same boosting effect.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.1.0/Advanced-Configuration/Boosting-Dedicated-Functions by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:28:33 GMT -->
+</html>

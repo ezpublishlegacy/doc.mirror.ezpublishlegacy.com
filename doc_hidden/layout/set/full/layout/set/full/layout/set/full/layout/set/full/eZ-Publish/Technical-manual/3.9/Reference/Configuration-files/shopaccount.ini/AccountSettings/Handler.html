@@ -1,0 +1,97 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Configuration-files/shopaccount.ini/AccountSettings/Handler by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Handler / [AccountSettings] / shopaccount.ini / Configuration files / Reference / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Handler</h1>
+</div>
+<h3>Summary</h3>
+Controls which shop account handler that will be used.<h3>Usage</h3>
+<pre class="pfix"> <p>Handler=ezuser|ezdefault|ezsimple</p></pre><h3>Description</h3>
+ <p>This directive controls how the webshop system will get and store the information about the user when he/she initiates the checkout process. More generally, this directive sets which shop account handler that will be used. A shop account handler is a PHP class providing a mechanism that handles and stores customer information for webshop orders. The system behavior during the checkout process will depend on which shop account handler that is used. The default value of this setting is &quot;ezuser&quot;, which means that users do not need to be logged in when making their orders.</p> <p>There are three built-in shop account handlers called &quot;ezuser&quot;, &quot;ezdefault&quot; and &quot;ezsimple&quot;. These are located in the &quot;kernel/classes/shopaccounthandlers&quot; directory. The following table describes the built-in shop account handlers and how the checkout process behaves when the different handlers are selected.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Handler</p> 
+  </th> <th >   <p>Description</p> 
+  </th> <th >   <p>Details of the checkout process</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>ezuser</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Users do not need to be logged in when making orders (the checkout form will be used).</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>When the &quot;Checkout&quot; button is clicked, the system will bring up the checkout form asking the user to provide necessary information for the order (name, email, country and address of the customer, plus optional company name and comment). After that, the &quot;Confirm order&quot; interface will be displayed.</p> <p>Note that if the user is logged in, then some of the fields in the checkout form (e.g. &quot;First Name&quot;) will be automatically pre-filled according to the user's account data (fetched from the content object representing the user).</p> <p>In order to use this shop account handler, you need to make sure that anonymous users are granted access to the &quot;buy&quot; function of the &quot;shop&quot; module.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>ezdefault</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Users need to be logged in when making orders.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>When the &quot;Checkout&quot; button is clicked, the system will check whether the user is logged in or not. If yes, the system will bring up the &quot;Confirm order&quot; interface. Otherwise, the user will be suggested to log in first and then (if successful) the &quot;Confirm order&quot; interface will be displayed.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>ezsimple</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Users need to fill in the shop account registration form when making orders.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>When the &quot;Checkout&quot; button is clicked, the system will bring up the &quot;Register account information&quot; form asking the user to provide necessary information for creating a new shop account (name, email and post address of the customer). After that, the &quot;Confirm order&quot; interface will be displayed.</p> <p>Note that logged in users can make orders for other people by providing someone else's contact details in the shop account registration form. The system will not compare the information provided in the registration form with the currently logged in user's actual account data.</p> <p>In order to use this shop account handler, you need to make sure that anonymous users are granted access to the &quot;buy&quot; function of the &quot;shop&quot; module.</p> <p>It is not recommended to use the &quot;ezsimple&quot; handler if you charge different <a href="../../../../Features/VAT-charging-system.html" target="_self">VAT</a> percentage depending on the country the customer lives in. The main reason is that users are not supposed to specify their country while filling the &quot;Register account information&quot; form; and thus the system will not be able to calculate the amount of VAT for users that are not logged in (they will get an error message).</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Configuration-files/shopaccount.ini/AccountSettings/Handler by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:19 GMT -->
+</html>

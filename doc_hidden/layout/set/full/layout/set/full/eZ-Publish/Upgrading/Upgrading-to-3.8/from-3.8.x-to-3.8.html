@@ -1,0 +1,116 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.8/from-3.8.x-to-3.8.y by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:23:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>from 3.8.x to 3.8.y / Upgrading to 3.8 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>from 3.8.x to 3.8.y</h1>
+</div>
+
+ <p>This section describes how to upgrade your existing eZ Publish 3.8.x installation to version 3.8.y, for example from 3.8.0 to 3.8.10. If you are upgrading from a version prior to eZ Publish 3.8.0, you should first upgrade to 3.8.0 as described in <a href="from-3.6.x-or-3.7.x-to-3.8.html" target="_self">this section</a>.</p>    <a name="eztoc32942_0_0_1" id="eztoc32942_0_0_1"></a><h4>Important note</h4> <p>Before continuing, note that version 3.8 is no longer supported. Instead of running eZ Publish 3.8, you should consider upgrading to one of the <a href="http://ez.no/developer/security#supported_versions" target="_blank">supported versions</a>. If you want to run 3.8 anyway, make sure you upgrade to version 3.8.10, which is the latest stable release in the 3.8 branch. Refer to the <a href="https://github.com/ezsystems/ezpublish-legacy/tree/master/doc/changelogs/3.8" target="_blank">changelogs</a> for more information about the issues that were fixed in the latest 3.8.x releases or view the short list of changes below.</p>
+<ul>
+ <li><div> There is a significant problem with eZ Publish 3.8.0 - 3.8.8. More precisely, the discount functionality of the shop module contains a security vulnerability. The same bug exists in eZ Publish 3.9.0 - 3.9.2. The issue was fixed in eZ Publish 3.8.9, 3.9.3 and 3.10.0. Refer to the <a href="http://ez.no/community/news/ez_publish_security_fixes_3_9_3_and_3_8_9" target="_blank">announcement</a> for details. </div></li> <li><div> eZ Publish versions 3.8.0 - 3.8.9 contain a security vulnerability that can be used to show hidden content on a public siteaccess. The same bug exists in eZ Publish 3.9.0 - 3.9.3. This issue was fixed in eZ Publish 3.8.10, 3.9.4 and 3.10.0. Refer to the <a href="http://ez.no/developer/news/ez_publish_security_fixes_3_9_4_and_3_8_10" target="_blank">announcement</a> for details. </div></li> 
+</ul>
+ <p>Make sure that you have a working <a href="../../Upgrading.html#backup" target="_self">backup</a> of the site before you do the actual upgrade. The upgrade procedure consists of the following steps:</p> 
+<ol>
+ <li><div> Upgrading the distribution files to 3.8.10 </div></li> <li><div> Upgrading the database to 3.8.10 </div></li> <li><div> Running the system upgrade scripts </div></li> <li><div> Updating the system configuration </div></li> <li><div> Clearing the caches </div></li> 
+</ol>
+     <a name="eztoc32942_1" id="eztoc32942_1"></a><h2>Step 1: Upgrading the distribution files</h2> <p>The easiest way to upgrade the distribution files is to unpack eZ Publish 3.8.10 to a directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p> 
+<ul>
+ <li><div> design/example </div></li> <li><div> design/example_admin </div></li> <li><div> var </div></li> <li><div> settings/siteaccess </div></li> <li><div> settings/override </div></li> 
+</ul>
+ <p>Replace &quot;example&quot; and &quot;example_admin&quot; with actual names used by your siteaccesses.</p>  <a name="eztoc32942_1_1" id="eztoc32942_1_1"></a><h3>Important bug fix for the &quot;user&quot; module</h3> <p>In eZ Publish 3.8.10, the &quot;register&quot; view of the &quot;user&quot; module contains a bug. It prevents the system from registering new users when the &quot;<a href="../../Technical-manual/3.8/Reference/Configuration-files/site.ini/UserSettings/VerifyUserEmail.html" target="_self">VerifyUserEmail</a>&quot; setting is enabled (it is enabled by default). The same bug exists in eZ Publish 3.9.4 and 3.10.0 (refer to <a href="http://issues.ez.no/11598" target="_blank">http://issues.ez.no/11598</a> for more information). This issue will be fixed in the upcoming eZ Publish 3.9.5 and 3.10.1 releases. In order to make your user registration mechanism work properly in 3.8.10, you have to download the updated version of &quot;kernel/user/register.php&quot; from <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/kernel/user/register.php" target="_blank">http://pubsvn.ez.no</a> and replace the corresponding file in your installation.</p>   <a name="eztoc32942_1_2" id="eztoc32942_1_2"></a><h3>Custom extensions</h3> <p>If you are using custom extensions then the subdirectories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that come with eZ Publish (for example the &quot;PayPal&quot; extension).</p>    <a name="eztoc32942_2" id="eztoc32942_2"></a><h2>Step 2: Upgrading the database</h2> <p>To upgrade 3.8.0 database to 3.8.10, you should navigate into the eZ Publish 3.8.10 directory and run the following database upgrade scripts one after another:</p> 
+<ol>
+ <li><div> dbupdate-3.8.0-to-3.8.1.sql </div></li> <li><div> dbupdate-3.8.1-to-3.8.2.sql </div></li> <li><div> dbupdate-3.8.2-to-3.8.3.sql </div></li> <li><div> dbupdate-3.8.3-to-3.8.4.sql </div></li> <li><div> dbupdate-3.8.4-to-3.8.5.sql </div></li> <li><div> dbupdate-3.8.5-to-3.8.6.sql </div></li> <li><div> dbupdate-3.8.6-to-3.8.7.sql </div></li> <li><div> dbupdate-3.8.7-to-3.8.8.sql </div></li> <li><div> dbupdate-3.8.8-to-3.8.9.sql </div></li> <li><div> dbupdate-3.8.9-to-3.8.10.sql </div></li> 
+</ol>
+ <p>Note that there are seven <a href="../Notes-about-database-changes.html#skip_db_upgrades" target="_self">version-focused</a> upgrade scripts, meaning that seven of the scripts in the list contain only two lines (that simply update the version number) and can be skipped. Therefore, the list of scripts to run contains three items instead of ten:</p> 
+<ol>
+ <li><div> dbupdate-3.8.0-to-3.8.1.sql </div></li> <li><div> dbupdate-3.8.4-to-3.8.5.sql </div></li> <li><div> dbupdate-3.8.9-to-3.8.10.sql </div></li> 
+</ol>
+ <p>Running these three scripts is equivalent to running all the ten scripts mentioned above.</p>  <a name="eztoc32942_2_3" id="eztoc32942_2_3"></a><h3>MySQL</h3> <p>The database upgrade scripts are located in the &quot;update/database/mysql/3.8/&quot; directory of your eZ Publish installation. Each of these scripts can be launched using the following shell command: </p><pre class="wordwrap"><span class="line">mysql -u &lt;username&gt; -p&lt;password&gt; &lt;database&gt; &lt; update/database/mysql/3.8/dbupdate-3.8.x-to-3.8.y.sql</span>
+</pre>   <a name="eztoc32942_2_4" id="eztoc32942_2_4"></a><h3>PostgreSQL</h3> <p>The database upgrade scripts are located in the &quot;update/database/postgresql/3.8/&quot; directory of your eZ Publish installation. Each of these scripts can be launched using the following shell command: </p><pre class="wordwrap"><span class="line">psql -d &lt;database&gt; -U &lt;dbowner&gt; &lt; update/database/postgresql/3.8/dbupdate-3.8.x-to-3.8.y.sql</span>
+</pre>    <a name="eztoc32942_3" id="eztoc32942_3"></a><h2>Step 3: Running the system upgrade scripts</h2> <p> <a name="correctxmltextclasses"></a>
+ </p>  <a name="eztoc32942_3_5" id="eztoc32942_3_5"></a><h3>Custom classes in XML tags</h3> <p>In eZ Publish 3.8.0 and earlier versions, you could use <a href="../../../Extensions/eZ-Publish-extensions/Online-Editor/4.x/Usage/Formatted-text/Formatted-text/The-class-parameter.html" target="_self">custom classes in XML tags</a> without having to specify them first. From eZ Publish 3.8.1, you have to specify the names of all custom classes that are used within XML tags. The names of the classes must be added to the global (or siteaccess) &quot;content.ini.append.php&quot; configuration file. For example, you will not be able to use &quot;pRed&quot; and &quot;pBlue&quot; classified paragraphs in your XML blocks unless you have the [paragraph] section in &quot;content.ini.append.php&quot; containing the following lines: </p><pre class="wordwrap"><span class="line">AvailableClasses[]</span>
+<span class="line">AvailableClasses[]=pRed</span>
+<span class="line">AvailableClasses[]=pBlue</span>
+</pre><p>If you are using XML tag classes that are not listed in &quot;content.ini&quot; on your site, you will need to add the necessary configuration settings manually or run the &quot;correctxmltextclasses.php&quot; script. (If your installation does not include the &quot;correctxmltextclasses.php&quot; script, you need to download it <a href="https://github.com/ezsystems/ezpublish-legacy/tree/master/update/common/scripts" target="_self">here</a>.) </p> <p>If all your siteaccesses are using the same database, run the script with the &quot;--global&quot; option as described below.</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish directory. </div></li> <li><div> Run the script using the following shell command: <pre class="wordwrap"><span class="line">php update/common/scripts/correctxmltextclasses.php --global</span>
+</pre>  </div></li> 
+</ol>
+<p>The script will go through the XML blocks stored in the database, check which classes are in use and add missing settings (if any) to the &quot;settings/override/content.ini.append.php&quot; configuration file. If you do not wish to update this configuration file automatically, run the script like this: </p><pre class="wordwrap"><span class="line">php update/common/scripts/correctxmltextclasses.php --dump-only</span>
+</pre><p>The script will output the list of classes that need to be specified, for example: </p><pre class="wordwrap"><span class="line">Element 'paragraph': class 'pBlue' is not defined.</span>
+<span class="line">Element 'paragraph': class 'pRed' is not defined.</span>
+</pre><p>In case if your siteaccesses are using different databases, the classes that are used within XML tags must be specified per siteaccess. This means that the upgrade script must be run for each of your siteaccesses.</p>
+<ol>
+ <li><div> Navigate into the eZ Publish directory. </div></li> <li><div> Run the script (replace &quot;example&quot; with the actual name of your siteaccess): <pre class="wordwrap"><span class="line">php update/common/scripts/correctxmltextclasses.php -s example</span>
+</pre>  </div></li> 
+</ol>
+<p>The script will automatically update the &quot;settings/siteaccess/example/content.ini.append.php&quot; configuration file. </p> <p>If the siteaccess is not specified then the <a href="../../Technical-manual/3.8/Reference/Configuration-files/site.ini/SiteSettings/DefaultAccess.html" target="_self">default siteaccess</a> will be used.</p> <p> <a name="updatetipafriendpolicy"></a>
+ </p>   <a name="eztoc32942_3_6" id="eztoc32942_3_6"></a><h3>Changes to roles and policies</h3> <p>From 3.8.9, users (typically the anonymous role) need to have access to the &quot;tipafriend&quot; function of the &quot;content&quot; module in order to use the &quot;Tip a friend&quot; feature. Because of compatibility reasons, you need to run the &quot;updatetipafriendpolicy.php&quot; script. </p> <p>Note for Windows users: in eZ Publish 3.8 the &quot;updatetipafriendpolicy.php&quot; script contains a bug that prevents it from granting access to the &quot;Tip a friend&quot; feature to the users. Refer to <a href="http://issues.ez.no/11663" target="_blank">http://issues.ez.no/11663 </a> for more information about the problem and the solution.</p> <p>The following example shows how to run the script:</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.8.10 directory. </div></li> <li><div> Run the script using the following shell command: <pre class="wordwrap"><span class="line">php update/common/scripts/3.8/updatetipafriendpolicy.php -s example_admin -l login -p password</span>
+</pre>Replace &quot;example_admin&quot; with the actual name of your admin siteaccess, use the administrator's login and password instead of &quot;login&quot; and &quot;password&quot;. </div></li> 
+</ol>
+ <p>The script will add a new role that grants access to the &quot;Tip a friend&quot; feature and ask for confirmation about assigning this role to each user or user group located one level beneath the &quot;Users&quot; top level node.</p>    <a name="eztoc32942_4" id="eztoc32942_4"></a><h2>Step 4: Updating the system configuration</h2>  <a name="eztoc32942_4_7" id="eztoc32942_4_7"></a><h3>Updating INI settings for &quot;html&quot; classification</h3> <p>In eZ Publish versions from 3.8.0 to 3.8.3 it is possible to include HTML code in XML blocks by using the <a href="../../../Extensions/eZ-Publish-extensions/Online-Editor/4.x/Usage/The-toolbar/The-toolbar/The-Literal-text-button.html#html_classification" target="_self">&quot;html&quot; classification</a>. However, this feature can also be used to insert JavaScript code, making it possible for users with sufficient privileges to make an XSS exploit. This feature is therefore disabled by default in eZ Publish 3.8.4 and later, and should only be enabled if you really trust your editors.</p> <p>To enable html classification, add the following lines to your &quot;content.ini.append.php&quot; file:</p> <pre class="wordwrap copytoclipboard"><span class="line">[literal]</span>
+<span class="line">&nbsp;# The class 'html' is disabled by default because it gives editors the</span>
+<span class="line">&nbsp;# possibility to insert html and javascript code in XML blocks.</span>
+<span class="line">&nbsp;# Don't enable the 'html' class unless you really trust all users who has</span>
+<span class="line">&nbsp;# privileges to edit objects containing XML blocks.</span>
+<span class="line">&nbsp;AvailableClasses[]=html</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[literal]\r\n # The class \'html\' is disabled by default because it gives editors the\r\n # possibility to insert html and javascript code in XML blocks.\r\n # Don\'t enable the \'html\' class unless you really trust all users who has\r\n # privileges to edit objects containing XML blocks.\r\n AvailableClasses[]=html' ); return false;" /></p>
+<![endif]-->   <a name="eztoc32942_4_8" id="eztoc32942_4_8"></a><h3>Enabling the Online Editor extension (optional)</h3> <p>eZ Publish 3.8.1 and later versions include the Online Editor extension licensed under the <a href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html" target="_self">GPL</a>. If you wish to use this extension, make sure it is enabled (refer to <a href="../../../Extensions/eZ-Publish-extensions/Online-Editor/4.x/Installation.html#enable" target="_self">this section</a> for more information).</p>   <a name="eztoc32942_4_9" id="eztoc32942_4_9"></a><h3>Default configuration of unique user emails</h3> <p>
+In eZ Publish versions prior to 3.8.0, the default configuration does not allow different users to be registered with the exact same email address. This is just a built-in precaution mechanism which can be easily turned off by setting the &quot;<a href="../../Technical-manual/3.8/Reference/Configuration-files/site.ini/UserSettings/RequireUniqueEmail.html" target="_self">RequireUniqueEmail</a>&quot; directive within the [UserSettings] block of a configuration override for &quot;site.ini&quot; to &quot;false&quot;. However, this default configuration has been accidentally changed in eZ Publish version 3.8.0 (refer to <a href="http://issues.ez.no/9643" target="_blank">http://issues.ez.no/9643</a> for more information). The change is reverted in eZ Publish version 3.8.7. If you are going to use eZ Publish 3.8.0-3.8.6, it is recommended to add the following line to the [UserSettings] block of the &quot;override/site.ini.append.php&quot; configuration file:<br /></p><pre class="wordwrap"><span class="line">RequireUniqueEmail=true</span>
+</pre><p>&nbsp;</p>    <a name="eztoc32942_5" id="eztoc32942_5"></a><h2>Step 5: Clearing the caches</h2> <p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.8.10 directory. </div></li> <li><div> 
+Run the clear cache script:<br /> <pre class="wordwrap"><span class="line">bin/shell/clearcache.sh --clear-all</span>
+</pre>  </div></li> 
+</ol>
+ <p>Make sure that all caches are cleared. Sometimes the script is unable to clear caches because of restrictive file/directory permission settings. Make sure that all caches have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.8/from-3.8.x-to-3.8.y by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:23:58 GMT -->
+</html>

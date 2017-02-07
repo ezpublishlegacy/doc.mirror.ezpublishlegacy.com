@@ -1,0 +1,97 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Flow/eZ-Flow-LS-5.x/Usage/Block-types/Block-Types/Latest-content by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:27:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Latest content / Block Types / Block types / Usage / eZ Flow LS 5.x / eZ Flow / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Latest content</h1>
+</div>
+
+<p>This block allows you to display the latest published contents from a sub-tree based on the content type defined in the block. To add a latest content block log in to the eZ Flow front-end editing interface to edit the front page.</p><p>Select a zone and in the block type list you select &quot;Latest content&quot; from the drop down list as in the screen below.</p><p><b>Note:</b> In dynamic blocks, like &quot;Latest content&quot;, the content of the block will be fetched with the access rights of an anonymous user. eZ Publish behaves like this in order to ensure that the front page content will be available to any user. This is currently required due to the eZ Flow implementation: content for dynamic blocks isn't generated when viewed, and is therefore fetched as if&nbsp;seen by a user.</p>
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/latest-content-1/136636-1-eng-GB/Latest-content-1_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>The following block will be added to the block list. Here you are able to name the block. Next choose a source to limit the location where the latest content should be fetched and define the additional parameters such as the class,&nbsp;<a href="../../Block-Management.html#overflow" target="_self">overflow</a> and the rotation frequency of the content, set in minutes, hours or days.</p>
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/latest-content-2/136639-1-eng-GB/Latest-content-2_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>And click &quot;Send for publishing&quot; to complete the procedure.</p><a name="eztoc136437_0_1" id="eztoc136437_0_1"></a><h3>Usage with translation</h3><p>eZ Flow always list <b>objects not translations</b>. If you are using more than one language, consider that <b>you can have a different number of items</b> according to the language.</p><p><b>Note :</b> If it is a problem for you, consider the following workaround.</p><p>The idea is <b>to put more items in the pool</b>, so more objects will be loaded. Then you can filter this items depending on the siteaccess language.</p>
+<ul>
+<li><div>First you have to apply the patch available in this <a href="https://jira.ez.no/browse/EZP-22118" target="_self">JIRA EZP-22118 issue</a>.</div></li><li><div>Edit block.ini and update the latest content block's limit values and set a bigger number than previously<pre class="wordwrap"><span class="line">[LatestContent]</span>
+<span class="line">NumberOfValidItems=10</span>
+<span class="line">FetchFixedParameters[Limit]=10</span>
+</pre></div></li>
+</ul>
+
+<ul>
+<li><div>
+If you have existing blocks experiencing the problem, you need to force the reload of their content : set to 0 the last_update in the database ezm_block table.<br />For example if you want to update all of them run:<pre class="wordwrap"><span class="line">update ezm_block set last_update = '0' where block_type = 'LatestContent';</span>
+</pre></div></li>
+</ul>
+
+<ul>
+<li><div>Then run the cronjob:<pre class="wordwrap"><span class="line">php runcronjobs.php ezflow</span>
+</pre></div></li>
+</ul>
+
+<ul>
+<li><div>If too many items are displayed, you can override the template to fit your needs.</div></li>
+</ul>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Flow/eZ-Flow-LS-5.x/Usage/Block-types/Block-Types/Latest-content by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:27:57 GMT -->
+</html>

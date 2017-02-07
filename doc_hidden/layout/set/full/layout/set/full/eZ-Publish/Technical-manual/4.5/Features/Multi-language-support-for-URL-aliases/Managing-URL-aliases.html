@@ -1,0 +1,89 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.5/Features/Multi-language-support-for-URL-aliases/Managing-URL-aliases by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:51:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Managing URL aliases / Multi-language support for URL aliases / Features / 4.5 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Managing URL aliases</h1>
+</div>
+
+<p>The administration interface makes it possible to easily manage the <a href="../../Concepts-and-basics/URL-translation.html" target="_self">virtual URLs</a> that belong to a site. Management happens through the manipulation of two lists. While one of them is related to node URL aliases, the other deals with global aliases. In addition, it is possible to manage rules of wildcard based URL forwarding (so-called &quot;wildcard aliases&quot;) using the URL wildcards interface.</p><a name="eztoc122747_1" id="eztoc122747_1"></a><h2>Managing node aliases</h2><p>The interface for managing the URL aliases of content nodes can be accessed by selecting the &quot;Manage URL aliases&quot; item from the &quot;Advanced&quot; section of the <a href="../../../../User-manual/4.4/The-administration-interface/The-Content-structure-tab.html#the_popup_menu" target="_self">context sensitive menu</a> for each content node. It can also be accessed by requesting &quot;content/urlalias/&lt;node_id&gt;&quot; directly (where &quot;node_id&quot; must be replaced with the actual ID number of the desired node). The following screenshot the interface for managing a node's URL aliases.</p>
+<div class="object-center doc">        <img src="../../../../../../../../../../../../var/doc/storage/images/media/images/the-interface-for-managing-url-aliases3/119611-1-eng-GB/The-interface-for-managing-URL-aliases_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>This interface provides an overview of all URL aliases that belong to the selected node. In addition, it can be used to create new and remove the existing aliases. The example shows a list of virtual URLs for the &quot;eZ Publish&quot; node. There are three manual aliases: &quot;eZ-Web-Page&quot;, &quot;page-web&quot; and &quot;webseite&quot;. While the &quot;page-web&quot; alias is associated with French language, the &quot;webseite&quot; alias is associated with German and &quot;eZ-Web-Page&quot; alias is in English. This means that the same page (node) can be accessed using any of these aliases if both French, German and English languages are configured for a siteaccess.</p><p>The drop-down list can be used to select the <a href="#site_languages" target="_self">site language</a> that the alias should be associated with. For example, if &quot;Spanish&quot; is selected, the alias will be available for all siteaccesses that have Spanish on the list of site languages. The drop-down list contains all the languages that are configured for the admin siteaccess. If the &quot;<a href="../../../4.x/Reference/Configuration-files/site.ini/RegionalSettings/ShowUntranslatedObjects.html" target="_self">ShowUntranslatedObjects</a>&quot; setting is enabled, then all <a href="#translation_languages" target="_self">translation languages</a> will be listed. For example, it will be possible to create an alias associated with Spanish even though the actual object does not exist in this language. Note that multilingual aliases do not control which language the requested page will be displayed in (this depends on the language configuration of the current siteaccess).</p><p>The &quot;Place alias on the site root&quot; check-box can be used to specify where the alias/URL to be added should start. If checked, it will start from the root node. Otherwise, the provided alias is created from the parent node. For example, if you are adding a new URL alias called &quot;test&quot; to a node &quot;City&quot; located at &quot;/country/state/city&quot;, the new URL alias will either be &quot;/country/state/test&quot; or just &quot;/test&quot; depending on whether the &quot;Place alias on the site root&quot; check-box was checked or unchecked.</p><a name="eztoc122747_1_1" id="eztoc122747_1_1"></a><h3>The &quot;Generated aliases&quot; window</h3><p>In the example above, the &quot;eZ-Publish&quot; node exists in both English, German and French languages and thus it has three auto-generated aliases &quot;eZ-Web-Page&quot;, &quot;page-web&quot; and &quot;webzeite&quot;. These are automatically created by the system based on the existing translations of the actual object. The list of auto-generated aliases is shown in the &quot;Generated aliases&quot; window located in the upper part of the interface. The &quot;eZ-Publish&quot; page can be accessed using any of these aliases if both French, German and English languages are configured for a siteaccess.</p><p>Note that the &quot;Generated aliases&quot; window displays only one URL for each language that the actual object exists in even though the parent node has several aliases in different languages. In other words, it can happen that not all the possible combinations are shown. For example, if a new node &quot;Employees&quot; is created beneath the &quot;Company&quot; node, it can be accessed using one of the following URL aliases:</p>
+<ul>
+<li><div>&nbsp;Company/Employees </div></li><li><div>&nbsp;Compagnie/Employees </div></li><li><div>&nbsp;articles/company_info/Employees </div></li><li><div>&nbsp;MaCompagnie/Employees </div></li><li><div>&nbsp;mycompany/Employees </div></li>
+</ul>
+<p>However, only one of these URLs will be displayed in the list of auto-generated aliases for the &quot;Employees&quot; node. The system will pick one of the auto-generated aliases of the parent node (either &quot;Company&quot; or &quot;Compagnie&quot;), depending of the siteaccess' language configuration. If the most prioritized language for the admin siteaccess is English, only the &quot;Company/Employees&quot; alias will be displayed in the &quot;Generated aliases&quot; section for the &quot;About&quot; node. If the most prioritized language is French, then &quot;Compagnie/Employees&quot; will be displayed. The corresponding alias will be displayed using bold characters in the list of auto-generated aliases for the parent node. The screenshot above shows a situation when English is configured as the most prioritized language for the admin siteaccess and thus the &quot;Company&quot; alias is displayed using bold characters.</p><a name="eztoc122747_1_2" id="eztoc122747_1_2"></a><h3>Creating a new node alias</h3><p>To create a new alias, first select which site language that the alias should be associated with. Type in the desired text for the new alias into the input field and click the &quot;Create&quot; button. It is possible to create virtual URLs that make it look like if a node is situated at a different location in the tree. For example, you can create a URL alias &quot;my_dummy_folder/my_article&quot; for a node called &quot;Article&quot; which in reality is located inside a folder called &quot;Articles&quot;. Note that in this case, the &quot;Relative to parent&quot; checkb-ox must be unchecked.</p><a name="eztoc122747_1_2_1" id="eztoc122747_1_2_1"></a><h4>Further notes</h4><p>Let's say that you have a node (somewhere in the tree, the location does not matter) called &quot;About us&quot;. As previously mentioned, you can create an imaginary URL (with bogus / non-existing parent(s)) for it. For example, you can create &quot;company/about_us&quot; and it will work (the system will bring up the &quot;About us&quot; node). Assuming that the &quot;Company&quot; node does not exist from before, if someone requests only &quot;company&quot;, the system will return an &quot;Object not found&quot; page. However, if a node called &quot;Company&quot; is created, the system will automatically make a URL alias for it (most likely &quot;company&quot;) and thus the &quot;company&quot; alias will work (it will bring up the &quot;Company&quot; node).</p><a name="eztoc122747_2" id="eztoc122747_2"></a><h2>Managing global aliases</h2><p>The interface for managing global aliases was introduced a long time ago. However, it was changed in eZ Publish 3.10. This interface can be reached by clicking the &quot;URL translator&quot; link under the &quot;Setup&quot; tab in the Administration interface. The following image shows the URL translator interface.</p>
+<div class="object-center doc">        <img src="../../../../../../../../../../../../var/doc/storage/images/media/images/managing-global-aliases2/119730-1-eng-GB/Managing-global-aliases_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>As the screenshot shows, it is similar to the interface used to manipulate the URL aliases for individual nodes. The list displays all aliases in the system. The list is sorted by the text of the aliases (not the actual path that the alias is created for).</p><p>In the example above, three global aliases for the &quot;search&quot; view of the &quot;content&quot; module have been added. While the first alias is associated with the German language, the second one is in English and the third one is in French. This makes it possible to access the &quot;search&quot; view using the &quot;Findet-mich&quot;&quot;findme&quot; or &quot;trouve-moi&quot; aliases if the current siteaccess is configured to use both German, English and French. In other words &quot;http://www.example.com/content/search&quot;, &quot;http://www.example.com/findme&quot; and &quot;http://www.example.com/trouve-moi&quot; will bring up the search interface. The &quot;Always available&quot; column indicates whether the alias is <a href="../Multi-language-support-for-URL-aliases.html" target="_self">always available</a> or not. In the screenshot above, the &quot;findme&quot; alias is always available (it will work for all siteaccesses regardless of their language configuration).</p><p>Note that unlike before 3.10, this list does no longer show aliases for nodes. The node aliases can be viewed and edited (individually, for every node) from within the node alias interface which was described earlier.</p><a name="eztoc122747_2_2_2" id="eztoc122747_2_2_2"></a><h4>Creating a new global alias</h4><p>To create a new global alias, input the desired virtual URL and the path to existing functionality or resource; this can be a module/view-combination or the address of a node. The specified alias will always start at the root of the site. The language drop-down list can be used to select which site language the alias should be associated with. If the &quot;Include in other languages&quot; checkbox is selected, the newly created alias will work for all siteaccesses regardless of their language configuration.</p><p>Note that it is possible to use the global aliases interface to create aliases to nodes (to for example &quot;content/view/full/&lt;node_id&gt;&quot; or a virtual URL). However, such aliases will not appear in the global list. They will automatically appear in the node aliases interface for the corresponding node.</p><a name="eztoc122747_3" id="eztoc122747_3"></a><h2>Managing wildcard URL aliases</h2><p>The interface for managing <a href="../Multi-language-support-for-URL-aliases.html#wildcard_based_url_forwarding" target="_self">wildcard aliases</a> can be reached by clicking the &quot;URL wildcards&quot; link under the &quot;Setup&quot; tab in the administration interface. The following image shows how the URL wildcards interface looks like.</p>
+<div class="object-center doc">        <img src="../../../../../../../../../../../../var/doc/storage/images/media/images/managing-url-wildcards/119724-1-eng-GB/Managing-URL-wildcards_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>The interface displays all wildcard aliases in the system and enables you to create new ones. In the example above, five wildcard aliases have been added.</p><p>When someone enters a URL in the browser address bar, the system will search for a node that matches this URL according to the specified rules of wildcard based URL-forwarding. In eZ Publish, the only wildcard character that can be used in aliases is asterisk (*). It can be repeated several times within one alias. Note that all wildcard characters within one alias are automatically assigned numbers: 1, 2, 3, ... These are used when you specify a destination for this alias: {1}, {2}, {3}, ...</p><p>The &quot;Type&quot; column indicates whether the alias is a &quot;direct&quot; or &quot;forward&quot; one. In the screenshot above, all aliases are of the &quot;forward&quot; type, which means the system will redirect users to the original URL of the node that is being accessed (destination). In other words, when someone enters a URL like &quot;http://www.example.com/pictures/home/photo/&quot; in the address bar of a browser, the system will redirect the user to &quot;http://www.example.com/media/images/home/photo/&quot;.</p><a name="eztoc122747_3_2_3" id="eztoc122747_3_2_3"></a><h4>Creating wildcard aliases</h4><p>To create a new wildcard alias, input the desired text of the alias and the destination address into the corresponding fields. If the &quot;Redirecting URL&quot; check-box is selected, the newly created alias will work as &quot;forward&quot; one. After you click the Create-button, the newly added alias will appear on the list.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.5/Features/Multi-language-support-for-URL-aliases/Managing-URL-aliases by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:51:07 GMT -->
+</html>

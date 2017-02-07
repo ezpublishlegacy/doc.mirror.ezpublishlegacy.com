@@ -1,0 +1,245 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-5.0/Upgrading-from-4.7-to-5.0 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:25:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Upgrading from 4.7 to 5.0 / Upgrading to 5.0 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Upgrading from 4.7 to 5.0</h1>
+</div>
+
+<p>This section describes how to upgrade your existing eZ Publish 4.7 installation to version 5.0. Make sure that you have a working backup of the site before you do the actual upgrade, and make sure that the installation you are performing the upgrade on is offline.</p><a name="eztoc129581_0_0_1" id="eztoc129581_0_0_1"></a><h4>Note on Paths:</h4>
+<ul>
+<li><div><i>/&lt;ezp5-root&gt;/</i>: The root directory where eZ Publish 5 is installed in, examples: &quot;<i>/home/myuser/www</i>/&quot; or &quot;<i>/var/sites/ezpublish/</i>&quot;</div></li><li><div><i>/&lt;ezp5-root&gt;/ezpublish_legacy/</i>: &nbsp;Root&nbsp;directory&nbsp;of&nbsp;&quot;Legacy&quot; (aka &quot;Legacy Stack&quot;, refers to the eZ Publish 4.x&nbsp;installation&nbsp;which is bundled with eZ Publish 5) normally inside &quot;<i>ezpublish_legacy</i>/&quot;, example: &quot;<i>/home/myuser/www/ezpublish_legacy/</i>&quot;</div></li>
+</ul>
+<p><a name="eztoc126882_0_1"></a>
+</p><a name="eztoc129581_0_0_2" id="eztoc129581_0_0_2"></a><h4>Important upgrade notes:</h4><p>
+Before starting, please make sure that the&nbsp;DebugByUser&nbsp;legacy setting is disabled, as it will interfere with the login mechanism. This is a known issue, and you can get more details and the fix itself in the related Jira,&nbsp;<a href="https://jira.ez.no/browse/EZP-21237" target="_self">EZP-21237</a>.<br />If you still need to use the debug by user feature, make sure to apply the patch from&nbsp;<a href="https://jira.ez.no/browse/EZP-21237" target="_self">EZP-21237</a>&nbsp;or request for an official patch from the customer support team, until the fix is not yet distributed in a service pack.</p><p>The procedure for upgrading directly from version 4.7 to 5.0 consists of the following steps:</p>
+<ol>
+<li><div>Upgrade the distribution files</div></li><li><div>Upgrade custom extensions</div></li><li><div>Upgrade the database</div></li><li><div>Run scripts</div></li><li><div>Regenerate the autoload array for extensions</div></li><li><div>Generate eZ Publish 5 yml configuration &amp; symlink assets</div></li><li><div>Clear the caches</div></li><li><div>Update rewrite rules</div></li><li><div>Upgrade extensions (site package)</div></li>
+</ol>
+<p><a name="eztoc126882_1"></a>
+</p><a name="eztoc129581_0_1" id="eztoc129581_0_1"></a><h3>Check for requirements</h3><p><a name="eztoc126882_1_2"></a>
+</p><p>php 5.3.3 and higher is needed. Further information regarding system requirements can be found on <a href="../../Technical-manual/5.x/Installation/Requirements.html" target="_self">Requirements Documentation Page</a>.</p><p><a name="eztoc126882_2"></a>
+</p><a name="eztoc129581_0_2" id="eztoc129581_0_2"></a><h3>Step 1: Upgrade the distribution files</h3><p>The easiest way to upgrade the distribution files is to unpack eZ Publish 5 to a separate directory and then copy the directories that contain site-specific files from the existing 4.7 installation into &quot;<i>/&lt;ezp5-root&gt;/ezpublish_legacy/</i>&quot;. Make sure you copy the following directories:</p>
+<ul>
+<li><div>design/example</div></li><li><div>design/example_admin</div></li><li><div>var</div></li><li><div>settings/siteaccess</div></li><li><div>settings/override</div></li>
+</ul>
+<p>Replace &quot;example&quot; and &quot;example_admin&quot; with the actual names of your site accesses, however make sure that you do not overwrite any designs that are included in eZ Publish&nbsp;distribution: admin, base, standard, mysite &amp; plain, and avoid coping admin2 design as it has been merged into admin as of 5.0.</p><p><i><b>Note: </b>Because the new directory has replaced the original directory, the directory permissions need to be fixed. You can choose between Shell commands or Alternative shell commands.</i></p><p>Use <i>one</i> of the following two alternatives to do this:</p>
+<ul>
+<li><div><b>Shell commands</b></div></li>
+</ul>
+<p>These shell commands will give proper permission to the web server and command line users:</p><pre class="wordwrap"><span class="line">cd /&lt;ezp5-root&gt;/</span>
+<span class="line">chmod -R a+rwx ezpublish/{cache,logs,config} \</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;ezpublish_legacy/{design,extension,settings,var}</span>
+</pre>
+<ul>
+<li><div><b>Recommended shell commands using&nbsp;setfacl</b></div></li>
+</ul>
+<p>These commands will setup the permission more correctly, but require use of setfacl which is not&nbsp;available&nbsp;on all systems (change 'www-data' to your web server user if your system uses something else):</p><pre class="wordwrap copytoclipboard"><span class="line">cd /&lt;ezp5-root&gt;/</span>
+<span class="line">sudo setfacl -R -m u:www-data:rwx -m u:www-data:rwx \</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;ezpublish/{cache,logs,config} \</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;ezpublish_legacy/{design,extension,settings,var}</span>
+<span class="line">sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx \</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;ezpublish/{cache,logs,config} \</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;ezpublish_legacy/{design,extension,settings,var}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'cd /&lt;ezp5-root&gt;/\r\nsudo setfacl -R -m u:www-data:rwx -m u:www-data:rwx \\r\n    ezpublish/{cache,logs,config} \\r\n    ezpublish_legacy/{design,extension,settings,var}\r\nsudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx \\r\n    ezpublish/{cache,logs,config} \\r\n    ezpublish_legacy/{design,extension,settings,var}' ); return false;" /></p>
+<![endif]--><a name="eztoc129581_0_3" id="eztoc129581_0_3"></a><h3>Step 2: Upgrade custom extensions</h3><p>If you are using custom extensions, the sub-directories inside the &quot;extension&quot; directory will also have to be copied from the existing 4.7 installation into &quot;<i>/&lt;ezp5-root&gt;/ezpublish_legacy/extension/</i>&quot;. However, make sure that you do not overwrite any extensions that are included in eZ Publish&nbsp;distribution, which currently are (<i><b>Note:</b> As of eZ Publish 5.0, these extensions have the same version number as eZ Publish</i>):</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<td width="50%" valign="top" style="vertical-align: top">  <p><b>Extension name</b></p>
+  </td>
+<td width="20%" valign="top" style="vertical-align: top">  <p><b>Folder name</b></p>
+  </td>
+<td width="30%" valign="top" style="vertical-align: top">  <p><b>Note</b></p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Flow</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ezflow</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ JSCore</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ezjscore</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Online Editor</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ezoe</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ OpenOffice Document Format</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ezodf</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Image Editor</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ezie</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Multiupload</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ezmultiupload</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ MB Password Expiry</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ezmbpaex</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Network</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ez_network</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ REST API Provider</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ezprestapiprovider</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Script Monitor</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ezscriptmonitor</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ SI</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ezsi</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Find</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ezfind</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Optional install</p>
+  </td>
+
+</tr>
+
+</table>
+<p>Note that upgrading the distribution files will overwrite the autoload arrays for extensions. You will need to re-generate the autoload arrays for active extensions later.</p><p><i><b>Important: </b>If you plan to upgrade your eZ Website Interface, eZ Flow or eZ Demo site package as well, then&nbsp;additional&nbsp;extensions will be updated and the step for&nbsp;re-generate the autoload arrays can be skipped until that is done (links to documentation for upgrading these site packages can be found in the last step of this page).</i></p><p><a name="eztoc126882_4"></a>
+</p><a name="eztoc129581_0_4" id="eztoc129581_0_4"></a><h3>Step 3: Upgrade the database</h3><p>The update script for the database is located in:</p><pre class="wordwrap"><span class="line">/&lt;ezp5-root&gt;/ezpublish_legacy/update/database/&lt;mysql|postgresql&gt;/5.0/dbupdate-4.7.0-to-5.0.0.sql</span>
+</pre><p>You can run this with the appropriate command line tool or application.</p><p><a name="eztoc126882_4_2_0_0_1"></a>
+</p><a name="eztoc129581_0_5" id="eztoc129581_0_5"></a><h3>Step 4: Run scripts</h3><p>The following script has to be run after the upgrade of the database:</p><pre class="wordwrap"><span class="line">cd /&lt;ezp5-root&gt;/ezpublish_legacy/</span>
+<span class="line">php update/common/scripts/5.0/deduplicatecontentstategrouplanguage.php</span>
+</pre><p>The following script must be executed to fix existing content and restore its relations.&nbsp;</p><p><i><b>Note:</b> This fix is about a known issue with relations and embedded/linked objects in XML text blocks that could be lost at object level for secondary languages and only applies to multilingual websites.</i></p><pre class="wordwrap"><span class="line">php update/common/scripts/5.0/restorexmlrelations.php</span>
+</pre><p>The following script is responsible for disabling user accounts with suspicious user login (containing &lt; and &gt;). Remove the '--disable' option for a dry run:</p><pre class="wordwrap"><span class="line">php update/common/scripts/5.0/disablesuspicioususers.php --disable</span>
+</pre><p><i><b>Note:</b> If you are running ezxmlexport, an ezxmlexport upgrade SQL script have to be imported. The scripts for each supported database are available in /&lt;ezp5-root&gt;/ezpublish_legacy/extension/ezxmlexport/update/database/[your database]/5.0/dbupdate-1.5-5.0.sql.</i></p><a name="eztoc129581_0_6" id="eztoc129581_0_6"></a><h3>Step 5: Regenerate the autoload array for extensions</h3><p>The autoload system has undergone some changes also. For instance: the autoload array for extensions is now placed in <i>var/autoload</i> of your eZ Publish installation (along with the class changes in extensions itself).</p><p>To regenerate the autoload array, execute the following script from the root of your eZ Publish Legacy directory:</p><pre class="wordwrap"><span class="line">cd /&lt;ezp5-root&gt;/ezpublish_legacy/</span>
+<span class="line">php bin/php/ezpgenerateautoloads.php --extension</span>
+</pre><a name="eztoc129581_0_7" id="eztoc129581_0_7"></a><h3>Step 6: Generate eZ Publish 5 yml configuration &amp; symlink assets</h3><a name="eztoc129581_0_7_2_0_1" id="eztoc129581_0_7_2_0_1"></a><h6>yml config</h6><p>To generate yml configuration for the new Symfony stack, a console command has been provided to cover single site setups.</p><p>&nbsp;Perform the following command where `&lt;group&gt;` is the siteaccess group name(new concept, a grouping of siteaccesses that have something in common, db and admin siteaccess would be minimum determinators to be able to use the command), examples of group name: 'ezdemo_site', 'ezwebin_site' or 'ezflow_site'. And `&lt;admin_siteaccess&gt;` is the name of the admin siteaccess, for instance, 'ezdemo_site_admin'.</p><pre class="wordwrap"><span class="line">cd /&lt;ezp5-root&gt;</span>
+<span class="line">php ezpublish/console ezpublish:configure --env=prod &lt;group&gt; &lt;admin-siteaccess&gt;</span>
+</pre><a name="eztoc129581_0_7_2_0_2" id="eztoc129581_0_7_2_0_2"></a><h6>assets</h6><p>To be able to run eZ Publish 5 correctly, assets need to be exposed in the public 'web' folder.</p><p>The following commands will first symlink eZ Publish 5 assets in &quot;Bundles&quot; and the second will symlink assets (design files like images, scripts and css, and files in var folder) &nbsp;from eZ Publish Legacy:</p><pre class="wordwrap"><span class="line">php ezpublish/console assets:install --symlink web</span>
+<span class="line">php ezpublish/console ezpublish:legacy:assets_install --symlink web</span>
+</pre><p><i><b>Note</b>: In both cases &quot;web&quot; is the default folder and can be skipped from the command. Further information about alternative options is&nbsp;available&nbsp;with -h just like it is with &quot;</i>php ezpublish/console -h&quot;</p><a name="eztoc129581_0_8" id="eztoc129581_0_8"></a><h3>Step 7: Clear the caches</h3><p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p>
+<ol>
+<li><div>Navigate into the new eZ Publish directory.</div></li><li><div>Run the script using the following shell command:</div></li>
+</ol>
+<pre class="wordwrap"><span class="line">cd /&lt;ezp5-root&gt;/ezpublish_legacy/</span>
+<span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre><p>Purging ensures that the caches are physically removed. When the &quot;--purge&quot; parameter is not specified, the caches will be expired but not removed.</p><p><b>Note:</b> Sometimes the script is unable to clear all cache files because of restrictive file/directory permission settings. Make sure that all cache files have been cleared by inspecting the contents of the various cache sub-directories within the &quot;var&quot; directory (typically the &quot;<i>var/cache/</i>&quot; and &quot;<i>var/&lt;name_of_siteaccess&gt;/cache/</i>&quot; directories). If there are any cache files left, you need to remove them manually.</p><a name="eztoc129581_0_9" id="eztoc129581_0_9"></a><h3>Step 8: Update rewrite rules</h3><p>There are two ways eZ Publish 5 can be installed, either the full install with both the new Symfony stack and the legacy stack, or legacy only. In latter case you only need to point your '4.7 like' rewrite rules to <i>/&lt;ezp5-root&gt;/ezpublish_legacy/</i> and that's it. Otherwise, update your rewrite rules to&nbsp;resemble&nbsp;<a href="../../Technical-manual/5.x/Installation/Virtual-host-setup.html" target="_self">this</a>&nbsp;and point it to&nbsp;<i>/&lt;ezp5-root&gt;/web/</i>.</p><a name="eztoc129581_0_10" id="eztoc129581_0_10"></a><h3>Step 9: Upgrade Extensions (site package)</h3><p>Next, depending on if you originally installed eZ Flow, eZ Webin or eZ Demo site, follow the steps mentioned in the&nbsp;<a href="../../../Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-8.html" id="vmvc" title="http://ez.no/doc/extensions/website_interface/website_interface_1_7_upgrade" target="_self">eZ Webin</a>,&nbsp;<a href="../../../Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-6.html" id="qorj" title="http://ez.no/doc/extensions/ez_flow/ez_flow_2_2_upgrade" target="_self">eZ Flow</a>&nbsp;or <a href="../../../Extensions/eZ-Publish-extensions/eZ-Demo/eZ-Demo-6.html" target="_self">eZ Demo</a>&nbsp;upgrade documentation.</p><a name="eztoc129581_1" id="eztoc129581_1"></a><h2>Known issue</h2><a name="eztoc129581_1_11" id="eztoc129581_1_11"></a><h3>Lazy sessions not supported</h3><p>As Symfony always forces the creation of sessions, and regarding the way eZ Publish has&nbsp;this feature implemented, lazy sessions is currently not supported on eZ Publish 5.x.</p><p>
+Please note that the &quot;ForceStart&quot; setting still exists in eZ Publish 5 legacy, but it will not take any effect, since the creation of a session is always forced by Symfony.<br />Also please be aware that using this setting with Varnish or other similar caching systems may generate additional cache issues.&nbsp;</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-5.0/Upgrading-from-4.7-to-5.0 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:25:27 GMT -->
+</html>

@@ -1,0 +1,135 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/Policy-functions by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:01:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Policy functions / Features / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Policy functions</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><p>The built-in <a href="../Concepts-and-basics/Access-control.html" target="_self">access control mechanism</a> of eZ Publish is based on roles and policies. A policy is a rule that grants access to a specific function or all functions of a <a href="../Concepts-and-basics/Modules-and-views.html" target="_self">module</a>. The functions are assigned to the module's views and thus the access requirements for a view are controlled by the functions that are assigned to it.</p><p>The following code (taken from the eZ Publish source) shows how the function-view assignments of the &quot;<a href="../Reference/Modules/notification.html" target="_self">notification</a>&quot; module are specified in &quot;kernel/notification/module.php&quot;.</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">&nbsp;</span>
+<span class="line">$Module = array( &quot;name&quot; =&gt; &quot;eZNotification&quot;,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;variable_params&quot; =&gt; true );</span>
+<span class="line">&nbsp;</span>
+<span class="line">$ViewList = array();</span>
+<span class="line">$ViewList[&quot;settings&quot;] = array(</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;functions&quot; =&gt; array( 'use' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;script&quot; =&gt; &quot;settings.php&quot;,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;'ui_context' =&gt; 'administration',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;default_navigation_part&quot; =&gt; 'ezmynavigationpart',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;params&quot; =&gt; array( ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;'unordered_params' =&gt; array( 'offset' =&gt; 'Offset' ) );</span>
+<span class="line">&nbsp;</span>
+<span class="line">$ViewList[&quot;runfilter&quot;] = array(</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;functions&quot; =&gt; array( 'administrate' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;script&quot; =&gt; &quot;runfilter.php&quot;,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;'ui_context' =&gt; 'administration',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;default_navigation_part&quot; =&gt; 'ezsetupnavigationpart',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;params&quot; =&gt; array( ) );</span>
+<span class="line">&nbsp;</span>
+<span class="line">$ViewList[&quot;addtonotification&quot;] = array(</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;functions&quot; =&gt; array( 'use' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;script&quot; =&gt; &quot;addtonotification.php&quot;,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;'ui_context' =&gt; 'administration',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;default_navigation_part&quot; =&gt; 'ezcontentnavigationpart',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;params&quot; =&gt; array( 'ContentNodeID' ) );</span>
+<span class="line">&nbsp;</span>
+<span class="line">$FunctionList['use'] = array( );</span>
+<span class="line">$FunctionList['administrate'] = array( );</span>
+<span class="line">&nbsp;</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\n\r\n$Module = array( &quot;name&quot; =&gt; &quot;eZNotification&quot;,\r\n                 &quot;variable_params&quot; =&gt; true );\r\n\r\n$ViewList = array();\r\n$ViewList[&quot;settings&quot;] = array(\r\n    &quot;functions&quot; =&gt; array( \'use\' ),\r\n    &quot;script&quot; =&gt; &quot;settings.php&quot;,\r\n    \'ui_context\' =&gt; \'administration\',\r\n    &quot;default_navigation_part&quot; =&gt; \'ezmynavigationpart\',\r\n    &quot;params&quot; =&gt; array( ),\r\n    \'unordered_params\' =&gt; array( \'offset\' =&gt; \'Offset\' ) );\r\n\r\n$ViewList[&quot;runfilter&quot;] = array(\r\n    &quot;functions&quot; =&gt; array( \'administrate\' ),\r\n    &quot;script&quot; =&gt; &quot;runfilter.php&quot;,\r\n    \'ui_context\' =&gt; \'administration\',\r\n    &quot;default_navigation_part&quot; =&gt; \'ezsetupnavigationpart\',\r\n    &quot;params&quot; =&gt; array( ) );\r\n\r\n$ViewList[&quot;addtonotification&quot;] = array(\r\n    &quot;functions&quot; =&gt; array( \'use\' ),\r\n    &quot;script&quot; =&gt; &quot;addtonotification.php&quot;,\r\n    \'ui_context\' =&gt; \'administration\',\r\n    &quot;default_navigation_part&quot; =&gt; \'ezcontentnavigationpart\',\r\n    &quot;params&quot; =&gt; array( \'ContentNodeID\' ) );\r\n\r\n$FunctionList[\'use\'] = array( );\r\n$FunctionList[\'administrate\'] = array( );\r\n\r\n?&gt;' ); return false;" /></p>
+<![endif]--><p>As the code shows, there are three views and two functions assigned to them. While the &quot;administrate&quot; function is assigned to the &quot;runfilter&quot; view, the &quot;use&quot; function is assigned to the &quot;addtonotification&quot; and &quot;settings&quot; views.</p><a name="eztoc86331_1" id="eztoc86331_1"></a><h2>Multiple function assignments</h2><p>A view can have several functions assigned to it. From version 3.9.3, the system makes use of logical operators (&quot;and&quot;, &quot;or&quot;) within the function-view assignments. The following examples show how this works.</p><a name="eztoc86331_1_1" id="eztoc86331_1_1"></a><h3>Example 1</h3><p>The &quot;<a href="../Reference/Modules/content/Views/tipafriend.html" target="_self">tipafriend</a>&quot; view of the &quot;content&quot; module has two functions assigned. The following code is taken from &quot;kernel/content/module.php&quot;.</p><pre class="wordwrap copytoclipboard"><span class="line">$ViewList['tipafriend'] = array(</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;'functions' =&gt; array( 'tipafriend', 'read' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;'default_navigation_part' =&gt; 'ezcontentnavigationpart',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;'script' =&gt; 'tipafriend.php',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;'params' =&gt; array( 'NodeID' ) );</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '$ViewList[\'tipafriend\'] = array(\r\n    \'functions\' =&gt; array( \'tipafriend\', \'read\' ),\r\n    \'default_navigation_part\' =&gt; \'ezcontentnavigationpart\',\r\n    \'script\' =&gt; \'tipafriend.php\',\r\n    \'params\' =&gt; array( \'NodeID\' ) );' ); return false;" /></p>
+<![endif]--><p>The code in this example specifies that a user must be granted access to both the &quot;tipafriend&quot; and &quot;read&quot; functions in order to use the &quot;tipafriend&quot; view (which is a part of the &quot;content&quot; module). Note that there is an alternate way of specifying this, refer to the example below.</p><pre class="wordwrap"><span class="line">...</span>
+<span class="line">'functions' =&gt; array( 'tipafriend and read' ),</span>
+<span class="line">...</span>
+</pre><p>Also, note that the &quot;and&quot; operator can be either &quot;and&quot; or &quot;&amp;&amp;&quot;.</p><a name="eztoc86331_1_2" id="eztoc86331_1_2"></a><h3>Example 2</h3><p>The &quot;<a href="../Reference/Modules/section/Views/list.html" target="_self">list</a>&quot; view of the &quot;section&quot; module has three functions assigned. The following code is taken from &quot;kernel/section/module.php&quot;.</p><pre class="wordwrap copytoclipboard"><span class="line">$ViewList['list'] = array(</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;'functions' =&gt; array( 'view or edit or assign' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;'script' =&gt; 'list.php',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;'default_navigation_part' =&gt; 'ezsetupnavigationpart',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;unordered_params&quot; =&gt; array( &quot;offset&quot; =&gt; &quot;Offset&quot; ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;'params' =&gt; array( ) );</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '$ViewList[\'list\'] = array(\r\n    \'functions\' =&gt; array( \'view or edit or assign\' ),\r\n    \'script\' =&gt; \'list.php\',\r\n    \'default_navigation_part\' =&gt; \'ezsetupnavigationpart\',\r\n    &quot;unordered_params&quot; =&gt; array( &quot;offset&quot; =&gt; &quot;Offset&quot; ),\r\n    \'params\' =&gt; array( ) );' ); return false;" /></p>
+<![endif]--><p>The code above specifies that a user must be granted access to either the &quot;view&quot; or the &quot;edit&quot; or the &quot;assign&quot; function in order to use the &quot;list&quot; view (which is a part of the &quot;section&quot; module). Note that that the &quot;or&quot; operator can be either &quot;or&quot; or &quot;||&quot;.</p><a name="eztoc86331_2" id="eztoc86331_2"></a><h2>Missing functions</h2><p>Some modules do not have functions (for example, this is true for the &quot;search&quot; and &quot;collaboration&quot; modules). If this is the case, granting users access to that module means that the users have access to all of the module's views.</p><p>
+But in cases where a module has both views with functions assigned as well as views without functions assigned, only users with access to the entire module will have access to the views were no functions are assigned.<br /> <a name="notes"></a>
+</p><a name="eztoc86331_2_3" id="eztoc86331_2_3"></a><h3>Additional notes for earlier versions</h3><p>In eZ Publish versions prior to 3.9.3 (except 3.8.9 and later versions of the 3.8 branch), granting access to a function of a module means that the user(s) will get access to the following:</p>
+<ul>
+<li><div> Views that have the function assigned. </div></li><li><div> Views that do not have any functions assigned. </div></li>
+</ul>
+<p>For example, in eZ Publish version 3.9.2, there are no functions assigned to the &quot;<a href="../Reference/Modules/shop/Views/discountgroupview.html" target="_self">discountgroupview</a>&quot; view of the &quot;shop&quot; module. Anonymous users that have access to the &quot;buy&quot; function of the &quot;shop&quot; module can access the &quot;discountgroupview&quot; view (along with other views of the &quot;shop&quot; module that do not have any functions assigned to them). This was changed in versions 3.10.0 beta1, 3.9.3 and 3.8.9 because of security reasons. Refer to the <a href="http://ez.no/community/news/ez_publish_security_fixes_3_9_3_and_3_8_9" target="_blank">release announcement</a> for more information.</p><p>In order to optimize the functionality of the access permissions when using earlier versions, it is best that modules either have views with functions assigned or views without functions assigned to them, but not both.</p><a name="eztoc86331_3" id="eztoc86331_3"></a><h2>Function limitations</h2><p>A policy (which grants access to a module's function) can be further restricted by function limitations. This can only be done if the function itself supports limitations. A function may support none, one or several limitations. The following code shows how the available limitations for the &quot;diff&quot;, &quot;hide&quot; and &quot;tipafriend&quot; functions of the &quot;content&quot; module are specified in &quot;kernel/content/module.php&quot;.</p><pre class="wordwrap copytoclipboard"><span class="line">...</span>
+<span class="line">$FunctionList['diff'] = array( 'Class' =&gt; $ClassID,</span>
+<span class="line">'Section' =&gt; $SectionID,</span>
+<span class="line">'Owner' =&gt; $Assigned,</span>
+<span class="line">'Node' =&gt; $Node,</span>
+<span class="line">'Subtree' =&gt; $Subtree);</span>
+<span class="line">...</span>
+<span class="line">$FunctionList['hide'] = array( 'Subtree' =&gt; $Subtree );</span>
+<span class="line">...</span>
+<span class="line">$FunctionList['tipafriend'] = array();</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '...\r\n$FunctionList[\'diff\'] = array( \'Class\' =&gt; $ClassID,\r\n\'Section\' =&gt; $SectionID,\r\n\'Owner\' =&gt; $Assigned,\r\n\'Node\' =&gt; $Node,\r\n\'Subtree\' =&gt; $Subtree);\r\n...\r\n$FunctionList[\'hide\'] = array( \'Subtree\' =&gt; $Subtree );\r\n...\r\n$FunctionList[\'tipafriend\'] = array();\r\n...' ); return false;" /></p>
+<![endif]--><p>As the code shows, the &quot;diff&quot; function supports five limitations, the &quot;hide&quot; function supports one limitation and the &quot;tipafriend&quot; function supports no limitations. Refer to the &quot;<a href="../Concepts-and-basics/Access-control.html#function_limitations" target="_self">Access control</a>&quot; section of the &quot;Concept and basics&quot; chapter for an overview of the available function limitations.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/Policy-functions by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:01:53 GMT -->
+</html>

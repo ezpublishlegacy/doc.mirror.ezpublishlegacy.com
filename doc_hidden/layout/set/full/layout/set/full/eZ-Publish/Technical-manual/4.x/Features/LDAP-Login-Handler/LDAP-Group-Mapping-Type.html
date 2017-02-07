@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/LDAP-Login-Handler/LDAP-Group-Mapping-Type by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:42:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>LDAP Group Mapping Type / LDAP Login Handler / Features / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>LDAP Group Mapping Type</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><a name="eztoc104205_1" id="eztoc104205_1"></a><h2><a name="UseGroupAttribute"></a>
+UseGroupAttribute</h2><p>This mode requires that group membership is specified in the LDAP user object, i.e. the user object contains an attribute specifying the groups. When you use this, you must set LDAPUserGroupAttribute to the LDAP attribute that holds the group information. Also, LDAPUserGroupAttributeType must be either 'id' or 'name'.</p><p>If 'id' is used, then the LDAPUserGroupAttribute attribute must contain an ID (example: 42) that will match an existing eZ Publish group with the name 'LDAP 42'. If 'name' is used, then the LDAPUserGroupAttribute attribute must contain the name of an existing eZ Publish group. Starting with eZ Publish 4.3, there is a third option 'dn', meaning that the LDAPUserGroupAttribute attribute must contain a DN referring to the group the user belongs to. (Note that in LDAP, some attributes may be set multiple times, as opposed to having the same attribute containing multiple values.)</p><p>Some examples:</p><table class="renderedtable indented-table" cellpadding="2" cellspacing="0">
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>ldap.ini settings</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>
+LDAPGroupMappingType=UseGroupAttribute<br />
+ LDAPUserGroupAttributeType=id<br /> LDAPUserGroupAttribute=employeetype</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>LDAP user objects</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>
+uid: janedoe<br /> employeetype: 22</p><p>
+uid: johndoe<br />
+ employeetype: 22<br /> employeetype: 42</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>Maps users to eZ</b> <b>Publish groups</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>janedoe: 'LDAP 22'</p><p>johndoe: 'LDAP 22', 'LDAP 42'</p>
+  </td>
+
+</tr>
+
+</table>
+<table class="renderedtable indented-table" cellpadding="2" cellspacing="0">
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>ldap.ini settings</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>
+LDAPGroupMappingType=UseGroupAttribute<br />
+ LDAPUserGroupAttributeType=name<br /> LDAPUserGroupAttribute=employeetype</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>LDAP user objects</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>
+uid: janedoe<br /> employeetype: Editors</p><p>
+uid: johndoe<br />
+ employeetype: Editors<br /> employeetype: Technical writers</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>Maps users to eZ</b> <b>Publish groups</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>janedoe: 'Editors'</p><p>johndoe: 'Editors', 'Technical writers'</p>
+  </td>
+
+</tr>
+
+</table>
+<table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>ldap.ini settings</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>
+LDAPGroupMappingType=UseGroupAttribute<br />
+ LDAPUserGroupAttributeType=dn<br /> LDAPUserGroupAttribute=employeetype</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>LDAP user objects</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>
+uid: janedoe<br /> employeetype:cn=Editors,dc=Groups,dc=example,dc=com</p><p>
+uid: johndoe<br />
+ employeetype:cn=Editors,dc=Groups,dc=example,dc=com<br /> employeetype:cn=&quot;Technical writers&quot;,dc=Groups,dc=example,dc=com</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>
+<b>Maps users to eZ</b> <br /> <b>Publish groups </b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>janedoe: 'Editors'</p><p>johndoe: 'Editors', 'Technical writers'</p>
+  </td>
+
+</tr>
+
+</table>
+<p>In eZ Publish 4.2 and older, all three LDAPUserGroupAttributeType alternatives require that the groups exist in eZ Publish, they will not be created by the login handler. However, starting with eZ Publish 4.3, if LDAPCreateMissingGroups is enabled, it will create groups as needed. This setting is disabled by default, for backwards compatibility. When not creating groups, the handler will fall back to using the <a href="LDAP-Group-Mapping-Type.html#DefaultGroup" target="_self">default group</a>.</p><a name="eztoc104205_2" id="eztoc104205_2"></a><h2><a name="SimpleMapping"></a>
+SimpleMapping</h2><p>This mode requires that group membership is specified in the LDAP group object, i.e. the group object contains an attribute specifying the users that are members. When you use this, you must set LDAPGroupClass, LDAPGroupNameAttribute, LDAPGroupMemberAttribute, and LDAPUserGroupMap.</p><p>
+LDAPGroupClass must be set to the class of LDAP group objects. LDAPGroupNameAttribute must be set to the attribute of the LDAP group that contains the name of the group. LDAPGroupMemberAttribute must be set to the attribute of the LDAP group that contains the names of the users that are members. LDAPUserGroupMap is a simple mapping from LDAP group names to eZ Publish group names. Example: 'LDAPUserGroupMap[myldapgroup]=myezgroup'. You may also set LDAPGroupBaseDN and LDAPGroupDescriptionAttribute. LDAPGroupBaseDN may be set to the base DN of your groups tree, to limit the amount of data to search through. LDAPGroupDescriptionAttribute may be set to the attribute of the LDAP group that contains the description of the group, if any. This will set the same description in the eZ Publish group. This mode requires that the groups exist in eZ Publish, because they will not be created automatically. This allows the eZ Publish groups to have different names than the corresponding LDAP groups.<br /> The LDAPCreateMissingGroups setting does not apply in this mode.</p><p>An example:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>ldap.ini settings</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>
+LDAPGroupMappingType=SimpleMapping<br />
+ LDAPUserGroupClass=organizationalUnit<br />
+ LDAPUserGroupAttribute=cn<br />
+ LDAPGroupMemberAttribute=members<br />
+ LDAPUserGroupMap[]<br />
+ LDAPUserGroupMap[editor]=Editor<br /> LDAPUserGroupMap[techwriter]=Technical writer</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>LDAP group objects</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>
+cn: editor<br />
+ members: janedoe<br /> members: johndoe</p><p>
+cn: techwriter<br /> members: johndoe</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>Maps users to eZ Publish groups </b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>janedoe: 'Editors'</p><p>johndoe: 'Editors', 'Technical writers'</p>
+  </td>
+
+</tr>
+
+</table>
+<table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+
+</tr>
+
+</table>
+<a name="eztoc104205_3" id="eztoc104205_3"></a><h2><a name="GetGroupsTree"></a>
+GetGroupsTree</h2><p>
+This mode requires that group membership is specified in the LDAP group object, i.e. the group object contains an attribute specifying the users that are members. When you use this, you must set LDAPGroupClass, LDAPGroupNameAttribute and LDAPGroupMemberAttribute.<br /> LDAPGroupClass must be set to the class of LDAP group objects. LDAPGroupNameAttribute must be set to the attribute of the LDAP group that contains the name of the group. LDAPGroupMemberAttribute must be set to the attribute of the LDAP group that contains the names of the users that are members. You may also set LDAPGroupBaseDN and LDAPGroupDescriptionAttribute. LDAPGroupBaseDN may be set to the base DN of your groups tree, to limit the amount of data to search through. LDAPGroupDescriptionAttribute may be set to the attribute of the LDAP group that contains the description of the group, if any. This will set the same description in the eZ Publish group. This mode will create groups in eZ Publish automatically. The groups will be given the same name in eZ Publish as they have in LDAP.</p><p>An example:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>ldap.ini settings</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>
+LDAPGroupMappingType=GetGroupsTree<br />
+ LDAPUserGroupClass=organizationalUnit<br />
+ LDAPUserGroupAttribute=cn<br /> LDAPGroupMemberAttribute=members</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>LDAP group objects</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>
+cn: editor<br />
+ members: janedoe<br /> members: johndoe</p><p>
+cn: techwriter<br /> members: johndoe</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>Maps users to eZ Publish groups </b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>janedoe: 'editors'</p><p>johndoe: 'editors', 'techwriter'</p>
+  </td>
+
+</tr>
+
+</table>
+<a name="eztoc104205_4" id="eztoc104205_4"></a><h2><a name="DefaultGroup"></a>
+Default group</h2><p>
+The default LDAP group is not created automatically, you should create one and call it e.g. 'LDAP Users'. If the group mapping fails, the user will instead be placed in the default group, as specified in the LDAPUserGroupType and LDAPUserGroup[] settings.<br /> LDAPUserGroupType can be either 'id' or 'name'. If 'id' is used, LDAPUserGroup[] must contain the content object ID of the default group. If 'name' is used, LDAPUserGroup[] must contain the name of the default group. The default group is not used when group mapping succeeds.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/LDAP-Login-Handler/LDAP-Group-Mapping-Type by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:42:38 GMT -->
+</html>

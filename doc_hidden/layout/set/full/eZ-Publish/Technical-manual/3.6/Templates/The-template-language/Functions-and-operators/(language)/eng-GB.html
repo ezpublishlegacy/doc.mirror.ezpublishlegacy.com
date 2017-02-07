@@ -1,0 +1,78 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.6/Templates/The-template-language/Functions-and-operators/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:45:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Functions and operators / The template language / Templates / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Functions and operators</h1>
+</div>
+
+ <p>The eZ publish template language offers a collection of various <a href="../../../../Reference/Template-functions.html" target="_self">functions</a> and <a href="../../../../Reference/Template-operators.html" target="_self">operators</a> that can be used to carry out different tasks. In addition, it is possible to extend the system by creating custom operators for special needs. Custom operators have to be programmed in PHP.</p>  <a name="eztoc1319_1" id="eztoc1319_1"></a><h2>Template functions</h2> <p>A function takes a set of named parameters, carries out a specific task and returns a result. It can be called anywhere in a template using the following syntax:</p> <pre class="wordwrap"><span class="line">{function_name parameter1=value1 parameter2=value2 ...}</span>
+</pre> <p>A function may take none, one or several parameters. The parameters must be specified after the function name, separated by spaces. Since each parameter is specified using the parameter's name, the parameters can be provided in any order. Each parameter must be assigned a value using the equal sign. The following illustration shows the typical usage of a commonly used function.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_5/images/templates/template_function/6125-3-eng-GB/template_function_doc.png" alt="Template function" />
+ <p>Typical components of a function call.</p>
+
+
+
+
+
+
+
+</div> <p>The example above calls the <a href="../../../../Reference/Template-functions/Visualization/node_view_gui.html" target="_self">&quot;node_view_gui&quot;</a> function. This function displays a node by including the template that is associated with the view mode. The node is specified using the &quot;content_node&quot; parameter. The desired view mode is specified using the &quot;view&quot; parameter.</p>   <a name="eztoc1319_2" id="eztoc1319_2"></a><h2>Template operators</h2> <p>An operator takes unnamed parameters, carries out a specific task and returns a result. In addition, an operator is capable of handling a parameter which is passed to it using a pipe. It can be called anywhere in a template using the following syntax:</p> <pre class="wordwrap"><span class="line">{$input_parameter|operator_name( parameter1, parameter2 ... )}</span>
+</pre> <p>Because the operator only takes unnamed parameters, the parameters must be specified in the order dictated by the operator's documentation page. In addition, the parameters must be separated by commas. The following illustration shows the typical usage of a commonly used operator.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_5/images/templates/template_operator/6128-2-eng-GB/template_operator_doc.png" alt="Typical components of a template operator call." />
+ <p>Typical components of a template operator call.</p>
+
+
+
+
+
+
+
+</div> <p>The example above demonstrates the usage of the <a href="../../../../Reference/Template-operators/Formatting-and-internationalization/datetime.html" target="_self">&quot;datetime&quot;</a> operator. This operator can be used to convert a UNIX timestamp to a human readable format. The timestamp is provided by the $yesterday_evening variable as the input parameter. The first parameter tells the operator that the output should be formatted using a custom schema. The schema is defined by the second parameter (hours : minutes).</p>  <a name="eztoc1319_2_1" id="eztoc1319_2_1"></a><h3>Piping</h3> <p>An operator takes input on the left hand side and produces output on the right hand side. A collection of operators can be glued together using pipes. A pipe makes sure that the output from one operator is presented as the input parameter to another operator. The following example demonstrates how pipes and operators can be used to create a string.</p> <pre class="wordwrap"><span class="line">{concat( 'To ', 'The ' )|prepend( 'Back ' )|append( 'Future' )}</span>
+</pre> <p>The following output will be produced:</p> <div class="output"> <p>Back To The Future</p> </div>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.6/Templates/The-template-language/Functions-and-operators/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:45:11 GMT -->
+</html>

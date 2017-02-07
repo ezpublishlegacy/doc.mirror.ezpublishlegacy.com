@@ -1,0 +1,128 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.7/Reference/Modules/class/Fetch-functions/override_template_list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:18:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>override_template_list / Fetch functions / class / Modules / Reference / 3.7 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>override_template_list</h1>
+</div>
+<h3>Summary</h3>
+Fetches the override rules associated with a class.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'class', 'override_template_list', hash( 'class_id', class_id ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>class_id</td>
+        <td>integer</td>
+        <td>The ID number of the target class.</td>
+        <td>Yes.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An array of hashes containing information about the override rules.</p><h3>Description</h3>
+ <p>This function fetches the override rules that are associated with the class specified by the &quot;class_id&quot; parameter. The function returns an array of hashes. Each element of the returned array contains the following structure:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Attribute</p> 
+  </th> <th >   <p>Type</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>siteaccess</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The siteaccess that the override belongs to.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>block</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the override block.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>source</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The path to the original template.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>target</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The path to the override template.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+<h3>Examples</h3>
+    <a name="eztoc17775_0_0_1" id="eztoc17775_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $overrides=fetch( 'class', 'override_template_list', hash( 'class_id', 13 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $overrides as $override}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$override.target} - ({$override.source}) &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{def $overrides=fetch( \'class\', \'override_template_list\', hash( \'class_id\', 13 ) )}\r\n\r\n{foreach $overrides as $override}\r\n\r\n    {$override.target} - ({$override.source}) &lt;br /&gt;\r\n\r\n{/foreach}\r\n' ); return false;" /></p>
+<![endif]--> <p>Outputs information about the overrides for class number 13.</p>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.7/Reference/Modules/class/Fetch-functions/override_template_list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:18:10 GMT -->
+</html>

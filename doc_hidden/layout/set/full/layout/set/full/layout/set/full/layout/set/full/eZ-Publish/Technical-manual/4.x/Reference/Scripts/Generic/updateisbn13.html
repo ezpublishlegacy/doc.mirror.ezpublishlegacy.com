@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/updateisbn13.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:47:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>updateisbn13.php / Generic / Scripts / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>updateisbn13.php</h1>
+</div>
+
+<h3>Summary</h3>
+Imports the latest ISBN ranges to the database.
+
+<h3>Location</h3>    ./bin/php/updateisbn13.php<h3>Parameters</h3><p>
+<a href=#colors>colors</a><br/>
+
+<a href=#db-database>db-database</a><br/>
+
+<a href=#db-driver>db-driver</a><br/>
+
+<a href=#db-host>db-host</a><br/>
+
+<a href=#db-password>db-password</a><br/>
+
+<a href=#db-user>db-user</a><br/>
+
+<a href=#debug>debug</a><br/>
+
+<a href=#file>file</a><br/>
+
+<a href=#help>help</a><br/>
+
+<a href=#logfiles>logfiles</a><br/>
+
+<a href=#no-colors>no-colors</a><br/>
+
+<a href=#no-logfiles>no-logfiles</a><br/>
+
+<a href=#quiet>quiet</a><br/>
+
+<a href=#siteaccess>siteaccess</a><br/>
+</p>
+
+    <a name="colors"></a>
+    <h4>-c, --colors</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Use ANSI colors when generating debug output (default).</p>    </div>
+
+    <a name="db-database"></a>
+    <h4>--db-database=&lt;database_name&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The name of the database to update. If omitted, the database name specified in the &quot;<a href="../../Configuration-files/site.ini/DatabaseSettings/Database.html" target="_self">Database</a>&quot; configuration directive will be used.</p>    </div>
+
+    <a name="db-driver"></a>
+    <h4>--db-driver=&lt;database_type&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The type of the database, for example &quot;ezmysql&quot;. If omitted, the type specified in the &quot;<a href="../../Configuration-files/site.ini/DatabaseSettings/DatabaseImplementation.html" target="_self">DatabaseImplementation</a>&quot; configuration directive will be used.</p>    </div>
+
+    <a name="db-host"></a>
+    <h4>--db-host=&lt;database_host&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The hostname or the IP address of the server running the database engine, for example &quot;localhost&quot;. If omitted, the value specified in the &quot;<a href="../../Configuration-files/site.ini/DatabaseSettings/Server.html" target="_self">Server</a>&quot; configuration directive will be used. </p>    </div>
+
+    <a name="db-password"></a>
+    <h4>--db-password=&lt;password&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The password that belongs to the database user. If omitted, the password specified in the &quot;<a href="../../Configuration-files/site.ini/DatabaseSettings/Password.html" target="_self">Password</a>&quot; configuration directive will be used.</p>    </div>
+
+    <a name="db-user"></a>
+    <h4>--db-user=&lt;database_user&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The username that will be used to access the database. If omitted, the name specified in the &quot;<a href="../../Configuration-files/site.ini/DatabaseSettings/User.html" target="_self">User</a>&quot; configuration directive will be used.</p>    </div>
+
+    <a name="debug"></a>
+    <h4>-d[&lt;option&gt;[,&lt;option2&gt;...]], --debug[=&lt;option&gt;[,&lt;option2&gt;...]]</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output debug information. The following options can be used to control what the debug output should include: &quot;all&quot; (everything), &quot;accumulator&quot; (accumulators), &quot;include&quot; (included files), &quot;timing&quot; (timing points), &quot;error&quot; (errors), &quot;warning&quot; (warnings), &quot;notice&quot; (notices).</p>    </div>
+
+    <a name="file"></a>
+    <h4>--file=&lt;path_to_file&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The path to the file that contains the list of ranges (relative to the root directory of eZ Publish). This parameter is required.</p>    </div>
+
+    <a name="help"></a>
+    <h4>-h, --help</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output information about the script and supported parameters.</p>    </div>
+
+    <a name="logfiles"></a>
+    <h4>--logfiles</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Generate log files. This parameter must be used together with the debug parameter (&quot;-d&quot; or &quot;--debug&quot;). The log files (for example &quot;warning.log&quot;) will be stored in the &quot;var/log&quot; directory of the eZ Publish installation.</p>    </div>
+
+    <a name="no-colors"></a>
+    <h4>--no-colors</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Do not use ANSI colors when generating debug output.</p>    </div>
+
+    <a name="no-logfiles"></a>
+    <h4>--no-logfiles</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Do not generate log files (default).</p>    </div>
+
+    <a name="quiet"></a>
+    <h4>-q, --quiet</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Run the script in &quot;quiet&quot; mode. No output will be generated.</p>    </div>
+
+    <a name="siteaccess"></a>
+    <h4>-s &lt;siteaccess&gt;, --siteaccess=&lt;siteaccess&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The siteaccess to run the script for. If omitted, the <a href="../../Configuration-files/site.ini/SiteSettings/DefaultAccess.html" target="_self">default siteaccess</a> will be used.</p>    </div>
+
+<h3>Description</h3>
+<p>This script makes it possible to import the latest ISBN ranges to the database. Without this information, the system may not be able to handle ISBN-13 codes properly (refer to the <a href="../../Datatypes/ISBN.html" target="_self">documentation of the ISBN datatype</a> for more information). Since the calculation rules for ISBN codes can be changed on a monthly basis, you may need to run the script regularly in order to keep the range information in the database up to date.</p><p>Before running the script, download the &quot;ranges.js&quot; file that contains information about the different ranges from <a href="http://www.isbn-international.org/converter/ranges.js" target="_blank">http://www.isbn-international.org/converter/ranges.js</a> and copy it to your eZ Publish installation. When running the script, use the &quot;--file&quot; parameter to tell the script where to look for the downloaded file. By default, the database configuration of the default siteaccess will be used. You can use the optional &quot;--siteaccess&quot; parameter to make the script import ranges to the database that is used by a particular siteaccess. In addition, the optional &quot;--db-database&quot;, &quot;--db-driver&quot;, &quot;--db-host&quot;, &quot;--db-user&quot; and &quot;--db-password&quot; parameters make it possible to combine custom database options with the database configuration of the specified (or default) siteaccess.</p>
+<h3>Examples</h3>
+<a name="eztoc96981_0_0_1" id="eztoc96981_0_0_1"></a><h4>Example 1</h4><pre class="wordwrap"><span class="line">php bin/php/updateisbn13.php --file=var/ranges.js</span>
+</pre><p>Import data from the &quot;ranges.js&quot; file to the database that is used by the default siteaccess. The script will look for &quot;ranges.js&quot; in the &quot;var&quot; directory of the eZ Publish installation.</p><a name="eztoc96981_0_0_2" id="eztoc96981_0_0_2"></a><h4>Example 2</h4><pre class="wordwrap"><span class="line">php bin/php/updateisbn13.php --file=ranges.js --siteaccess=example</span>
+</pre><p>Import data from the &quot;ranges.js&quot; file to the database that is used by the &quot;example&quot; siteaccess. The script will look for &quot;ranges.js&quot; in the root directory of the eZ Publish installation.</p><a name="eztoc96981_0_0_3" id="eztoc96981_0_0_3"></a><h4>Example 3</h4><pre class="wordwrap"><span class="line">php bin/php/updateisbn13.php --file=ranges.js --siteaccess=example --db-database=test</span>
+</pre><p>Import data from the &quot;ranges.js&quot; file located in the root directory of the eZ Publish installation. The script will use the database configuration of the &quot;example&quot; siteaccess but ignore the value of the &quot;Database&quot; directive and use the specified custom database name instead. If the &quot;example&quot; siteaccess makes use of a database called &quot;foo&quot; on localhost, the script will import ISBN ranges to the &quot;test&quot; database on localhost.</p><a name="eztoc96981_0_0_4" id="eztoc96981_0_0_4"></a><h4>Example 4</h4><pre class="wordwrap"><span class="line">php bin/php/updateisbn13.php --file=ranges.js --db-database=test –db-user=root –db-password=secret</span>
+</pre><p>Import data from the &quot;ranges.js&quot; file located in the root directory of the eZ Publish installation. The script will use the specified custom database name, user name and password, while the type of the database and the hostname will still be fetched from the database configuration of the default siteaccess.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/updateisbn13.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:47:12 GMT -->
+</html>

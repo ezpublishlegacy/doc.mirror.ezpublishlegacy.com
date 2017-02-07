@@ -1,0 +1,74 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.10/Concepts-and-basics/Content-management/The-content-object by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:06:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>The content object / Content management / Concepts and basics / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>The content object</h1>
+</div>
+
+ <p>A content object is an instance of a content class. While the class only defines the data structure, it is the content objects themselves that contain actual data. Once a content class is defined, several content objects / instances of that class can be created. For example, if a class for storing news articles is created, several article objects (each containing a different story) can then be instantiated. The following illustration summarizes and shows the relation between datatypes, attributes, a content class and content objects.</p> 
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_10/images/concepts_and_basics/datatypes_attributes_content_class_and_objects/565-8-eng-GB/datatypes_attributes_content_class_and_objects_doc.png" alt="Datatypes, attributes, a content class and objects." />
+ <p>Datatypes, attributes, a content class and objects.</p>
+
+
+
+
+
+
+
+</div> <p>Please note that the illustration above is a simplified version of the reality. It doesn't show the exact structure of the objects since the versioning and the translation layers have been left out. The following text gives a more in-depth explanation of the object structure. The versioning and the translation layers will be explained in the upcoming sections.</p>  <a name="eztoc74991_1" id="eztoc74991_1"></a><h2>Object structure</h2> <p>A content object consists of the following elements:</p> 
+<ul>
+ <li><div> Object ID </div></li> <li><div> Name </div></li> <li><div> Type </div></li> <li><div> Owner </div></li> <li><div> Creation time </div></li> <li><div> Modification time </div></li> <li><div> Status </div></li> <li><div> Section ID </div></li> <li><div> Versions </div></li> <li><div> Current version </div></li> 
+</ul>
+  <a name="eztoc74991_1_1" id="eztoc74991_1_1"></a><h3>Object ID</h3> <p>Every object has a unique identification number. The ID numbers are used by the system to organize and keep track of different objects. These ID numbers are not recycled. In other words, if an object is deleted, the ID number of that object will not be reused when a new object is created.</p>   <a name="eztoc74991_1_2" id="eztoc74991_1_2"></a><h3>Name</h3> <p>The name of an object is nothing more than a friendly name that appears in various lists throughout the administration interface. It helps the user to identify different objects by their names instead of having to deal with identification numbers. An object's name is generated automatically by the system when the object is published. It is the object name pattern definition of a class that dictates how objects of that class should be named. This mechanism makes it possible to automatically generate names based on the object's attributes. Since the object name is not used by the system, different objects can have the exact same name.</p> <p>For example, when dealing with news articles, the title of the article would most likely be used to generate the object names. When an article object is published, its name will be a copy of the object's title attribute. The name of the object will be updated every time the object is published. In other words, if the title is changed, the object's name will automatically also be changed.</p>   <a name="eztoc74991_1_3" id="eztoc74991_1_3"></a><h3>Type</h3> <p>The type information indicates which class that was used to create the object.</p>   <a name="eztoc74991_1_4" id="eztoc74991_1_4"></a><h3>Owner</h3> <p>The object's owner contains a reference to the user who initially created the object. At any time, an object can only be owned by one user. This reference is set by the system the first time the object is published. The ownership of an object can not be manipulated and will not change even if the owner the object is removed from the system.</p>   <a name="eztoc74991_1_5" id="eztoc74991_1_5"></a><h3>Creation time</h3> <p>The published field contains a timestamp pinpointing the exact date and time when the object was published for the first time. This information is set by the system and it can not be modified. The published timestamp will remain the same regardless of what happens to the object.</p>   <a name="eztoc74991_1_6" id="eztoc74991_1_6"></a><h3>Modification time</h3> <p>The modified field contains a timestamp revealing the exact date and time when the object was modified. This information is set by the system and it can not be modified. The modified timestamp will change every time the object is published.</p> <p> <a name="status"></a>
+ </p>   <a name="eztoc74991_1_7" id="eztoc74991_1_7"></a><h3>Status</h3> <p>The status indicates the current state of the object. There are three possibilities:</p> 
+<ul>
+ <li><div> (0) Draft </div></li> <li><div> (1) Published </div></li> <li><div> (2) Archived </div></li> 
+</ul>
+ <p>When initially created, the object's status is set to <i>draft</i>. This status will remain until the object is published and thus the status will be set to <i>published</i>. Once published, the object can not become a draft. When a published object is moved to the trash, the status will be set to <i>archived</i>. If a published object is removed from the trash (or removed without being put in the trash first), it will be permanently deleted.</p>   <a name="eztoc74991_1_8" id="eztoc74991_1_8"></a><h3>Section</h3> <p>The section ID of an object denotes which section that object belongs to. Each object can belong to one section. By assigning different sections to objects, it is possible to have different groups of objects. The section mechanism is explained under <a href="Sections.html" target="_self">&quot;Sections&quot;</a>.</p>   <a name="eztoc74991_1_9" id="eztoc74991_1_9"></a><h3>Versions</h3> <p>The actual contents of an object is stored inside different versions. A version can be thought of as a timestamped collection of data (the object's attributes) that belongs to a specific user. Every time the contents of an object is edited, a new version is created. It is always the new version that will be edited. The current / published version along with earlier versions will remain untouched. This makes it possible to revert unwanted or accidental changes. An object always has at least one version of its content. Each version is identified by a number which is automatically increased for every new version that is created. The structure and logic of the versioning mechanism is explained in the next section.</p>   <a name="eztoc74991_1_10" id="eztoc74991_1_10"></a><h3>Current version</h3> <p>The current version is a number that pinpoints the currently published version of the object. As described above, the contents of an object may exist in several versions. However, only one of them can be the current version (also referred to as the <i>published</i> version). The current/published version is the version that will be displayed when the object is viewed.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.10/Concepts-and-basics/Content-management/The-content-object by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:06:15 GMT -->
+</html>

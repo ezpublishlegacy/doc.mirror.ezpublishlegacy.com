@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/User-manual/3.8/The-administration-interface/The-Content-structure-tab by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:25:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>The &quot;Content structure&quot; tab / The administration interface / 3.8 / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>The &quot;Content structure&quot; tab</h1>
+</div>
+
+ <p>The &quot;Content structure&quot; tab allows the user to browse and manage the nodes that belong to the &quot;Content&quot; top level node. This is the part that makes up the actual structure of the site. It may contain menu items, folders, articles, comments, products, forum messages and so on. The following screenshot shows what the administration interface displays when the &quot;Content structure&quot; tab is selected.</p> 
+<div class="object-center linked">            <a href="../../../../layout/set/full/eZ-Publish/User-manual/3.8/Images/Admin/Content-structure-tab.html" target="_self"><img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_8/images/admin/content_structure_tab/30318-2-eng-GB/content_structure_tab_doc.png" alt="The &quot;Content structure&quot; tab." /></a>
+ <p>The &quot;Content structure&quot; tab.</p>
+
+
+
+
+
+
+
+</div> <p>The interface consists of two parts: a left menu and a main area with multiple windows. <a name="left_menu"></a>
+ </p>  <a name="eztoc30193_1" id="eztoc30193_1"></a><h2>The left menu</h2> <p>The left menu will display an interactive tree containing the nodes that belong to the &quot;Content&quot; top level node. In addition, it also provides access to the trash. This menu can be enabled or disabled using the +/- button located in the upper right corner of the menu window itself. The state of the window is stored for each user. The following screenshot shows the left menu of the &quot;Content structure&quot; tab in a hidden/disabled state.</p> 
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_8/images/admin/content_structure_left_menu_disabled/12024-1-eng-GB/content_structure_left_menu_disabled_doc.png" alt="Disabled tree menu." />
+ <p>Disabled tree menu.</p>
+
+
+
+
+
+
+
+</div> <p>As the screenshot indicates, the window will not display the tree when the menu is disabled/hidden. However, it will still show the trash and the small/medium/large links, which can be used to adjust the horizontal size of the menu. The selected size is stored for each user. Unlike the horizontal size, the vertical size can not be adjusted. The window will automatically adjust itself depending on the height of the tree that is being displayed. The following screenshot shows the menu in a shown/enabled state.</p> 
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_8/images/admin/content_structure_left_menu_enabled/12027-1-eng-GB/content_structure_left_menu_enabled_doc.png" alt="Enabled tree menu." />
+ <p>Enabled tree menu.</p>
+
+
+
+
+
+
+
+</div> <p>The tree menu in eZ Publish behaves very much in the same way as the interface of a typical file browser in a modern operating system. It allows the user to view and explore the depths of the content tree by expanding the different nodes. This can be done using the small +/- buttons that are located on the left hand side of the icons. A missing +/- means that a node does not have any children and thus it can not be explored. If the target browser does not support JavaScript or if JavaScript support is disabled, the tree will be displayed as a static HTML list. In this case, the tree will be fully expanded at all times.</p> <p>A node can be selected by clicking on its name. Whenever a different node is selected, the interface will reload and the main area will display the selected node.</p>   <a name="eztoc30193_1_0_1" id="eztoc30193_1_0_1"></a><h4>Configuration issues</h4> <p>In eZ Publish 3.7 and earlier versions, the default configuration allowed the tree to show all kinds of nodes without any limitations. However, the display logic eats a lot of server CPU and network bandwidth if it is set up to display all nodes on a large site. From 3.8, the default configuration has been changed so that the tree only shows certain types of nodes. The &quot;ShowClasses[]&quot; array located under the &quot;[TreeMenu]&quot; section of the &quot;<a href="../../../Technical-manual/3.8/Reference/Configuration-files/contentstructuremenu.html" target="_self">contentstructuremenu.ini</a>&quot; configuration file determines which types of nodes should be displayed. The behavior of the tree menu can be configured by editing the &quot;contentstructuremenu.ini.append.php&quot; file located in the &quot;settings/siteaccess/example_admin&quot; directory (replace &quot;example_admin&quot; by the actual name of your admin siteaccess). If the file does not exist, create it.</p> <p>Please refer to the &quot;Treemenu configuration&quot; part of the &quot;<a href="../../../Upgrading/Upgrading-to-3.8/from-3.6.x-or-3.7.x-to-3.8.html" target="_self">Upgrading from 3.6.x (3.7.x) to 3.8.0</a>&quot; page for information about configuring the tree menu.</p>    <a name="eztoc30193_1_1" id="eztoc30193_1_1"></a><h3>The popup menu</h3> <p>When the interface is displayed in a browser with JavaScript support enabled, it is possible to bring up a context sensitive menu. This menu can be accessed at different parts of the interface, it provides quick access to commonly used functions. The context sensitive menu of the node tree can be accessed by clicking on one of the icons. The icon must be clicked using the left (or primary) button on pointer devices with multiple buttons. The following screenshot shows the popup menu.</p> 
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_8/images/admin/content_structure_popup_menu/30249-2-eng-GB/content_structure_popup_menu_doc.png" alt="Content structure popup menu." />
+ <p>Content structure popup menu.</p>
+
+
+
+
+
+
+
+</div> <p>The title of the menu is the name of the node/object that was clicked. In the example above, a node called &quot;News&quot; was clicked. The following table shows the different menu items along with a short description.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Item</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>View</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Selects the node (same as clicking on the node's name). The selected node will be displayed in the main area.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Edit</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Edits the node (same as clicking on the &quot;Edit&quot; button in the first/preview window in the main area).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Copy</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Creates a copy of both the node and the object that it encapsulates. The user will be asked to select a location for the newly created node. Please note that only the selected/clicked node will be duplicated, its children will be left alone.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Copy subtree</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Works in the very same way as the &quot;Copy&quot; function (described above). However, this feature creates a copy of an entire subtree. In other words, if a node with children is selected, then both the node and its children will be duplicated. Please note that this operation may time out if the selected subtree contains many nodes. An alternate solution is to use the &quot;ezsubtreecopy.php&quot; script from the command line. This script is located in the &quot;bin/php/&quot; directory.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Move</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Moves the node from one location to another. The user will be asked to select a new location for the node.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Remove</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Removes the node. If the selected node is the only one referencing the object, then the object itself will also be removed.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Advanced</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <table class="renderedtable nested" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Item</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Swap with another node</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Swaps the node with another node. This feature is particularly useful when there is a need to change a top level node. A top level node can not be removed from the system, but it may be swapped/replaced with another node.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Hide / unhide</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>This function can be used to hide or reveal a single node or an entire subtree. Please refer to the <a href="../../../Technical-manual/3.8/Concepts-and-basics/Content-management/Node-visibility.html" target="_self">&quot;Node visibility&quot;</a> documentation page for more information about this feature.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>View index</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>This function generates a simple sitemap (a visual representation of the node tree structure). The selected node will be used as the starting node.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Expand</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Unfolds the target node displaying all the nodes that are below it. This feature can be used to quickly explore a subtree (without having to repeatedly click the +/- buttons).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Collapse</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Does the opposite of &quot;Expand&quot;, it folds/collapses an open subtree.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Add to my bookmarks</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Adds the node to the bookmarks of the user who is currently logged in.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Add to my notifications</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Adds the node to the notifications of the user who is currently logged in.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+    <a name="eztoc30193_2" id="eztoc30193_2"></a><h2>The main area</h2> <p>The purpose of the main area is to display information about the currently selected node. It consists of miscellaneous windows where each window provides a dedicated interface. The following screenshot shows a typical view of the main area.</p> 
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_8/images/admin/content_structure_main_area/30252-2-eng-GB/content_structure_main_area_doc.png" alt="Content structure - main area." />
+ <p>Content structure - main area.</p>
+
+
+
+
+
+
+
+</div> <p>The top (2) and the bottom (3) windows are always visible. While the top window displays the contents of the selected node, the bottom window shows the node's children. In other words, if there are any items below the selected node, they will be shown in the bottom window. The horizontally aligned switches (1) in the upper area control the visibility of the different windows. A bluish background indicates that a switch is on and thus the window that it controls will be active/visible. The following text gives a comprehensive walkthrough of the different windows. <a name="preview_window"></a>
+ </p>  <a name="eztoc30193_2_2" id="eztoc30193_2_2"></a><h3>The preview window</h3> <p>The purpose of the preview window is to display the actual contents (the attributes) of the object that is referenced by the selected node. Unlike the other windows, this window can not be turned off completely using the &quot;Preview&quot; switch. Deactivating the switch will only hide the window's contents. The following screenshot shows the window in a deactivated/collapsed state.</p> 
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_8/images/admin/content_structure_preview_collapsed/30255-2-eng-GB/content_structure_preview_collapsed_doc.png" alt="Collapsed preview window." />
+ <p>Collapsed preview window.</p>
+
+
+
+
+
+
+
+</div> <p>When the window is activated, it will display the attributes of the object. The following screenshot shows the window in an active state.</p> 
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_8/images/admin/content_structure_preview_activated/30258-2-eng-GB/content_structure_preview_activated_doc.png" alt="Activated preview window." />
+ <p>Activated preview window.</p>
+
+
+
+
+
+
+
+</div>  <a name="eztoc30193_2_2_2" id="eztoc30193_2_2_2"></a><h4>(1) Title bar</h4> <p>The title bar consists of three elements:</p> 
+<ul>
+ <li><div> An icon indicating the object type. Clicking on this icon brings up a popup menu (see below). </div></li> <li><div> The name of the object. </div></li> <li><div> The name of the class which the object is an instance of (encapsulated in square brackets). </div></li> 
+</ul>
+   <a name="eztoc30193_2_2_3" id="eztoc30193_2_2_3"></a><h4>(2) Information bar</h4> <p>The information bar contains information about the version and the translation that is being viewed. The left part of this area reveals when the object was last modified along with a named link to the user who did the actual modification. The right area reveals the translation that is being displayed.</p>   <a name="eztoc30193_2_2_4" id="eztoc30193_2_2_4"></a><h4>(3) Object attributes</h4> <p>The main area of this window displays the object's attributes according to the order that is specified in the class definition. The attributes are visualized using the standard view templates for the datatypes.</p>   <a name="eztoc30193_2_2_5" id="eztoc30193_2_2_5"></a><h4>(4) Button bar</h4> <p>The bottom of this window contains a button bar. At the minimum the following buttons are available: &quot;Edit&quot;, &quot;Move&quot; and &quot;Remove&quot;. These actions are exactly the same as the ones that are present in the popup menu of the left menu. Additional buttons will appear depending on the object's attributes. For example, if the object has a price attribute, then the &quot;Add to wishlist&quot; and &quot;Add to basket&quot; buttons will appear. If the object contains an attribute that is an information collector, a button labelled &quot;Send&quot; will appear.</p>    <a name="eztoc30193_2_3" id="eztoc30193_2_3"></a><h3>Details</h3> <p>The purpose of the details window is to provide additional information about the selected node and the object that it encapsulates. The following screenshot shows the details window.</p> 
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_8/images/admin/content_structure_details/30261-6-eng-GB/content_structure_details_doc.png" alt="Node and object details." />
+ <p>Node and object details.</p>
+
+
+
+
+
+
+
+</div> <p>As the screenshot indicates, this window reveals the following information:</p> 
+<ul>
+ <li><div> The user who initially created the object. </div></li> <li><div> The exact date/time when the object was initially created. </div></li> <li><div> The section that the object belongs to. </div></li> <li><div> The number of versions that the object contains. </div></li> <li><div> The number of translations that the current version contains. </div></li> <li><div> The ID number of the node. </div></li> <li><div> The ID number of the object. </div></li> 
+</ul>
+ <p> <a name="translations_window"></a>
+ </p>   <a name="eztoc30193_2_4" id="eztoc30193_2_4"></a><h3>Translations</h3> <p>
+The purpose of the translation window is to show the languages in which the last published version of the object that is being viewed exists. This window can be activated by clicking the &quot;Translations&quot; switch located in the upper area. (Note that the switch will not be shown in case only one <a href="../../../Technical-manual/3.8/Features/Multi-language.html#translation_languages" target="_self">translation language</a> is available.) The currently selected translation is displayed using bold characters. The following screenshot shows the translations window.<br /></p>
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_8/images/admin/content_structure_translations/30264-2-eng-GB/content_structure_translations_doc.png" alt="Translations window." />
+ <p>Translations window.</p>
+
+
+
+
+
+
+
+</div><p>As you can see from the screenshot above, the table reveals the following information for each language/translation:</p> 
+<ul>
+ <li><div> The language itself (this is the full language name). </div></li> <li><div> The locale of the language. </div></li> <li><div> Whether the language is the initial/main language for the object or not. </div></li> 
+</ul>
+ <p>It is possible to edit a translation by clicking on the language's corresponding edit icon (on the right hand side). Clicking on a translation name will reload the page and the selected translation will be displayed in the preview window. When either one or several languages are selected using the checkboxes (on the left hand side), the &quot;Remove selected&quot; button can be used to carry out the actual removal of the selected translations. The &quot;Set main&quot; button can be used to change the initial/main language. The initial/main language can not be removed.</p> <p>The &quot;Use the main language if there is no prioritized translation&quot; checkbox makes it possible to mark the object that is being viewed as &quot;always available&quot; (the object will be available on any siteaccess regardless of the site language settings).</p> <p> <a name="locations_window"></a>
+ </p>   <a name="eztoc30193_2_5" id="eztoc30193_2_5"></a><h3>Locations</h3> <p>The purpose of the locations window is to reveal the different nodes (locations) that are associated with the object which is being viewed. In eZ Publish, each object is represented by at least one node within the tree. The currently selected node is displayed using bold characters. The following screenshot shows the locations window.</p> 
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_8/images/content_structure_locations/30324-2-eng-GB/content_structure_locations_doc.png" alt="Locations window." />
+ <p>Locations window.</p>
+
+
+
+
+
+
+
+</div> <p>As the screenshot indicates, the table reveals the following information for each location/node:</p> 
+<ul>
+ <li><div> The location itself (this is the actual node path). </div></li> <li><div> The number of items that are present below a certain node. </div></li> <li><div> The visibility of a node (visible, hidden, hidden by superior). </div></li> <li><div> Whether the node is the main node or not. </div></li> 
+</ul>
+ <p>It is possible to add new and remove existing locations using the &quot;Add locations&quot; and the &quot;Remove selected&quot; buttons. The &quot;Set main&quot; button can be used to change the main node. The &quot;Hide&quot; and &quot;Reveal&quot; links can be used to alter the visibility state of a node. Clicking on &quot;Hide&quot; will hide the corresponding node along with its children. Clicking on &quot;Reveal&quot; will do the opposite. Please refer to <a href="../../../Technical-manual/3.8/Concepts-and-basics/Content-management/The-content-node-tree.html" target="_self">&quot;The content node tree&quot;</a> and the <a href="../../../Technical-manual/3.8/Concepts-and-basics/Content-management/Node-visibility.html" target="_self">&quot;Node visibility&quot;</a> documentation pages for more information about objects, nodes and the hide feature.</p>   <a name="eztoc30193_2_6" id="eztoc30193_2_6"></a><h3>Relations</h3> <p>The purpose of the relations window is to reveal information about objects that are either used by or use the object that is referenced by the object being viewed. In eZ Publish, any type of object can be connected to any other type of object. This feature is typically useful in situations when there is a need to bind and/or reuse information that is scattered around in the system. The following screenshot shows the relations window.</p> 
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_8/images/admin/content_structure_relations/30267-2-eng-GB/content_structure_relations_doc.png" alt="Relations window." />
+ <p>Relations window.</p>
+
+
+
+
+
+
+
+</div> <p>The screenshot above reveals that the object being viewed makes use of two images. In addition, the object itself is being used by an article called &quot;Demo news #1&quot;. Please refer to the <a href="../../../Technical-manual/3.8/Concepts-and-basics/Content-management/Object-relations.html" target="_self">&quot;Object relations&quot;</a> documentation page for more information about how this part of the system actually works. <a name="subitems_window"></a>
+ </p>   <a name="eztoc30193_2_7" id="eztoc30193_2_7"></a><h3>Sub items</h3> <p>The primary purpose of this window is to reveal information about nodes that are located directly below the one which is being viewed. In addition, it allows the following functionality:</p> 
+<ul>
+ <li><div> Creation of new nodes. </div></li> <li><div> Removal of existing nodes. </div></li> <li><div> Editing of existing nodes. </div></li> <li><div> Configuration of the selected node's sorting settings. </div></li> 
+</ul>
+ <p>It is also possible to access the popup menu described earlier by left-clicking the icons in the list. The following screenshot shows the sub items window.</p> 
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_8/images/admin/content_structure_sub_items/30270-2-eng-GB/content_structure_sub_items_doc.png" alt="Sub items window." />
+ <p>Sub items window.</p>
+
+
+
+
+
+
+
+</div>  <a name="eztoc30193_2_7_6" id="eztoc30193_2_7_6"></a><h4>(1) Limitation</h4> <p>The limitation links control the number of nodes that will be displayed per page. The default selection is 25, which means that the list will consist of several pages if there are more than 25 nodes below the one that is being viewed.</p>   <a name="eztoc30193_2_7_7" id="eztoc30193_2_7_7"></a><h4>(2) View mode</h4> <p>This selector makes it possible to choose between different view modes. There are three settings:</p> 
+<ul>
+ <li><div> List - a simple list of nodes </div></li> <li><div> Thumbnail - images are shown as thumbnails </div></li> <li><div> Detailed - a detailed list for experienced users </div></li> 
+</ul>
+   <a name="eztoc30193_2_7_8" id="eztoc30193_2_7_8"></a><h4>(3) Node list</h4> <p>The main area of the child list contains the actual nodes which are located directly below the one that is being viewed. The checkboxes on the left hand side can be used to select nodes for removal. Above the checkboxes, there is a button that can be used to invert the current selection. For example, if no nodes are selected, when pressing this button all the nodes will be selected.</p>   <a name="eztoc30193_2_7_9" id="eztoc30193_2_7_9"></a><h4>(4) Removal of nodes</h4> <p>When either one or several nodes are selected, the &quot;Remove&quot; button can be used to carry out the actual removal of the selected nodes.</p>   <a name="eztoc30193_2_7_10" id="eztoc30193_2_7_10"></a><h4>(5) Creation of nodes</h4> <p>The interface below the &quot;Remove&quot; button can be used to create new nodes of different types. The dropdown list makes it possible to choose the type of node that will be created. This list will typically contain classes from all class groups except the &quot;Users&quot; and the &quot;Setup&quot; class groups.</p> <p>The &quot;Create here&quot; button will start the actual creation process and thus the system will display the object edit interface. When editing is done, the newly created node will be placed at the location where the user clicked the &quot;Create here&quot; button. For example, if the user navigates into a folder called &quot;International&quot; inside another folder called &quot;News&quot; and creates an article, the article will be placed in the &quot;International&quot; folder.</p>   <a name="eztoc30193_2_7_11" id="eztoc30193_2_7_11"></a><h4>(6) Sorting controls</h4> <p>The sorting controls are located towards the lower-right part of the &quot;Sub items&quot; window. These controls can be used to determine how the nodes that are under the one that is being viewed should be sorted. It is possible to control both the sorting method and the direction by making use of the dropdown lists. When done, the &quot;Set&quot; button must be clicked to store the new settings.</p> <p>Please note that the sorting settings may not be used by the template that displays the nodes. In other words: changing the sorting in the administration interface may not be visible on the site. This part is completely up to the developer who creates the view templates for the different nodes.</p>  <a name="eztoc30193_2_7_11_1" id="eztoc30193_2_7_11_1"></a><h5>Priority sorting</h5> <p>When the sorting method is set to &quot;Priority&quot;, the node list in the &quot;Sub items&quot; window will contain a row of input fields. In addition, the &quot;Update priorities&quot; button will become enabled. The input fields can be used to manually sort the nodes. It is possible to use both negative and positive integers (zero included). The &quot;Update priorities&quot; button must be clicked in order to store the new/changed priorities. Please note that the direction of the sorting (ascending or descending) will still be controlled by the direction dropdown list.</p>    
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/User-manual/3.8/The-administration-interface/The-Content-structure-tab by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:25:05 GMT -->
+</html>

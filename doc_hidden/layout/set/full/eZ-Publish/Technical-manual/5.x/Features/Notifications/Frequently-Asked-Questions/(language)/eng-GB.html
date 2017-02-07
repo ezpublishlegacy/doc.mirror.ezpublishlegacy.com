@@ -1,0 +1,55 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Notifications/Frequently-Asked-Questions/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Frequently Asked Questions / Notifications / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Frequently Asked Questions</h1>
+</div>
+
+<p><i>Q: Is there a standard user who automatically get notified about all the site changes (creation/modification of content objects)?</i></p><p>A: By default, none of the users is notified about all the site changes. If you want to be notified whenever content is changed or added, you can <a href="../../Using-the-admin-interface.html" target="_self">subscribe for subtree notifications</a> for the top node in the &quot;Content structure&quot; tree.</p><p><i>Q: Is it possible to be notified about new user registrations?</i></p><p>A: You can <a href="../../Using-the-admin-interface.html" target="_self">subscribe for subtree notifications</a> for the top node in the &quot;User accounts&quot; tree so that you will be notified every time a new user is created. To do this, click on the &quot;User accounts&quot; tab in the administration interface, locate the desired node (under which new users are created upon user registration) in the tree and select &quot;Add to my notifications&quot; using the context menu.</p><p><i>Q: Is it possible to receive E-mails whenever I need to approve an article? Is it possible that the writer of the article is notified whether or not the article was approved?</i></p><p>A: It is possible to get notifications when you need to approve an item (same for the author). This can be easily done by <a href="../../Using-the-admin-interface.html#collaboration" target="_self">enabling the collaboration notifications</a>. Currently there is no support for notifications to the author when the the article has been approved/rejected.</p><p><i>Q: I have subscribed for notifications but I do not receive any E-mails.</i></p><p>A: You might have forgotten about the &quot;<a href="../../../Notifications.html#runcronjobs" target="_self">runcronjobs.php</a>&quot; script. If you wish to use the notification system, this script must be executed periodically.</p><p><i>Q: I use both subtree and collaboration notifications. The subtree notifications work well but I do not receive collaboration notifications.</i></p><p>A: The collaboration notifications are sent every time a new collaboration message is generated. Check your collaboration messages by clicking the &quot;My Account&quot; tab in the administration interface and select the &quot;Collaboration&quot; link on the left. If there are no collaboration messages there, check your collaboration settings by clicking the &quot;Setup&quot; tab and choosing the &quot;Workflows&quot; and/or &quot;Triggers&quot; link on the left. Refer to the &quot;<a href="../../../../Concepts-and-basics/Workflows.html" target="_self">Workflows</a>&quot; and &quot;<a href="../../../../../4.x/Reference/Workflow-events/Approve.html" target="_self">Approve</a>&quot; documentation chapters for more information about workflows, triggers and approval events.&nbsp;</p><p><i>Q: Notification settings are not available for one of my users.</i></p><p>A: A user must be logged in to access the notification settings. If the notification settings are still unavailable after logging in, check the role/policy settings specified for the user(s) as described in the &quot;<a href="../../Granting-access-to-notifications.html" target="_self">Granting access to notifications</a>&quot; part of the documentation.</p><p><i>Q: Why do the users see the &quot;access denied&quot; page when they click the &quot;Keep me updated&quot; button?</i></p><p>A: Perhaps they are not allowed to use notifications. Check the role/policy settings specified for these users as described in the &quot;<a href="../../Granting-access-to-notifications.html" target="_self">Granting access to notifications</a>&quot; chapter.</p><p><i>Q: I have the default/built-in forum on my site and I wish that every registered user should be able to subscribe/unsubscribe for subtree notifications about the forum/topic/reply. How can I do this?</i></p><p>A: By default, all the users that belong to the &quot;Guest accounts&quot; user group are allowed to use notifications. This is specified in the default &quot;Forum user&quot; role that is assigned to the guest user group. It is possible to assign this role to other users (refer to &quot;<a href="../../Granting-access-to-notifications.html" target="_self">Assigning a role to a user / user group</a>&quot; section of the &quot;<a href="../../Granting-access-to-notifications.html" target="_self">Granting access to notifications</a>&quot; chapter for more information). There is no point to assign this role to the &quot;Administrator users&quot; group. The default &quot;Administrator&quot; role assigned to the &quot;Administrator users&quot; group allows these users to access all modules including the <a href="../../../../../4.x/Reference/Modules/notification.html" target="_self">&quot;notification&quot; module</a>.</p><p><i>Q: In the role/policy settings I can choose the &quot;administrate&quot; function when granting access to the &quot;notification&quot; module. Does it mean that it is possible to view/edit the notification settings of each subscribed user somewhere in the administration area?</i></p><p>A: Although letting administrators to view and/or edit notification settings for all users is probably good idea, it is not implemented yet. The only difference between &quot;use&quot; and &quot;administrate&quot; functions is that the latter grants access to the &quot;runfilter&quot; view of the <a href="../../../../../4.x/Reference/Modules/notification.html" target="_self">&quot;notification&quot; module</a>. Note that this view should only be used for testing and debugging.</p><p><i>Q: Is it possible to force digest mode for notifications so that the digest mode is set by default for all the subscribed users (with the preset time)?</i></p><p>A: This functionality is not implemented. By default, the digest mode is off and the database contains no records about this setting. If the user <a href="../../Using-an-actual-site.html#set_digest_mode" target="_self">sets the digest mode</a>, it will be recorded in the database.</p><p><i>Q: Is there any way to set &quot;filters&quot; for subtree notifications? I have a set of articles under a certain folder and the users are notified whenever a new article is created there. However, they also receive notifications when an existing article is edited or a new folder is created. I'd like to specify &quot;only notify if a new object of type article is being created&quot; or something similar.</i></p><p>A: This is not supported at the moment.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Notifications/Frequently-Asked-Questions/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:29 GMT -->
+</html>

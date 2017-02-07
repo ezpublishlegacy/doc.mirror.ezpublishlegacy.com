@@ -1,0 +1,84 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Reference/Configuration-files/site.ini/SiteAccessRules/Rules by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Rules / [SiteAccessRules] / site.ini / Configuration files / Reference / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Rules</h1>
+</div>
+<h3>Summary</h3>
+Sets which modules and views to enable or disable.<h3>Usage</h3>
+<pre class="pfix"> <p>
+Rules[]=function1;parameter1<br />Rules[]=function2;parameter2</p></pre><h3>Description</h3>
+ <p>The &quot;Rules&quot; setting defines a ruleset that eZ publish uses to determine wether module and views should be available or not. Each line of the ruleset is read and evaluated. The order in which you enable/disable modules does not matter, but more specific rules will override global rules.</p> <p>The available functions are:</p>    <a name="eztoc26241_0_0_1" id="eztoc26241_0_0_1"></a><h4>access</h4> <p>The access function is used to change if subsequent <i>module</i> or <i>moduleall</i> rules should be enabled or disabled. The access function has two possible parameter options</p>
+<ol>
+ <li><div>  <b>enable</b> - enable subsequently mentioned modules and views </div></li> <li><div>  <b>disable</b> - disables subsequently mentioned modules and views </div></li> 
+</ol>
+       <a name="eztoc26241_0_0_2" id="eztoc26241_0_0_2"></a><h4>module</h4> <p>
+The module function is used to specify complete modules or specific views. <br />
+The module or view will get the access level of the last access level set. To specify a module simply provide the module name as the parameter value:<br /></p><pre class="wordwrap"><span class="line">Rules[]=module;name_of_module</span>
+</pre><p>
+ <br />If you specify a module, the access mode is set for all views in that module.</p> <p>
+To specify a single view you need to specify both the name of the module and the view as the parameter value:<br /></p><pre class="wordwrap"><span class="line">Rules[]=module;name_of_module/name_of_view</span>
+</pre><p>&nbsp;</p>       <a name="eztoc26241_0_0_3" id="eztoc26241_0_0_3"></a><h4>moduleall</h4> <p>Moduleall is a special mode that should be used on a line on itself without a trailing function definition. It is used to set the current access mode to all modules in the system.</p>   <h3>Examples</h3>
+    <a name="eztoc26242_0_0_1" id="eztoc26242_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap"><span class="line">Rules[]=access;enable</span>
+<span class="line">Rules[]=moduleall</span>
+</pre> <p>This configuration enables all modules and views. This is equal to the default ruleset.</p>       <a name="eztoc26242_0_0_2" id="eztoc26242_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap copytoclipboard"><span class="line">Rules[]=access;enable</span>
+<span class="line">Rules[]=moduleall</span>
+<span class="line">Rules[]=access;disable</span>
+<span class="line">Rules[]=module;ezinfo</span>
+<span class="line">Rules[]=module;content/search</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'Rules[]=access;enable\r\nRules[]=moduleall\r\nRules[]=access;disable\r\nRules[]=module;ezinfo\r\nRules[]=module;content/search' ); return false;" /></p>
+<![endif]--> <p>This configuration enables all modules and views except all views in the ezinfo module and the view content/search.</p>       <a name="eztoc26242_0_0_3" id="eztoc26242_0_0_3"></a><h4>Example 3</h4> <pre class="wordwrap copytoclipboard"><span class="line">Rules[]=access;disable</span>
+<span class="line">Rules[]=moduleall</span>
+<span class="line">Rules[]=access;enable</span>
+<span class="line">Rules[]=module;content/view</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'Rules[]=access;disable\r\nRules[]=moduleall\r\nRules[]=access;enable\r\nRules[]=module;content/view' ); return false;" /></p>
+<![endif]--> <p>This configuration takes a different approach. It disables all modules by default and enables only the modules that you want to use. In this case only the content/view module is available.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Reference/Configuration-files/site.ini/SiteAccessRules/Rules by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:40 GMT -->
+</html>

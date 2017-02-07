@@ -1,0 +1,111 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.5/from-3.4.4-to-3.5.0 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:05:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>from 3.4.4 to 3.5.0 / Upgrading to 3.5 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>from 3.4.4 to 3.5.0</h1>
+</div>
+
+ <p>This section describes how to upgrade your existing eZ publish 3.4.4 installation to version 3.5.0. If you are upgrading from a version prior to eZ publish 3.4.4, you need to first <a href="../Upgrading-to-3.4/from-3.4.x-to-3.4.html" target="_self">upgrade to 3.4.4</a> before you can upgrade to 3.5.0.</p> <p>Please make sure that you have a working <a href="../../Upgrading.html#backup" target="_self">backup</a> of the site before you do the actual upgrade. The upgrade procedure consists of the following steps:</p> 
+<ol>
+ <li><div> Upgrading the distribution files to 3.5.0 </div></li> <li><div> Upgrading the database to 3.5.0 </div></li> <li><div> Running the 3.5.0 upgrade scripts </div></li> <li><div> Updating the system configuration </div></li> <li><div> Clearing the caches </div></li> 
+</ol>
+  <a name="eztoc33072_1" id="eztoc33072_1"></a><h2>Step 1: Upgrading the distribution files</h2> <p>The easiest way to upgrade the distribution files is to unpack eZ publish 3.5.0 to a directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p> 
+<ul>
+ <li><div> design/example </div></li> <li><div> design/example_admin </div></li> <li><div> var </div></li> <li><div> settings/siteaccess </div></li> <li><div> settings/override </div></li> 
+</ul>
+ <p>Replace &quot;example&quot; and &quot;example_admin&quot; with actual names used by your siteaccesses.</p>  <a name="eztoc33072_1_1" id="eztoc33072_1_1"></a><h3>Custom extensions</h3> <p>If you are using custom extensions then the subdirectories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that come with eZ publish (for example the &quot;PayPal&quot; extension).</p>    <a name="eztoc33072_2" id="eztoc33072_2"></a><h2>Step 2: Upgrading the database</h2> <p>The following text describes how a 3.4.4 database can be upgraded to 3.5.0.</p>  <a name="eztoc33072_2_2" id="eztoc33072_2_2"></a><h3>MySQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ publish 3.5.0 directory. </div></li> <li><div> 
+Run the database upgrade script:<br /> <pre class="wordwrap"><span class="line">mysql -u &lt;username&gt; -p&lt;password&gt; &lt;database&gt; &lt; update/database/mysql/3.5/dbupdate-3.4.4-to-3.5.0.sql</span>
+</pre>  </div></li> 
+</ol>
+   <a name="eztoc33072_2_3" id="eztoc33072_2_3"></a><h3>PostgreSQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ publish 3.5.0 directory. </div></li> <li><div> 
+Run the database upgrade script:<br /> <pre class="wordwrap"><span class="line">psql -d &lt;database&gt; -U &lt;dbowner&gt; &lt; update/database/postgresql/3.5/dbupdate-3.4.4-to-3.5.0.sql</span>
+</pre>  </div></li> 
+</ol>
+    <a name="eztoc33072_3" id="eztoc33072_3"></a><h2>Step 3: Running the 3.5.0 upgrade scripts</h2> <p>The 3.5.0 version of eZ publish introduces a couple of new features. In order to make sure that your site is compatible with these features, you'll have to run a couple of upgrade scripts.</p>  <a name="eztoc33072_3_4" id="eztoc33072_3_4"></a><h3>Content class structure changes</h3> <p>In eZ publish 3.5.0, a new attribute called &quot;is_container&quot; has been added to content classes (see the <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/features/3.5/class_enhancement.txt" target="_self">feature doc</a> for more information). The container flag controls whether an instance of the class should be allowed to have sub items (often called child nodes, children) or not. In order to be compatible with this functionality, you will have to run the &quot;updateiscontainer.php&quot; script for all siteaccesses that use different databases. If you only have a public and an administration siteaccess (which is the most typical/usual case), then you will only need to run the script for one of the siteaccesses:</p> 
+<ol>
+ <li><div> Navigate into the eZ publish 3.5.0 directory. </div></li> <li><div> 
+Run the script (replace &quot;example&quot; with the name of your siteaccess(es)):<br /> <pre class="wordwrap"><span class="line">php update/common/scripts/updateiscontainer.php -s example</span>
+</pre>  </div></li> 
+</ol>
+ <p>Please note that the script can only modify the <a href="../../Technical-manual/3.8/Reference/Content-classes.html" target="_self">general purpose classes</a>. You should manually set the container flag for your custom classes (if there are any), otherwise it won't be possible to create subitems.</p>   <a name="eztoc33072_3_5" id="eztoc33072_3_5"></a><h3>Updating the nice URLs (optional)</h3> <p>eZ publish 3.5 includes the built-in transliteration feature that allows to automatically convert special characters to their equivalent in English letters when generating the <a href="../../Technical-manual/3.8/Concepts-and-basics/URL-translation.html#virtual_url" target="_self">virtual URLs</a> (nice URLs, URL aliases). For example, the Norwegian characters &quot;æ&quot;, &quot;ø&quot; and &quot;å&quot; are converted to &quot;ae&quot;, &quot;oe&quot; and &quot;aa&quot; instead of underscores. It is recommended (but not required) to run the &quot;updateniceurls.php&quot; script in order to update your nice URLs:</p> 
+<ol>
+ <li><div> Navigate into the eZ publish 3.5.0 directory. </div></li> <li><div> 
+Run the script:<br /> <pre class="wordwrap"><span class="line">php update/common/scripts/updateniceurls.php</span>
+</pre>  </div></li> 
+</ol>
+   <a name="eztoc33072_3_6" id="eztoc33072_3_6"></a><h3>Updating the search index (optional)</h3> <p>eZ publish 3.5.0 includes a few bug fixes related to the search index generation (see the <a href="http://ez.no/download/ez_publish/changelogs/ez_publish_3_5/changelog_3_4_4_to_3_5_0" target="_self">3.5.0 changelog</a> for more information). It is recommended (but not required) to run the &quot;updatesearchindex.php&quot; script with the &quot;--clean&quot; option in order to update the search index of your site:</p> 
+<ol>
+ <li><div> Navigate into the eZ publish 3.5.0 directory. </div></li> <li><div> 
+Run the script:<br /> <pre class="wordwrap"><span class="line">php update/common/scripts/updatesearchindex.php --clean</span>
+</pre>  </div></li> 
+</ol>
+ <p>The &quot;--clean&quot; option (added in eZ publish 3.3-1) means that the existing search index data should be removed before starting indexing.</p>    <a name="eztoc33072_4" id="eztoc33072_4"></a><h2>Step 4: Updating the system configuration</h2>  <a name="eztoc33072_4_7" id="eztoc33072_4_7"></a><h3>Administration interface changes</h3> <p>The administration interface has been completely renewed in 3.5.0, and it requires two new override files. These are created automatically for new installations but should be copied manually when upgrading: </p><pre class="wordwrap"><span class="line">cp settings/siteaccess/admin/override.ini.append.php settings/siteaccess/example_admin/</span>
+<span class="line">&nbsp;</span>
+<span class="line">cp settings/siteaccess/admin/icon.ini.append settings/siteaccess/example_admin/</span>
+</pre> <p>
+Replace &quot;example_admin&quot; with the actual name of your admin siteaccess.<br />
+In order to be compatible with new functionality, you will also need to specify the &quot;<a href="../../Technical-manual/3.8/Reference/Configuration-files/site.ini/ContentSettings/CachedViewPreferences.html" target="_self">CachedViewPreferences</a>&quot; setting in the &quot;site.ini.append.php&quot; configuration file of your admin siteaccess:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[ContentSettings]</span>
+<span class="line">CachedViewPreferences[full]=admin_navigation_content=0;admin_navigation_details=0;admin_navigation_languages=0;admin_navigation_locations=0;admin_navigation_relations=</span>
+<span class="line">0;admin_navigation_roles=0;admin_navigation_policies=0;admin_navigation_content=0;admin_navigation_translations=0;admin_children_viewmode=list;admin_list_limit=1;admin</span>
+<span class="line">_edit_show_locations=0;admin_url_list_limit=10;admin_url_view_limit=10;admin_section_list_limit=1;admin_orderlist_sortfield=user_name;admin_orderlist_sortorder=desc;ad</span>
+<span class="line">min_search_stats_limit=1;admin_treemenu=1;admin_bookmarkmenu=1;admin_left_menu_width=13</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ContentSettings]\r\nCachedViewPreferences[full]=admin_navigation_content=0;admin_navigation_details=0;admin_navigation_languages=0;admin_navigation_locations=0;admin_navigation_relations=\r\n0;admin_navigation_roles=0;admin_navigation_policies=0;admin_navigation_content=0;admin_navigation_translations=0;admin_children_viewmode=list;admin_list_limit=1;admin\r\n_edit_show_locations=0;admin_url_list_limit=10;admin_url_view_limit=10;admin_section_list_limit=1;admin_orderlist_sortfield=user_name;admin_orderlist_sortorder=desc;ad\r\nmin_search_stats_limit=1;admin_treemenu=1;admin_bookmarkmenu=1;admin_left_menu_width=13' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>If you have a large site that contains a lot of content objects, then it may be useful to reduce the number of objects shown in the left tree menu in the administration interface. It is possible to configure the tree menu limitations so that it for example only shows certain types of nodes, only goes to a certain depth and so on. Configuration should be done by creating an override for the &quot;contentstructuremenu.ini&quot; file.</p>   <a name="eztoc33072_4_8" id="eztoc33072_4_8"></a><h3>Configuring the smart viewcache cleaning system (optional)</h3> <p>If you have not configured the <a href="http://ez.no/products/ez_publish/documentation/incoming/smart_viewcache_cleaning_system" target="_self">smart viewcache cleaning system</a> before (this feature is available from version 3.4.2), then you will probably need to do this. This feature allows to determine which additional nodes the system should clear the caches for when the content of an object is changed (by default, the view cache will be cleared for all published nodes of this object, their parent nodes, nodes of reverse related objects and nodes of objects with the same keyword). Please note that this step is only required if you are running a complex site or if you have cache problems after upgrading (for example, if your changes to content are not visible on some pages).</p>   <a name="eztoc33072_4_9" id="eztoc33072_4_9"></a><h3>New folders under the &quot;Media&quot; top level node</h3> <p>You need to create three new folders called &quot;Files&quot;, &quot;Images&quot; and &quot;Multimedia&quot; under the &quot;Media&quot; top level node. These will be used for autoplacement of uploaded files.</p>    <a name="eztoc33072_5" id="eztoc33072_5"></a><h2>Step 5: Clearing the caches</h2> <p>Whenever an eZ publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p> 
+<ol>
+ <li><div> Navigate into the eZ publish 3.5.0 directory. </div></li> <li><div> 
+Run the clear cache script:<br /> <pre class="wordwrap"><span class="line">bin/shell/clearcache.sh --clear-all</span>
+</pre>  </div></li> 
+</ol>
+ <p>Please make sure that all caches are cleared. Sometimes the script is unable to clear caches because of restrictive file/directory permission settings. Make sure that all caches have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.5/from-3.4.4-to-3.5.0 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:05:45 GMT -->
+</html>

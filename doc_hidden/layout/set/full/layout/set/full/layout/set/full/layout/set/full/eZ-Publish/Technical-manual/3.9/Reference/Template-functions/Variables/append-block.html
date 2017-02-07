@@ -1,0 +1,94 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Template-functions/Variables/append-block by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:50:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>append-block / Variables / Template functions / Reference / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>append-block</h1>
+</div>
+<h3>Summary</h3>
+Redirects the output from multiple blocks of template code to an array.<h3>Usage</h3>
+<pre>{append-block variable=$variable [ name=name ] [ scope=scope ]}
+...
+{/append-block}</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>name</td>
+        <td>string</td>
+        <td>Name of the namespace.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>scope</td>
+        <td>string</td>
+        <td>The scope (&quot;global&quot;, &quot;root&quot; or &quot;relative&quot;).</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>variable</td>
+        <td>string</td>
+        <td>The name of variable that will be returned.</td>
+        <td>Yes.</td>
+    </tr></table><h3>Description</h3>
+ <p>This mechanism will silently process all template code which is encapsulated by &quot;{append-block ...}&quot; and &quot;{/append-block}&quot;. It will not produce any actual output. Instead, the generated output will be assigned to a variable specified by the &quot;variable&quot; parameter (as an array). If the variable does not exist, it will be automatically created. If the same target variable is used in several blocks, the function will simply add new elements to the array and thus the previous contents will be preserved.</p><h3>Examples</h3>
+    <a name="eztoc69933_0_0_1" id="eztoc69933_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{append-block variable=$alien}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;It seems to have a life,</span>
+<span class="line">{/append-block}</span>
+<span class="line">&nbsp;</span>
+<span class="line">...</span>
+<span class="line">&nbsp;</span>
+<span class="line">{append-block variable=$alien}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;organic life...</span>
+<span class="line">{/append-block}</span>
+<span class="line">&nbsp;</span>
+<span class="line">...</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $alien as $element}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$element} &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{append-block variable=$alien}\r\n    It seems to have a life,\r\n{/append-block}\r\n\r\n...\r\n\r\n{append-block variable=$alien}\r\n    organic life...\r\n{/append-block}\r\n\r\n...\r\n\r\n{foreach $alien as $element}\r\n    {$element} &lt;br /&gt;\r\n{/foreach}\r\n' ); return false;" /></p>
+<![endif]--> <p>This example demonstrates how to create an array called $alien using the &quot;append-block&quot; mechanism. The output from the code that is encapsulated by &quot;{append-block ...}&quot; and &quot;{/append-block}&quot; will be assigned as elements to the target variable. When the $alien array is inspected, the following output will be produced:</p> <div class="output"> <p>
+It seems to have a life,<br />organic life...</p> </div>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Template-functions/Variables/append-block by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:50:35 GMT -->
+</html>

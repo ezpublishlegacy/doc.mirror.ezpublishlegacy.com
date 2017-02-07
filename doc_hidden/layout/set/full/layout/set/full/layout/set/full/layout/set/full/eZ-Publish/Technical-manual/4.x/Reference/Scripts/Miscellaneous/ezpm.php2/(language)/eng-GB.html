@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Miscellaneous/ezpm.php2/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:02:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>ezpm.php / Miscellaneous  	 / Scripts / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ezpm.php</h1>
+</div>
+
+<h3>Summary</h3>
+Package Manager. This documentation page applies to all version of ezpublish 4.x
+
+<h3>Location</h3>    .//ezpm.php<h3>Parameters</h3><p>
+<a href=#colors>colors</a><br/>
+
+<a href=#db-host>db-host</a><br/>
+
+<a href=#db-name>db-name</a><br/>
+
+<a href=#db-password>db-password</a><br/>
+
+<a href=#db-socket>db-socket</a><br/>
+
+<a href=#db-type>db-type</a><br/>
+
+<a href=#logfiles>logfiles</a><br/>
+
+<a href=#login>login</a><br/>
+
+<a href=#no-colors>no-colors</a><br/>
+
+<a href=#no-logfiles>no-logfiles</a><br/>
+
+<a href=#password>password</a><br/>
+
+<a href=#repos>repos</a><br/>
+
+<a href=#siteaccess>siteaccess</a><br/>
+</p>
+
+    <a name="colors"></a>
+    <h4>-c,--colors</h3>
+    <div style="margin-left:35px;">
+        
+<p>Display output using ANSI colors (default).</p>    </div>
+
+    <a name="db-host"></a>
+    <h4>--db-host HOST</h3>
+    <div style="margin-left:35px;">
+        
+<p>Set host name for database connection.</p>    </div>
+
+    <a name="db-name"></a>
+    <h4>--db-name NAME</h3>
+    <div style="margin-left:35px;">
+        
+<p>Set name of database to use.</p>    </div>
+
+    <a name="db-password"></a>
+    <h4>--db-password PASSWD</h3>
+    <div style="margin-left:35px;">
+        
+<p>Set password for database user.</p>    </div>
+
+    <a name="db-socket"></a>
+    <h4>--db-socket SOCKET</h3>
+    <div style="margin-left:35px;">
+        
+<p>Set socket for database connection.</p>    </div>
+
+    <a name="db-type"></a>
+    <h4>--db-type TYPE</h3>
+    <div style="margin-left:35px;">
+        
+<p>Set type of database to use.</p>    </div>
+
+    <a name="logfiles"></a>
+    <h4>--logfiles</h3>
+    <div style="margin-left:35px;">
+        
+<p>Create log files.</p>    </div>
+
+    <a name="login"></a>
+    <h4>-l,--login USER</h3>
+    <div style="margin-left:35px;">
+        
+<p>login with USER and use it for all operations</p>    </div>
+
+    <a name="no-colors"></a>
+    <h4>--no-colors</h3>
+    <div style="margin-left:35px;">
+        
+<p>Do not use ANSI coloring.</p>    </div>
+
+    <a name="no-logfiles"></a>
+    <h4>--no-logfiles</h3>
+    <div style="margin-left:35px;">
+        
+<p>Do not create log files (default).</p>    </div>
+
+    <a name="password"></a>
+    <h4>-p,--password PWD</h3>
+    <div style="margin-left:35px;">
+        
+<p>Use PWD as password for USER</p>    </div>
+
+    <a name="repos"></a>
+    <h4>-r,--repos REPOS</h3>
+    <div style="margin-left:35px;">
+        
+<p>Use REPOS for repository when accessing packages</p>    </div>
+
+    <a name="siteaccess"></a>
+    <h4>-s,--siteaccess</h3>
+    <div style="margin-left:35px;">
+        
+<p>Selected siteaccess for operations, if not specified default siteaccess is used</p>    </div>
+
+<h3>Description</h3>
+<p>
+The ezpm.php script, located in the root directory of eZ Publish, allows to execute package management operations from the command line.<br />This is very useful to eg. import a package that is too big and would result in a timeout if imported via the web interface (or viceversa to create a very big export package).</p><a name="eztoc137106_0_0_1" id="eztoc137106_0_0_1"></a><h4>add &lt;packagename&gt; &lt;contentobject&gt; [options] [path|node]</h4><p>Adding classes, templates and objects to the package.</p><table class="renderedtable nested" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p><b>Option</b></p>
+  </th><th >  <p><b>Description</b></p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>--include-classes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Include class definitions in package (default)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>--include-templates</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Include related template files in package (default)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>--exclude-classes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Do not include class definitions in package</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>--exclude-templates</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Do not include related template files in package</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>--language</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Comma separated list of languages to export. If not supplied the value is taken from settings.&nbsp;</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>--current-version</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Export only the published version for all objects. (default)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>--all-versions</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Export all versions for all objects.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>--node-main</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Export only main node for all objects. (default)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>--node-selected</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Export all nodes for all objects.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>--siteaccess</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>
+Comma separated list of siteaccess to get definitions from, determines template override data and designs. <br />If not supplied the value is taken from default siteaccess.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>path</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>
+The path is chosen in the same manner as the URL alias which is shown in the path in the browser. If you want to export all objects under the node you must add /* to the end of the path <br />
+e.g. news/this_is_news ,news or news/* <br />Note: To fetch the entire tree including users and media you must use an empty string, e.g. ''&nbsp;</p>
+  </td>
+
+</tr>
+
+</table>
+<a name="eztoc137106_0_0_2" id="eztoc137106_0_0_2"></a><h4>create &lt;packagename&gt; &lt;summary&gt;</h4><pre class="wordwrap"><span class="line">$ php -C ezpm.php create staff &quot;all the staff members&quot;</span>
+</pre><a name="eztoc137106_0_0_3" id="eztoc137106_0_0_3"></a><h4>export</h4><p>Export packages for saving them</p><pre class="wordwrap"><span class="line">$ php -C ezpm.php export test_package --output -d /your/folder</span>
+</pre><a name="eztoc137106_0_0_4" id="eztoc137106_0_0_4"></a><h4>info &lt;packagename&gt;</h4><p>Show Information for packages</p><a name="eztoc137106_0_0_5" id="eztoc137106_0_0_5"></a><h4>import</h4><p>Load the package into the eZ Publish instance</p><pre class="wordwrap"><span class="line">$ php -C ezpm.php --debug import test_package-1.0-1.ezpkg</span>
+</pre><a name="eztoc137106_0_0_6" id="eztoc137106_0_0_6"></a><h4>install</h4><p>Integrate the package to the eZ Publish instance</p><pre class="wordwrap"><span class="line">$ php -C ezpm.php --debug install test_package</span>
+</pre><a name="eztoc137106_0_0_7" id="eztoc137106_0_0_7"></a><h4>import and install</h4><p>You can combine the import and install commands in one line.</p><pre class="wordwrap"><span class="line">$ php -C ezpm.php --debug import test_package-1.0-1.ezpkg php ezpm.php --debug install test_package</span>
+</pre><a name="eztoc137106_0_0_8" id="eztoc137106_0_0_8"></a><h4>list</h4><p>List all packages</p><a name="eztoc137106_0_0_9" id="eztoc137106_0_0_9"></a><h4>set &lt;package&gt; &lt;attribute&gt; &lt;attributevalue&gt;</h4><pre class="wordwrap"><span class="line">$ php -C ezpm.php set staff vendor &quot;John Doe&quot;</span>
+</pre><p>Edit package information</p>
+<h3>Examples</h3>
+<a name="eztoc137107_0_0_0_1" id="eztoc137107_0_0_0_1"></a><h5>Filtering added content</h5><p>You can filter content you are adding to packages. This is done by calling packagehandler classes (see kernel/classes/packagehandler) and specifying dedicated parameters. Note that this is not fully documented and not supported as the recommended way it to use the admin interface. The following command lines are just provided as examples of this usage.</p><a name="eztoc137107_0_0_0_1_1" id="eztoc137107_0_0_0_1_1"></a><h6>Create a new package and add contentclasses to it</h6><p>Note: If you're only adding content classes to your package, you should also set the type of the package to &quot;contentclass&quot;.</p><pre class="wordwrap"><span class="line">$ php -C ezpm.php create testclasspackage</span>
+<span class="line">$ php -C ezpm.php add testclasspackage ezcontentclass folder,article</span>
+<span class="line">$ php -C ezpm.php set testclasspackage type contentclass</span>
+</pre><a name="eztoc137107_0_0_0_1_2" id="eztoc137107_0_0_0_1_2"></a><h6>Create a new package and add a subtree to it (by path)</h6><pre class="wordwrap"><span class="line">$ php -C ezpm.php create test_package &quot;Test Package Creation&quot;</span>
+<span class="line">$ php -C ezpm.php add test_package ezcontentobject --exclude-templates --exclude-classes --siteaccess=eng &quot;your_path_to_content/*&quot;</span>
+</pre><a name="eztoc137107_0_0_0_1_3" id="eztoc137107_0_0_0_1_3"></a><h6>Create a new package and add a subtree to it (by nodeid)</h6><p>Note: make sure to have the patch for&nbsp;<a href="https://jira.ez.no/browse/EZP-23299" title="EZP-23299" target="_self">https://jira.ez.no/browse/EZP-23299</a> applied. It is included in ezpublish 5.4, and will apply on older versions.</p><p>For example with node ID 74</p><pre class="wordwrap"><span class="line">$ php -C ezpm.php create test_package2 &quot;Test Package Creation2&quot;</span>
+<span class="line">$ php -C ezpm.php add test_package2 ezcontentobject --exclude-templates --exclude-classes --siteaccess=eng 74</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Miscellaneous/ezpm.php2/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:02:20 GMT -->
+</html>

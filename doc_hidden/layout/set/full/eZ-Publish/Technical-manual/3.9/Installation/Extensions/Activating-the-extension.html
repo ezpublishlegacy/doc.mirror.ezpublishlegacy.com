@@ -1,0 +1,71 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Installation/Extensions/Activating-the-extension by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Activating the extension / Extensions / Installation / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Activating the extension</h1>
+</div>
+
+ <p>Each extension needs to be activated, which means that it is being registered for eZ publish to be available from within the eZ publish framework. Every extension can either be activated in the eZ publish administration interface or in a configuration file. Furthermore, the activation can be done either for the whole eZ publish installation or for only certain siteaccesses.</p>  <a name="eztoc63109_1" id="eztoc63109_1"></a><h2>Administration interface</h2> <p>Go to the administration interface of your eZ publish installation and navigate to &quot;Setup / Extensions&quot;. The sample extension should be available in the list by the name &quot;ezfoo&quot;. Register this extension by activating the checkbox, then click &quot;Apply changes&quot;.</p> 
+<div class="object-center linked">            <a href="../../../../../layout/set/full/eZ-Publish/Technical-manual/3.9/Images/Installation/Extensions/Extension-configuration.html" target="_self"><img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/installation/extensions/extension_configuration/29690-2-eng-GB/extension_configuration_doc.png" alt="Extension configuration" /></a>
+ <p>Screenshot of extension configuration in administration interface.</p>
+
+
+
+
+
+
+
+</div> <p>This will activate the extension for all siteaccesses of an eZ publish installation.</p>   <a name="eztoc63109_2" id="eztoc63109_2"></a><h2>Configuration file</h2> <p>Alternativley, an extension can be enabled manually in the <a href="../../Reference/Configuration-files/site.html" target="_self">site.ini</a> configuration file.</p>  <a name="eztoc63109_2_1" id="eztoc63109_2_1"></a><h3>Activating for the whole installation</h3> <p>To do so, edit &quot;site.ini.append[.php]&quot; in the folder</p> <pre class="wordwrap"><span class="line">/root_of_ezpublish/settings/override/</span>
+</pre> <p>If this file does not exist, create it. Locate (or add) the <a href="../../Concepts-and-basics/Configuration.html" target="_self">configuration block</a> &quot;[ExtensionSettings]&quot; and add the line which is registering the extension:</p> <pre class="wordwrap"><span class="line">[ExtensionSettings]</span>
+<span class="line">ActiveExtensions[]=ezfoo</span>
+</pre> <p>Multiple extensions can be present within the &quot;[ExtensionSettings]&quot; block.</p>   <a name="eztoc63109_2_2" id="eztoc63109_2_2"></a><h3>Activating for certain siteaccesses</h3> <p>If you run several virtual sites aka siteaccesses based on a single eZ publish installation and only some of the sites should use the extension, then make the changes in the override file of that siteaccess. This file could be located e.g. at</p> <pre class="wordwrap"><span class="line">/root_of_ezpublish/settings/siteaccess/news/site.ini.append[.php]</span>
+</pre> <p>Notice that the line registering the extension is not called &quot;ActiveExtensions&quot;, but &quot;ActiveAccessExtensions&quot;:</p> <pre class="wordwrap"><span class="line">[ExtensionSettings]</span>
+<span class="line">ActiveAccessExtensions[]=ezfoo</span>
+</pre>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Installation/Extensions/Activating-the-extension by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:49 GMT -->
+</html>

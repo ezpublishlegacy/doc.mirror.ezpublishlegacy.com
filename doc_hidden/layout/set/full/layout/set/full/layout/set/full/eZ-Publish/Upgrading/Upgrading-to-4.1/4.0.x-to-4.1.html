@@ -1,0 +1,103 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-4.1/4.0.x-to-4.1.y by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:49:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>4.0.x to 4.1.y / Upgrading to 4.1 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>4.0.x to 4.1.y</h1>
+</div>
+
+ <p>This section describes how to upgrade your existing eZ Publish 4.0.x installation to version 4.1.y. If you are upgrading from version 4.0.3 or earlier, you need to first upgrade to 4.0.3 before you can upgrade to 4.1. (Refer to either &quot;<a href="../Upgrading-to-4.0/from-3.10.x-to-4.0.html" target="_self">Upgrading from 3.10.x to 4.0.y</a>&quot; or &quot;<a href="../Upgrading-to-4.0/from-4.0.x-to-4.0.html" target="_self">Upgrading from 4.0.x to 4.0.y</a>&quot; depending on which version you are currently running.)</p> <p>The upgrade procedure described below is generic and does not cover any specific cases (for example, running eZ Publish in a clustered environment).</p> <p>Make sure that you have a working <a href="../../Upgrading.html#backup" target="_self">backup</a> of the site before you do the actual upgrade.</p>   <a name="eztoc102745_0_1" id="eztoc102745_0_1"></a><h3>Important upgrade notes:</h3> 
+<ul>
+ <li><div> updateimagesystem.php needs to be run before the dbupdate scripts, otherwise the tables being upgraded will be removed. </div></li> 
+</ul>
+ <p>The procedure for upgrading directly from version 4.0.x to 4.1.y consists of the following steps:</p> 
+<ol>
+ <li><div> Upgrading the distribution files to 4.1.y </div></li> <li><div> Upgrading custom extensions </div></li> <li><div> Updating image system </div></li> <li><div> Upgrading the database to 4.1.y </div></li> <li><div> Regenerate the autoload array for extensions </div></li> <li><div> Running the system upgrade scripts for versions from 4.0.x to 4.1.y </div></li> <li><div> Clearing the caches </div></li> 
+</ol>
+    <a name="eztoc102745_1" id="eztoc102745_1"></a><h2>Check the eZ Components 2008.2 requirements</h2> <p>With eZ Publish 4.1.0, <b>eZ Components 2008.2</b> is the minimum version required. If you installed a previous version with PEAR, please upgrade to version 2008.2. For more information see also <a href="http://ezcomponents.org/docs/install" title="eZ Components installation documentation" target="_self">http://ezcomponents.org/docs/install</a> </p>   <a name="eztoc102745_2" id="eztoc102745_2"></a><h2>Step 1: Upgrading the distribution files</h2> <p>The easiest way to upgrade the distribution files is to unpack eZ Publish 4.1.0 to a separate directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories: </p> 
+<ul>
+ <li><div> design/example </div></li> <li><div> design/example_admin </div></li> <li><div> var </div></li> <li><div> settings/siteaccess </div></li> <li><div> settings/override </div></li> 
+</ul>
+ <p>Replace &quot;example&quot; and &quot;example_admin&quot; with the actual names of your siteaccesses. </p>   <a name="eztoc102745_3" id="eztoc102745_3"></a><h2>Step 2: Custom extensions</h2> <p>If you are using custom extensions, the subdirectories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that come with eZ Publish (currently &quot;ezoe&quot;, &quot;ezodf&quot;). Note that upgrading the distribution files will overwrite the autoload arrays for extensions. You will need to re-generate the autoload arrays for active extensions late.</p> <p>See below for dedicated upgrade instructions for ez flow and ez webin.</p> <p>Note that ezdhtml is now replaced by ezoe, so you should not copy it over.</p> <p>For eZ OE 5.0, you will need to have the following rewrite rule if using Virtual Hosts:</p> <pre class="wordwrap"><span class="line">RewriteRule ^/var/[^/]+/cache/public/.* - [L]</span>
+</pre> <p>For extension development: when using modules always make sure that $Result['path'] is assigned an array even if it's an empty one:</p> <pre class="wordwrap"><span class="line">$Result['path'] = array();</span>
+</pre> <p>For more detailed instructions, see the dedicated doc page: <a href="http://ez.no/doc/extensions/online_editor/4.x/installation" target="_self">http://ez.no/doc/extensions/online_editor/5_x/installation</a> </p>   <a name="eztoc102745_4" id="eztoc102745_4"></a><h2>Step 3: updateimagesystem.php</h2> <p>This script is necessary to run if you have data of the 'ezimage' datatype, dating from before eZ Publish 3.3, in version 3.3 a new image system took over based on ezimagealiashandler.</p> <p>If you are upgrading to the 4.1.x series of eZ Publish for the first time, and the installation at hand have been running since eZ Publish &lt; 3.3 then you need to run the updateimagesystem.php script before running any of the dbupdate scripts for version 4.1.0 or 4.1.1.</p> <p>If the installation at hand is a new installation or based on any eZ Publish version &gt;= 3.3 then you can skip running the updateimagesystem.php script.</p>   <a name="eztoc102745_5" id="eztoc102745_5"></a><h2>Step 4: Upgrading the database</h2> <p>The update script for the database is located in</p> <pre class="wordwrap"><span class="line">&lt;eZP root&gt;/update/database/&lt;mysql|postgresql&gt;/4.1/dbupdate-4.0.0-to-4.1.0.sql</span>
+</pre> <p>You can run this with the appropriate command line tool or application</p>   <a name="eztoc102745_6" id="eztoc102745_6"></a><h2>Step 5: Regenerate the autoload array for extensions</h2> <p>The autoload system has also some changes, for example the autoload array for extensions is now placed in var/autoload of your eZ Publish installation (along teh class changes in extensions itself).</p> <p>To regenerate the autoload array, execute the following script from </p> <pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php --extension</span>
+</pre>   <a name="eztoc102745_7" id="eztoc102745_7"></a><h2>Step 6: Running the system upgrade scripts</h2> <p>The update scripts are located in &lt;root of ez publish installation&gt;/update/common/scripts/4.1</p> 
+<ul>
+ <li><div> 
+addlockstategroup.php: is used for creating locked states, part of the object states functionality. It might be useful to know that you can only execute this script once. If you wish to run it a second time, it must be done like this:<br /> <pre class="wordwrap copytoclipboard"><span class="line">truncate ezcobj_state &nbsp;;</span>
+<span class="line">truncate ezcobj_state_group &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;</span>
+<span class="line">truncate ezcobj_state_group_language &nbsp;&nbsp;&nbsp;;</span>
+<span class="line">truncate ezcobj_state_language &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;</span>
+<span class="line">truncate ezcobj_state_link &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;</span>
+<span class="line">&nbsp;</span>
+<span class="line">php update/common/scripts/4.1/addlockstategroup.php -sezwebin_site_admin</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'truncate ezcobj_state  ;\r\ntruncate ezcobj_state_group         ;\r\ntruncate ezcobj_state_group_language    ;\r\ntruncate ezcobj_state_language         ;\r\ntruncate ezcobj_state_link             ;\r\n\r\nphp update/common/scripts/4.1/addlockstategroup.php -sezwebin_site_admin' ); return false;" /></p>
+<![endif]-->  </div></li> <li><div> fixclassremoteid.php: is used to fix remote ids of classes. </div></li> <li><div> fixezurlobjectlinks.php: is used to fix older occurrences of link items not being present in the ezurl_object_table for all versions/translations. </div></li> <li><div> fixobjectremoteid.php: is used to fix non-unique usage of content object remote ID's. </div></li> <li><div> initurlaliasmlid.php: initialize the ezurlalias_ml_incr table, part of the fixed issue #14077: eZURLAliasML database table lock and unlock code causes implicit commit of database transaction. </div></li> <li><div> correctxmlalign.php: after upgrading to 4.1 the default alignment for embedded images in ezxmltext datatype is removed, this script will allow you to have the correct xmlalignment. </div></li> 
+</ul>
+   <a name="eztoc102745_8" id="eztoc102745_8"></a><h2>Step 7: Clearing the caches</h2> <p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 4.1 directory. </div></li> <li><div> 
+Run the script using the following shell command:<br /> <pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre>  </div></li> 
+</ol>
+ <p>Purging ensures that the caches are physically removed. When the &quot;--purge&quot; parameter is not specified, the caches will be expired but not removed. </p> <p>Sometimes the script is unable to clear all cache files because of restrictive file/directory permission settings. Make sure that all cache files have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory (typically the &quot;var/cache/&quot; and &quot;var/&lt;name_of_siteaccess&gt;/cache/&quot; directories). If there are any cache files left, you need to remove them manually.</p>   <a name="eztoc102745_9" id="eztoc102745_9"></a><h2>Upgrading eZ Flow and/or Website Interface separately</h2>  <a name="eztoc102745_9_2" id="eztoc102745_9_2"></a><h3>Step 1: Backup</h3> <p>Before you will start the Website Interface or eZ Flow upgrading process make sure that you have backup of existing website state including database, extensions, INI settings, etc. During upgrade process existing ezflow and ezwebin extensions will be removed and replaced with new version. Website Interface and eZ Flow default content classes will be replaced as well. Upgrade script will also change some of the existing INI settings and add new ones which are required by latest version.</p>   <a name="eztoc102745_9_3" id="eztoc102745_9_3"></a><h3>Step 2: eZ Flow upgrade</h3> <p>eZ Publish 4.1 comes with eZ Flow upgrade script which allows upgrade from previous version to the latest 1.1-0 version. To run upgrade process in automatic mode simply execute following command from eZ Publish root folder.</p> <pre class="wordwrap"><span class="line">php bin/php/ezflowupgrade.php --to-version=1.1-0 --url=http://packages.ez.no/ezpublish/4.1/4.1.0</span>
+</pre> <p>It is very important that user which will execute the upgrade script had correct permissions to modify content user extension, settings and var folders.</p> <p>
+In order to get more information about available upgrade options, execute ezflowupgrade.php script with –help param.<br /></p><pre class="wordwrap"><span class="line">php bin/php/ezflowupgrade.php --help</span>
+</pre><p>&nbsp;</p>   <a name="eztoc102745_9_4" id="eztoc102745_9_4"></a><h3>Step 3: Re-write rules</h3> <p>Users running their eZ Flow sites in VH mode should update their extension related re-write rules to the following:</p> <pre class="wordwrap"><span class="line">Rewriterule ^/extension/[^/]+/design/[^/]+/(stylesheets|flash|images|lib|javascripts?)/.* - [L]</span>
+</pre>   <a name="eztoc102745_9_5" id="eztoc102745_9_5"></a><h3>Step 4: Website Interface upgrade</h3> <p>
+Upgrading Website Interface is very similar to eZ Flow upgrade process. In order to upgrade existing installation to latest 1.4-0 version simply execute following command from eZ Publish root folder:<br /></p><pre class="wordwrap"><span class="line">php bin/php/ezwebinupgrade.php --to-version=1.4-0 --url=http://packages.ez.no/ezpublish/4.1/4.1.0</span>
+</pre><p>
+ <br />
+Again, it is very important that user which will execute the upgrade script had correct permissions to modify content user extension, settings and var folders.<br />
+In order to get more information about available upgrade options, execute ezwebinupgrade.php script with –help param.<br /></p><pre class="wordwrap"><span class="line">php bin/php/ezwebinupgrade.php --help</span>
+</pre><p>&nbsp;</p>   <a name="eztoc102745_9_6" id="eztoc102745_9_6"></a><h3>Step 5: Regenerate the autoload array for extensions</h3> <p>The autoload system has also some changes, for example the autoload array for extensions is now placed in var/autoload of your eZ Publish installation (along teh class changes in extensions itself).</p> <p>To regenerate the autoload array, execute the following script from </p> <pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php --extension</span>
+</pre>   <a name="eztoc102745_9_7" id="eztoc102745_9_7"></a><h3>Step 6: Cache</h3> <p>Once the upgrade script is done, you need to clear the cache by executing following command from eZ Publish root folder:</p> <pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-4.1/4.0.x-to-4.1.y by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:49:21 GMT -->
+</html>

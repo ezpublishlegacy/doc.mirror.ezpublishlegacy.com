@@ -1,0 +1,109 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/transform.ini/Transformation/Groups by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:14:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Groups / [Transformation] / transform.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Groups</h1>
+</div>
+<h3>Summary</h3>
+Sets the available groups to define the rules of transformation for.<h3>Usage</h3>
+<pre class="pfix"><p>Groups[]=&lt;name group&gt;</p></pre><h3>Description</h3>
+<p>
+The groups setting allows you to defines the available transformation groups and specify the rules of character transformation for them.<br />
+ Each group uses its own set of transformation files, extensions and additional transformation rules called Commands. These groups are also used by the search engine and by some datatypes. In addition it is also possible to use the defined groups in custom code.<br />
+ For each group set here, the rules that should be used for this group should be defined in their own block. For example if Groups[]=latin is set here, then the rules for this group need to be defined in block [latin].<br /> Groups available by default are:</p>
+<ul>
+<li><div> <b>latin:</b> Sets the transformation rules that can be used if the current charset handles Latin. By default this group uses the transformation file &quot;latin.tr&quot;. </div></li><li><div> <b>cyrillic:</b> Sets the transformation rules that can be used if the current charset handles Cyrillic. By default this group uses the transformation file &quot;cyrillic.tr&quot;. </div></li><li><div> <b>greek:</b> Sets the transformation rules that can be used if the current charset handles Greek. By default this group uses the transformation file &quot;greek.tr&quot;. </div></li><li><div> <b>hebrew:</b> Sets the transformation rules that can be used if the current charset handles Hebrew. By default this group uses the transformation file &quot;hebrew.tr&quot;. </div></li><li><div> <b>search:</b> Sets the transformation rules that can be used to normalize the search requests and to make it easier for the search engine to interpret it. By default this group uses the transformation file &quot;search.tr&quot;. </div></li><li><div> <b>urlalias_iri:</b> Sets the transformation rules that can be used to make sure the text of URLs is transformed into characters supported by IRI (for more information please visit <a href="http://en.wikipedia.org/wiki/Internationalized_Resource_Identifier" target="_blank">http://en.wikipedia.org/wiki/Internationalized_Resource_Identifier</a>) </div></li><li><div> <b>urlalias:</b> Sets the transformation rules that can be used to make sure the characters not supported by the URI specialization (for more information please visit <a href="http://en.wikipedia.org/wiki/Uniform_Resource_Identifier" target="_blank">http://en.wikipedia.org/wiki/Uniform_Resource_Identifier</a>) are transformed or removed when the URL alias system is making an URL. </div></li><li><div> <b>urlalias_compat:</b> Sets the transformation rules that can be used to make sure the text of URLs is transformed into characters supported by this method of transformation. </div></li><li><div> <b>identifier:</b> Sets the transformation rules that can be used to make sure the text of identifiers is transformed into ASCII equivalent characters. </div></li><li><div> <b>uppercase:</b> Sets the transformation rules that can be used to make sure the characters are transformed into the uppercase. </div></li><li><div> <b>lowercase:</b> Sets the transformation rules that can be used to make sure the characters are transformed into the lowercase. </div></li>
+</ul>
+<p>
+It is also possible to create custom groups and add custom sets of transformation rules to them, in order to transform characters according to specific needs.<br /> Please refer to the <a href="../../site.ini/URLTranslator/TransformationGroup.html" title="TransformationGroup" target="_blank">TransformationGroup</a> setting in site.ini to learn more about the URL's text transformation methods.</p><h3>Examples</h3>
+<a name="eztoc113522_0_0_0_1" id="eztoc113522_0_0_0_1"></a><h5>Example 1</h5><pre class="wordwrap copytoclipboard"><span class="line">Groups[]</span>
+<span class="line">Groups[]=search</span>
+<span class="line">Groups[]=urlalias_iri</span>
+<span class="line">Groups[]=urlalias</span>
+<span class="line">Groups[]=urlalias_compat</span>
+<span class="line">Groups[]=identifier</span>
+<span class="line">Groups[]=uppercase</span>
+<span class="line">Groups[]=lowercase</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'Groups[]\r\nGroups[]=search\r\nGroups[]=urlalias_iri\r\nGroups[]=urlalias\r\nGroups[]=urlalias_compat\r\nGroups[]=identifier\r\nGroups[]=uppercase\r\nGroups[]=lowercase' ); return false;" /></p>
+<![endif]--><p> This is the default setting.</p><a name="eztoc113522_0_0_0_2" id="eztoc113522_0_0_0_2"></a><h5>Example 2</h5><pre class="wordwrap copytoclipboard"><span class="line">[Transformation]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Groups[]</span>
+<span class="line">Groups[]=search</span>
+<span class="line">&nbsp;</span>
+<span class="line">[search]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Files[]</span>
+<span class="line">Files[]=search.tr</span>
+<span class="line">&nbsp;</span>
+<span class="line">Extensions[]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Commands[]</span>
+<span class="line">Commands[]=search_normalize</span>
+<span class="line">Commands[]=lowercase</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[Transformation]\r\n\r\nGroups[]\r\nGroups[]=search\r\n\r\n[search]\r\n\r\nFiles[]\r\nFiles[]=search.tr\r\n\r\nExtensions[]\r\n\r\nCommands[]\r\nCommands[]=search_normalize\r\nCommands[]=lowercase' ); return false;" /></p>
+<![endif]--><p> This configuration sets a group &quot;search&quot; which uses &quot;search_normalize&quot; and &quot;lowercase&quot; transformation rules in addition to the rules defined in the &quot;search.tr&quot; transformation file.</p><a name="eztoc113522_0_0_0_3" id="eztoc113522_0_0_0_3"></a><h5>Example 3</h5><pre class="wordwrap copytoclipboard"><span class="line">[Transformation]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Groups[]</span>
+<span class="line">Groups[]=my_group</span>
+<span class="line">&nbsp;</span>
+<span class="line">[my_group]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Files[]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Extensions[]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Commands[]</span>
+<span class="line">Commands[]=normalize</span>
+<span class="line">Commands[]=diacritical</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[Transformation]\r\n\r\nGroups[]\r\nGroups[]=my_group\r\n\r\n[my_group]\r\n\r\nFiles[]\r\n\r\nExtensions[]\r\n\r\nCommands[]\r\nCommands[]=normalize\r\nCommands[]=diacritical' ); return false;" /></p>
+<![endif]--><p>This configuration sets a custom group &quot;my_group&quot; which uses &quot;normalize&quot; and &quot;diacritical&quot; transformation rules.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/transform.ini/Transformation/Groups by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:14:53 GMT -->
+</html>

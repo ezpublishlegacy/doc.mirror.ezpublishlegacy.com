@@ -1,0 +1,103 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/1.4/Installation/Manual-initialization by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:51:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Manual initialization / Installation / 1.4 / eZ Publish Extension for Oracle® database / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Manual initialization</h1>
+</div>
+
+ <p>This section describes the generic manual initialization method that makes it possible to create a clean eZ Publish database on your Oracle server and/or import data from an existing MySQL database to Oracle. Both UNIX/Linux and Windows users can perform manual initialization. The following instructions explain how it can be done.</p>  <a name="eztoc35103_1" id="eztoc35103_1"></a><h2>1. Create an Oracle user with sufficient privileges (optional)</h2> <p>You will not be able to run eZ Publish on an Oracle database unless you have an Oracle user with <a href="../Requirements.html#privileges" target="_self">sufficient privileges</a>. If you do not have such a user, connect to the Oracle database as the database administrator (or any other Oracle user that has the &quot;CREATE USER&quot; system privilege) and execute the following SQL query:</p> <pre class="wordwrap copytoclipboard"><span class="line">SQL&gt; CREATE USER scott IDENTIFIED BY tiger QUOTA UNLIMITED ON SYSTEM;</span>
+<span class="line">&nbsp;GRANT CREATE &nbsp;&nbsp;&nbsp;SESSION &nbsp;&nbsp;TO scott;</span>
+<span class="line">&nbsp;GRANT CREATE &nbsp;&nbsp;&nbsp;TABLE &nbsp;&nbsp;&nbsp;&nbsp;TO scott;</span>
+<span class="line">&nbsp;GRANT CREATE &nbsp;&nbsp;&nbsp;TRIGGER &nbsp;&nbsp;TO scott;</span>
+<span class="line">&nbsp;GRANT CREATE &nbsp;&nbsp;&nbsp;SEQUENCE &nbsp;TO scott;</span>
+<span class="line">&nbsp;GRANT CREATE &nbsp;&nbsp;&nbsp;PROCEDURE TO scott;</span>
+<span class="line">&nbsp;GRANT ALTER ANY TABLE &nbsp;&nbsp;&nbsp;&nbsp;TO scott;</span>
+<span class="line">&nbsp;GRANT ALTER ANY TRIGGER &nbsp;&nbsp;TO scott;</span>
+<span class="line">&nbsp;GRANT ALTER ANY SEQUENCE &nbsp;TO scott;</span>
+<span class="line">&nbsp;GRANT ALTER ANY PROCEDURE TO scott;</span>
+<span class="line">&nbsp;GRANT DROP &nbsp;ANY TABLE &nbsp;&nbsp;&nbsp;&nbsp;TO scott;</span>
+<span class="line">&nbsp;GRANT DROP &nbsp;ANY TRIGGER &nbsp;&nbsp;TO scott;</span>
+<span class="line">&nbsp;GRANT DROP &nbsp;ANY SEQUENCE &nbsp;TO scott;</span>
+<span class="line">&nbsp;GRANT DROP &nbsp;ANY PROCEDURE TO scott;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'SQL&gt; CREATE USER scott IDENTIFIED BY tiger QUOTA UNLIMITED ON SYSTEM;\r\n GRANT CREATE    SESSION   TO scott;\r\n GRANT CREATE    TABLE     TO scott;\r\n GRANT CREATE    TRIGGER   TO scott;\r\n GRANT CREATE    SEQUENCE  TO scott;\r\n GRANT CREATE    PROCEDURE TO scott;\r\n GRANT ALTER ANY TABLE     TO scott;\r\n GRANT ALTER ANY TRIGGER   TO scott;\r\n GRANT ALTER ANY SEQUENCE  TO scott;\r\n GRANT ALTER ANY PROCEDURE TO scott;\r\n GRANT DROP  ANY TABLE     TO scott;\r\n GRANT DROP  ANY TRIGGER   TO scott;\r\n GRANT DROP  ANY SEQUENCE  TO scott;\r\n GRANT DROP  ANY PROCEDURE TO scott;' ); return false;" /></p>
+<![endif]--> <p>This will create an Oracle account with username &quot;scott&quot; and password &quot;tiger&quot;. If the user &quot;scott&quot; already exists, you will see the following error message:</p> <pre class="wordwrap"><span class="line">ORA-01920: user name 'SCOTT' conflicts with another user or role name</span>
+</pre> <p>In this case, you should either chose a different username or make sure that the user with the username &quot;scott&quot; has the necessary privileges. </p>   <a name="eztoc35103_2" id="eztoc35103_2"></a><h2>2. Create the &quot;md5_digest&quot; function</h2> <p>The database extension requires a custom function called &quot;md5_digest&quot; to be stored in the database. This function returns an MD5 hash (checksum) generated for the supplied string input. To add this function, connect to the database using an Oracle account that has the &quot;CREATE PROCEDURE&quot; privilege and execute the SQL query located in the &quot;extension/ezoracle/sql/md5_digest.sql&quot; file. The following example shows how this can be done assuming that user &quot;scott&quot; can connect to an Oracle instance called &quot;ORCL&quot; and has the &quot;CREATE PROCEDURE&quot; privilege.</p>
+<ol>
+ <li><div> Navigate into the eZ Publish installation directory. </div></li> <li><div> 
+Create the &quot;md5_digest&quot; function using the following shell command:<br /> <pre class="wordwrap"><span class="line">sqlplus scott/tiger@ORCL @extension/ezoracle/sql/md5_digest.sql</span>
+</pre>  </div></li> 
+</ol>
+   <a name="eztoc35103_3" id="eztoc35103_3"></a><h2>3. Initialize the database structure and import pre-defined data</h2> <p>It is possible to create a clean eZ Publish database on your Oracle server or import data from an existing MySQL database to Oracle. Please follow the instructions given in the corresponding subsection below.</p>  <a name="eztoc35103_3_1" id="eztoc35103_3_1"></a><h3>Creating a clean database</h3> <p>In order to create a new eZ Publish site that uses an Oracle database, you will have to initialize the necessary database structure for eZ Publish according to the instructions specified in the &quot;share/db_schema.dba&quot; file and then import pre-defined data from the &quot;share/db_data.dba&quot; file to the database. This can be done by using the &quot;ezsqlinsertschema.php&quot; script located in the &quot;bin/php&quot; directory of your eZ Publish installation. The following example shows how to run this script:</p>
+<ol>
+ <li><div> Navigate into the eZ Publish installation directory. </div></li> <li><div> <p>Initialize the necessary database structure using the following shell command:</p> <pre class="wordwrap"><span class="line">./bin/php/ezsqlinsertschema.php --type=oracle --user=scott --password=tiger share/db_schema.dba ORCL</span>
+</pre> <p>
+The &quot;--clean-existing&quot; option makes it possible to remove eZ Publish data (if it already exists, left-overs from a previous installation):<br /></p><pre class="wordwrap"><span class="line">./bin/php/ezsqlinsertschema.php --type=oracle --user=scott --password=tiger share/db_schema.dba ORCL --clean-existing</span>
+</pre><p>&nbsp;</p> </div></li> <li><div> 
+Import the pre-defined data to the database using the following shell command:<br /> <pre class="wordwrap"><span class="line">./bin/php/ezsqlinsertschema.php --type=oracle --user=scott --password=tiger --schema-file=share/db_schema.dba --insert-types=data share/db_data.dba ORCL</span>
+</pre>  </div></li> 
+</ol>
+   <a name="eztoc35103_3_2" id="eztoc35103_3_2"></a><h3>Importing data from MySQL</h3> <p>In order to migrate an existing eZ Publish site from MySQL to Oracle, you will have to import data from an existing MySQL database to Oracle. The following example shows how this can be done assuming that user &quot;root&quot; has password &quot;secret&quot; and can connect to a MySQL database called &quot;mydb&quot; on localhost.</p> 
+<ol>
+ <li><div> Navigate into the &quot;extension/ezoracle/scripts&quot; subdirectory. </div></li> <li><div> <p>
+Run the &quot;mysql2oracle-schema.php&quot; script like this:<br /></p><pre class="wordwrap"><span class="line">./mysql2oracle-schema.php mydb:root/secret@localhost &gt; mydump.sql</span>
+</pre><p>&nbsp;</p> <p>The script will connect to the MySQL database, retrieve the database schema and save it to the &quot;mydump.sql&quot; file in a specific format that is compatible with Oracle.</p> <p>
+If the Oracle database that you are going to use already contains some eZ Publish data, the &quot;mysql2oracle-schema.php&quot; script must be run using the &quot;--drop&quot; option, like this:<br /></p><pre class="wordwrap"><span class="line">./mysql2oracle-schema.php mydb:root/secret@localhost &gt; mydump.sql --drop</span>
+</pre><p>&nbsp;</p> </div></li> <li><div> 
+Import the database schema from &quot;mydump.sql&quot; to the Oracle database:<br /> <pre class="wordwrap"><span class="line">sqlplus scott/tiger@ORCL &lt; mydump.sql</span>
+</pre>
+ <br />If you have used the &quot;--drop&quot; option during the previous step, the &quot;mydump.sql&quot; file will include an appropriate &quot;drop&quot; statement before every &quot;create&quot; instruction, so that the existing elements (if any) will be removed before new ones are created. </div></li> <li><div> 
+Run the &quot;mysql2oracle-data.php&quot; script using the following shell command:<br /> <pre class="wordwrap"><span class="line">./mysql2oracle-data.php mydb:root/secret@localhost scott/tiger@ORCL</span>
+</pre>
+ <br />The script will import data from the MySQL database to the Oracle database. </div></li> <li><div> 
+Update the sequences in the Oracle database:<br /> <pre class="wordwrap"><span class="line">./ora-update-seqs.php scott/tiger@ORCL</span>
+</pre>  </div></li> 
+</ol>
+    <a name="eztoc35103_4" id="eztoc35103_4"></a><h2>4. Continue the installation process</h2> <p>Once the Oracle database is ready, you may continue the installation process by following the <a href="../Installation.html#configure_ezp" target="_self">remaining steps</a>.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/1.4/Installation/Manual-initialization by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:51:45 GMT -->
+</html>

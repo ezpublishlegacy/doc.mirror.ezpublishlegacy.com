@@ -1,0 +1,81 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Notifications/Notification-handlers by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:16:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Notification handlers / Notifications / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Notification handlers</h1>
+</div>
+
+<p>There are several handlers that process notification events. The following handlers are known to the eZ Publish system by default:</p>
+<ul>
+<li><div> Subtree notification </div></li><li><div> General digest </div></li><li><div> Collaboration notification </div></li>
+</ul>
+<a name="eztoc132395_1" id="eztoc132395_1"></a><h2>Subtree notification</h2><p>The &quot;ezsubtree&quot; notification handler processes &quot;ezpublish&quot; events.</p><a name="eztoc132395_2" id="eztoc132395_2"></a><h2>General digest</h2><p>The &quot;ezgeneraldigest&quot; notification handler processes &quot;ezcurrenttime&quot; events.</p><a name="eztoc132395_3" id="eztoc132395_3"></a><h2>Collaboration notification</h2><p>The &quot;ezcollaborationnotification&quot; notification handler processes &quot;ezcollaboration&quot; events.</p><p>The built-in notification handlers are stored in the &quot;kernel/classes/notification/handler/&quot; directory. It is possible to extend the system by creating custom notification handlers for special needs.</p><a name="eztoc132395_4" id="eztoc132395_4"></a><h2>Processing the notification events</h2><p>Whenever the &quot;eznotificationeventfilter.php&quot; script is executed, the system will try to run every unhandled <a href="Notification-events.html" target="_self">notification event</a> with every available notification handler.</p><p>Please note that handling one event may result in sending/generating more than one notification. For example, if a new version of an article is published, all the subscribed users will be notified.</p><p>If every notification is sent successfully, the event will be deleted from the database. Otherwise, if some of the generated notifications must be delayed in order to form a daily/weekly/monthly digest, the system will add new notification items to the user collection. A notification item contains data about the notification event, its handler, subscriber e-mail and time when this notification must be sent.</p><p>The digest handler starts processing the &quot;ezcurrenttime&quot; event by accessing the collection of notification items. The time specified in the &quot;ezcurrenttime&quot; event will be compared with the time of each notification item in order to determine which items that must be handled at the moment. As long as each notification item contains data on the notification event and its handler, the system will process this event with the right handler. The resulting notifications will be collected into digest messages and sent to the subscribers.</p><p>If the notification item was handled successfully, this item will be removed from the collection. If none of the remaining notification items reference the handled notification event, this event will be deleted from the database.</p><p>The &quot;ezcurrenttime&quot; event will be deleted from the database when processing is completed. Please note that processing the &quot;ezcurrenttime&quot; event by the digest handler does not always result in sending/generating digest notifications (for example, if none of the subscribers has chosen the digest mode for notifications).</p><a name="eztoc132395_5" id="eztoc132395_5"></a><h2>Settings</h2><p>The &quot;[NotificationEventHandlerSettings]&quot; section of the &quot; <a href="../../../4.x/Reference/Configuration-files/notification.html" target="_self">notification.ini</a>&quot; configuration file defines the event handlers that will respond to the notification event. Under this section, the following settings can be specified:</p><p>The &quot;RepositoryDirectories[]&quot; array specifies the directories where eZ Publish will search for built in notification handlers. The exact location of the handler in the directory is specified using the &quot;AvailableNotificationEventTypes&quot; setting.</p><p>The &quot;ExtensionDirectories[]&quot; array specifies the extension directories where eZ Publish will search for additional notification handlers. By default eZ Publish will search in the &quot;notification/handler/&quot; subdirectory inside your extension. The exact location of the handler in this subdirectory is specified using the &quot;AvailableNotificationEventTypes&quot; setting.</p><p>The &quot;AvailableNotificationEventTypes[]&quot; array contains a list of handlers.</p><a name="eztoc132395_5_1" id="eztoc132395_5_1"></a><h3>Example 1</h3><p>The following lines can be specified in the &quot; <a href="../../../4.x/Reference/Configuration-files/notification.html" target="_self">notification.ini</a>&quot; configuration file:</p><pre class="wordwrap copytoclipboard"><span class="line">[NotificationEventHandlerSettings]</span>
+<span class="line">RepositoryDirectories[]=kernel/classes/notification/handler/</span>
+<span class="line">ExtensionDirectories[]</span>
+<span class="line">AvailableNotificationEventTypes[]=ezgeneraldigest</span>
+<span class="line">AvailableNotificationEventTypes[]=ezcollaborationnotification</span>
+<span class="line">AvailableNotificationEventTypes[]=ezsubtree</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[NotificationEventHandlerSettings]\r\nRepositoryDirectories[]=kernel/classes/notification/handler/\r\nExtensionDirectories[]\r\nAvailableNotificationEventTypes[]=ezgeneraldigest\r\nAvailableNotificationEventTypes[]=ezcollaborationnotification\r\nAvailableNotificationEventTypes[]=ezsubtree' ); return false;" /></p>
+<![endif]--><p>These settings will make eZ Publish search for the following files for built in notification handlers.</p>
+<ul>
+<li><div> kernel/classes/notification/handler/ezgeneraldigest/ezgeneraldigesthandler.php </div></li><li><div> kernel/classes/notification/handler/ezcollaborationnotification/ezcollaborationnotificationhandler.php </div></li><li><div> kernel/classes/notification/handler/ezsubtree/ezsubtreehandler.php </div></li>
+</ul>
+<a name="eztoc132395_5_2" id="eztoc132395_5_2"></a><h3>Example 2</h3><p>You can extend the system by creating custom notification handlers. For example, if you have an extension &quot;nExt&quot; that includes a notification handler &quot;nh&quot; put the following lines into an override for the &quot; <a href="../../../4.x/Reference/Configuration-files/notification.html" target="_self">notification.ini</a>&quot; configuration file:</p><pre class="wordwrap copytoclipboard"><span class="line">[NotificationEventHandlerSettings]</span>
+<span class="line">ExtensionDirectories[]=nExt</span>
+<span class="line">AvailableNotificationEventTypes[]=nh</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[NotificationEventHandlerSettings]\r\nExtensionDirectories[]=nExt\r\nAvailableNotificationEventTypes[]=nh' ); return false;" /></p>
+<![endif]--><p>or</p><pre class="wordwrap copytoclipboard"><span class="line">[NotificationEventHandlerSettings]</span>
+<span class="line">RepositoryDirectories[]=extension/nExt/notification/handler/</span>
+<span class="line">AvailableNotificationEventTypes[]=nh</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[NotificationEventHandlerSettings]\r\nRepositoryDirectories[]=extension/nExt/notification/handler/\r\nAvailableNotificationEventTypes[]=nh' ); return false;" /></p>
+<![endif]--><p>These settings will make eZ Publish expect the additional notification handler to be located at &quot;extension/nExt/notification/handler/nh/nhhandler.php&quot;</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Notifications/Notification-handlers by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:16:44 GMT -->
+</html>

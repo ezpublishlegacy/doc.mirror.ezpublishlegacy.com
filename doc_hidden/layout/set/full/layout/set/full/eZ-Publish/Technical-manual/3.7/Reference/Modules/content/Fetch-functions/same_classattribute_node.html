@@ -1,0 +1,92 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.7/Reference/Modules/content/Fetch-functions/same_classattribute_node by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:48:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>same_classattribute_node / Fetch functions / content / Modules / Reference / 3.7 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>same_classattribute_node</h1>
+</div>
+<h3>Summary</h3>
+Fetches nodes containing attributes that match a certain value.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'content', 'same_classattribute_node',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'class_attribute_id', class_attribute_id,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'value', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value,</span>
+<span class="line">	 &nbsp;&nbsp;&nbsp;&nbsp;'datatype', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;datatype ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>id</td>
+        <td>integer</td>
+        <td>The ID number of the class attribute that should be examined.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>value</td>
+        <td>mixed</td>
+        <td>The value that should be matched.</td>
+        <td>Yes.</td>
+    </tr><tr class="bglight">
+        <td>datatype</td>
+        <td>string</td>
+        <td>Must be either &quot;int&quot;, &quot;float&quot; or &quot;text&quot;.</td>
+        <td>Yes.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An array of <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> objects or FALSE.</p><h3>Description</h3>
+ <p>This function will go through all object attributes that are instances of the class attribute specified by the &quot;class_attribute_id&quot; parameter. The value that should be matched must be specified using the &quot;value&quot; parameter. In addition, the type of data (either &quot;int&quot;, &quot;float&quot; or &quot;text&quot;) that the datatype representing the attribute must be provided. The function returns an array of <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> objects or FALSE (if there is no match).</p><h3>Examples</h3>
+ <pre class="wordwrap copytoclipboard"><span class="line">{def $matched_nodes=fetch( 'content', 'same_classattribute_node',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'class_attribute_id', 245,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'value', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'example',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'datatype', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'text' ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $matched_nodes as $matched_node}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$matched_node.name|wash} &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{def $matched_nodes=fetch( \'content\', \'same_classattribute_node\',\r\n                           hash( \'class_attribute_id\', 245,\r\n                                 \'value\',              \'example\',\r\n                                 \'datatype\',           \'text\' ) )}\r\n\r\n{foreach $matched_nodes as $matched_node}\r\n    {$matched_node.name|wash} &lt;br /&gt;\r\n{/foreach}\r\n' ); return false;" /></p>
+<![endif]--> <p>Outputs the names of the nodes that make use of class attribute number 245 and where the text contents of the object attribute equals the string &quot;example&quot;.</p>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.7/Reference/Modules/content/Fetch-functions/same_classattribute_node by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:48:49 GMT -->
+</html>

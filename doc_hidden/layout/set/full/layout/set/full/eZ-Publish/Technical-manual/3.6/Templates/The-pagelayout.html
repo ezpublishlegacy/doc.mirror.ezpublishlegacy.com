@@ -1,0 +1,100 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Templates/The-pagelayout by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:19:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>The pagelayout / Templates / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>The pagelayout</h1>
+</div>
+
+ <p>The pagelayout is the main template. Among other things, it dictates the overall look of a site. The filename of the pagelayout template must be &quot;pagelayout.tpl&quot;. It has to be placed inside the &quot;templates&quot; directory of a design. If eZ Publish is unable to find a pagelayout within the current design (specified by the siteaccess), it will attempt to use the pagelayout template that is provided by one of the <a href="../Concepts-and-basics/Designs/Design-combinations.html#automatic_fallback" target="_self">fallback designs</a>. The following illustration shows the location of the pagelayout template located in a design called &quot;example&quot;.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_6/images/templates/filesystem_pagelayout_template/1316-2-eng-GB/filesystem_pagelayout_template_doc.png" alt="The location of the pagelayout (main) template." />
+ <p>The location of the pagelayout (main) template.</p>
+
+
+
+
+
+
+
+</div> <p>The pagelayout contains the HTML, HEAD and BODY tags (the other HTML framework). In addition, it dictates the overall look of a site. Among other things, it is used to describe the visual structure (main layout, logo, main menu, footer, etc.) that will be presented for every page request. The following example shows what is considered to be the most basic pagelayout:</p> <pre class="wordwrap copytoclipboard"><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; lang=&quot;en&quot;&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;head&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;style type=&quot;text/css&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;@import url({'stylesheets/core.css'|ezdesign});</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;@import url({'stylesheets/debug.css'|ezdesign});</span>
+<span class="line">&lt;/style&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{include uri='design:page_head.tpl'}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;/head&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;body&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{$module_result.content}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;!--DEBUG_REPORT--&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;/body&gt;</span>
+<span class="line">&lt;/html&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;\r\n&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; lang=&quot;en&quot;&gt;\r\n\r\n&lt;head&gt;\r\n\r\n&lt;style type=&quot;text/css&quot;&gt;\r\n    @import url({\'stylesheets/core.css\'|ezdesign});\r\n    @import url({\'stylesheets/debug.css\'|ezdesign});\r\n&lt;/style&gt;\r\n\r\n{include uri=\'design:page_head.tpl\'}\r\n\r\n&lt;/head&gt;\r\n\r\n&lt;body&gt;\r\n\r\n{$module_result.content}\r\n\r\n&lt;!--DEBUG_REPORT--&gt;\r\n\r\n&lt;/body&gt;\r\n&lt;/html&gt;' ); return false;" /></p>
+<![endif]-->  <a name="eztoc1268_1" id="eztoc1268_1"></a><h2>The document type</h2> <p>The very first line in the pagelayout is used to declare the document type of the pages that are generated by eZ Publish. Per HTML and XHTML standards, a DOCTYPE (short for &quot;document type declaration&quot;) informs browsers and syntax validation engines about which version of (X)HTML that is used. This information should be included at the very top of in every web page, this is why it is the first part of the pagelayout.</p> <p>The DOCTYPE declaration is one of the key components when it comes to proper rendering and compliant web pages. A DOCTYPE that includes a full URL tells the browser to render the page in standards-compliant mode, treating the (X)HTML, CSS, and DOM structures as they should be treated according to the standards. A missing, incomplete or outdated DOCTYPE throws most browsers into something called &quot;Quirks&quot; mode. In this mode, the browser assumes that the document was written using old-fashioned, invalid markup and code per the chaotic industry norms of the late 1990s. In other words, the page will most likely not be rendered according to the standards and it will certainly not validate.</p>   <a name="eztoc1268_2" id="eztoc1268_2"></a><h2>The HTML tag</h2> <p>The HTML tags encapsulate the marked up contents of an actual web page. In addition to the tag itself, the HTML tag in the example above includes a URL to the XHTML specification. XHTML is a family of current and future document types and modules that reproduce, subset, and extend HTML 4. The XHTML family document types are XML based, which means that they are designed to work in conjunction with XML-based user agents.</p> <p>In document processing, it is often useful to identify the natural or formal language in which the content is written. The &quot;lang&quot; and &quot;xml:lang&quot; attributes specify the language of the entire HTML element. The value of the xml:lang attribute takes precedence. The language values should be set to the language that is used throughout the site. The values of the attributes are language identifiers as defined by <a href="../../../../../full.html" target="_self">ISO 3166-1</a> (and the corresponding ISO 3166-1-alpha-2) standards.</p>   <a name="eztoc1268_3" id="eztoc1268_3"></a><h2>The head tag</h2> <p>The head tag contains information about the document itself. The information contained here doesn't show up on the page displayed in a web browser. Only the contents of the title tag will be made visible (as the title of the browser window). The head tag typically contains information about which CSS files that should be used, a description of the document itself, keywords and so on.</p>  <a name="eztoc1268_3_1" id="eztoc1268_3_1"></a><h3>Cascading Style Sheets</h3> <p>The pagelayout in the example above makes use of two CSS files: &quot;core.css&quot; and &quot;debug.css&quot;. The code encapsulated by curly brackets is eZ Publish specific code. What happens here is that the text within the quotes is piped into a template operator called <a href="../Reference/Template-operators/URLs/ezdesign.html" target="_self">&quot;ezdesign&quot;</a>. The operator prepends the text with the path to the current design directory (the one which is specified using the &quot;SiteDesign&quot; configuration directive). This technique assures that the path to the CSS files are always correct, regardless of the <a href="../Concepts-and-basics/Configuration/Access-methods.html" target="_self">access method</a> that is being used. For example, if the name of the current design is &quot;my_design&quot; and it includes a CSS file called &quot;example.css&quot;, the following output will be produced:</p> <pre class="wordwrap nocopy"><span class="line">@import url(&quot;/design/my_design/stylesheets/example.css&quot;);</span>
+</pre> <p>The &quot;core.css&quot; and &quot;debug.css&quot; files are a part of the standard design that comes with eZ Publish. It is not necessary to have these CSS files in the &quot;stylesheets&quot; directory of a custom design. If eZ Publish is unable to find the files within the current/custom design, it will automatically use the ones that are in the standard design. Please refer to the description of the <a href="../Concepts-and-basics/Designs/Design-combinations.html#automatic_fallback" target="_self">automatic fallback system</a> for a detailed description of the fallback mechanism. Because of the fallback system, the style-part of the pagelayout presented above will most likely result in the following output:</p> <pre class="wordwrap nocopy"><span class="line">...</span>
+<span class="line">&lt;style type=&quot;text/css&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;@import url(&quot;/design/standard/stylesheets/core.css&quot;);</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;@import url(&quot;/design/standard/stylesheets/debug.css&quot;);</span>
+<span class="line">&lt;/style&gt;</span>
+<span class="line">...</span>
+</pre>  <a name="eztoc1268_3_1_1" id="eztoc1268_3_1_1"></a><h4>The core stylesheet</h4> <p>The &quot;core.css&quot; file defines a standard set of basic styles (font styles, sizes, margins, etc.) for both general HTML elements and some eZ Publish specific classes. The eZ Publish specific classes are used by the standard templates. A site that makes an extensive use of the default templates should always have the &quot;core.css&quot; file included in the pagelayout. Otherwise, the missing styles may cause the unexpected rendering of various elements.</p> <p>The standard &quot;core.css&quot; file should never be changed. If there are basic styles in core.css that doesn't fit the visual environment of a site, a modified version of &quot;core.css&quot; may be placed in the custom design that the site uses. However, the recommended solution is to create a completely new CSS file that contains both custom classes and overrides for elements defined in &quot;core.css&quot;.</p>   <a name="eztoc1268_3_1_2" id="eztoc1268_3_1_2"></a><h4>The debug stylesheet</h4> <p>The &quot;debug.css&quot; file contains styles that are used to format the debug output which appears at the bottom of the page when debug output is enabled. The usage of the &quot;debug.css&quot; file is only necessary during the development of the site (typically when debug information is needed) and thus it can be removed or commented out before the site is launched.</p>    <a name="eztoc1268_3_2" id="eztoc1268_3_2"></a><h3>Document information</h3> <p>The system is capable of automatically generating information about the page itself (title, meta tags, keywords, etc.). This can be done by the inclusion of the <a href="The-pagelayout/The-page-head.html" target="_self">page head</a> template (&quot;page_head.tpl&quot;), which is located in the templates directory of the standard design. If eZ Publish is unable to find the requested file in current/custom design, it will automatically fallback and use the file located in the standard design.</p>    <a name="eztoc1268_4" id="eztoc1268_4"></a><h2>The body tag</h2> <p>The body tag defines the document's body, which contains the actual contents of the web page (text, images, etc.) marked up in an orderly fashion. At the minimum, an eZ Publish pagelayout should contain the result from the requested modules.</p>  <a name="eztoc1268_4_3" id="eztoc1268_4_3"></a><h3>Module result</h3> <p>
+Upon every request, eZ Publish automatically generates an array called &quot;module_result&quot;. This array is available only in the pagelayout template. It contains all the necessary information about which module that was run, which view that was called, the output that was produced and so on. The actual output (for example the contents of a news article) can be included in the pagelayout by accessing the &quot;content&quot; element of the $module_result array, the syntax is:<br /></p><pre class="wordwrap"><span class="line">{$module_result.content}</span>
+</pre><p>&nbsp;</p> <p>When the pagelayout is rendered, the {$module_result.content} part will be replaced with the actual output that the requested module produced. Please refer to the <a href="The-pagelayout/Variables-in-pagelayout.html" target="_self">&quot;Variables in pagelayout&quot;</a> page for an overview of the template variables that can be accessed from within the pagelayout.</p>   <a name="eztoc1268_4_4" id="eztoc1268_4_4"></a><h3>Debug information</h3> <p>
+The last part of a typical eZ Publish pagelayout is an HTML comment that looks like this:<br /></p><pre class="wordwrap"><span class="line">&lt;!--DEBUG_REPORT--&gt;</span>
+</pre><p>&nbsp;</p> <p>If the debug information is turned on, eZ Publish will replace this comment with the actual debug report when the pagelayout is processed. In other words, the debug report will be included as a part of the generated page and thus it will not cause invalid output by breaking the HTML structure. The debug reports that eZ Publish generates follow the XHTML 1.0 Transitional specification and thus the debug information validates.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Templates/The-pagelayout by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:19:42 GMT -->
+</html>

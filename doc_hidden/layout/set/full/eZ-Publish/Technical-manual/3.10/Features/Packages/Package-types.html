@@ -1,0 +1,71 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.10/Features/Packages/Package-types by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:06:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Package types / Packages / Features / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Package types</h1>
+</div>
+
+ <p>The following package types are supported:</p> 
+<ul>
+ <li><div> content class packages </div></li> <li><div> content object packages </div></li> <li><div> extension packages </div></li> <li><div> site style packages (design packages) </div></li> <li><div> site packages </div></li> 
+</ul>
+  <a name="eztoc74589_1" id="eztoc74589_1"></a><h2>Content class and content object packages</h2> <p>A <i>content class package</i> allows the storage of class definitions. If you create several classes and need to use them on other installations, you can export these class definitions into a content class package. The package itself can be then exported into &quot;.ezpkg&quot; file. This file can be then imported and installed on other eZ publish installations.</p> <p> <i>Content object packages</i> are used for storing actual content objects. If you create some objects and need to use them on other installations, you can export these objects into a content object package.</p> <p>The package creation wizard will ask you to select nodes and/or subtrees that will be included to the content object package that is being created. It is possible to include class definitions for the objects being exported and related templates from one or several siteaccesses to the package. The selected objects can be exported together with all their versions and languages or you can specify custom parameters. You may choose to keep all node assignments or only main nodes for the objects being imported and specify what to do with related objects.</p>  <a name="eztoc74589_1_1" id="eztoc74589_1_1"></a><h3>Datatypes serialization support</h3> <p>In eZ publish 3.8 all the built-in datatypes are compatible with the package system. Both object and class serialization are supported. If you use an additional datatype that does not support serialization then you will see a warning when trying to export/import class definitions and/or content objects containing attributes of this datatype.</p>    <a name="eztoc74589_2" id="eztoc74589_2"></a><h2>Extension packages</h2> <p>
+These packages store extension files. If you create an extension and need to use it on other installations, you can export it into an extension package. The administration interface makes it possible to create extension packages.<br /> <a name="design_packages"></a>
+ </p>   <a name="eztoc74589_3" id="eztoc74589_3"></a><h2>Design / site style packages</h2> <p>Site style packages store site design themes. Such packages make it possible to change the look and feel of the site easily. A site style package includes non-content specific images (logos, banners, graphical layout elements etc.) and two CSS files (&quot;site-colors.css&quot; containing styles like color codes and background image details for the <a href="../../Templates/The-pagelayout.html" target="_self">pagelayout</a> and &quot;classes-colors.css&quot; that determines styles for class templates).</p> <p>Please note that site style packages can not be installed or uninstalled. If you import several design packages, you will be able to switch between them using the administration interface. The next subsection explains how this can be done. </p> <p> <a name="change_theme"></a>
+ </p>  <a name="eztoc74589_3_2" id="eztoc74589_3_2"></a><h3>Changing the site style theme</h3> <p>Let's say that you have imported a new site style package. To change the look and feel of your site according to the imported design theme, do the following:</p> 
+<ol>
+ <li><div> Click the &quot;Design&quot; tab in the administration interface and select &quot;Look and Feel&quot; from the menu on the left. </div></li> <li><div> Select the desired site style from the &quot;Sitestyle&quot; list. </div></li> <li><div> Click the &quot;Send for publishing&quot; button to save your changes. </div></li> <li><div> Go to the actual site and refresh the page. If you can't see any changes then you should <a href="../../../../../Extensions/eZ-Publish-extensions/Online-Editor/4.x/Installation.html#clear_caches" target="_self">clear eZ publish caches</a>. </div></li> 
+</ol>
+ <p> <a name="site_packages"></a>
+ </p>    <a name="eztoc74589_4" id="eztoc74589_4"></a><h2>Site packages</h2> <p>The special packages provide basic site examples like &quot;News&quot;, &quot;Shop&quot;, &quot;Gallery&quot; etc. mostly for the purpose of demonstration and learning. Site packages do not contain any objects. However, they contain dependencies to other packages plus specific settings and scripts. These packages can not be installed or uninstalled. Site packages can be thought of as &quot;meta packages&quot; that are used only in the <a href="../../Installation/The-setup-wizard.html" target="_self">setup wizard</a> when you are installing eZ publish. (If you remove a site package from internal repository, this will not affect the behavior of the installed system.) It is not possible to create site packages using the administration interface.</p> <p>The setup wizard automatically fetches the list of available site packages from remote and internal repositories and asks the user to choose one. It will automatically download the selected site package and all its dependent packages, import them to the system and display a list of successfully imported packages. (This step will be omitted if all these packages are already stored under internal repositories.) All dependent packages except for the site style package will be automatically installed.</p>  <a name="eztoc74589_4_3" id="eztoc74589_4_3"></a><h3>Example</h3> <p>The &quot;Shop site&quot; package v.2.0.6 contains dependencies to the following packages:</p> 
+<ul>
+ <li><div> Three content object packages called &quot;Products&quot;, &quot;Multi-price products&quot;, &quot;Dynamic VAT products&quot;. </div></li> <li><div> A site style package called &quot;Theme 04&quot;. </div></li> <li><div> An extension package called &quot;ezpaypal extension&quot;. </div></li> 
+</ul>
+ <p>Choosing the &quot;Shop site&quot; package in the setup wizard will result in downloading this package and five dependent packages from <a href="http://packages.ez.no/ezpublish/3.10" target="_self">http://packages.ez.no/ezpublish/3.10</a>. The downloaded &quot;.ezpkg&quot; files will be unpacked into the &quot;var/storage/packages/ez_systems&quot; directory (i.e. these packages will be imported to the system). The wizard will then automatically install the &quot;Products&quot;, &quot;Multi-price products&quot;, &quot;Dynamic VAT products&quot; and &quot;ezpaypal extension&quot; packages. The &quot;Shop site&quot; and &quot;Theme 04&quot; packages will not be installed (as site package and site style package). When the setup wizard is finished, you can safely remove the &quot;shop_site&quot; package manually or using the administration interface. The removal of a site package will not affect any of its dependent packages.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.10/Features/Packages/Package-types by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:06:04 GMT -->
+</html>

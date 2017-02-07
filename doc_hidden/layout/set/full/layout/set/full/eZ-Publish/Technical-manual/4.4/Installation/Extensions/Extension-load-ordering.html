@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.4/Installation/Extensions/Extension-load-ordering by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Extension load ordering / Extensions / Installation / 4.4 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Extension load ordering</h1>
+</div>
+
+<a name="eztoc115244_0_1" id="eztoc115244_0_1"></a><h3>Introduction</h3><p>In eZ Publish Fuji, there is a mechanism that enables extensions to define in which order they should be loaded in regards to other, related, extensions. The function automates the extension load ordering and improves the extension loading so that each request is quicker, as such eZ Publish scales better with many extensions. This is done either by adding cache in the processing of extensions, or move non-critical parts out of the code-path which is run on each request.</p><a name="eztoc115244_0_2" id="eztoc115244_0_2"></a><h3>Requirements</h3><p>For the extension load ordering mechanism to be active, extensions should be recent enough to contain the needed metadata stored in the &quot;extension.xml&quot; file, located at the root directory of the extension. The following is a list of extensions and versions that contain the necessary metadata:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Extension</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Version</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Comments</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Find</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2.3</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Flow</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2.2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Image Editor</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ SI</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.3</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Style Editor</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Survey</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2.1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Teamroom</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ XML Export</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.3</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ ODF</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Online Editor</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>5.x</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Website Interface</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.7</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ GMAP Location</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ JS Core</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZ Multiupload</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+</table>
+<a name="eztoc115244_0_3" id="eztoc115244_0_3"></a><h3>Configuration</h3><p>To activate the extension load ordering, the following configuration setting should be enabled in &quot;site.ini.append.php&quot; in setting/override:</p><pre class="wordwrap"><span class="line">[ExtensionSettings]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;ExtensionOrdering=enabled</span>
+</pre><a name="eztoc115244_0_4" id="eztoc115244_0_4"></a><h3>Extension ordering</h3><p>The order in which active extensions appear in the &quot;site.ini&quot; under /settings/override/site.ini &quot;[ExtensionSettings] ActiveExtensions=&quot; is important for the selection of templates and, possibly, configuration settings. For this reason, users must insure that the correct order is used for extensions that have dependencies on other extensions. For example eZ Find must be activated before eZ Webin. The same rule applies for the eZ Teamroom extension: eZ Teamroom and all its dependent extensions, such as eZ Lightbox and eZ Event, need to be activated before eZ Webin.</p><p>Although extensions can be activated using the Administrator Interface, as for now the admin interface does not provide a way to re-order the extensions, manually or automatically. This implies that the order can only be defined in site.ini.</p><p>Defining the correct order can sometimes be tricky when many extensions need to be considered. By providing metadata to the extension loading, manual extension load ordering is now a thing of the past.</p><a name="eztoc115244_0_5" id="eztoc115244_0_5"></a><h3>Metadata</h3><p>By providing metadata for the extension load ordering we enable eZ Publish to correctly determine the correct order itself. The metadata about extension ordering is optional. These metadata are now declared using an XML file, that can also be used to replace what is currently in &quot;ezinfo.php&quot;. This file is named &quot;extension.xml&quot;, located at the root of the extension. It has the following content:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+<span class="line">&nbsp;&lt;software&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;metadata&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;name&gt;Extension name&lt;/name&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;X.Y.Z&lt;/version&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;copyright&gt;Copyright text&lt;/copyright&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;license&gt;License type&lt;/license&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;info_url&gt;http://url/to/extension/site&lt;/info_url&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;software&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;uses&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;name&gt;Used library/software 1&lt;/name&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;license&gt;Used library/software 1 &nbsp;license&lt;/license&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;copyright&gt;Used library/software 1 &nbsp;copyright&lt;/copyright&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;info_url&gt;Used library/software 1 &nbsp;URL&lt;/info_url&gt;s</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;Used library/software 1 &nbsp;version&lt;/version&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/uses&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;uses&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;name&gt;Used library/software 2&lt;/name&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;license&gt;Used library/software 2 &nbsp;license&lt;/license&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;copyright&gt;Used library/software 2 &nbsp;copyright&lt;/copyright&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;info_url&gt;Used library/software 2 &nbsp;URL&lt;/info_url&gt;s</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;Used library/software 2 &nbsp;version&lt;/version&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/uses&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/software&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/metadata&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependencies&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;uses&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;extension name=&quot;usedExtension&quot; /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/uses&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;requires&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;extension name=&quot;requiredExtension&quot; /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/requires&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;extends&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;extension name=&quot;extendedExtension&quot; /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/extends&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependencies&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&lt;/software&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;\r\n &lt;software&gt;\r\n     &lt;metadata&gt;\r\n         &lt;name&gt;Extension name&lt;/name&gt;\r\n         &lt;version&gt;X.Y.Z&lt;/version&gt;\r\n         &lt;copyright&gt;Copyright text&lt;/copyright&gt;\r\n         &lt;license&gt;License type&lt;/license&gt;\r\n         &lt;info_url&gt;http://url/to/extension/site&lt;/info_url&gt;\r\n \r\n         &lt;software&gt;\r\n             &lt;uses&gt;\r\n                 &lt;name&gt;Used library/software 1&lt;/name&gt;\r\n                 &lt;license&gt;Used library/software 1  license&lt;/license&gt;\r\n                 &lt;copyright&gt;Used library/software 1  copyright&lt;/copyright&gt;\r\n                 &lt;info_url&gt;Used library/software 1  URL&lt;/info_url&gt;s\r\n                 &lt;version&gt;Used library/software 1  version&lt;/version&gt;\r\n             &lt;/uses&gt;\r\n            &lt;uses&gt;\r\n                &lt;name&gt;Used library/software 2&lt;/name&gt;\r\n                &lt;license&gt;Used library/software 2  license&lt;/license&gt;\r\n                &lt;copyright&gt;Used library/software 2  copyright&lt;/copyright&gt;\r\n                &lt;info_url&gt;Used library/software 2  URL&lt;/info_url&gt;s\r\n                &lt;version&gt;Used library/software 2  version&lt;/version&gt;\r\n            &lt;/uses&gt;\r\n \r\n         &lt;/software&gt;\r\n \r\n     &lt;/metadata&gt;\r\n \r\n     &lt;dependencies&gt;\r\n         &lt;uses&gt;\r\n             &lt;extension name=&quot;usedExtension&quot; /&gt;\r\n         &lt;/uses&gt;\r\n        &lt;requires&gt;\r\n            &lt;extension name=&quot;requiredExtension&quot; /&gt;\r\n        &lt;/requires&gt;\r\n         &lt;extends&gt;\r\n             &lt;extension name=&quot;extendedExtension&quot; /&gt;\r\n         &lt;/extends&gt;\r\n     &lt;/dependencies&gt;\r\n \r\n &lt;/software&gt;' ); return false;" /></p>
+<![endif]--><p>The first block (software/metadata) replaces &quot;ezinfo.php&quot;. The fields are equivalent to those found in the info() method of the 'old' ezinfo. The sub-node software/metadata/software replaces the previous 3rdparty_libraries entry. One software/metadata/software/uses node must be used for each library.</p><p>The second block (software/dependencies) contains 3 sub-nodes:</p>
+<ul>
+<li><div>&nbsp;<b>uses:</b> indicates that the referenced extension is used by this extension. </div></li><li><div>&nbsp;<b>requires:</b> indicates that the referenced extension is required by this extension. </div></li><li><div>&nbsp;<b>extends:</b> indicates that the referenced extension is overloaded by this extension. </div></li>
+</ul>
+<p><b>Note:</b> 'uses' and 'requires' currently have the same effect, but their behavior will change when real dependencies checking is developed in the future.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.4/Installation/Extensions/Extension-load-ordering by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:02 GMT -->
+</html>

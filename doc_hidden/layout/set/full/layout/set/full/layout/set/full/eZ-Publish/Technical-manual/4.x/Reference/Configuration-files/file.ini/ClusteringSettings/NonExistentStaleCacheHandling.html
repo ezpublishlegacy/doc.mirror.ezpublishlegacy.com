@@ -1,0 +1,73 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/file.ini/ClusteringSettings/NonExistentStaleCacheHandling by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>NonExistentStaleCacheHandling / [ClusteringSettings] / file.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>NonExistentStaleCacheHandling</h1>
+</div>
+<h3>Summary</h3>
+This setting defines what happens when a requested cache file is already being generated and no expired cache file exists.<h3>Usage</h3>
+<pre class="pfix"> <p>NonExistentStaleChacheHandling[&lt;cache type&gt;]=wait|generate</p></pre><h3>Description</h3>
+ <p>This is a new setting available since eZ Publish 4.1. NonExistentStaleCacheHandling defines what happens when a requested cache file is already being generated and no expired cache file exists (for instance if the content is new). The second request can either wait for the first request to finish, or it can generate its own result to display without storing it.</p> <p>Note that this is an advanced setting and should only be customized if it is specifically required.</p> <p>There are two possible values:</p> 
+<ul>
+ <li><div> The default value is &quot;wait&quot;, which places the process in a wait loop for a limited time until the file is done generating. </div></li> <li><div> The second value is &quot;generate&quot; which lets the requesting process generate its own data without storing the result. </div></li> 
+</ul>
+ <p>Use the [key] to define the type of cache that is impacted by the setting. The following three cache types are allowed as key:</p> 
+<ul>
+ <li><div> viewcache </div></li> <li><div> cacheblock </div></li> <li><div> misc: this is used for any cache that is not viewcache nor cacheblock. </div></li> 
+</ul>
+ <p>This setting is case sensitive.</p><h3>Examples</h3>
+ <pre class="wordwrap copytoclipboard"><span class="line">NonExistantStaleCacheHandling[viewcache]=wait</span>
+<span class="line">&nbsp;</span>
+<span class="line">NonExistantStaleCacheHandling[cacheblock]=wait</span>
+<span class="line">&nbsp;</span>
+<span class="line">NonExistantStaleCacheHandling[misc]=wait</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'NonExistantStaleCacheHandling[viewcache]=wait\r\n\r\nNonExistantStaleCacheHandling[cacheblock]=wait\r\n\r\nNonExistantStaleCacheHandling[misc]=wait' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/file.ini/ClusteringSettings/NonExistentStaleCacheHandling by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:01 GMT -->
+</html>

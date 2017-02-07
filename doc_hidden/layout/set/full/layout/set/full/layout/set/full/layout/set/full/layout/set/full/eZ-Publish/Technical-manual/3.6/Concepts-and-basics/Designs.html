@@ -1,0 +1,112 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Concepts-and-basics/Designs by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:00:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Designs / Concepts and basics / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Designs</h1>
+</div>
+
+ <p>This section explains the concept of designs and how eZ Publish handles different designs. As mentioned in the beginning of this chapter, design is all about the way actual content is marked up and visually presented. When talking about a design, we're talking about the things that make up a web interface: HTML, style sheets, images that are not a part of the content, etc. All files that are related to appearance reside in the &quot;design&quot; directory. An eZ Publish installation is capable of handling a virtually unlimited number of designs. Each design has its own dedicated subdirectory within the main design directory. The name of a subdirectory also functions as the actual name of a design. A typical eZ Publish design consists of the following components:</p> 
+<ul>
+ <li><div> CSS files </div></li> <li><div> Image files </div></li> <li><div> Font files </div></li> <li><div> Template files </div></li> 
+</ul>
+ <p>Among other things, a siteaccess dictates which design that should be used. By making use of different siteaccesses, it is possible to combine different content and designs. A typical eZ Publish site consists of two siteaccesses: a public interface for visitors and a restricted interface for administrators. Both siteaccesses use the same content (database and var directory) but they use different designs. In particular, the administration siteaccess would most likely use the built in administration design. The public siteaccess would use a custom design.</p>  <a name="eztoc261_1" id="eztoc261_1"></a><h2>Default designs</h2> <p>An eZ Publish distribution comes with at least two default designs:</p> 
+<ul>
+ <li><div> admin </div></li> <li><div> standard </div></li> 
+</ul>
+ <p>The &quot;admin&quot; directory contains all design related files that make up the built in administration interface. The &quot;standard&quot; directory contains a set of standard/default design related files such as the default/standard templates, images, etc. The contents of these directories should not be tampered with. Instead, custom designs should be used (if/when necessary). A custom design can be added by creating a new subdirectory within the main &quot;/design&quot; directory.</p>   <a name="eztoc261_2" id="eztoc261_2"></a><h2>Design directory structure</h2> <p>All files that belong to a specific design are located inside the directory of that design. The name of the directory also functions as the name for the design itself. A eZ Publish design directory typically contains the following subdirectories:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Subdirectory</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>fonts</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Font files used by the <a href="../Reference/Template-operators/Images/texttoimage.html" target="_self">&quot;texttoimage&quot;</a> template operator which is capable of visualizing text using truetype fonts.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>images</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Non-content specific images (banners, logos, graphical layout elements, etc.).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>override</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Custom templates that will be used by instead of the default/standard templates. These files will be triggered by template override rules that are specified in a configuration override for &quot;override.ini&quot;. Please refer to <a href="../Templates/The-template-override-system.html" target="_self">&quot;The template override system&quot;</a> section of the &quot;Templates&quot; chapter for more information about this feature.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>stylesheets</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>CSS files.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>templates</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Main template(s) (for example the pagelayout, header, footer, etc.) and custom templates that will be used instead of the standard/default templates.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Concepts-and-basics/Designs by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:00:36 GMT -->
+</html>

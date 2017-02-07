@@ -1,0 +1,138 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Modules/search/Fetch-functions/list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:08:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>list / Fetch functions / search / Modules / Reference / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>list</h1>
+</div>
+<h3>Summary</h3>
+Fetches the phrases that have been searched ordered by their usage frequency.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'search', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( [ 'offset', offset, ]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'limit', &nbsp;limit &nbsp;&nbsp;] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>offset </td>
+        <td>integer </td>
+        <td>The offset to start at. </td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>limit</td>
+        <td>integer</td>
+        <td>The number of items that should be returned. </td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An array of hashes (see below) or FALSE. </p><h3>Description</h3>
+ <p>This function fetches the phrases that have been searched on the site. The phrases are ordered by their usage frequency. If two or more phrases have the same usage frequency, they are ordered by the number of nodes that match the search conditions.</p> <p>The &quot;offset&quot; and &quot;limit&quot; parameters are optional and can be used to limit the result. If the &quot;offset&quot; and &quot;limit&quot; parameters are omitted, the function will return all the search phrases.</p> <p>The function returns an array of hashes. The hashes consist of the following elements: </p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Key</p> 
+  </th> <th >   <p>Type</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>id</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The ID number of the search phrase. </p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>phrase</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The text of the search phrase. </p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>phrase_count</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The number of times the phrase has been searched for.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>result_count</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The number of nodes that match the search conditions (average search results that have been returned). </p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>If no search phrases are found, the function returns FALSE.</p><h3>Examples</h3>
+    <a name="eztoc72784_0_0_1" id="eztoc72784_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $search_list=fetch( 'search', 'list' ) )}</span>
+<span class="line">{foreach $search_list as $s}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$s.id } : {$s.phrase}&lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $search_list=fetch( \'search\', \'list\' ) )}\r\n{foreach $search_list as $s}\r\n        {$s.id } : {$s.phrase}&lt;br /&gt;\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>Outputs all phrases that have been searched for along with their ID numbers.</p>       <a name="eztoc72784_0_0_2" id="eztoc72784_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $search_list=fetch( 'search', 'list', hash( 'limit','10' &nbsp;) )}</span>
+<span class="line">{foreach $search_list as $s}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$s.phrase } : {$s.phrase_count}&lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $search_list=fetch( \'search\', \'list\', hash( \'limit\',\'10\'  ) )}\r\n{foreach $search_list as $s}\r\n        {$s.phrase } : {$s.phrase_count}&lt;br /&gt;\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>Outputs the ten most frequently searched phrases and their usage frequency.</p>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Modules/search/Fetch-functions/list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:08:56 GMT -->
+</html>

@@ -1,0 +1,213 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-2.0-upgrade by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>eZ Flow 2.0 upgrade / Upgrading eZ Flow / eZ Flow / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>eZ Flow 2.0 upgrade</h1>
+</div>
+
+  <a name="eztoc104178_1" id="eztoc104178_1"></a><h2>Back-up</h2> <p>Before starting the eZ Flow upgrading process make sure that you have a working <a href="http://ez.no/doc_hidden/ez_publish/upgrading#backup" target="_self">backup</a> of the existing website state including database, extensions, INI settings, etc. During the upgrade process the existing eZ Flow extension will be removed and replaced with a new version. eZ Flow default content classes will be replaced as well. </p>   <a name="eztoc104178_2" id="eztoc104178_2"></a><h2>Packages</h2> <p>Download following packages from <a href="http://packages.ez.no/ezpublish/4.2/4.2.0" target="_self">http://packages.ez.no/ezpublish/4.2/4.2.0:</a> </p> <p>
+ezflow_extension.ezpkg<br />
+ezwebin_extension.ezpkg<br />
+ezstarrating_extension.ezpkg<br />
+ezjscore_extension.ezpkg<br />
+ezgmaplocation_extension.ezpkg<br />ezwt_extension.ezpkg</p> <p>Go to the packages management interface in the Administration Interface. This can be done via the Setup-tab, where you can click on the &quot;Packages&quot;-link in the left menu</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/view_setup_packages__1/104182-1-eng-GB/view_setup_packages_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div> <p>From the Repository drop-down box choose eZ-system then click “Change repository” button. From the list of available packages remove following packages:</p> <p>
+ezflow_extension<br />ezwebin_extension</p> <p>Next change repository again to the “eZ-systems” and click on “Import new package” button. In the next view select ezflow_extension and click “Import package” button. Once the ezflow_extension is imported click on “Install package”. In the next view choose “Replace extension” option and click “Continue” button. Repeat these steps for rest of new extensions (ezwebin_extension, ezstarrating_extension, ezjscore_extension, ezgmaplocation_extension and ezwt_extension).</p> <p>Once all new extensions are imported they need to be activated in the proper order under the [ExtensionSettings] block in the settings/site.ini.append.php:</p> <pre class="wordwrap copytoclipboard"><span class="line">[ExtensionSettings]</span>
+<span class="line">[...]</span>
+<span class="line">ActiveExtensions[]=ezjscore</span>
+<span class="line">ActiveExtensions[]=ezstarrating</span>
+<span class="line">ActiveExtensions[]=ezgmaplocation</span>
+<span class="line">ActiveExtensions[]=ezflow</span>
+<span class="line">ActiveExtensions[]=ezwt</span>
+<span class="line">ActiveExtensions[]=ezwebin</span>
+<span class="line">[…]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ExtensionSettings]\r\n[...]\r\nActiveExtensions[]=ezjscore\r\nActiveExtensions[]=ezstarrating\r\nActiveExtensions[]=ezgmaplocation\r\nActiveExtensions[]=ezflow\r\nActiveExtensions[]=ezwt\r\nActiveExtensions[]=ezwebin\r\n[…]' ); return false;" /></p>
+<![endif]-->  <a name="eztoc104178_2_1" id="eztoc104178_2_1"></a><h3>Autoload update</h3> <p>Next the autoload array needs to be updated for the new extensions. In order to do so, execute following command from eZ Publish root folder:</p> <pre class="wordwrap"><span class="line">$ php bin/php/ezpgenerateautoloads.php -e -p</span>
+</pre>   <a name="eztoc104178_2_2" id="eztoc104178_2_2"></a><h3>Content classes</h3> <p>eZ Flow 2.0 provides a new Geo Article content class which uses a eZ GMap Location extension for storing geo located content. You can import Geo Article content class using package manager in the Administration Interface. This can be done via the Setup-tab, where you can click on the &quot;Packages&quot;-link in the left menu.</p> <p>First change repository to “eZ-systems”. Next click “Import new package” button. Geo Article class package is located in eZ Publish root directory in subfolder extension/ezwebin/packages/geo_article-1.5-0.ezpkg.</p>   <a name="eztoc104178_2_3" id="eztoc104178_2_3"></a><h3>eZ Star Rating</h3> <p>
+This extension requires new database tables in order to store ratings.<br />Execute following command to create database tables in MySQL:</p> <pre class="wordwrap"><span class="line">mysql -u[datbase_user] -p[database-password] [databasename] &lt; extension/ezstarrating/sql/mysql/mysql.sql</span>
+</pre> <p>Sql files are also provided for postgressql and oracle - refer to the database documentation on how to execute queries from a command-line clients.</p> <p>For the user roles that are allowed to vote, add in the &quot;roles and policies&quot; page in the administration interface policy on module &quot;ezjscore&quot;, function call&quot;, with limitation &quot;ezstarrating_rate&quot;.</p> <p>
+To enable users to rate your content simply add a Star Rating attribute to the content class you want to be rated.<br /></p>
+<div class="object-center">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/star_rating_attribute/104185-1-eng-GB/star_rating_attribute_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>&nbsp;</p> <p>For more information about installation please read the eZ Star Rating README file located in in the extension/ezstarrating in the eZ Publish root directory.</p>   <a name="eztoc104178_2_4" id="eztoc104178_2_4"></a><h3>eZ GMap Location</h3> <p>eZ GMap Location extension requires Google Maps API key which you can obtain for your domain following instructions mention in <a href="http://www.google.com/apis/maps" target="_self">http://www.google.com/apis/maps</a> </p> <p>Once you have generated your key add it to the settings/override/site.ini.append.php under [SiteSettings] block like so:</p> <pre class="wordwrap"><span class="line">[SiteSettings]</span>
+<span class="line">GmapsKey=&lt;Google Maps API Key&gt;</span>
+</pre> <p>
+This extension requires new database tables in order to store locations information.<br />Execute following command to create database tables in MySQL:</p> <pre class="wordwrap"><span class="line">mysql -u[datbase_user] -p[database-password] [databasename] &lt; extension/ezgmaplocation/sql/mysql/mysql.sql</span>
+</pre> <p>Sql files are also provided for postgressql and oracle - refer to the database documentation on how to execute queries from a command-line clients.</p> <p>
+With Geo Article class you can use this feature immediately. However If you want extend your current content classes with eZ GMap Location attribute simply add new attribute.<br /></p>
+<div class="object-center">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/gmap_location_attribute/104188-1-eng-GB/gmap_location_attribute_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>&nbsp;</p> <p>For more information about installation please read the eZ GMAP Location README file located in the extension/ezgmaplocation in the eZ Publish root directory.</p>   <a name="eztoc104178_2_5" id="eztoc104178_2_5"></a><h3>INI settings</h3> <p>Update settings/siteaccess/(public_site_name)/override.ini.append.php:</p> <pre class="wordwrap copytoclipboard"><span class="line">[block_gmap]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/gmap.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=GMap</span>
+<span class="line">Match[view]=gmap</span>
+<span class="line">&nbsp;</span>
+<span class="line">[block_online_users]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/online_users.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=OnlineUsers</span>
+<span class="line">Match[view]=onlineusers</span>
+<span class="line">&nbsp;</span>
+<span class="line">[block_keyword]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/keyword.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=Keyword</span>
+<span class="line">Match[view]=keyword</span>
+<span class="line">&nbsp;</span>
+<span class="line">[block_multimediacarousel]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/multimediacarousel.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=MultimediaCarousel</span>
+<span class="line">Match[view]=multimediacarousel</span>
+<span class="line">&nbsp;</span>
+<span class="line">[block_search]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/search.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=Search</span>
+<span class="line">Match[view]=search</span>
+<span class="line">&nbsp;</span>
+<span class="line">[block_ads]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/ads.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=Ads</span>
+<span class="line">Match[view]=ads</span>
+<span class="line">&nbsp;</span>
+<span class="line">[block_latest_content]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/latest_content.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=LatestContent</span>
+<span class="line">Match[view]=latest_content</span>
+<span class="line">&nbsp;</span>
+<span class="line">[block_top_rated]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/top_rated.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=TopRated</span>
+<span class="line">Match[view]=toprated</span>
+<span class="line">&nbsp;</span>
+<span class="line">[block_gmapitems_geo_located_content]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/geo_located_content.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=GMapItems</span>
+<span class="line">Match[view]=geo_located_content</span>
+<span class="line">&nbsp;</span>
+<span class="line">[block_feed_reader]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/feed_reader.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=FeedReader</span>
+<span class="line">Match[view]=feed_reader</span>
+<span class="line">&nbsp;</span>
+<span class="line">[block_item_comment]</span>
+<span class="line">Source=node/view/block_item.tpl</span>
+<span class="line">MatchFile=block_item/comment.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=comment</span>
+<span class="line">&nbsp;</span>
+<span class="line">[full_geo_article]</span>
+<span class="line">Source=node/view/full.tpl</span>
+<span class="line">MatchFile=full/geo_article.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=geo_article</span>
+<span class="line">&nbsp;</span>
+<span class="line">[line_geo_article]</span>
+<span class="line">Source=node/view/line.tpl</span>
+<span class="line">MatchFile=line/geo_article.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=geo_article</span>
+<span class="line">&nbsp;</span>
+<span class="line">[embed_flash_player]</span>
+<span class="line">Source=content/view/embed.tpl</span>
+<span class="line">MatchFile=embed/flash_player.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=flash_player</span>
+<span class="line">&nbsp;</span>
+<span class="line">[flash_player_galleryline]</span>
+<span class="line">Source=node/view/galleryline.tpl</span>
+<span class="line">MatchFile=galleryline/flash_player.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=flash_player</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[block_gmap]\r\nSource=block/view/view.tpl\r\nMatchFile=block/gmap.tpl\r\nSubdir=templates\r\nMatch[type]=GMap\r\nMatch[view]=gmap\r\n\r\n[block_online_users]\r\nSource=block/view/view.tpl\r\nMatchFile=block/online_users.tpl\r\nSubdir=templates\r\nMatch[type]=OnlineUsers\r\nMatch[view]=onlineusers\r\n\r\n[block_keyword]\r\nSource=block/view/view.tpl\r\nMatchFile=block/keyword.tpl\r\nSubdir=templates\r\nMatch[type]=Keyword\r\nMatch[view]=keyword\r\n\r\n[block_multimediacarousel]\r\nSource=block/view/view.tpl\r\nMatchFile=block/multimediacarousel.tpl\r\nSubdir=templates\r\nMatch[type]=MultimediaCarousel\r\nMatch[view]=multimediacarousel\r\n\r\n[block_search]\r\nSource=block/view/view.tpl\r\nMatchFile=block/search.tpl\r\nSubdir=templates\r\nMatch[type]=Search\r\nMatch[view]=search\r\n\r\n[block_ads]\r\nSource=block/view/view.tpl\r\nMatchFile=block/ads.tpl\r\nSubdir=templates\r\nMatch[type]=Ads\r\nMatch[view]=ads\r\n\r\n[block_latest_content]\r\nSource=block/view/view.tpl\r\nMatchFile=block/latest_content.tpl\r\nSubdir=templates\r\nMatch[type]=LatestContent\r\nMatch[view]=latest_content\r\n\r\n[block_top_rated]\r\nSource=block/view/view.tpl\r\nMatchFile=block/top_rated.tpl\r\nSubdir=templates\r\nMatch[type]=TopRated\r\nMatch[view]=toprated\r\n\r\n[block_gmapitems_geo_located_content]\r\nSource=block/view/view.tpl\r\nMatchFile=block/geo_located_content.tpl\r\nSubdir=templates\r\nMatch[type]=GMapItems\r\nMatch[view]=geo_located_content\r\n\r\n[block_feed_reader]\r\nSource=block/view/view.tpl\r\nMatchFile=block/feed_reader.tpl\r\nSubdir=templates\r\nMatch[type]=FeedReader\r\nMatch[view]=feed_reader\r\n\r\n[block_item_comment]\r\nSource=node/view/block_item.tpl\r\nMatchFile=block_item/comment.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=comment\r\n\r\n[full_geo_article]\r\nSource=node/view/full.tpl\r\nMatchFile=full/geo_article.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=geo_article\r\n\r\n[line_geo_article]\r\nSource=node/view/line.tpl\r\nMatchFile=line/geo_article.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=geo_article\r\n\r\n[embed_flash_player]\r\nSource=content/view/embed.tpl\r\nMatchFile=embed/flash_player.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=flash_player\r\n\r\n[flash_player_galleryline]\r\nSource=node/view/galleryline.tpl\r\nMatchFile=galleryline/flash_player.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=flash_player' ); return false;" /></p>
+<![endif]-->   <a name="eztoc104178_2_6" id="eztoc104178_2_6"></a><h3>Clear Cache</h3> <p>Once the upgrade script is done, you need to clear the cache by executing following command from eZ Publish root folder: </p> <pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-2.0-upgrade by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:00 GMT -->
+</html>

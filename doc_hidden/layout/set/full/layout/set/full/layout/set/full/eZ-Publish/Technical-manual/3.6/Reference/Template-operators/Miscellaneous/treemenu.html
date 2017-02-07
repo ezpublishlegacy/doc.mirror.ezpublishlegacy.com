@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Template-operators/Miscellaneous/treemenu by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:20:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>treemenu / Miscellaneous / Template operators / Reference / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>treemenu</h1>
+</div>
+<h3>Summary</h3>
+Fetches a subtree of nodes for the purpose of menu generation.<h3>Usage</h3>
+<pre>treemenu( path, 
+          node_id
+          [, class_filter       ]
+          [, depth_skip         ]
+          [, max_level          ] 
+          [, is_selected_method ] )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>path</td>
+        <td>array</td>
+        <td>An array of the path ($module_result.path).</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>node_id</td>
+        <td>integer</td>
+        <td>The node ID number (the root of the subtree).</td>
+        <td>Yes.</td>
+    </tr><tr class="bglight">
+        <td>class_filter</td>
+        <td>array</td>
+        <td>An array of classes that should be filtered.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>depth_skip</td>
+        <td>integer</td>
+        <td>Number of levels that should be skipped.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>max_level</td>
+        <td>integer</td>
+        <td>The max depth that should be explored. (2 by default)</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>is_selected_method</td>
+        <td>string</td>
+        <td>Sets whether &quot;is_selected=TRUE&quot; should be assigned to the parents of the current node as well.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+A complex structure that can be used to build a menu (see below).<h3>Description</h3>
+ <p>This operator fetches a subtree of nodes and returns a complex structure (an array of hashes) that can be used to generate a menu.</p> <p>If the optional &quot;class_filter&quot; parameter is omitted, all nodes will be fetched without filtering. If an empty array is passed, then only folder nodes (class ID = 1) will be fetched.</p> <p>The default value of the &quot;is_selected_method&quot; parameter is &quot;tree&quot;. This value determines that the current node and its parent nodes will be considered as selected (is_selected=TRUE). If this parameter is set to &quot;node&quot;, only the current node will be considered as selected.</p> <p>The following table shows the hash-structure for each element in the array that will be returned.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Key</p> 
+  </th> <th >   <p>Type</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>id</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>integer</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The ID of the node.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>level</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>integer</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The depth of the node.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>url_alias</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The URL alias of the node.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>url</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The system URL of the node.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>text</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the node.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>is_selected</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>boolean</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>TRUE if the node is currently being viewed/selected, FALSE otherwise.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+<h3>Examples</h3>
+    <a name="eztoc4173_0_0_1" id="eztoc4173_0_0_1"></a><h4>Example 1 (explanatory)</h4> <p>Let's use a small site with the following content structure (see the screenshot) for the purpose of demonstration </p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/reference/template_operators/treemenu_explanatory_example/32670-3-eng-GB/treemenu_explanatory_example_doc.png" alt="The content tree" />
+ <p>The content tree</p>
+
+
+
+
+
+
+
+</div><p>
+and insert the following code into &quot;pagelayout.tpl&quot;:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">{def $mainMenu=treemenu( $module_result.path, $module_result.node_id ) }</span>
+<span class="line">{foreach $mainMenu as $menu}</span>
+<span class="line">{$menu.level} - {$menu.text}&lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+<span class="line">{undef $mainMenu}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $mainMenu=treemenu( $module_result.path, $module_result.node_id ) }\r\n{foreach $mainMenu as $menu}\r\n{$menu.level} - {$menu.text}&lt;br /&gt;\r\n{/foreach}\r\n{undef $mainMenu}' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>
+If the &quot;Weblog&quot; node is being viewed, then the following output will be produced:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">0 - Weblog</span>
+<span class="line">1 - July, 29</span>
+<span class="line">1 - July, 14</span>
+<span class="line">1 - June, 25</span>
+<span class="line">0 - Galleries</span>
+<span class="line">0 - Products</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '0 - Weblog\r\n1 - July, 29\r\n1 - July, 14\r\n1 - June, 25\r\n0 - Galleries\r\n0 - Products' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>
+If the &quot;Blue flower&quot; node is being viewed, then the following output will be produced:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">0 - Weblog</span>
+<span class="line">0 - Galleries</span>
+<span class="line">1 - Misc flowers</span>
+<span class="line">1 - Landscape</span>
+<span class="line">0 - Products</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '0 - Weblog\r\n0 - Galleries\r\n1 - Misc flowers\r\n1 - Landscape\r\n0 - Products' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>
+Since the &quot;max_level&quot; parameter is omitted, only two levels are explored. To set the &quot;max_level&quot; parameter to 3, change the first line of the previous code fragment in the following way:<br /></p><pre class="wordwrap"><span class="line">{def $mainMenu=treemenu( $module_result.path, $module_result.node_id, , , 3 ) }</span>
+</pre><p>&nbsp;</p> <p>
+This will produce the following output for the &quot;Blue flower&quot; node:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">0 - Weblog</span>
+<span class="line">0 - Galleries</span>
+<span class="line">1 - Misc flowers</span>
+<span class="line">2 - Red flower</span>
+<span class="line">2 - Blue flower</span>
+<span class="line">1 - Landscape</span>
+<span class="line">0 - Products</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '0 - Weblog\r\n0 - Galleries\r\n1 - Misc flowers\r\n2 - Red flower\r\n2 - Blue flower\r\n1 - Landscape\r\n0 - Products' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>
+To skip the first level, set the &quot;depth_skip&quot; parameter to 1 by changing the first line of the code fragment as shown below:<br /></p><pre class="wordwrap"><span class="line">{def $mainMenu=treemenu( $module_result.path, $module_result.node_id, , 1, 3 ) }</span>
+</pre><p>&nbsp;</p> <p>
+If the &quot;Blue flower&quot; node is being viewed, then the following output will be produced:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">0 - Misc flowers</span>
+<span class="line">1 - Red flower</span>
+<span class="line">1 - Blue flower</span>
+<span class="line">0 - Landscape</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '0 - Misc flowers\r\n1 - Red flower\r\n1 - Blue flower\r\n0 - Landscape' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>
+Now, let's use another code fragment in order to see which items are selected:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">{def $mainMenu=treemenu( $module_result.path, $module_result.node_id, , , 3 )}</span>
+<span class="line">{foreach $mainMenu as $menu}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{if $menu.is_selected}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$menu.level} - {$menu.text} (selected) &lt;br /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$menu.level} - {$menu.text} &lt;br /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{/if}</span>
+<span class="line">{/foreach}</span>
+<span class="line">{undef $mainMenu}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $mainMenu=treemenu( $module_result.path, $module_result.node_id, , , 3 )}\r\n{foreach $mainMenu as $menu}\r\n    {if $menu.is_selected}\r\n        {$menu.level} - {$menu.text} (selected) &lt;br /&gt;\r\n    {else}\r\n        {$menu.level} - {$menu.text} &lt;br /&gt;\r\n    {/if}\r\n{/foreach}\r\n{undef $mainMenu}' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>
+Since the &quot;is_selected_method&quot; parameter is omitted, the &quot;tree&quot; mode will be used and the following output will be produced for the &quot;Blue flower&quot; node:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">0 - Weblog</span>
+<span class="line">0 - Galleries (selected)</span>
+<span class="line">1 - Misc flowers (selected)</span>
+<span class="line">2 - Red flower</span>
+<span class="line">2 - Blue flower (selected)</span>
+<span class="line">1 - Landscape</span>
+<span class="line">0 - Products</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '0 - Weblog \r\n0 - Galleries (selected) \r\n1 - Misc flowers (selected) \r\n2 - Red flower \r\n2 - Blue flower (selected) \r\n1 - Landscape \r\n0 - Products ' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>
+To set the &quot;is_selected_method&quot; parameter to &quot;node&quot;, replace the first line of the last code fragment by the following line:<br /></p><pre class="wordwrap"><span class="line">{def $mainMenu=treemenu( $module_result.path, $module_result.node_id, , , 3, 'node' )}</span>
+</pre><p>&nbsp;</p> <p>
+If the &quot;Blue flower&quot; node is being viewed, then the following output will be produced:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">0 - Weblog</span>
+<span class="line">0 - Galleries</span>
+<span class="line">1 - Misc flowers</span>
+<span class="line">2 - Red flower</span>
+<span class="line">2 - Blue flower (selected)</span>
+<span class="line">1 - Landscape</span>
+<span class="line">0 - Products</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '0 - Weblog \r\n0 - Galleries \r\n1 - Misc flowers \r\n2 - Red flower \r\n2 - Blue flower (selected) \r\n1 - Landscape \r\n0 - Products ' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p>       <a name="eztoc4173_0_0_2" id="eztoc4173_0_0_2"></a><h4>Example 2</h4> <p>These examples are from pagelayout.tpl.</p> <p>Make a menu of folder and info_page classes. Skip the first level and maximum go to depth 6.</p> <pre class="wordwrap copytoclipboard"><span class="line">&lt;ul&gt;</span>
+<span class="line">{def $mainMenu=treemenu( $module_result.path,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$module_result.node_id,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array('folder','info_page'), 1, 6 )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $mainMenu as $menu}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li class=&quot;level_{$menu.level}&quot;&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{if $menu.is_selected}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;selected&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href={$menu.url_alias|ezurl}&gt;{$menu.text}&lt;/a&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href={$menu.url_alias|ezurl}&gt;{$menu.text}&lt;/a&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{/if}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li&gt;</span>
+<span class="line">{/foreach}</span>
+<span class="line">&lt;/ul&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;ul&gt;\r\n{def $mainMenu=treemenu( $module_result.path, \r\n                                    $module_result.node_id,\r\n                                    array(\'folder\',\'info_page\'), 1, 6 )}\r\n\r\n{foreach $mainMenu as $menu}\r\n    &lt;li class=&quot;level_{$menu.level}&quot;&gt;\r\n\r\n    {if $menu.is_selected}\r\n        &lt;div class=&quot;selected&quot;&gt; \r\n        &lt;a href={$menu.url_alias|ezurl}&gt;{$menu.text}&lt;/a&gt;\r\n        &lt;/div&gt;  \r\n    {else}\r\n        &lt;a href={$menu.url_alias|ezurl}&gt;{$menu.text}&lt;/a&gt;\r\n    {/if}\r\n\r\n    &lt;/li&gt;\r\n{/foreach}\r\n&lt;/ul&gt;' ); return false;" /></p>
+<![endif]--> <p>Make a menu which shows the sub menu items when clicked on the parent menu item. Notice that only the objectclass ids: 1, 9, and 17 are visible.</p> <pre class="wordwrap copytoclipboard"><span class="line">{def $docs=treemenu( $module_result.path, $module_result.node_id,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(1, 9, 17), 0, 4)}</span>
+<span class="line">{def $depth=1 $last=0}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $docs as $menu}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{if and($last | ne(0), $last.level|gt($menu.level))}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{/if}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{if and($last | ne(0), $last.level| lt($menu.level))}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{/if}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;a {$menu.is_selected|choose('','class=&quot;selected&quot;')}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;href={$menu.url_alias|ezurl}&gt;{$menu.text|shorten(25)}&lt;/a&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{set last=$menu}</span>
+<span class="line">{/foreach}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{while $depth |gt(1)}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{set depth=$depth|sub(1)}</span>
+<span class="line">{/while}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $docs=treemenu( $module_result.path, $module_result.node_id,\r\n                                     array(1, 9, 17), 0, 4)}\r\n{def $depth=1 $last=0}\r\n\r\n{foreach $docs as $menu}\r\n    {if and($last | ne(0), $last.level|gt($menu.level))}\r\n        &lt;/ul&gt;\r\n        &lt;/li&gt;\r\n    {/if}\r\n\r\n    &lt;li&gt;\r\n\r\n    {if and($last | ne(0), $last.level| lt($menu.level))}\r\n        &lt;ul&gt;\r\n        &lt;li&gt;\r\n    {/if}\r\n\r\n    &lt;a {$menu.is_selected|choose(\'\',\'class=&quot;selected&quot;\')}\r\n        href={$menu.url_alias|ezurl}&gt;{$menu.text|shorten(25)}&lt;/a&gt;\r\n    &lt;/li&gt;\r\n\r\n    {set last=$menu}\r\n{/foreach}\r\n\r\n{while $depth |gt(1)} \r\n    &lt;/li&gt;\r\n    &lt;/ul&gt;\r\n    {set depth=$depth|sub(1)}\r\n{/while}' ); return false;" /></p>
+<![endif]-->   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Template-operators/Miscellaneous/treemenu by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:20:11 GMT -->
+</html>

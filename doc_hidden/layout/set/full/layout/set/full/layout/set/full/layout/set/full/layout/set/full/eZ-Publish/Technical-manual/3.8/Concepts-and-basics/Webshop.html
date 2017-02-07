@@ -1,0 +1,143 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Concepts-and-basics/Webshop by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:53:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Webshop / Concepts and basics / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Webshop</h1>
+</div>
+
+ <p>This section explains the e-commerce capabilities of eZ publish. The system comes with an integrated shop mechanism that plugs directly into the object / node tree model. The webshop functionality is built around the following components:</p> 
+<ul>
+ <li><div> Products </div></li> <li><div> Value Added Taxes (VATs) </div></li> <li><div> Discount rules </div></li> <li><div> Wishlist </div></li> <li><div> Basket </div></li> <li><div> Orders </div></li> 
+</ul>
+ <p>The following illustration shows how the different components interconnect and work together.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/concepts_and_basics/webshop/29967-1-eng-GB/webshop_doc.png" alt="The integrated e-commerce solution." />
+ <p>The integrated e-commerce solution.</p>
+
+
+
+
+
+
+
+</div> <p>An actual product is represented by a content object (with at least one node assignment) that contains information about the product itself along with a price. The price must be represented by an attribute that makes use of the built-in price or multi-price datatype. These are special datatypes which plug more deeply into the system. The main difference is that the price datatype allows to specify only one price value for each object (simple price product) whereas the multi-price datatype makes it possible to specify several price values in different currencies for each object (multi-price product). A content class can only contain one price attribute or one multi-price attribute. There is no way to have a simple price product and a multi-price one in the shopping basket at the same time and it is not recommended to use both price and multi-price datatype on your site.</p> <p>The price can be affected by a value added tax and/or a discount rule. A discount rule can be configured to reduce the price of certain products by a percentage. The products can be put into a user's wishlist and/or shopping basket. A user's wishlist and basket can be modified at any time. The contents of the shopping basket can be purchased by initiating the checkout process. Once the checkout process is completed, an order will be created. The system will automatically notify the site administrator and the user who placed the order by sending out E-mails. A list of placed orders and sales statistics can be viewed using the administration interface. An order is assigned a status which may be changed by a user with sufficient permissions. A status log is kept for each order.</p>  <a name="eztoc23806_1" id="eztoc23806_1"></a><h2>Value added taxes</h2> <p>The system allows the site administrator to set up different kinds of value added taxes (VAT types). A VAT type consists of a name and a percentage. The administration interface makes it possible to add, remove and modify VAT types. The VAT types are used by the price and multi-price datatype. There is an additional possibility to create VAT charging rules which instruct the system to charge VATs according to the product category and the buyer's country. (Please refer to the &quot;<a href="../Features/VAT-charging-system.html" target="_self">VAT charging system</a>&quot; section of the &quot;Features&quot; chapter for more information.)</p> <a name="eztoc23806_2" id="eztoc23806_2"></a><h2>The price datatype</h2> <p>As pointed out above, a product is nothing more than a content object with a price. The price can be represented by an attribute that makes use of the built-in price datatype. Instances of any class containing the price datatype will automatically be treated as simple price products. A class attribute represented by the price datatype makes use of one of the predefined VATs. There are two ways in which the selected VAT can be used. This configuration depends on how the product prices are entered when the objects are created. The first alternative (Price inc. VAT) is to be used if the prices that are entered already include the value added tax. The second alternative (Price ex. VAT) should be used if the prices that are entered do not contain the value added tax. When the first alternative is used and the product is viewed, the price that was entered will be shown. When the second alternative is used and the product is viewed, the price will be the price that was entered plus the VAT. When the object is in the basket and the basket is viewed, it is possible to see the price of the products with and without the VATs (regardless of which approach that was used).</p> <p>Please note that the price datatype allows to set only one price value for each product (the system will use your locale currency for when displaying this price). This datatype does not work with multiple currencies.</p> <a name="eztoc23806_3" id="eztoc23806_3"></a><h2>The multi-price datatype</h2> <p>The price can be represented by an attribute that makes use of the built-in multi-price datatype. This datatype allows you to set several prices in different currencies for each product independently of your locale currency. Instances of any class containing the multi-price price datatype are automatically treated as multi-price products. (Please refer to the &quot;<a href="../Features/Multi-currency.html" target="_self">Multi-currency</a>&quot; section of the &quot;Features&quot; chapter for more information.) This datatype interacts with VATs in the same way as the price datatype.</p> <a name="eztoc23806_4" id="eztoc23806_4"></a><h2>Discount rules</h2> <p>The final price of a product can be affected by a discount rule. A discount rule can be configured to reduce the price of certain products by a percentage. The discount rules can be placed in different discount rule groups and are always active (there is no way to turn them on/off). The discount rule groups make it possible to choose which group(s) of customers will be affected. This can be done by assigning a discount rule group to the target user group(s).</p> <p>By default, a newly created discount rule affects all the products that are in the system. However, a discount rule can be easily limited to a group of products. A discount rule can be limited in two ways, which are mutually exclusive. The first alternative is to use a combination of the &quot;Product type&quot; and the &quot;Section&quot; limitations, which are described in the table below.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Limitation</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Product type</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Product type&quot; limitation makes it possible to limit a policy to products/objects of certain types (only classes that make use of the price datatype will be shown). The default setting is &quot;Any&quot;, which means that it will affect all kinds of product objects.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Section</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Section&quot; limitation makes it possible to limit a policy to products/objects that are assigned to certain sections. The default setting is &quot;Any&quot;, which means that the discount rule will affect product objects in all sections.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>The second alternative is to add individual products to the discount rule's product list. When the individual product list is used, the &quot;Product type&quot; and &quot;Section&quot; limitations will be omitted and thus only the products that are in the list will be affected.</p>   <a name="eztoc23806_5" id="eztoc23806_5"></a><h2>Shop related datatypes</h2> <p>The following table shows the datatypes that plug in to the e-commerce subsystem of eZ publish. </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Datatype</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="../Reference/Datatypes/Price.html" target="_self">Price</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>When used as an attribute in a content class, the &quot;Price&quot; datatype connects the instances (objects) of that class to the webshop system. As soon as an object has a price attribute, users can put the object in their baskets and/or wishlists. This datatype allows to set only one price value for each product (the system will use your locale currency for this price).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="../Reference/Datatypes/Multi-price.html" target="_self">Multi-price</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>When used as an attribute in a content class, the &quot;Multi-price&quot; datatype also connects the instances (objects) of that class to the webshop system. As soon as an object has a multi-price attribute, users can view its price in different currencies, put the object in their baskets and/or wishlists. Objects without a price or multi-price attribute can not be put into a user's basket and/or wishlist and thus they are not connected to the e-commerce subsystem. The multi-price datatype allows you to set several prices in different currencies for each product.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="../Reference/Datatypes/Option.html" target="_self">Option</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Option&quot; datatype makes it possible to create a single group of options for each content object. Each option can be assigned a short text and an additional price. For example, it can be used to sell T-shirts in different colors where the price is different for some (or all) colors.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="../Reference/Datatypes/Multi-option.html" target="_self">Multi-option</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Multi-option&quot; datatype makes it possible to create multiple groups of options for each content object. Each option can be assigned a short text and an additional price. This datatype works in the same way as the &quot;Option&quot; datatype. The only difference is that instead of supporting only one group of options, it allows the creation of multiple groups of options for each content object.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="../Reference/Datatypes/Range-option.html" target="_self">Range-option</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Range-option&quot; datatype makes it possible to create a single group of enumerated options for each content object. For example, it can be used in a scenario where the goal is to sell shoes of different sizes and the size does not affect the price. For each content object, the administrator needs to set up the available range (if any).</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Concepts-and-basics/Webshop by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:53:22 GMT -->
+</html>

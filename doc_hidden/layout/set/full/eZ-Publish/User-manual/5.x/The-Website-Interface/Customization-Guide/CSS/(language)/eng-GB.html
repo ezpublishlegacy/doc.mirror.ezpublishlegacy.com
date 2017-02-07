@@ -1,0 +1,85 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/The-Website-Interface/Customization-Guide/CSS/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>CSS / Customization Guide / The Website Interface / 5.x / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>CSS</h1>
+</div>
+
+<a name="eztoc134017_1" id="eztoc134017_1"></a><h2>CSS</h2><p>As described before, the visual elements of an eZ Publish site are determined by the instructions contained in CSS files.</p><p>Refer to the tutorial “<a href="http://share.ez.no/learn/ez-publish/how-to-skin-an-ez-publish-now-site/(from)/ez.no" target="_self">How to Skin an eZ Publish Now Site</a>” for step-by-step instructions on how to modify the visual design and layout of an eZ Publish site.</p><a name="eztoc134017_1_1" id="eztoc134017_1_1"></a><h3>Basic Styles</h3><p>The following CSS files are the basic ones used in the eZ Publish Website Interface design extension. They each serve a specific purpose for site design and layout. Site design can be modified by&nbsp; changing these CSS files. However, most modifications can be done by creating a site style package. Modifying the basic styles should only be done by advanced users.</p>
+<ul>
+<li><div><b><i>core.css</i>:</b> Specifies general visual styles for many of the basic HTML elements. These include elements such as font styles and sizes, margins and paddings. In addition, <i>core.css</i> contains some&nbsp; specific styles that eZ Publish Website Interface needs for default templates. This file is included in the <i>pagelayout.tpl</i> template.</div></li><li><div><b><i>pagelayout.css:</i></b> Specifies styles used in the <i>pagelayout.tpl</i> template (the main template). To make it easier to find specific elements, the order of the styles inthis CSS file attempts to match the order of elements in the HTML page. Forexample, the style for <i>div#header</i> is close to the top of file.</div></li><li><div><b><i>content.css:</i></b> Specifies the styles used by content templates, including thegeneral styles common to all content and the specific styles required by groups ofrelated content classes. For example, the Folder and Article content classes use thefollowing CSS:</div></li>
+</ul>
+<pre class="wordwrap"><span class="line">/* Folder */</span>
+</pre><pre class="wordwrap"><span class="line">div.content-view-full div.class-folder</span>
+</pre><pre class="wordwrap"><span class="line">{</span>
+</pre><pre class="wordwrap"><span class="line">&lt;span style=&quot;white-space: pre;&quot;&gt; &lt;/span&gt;color: #000;</span>
+</pre><pre class="wordwrap"><span class="line">}</span>
+</pre><pre class="wordwrap"><span class="line">/* Article */</span>
+</pre><pre class="wordwrap"><span class="line">div.content-view-full div.class-article</span>
+</pre><pre class="wordwrap"><span class="line">{</span>
+</pre><pre class="wordwrap"><span class="line">&lt;span style=&quot;white-space: pre;&quot;&gt; &lt;/span&gt;color: #000;</span>
+</pre><pre class="wordwrap"><span class="line">}</span>
+</pre>
+<ul>
+<li><div><b><i>print.css:</i></b> Specifies additional styles that override the other styles to make the page better suited for printing. This includes hiding menus and other areas of the layout that are unnecessary on paper, ensuring that the main content gets the proper focus and formatting.</div></li>
+</ul>
+<p>A site style package contains the following supplementary CSS files:</p>
+<ul>
+<li><div><b>site-colors.css:</b> This file overrides the styles in the default <i>pagelayout.css&nbsp;</i>(which applies to the <i>paglayout.tpl</i> template).</div></li><li><div><i><b>classes-colors.css:</b></i> This file overrides the styles used in <i>content.css</i> (which applies to the content classes).</div></li>
+</ul>
+<p>The CSS files are fetched by the HTML in the order that they are listed above. This ensures that overrides occur in the proper order. For example, if an element is defined in <i>pagelayout.css</i> and then again in <i>print.css</i>, the <i>print.css</i> definition overrides the <i>pagelayout.css</i> definition. If an element is not defined in <i>pagelayout.css</i> and is defined in <i>print.css</i>, the <i>print.css</i> definition is used.</p><a name="eztoc134017_1_2" id="eztoc134017_1_2"></a><h3>Styles specific to Internet Explorer</h3><p>To compensate for Internet Explorer's bugs and rendering discrepancies, the eZ Publish Website Interface includes two stylesheets specific to Internet Explorer. The stylesheets are delivered to the browser by the use of IE's conditional comments. While this is a proprietary feature of IE, the syntax makes it look like a regular HTML comment to other browsers (and thus does not affect the validity of the page). (Be aware that some other forms of conditional comments, as described by Microsoft on their web site, may not validate correctly).</p><p>The following stylesheets are specific to Internet Explorer:</p>
+<ul>
+<li><div><b>ie5.css</b> - styles for IE 5 only</div></li><li><div><b>ie7lte.css</b> - styles for IE 5, 6 and 7</div></li>
+</ul>
+<p>Edit these files if you encounter a design inconsistency with Internet Explorer after changing the default site design.</p><a name="eztoc134017_1_3" id="eztoc134017_1_3"></a><h3>JavaScript</h3><p>The JavaScript used by eZ Publish Website Interface sites follows the general principle that the structural content on a page should be fully accessible whether or not JavaScriptis enabled in the user's browser, and that the visual presentation should have a non-JavaScript fallback that looks as good as possible.The following JavaScript is disabled by default, but can be enabled if needed.</p>
+<ul>
+<li><div><i><b>heightresize.js:</b></i> This script automatically adjusts several columns to have the same height in a pure CSS-based layout, something that would otherwise be difficult to achieve in a simple and consistent way. If JavaScript is not available, the columns simply stay at their initial height.</div></li>
+</ul>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/The-Website-Interface/Customization-Guide/CSS/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:25 GMT -->
+</html>

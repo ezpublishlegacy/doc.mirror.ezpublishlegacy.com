@@ -1,0 +1,73 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/ODF-Import-Export/Installation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Installation / ODF Import / Export / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installation</h1>
+</div>
+
+<a name="eztoc131275_1" id="eztoc131275_1"></a><h2>Installation</h2><p>Unpack the tar.gz archive and place the ezodf folder under the extension folder in the eZ Publish installation. Enable the eZODF extension in the eZ Publish Administration Interface under the Setup-&gt;Extensions menu.</p><p><i><b>Note:</b> if you want to upload large documents you need to increase the upload memory limit in PHP. This is configured in the php.ini configuration file.</i></p><a name="eztoc131275_1_1" id="eztoc131275_1_1"></a><h3>Microsoft Word import configuration</h3><p>To install Microsoft Word import support you need to do the following on your web server:</p><p>
+1. Install <a href="http://www.openoffice.org/" title="OpenOffice.org 2.x" target="_blank">OpenOffice.org 2.x</a><br />
+2. Install document conversion macros in OOo<br />3. Start the document conversion daemon</p><p>The reason you need to have OpenOffice.org installed is because eZ Publish uses it to first convert the Word file formats to OpenDocument Text format, which is then imported. Tested formats include <b>.do</b>c and <b>.rtf</b>.</p><a name="eztoc131275_1_2" id="eztoc131275_1_2"></a><h3>Installation of OpenOffice.org macros</h3><p>Go to the package manager interface in OpenOffice.org. This is found under <b>Tools</b> -&gt; <b>Package Manager</b>.</p>
+<div class="">        <img src="../../../../../../../../../var/doc/storage/images/media/images/package-manager/131279-1-eng-GB/Package-Manager_reference.jpg" alt="Package Manager" />
+<p>Package Manager</p>
+
+
+
+
+
+
+
+</div><p>Choose My Packages and click Add.</p><p>Then, select the file <i>extension/ezodf/doc/eZconversion.zip</i>.&nbsp;</p><a name="eztoc131275_1_3" id="eztoc131275_1_3"></a><h3>Starting the document conversion daemon</h3><p>The document conversion daemon is a PHP script bundled with the extension. It communicates with OpenOffice.org and does the actual conversion of documents.</p><p>The script needs to be started with the CLI version of PHP, which means that you need to execute the following command from the command line:</p><pre class="wordwrap"><span class="line">$ php extension/ezodf/scripts/daemon.php</span>
+</pre><p><i><b>Note:</b> PHP must have been compiled with the following switches:</i></p><pre class="wordwrap copytoclipboard"><span class="line">--enable-cli</span>
+<span class="line">--enable-pcntl</span>
+<span class="line">--enable-sockets</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '--enable-cli\r\n--enable-pcntl\r\n--enable-sockets\r\n' ); return false;" /></p>
+<![endif]--><p><i><b>Note:</b> The document conversion daemon will only run under Linux. It requires the <b>pcntl</b> PHP extension, unsupported on windows platforms.</i></p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/ODF-Import-Export/Installation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:26 GMT -->
+</html>

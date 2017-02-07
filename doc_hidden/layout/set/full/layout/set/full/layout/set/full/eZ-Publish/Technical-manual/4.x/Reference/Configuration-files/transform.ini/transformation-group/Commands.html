@@ -1,0 +1,116 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/transform.ini/transformation-group/Commands by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Commands /  [{transformation group}] / transform.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Commands</h1>
+</div>
+<h3>Summary</h3>
+Sets character transformation rules.<h3>Usage</h3>
+<pre class="pfix"><p>Commands[]=&lt;transformation_command1_groupname&gt;</p></pre><h3>Description</h3>
+<p>
+The Commands setting allows you to define the rules of character transformation and define them to the corresponding groups. These commands will be used by the system in addition to the rules defined in the transformation files if any are specified to a certain group.<br />
+ It is also possible to specify parameters for the commands, these will allowed the system to look for the defined rule in all transformation files (not only the loaded ones). If not specified all corresponding transformation rules will be used.<br /> The following list contains the possible transformation commands:</p>
+<ul>
+<li><div> <b>normalize:</b> this command normalizes multiple characters with similar meaning to one type. For each parameter, it looks for rules named:<pre class="wordwrap"><span class="line">&lt;parameter&gt;_normalize</span>
+</pre>If no parameters are used it will use all normalize rules.</div></li><li><div> <b>search_normalize:</b> this command runs normalization rules required for search engine. For each parameter, it looks for rules named:<pre class="wordwrap"><span class="line">&lt;parameter&gt;_search_normalize</span>
+</pre>If no parameters are used it will use all search rules.</div></li><li><div> <b>transform:</b> this command transforms one type of character into another. For each parameter, it looks for rules named:<pre class="wordwrap"><span class="line">&lt;parameter1&gt;_to_&lt;parameter2&gt;</span>
+</pre>If no parameters are used it will find all transformation rules.</div></li><li><div> <b>decompose:</b> this command turns special characters into strings representing the character. For each parameter, it looks for rules named:<pre class="wordwrap"><span class="line">&lt;parameter&gt;_decompose</span>
+</pre>If no parameters are used it will find all decompose rules.</div></li><li><div> <b>lowercase:</b> this command turns characters into their lowercase variant if possible. For each parameter, it looks for rules named:<pre class="wordwrap"><span class="line">&lt;parameter&gt;_lowercase</span>
+</pre>If no parameters are used it will find all lowercase rules.</div></li><li><div> <b>uppercase:</b> this command turns characters into their uppercase variant if possible. For each parameter, it looks for rules named:<pre class="wordwrap"><span class="line">&lt;parameter&gt;_uppercase</span>
+</pre>If no parameters are used it will find all uppercase rules.</div></li><li><div> <b>transliterate:</b> this command converts from one type of charset to another by finding similar characters or strings. For each parameter, it looks for rules named:<pre class="wordwrap"><span class="line">&lt;parameter1&gt;_transliterate_&lt;parameter2&gt;</span>
+</pre>If no parameters are used it will find all transliteration rules </div></li><li><div> <b>diacritical:</b> this command removes diacriticals from characters. For each parameter, it looks for rules named:<pre class="wordwrap"><span class="line">&lt;parameter&gt;_diacritical</span>
+</pre>If no parameters are used it will find all diacritical rules.</div></li><li><div> <b>rule:</b> this command runs custom transformation rule. For each parameter, it looks for rules named:<pre class="wordwrap"><span class="line">&lt;parameter&gt;</span>
+</pre>If no parameters are used it will do nothing. </div></li><li><div> <b>url_cleanup:</b> this command performs cleanups to make the text presentable in a URL. No parameters can be passed for this command. </div></li><li><div> <b>identifier_cleanup:</b> this command performs cleanups to make the text usable as an identifier. No parameters can be passed for this command. </div></li><li><div> <b>search_cleanup:</b> this command performs cleanup to make the text parsable by the search engine. For each parameter, it looks for rules named:<pre class="wordwrap"><span class="line">&lt;parameter&gt;_search_cleanup</span>
+</pre>If no parameters are used it will find all search_cleanup rules.</div></li>
+</ul>
+<p>It is also possible to create custom rules in order to transform characters according to your own specific needs.</p><h3>Examples</h3>
+<a name="eztoc113560_0_0_0_1" id="eztoc113560_0_0_0_1"></a><h5>example 1</h5><pre class="wordwrap copytoclipboard"><span class="line">[urlalias_iri]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Commands[]</span>
+<span class="line">Commands[]=url_cleanup_iri</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[urlalias_iri]\r\n\r\nCommands[]\r\nCommands[]=url_cleanup_iri' ); return false;" /></p>
+<![endif]--><p> This is the default setting for commands in [urlalias_in]. This command will perform an IRI cleanup only, which means that almost all unicode characters are allowed in URLs with the exceptions being space, ampersand and semi-colon.</p><a name="eztoc113560_0_0_0_2" id="eztoc113560_0_0_0_2"></a><h5>example 2</h5><pre class="wordwrap copytoclipboard"><span class="line">[search]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Commands[]</span>
+<span class="line">Commands[]=decompose</span>
+<span class="line">Commands[]=normalize</span>
+<span class="line">Commands[]=diacritical</span>
+<span class="line">Commands[]=search_normalize</span>
+<span class="line">Commands[]=lowercase</span>
+<span class="line">Commands[]=transform(inverted,normal)</span>
+<span class="line">Commands[]=transform(math,ascii)</span>
+<span class="line">Commands[]=search_cleanup</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[search]\r\n\r\nCommands[]\r\nCommands[]=decompose\r\nCommands[]=normalize\r\nCommands[]=diacritical\r\nCommands[]=search_normalize\r\nCommands[]=lowercase\r\nCommands[]=transform(inverted,normal)\r\nCommands[]=transform(math,ascii)\r\nCommands[]=search_cleanup' ); return false;" /></p>
+<![endif]--><p> These are the default commands to use for search.</p><a name="eztoc113560_0_0_0_3" id="eztoc113560_0_0_0_3"></a><h5>example 3</h5><pre class="wordwrap copytoclipboard"><span class="line">[urlalias]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Commands[]</span>
+<span class="line">Commands[]=url_cleanup</span>
+<span class="line">Commands[]=transform</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[urlalias]\r\n\r\nCommands[]\r\nCommands[]=url_cleanup\r\nCommands[]=transform' ); return false;" /></p>
+<![endif]--><p> This configuration means that when the setting TransformationGroup in Site.ini is set to &quot;urlalias&quot;, the system will use two commands, url_cleanup and transform, in addition to the rules from the transformation files that are loaded by default.</p><a name="eztoc113560_0_0_0_4" id="eztoc113560_0_0_0_4"></a><h5>Example 4</h5><pre class="wordwrap copytoclipboard"><span class="line">[transformation]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Groups[]</span>
+<span class="line">Groups[]=my_group</span>
+<span class="line">&nbsp;</span>
+<span class="line">[my_group]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Files[]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Extensions[]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Commands[]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Commands[]=transform(math,ascii)</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[transformation]\r\n\r\nGroups[]\r\nGroups[]=my_group\r\n\r\n[my_group]\r\n\r\nFiles[]\r\n\r\nExtensions[]\r\n\r\nCommands[]\r\n\r\nCommands[]=transform(math,ascii)' ); return false;" /></p>
+<![endif]--><p> This configuration sets a new custom group &quot;my_group&quot; that will use the transform command with a parameter &quot;math_to_ascii&quot;. The transformation rules for this case are defined in the corresponding section of &quot;latin.tr&quot; transformation file and will turn some special math symbols into ASCII equivalents.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/transform.ini/transformation-group/Commands by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:08 GMT -->
+</html>

@@ -1,0 +1,164 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Modules/content/Fetch-functions/calendar by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:40:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>calendar / Fetch functions / content / Modules / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>calendar</h1>
+</div>
+<h3>Summary</h3>
+This function fetches the date time list when objects were published.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'content', 'calendar',</span>
+<span class="line"> hash( 'parent_node_id',              parent_node_id,   </span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'offset',       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            &nbsp; offset,                    ]</span>
+<span class="line">&nbsp;&nbsp;     [ 'limit',          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           &nbsp;limit,                     ]</span>
+<span class="line">&nbsp;&nbsp;     [ 'depth',                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   depth,                     ]</span>
+<span class="line">&nbsp;&nbsp;     [ 'depth_operator',     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       depth_operator,            ]</span>
+<span class="line">&nbsp;&nbsp;     [ 'class_id',           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       class_id, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           ]</span>
+<span class="line">&nbsp;&nbsp;     [ 'attribute_filter',        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   attribute_filter,          ]</span>
+<span class="line">&nbsp;&nbsp;     [ 'extended_attribute_filter', &nbsp;extended_attribute_filter, ]</span>
+<span class="line">&nbsp;&nbsp;     [ 'class_filter_type',      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    class_filter_type,         ]</span>
+<span class="line">&nbsp;&nbsp;     [ 'class_filter_array',    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     class_filter_array,        ]</span>
+<span class="line">&nbsp;&nbsp;     [ 'group_by',          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  group_by, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          ]</span>
+<span class="line">&nbsp;&nbsp;     [ 'main_node_only',        &nbsp;     main_node_only,            ]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ 'ignore_visibility', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignore_visibility,     &nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;     [ 'limitation',           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      limitation &nbsp;               ] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>parent_node_id</td>
+        <td>integer</td>
+        <td>The ID number of the parent node.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>offset</td>
+        <td>integer</td>
+        <td>The offset to start at.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>limit</td>
+        <td>integer</td>
+        <td>The number of date time that should be fetched.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>depth</td>
+        <td>integer</td>
+        <td>The maximum level of depth that should be explored (1 by default).</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>depth_operator</td>
+        <td>string</td>
+        <td>The logic to use when checking the depth.('le' by default).</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>class_id</td>
+        <td>integer</td>
+        <td>The class id of the objects to be fetched.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>attribute_filter</td>
+        <td>mixed</td>
+        <td>The attribute level filter logic.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>extended_attribute_filter</td>
+        <td>mixed</td>
+        <td>The extended attribute level filter logic.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>class_filter_type</td>
+        <td>string</td>
+        <td>The type of class filtering (include/exclude).</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>class_filter_array</td>
+        <td>array</td>
+        <td>The classes that should be filtered.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>group_by</td>
+        <td>array</td>
+        <td>Deprecated</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>main_node_only</td>
+        <td>boolean</td>
+        <td>Type of nodes that should be fetched (all or main nodes only).</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>ignore_visibility</td>
+        <td>boolean</td>
+        <td>Makes it possible to fetch hidden nodes. (false by default)</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>limitation</td>
+        <td>array</td>
+        <td>The limitations that one user has on the objects to be fetched</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+<p>An array of publish date time of objects or FALSE.</p><h3>Description</h3>
+<p>This function fetches the publish date time of objects. The parent node must be specified using &quot;parent_node_id&quot; parameter.</p><p><b>The depth parameter:</b> The depth parameter can be used to specify the level of depth (within the branch) that the function should explore when it is running. If the depth is set to one, this function will simply act as the list function. If the depth is greater than one, the function will fetch nodes further down in the branch. The default value is unlimited.</p><p><b>The depth operator:</b> The depth operator can be set to either &quot;lt&quot;, &quot;le&quot;, &quot;eq&quot;, &quot;gt&quot; or &quot;ge&quot; - meaning &quot;less than&quot;, &quot;less equal&quot;, &quot;equal to&quot;, &quot;greater than&quot; and &quot;greater equal&quot;. For example, if it is set to 'eq', only nodes with the depth that was specified using the depth parameter will be fetched.</p><h3>Examples</h3>
+<p><b>Example 1</b></p><pre class="wordwrap copytoclipboard"><span class="line">{def $nodes=fetch( 'content', 'calendar',</span>
+<span class="line">&nbsp;hash( 'parent_node_id', 42 ) )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{foreach $nodes as $node}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$node.published|wash} &lt;br /&gt;</span>
+<span class="line">&nbsp;{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $nodes=fetch( \'content\', \'calendar\', \r\n hash( \'parent_node_id\', 42 ) )} \r\n    {foreach $nodes as $node} \r\n     {$node.published|wash} &lt;br /&gt;\r\n {/foreach}\r\n' ); return false;" /></p>
+<![endif]--><p>The example outputs publish date time of all objects under node 42 in depth 1.</p><p><b>Example 2</b></p><pre class="wordwrap copytoclipboard"><span class="line">{def $nodes=fetch( 'content', 'calendar',</span>
+<span class="line">&nbsp;hash( 'parent_node_id', 42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'depth', 1,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'depth_opeator', 'ge' ) )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;{foreach $nodes as $node}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$node.published|wash} &lt;br /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $nodes=fetch( \'content\', \'calendar\', \r\n hash( \'parent_node_id\', 42,\r\n        \'depth\', 1,\r\n        \'depth_opeator\', \'ge\' ) )} \r\n   {foreach $nodes as $node} \r\n     {$node.published|wash} &lt;br /&gt;\r\n   {/foreach}' ); return false;" /></p>
+<![endif]--><p>The example outputs publish date time of all object under node id 42.</p>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Modules/content/Fetch-functions/calendar by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:40:34 GMT -->
+</html>

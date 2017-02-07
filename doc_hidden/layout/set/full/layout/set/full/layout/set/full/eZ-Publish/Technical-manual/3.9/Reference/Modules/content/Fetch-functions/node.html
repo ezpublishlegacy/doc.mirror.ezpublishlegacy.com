@@ -1,0 +1,81 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Modules/content/Fetch-functions/node by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:13:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>node / Fetch functions / content / Modules / Reference / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>node</h1>
+</div>
+<h3>Summary</h3>
+Fetches a node (identified by either an ID number or a path).<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'content', 'node', hash( [ 'node_id', &nbsp;&nbsp;node_id, &nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'node_path', node_path ] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>node_id</td>
+        <td>integer</td>
+        <td>The ID number of the node that should be fetched.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>node_path</td>
+        <td>string</td>
+        <td>The path of the node that should be fetched.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> object of FALSE.</p><h3>Description</h3>
+ <p>This function fetches a single node and returns it as a <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a>. The target node must be specified using either the &quot;node_id&quot; or the &quot;node_path&quot; parameter. If no node can be found, or if an error occurs, the function will return FALSE.</p><h3>Examples</h3>
+    <a name="eztoc64297_0_0_1" id="eztoc64297_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap"><span class="line">{def $my_node=fetch( 'content', 'node', hash( 'node_id', 96 ) )}</span>
+<span class="line">{$my_node.name|wash}</span>
+</pre> <p>Fetches node number 96 and outputs the name of the object that is encapsulated by that node.</p>       <a name="eztoc64297_0_0_2" id="eztoc64297_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap"><span class="line">{def $my_node=fetch( 'content', 'node', hash( 'node_path', 'news/article_test' ) )}</span>
+<span class="line">{$my_node.name|wash}</span>
+</pre> <p>Fetches the node by the specified path and outputs the name of the object that is encapsulated by that node.</p>       <a name="example3" /><a name="eztoc64297_0_0_3" id="eztoc64297_0_0_3"></a><h4>Example 3</h4> <pre class="wordwrap"><span class="line">{def $my_node=fetch( 'content', 'node', hash( 'node_path', 'news/article_test' ) )}</span>
+<span class="line">Views: {$my_node.view_count}</span>
+</pre> <p>Fetches the node by the specified path and outputs the number of times this node has been viewed. (The &quot;updateviewcount.php&quot; cronjob must be run periodically.)</p>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Modules/content/Fetch-functions/node by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:13:06 GMT -->
+</html>

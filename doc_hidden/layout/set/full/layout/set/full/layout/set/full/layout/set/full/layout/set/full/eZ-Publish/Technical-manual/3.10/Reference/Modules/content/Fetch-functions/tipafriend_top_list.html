@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Modules/content/Fetch-functions/tipafriend_top_list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:55:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>tipafriend_top_list / Fetch functions / content / Modules / Reference / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>tipafriend_top_list</h1>
+</div>
+<h3>Summary</h3>
+Fetches the most popular (most tipped) nodes.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'content', 'tipafriend_top_list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( [ 'offset', &nbsp;&nbsp;&nbsp;&nbsp;offset, &nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'limit', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'start_time', start_time, ]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'end_time', &nbsp;&nbsp;end_time, &nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'duration', &nbsp;&nbsp;duration, &nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'ascending', &nbsp;ascending, &nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'extended', &nbsp;&nbsp;extended &nbsp;&nbsp;&nbsp;] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>offset</td>
+        <td>integer</td>
+        <td>The offset to start at.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>limit</td>
+        <td>integer</td>
+        <td>The number of nodes that should be returned.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>start_time</td>
+        <td>integer</td>
+        <td>The time to start at.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>end_time</td>
+        <td>integer</td>
+        <td>The time to end at.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>duration</td>
+        <td>integer</td>
+        <td>The period of time that should be used.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>ascending</td>
+        <td>boolean</td>
+        <td>The sorting direction that should be used. If FALSE (default), the results will be sorted descending by the number of times each node was tipped.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>extended</td>
+        <td>boolean</td>
+        <td>If TRUE, an array of hashes will be returned.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An array of <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> objects, an array of hashes (see below) or FALSE.</p><h3>Description</h3>
+ <p>This function fetches the nodes that were most tipped using the &quot;Tip a friend&quot; feature. The &quot;Tip a friend&quot; feature can be accessed by requesting the &quot;tipafriend&quot; view of the &quot;content&quot; module, it takes a node ID as a parameter, for example: &quot;http://www.example.com/content/tipafriend/44&quot;.</p> <p>The returned result is sorted by the number of times the nodes were tipped. The sorting direction can be controlled using the &quot;ascending&quot; parameter, it can be set to either TRUE or FALSE (default).</p> <p>The &quot;limit&quot; and &quot;offset&quot; parameters can be used to control the number of items returned and the offset to start at.</p> <p>The &quot;start_time&quot;, &quot;end_time&quot; and &quot;duration&quot; parameters can be used to specify a time period that the function should operate within. These parameters make it possible to fetch the most popular/tipped nodes for a certain period of time (for example last 24 hours, last week, last month, etc.). If the &quot;start_time&quot; and &quot;duration&quot; parameters are specified, results for the &quot;start_time+duration&quot; period of time will be fetched. If the &quot;end_time&quot; and &quot;duration&quot; parameters are specified, results for the &quot;end_time-duration&quot; period of time will be fetched. If all of these parameters are omitted, the function will cover all nodes, regardless when they were tipped. If both the &quot;start_time&quot; and &quot;duration&quot; parameters are omitted, then only results for the period before &quot;end_time&quot; will be fetched. If only the &quot;start_time&quot; or &quot;duration&quot; parameter is set, the function will automatically use the current time as the &quot;end_time&quot; parameter. </p> <p>By default (when the &quot;extended&quot; parameter is FALSE), the function returns an array of <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> objects. If the &quot;extended&quot; parameter is set to TRUE, the function will return an array of the following hashes:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Key</p> 
+  </th> <th >   <p>Type</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>node_id</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The ID number of the node.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>count</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The number of times the node was tipped.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>node</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>object</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The node itself (as an <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> object).</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>If the function is unable to find any tipped nodes or if an error occurs, it will return FALSE.</p><h3>Examples</h3>
+    <a name="eztoc76084_0_0_1" id="eztoc76084_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $popular_nodes=fetch( 'content', 'tipafriend_top_list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'limit', &nbsp;10,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'offset', 0,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'start_time', maketime( 0, 0, 0 ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'duration', mul( 60, 60, 24 )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $popular_nodes as $popular_node}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$popular_node.name|wash} &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+<span class="line">{undef}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $popular_nodes=fetch( \'content\', \'tipafriend_top_list\',\r\n                     hash( \'limit\',  10,\r\n                           \'offset\', 0,\r\n                           \'start_time\', maketime( 0, 0, 0 ),\r\n                           \'duration\', mul( 60, 60, 24 )\r\n                            ) )}\r\n\r\n{foreach $popular_nodes as $popular_node}\r\n    {$popular_node.name|wash} &lt;br /&gt;\r\n{/foreach}\r\n{undef}' ); return false;" /></p>
+<![endif]--> <p>Outputs the names of the ten most popular nodes during the last 24 hours. The &quot;start_time&quot; parameter sets 00:00:00 as the time and the current date. The &quot;duration&quot; parameter is set to a period that equals one day (60 seconds x 60 minutes x 24 hours). </p>       <a name="eztoc76084_0_0_2" id="eztoc76084_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $popular_nodes=fetch( 'content', 'tipafriend_top_list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'ascending', false(),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'extended', true()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;) )}</span>
+<span class="line">{foreach $popular_nodes as $popular_node}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;{$popular_node.node.name|wash}&lt;/td&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;{$popular_node.count}&lt;/td&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;</span>
+<span class="line">{/foreach}</span>
+<span class="line">{undef}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $popular_nodes=fetch( \'content\', \'tipafriend_top_list\',\r\n                     hash( \'ascending\', false(),\r\n                           \'extended\', true()\r\n                          ) )}\r\n{foreach $popular_nodes as $popular_node}\r\n    &lt;tr&gt;\r\n         &lt;td&gt;{$popular_node.node.name|wash}&lt;/td&gt;\r\n         &lt;td&gt;{$popular_node.count}&lt;/td&gt;\r\n    &lt;/tr&gt;\r\n{/foreach}\r\n{undef}' ); return false;" /></p>
+<![endif]--> <p>Generates a list of popular nodes by outputting their names and the number of times they were tipped. The results are sorted by the number of times the nodes were tipped.</p>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Modules/content/Fetch-functions/tipafriend_top_list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:55:27 GMT -->
+</html>

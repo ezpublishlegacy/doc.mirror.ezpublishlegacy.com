@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.6/Installation/Normal-installation/Requirements-for-doing-a-normal-installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:14:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Requirements for doing a normal installation / Normal installation / Installation / 4.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Requirements for doing a normal installation</h1>
+</div>
+
+<p>eZ Publish makes use of and depends on four important things:</p>
+<ol>
+<li><div>A web server </div></li><li><div>A server-side PHP scripting engine </div></li><li><div>The eZ Components library </div></li><li><div>A database server </div></li><li><div>An image conversion system (optional) </div></li>
+</ol>
+<p>The first three things should be in place before an eZ Publish installation is deployed. The image conversion system is optional and is only needed if you're planning to use eZ Publish with images. The web server and the server-side PHP scripting engine has to run on the same machine. The database server may run on a different computer.Please also visit the <a href="../Requirements-4.html" target="_self">requirements page</a> to check if your operation system is supported.For the moment, the following software solutions can be used:</p><a name="eztoc125079_1" id="eztoc125079_1"></a><h2>Web server</h2><p>Currently, only the Apache web server is supported. On Linux/UNIX based systems, it is recommended to use the latest version of the 2.2.x branch (applies also to cluster mode). Note that it must run in &quot;prefork&quot; mode instead of &quot;threaded&quot; mode - the reason for this is because some of the libraries that PHP extensions use might not be thread-safe.On Windows, it is recommended to use MS IIS 7 (with Microsoft URL Rewrite Module 1.1 ). (Apache 2.x for Windows is not supported since it only exists in &quot;threaded&quot; mode.)The Apache web server is the most popular web server on the planet. It is free, open source and can be downloaded from <a href="http://www.apache.org/" target="_blank">http://www.apache.org</a>.</p><a name="eztoc125079_2" id="eztoc125079_2"></a><h2>Server-side PHP scripting engine</h2><p>Since most of the eZ Publish system is written using the PHP scripting language, a PHP (hypertext pre-processor) server-side engine is needed. Make sure you have PHP 5.1.6 or later, up to PHP 5.3.x.</p><p>Note that it is strongly recommended to use the latest version of the 5.3.x branch. The reason for this is that eZ Publish runs faster on PHP 5.3 than on PHP 5.2 or PHP 5.1. In addition, some extensions may require PHP 5.3 (for example, the eZ Flow extension that comes together with eZ Publish). Make sure you use the PHP version that is required for your specific <a href="Requirements-for-doing-a-normal-installation.html#ezc" target="_self">eZ Components</a> version.PHP is free software and can be downloaded from <a href="http://www.php.net/" target="_blank">http://www.php.net</a>. The following table reveals which functionality PHP needs to have compiled-in support for.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Name</p>
+  </th><th >  <p>Description</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="http://www.php.net/mysqli" target="_blank">MySQLi extension</a> (recommended) or <a href="http://www.php.net/mysql" target="_blank">MySQL functions</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Required if a MySQL database will be used.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="http://www.php.net/pgsql" target="_blank">PostgreSQL functions</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Required if a PostgreSQL database will be used.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="http://www.php.net/zlib" target="_blank">Zlib compression functions</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Required (see below).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="http://www.php.net/dom" target="_blank">DOM functions</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Required (see below).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="http://www.php.net/manual/en/ref.session.php" target="_blank">Session support</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Required (enabled in PHP by default).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="http://www.php.net/manual/en/ref.pcre.php" target="_blank">PCRE functions</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Required (enabled in PHP by default).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="http://www.php.net/manual/en/ref.image.php" target="_blank">GD2 support</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Required if <a href="#image_conversion" target="_self">ImageMagick</a> is not installed.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="http://www.php.net/manual/en/features.commandline.php" target="_blank">CLI support</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Recommended (see below).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="http://www.php.net/curl" target="_blank">Client URL library functions</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Recommended (see below).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="http://www.php.net/manual/en/ref.mbstring.php" target="_blank">Multibyte string functions</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Required.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="http://www.php.net/exif" target="_blank">Exif functions</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Recommended.</p>
+  </td>
+
+</tr>
+
+</table>
+<a name="eztoc125079_2_1" id="eztoc125079_2_1"></a><h3>Zlib extension</h3><p>Make sure that zlib support in PHP is enabled, otherwise the <a href="../The-setup-wizard.html" target="_self">setup wizard</a> will not be able to unpack downloaded packages during the installation process.</p><a name="eztoc125079_2_2" id="eztoc125079_2_2"></a><h3>DOM extension</h3><p>In most cases, <a href="http://www.php.net/dom" target="_blank">DOM functions</a> are enabled by default as they are included in the PHP core. However, some Linux distributions have PHP without compiled-in support for DOM. Instead, they provide DOM as a shared module in a separate RPM package called &quot;php-xml&quot;.</p><a name="eztoc125079_2_3" id="eztoc125079_2_3"></a><h3>PHP CLI</h3><p>It is strongly recommended to have <a href="http://www.php.net/manual/en/features.commandline.php" target="_blank">PHP CLI</a> installed, otherwise some features like <a href="../../Features/Notifications.html" target="_self">notifications</a>, delayed search indexing, upgrade scripts, the collaboration system (content approval), clearing caches from within the command line, etc. will not work.</p><a name="eztoc125079_2_4" id="eztoc125079_2_4"></a><h3>CURL</h3><p>It is recommended to enable <a href="http://www.php.net/curl" target="_blank">CURL</a> support, otherwise some features like <a href="../../../4.x/Reference/Configuration-files/site.ini/ProxySettings/ProxyServer.html" target="_self">outbound connections via proxy</a> and <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/features/3.8/ssl_enhancement_with_ezsoapclient.txt" target="_blank">SSL support for eZSoap</a> will not work.</p><a name="eztoc125079_2_5" id="eztoc125079_2_5"></a><h3>PHP memory limit issue</h3><p>eZ Publish needs at least 64 MB in order to complete the setup wizard. If you are using PHP 5.2.0 or earlier version, you'll have to increase the default &quot;memory_limit&quot; setting which is located in the &quot;php.ini&quot; configuration file. (Don't forget to restart Apache after editing &quot;php.ini&quot;.) Normal operation requires about 16 MB. However, it is highly recommended that you keep the 64 MB setting since eZ Publish consumes a lot more memory as soon as you reindex the search, execute upgrade scripts, etc. Multilingual sites will also require at least 64 MB.If you are using PHP 5.2.1 or later, there is no need to change the default &quot;memory_limit&quot; setting (it is set to 128 MB by default).</p><a name="eztoc125079_2_6" id="eztoc125079_2_6"></a><h3>PHP timezone</h3><p>You need to set the &quot;<a href="http://www.php.net/manual/en/ref.datetime.php#ini.date.timezone" target="_blank">date.timezone</a>&quot; value in the &quot;php.ini&quot; configuration file. If this setting is not specified, you will most likely receive error messages like &quot;It is not safe to rely on the system's timezone settings&quot; when running eZ Publish on PHP 5. The following example shows how the corresponding line in &quot;php.ini&quot; looks like:</p><pre class="wordwrap"><span class="line">date.timezone =</span>
+</pre><p>Refer to the <a href="http://www.php.net/timezones" target="_blank">PHP documentation</a> for the list of supported timezones. Don't forget to restart Apache after editing &quot;php.ini&quot;.</p><a name="eztoc125079_3" id="eztoc125079_3"></a><h2>eZ Components library</h2><p>eZ Publish is an object-oriented application where each class definition is stored in a separate PHP source file. Instead of having a list of needed includes at the beginning of each source file, eZ Publish 4 makes use of the <a href="http://www.php.net/autoload" target="_blank">__autoload()</a> function. When eZ Publish is installed, all class definitions of the eZ Publish kernel will have their paths listed in the &quot;autoload/ezp_kernel.php&quot; file. In addition, the &quot;autoload/ezp_extension.php&quot; file will contain an array of paths for class definitions that are a part of the extensions that come with eZ Publish. These arrays will most likely need to be updated in the future (for example, when you install new extensions or configure existing ones using the &quot;Setup - Extensions&quot; part of the administration interface). The minimum eZ Components version required with eZ Publish 4.5 is &quot;ezcomponents-ezp45&quot;, containing a fix to the package system. In particular, you need to install the File and Base components (&quot;ezcBase&quot; and &quot;ezcFile&quot;), otherwise eZ Publish will not be able to update autoload arrays.eZ Components is an enterprise ready general purpose PHP components library used independently or together for PHP application development. eZ Components can be downloaded from <a href="http://ezcomponents.org/download" target="_blank">http://ezcomponents.org/download</a>. In the future, eZ Components will be bundled with eZ Publish. Refer to <a href="http://ezcomponents.org/docs/install" target="_blank">http://ezcomponents.org/docs/install</a> for information about how to install eZ Components.</p><a name="eztoc125079_3_7" id="eztoc125079_3_7"></a><h3>Important note</h3><p>Starting from version 2008.1, the eZ Components library requires PHP version 5.2.1 or higher&nbsp;up to PHP 5.3.x.</p><a name="eztoc125079_4" id="eztoc125079_4"></a><h2>Database server</h2><p>eZ Publish stores miscellaneous data structures and actual content using a database. This means that a database server has to be available for eZ Publish at all times. Follow this link to the eZ Publish <a href="Requirements-for-doing-a-normal-installation.html" target="_self">requirements page</a> to find which database solutions eZ Publish is compatible with.The setup wizard will automatically detect the database server as long as it is running on the same computer that functions as the web server. eZ Publish 4 requires a UTF-8 database.Note that eZ Publish 4 does not support <a href="../../Features/Clustering.html" target="_self">clustering</a> for PostgreSQL databases. The clustering code is optimized for best performance and focused on MySQL databases using the InnoDB <a href="https://dev.mysql.com/doc/refman/5.1/en/pluggable-storage-overview.html" target="_blank">storage engine</a>.Even if you are not going to run eZ Publish in a clustered environment, the use of InnoDB is required. This storage engine makes it possible to use transaction-safe tables in a MySQL database. (Database transaction support is enabled by default in eZ Publish. This feature makes the system less vulnerable to database errors and inconsistencies due to aborted requests.) Contact your database administrator if you are unsure about whether InnoDB is available on your server.If you want to use PostgreSQL, make sure the &quot;<a href="http://www.postgresql.org/docs/8.3/static/pgcrypto.html" target="_blank">pgcrypto</a>&quot; module is installed. On Linux/UNIX, you may need to install a separate package called &quot;postgresql-contrib&quot; (refer to the <a href="http://www.postgresql.org/docs/8.3/static/contrib.html" target="_blank">PostgreSQL documentation</a> for more information), which contains the &quot;pgcrypto&quot; module. The &quot;pgcrypto&quot; module provides cryptographic functions for PostgreSQL, including the &quot;digest&quot; function, which is needed for eZ Publish. When setting up a PostgreSQL database for eZ Publish, you will have to register these functions in the database. Refer to the &quot;Setting up a database&quot; part of the &quot;<a href="Installing-eZ-Publish-on-a-Linux-UNIX-based-system.html" target="_self">Installing eZ Publish on a Linux/UNIX based system</a>&quot; and &quot;<a href="Installing-eZ-Publish-on-Windows.html" target="_self">Installing eZ Publish on Windows</a>&quot; documentation pages (depending on the target OS) for more information.<b>Known issue with running PHP5.3 on MySQL:</b> Some people (like Windows users with both IPv4 and IPv6 installed ) experience problems connecting to the database server using host names like &quot;localhost&quot;... If you experience problems, try using IPv4 address like &quot;127.0.0.1&quot;. This is due to a connectivity problem when running PHP5.3 on MySQL. So, please replace the database server name &quot;localhost&quot; with the IP address of the machine, or &quot;127.0.0.1&quot;, which is reserved for the local host.</p><a name="eztoc125079_5" id="eztoc125079_5"></a><h2>Session parameters</h2><p>In order to support ezpSessionHandlerDB, session.hash_function and session.hash_bits_per_character in php.ini should be combined with the goal of never generating keys longer then 32 bytes.</p><p>Default PHP settings (MD5):</p><pre class="wordwrap"><span class="line">session.hash_function = 0</span>
+<span class="line">session.hash_bits_per_character = 4</span>
+</pre><p>Recommended settings (SHA-1):</p><pre class="wordwrap"><span class="line">session.hash_function = 1</span>
+<span class="line">session.hash_bits_per_character = 5</span>
+</pre><a name="eztoc125079_5_8" id="eztoc125079_5_8"></a><h3>Oracle compatibility</h3><p>The version 1.8 of the <a href="../../../../../Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database.html" target="_self">eZ Publish Extension for Oracle® Database</a> makes it possible to use Oracle as a database for eZ Publish 4.0.1 and higher. Note that earlier versions of the extension are not compatible with eZ Publish 4.</p><a name="eztoc125079_6" id="eztoc125079_6"></a><h2>Image conversion system (optional)</h2><p>In order to scale, convert or modify images, eZ Publish needs to make use of an image conversion system. One of the following software packages (both are free) can be used:</p>
+<ul>
+<li><div>GD2 (comes with PHP) </div></li><li><div>ImageMagick (<a href="http://www.imagemagick.org/" target="_blank">http://www.imagemagick.org</a>) </div></li>
+</ul>
+<p>ImageMagick supports more formats than GD and usually produces better results (better scaling, etc.). The setup wizard will automatically detect the pre-installed image conversion system(s).The installation and setup of required software solutions (outlined above) is far beyond the scope of this document. Please refer to the homepage and documentation of the different software solutions.</p><a name="eztoc125079_7" id="eztoc125079_7"></a><h2>Supported browsers</h2><p>For the supported browser list please check the&nbsp;<a href="../../../../User-manual/4.6/The-administration-interface.html" title="The administration interface" target="_blank">administration interface</a>&nbsp;chapter.</p><a name="eztoc125079_8" id="eztoc125079_8"></a><h2>Limitation on some file systems when storing large number of content files</h2><p>eZ Publish stores all disc related content (eg Images, PDF's etc) in var/storage like the structure from content tree, creating one folder for each object. In most file systems used under Linux (especially ext2 + ext3) there exists a hard LIMIT TO 32000 directories per folder. So it is not possible to store more than 31999 objects under one folder.To get around this limitation without changing the file system, you can split your content tree so that you don't have more than 32k content files (example: images) in the same folder.Examples of file systems that supports more file/folder entries per folder. - ReiserFS: roughly 1.2 million per directory- ZFS: 2^48 (a really big number: 281474976710656)!</p><a name="eztoc125079_9" id="eztoc125079_9"></a><h2>eZ Publish on NFS file systems</h2><p>Please be aware that it's not advisable to run eZ Publish on NFS file systems as you may experience issues. The cause of the issues may be performance, as NFS will slow down on heavy network traffic, slow access to files, or file access concurrency regarding file lock. Also, eZ Publish currently uses the&nbsp;<a href="http://php.net/manual/en/function.flock.php" title="flock() PHP function" target="_blank">flock()</a>&nbsp;PHP function, which is not considered stable for NFS shares.</p><p>NFS should only be used to store distributed data such as cache, or binary files,&nbsp;in clustered environments.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.6/Installation/Normal-installation/Requirements-for-doing-a-normal-installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:02 GMT -->
+</html>

@@ -1,0 +1,136 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Recommendation/Retrieving-Recommendations by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Retrieving Recommendations / eZ Recommendation / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Retrieving Recommendations</h1>
+</div>
+
+<a name="eztoc129120_1" id="eztoc129120_1"></a><h2>Retrieving recommendations</h2><p>In order to get recommendations, a custom tag needs to be inserted in an article. This can be done in the editor view of an article by simply adding it in the WYSIWIG Editor.</p><p>While editing an item click on “insert custom tag”</p><p>&nbsp;</p>
+<div class="">        <img src="../../../../../../../var/doc/storage/images/media/images/ez-recommender-insert-custom-tag/129133-1-eng-GB/eZ-Recommender-Insert-Custom-Tag_pdf.png" alt="" />
+<p>eZ Recommender Insert Custom Tag</p>
+
+
+
+
+
+
+
+</div><p>and select “recommendations” from the option-box.</p>
+<div class="">        <img src="../../../../../../../var/doc/storage/images/media/images/ez-recommender-insert-custom-tag2/129136-1-eng-GB/eZ-Recommender-Insert-Custom-Tag_pdf.png" alt="" />
+<p>eZ Recommender Insert Custom Tag</p>
+
+
+
+
+
+
+
+</div><p>Select the corresponding recommendation scenario (see also under <a href="https://admin.yoochoose.net/" target="_self">https://admin.yoochoose.net</a>) and if you want it to be rendered inside the article or as a flyout.</p>
+<div class="">        <img src="../../../../../../../var/doc/storage/images/media/images/ez-recommender-insert-custom-tag4/129142-1-eng-GB/eZ-Recommender-Insert-Custom-Tag_pdf.png" alt="" />
+<p>eZ Recommender Insert Custom Tag</p>
+
+
+
+
+
+
+
+</div><p>The following placeholder should appear in the editor window</p>
+<div class="">        <img src="../../../../../../../var/doc/storage/images/media/images/ez-recommender-insert-custom-tag5/129145-1-eng-GB/eZ-Recommender-Insert-Custom-Tag_pdf.png" alt="" />
+<p>eZ Recommender Insert Custom Tag</p>
+
+
+
+
+
+
+
+</div><p>After publishing and reloading the page you will see recommendations if there’s enough tracking events available.</p>
+<div class="">        <img src="../../../../../../../var/doc/storage/images/media/images/ez-recommender-insert-custom-tag6/129148-1-eng-GB/eZ-Recommender-Insert-Custom-Tag_pdf.png" alt="" />
+<p>eZ Recommender Insert Custom Tag</p>
+
+
+
+
+
+
+
+</div><p>If you want to customize the embedding of recommendations you can also follow these steps:</p><p>Include the following code wherever you want to see the recommendations</p><pre class="wordwrap"><span class="line">{include uri='design:content/recommendations.tpl'&amp;nbsp; node=$node scenario='top_clicked' limit=3 category_based=false() track_rendered_items=true() create_clickrecommended_event=true()}</span>
+</pre><p>As an example, we included the code in our full view template of ´articles for recommendation´ between the star rating and the related content.</p><pre class="wordwrap"><span class="line">...</span>
+</pre><pre class="wordwrap"><span class="line">&lt;div class=&quot;attribute-star-rating&quot;&gt;</span>
+</pre><pre class="wordwrap"><span class="line">&amp;nbsp;&amp;nbsp; {attribute_view_gui attribute=$node.data_map.star_rating}</span>
+</pre><pre class="wordwrap"><span class="line">&lt;/div&gt;</span>
+</pre><pre class="wordwrap"><span class="line">{* Start of eZ Recommendation service *}</span>
+</pre><pre class="wordwrap"><span class="line">&lt;div class=&quot;attribute-recommendations&quot;&gt;</span>
+</pre><pre class="wordwrap"><span class="line">&lt;h1&gt;{&quot;Also clicked articles&quot;}&lt;/h1&gt;</span>
+</pre><pre class="wordwrap"><span class="line">{include uri='design:content/recommendations.tpl'&amp;nbsp; node=$node scenario='also_clicked_article' limit=3 category_based=false() track_rendered_items=true() create_clickrecommended_event=true()}</span>
+</pre><pre class="wordwrap"><span class="line">&lt;/div&gt;</span>
+</pre><pre class="wordwrap"><span class="line">{* End of eZ Recommendation service *}</span>
+</pre><pre class="wordwrap"><span class="line">&amp;nbsp;&amp;nbsp; {include uri='design:parts/related_content.tpl'}</span>
+</pre><pre class="wordwrap"><span class="line">...</span>
+</pre><p>After reloading &nbsp;the page we see the following:</p>
+<div class="">        <img src="../../../../../../../var/doc/storage/images/media/images/ez-recommender-insert-custom-tag7/129151-1-eng-GB/eZ-Recommender-Insert-Custom-Tag_pdf.png" alt="" />
+<p>eZ Recommender Insert Custom Tag</p>
+
+
+
+
+
+
+
+</div><p>The top of the above screenshot shows the article full view followed by a star rating and recommendations from the eZ Recommendation service.</p><p>To analyze the recommendation workflow in more detail, we check again the latest entries in &lt;eZ publish root directory&gt;/var/log/debug.log.</p><p>We start with the request for recommendations:</p><pre class="wordwrap"><span class="line">debug.log:</span>
+</pre><pre class="wordwrap"><span class="line">[ Sep 17 2011 16:20:23 ] [ezyoochoose] Trying request reco.yoochoose.net/ebl/&lt;strong&gt;&lt;CustomerID&gt;&lt;/strong&gt;/top_clicked.json?itemid=246&amp;numrecs=3&amp;itemtypeid=2</span>
+</pre><pre class="wordwrap"><span class="line">[ Sep 17 2011 16:20:24 ] [ezyoochoose] Sending request reco.yoochoose.net/ebl/&lt;strong&gt;&lt;CustomerID&gt;&lt;/strong&gt;/top_clicked.json?itemid=246&amp;numrecs=3&amp;itemtypeid=2</span>
+</pre><pre class="wordwrap"><span class="line">[ Sep 17 2011 16:20:24 ] [ezyoochoose] Received answer 'HTTP/1.1 200 OK</span>
+</pre><pre class="wordwrap"><span class="line">...</span>
+</pre><p>If the installation is working properly and recommendations are available you will also see an answer in the following form:</p><pre class="wordwrap"><span class="line">[ Nov 17 2011 18:59:29 ] [ezrecommendation] Received recommendations</span>
+</pre><pre class="wordwrap"><span class="line">{&quot;recommendationResponseList&quot;:[{&quot;reason&quot;:&quot;CF_I2I_CLICK (context: ITEM(s))&quot;,&quot;itemType&quot;:2,&quot;itemId&quot;:179,&quot;relevance&quot; :93},{&quot;reason&quot;:&quot;CF_I2I_CLICK (context: ITEM(s))&quot;, &quot;itemType&quot;:2,&quot;itemId&quot;:175,&quot;relevance&quot;:91},{&quot;reason&quot;: &quot;CF_I2I_CLICK (context:ITEM(s))&quot;,&quot;itemType&quot;:2, &quot;itemId&quot;:177,&quot;relevance&quot;:76}]}'...&amp;nbsp;&amp;nbsp;</span>
+</pre><p>Scrolling down you will see tracking events showing that some of the recommendations have been rendered:</p><pre class="wordwrap"><span class="line">[ Nov 17 2011 18:59:29 ] [ezrecommendation] Sending request event.yoochoose.net/news/mycustomerID/rendered/mycookie/2/179,175,177</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Recommendation/Retrieving-Recommendations by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:04 GMT -->
+</html>

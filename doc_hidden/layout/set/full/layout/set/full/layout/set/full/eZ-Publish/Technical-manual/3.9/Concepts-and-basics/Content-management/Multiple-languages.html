@@ -1,0 +1,76 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Concepts-and-basics/Content-management/Multiple-languages by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Multiple languages / Content management / Concepts and basics / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Multiple languages</h1>
+</div>
+
+ <p>In addition to the versioning system, the content model of eZ publish also provides a built-in multilanguage framework. This feature allows an object's contents to exist in several languages. The system is able to support up to 30 different languages at the same time.</p> <p>The multi-language feature provides a generic one-to-one translation mechanism that can be used to translate any kind of content. A one-to-one translation solution makes it possible to represent the exact same content in multiple languages. For example, when a news article is available in English, Norwegian and Hungarian (same content in all three cases), we say that we have one-to-one translation of the content. The translation mechanism is completely independent of the datatypes. In other words, any kind of content can be translated regardless of the datatypes that are used to realize the content's structure. It is possible to start with only one language and when time comes, add translations and thus extend the spectrum of the target audience.</p> <p>The following illustration shows a simplified example of an object with two versions where each version exists in several languages. A language in this case is often referred to as a <i>translation</i>.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/concepts_and_basics/object_structure_basic_versions_and_translations/29976-2-eng-GB/object_structure_basic_versions_and_translations_doc.png" alt="Content object structure (with versions and translations)." />
+ <p>Content object structure (with versions and translations).</p>
+
+
+
+
+
+
+
+</div> <p>As the illustration indicates, each version can have a different set of translations. At minimum, a version always has one translation which by default is the <i>initial/main</i> translation. The initial/main translation can not be removed. However, if the object exists in several languages, it is possible to select which of the translations that should be initial/main and thus the previous initial/main translation can be removed.</p> <p>It is important to note that from 3.8, when a user edits an object, it is no longer the entire version that gets edited. Instead, a combination of a version and a translation that is edited. This approach avoids the locking of entire versions (along with all the translations) and thus it allows multiple translators to work with the same content in several languages at the same time. <a name="global_translation_list"></a>
+ </p>  <a name="eztoc63298_1" id="eztoc63298_1"></a><h2>The global translation list</h2> <p>An object can only be edited/translated using languages that exist in the <i>global translation list</i>. Initially, this list contains the languages that were selected during step six of the setup wizard. Additional languages can be added at any time while the site is up and running. The following screenshot shows the global translation list as it appears in the administration interface (under &quot;Setup&quot; and &quot;Languages&quot;).</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/concepts_and_basics/the_list_of_languages/31480-1-eng-GB/the_list_of_languages_doc.png" alt="The list of existing languages for translation of content" />
+ <p>The list of existing languages for translation of content</p>
+
+
+
+
+
+
+
+</div> <p>The global translation list simply keeps track of the languages that users are allowed to use when editing/translating content. A translation added to the list will immediately become available for use. Note that from 3.8, it is no longer possible to remove languages from the global translation list unless they are not used by any objects. The global translation list is capable of handling up to 30 languages.</p>   <a name="eztoc63298_2" id="eztoc63298_2"></a><h2>Differences between 3.8 and earlier versions</h2> <p>In eZ publish 3.7 and earlier versions, objects had to be created in the primary language before they could be translated to additional languages. Multiple translators could not work simultaneously because the edit process locked the entire version which also contained the translations.</p> <p>In eZ publish 3.8, the primary language concept is gone and thus objects can be created using different languages. This means that you can for example have an article available only in English and another article available only in Norwegian. Multiple translators can work on the same object because when editing, they actually edit the translation itself instead of the entire version. This means that if you have written an article in English, different translators can go ahead and add translations (for example Hungarian, Norwegian and Russian) to the object simultaneously. They no longer have to wait for eachother because they can work with different translations at the same time on the same object. However, this also means that a user can no longer work with multiple translations at the same time. The problem is that the user must leave the edit interface in order to be able to add (and then edit) new translations for an object. There are some other drawbacks as well. For example, unless a user is editing the very first version of an object, it is no longer possible to change the object's locations from the edit interface. However, the locations can still be changed using the &quot;Locations&quot; window when the object isn't being edited.</p> <p>Whenever an object is published, the system automatically collects all the latest translations that the previous version(s) of the object contains and puts them into the version being published. The result is a version that contains all the up-to-date translations. The contents of an object can be translated to a maximum number of 30 languages.</p> <p>Please refer to the &quot;Updating INI settings for multi-language&quot; part of the &quot;<a href="../../../../../../full.html" target="_self">Upgrading from 3.6.x (3.7.x) to 3.8.0</a>&quot; page for information about multi-language related INI settings.</p>   <a name="eztoc63298_3" id="eztoc63298_3"></a><h2>Multilingual classes</h2> <p>From 3.9, it is possible to translate the class names and the attribute names. In other words, you can for example have &quot;Car&quot; and &quot;Bil&quot; as class names in English and Norwegian along with &quot;Top speed&quot; and &quot;Topphastighet&quot; as attribute names. Refer to the &quot;<a href="../../Features/Multi-language/Translatable-class-attributes.html" target="_self">Translatable class attributes</a>&quot; documentation page for more information.</p>   <a name="eztoc63298_4" id="eztoc63298_4"></a><h2>Non-translatable attributes</h2> <p>The data structure defined by a class is built up of attributes where each attribute is represented by a datatype. Among other things, an attribute of a class can be made translatable or not. If an attribute is translatable, the system will allow the translation of its contents when an object of that class is being edited. This is typically convenient when the attribute contains actual text. For example, the written part of a news article can be translated into different languages. However, some attributes are non-translatable by nature. This is typical for images without text, numbers, dates, e-mail addresses and so on. Such attributes can be made non-translatable and thus their contents will simply be copied from the initial/main translation. The copied values can not be edited.</p> <p>For example, let's say that we need to store information about furniture in multiple languages. We could build a furniture class using the following attributes: name, photo, description, height, width, depth and weight. Allowing the translation of anything else then the description attribute would be pointless since the values stored by the other attributes are the same regardless of the language used to describe the furniture. In other words, the name, photo, height, width, depth and weight would be the same in for example both English and Norwegian. Conversion between different measuring units would have to be done within the template that is used to display the information.</p>   <a name="eztoc63298_5" id="eztoc63298_5"></a><h2>Access control</h2> <p>It is possible to control whether a user (or a group of users) should be able to translate content or not. This policy can be controlled on a class, section, language and owner basis. In particular, the language limitation makes it possible to control which user (or user groups) should be able to edit and/or translate different parts of the content using different languages. In addition, it is also possible to control access to the global translation list. This makes it possible to allow users other than the site administrator to add and remove translations on a global basis.</p> <p>Please refer to the <a href="../../Features/Multi-language.html" target="_self">multi-language</a> part of the features section for further details.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Concepts-and-basics/Content-management/Multiple-languages by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:27 GMT -->
+</html>

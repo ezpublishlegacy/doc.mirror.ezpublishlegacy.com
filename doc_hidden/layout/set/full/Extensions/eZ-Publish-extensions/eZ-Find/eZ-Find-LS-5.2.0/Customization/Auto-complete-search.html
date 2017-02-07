@@ -1,0 +1,87 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.2.0/Customization/Auto-complete-search by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:12:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Auto-complete search / Customization / eZ Find LS 5.2.0 / eZ Find / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Auto-complete search</h1>
+</div>
+
+<p>As of eZ Find 2.3 the auto-complete search function was introduced. This feature provides users with a list of suggested search words once they have entered a minimum amount of letters from a word in the search field. In short, the search engine will try to predict the first word the user wants to type and search. Instead of typing the word completely, the user can select the correct word from the suggestion list. To activate this feature you need to configure the settings in the [AutoCompleteSettings] block of your &quot;<i>ezfind.ini</i>&quot; configuration file, located here:</p><pre class="wordwrap"><span class="line">(root of your eZ Publish &nbsp;installation)/ezpublish_legacy/extension/ezfind/settings/ezfind.ini</span>
+</pre><p>First thing to do is to enable the AutoComplete setting. To prevent unrelated or unlimited amount of suggestions, it is possible to limit the suggestions as well as specify the type of info your search engine will return. This is done with the settings Limit and SolrParams. The amount of letters required before the auto-complete function is activated can be configured with the MinQueryLength setting. Keep in mind that setting this to a negative value will disable the auto-complete function.</p><p>For more information on the eZ Find auto-complete settings, please visit <a href="../../eZ-Find-LS-5.1.0/Basic-Configuration/Configuration-settings-eZ-Find.html" title="Configuration settings on eZ Find" target="_blank">Configuration settings eZ Find</a>.</p><a name="eztoc136006_1" id="eztoc136006_1"></a><h2>Known limitations</h2><a name="eztoc136006_1_0_1" id="eztoc136006_1_0_1"></a><h4>Auto-complete with Kanji and Hiragana Japanese characters</h4><p>eZ Find's auto-complete feature does not behave as expected with Kanji and Hiragana Japanese characters, like it does with katakana characters, which is the correct behavior.</p><p>To workaround this a patch is available on jira <a href="https://jira.ez.no/browse/EZP-21239" title="eZ Find's auto-complete functionality does not work with Kanji and Hiragana Japanese characters" target="_blank">EZP-21239</a>, which will require a change&nbsp;in solr <i>conf/schema.xml</i>, in&nbsp;the field type &quot;spell&quot; that will need to be changed to:</p><pre class="wordwrap copytoclipboard"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;fieldtype name=&quot;spell&quot; class=&quot;solr.TextField&quot; positionIncrementGap=&quot;100&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;analyzer&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;tokenizer class=&quot;solr.JapaneseTokenizerFactory&quot; mode=&quot;search&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.JapaneseBaseFormFilterFactory&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Normalizes full-width romaji to half-width and half-width kana to full-width (Unicode NFKC subset) --&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.CJKWidthFilterFactory&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Removes common tokens typically not useful for search, but have a negative effect on ranking --&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.JapaneseKatakanaStemFilterFactory&quot; minimumLength=&quot;4&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Lower-cases romaji characters --&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.StopFilterFactory&quot; ignoreCase=&quot;true&quot; words=&quot;stopwords.txt&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.StandardFilterFactory&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.LowerCaseFilterFactory&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.WordDelimiterFilterFactory&quot; generateWordParts=&quot;1&quot; splitOnNumerics=&quot;0&quot; generateNumberParts=&quot;0&quot; catenateWords=&quot;1&quot; catenateNumbers=&quot;0&quot; catenateAll=&quot;0&quot; splitOnCaseChange=&quot;1&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.RemoveDuplicatesTokenFilterFactory&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/analyzer&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/fieldtype&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '    &lt;fieldtype name=&quot;spell&quot; class=&quot;solr.TextField&quot; positionIncrementGap=&quot;100&quot;&gt;\r\n      &lt;analyzer&gt;\r\n        &lt;tokenizer class=&quot;solr.JapaneseTokenizerFactory&quot; mode=&quot;search&quot;/&gt;\r\n        &lt;filter class=&quot;solr.JapaneseBaseFormFilterFactory&quot;/&gt;\r\n        &lt;!-- Normalizes full-width romaji to half-width and half-width kana to full-width (Unicode NFKC subset) --&gt;\r\n        &lt;filter class=&quot;solr.CJKWidthFilterFactory&quot;/&gt;\r\n        &lt;!-- Removes common tokens typically not useful for search, but have a negative effect on ranking --&gt;\r\n         &lt;filter class=&quot;solr.JapaneseKatakanaStemFilterFactory&quot; minimumLength=&quot;4&quot;/&gt;\r\n        &lt;!-- Lower-cases romaji characters --&gt;\r\n        &lt;filter class=&quot;solr.StopFilterFactory&quot; ignoreCase=&quot;true&quot; words=&quot;stopwords.txt&quot;/&gt;\r\n        &lt;filter class=&quot;solr.StandardFilterFactory&quot;/&gt;\r\n        &lt;filter class=&quot;solr.LowerCaseFilterFactory&quot;/&gt;\r\n        &lt;filter class=&quot;solr.WordDelimiterFilterFactory&quot; generateWordParts=&quot;1&quot; splitOnNumerics=&quot;0&quot; generateNumberParts=&quot;0&quot; catenateWords=&quot;1&quot; catenateNumbers=&quot;0&quot; catenateAll=&quot;0&quot; splitOnCaseChange=&quot;1&quot;/&gt;\r\n        &lt;filter class=&quot;solr.RemoveDuplicatesTokenFilterFactory&quot;/&gt;\r\n       &lt;/analyzer&gt;\r\n    &lt;/fieldtype&gt;\r\n' ); return false;" /></p>
+<![endif]--><p>
+In this way, japanese text is split and normalized morphologically. The test string above (ひらがな) &nbsp;will not autocomplete, but a string like シニアソフトウェアエンジニア will be split into シニア &nbsp; &nbsp; 　ソフトウェア &nbsp; &nbsp; 　エンジニア &nbsp;.<br />If you want the string ひらがな to autocomplete, you may consider the more &quot;hard&quot; option to do only whitespace tokenisation by changing the &quot;spell&quot; field type to:</p><pre class="wordwrap copytoclipboard"><span class="line">&nbsp;&lt;fieldtype name=&quot;spell&quot; class=&quot;solr.TextField&quot; positionIncrementGap=&quot;100&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;analyzer&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;tokenizer class=&quot;solr.WhitespaceTokenizerFactory&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.StopFilterFactory&quot; ignoreCase=&quot;true&quot; words=&quot;stopwords.txt&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.StandardFilterFactory&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.LowerCaseFilterFactory&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.WordDelimiterFilterFactory&quot; generateWordParts=&quot;1&quot; splitOnNumerics=&quot;0&quot; generateNumberParts=&quot;0&quot; catenateWords=&quot;1&quot; catenateNumbers=&quot;0&quot; catenateAll=&quot;0&quot; splitOnCaseChange=&quot;1&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;filter class=&quot;solr.RemoveDuplicatesTokenFilterFactory&quot;/&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/analyzer&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/fieldtype&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', ' &lt;fieldtype name=&quot;spell&quot; class=&quot;solr.TextField&quot; positionIncrementGap=&quot;100&quot;&gt;\r\n      &lt;analyzer&gt;\r\n        &lt;tokenizer class=&quot;solr.WhitespaceTokenizerFactory&quot;/&gt;\r\n        &lt;filter class=&quot;solr.StopFilterFactory&quot; ignoreCase=&quot;true&quot; words=&quot;stopwords.txt&quot;/&gt;\r\n        &lt;filter class=&quot;solr.StandardFilterFactory&quot;/&gt;\r\n        &lt;filter class=&quot;solr.LowerCaseFilterFactory&quot;/&gt;\r\n        &lt;filter class=&quot;solr.WordDelimiterFilterFactory&quot; generateWordParts=&quot;1&quot; splitOnNumerics=&quot;0&quot; generateNumberParts=&quot;0&quot; catenateWords=&quot;1&quot; catenateNumbers=&quot;0&quot; catenateAll=&quot;0&quot; splitOnCaseChange=&quot;1&quot;/&gt;\r\n        &lt;filter class=&quot;solr.RemoveDuplicatesTokenFilterFactory&quot;/&gt;\r\n       &lt;/analyzer&gt;\r\n    &lt;/fieldtype&gt;\r\n' ); return false;" /></p>
+<![endif]--><p>This will not do any language specific analysis though.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.2.0/Customization/Auto-complete-search by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:12:59 GMT -->
+</html>

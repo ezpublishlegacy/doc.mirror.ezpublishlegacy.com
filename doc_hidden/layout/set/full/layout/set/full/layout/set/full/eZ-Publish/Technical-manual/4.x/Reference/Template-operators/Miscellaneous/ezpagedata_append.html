@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-operators/Miscellaneous/ezpagedata_append by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:02:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>ezpagedata_append / Miscellaneous / Template operators / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ezpagedata_append</h1>
+</div>
+<h3>Summary</h3>
+Appends a new value into a persistent variable.<h3>Usage</h3>
+<pre>ezpagedata_append( key, value )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>key</td>
+        <td>string</td>
+        <td>The key from the persistent variable to append into.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>value</td>
+        <td>mixed</td>
+        <td>The value to add into your persistent variable.</td>
+        <td>Yes.</td>
+    </tr></table><h3>Description</h3>
+<p>
+The&nbsp;<i>ezpagedata_append()</i> operator appends a new value into a persistent variable into your page data. The new value will be added as a array entry.<br />
+If the target persistent variable is not a array, then an array will be created, replacing the existing value. Please note that this will destroy the previously stored data in your persistent variable.<br />If the target persistent variable doesn't exist, a new one will be created.</p><p>This operator has been introduced by eZ Website Interface, and it is required that the <i>ezwebin</i> extension is installed to use it.</p><p>Created/appended persistent variables can be accessed by using the&nbsp;<a href="../Data-and-information-extraction/ezpagedata.html" target="_blank">ezpagedata()</a> operator.</p><h3>Examples</h3>
+<a name="eztoc134924_0_0_1" id="eztoc134924_0_0_1"></a><h4>Example 1</h4><pre class="wordwrap copytoclipboard"><span class="line">{ezpagedata_set('my_new_persistent_variable', hash('my_value',918))}</span>
+<span class="line">{ezpagedata_append('my_new_persistent_variable', hash('my_second_value',64))}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{def $mypageData = ezpagedata()}</span>
+<span class="line">{$mypageData.persistent_variable|attribute(show)}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{ezpagedata_set(\'my_new_persistent_variable\', hash(\'my_value\',918))}\r\n{ezpagedata_append(\'my_new_persistent_variable\', hash(\'my_second_value\',64))}\r\n\r\n{def $mypageData = ezpagedata()}\r\n{$mypageData.persistent_variable|attribute(show)}\r\n' ); return false;" /></p>
+<![endif]--><p>A new value should be appended into your 'my_new_persistent_variable'&nbsp;persistent variable.</p><p>When using the&nbsp;<i>attribute(show)</i> operator to output the content of your persistent_variable it should look like the following:</p><div class="output"><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Attribute</p>
+  </th><th >  <p>Type</p>
+  </th><th >  <p>Value</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>js_files</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(6)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;0</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezjsc::yui3'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;1</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezjsc::yui3io'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;2</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezcontentstaging_yui3.js'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;3</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'node_tabs.js'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;4</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezjsc::yui2'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;5</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezajaxsubitems_datatable.js'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>my_new_persistent_variable</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(2)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;my_value</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>918</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>&gt;my_second_value</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>integer</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>64</b></p>
+  </td>
+
+</tr>
+
+</table>
+</div><a name="eztoc134924_0_0_2" id="eztoc134924_0_0_2"></a><h4>Example 2</h4><pre class="wordwrap copytoclipboard"><span class="line">{ezpagedata_set('my_second_persistent_variable','Some text')}</span>
+<span class="line">{ezpagedata_append('my_second_persistent_variable','Another text')}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{def $mypageData = ezpagedata()}</span>
+<span class="line">{$mypageData.persistent_variable|attribute(show)}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{ezpagedata_set(\'my_second_persistent_variable\',\'Some text\')}\r\n{ezpagedata_append(\'my_second_persistent_variable\',\'Another text\')}\r\n\r\n{def $mypageData = ezpagedata()}\r\n{$mypageData.persistent_variable|attribute(show)}\r\n' ); return false;" /></p>
+<![endif]--><p>The 'my_second_persistent_variable'&nbsp;persistent variable should be replaced with an array.</p><p>The output created by the&nbsp;<i>attribute(show)</i>&nbsp;operator should look like the following:</p><div class="output"><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Attribute</p>
+  </th><th >  <p>Type</p>
+  </th><th >  <p>Value</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>js_files</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(6)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;0</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezjsc::yui3'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;1</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezjsc::yui3io'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;2</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezcontentstaging_yui3.js'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;3</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'node_tabs.js'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;4</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezjsc::yui2'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;5</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezajaxsubitems_datatable.js'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>my_second_persistent_variable</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>array</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>Array(1)</b></p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>&gt;0</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>string</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>'Another text'</b></p>
+  </td>
+
+</tr>
+
+</table>
+</div><a name="eztoc134924_0_0_3" id="eztoc134924_0_0_3"></a><h4>Example 3</h4><pre class="wordwrap copytoclipboard"><span class="line">{ezpagedata_append('my_third_persistent_variable',hash('value1','Hello world!'))}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{def $mypageData = ezpagedata()}</span>
+<span class="line">{$mypageData.persistent_variable|attribute(show)}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{ezpagedata_append(\'my_third_persistent_variable\',hash(\'value1\',\'Hello world!\'))}\r\n\r\n{def $mypageData = ezpagedata()}\r\n{$mypageData.persistent_variable|attribute(show)}\r\n' ); return false;" /></p>
+<![endif]--><p>The 'my_third_persistent_variable'&nbsp;persistent variable will be created, since it doesn't exists.</p><p>The output created by the&nbsp;<i>attribute(show)</i>&nbsp;operator should look like the following:</p><div class="output"><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Attribute</p>
+  </th><th >  <p>Type</p>
+  </th><th >  <p>Value</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>js_files</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(6)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;0</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezjsc::yui3'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;1</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezjsc::yui3io'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;2</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezcontentstaging_yui3.js'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;3</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'node_tabs.js'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;4</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezjsc::yui2'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;5</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'ezajaxsubitems_datatable.js'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>my_third_persistent_variable</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>array</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>Array(1)</b></p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>&gt;value1</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>string</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>'Hello world!'</b></p>
+  </td>
+
+</tr>
+
+</table>
+</div>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-operators/Miscellaneous/ezpagedata_append by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:02:43 GMT -->
+</html>

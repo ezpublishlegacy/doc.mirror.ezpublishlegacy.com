@@ -1,0 +1,65 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Configuration-files/content.ini/RelationAssignmentSettings/ClassSpecificAssignment by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>ClassSpecificAssignment / [RelationAssignmentSettings] / content.ini / Configuration files / Reference / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ClassSpecificAssignment</h1>
+</div>
+<h3>Summary</h3>
+Sets the rules for automatic location assignment when uploading related objects.<h3>Usage</h3>
+<pre class="pfix"> <p>
+ClassSpecificAssignment[]= <i>list_of_classes_and_class_groups1;list_of_locations1;main_location1</i> <br />
+ClassSpecificAssignment[]= <i>list_of_classes_and_class_groups2;list_of_locations2;main_location2</i> <br />...</p></pre><h3>Description</h3>
+ <p>While the &quot;<a href="DefaultAssignment.html" target="_self">DefaultAssignment</a>&quot; directive sets the default location for newly created (uploaded) related objects, the &quot;ClassSpecificAssignment&quot; directive makes it possible to specify a set of override rules. These rules make it possible to place specific types of objects at desired locations in the tree.</p> <p>The value of this setting has to be provided as an array where each element must contain two or three values separated by semicolons. </p> <p>The first value sets which types of objects that should be affected. It has to be a class and/or class group or a comma separated list of classes and/or class groups (both identifiers and ID numbers can be used). Note that classes should come before class groups because it is always the first match that will be used. </p> <p>The second value tells the system where to place newly uploaded objects of the specified type. It has to be a location or a comma separated list of locations (both paths and ID numbers of the desired nodes can be used). If multiple locations are specified, you can use the optional third parameter to set which of the locations that should be the main node. If the third (main node) parameter is omitted, the first location in the list will be the main node.</p> <p>From 3.9, the &quot;ClassSpecificAssignment&quot; array may contain several entries using the same first value. This means that you can specify multiple sets of locations for the same class. The system will use the one (the others will be skipped) under which the current user has sufficient &quot;create&quot; privileges. </p> <p>If the class is not mentioned anywhere in the &quot;ClassSpecificAssignment&quot; setting or if it is mentioned but the current user does not have sufficient &quot;create&quot; privileges at the specified locations, the value (location) specified by the &quot;DefaultAssignment&quot; setting will be used.</p><h3>Examples</h3>
+    <a name="eztoc79177_0_0_1" id="eztoc79177_0_0_1"></a><h4>Example 1</h4> <p>&nbsp;</p><pre class="wordwrap"><span class="line">ClassSpecificAssignment[]=flash;media/movies,media/multimedia,media/myflash;media/multimedia</span>
+</pre><p>
+ <br />With this configuration, newly uploaded flash files will be placed at three locations: &quot;media/movies&quot;, &quot;media/myflash&quot; and &quot;media/multimedia&quot;. The main node will be located under &quot;media/multimedia&quot;.</p>       <a name="eztoc79177_0_0_2" id="eztoc79177_0_0_2"></a><h4>Example 2</h4> <p>Let's say that you have several folders called &quot;computers&quot;, &quot;news&quot;, &quot;company&quot; and &quot;john_photo&quot; located under the &quot;Media&quot; top level node. In addition, you create the following rules:</p> <pre class="wordwrap"><span class="line">ClassSpecificAssignment[]=image;media/computers,media/news</span>
+<span class="line">ClassSpecificAssignment[]=image;media/company</span>
+<span class="line">ClassSpecificAssignment[]=image;media/john_photo</span>
+</pre> <p>In this case, the system will choose a location for uploaded images according to the current user's privileges. If the user has sufficient &quot;create&quot; privileges under both &quot;media/computers&quot; and &quot;media/news&quot;, all images uploaded by this user will be put to these folders (the system will create main nodes under &quot;media/computers&quot; and additional locations under &quot;media/news&quot;). However, if the user does not have the necessary privileges, the system will skip this line and go to the next one. If the user has sufficient &quot;create&quot; privileges under &quot;media/company&quot;, the images will be put inside that folder. If not, the system will skip that line as well and check the next one. If the user has sufficient &quot;create&quot; privileges under &quot;media/john_photo&quot;, the images will be put in that folder. Otherwise, the <a href="DefaultAssignment.html" target="_self">default location</a> will be used.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Configuration-files/content.ini/RelationAssignmentSettings/ClassSpecificAssignment by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:14 GMT -->
+</html>

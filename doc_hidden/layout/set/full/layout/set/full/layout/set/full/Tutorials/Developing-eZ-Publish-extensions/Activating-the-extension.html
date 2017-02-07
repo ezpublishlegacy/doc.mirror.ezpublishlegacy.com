@@ -1,0 +1,81 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/Activating-the-extension by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:02:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                  
+    <title>Activating the extension / Developing eZ Publish extensions / Tutorials / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Activating the extension</h1>
+</div>
+
+<p>To test the new view list of the module modul1 in &quot;jacextension&quot;, we have to activate the extension. This is done in the global site.ini.append.php (see listing 4) or in the &quot;site.ini.append.php&quot; associated with the applicable siteaccess (see listing 5). In the global siteaccess, the extension is activated via the &quot;ActiveExtensions[]&quot; setting. If you are activating the extension for a specific siteaccess, use the &quot;ActiveAccessExtensions[]&quot; setting.</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">/* #?ini charset=&quot;utf-8&quot;?</span>
+<span class="line">[ExtensionSettings]</span>
+<span class="line">ActiveExtensions[]</span>
+<span class="line">ActiveExtensions[]=jacextension</span>
+<span class="line">...</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php \r\n/* #?ini charset=&quot;utf-8&quot;? \r\n[ExtensionSettings] \r\nActiveExtensions[] \r\nActiveExtensions[]=jacextension\r\n... \r\n*/ ?&gt;' ); return false;" /></p>
+<![endif]--><p><i>Listing 4. Option 1 – Activating the extension for all existing siteaccesses in the global configuration file: settings/override/site.ini.append.php</i></p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">/* #?ini charset=&quot;utf-8&quot;?</span>
+<span class="line">...</span>
+<span class="line">[ExtensionSettings]</span>
+<span class="line">ActiveAccessExtensions[]=jacextension</span>
+<span class="line">...</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php \r\n/* #?ini charset=&quot;utf-8&quot;? \r\n... \r\n[ExtensionSettings] \r\nActiveAccessExtensions[]=jacextension\r\n... \r\n*/ ?&gt;\r\n' ); return false;" /></p>
+<![endif]--><p><i>Listing 5. Option 2 – Activating extensions in the configuration file of a specific siteaccess, for example: settings/siteaccess/plain_site/site.ini.append.php</i></p><a name="eztoc123559_0_1" id="eztoc123559_0_1"></a><h3>Privilege system</h3><p>If we try to open the view list of modul1 with following URL:</p><p>http://localhost/ez/index.php/plain_site/modul1/list/table/5/(param4)/141</p><p>...eZ Publish returns an “access denied” message. Why? Because the Anonymous user does not have the necessary privileges.</p><p>There are two ways to grant privileges. We could grant access to all users with the entry PolicyOmitList[]=modul1/list in the configuration file &quot;extension/jacextension/settings/site.ini.append.php&quot;, (see listing 6).</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">/* #?ini charset=&quot;utf-8&quot;?</span>
+<span class="line">[RoleSettings]</span>
+<span class="line">PolicyOmitList[]=modul1/list</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\n/* #?ini charset=&quot;utf-8&quot;? \r\n[RoleSettings] \r\nPolicyOmitList[]=modul1/list\r\n*/ ?&gt;' ); return false;" /></p>
+<![endif]--><p><i>Listing 6. Set the access rights to the view list of modul1 for all users, in the configuration file extension/jacextension/settings/site.ini.append.php</i></p><p>Alternatively, we could alter the user access privileges using the eZ Publish Administration Interface. To do this we have to change the role Anonymous to allow access to the functions of module modul1. Use the following URL: http://localhost/ez/index.php/plain_site_admin/role/view/1.</p><p>The functions that can have an extension module are defined in module.php with the array $FunctionList. The link is done in the definition of the view with the Array key functions. So in our example we link the view list with the user function read:</p><pre class="wordwrap"><span class="line">$FunctionList['read'] = array(); // with 'functions' =&gt; array( 'read' ) in the $ViewList array</span>
+</pre><p>Using $FunctionList, it is possible to link individual views of a module with specific user functions. There is also the user function &quot;create&quot;, which is assigned to all views that create content. In this case, we want to limit access to editors.</p><p>The &quot;read&quot; function is available to all the users who need read rights, and also for the Anonymous user. For advanced settings on privileges, please check the tutorial &quot;Adding custom security policy limitations to your modules&quot;.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/Activating-the-extension by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:02:17 GMT -->
+</html>

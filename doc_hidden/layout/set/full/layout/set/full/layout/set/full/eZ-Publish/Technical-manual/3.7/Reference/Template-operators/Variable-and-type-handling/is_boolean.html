@@ -1,0 +1,90 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.7/Reference/Template-operators/Variable-and-type-handling/is_boolean by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:18:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>is_boolean / Variable and type handling / Template operators / Reference / 3.7 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>is_boolean</h1>
+</div>
+<h3>Summary</h3>
+Returns TRUE if the provided variable is a boolean.<h3>Usage</h3>
+<pre>input|is_boolean( target )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>target</td>
+        <td>any</td>
+        <td>Target variable.</td>
+        <td>Only if the input parameter is omitted.</td>
+    </tr></table><h3>Returns</h3>
+TRUE or FALSE.<h3>Description</h3>
+ <p>This operator checks if the input parameter or the target variable is a boolean. If it is, the operator will return TRUE, otherwise FALSE will be returned. If both the input parameter and the target variable are provided, it is the target variable that will be evaluated.</p><h3>Examples</h3>
+    <a name="eztoc22011_0_0_1" id="eztoc22011_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $my_variable=true</span>
+<span class="line">{if $my_variable|is_boolean()}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;It is a boolean.</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;It is not a boolean.</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{def $my_variable=true \r\n{if $my_variable|is_boolean()}\r\n    It is a boolean.\r\n{else}\r\n    It is not a boolean.\r\n{/if}\r\n' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced: &quot;It is a boolean.&quot;.</p>   <a name="eztoc22011_0_0_2" id="eztoc22011_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $my_variable=true</span>
+<span class="line">{if is_boolean( $my_variable )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;It is a boolean.</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;It is not a boolean.</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{def $my_variable=true \r\n{if is_boolean( $my_variable )}\r\n    It is a boolean.\r\n{else}\r\n    It is not a boolean.\r\n{/if}\r\n' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced: &quot;It is a boolean.&quot;.</p>   <a name="eztoc22011_0_0_3" id="eztoc22011_0_0_3"></a><h4>Example 3</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $my_variable=true</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$your_variable='BOFID'}</span>
+<span class="line">{if $my_variable|is_boolean( $your_variable )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;It is a boolean.</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;It is not a boolean.</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{def $my_variable=true \r\n     $your_variable=\'BOFID\'}\r\n{if $my_variable|is_boolean( $your_variable )}\r\n    It is a boolean.\r\n{else}\r\n    It is not a boolean.\r\n{/if}\r\n' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced: &quot;It is not a boolean.&quot;.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.7/Reference/Template-operators/Variable-and-type-handling/is_boolean by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:18:09 GMT -->
+</html>

@@ -1,0 +1,71 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Workflow-events/Payment-gateway by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:39:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Payment gateway / Workflow events / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Payment gateway</h1>
+</div>
+<h3>Summary</h3>
+Generic solution for handling payment redirections.<h3>Description</h3>
+ <p>This event is a general solution that is capable of handling different kinds of payment redirections. It allows several payment gateway mechanisms to be plugged into the system through a workflow. The workflow must be assigned to the &quot;shop/checkout/before&quot; trigger. The following screenshot shows the edit interface for this event.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/reference/workflow_events/edit_interface_payment_gateway/9431-1-eng-GB/edit_interface_payment_gateway_doc.png" alt="Edit interface for the &quot;Payment gateway&quot; event." />
+ <p>Edit interface for the &quot;Payment gateway&quot; event.</p>
+
+
+
+
+
+
+
+</div>    <a name="eztoc91636_0_0_1" id="eztoc91636_0_0_1"></a><h4>Type</h4> <p>The &quot;Type&quot; menu shows the payment gateway solutions that are available (installed and activated) as eZ publish extensions. It allows the administrator to select which payment gateway(s) that should be used. If several gateways are selected, the system will allow the customer to choose between the available gateways during the checkout process. The selection interface is presented using &quot;/templates/workflow/selectgateway.tpl&quot; located in the current or one of the fallback designs.</p>   <a name="eztoc91636_0_0_2" id="eztoc91636_0_0_2"></a><h4>Execution</h4> <p>The following list shows the flow of execution when a payment gateway is used through the interface that this workflow event provides.</p> 
+<ol>
+ <li><div> The customer initiates the checkout process. </div></li> <li><div> The browser is redirected to the target payment server (PayPal, PayNet, etc.). </div></li> <li><div> The customer attempts to pay for the products using the payment gateway. </div></li> <li><div> The browser is sent back to eZ publish, the order will be either approved or rejected. </div></li> 
+</ol>
+ <p>
+Between steps 3 and 4, the selected payment server will notify eZ publish about the purchase.<br />The system will validate the authenticity (identity) of the message, and based on the reply it will either approve or reject the order. In case of no reply, the validation process will time-out and the customer will be asked to contact the shop owner.</p> <p>This event provides a development framework which simplifies the implementation of payment solutions.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Workflow-events/Payment-gateway by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:39:24 GMT -->
+</html>

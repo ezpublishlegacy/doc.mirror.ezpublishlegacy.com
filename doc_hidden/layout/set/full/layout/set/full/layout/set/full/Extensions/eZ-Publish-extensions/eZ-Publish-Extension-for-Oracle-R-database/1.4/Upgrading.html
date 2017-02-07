@@ -1,0 +1,93 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/1.4/Upgrading by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:49:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Upgrading / 1.4 / eZ Publish Extension for Oracle® database / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Upgrading</h1>
+</div>
+
+ <p>Every new version of the eZ Publish Extension for Oracle® Database comes with database upgrade scripts of the following two types:</p>
+<ul>
+ <li><div> Scripts that make it possible for your current eZ Publish installation to use the latest version of the extension. These are located in the &quot;update/database/ezoracle/&quot; directory of the database extension. </div></li> <li><div> Scripts that make it possible to upgrade eZ Publish to the latest stable version. These are located in the &quot;update/database/ezpublish/&quot; directory of the extension.  </div></li> 
+</ul>
+<p>Please note that as long as your site is already running on an Oracle database, the database extension makes it possible to upgrade the entire eZ Publish installation and not just the extension itself .</p>  <a name="eztoc35472_1" id="eztoc35472_1"></a><h2>Consistency checks</h2> <p>Make sure that your eZ Publish site is in a consistent state. The administration interface allows you to quickly check whether the current installation is in a consistent state or not. This can be done using the &quot;Upgrade check&quot; section of the &quot;Setup&quot; part. Please refer to the <a href="../../../../eZ-Publish/Upgrading.html#system_check" target="_self">eZ Publish Upgrading Manual</a> for more information about consistency checks.</p>   <a name="eztoc35472_2" id="eztoc35472_2"></a><h2>Backup</h2> <p>Make sure that you have a working backup of the site before you do the actual upgrade. You should create a copy of the entire eZ Publish directory and the database. Please refer to the <a href="http://www.oracle.com/technology/deploy/availability/htdocs/BR_Overview.htm" target="_blank">Oracle backup and recovery</a> documentation page and/or <a href="http://www.orafaq.com/wiki/Recovery" target="_blank">Oracle Backup and recovery FAQ</a> for information about backing up the database.</p> <p> <a name="upgrade_ezoracle"></a>
+ </p>   <a name="eztoc35472_3" id="eztoc35472_3"></a><h2>Upgrading the database extension</h2> <p>Use this method if you only want to upgrade the extension itself but not eZ Publish. In this case, the upgrade procedure consists of the following steps:</p>
+<ol>
+ <li><div> Upgrading the extension files </div></li> <li><div> Upgrading the database </div></li> <li><div> Clearing the INI cache </div></li> <li><div> Restarting Apache (optional) </div></li> 
+</ol>
+  <a name="eztoc35472_3_1" id="eztoc35472_3_1"></a><h3>Step 1. Upgrading the extension files</h3> <p>Download the distribution package from <a href="http://ez.no/download/add_ons/database_extension" target="_self">http://ez.no/download/add_ons/database_extension</a> and unpack it inside the &quot;extension&quot; directory. (Please refer to the &quot;<a href="Installation.html" target="_self">Installation</a>&quot; section for more information about how to download and unpack the eZ Publish Extension for Oracle® Database.)</p>   <a name="eztoc35472_3_2" id="eztoc35472_3_2"></a><h3>Step 2. Upgrading the database</h3> <p>When a new version of the database extension is released, the database structure is usually changed/updated. In order for your eZ Publish installation to use the latest version of the database extension, you need to run the corresponding database upgrade script(s). These are located in the &quot;extension/ezoracle/update/database/ezoracle/&quot; directory. The following example demonstrates how this can be done when upgrading the eZ Publish Extension for Oracle® Database from version 1.3 to 1.4. </p>  <a name="eztoc35472_3_2_1" id="eztoc35472_3_2_1"></a><h4>Example</h4> <p>Assuming that an Oracle instance called &quot;ORCL&quot; is running on your Oracle server and can be accessed using an Oracle account with username &quot;scott&quot; and password &quot;tiger&quot;, you need to do the following:</p>
+<ol>
+ <li><div> Navigate into the &quot;extension/ezoracle/&quot; directory. </div></li> <li><div> Run the script using the following shell command: <pre class="wordwrap"><span class="line">$ sqlplus scott/tiger@ORCL @update/database/ezoracle/1.4/dbupdate-1.3-1.4.sql</span>
+</pre>  </div></li> 
+</ol>
+    <a name="eztoc35472_3_3" id="eztoc35472_3_3"></a><h3>Step 3. Clearing the INI cache</h3> <p>Upgrading the database extension requires the INI file caches to be cleared. This should be done from within a system shell: </p>
+<ol>
+ <li><div> Navigate into the eZ Publish directory. </div></li> <li><div> Run the clear cache script: <pre class="wordwrap"><span class="line">$ bin/shell/clearcache.sh --clear-ini</span>
+</pre>  </div></li> 
+</ol>
+   <a name="eztoc35472_3_4" id="eztoc35472_3_4"></a><h3>Step 4. Restarting Apache (optional)</h3> <p>You may need to restart the Apache web server after upgrading, especially if your site is using a PHP accelerator. Restarting Apache is usually a good idea when it comes to getting rid of strange results and doubts. Please note that the Oracle environment variables must be set before Apache is restarted, otherwise the PHP Oracle functions will not work (please refer to the <a href="http://www.php.net/oci8" target="_blank">PHP Oracle functions</a> documentation for more information).</p>    <a name="eztoc35472_4" id="eztoc35472_4"></a><h2>Upgrading eZ Publish</h2> <p>Use this method if you are already running the latest version of the database extension and wish to upgrade your eZ Publish installation to a newer version. In this case, the upgrade procedure consists of the following steps:</p>
+<ol>
+ <li><div> Upgrade the eZ Publish distribution files </div></li> <li><div> Upgrade the database </div></li> <li><div> Run the system upgrade scripts </div></li> <li><div> Update the system configuration </div></li> <li><div> Clear the caches </div></li> 
+</ol>
+ <p>Note that the upgrade procedure is basically the same as described in the <a href="../../../../eZ-Publish/Upgrading.html" target="_self">eZ Publish Upgrading Manual</a>. (Please refer to the &quot;<a href="../../../../eZ-Publish/Upgrading/Upgrading-from-3.a.b-to-3.x.html" target="_self">Upgrading from 3.a.b to 3.x.y</a>&quot; section or read the upgrade instructions for your particular version of eZ Publish.) The only difference is related to the database upgrade under step 2. The database upgrade scripts are located inside the &quot;ezoracle/update/database/ezpublish&quot; directory (starting from 3.5, because eZ Publish versions prior to 3.5 can not be run on an Oracle database server).</p> <p>The following example demonstrates how to upgrade the database assuming that an Oracle instance called &quot;ORCL&quot; is running on your Oracle server and can be accessed using an Oracle account with username &quot;scott&quot; and password &quot;tiger&quot;.</p>  <a name="eztoc35472_4_5" id="eztoc35472_4_5"></a><h3>Example</h3> <p>Let's say that you are using version 1.4 of the database extension and that you wish to upgrade eZ Publish from version 3.7.0 to 3.8.1. This means that you should follow the upgrade procedure described above. If you remembered to copy the &quot;extension/ezoracle&quot; directory while upgrading the eZ Publish distribution files during step 1, the &quot;ezoracle/update/database/ezpublish/3.8&quot; directory will contain the following database upgrade scripts:</p> 
+<ul>
+ <li><div> dbupdate-3.6.0-to-3.8.0.sql </div></li> <li><div> dbupdate-3.8.0-to-3.8.1.sql </div></li> 
+</ul>
+ <p>During step 2, you need to upgrade the 3.7.0 database to 3.8.1 by running these two scripts (in the specified order) following the <a href="../../../../eZ-Publish/Upgrading/Releases.html#upgrade_path" target="_self">official upgrade path</a>. In other words, you need to do the following:</p> 
+<ol>
+ <li><div> Navigate into the &quot;extension/ezoracle/&quot; directory. </div></li> <li><div> Run the following shell commands in the same order as specified: <pre class="wordwrap"><span class="line">$ sqlplus scott/tiger@ORCL @update/database/ezpublish/3.8/dbupdate-3.6.0-to-3.8.0.sql</span>
+<span class="line">$ sqlplus scott/tiger@ORCL @update/database/ezpublish/3.8/dbupdate-3.8.0-to-3.8.1.sql</span>
+</pre>  </div></li> 
+</ol>
+<p>The remaining three steps are described in the &quot;<a href="../../../../eZ-Publish/Upgrading/Upgrading-to-13.html" target="_self">Upgrading to 3.8</a>&quot; section of the eZ Publish Upgrading Manual.</p>    <a name="eztoc35472_5" id="eztoc35472_5"></a><h2>Upgrading eZ Publish and the database extension</h2> <p>This method is a combination of the two upgrade procedures described above. Use it if you wish to upgrade both eZ Publish and the database extension at the same time. The upgrade procedure consists of the following steps:</p> 
+<ol>
+ <li><div> Upgrade the eZ Publish distribution files and the database extension files </div></li> <li><div> Upgrade the database </div></li> <li><div> Run the system upgrade scripts </div></li> <li><div> Update the system configuration </div></li> <li><div> Clear the caches </div></li> <li><div> Restart Apache (optional) </div></li> 
+</ol>
+  <a name="eztoc35472_5_6" id="eztoc35472_5_6"></a><h3>Example</h3> <p>Let's say that you are using eZ Publish 3.7.0 together with version 1.3 of the database extension and wish to upgrade to versions 3.8.1 and 1.4 accordingly. In this case, there is no need to copy the &quot;extension/ezoracle/&quot; directory from the existing installation to the eZ Publish 3.8.1 directory when upgrading the distribution files during step 1. Instead, you need to download version 1.4 of the database extension from <a href="http://ez.no/download/add_ons/database_extension" target="_self">http://ez.no/download/add_ons/database_extension</a> and unpack it inside the &quot;extension&quot; directory. </p> <p>During step 2, you need to run the database upgrade scripts from both &quot;extension/ezoracle/update/database/ezoracle/1.4/&quot; and &quot;extension/ezoracle/update/database/ezpublish/3.8/&quot; subdirectories.</p> <p>
+Steps 3-5 are described in the &quot;<a href="../../../../eZ-Publish/Upgrading/Upgrading-to-13.html" target="_self">Upgrading to 3.8</a>&quot; section of the eZ Publish Upgrading Manual.<br />Step 6 is already described in the &quot;<a href="#upgrade_ezoracle" target="_self">Upgrading the database extension</a>&quot; subsection.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/1.4/Upgrading by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:49:31 GMT -->
+</html>

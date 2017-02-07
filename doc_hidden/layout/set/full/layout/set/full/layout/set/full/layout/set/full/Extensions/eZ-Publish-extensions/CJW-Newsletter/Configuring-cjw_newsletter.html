@@ -1,0 +1,105 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/CJW-Newsletter/Configuring-cjw_newsletter.ini by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:14:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Configuring cjw_newsletter.ini / CJW Newsletter / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Configuring cjw_newsletter.ini</h1>
+</div>
+
+<p>The default CJW Newsletter configuration settings are defined in this file:</p><pre class="wordwrap"><span class="line">/extension/cjw_newsletter/settings/cjw_newsletter.ini</span>
+</pre><p>It is highly recommended to create an override configuration file, for example here:</p><pre class="wordwrap"><span class="line">/settings/override/cjw_newsletter.ini.append.php</span>
+</pre><p>or preferred:</p><pre class="wordwrap"><span class="line">/extension/site_example/settings/override/cjw_newsletter.ini.append.php</span>
+</pre><a name="eztoc120938_0_1" id="eztoc120938_0_1"></a><h3>NewsletterSettings</h3><p>In the above mentioned override file (&quot;cjw_newsletter.ini.append.php&quot;) the following settings should be included and configured according to the needs of your site:</p><pre class="wordwrap copytoclipboard"><span class="line">[NewsletterSettings]</span>
+<span class="line"># Administration interface container NodeID</span>
+<span class="line">RootFolderNodeId=66</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Please put here the path to your PHP Cli installation. It is needed for generating the</span>
+<span class="line">preview and the views in the send out process</span>
+<span class="line">PhpCli=php</span>
+<span class="line">&nbsp;</span>
+<span class="line"># array with all skin names located in design folder</span>
+<span class="line"># =&gt; design:newsletter/skin/ $skin_name</span>
+<span class="line"># You can connect the layout with your newsletter list in the administration interface.</span>
+<span class="line">AvailableSkinArray[]</span>
+<span class="line">AvailableSkinArray[]=default</span>
+<span class="line">AvailableSkinArray[]=ez4you_extended</span>
+<span class="line">AvailableSkinArray[]=ez4you_simple</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[NewsletterSettings]\r\n# Administration interface container NodeID\r\nRootFolderNodeId=66\r\n\r\n# Please put here the path to your PHP Cli installation. It is needed for generating the\r\npreview and the views in the send out process\r\nPhpCli=php\r\n\r\n# array with all skin names located in design folder\r\n# =&gt; design:newsletter/skin/ $skin_name\r\n# You can connect the layout with your newsletter list in the administration interface.\r\nAvailableSkinArray[]\r\nAvailableSkinArray[]=default\r\nAvailableSkinArray[]=ez4you_extended\r\nAvailableSkinArray[]=ez4you_simple' ); return false;" /></p>
+<![endif]--><a name="eztoc120938_0_2" id="eztoc120938_0_2"></a><h3>NewsletterMailSettings</h3><p>
+It is possible to send your Newsletters with sendmail or SMTP. The file protocol is provided for development reasons only.<br />
+Keep in mind that there are three different types of send out mails:<br />
+&nbsp;&nbsp;&nbsp; * The subscribe or information mails<br />
+&nbsp;&nbsp;&nbsp; * the preview of the CJW Newsletter edition mails<br />
+&nbsp;&nbsp;&nbsp; * the CJW Newsletter edition itself.<br />When you choose SMTP, the SMTP settings in the above mentioned override file (cjw_newsletter.ini.append.php) should be configured as follows:</p><pre class="wordwrap copytoclipboard"><span class="line">[NewsletterMailSettings]</span>
+<span class="line"># smtp, sendmail, file</span>
+<span class="line"># cjw Newsletter edition</span>
+<span class="line">TransportMethodCronjob=sendmail</span>
+<span class="line">&nbsp;</span>
+<span class="line"># test cjw Newsletter edition</span>
+<span class="line">TransportMethodPreview=sendmail</span>
+<span class="line">&nbsp;</span>
+<span class="line"># subscribe, infomail</span>
+<span class="line">TransportMethodDirectly=sendmail</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Configuration for SMTP</span>
+<span class="line">SmtpTransportServer=</span>
+<span class="line">SmtpTransportPort=25</span>
+<span class="line">SmtpTransportUser=</span>
+<span class="line">SmtpTransportPassword=</span>
+<span class="line">&nbsp;</span>
+<span class="line"># settings for mail send out by subscribe, unsubscribe</span>
+<span class="line">EmailSender=newsletter@localhost.localdomain</span>
+<span class="line">EmailSenderName=Localhost Newsletter</span>
+<span class="line">&nbsp;</span>
+<span class="line"># string the subject of all mails is starting with</span>
+<span class="line">EmailSubjectPrefix=[Newsletter Localhost]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[NewsletterMailSettings]\r\n# smtp, sendmail, file\r\n# cjw Newsletter edition\r\nTransportMethodCronjob=sendmail\r\n\r\n# test cjw Newsletter edition\r\nTransportMethodPreview=sendmail\r\n\r\n# subscribe, infomail\r\nTransportMethodDirectly=sendmail\r\n\r\n# Configuration for SMTP\r\nSmtpTransportServer=\r\nSmtpTransportPort=25\r\nSmtpTransportUser=\r\nSmtpTransportPassword=\r\n\r\n# settings for mail send out by subscribe, unsubscribe\r\nEmailSender=newsletter@localhost.localdomain\r\nEmailSenderName=Localhost Newsletter\r\n\r\n# string the subject of all mails is starting with\r\nEmailSubjectPrefix=[Newsletter Localhost]' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/CJW-Newsletter/Configuring-cjw_newsletter.ini by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:14:33 GMT -->
+</html>

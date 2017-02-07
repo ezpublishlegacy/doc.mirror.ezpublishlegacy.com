@@ -1,0 +1,102 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.4/Features/Clustering/Setting-it-up-for-an-eZDBFileHandler by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:38:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Setting it up for an eZDBFileHandler / Clustering / Features / 4.4 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Setting it up for an eZDBFileHandler</h1>
+</div>
+
+<p>
+The following instructions reveal how you can configure eZ Publish to store images, binary files and content-related caches in the database using the eZ DB File Handler. <br />&nbsp;Before going any further, please read the <a href="Setting-it-up-for-an-eZDBFileHandler.html#note" target="_self">note: known issue</a> added at the end of this page regarding a known issue when using eZ Publish in a clustered environment.</p><a name="eztoc118166_1" id="eztoc118166_1"></a><h2>1. Clear the caches (optional)</h2><p>It is recommended (but not required) to clear all eZ Publish caches before enabling the clustering functionality. This can be done by running the following command from the root of your eZ Publish installation (if you are using multiple servers, run this command <b>from each server node</b>&nbsp;in order to clear the local caches for each one):</p><pre class="wordwrap"><span class="line">$php bin/php/ezcache.php --clear-all --purge</span>
+</pre><p>&quot;$php&quot; should be replaced by the path to your php executable.</p><p>After running the script, make sure that all cache files have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory (typically the &quot;var/cache/&quot; and &quot;var/&lt;name_of_siteaccess&gt;/cache/&quot; directories). If there are any cache files left, remove them manually.</p><a name="eztoc118166_2" id="eztoc118166_2"></a><h2>2. Modify the &quot;file.ini&quot; settings</h2><p>Add the following lines to an override for the &quot;file.ini&quot; configuration file (&quot;settings/override/file.ini.append.php&quot; or &quot;settings/siteaccess/ezwebin_site/file.ini.append.php&quot; where &quot;ezwebin_site&quot; is the name of your siteaccess):</p><pre class="wordwrap copytoclipboard"><span class="line">[ClusteringSettings]</span>
+<span class="line">FileHandler=eZDBFileHandler</span>
+<span class="line">DBBackend=eZDBFileHandlerMysqlBackend</span>
+<span class="line">DBHost=localhost</span>
+<span class="line">DBPort=3306</span>
+<span class="line">DBName=name</span>
+<span class="line">DBUser=user</span>
+<span class="line">DBPassword=pass</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ClusteringSettings]\r\nFileHandler=eZDBFileHandler\r\nDBBackend=eZDBFileHandlerMysqlBackend\r\nDBHost=localhost\r\nDBPort=3306\r\nDBName=name\r\nDBUser=user\r\nDBPassword=pass' ); return false;" /></p>
+<![endif]--><p>First define the proper file handler, which in this case is &quot;FileHandler=eZDBFileHandler&quot;. Specifying &quot;eZ DB File Handler&quot; in the &quot;FileHandler&quot; configuration setting will instruct eZ Publish to use the database specified here for storing images, binary files and content-related caches.</p><p>Next replace &quot;localhost&quot;, &quot;name&quot; (for example &quot;DBName=Cluster&quot;), &quot;user&quot; and &quot;pass&quot; by actual host name, database name, user name and password. In most cases these values will be the same as &quot;Server&quot;, &quot;Database&quot;, &quot;User&quot;, &quot;Password&quot; settings specified under the [DatabaseSettings] block of your &quot;site.ini.append.php&quot; configuration file.</p><p>The &quot;DBBackend&quot; setting specifies which back-end should be used by the eZ DB File Handler. For the database back-end setting (DBBackend=) the previously used value &quot;mysql&quot; is deprecated, so you need to use &quot;eZDBFileHandlerMysqlBackend&quot; for MySQL or &quot;eZDBFileHandlerOracleBackend&quot; for Oracle (this requires the eZ Oracle extension).</p><a name="eztoc118166_3" id="eztoc118166_3"></a><h2>3. Create a new script for serving images</h2><p>When clustering your installation all images (except design images) will be served by PHP. Your web-server (e.g Apache) will be instructed to use a specific PHP script called &quot;index_cluster.php&quot; for handling images, which will make the serving of images faster because the system does not have to read the configuration from the database. &quot;index_cluster.php&quot; doesn't exist by default so it must be created manually and must include &quot;index_image.php&quot; along with a collection of configuration settings.</p><p>Create the &quot;index_cluster.php&quot; inside the eZ Publish root directory and make sure that it contains the following lines. (The default contents of this file can also be found in the comments and example at the top of your installation's &quot;index_image.php&quot; file):</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">define( 'STORAGE_BACKEND', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'mysql' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">define( 'STORAGE_HOST', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'localhost' &nbsp;);</span>
+<span class="line">define( 'STORAGE_PORT', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3306 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">define( 'STORAGE_SOCKET', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">define( 'STORAGE_USER', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">define( 'STORAGE_PASS', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'pass' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">define( 'STORAGE_DB', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">define( 'STORAGE_CHUNK_SIZE', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;65535 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">include_once( 'index_image.php' );</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\ndefine( \'STORAGE_BACKEND\',         \'mysql\'      );\r\ndefine( \'STORAGE_HOST\',            \'localhost\'  );\r\ndefine( \'STORAGE_PORT\',            3306         );\r\ndefine( \'STORAGE_SOCKET\',          \'\'           );\r\ndefine( \'STORAGE_USER\',            \'user\'       );\r\ndefine( \'STORAGE_PASS\',            \'pass\'       );\r\ndefine( \'STORAGE_DB\',              \'name\'       );\r\ndefine( \'STORAGE_CHUNK_SIZE\',      65535        );\r\ninclude_once( \'index_image.php\' );\r\n?&gt;' ); return false;" /></p>
+<![endif]--><p>Note: Make sure you specify the same database settings as indicated under the &quot;[ClusteringSettings]&quot; block in your &quot;file.ini.append.php&quot; configuration file.</p><p>With this script the inclusion sequence will work as follows. First the rewrite rules (to be added in step 7) will redirect the images requested to the newly created &quot;index_cluster.php&quot;. The custom image file &quot;http://site.com/var/storage/images/foo.jpg&quot; will be transformed to &quot;http://site.com/index_cluster.php/var/storage/images/foo.jpg&quot;. Because &quot;index_cluster.php&quot; contains the set of settings described below, the &quot;index_image.php&quot; file (which is part of eZ Publish distribution) will be included when &quot;index_cluster.php&quot; is executed. This index_image.php includes a file named &quot;index_image_&lt;STORAGE_BACKEND&gt;.php&quot;. This means that if, for example, STORAGE_BACKEND is set to 'mysql' in &quot;index_cluster.php&quot;, the included file will be &quot;index_image_mysql.php&quot;. This &quot;index_image_&lt;STORAGE_BACKEND&gt;.php&quot; is the final script that will read and stream the files to the browser.</p><a name="eztoc118166_4" id="eztoc118166_4"></a><h2>4. Create new database tables</h2><p>The database table structure required to hold clustered file information needs to be created. This must be done manually, either on the same MySQL server or on the one used for the relational database or on a different one. Keep in mind that for large scale websites, a dedicated MySQL server will improve performances. The definitions of this table can be found inside the comment blocks in the beginning of the &quot;mysql.php&quot; file located in the following sub-directory:</p><pre class="wordwrap"><span class="line">(...)/kernel/classes/clusterfilehandlers/dbbackends/mysql.php</span>
+</pre><p>The MySQL table definitions when using eZ DB File Handler can also be imported directly from:</p><pre class="wordwrap"><span class="line">(...)/kernel/sql/mysql/cluster_schema.sql</span>
+</pre><a name="eztoc118166_5" id="eztoc118166_5"></a><h2>5. Import files to the database</h2><p>The files stored in the &quot;var&quot; directory need to be copied to the database. To do this, go to the root directory of eZ Publish and run the following script (replace &quot;ezwebin_site&quot; by the actual name of your siteaccess):</p><pre class="wordwrap"><span class="line">$php bin/php/clusterize.php -s ezwebin_site</span>
+</pre><p>Note that &quot;$php&quot; should be replaced by the path to your php executable.</p><p>The script will import your files, images and image aliases (<a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/datatypes/image#variation" target="_self">image variations</a>) that are stored under the &quot;var&quot; directory to the cluster database. eZ DB stores both metadata and data in tables, the metadata in ezdbfile, the binary data will however be split into chunks and stored in ezdbfile_data.</p><p>Keep in mind that this process might take some time, depending on the amount of files that need to be imported.</p><a name="eztoc118166_6" id="eztoc118166_6"></a><h2>6. Compile the templates (optional)</h2><p>Since all caches now are empty, you should re-compile the templates. Note that this step can be skipped and thus the templates will be compiled on-demand when the site is browsed. Go to the root directory of eZ Publish and run this command (if you are using multiple servers, run this command&nbsp;<b>from each server node</b>&nbsp;in order to compile the templates for each one):</p><pre class="wordwrap"><span class="line">$php bin/php/eztc.php -s ezwebin_site</span>
+</pre><p>Note that &quot;$php&quot; should be replaced by the path to your php executable.</p><p>Replace &quot;ezwebin_site&quot; by the actual name of your siteaccess. Repeat this step for all siteaccesses that are in use.</p><a name="eztoc118166_7" id="eztoc118166_7"></a><h2>7. Update the Apache configuration</h2><p>Apache needs to know which PHP script to use when serving images, in this case &quot;index_cluster.php&quot;. The script simply fetches the images from the database and serves them. By adding the RewriteRules mentioned below every request for a content image or binary file will be rewritten to &quot;index_cluster.php&quot;, which will then deliver the files directly through HTTP from the NFS server. These rules are the same for eZ DB and eZ DFS. So add the following rewrite rules to the &quot;.htaccess&quot; file before the other/existing rules:</p><pre class="wordwrap"><span class="line">RewriteRule ^/var/([^/]+/)?storage/images-versioned/.* /index_cluster.php [L]</span>
+<span class="line">RewriteRule ^/var/([^/]+/)?storage/images/.* /index_cluster.php [L]</span>
+<span class="line">RewriteRule ^/var/([^/]+/)?cache/public/(stylesheets|javascript) /index_cluster.php &nbsp;[L]</span>
+</pre><p>If no &quot;.htaccess&quot; file is used, add the same rules above the existing rewrite rules for eZ Publish in your Apache configuration file because these rules need to be found before the standard eZ Publish rewrite rules.</p><a name="eztoc118166_8" id="eztoc118166_8"></a><h2>8. Restart Apache and test the site</h2><p>Restart the Apache web server. After it has been restarted, the system should be up and running in cluster mode. Verify that the site works correctly, content images are displayed and content binary files are accessible (open the site pages in a web browser, log in to the administration interface, try clicking around and so on).</p><p>If for example a page of your website does not work correctly because its images are not displayed, your rewrite rules or your &quot;index_cluster.php&quot; file might be configured incorrectly. To locate the error, load the image directly in the browser (by, for example, choosing &quot;open image in a new tab&quot;). If instead of the image &quot;Module not found&quot; is displayed, then your rewrite rules are not correctly configured. If a PHP error is shown, your &quot;index_cluster.php&quot; is most likely configured wrong.</p><p>To test and troubleshoot your website, it can be useful to have more debug information regarding the cluster. This is an optional configuration but to enable it, create an override of the debug.ini file and enable &quot;kernel-clustering&quot; in the [GeneralCondition] block like this:</p><pre class="wordwrap copytoclipboard"><span class="line">[GeneralCondition]</span>
+<span class="line">(...)</span>
+<span class="line">kernel-clustering=enabled</span>
+<span class="line">(...)</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[GeneralCondition]\r\n(...)\r\nkernel-clustering=enabled\r\n(...)' ); return false;" /></p>
+<![endif]--><a name="eztoc118166_9" id="eztoc118166_9"></a><h2>9. Remove the imported files from the file system</h2><p>If the site works correctly, you can remove the original content images and binary files from the file system (since they have been successfully imported to the database). To do this, you need to inspect the contents of the various storage sub-directories within the &quot;var&quot; directory (typically the &quot;var/storage/&quot; and &quot;var/&lt;name_of_siteaccess&gt;/storage/&quot; directories). If there are any content images and binary files left, remove them manually or by using the following command from the root of your eZ Publish installation:</p><pre class="wordwrap"><span class="line">$php bin/php/ezcache.php --clear-all</span>
+</pre><p>Note that &quot;$php&quot; should be replaced by the path to your php executable.</p><p>If you configured multiple servers, execute the command <b>from each server node</b> in order to clear the local caches for each one.</p><a name="eztoc118166_9_0_0_1" id="eztoc118166_9_0_0_1"></a><h5>Note:</h5><p>The &quot;clusterize.php&quot; file mentioned in step &quot;5. Import files to database&quot; can also be used with a &quot;-r&quot; option. This will automatically remove the imported files after they have been clusterized. Using it will make this step &quot;9. Remove the imported files from the file system&quot; obsolete. But keep in mind that using the &quot;-r&quot; option is some what advanced so use with caution.</p><a name="eztoc118166_9_0_0_2" id="eztoc118166_9_0_0_2"></a><h5><b>&nbsp;Note: known issue</b></h5><p>When using a database based file handler (eZ DB or eZ DFS) the following bug will occur if all of the conditions listed here are true:</p>
+<ul>
+<li><div>&nbsp;You use MySQL </div></li><li><div>&nbsp;You use different databases for the content and cluster tables </div></li><li><div>&nbsp;You use the same host, port, user name and password for both databases </div></li><li><div>&nbsp;The port is explicitly specified in both site.ini and file.ini. </div></li>
+</ul>
+<p>The bug is that eZ Publish will look for content tables in the cluster database, which means that all page requests will fail. Although a solution has been proposed, it has not yet been approved at the time of this writing. So for the moment the quickest workaround is to use different user names for the two databases.</p><p>For more information regarding this issue, please visit <a href="http://issues.ez.no/13927" target="_self">http://issues.ez.no/13927</a></p><a name="eztoc118166_10" id="eztoc118166_10"></a><h2>Limitation on some file systems when storing large number of content files</h2><p>
+eZ Publish stores all disc related content (eg Images, PDF's etc) in var/storage like the structure from content tree, creating one folder for each object. In most file systems used under Linux (especially ext2 + ext3) there exists a hard LIMIT TO 32000 directories per folder. So it is not possible to store more as 31999 objects under one folder.<br />
+To get around this limitation without changing the file system, you can split your content tree so that you don't have more than 32k content files (example: images) in the same folder.<br />
+Examples of file systems that supports more file/folder entries per folder. <br />
+- ReiserFS: roughly 1.2 million per directory<br />- ZFS: 2^48 (a really big number: 281474976710656)!</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.4/Features/Clustering/Setting-it-up-for-an-eZDBFileHandler by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:38:39 GMT -->
+</html>

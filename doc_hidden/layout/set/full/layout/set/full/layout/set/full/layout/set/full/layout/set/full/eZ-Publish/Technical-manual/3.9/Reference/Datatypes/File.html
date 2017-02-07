@@ -1,0 +1,166 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Datatypes/File by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:57:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>File / Datatypes / Reference / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>File</h1>
+</div>
+
+<h3>Summary</h3>
+Stores any type of file.
+<h3>Properties</h3>
+<table class="renderedtable" cellspacing="0">
+<tr><th>Name</th><th>Internal name</th><th>Searchable</th><th>Information collector</th></tr>
+<tr>
+    <td>File</td>
+    <td>ezbinaryfile</td>
+    <td>Yes.</td>
+    <td>No.</td>
+</tr>
+</table>
+
+<h3>Description</h3>
+ <p>This datatype allows the storage and retrieval of a single file. It is capable of handling virtually any file type and is typically used for storing legacy document types such as PDF files, Word documents, spreadsheets, etc. The maximum allowed file size is determined by the &quot;Max file size&quot; class attribute edit parameter and the &quot;upload_max_filesize&quot; directive in the main PHP configuration file (&quot;php.ini&quot;). The following screenshot shows the class attribute edit interface for this datatype.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/reference/datatypes/file_class_attribute_edit_interface/6584-3-eng-GB/file_class_attribute_edit_interface_doc.png" alt="Class attribute edit interface for the &quot;File&quot; datatype." />
+ <p>Class attribute edit interface for the &quot;File&quot; datatype.</p>
+
+
+
+
+
+
+
+</div>    <a name="eztoc63762_0_0_1" id="eztoc63762_0_0_1"></a><h4>Max file size</h4> <p>The &quot;Max file size&quot; parameter makes it possible to set the highest size (in megabytes) that the system will allow. By default, this parameters is zero, which means that eZ publish will not do any size checking when files are uploaded. In the example above, the &quot;Max file size&quot; parameter is set to 16 MB, which means that the object edit interface will not allow the upload of files that are larger than 16 megabytes. However, if the value of the &quot;upload_max_filesize&quot; PHP setting is lower than 16 megabytes, the underlying system will cancel the upload.</p>       <a name="eztoc63762_0_0_2" id="eztoc63762_0_0_2"></a><h4>Object attribute edit interface</h4> <p>The following screenshot shows the object attribute edit interface when an attribute using this datatype does not contain any file.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/reference/datatypes/file_object_attribute_edit_interface_1/6599-3-eng-GB/file_object_attribute_edit_interface_1_doc.png" alt="Object attribute edit interface for the &quot;File&quot; datatype." />
+ <p>Object attribute edit interface for the &quot;File&quot; datatype.</p>
+
+
+
+
+
+
+
+</div> <p>The following screenshot shows the object attribute edit interface when an attribute using this datatype contains a file. The interface reveals the name of the file that was uploaded (&quot;BDScratch.wav&quot;), the MIME type (&quot;audio/wav&quot;) and the size (1.15 MB).</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/reference/datatypes/file_object_attribute_edit_interface_2/6602-3-eng-GB/file_object_attribute_edit_interface_2_doc.png" alt="Object attribute edit interface for the &quot;File&quot; datatype." />
+ <p>Object attribute edit interface for the &quot;File&quot; datatype.</p>
+
+
+
+
+
+
+
+</div>       <a name="eztoc63762_0_0_3" id="eztoc63762_0_0_3"></a><h4>MIME types</h4> <p>The MIME type will be automatically set based on the extension of the uploaded file's name. If the extension is unknown, the default MIME type will be used (&quot;application/octet-stream&quot;). The MIME types can be configured at the end of the &quot;/lib/ezutils/classes/ezmimetype.php&quot; file.</p>       <a name="eztoc63762_0_0_4" id="eztoc63762_0_0_4"></a><h4>Storage</h4> <p>The uploaded files are stored on the filesystem. The main reason for this is because the filesystem is much faster than the database when it comes to the storage and retrieval of large data chunks. Having the files on the filesystem allows the webserver to serve them directly without the need of going through the database. In addition, this technique makes it easier to use external tools to manipulate/scan/index the contents of the uploaded files and it dramatically decreases the size of the database.</p> <p>All files uploaded through an attribute that makes use of the file datatype will be stored below &quot;storage/original&quot; within the directory specified by the &quot;VarDir&quot; directive in a configuration override for &quot;site.ini&quot;. A new subdirectory will be created for every MIME type. For example, if an executable (.exe) file is uploaded, a directory called &quot;application&quot; will be created; if a text file is uploaded then a directory called &quot;text&quot; will be created, and so on. The uploaded files will be put in the different MIME type directories. Instead of re-using the original filenames, eZ publish will create a hash for every file. The following illustration shows the location of two uploaded files (an .exe and a .txt file) when the var directory is set to &quot;my_site&quot;.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/reference/datatypes/file_complete_var_directory_structure/7760-3-eng-GB/file_complete_var_directory_structure_doc.png" alt="Complete directory structure with uploaded files." />
+ <p>Complete directory structure with uploaded files.</p>
+
+
+
+
+
+
+
+</div> <p>The system keeps track of the files using a database table called &quot;ezbinaryfile&quot; consisting of the following fields:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Field</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>content_object_attribute_id</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The identification of the content object attribute.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>download_count</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The number of times the file has been downloaded.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>filename</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the file on the filesystem (for example &quot;5fd39fbaf751369965a4108715d5dea9.txt&quot;).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>mime_type</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The MIME type of the file (for example &quot;text/plain&quot;).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>original_filename</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The original name of the uploaded file (for example &quot;readme.txt&quot;).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>version</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The version of the object that the file belongs to.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+       <a name="eztoc63762_0_0_5" id="eztoc63762_0_0_5"></a><h4>Binary file indexing</h4> <p>eZ publish is capable of indexing the actual contents of uploaded files. This feature makes it possible to use the built-in search engine to search for something that is inside a file; for example the contents of a PDF file or a spreadsheet. By default, the system is only capable of indexing the contents of plain text/ASCII files. However, by making use of external programs, it is capable of indexing the contents of virtually any file type (as long as there is a program that goes through the file and returns keywords/contents as plain text). The external handlers can be set up in a configuration override for the &quot;binaryfile.ini&quot; file.</p>       <a name="eztoc63762_0_0_6" id="eztoc63762_0_0_6"></a><h4>Raw output</h4> <p>The &quot;.content&quot; of an <a href="../Objects/ezcontentobjectattribute.html" target="_self">ezcontentobjectattribute</a> object using this datatype returns an <a href="../Objects/ezbinaryfile.html" target="_self">ezbinaryfile</a> object.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Datatypes/File by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:57:18 GMT -->
+</html>

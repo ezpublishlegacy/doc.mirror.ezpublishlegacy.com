@@ -1,0 +1,126 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-2.3/What-s-new-in-eZ-Find-2.3 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:51:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>What's new in eZ Find 2.3 / eZ Find 2.3 / eZ Find / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>What's new in eZ Find 2.3</h1>
+</div>
+
+<p>Since 2.2 some changes have been implemented in eZ Find.</p><a name="eztoc110149_1" id="eztoc110149_1"></a><h2>New and improved settings in ezfind.ini</h2>
+<ul>
+<li><div>
+&nbsp;The &quot;EnableSolrAttributeStorage&quot; setting was added to the [IndexOptions] configuration group. It configures the attribute (slave) storage in the Solr back-end and can be used in templates to speed up page rendering. It is also essential for the related eZ Archive extension.<br />Keep in mind though that enabling this setting may inflate the index size on large installations. </div></li>
+</ul>
+
+<ul>
+<li><div><p>
+&nbsp;Since eZ Find 2.3 eztext attributes are also used to store (partial) html markup. To avoid highlighting problems the custom XML handler can be used.<br />&nbsp;In ezfind.ini this setting can be used to reflect these changes:</p><pre class="wordwrap"><span class="line">[SolrFieldMapSettings]</span>
+<span class="line">&nbsp;CustomMap[eztext]=ezfSolrDocumentFieldXML</span>
+</pre></div></li><li><div>&nbsp;Also new since eZ Find 2.3 is the auto-complete function. While entering text into the search field (both in the User Interface as in the Admin Interface), users and editors can select the word they want from the suggestions provided by the search engine. Therefore users do not need to complete typing the search words themselves. The settings related to this function are located in ezfind.ini's block [AutoCompleteSettings]. For more detailed information please visit the use page <a href="Use/Basic-Search/Basic-search/Autocomplete-Search.html" target="_blank">Autocomplete search.</a> </div></li>
+</ul>
+<p>For more information regarding the settings of eZ find visit the <a href="../../../../../full.html" target="_self">configuration settings of eZ Find</a> page.</p><a name="eztoc110149_2" id="eztoc110149_2"></a><h2>Load Priority</h2><p>From eZ Publish 4.4 (Fuji) onwards, the load order feature will enable extensions to define in which order they must be loaded in regards to other extensions, this was previously done by manually placing the extensions in the right order under &quot;[ExtensionSettings] ActiveAccessExtensions[]=&quot; in &quot;site.ini&quot;. This enhancement has been implemented in eZ Find 2.3 by adding the load order to the file &quot;extension.xml&quot; located here:</p><pre class="wordwrap"><span class="line">(root of eZ Publish installation)/extension/ezfind/extension.xml</span>
+</pre><p>This file contains:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+<span class="line">&nbsp;&lt;software&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;metadata&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;name&gt;Extension name&lt;/name&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;X.Y.Z&lt;/version&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;copyright&gt;Copyright text&lt;/copyright&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;license&gt;License type&lt;/license&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;info_url&gt;http://url/to/extension/site&lt;/info_url&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;software&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;uses&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;name&gt;Used library/software 1&lt;/name&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;license&gt;Used library/software 1 &nbsp;license&lt;/license&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;copyright&gt;Used library/software 1 &nbsp;copyright&lt;/copyright&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;info_url&gt;Used library/software 1 &nbsp;URL&lt;/info_url&gt;s</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;Used library/software 1 &nbsp;version&lt;/version&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/uses&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;uses&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;name&gt;Used library/software 2&lt;/name&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;license&gt;Used library/software 2 &nbsp;license&lt;/license&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;copyright&gt;Used library/software 2 &nbsp;copyright&lt;/copyright&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;info_url&gt;Used library/software 2 &nbsp;URL&lt;/info_url&gt;s</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;Used library/software 2 &nbsp;version&lt;/version&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/uses&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/software&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/metadata&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependencies&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;uses&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;extension name=&quot;usedExtension&quot; /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/uses&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;requires&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;extension name=&quot;requiredExtension&quot; /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/requires&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;extends&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;extension name=&quot;extendedExtension&quot; /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/extends&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependencies&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&lt;/software&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;\r\n &lt;software&gt;\r\n     &lt;metadata&gt;\r\n         &lt;name&gt;Extension name&lt;/name&gt;\r\n         &lt;version&gt;X.Y.Z&lt;/version&gt;\r\n         &lt;copyright&gt;Copyright text&lt;/copyright&gt;\r\n         &lt;license&gt;License type&lt;/license&gt;\r\n         &lt;info_url&gt;http://url/to/extension/site&lt;/info_url&gt;\r\n \r\n         &lt;software&gt;\r\n             &lt;uses&gt;\r\n                 &lt;name&gt;Used library/software 1&lt;/name&gt;\r\n                 &lt;license&gt;Used library/software 1  license&lt;/license&gt;\r\n                 &lt;copyright&gt;Used library/software 1  copyright&lt;/copyright&gt;\r\n                 &lt;info_url&gt;Used library/software 1  URL&lt;/info_url&gt;s\r\n                 &lt;version&gt;Used library/software 1  version&lt;/version&gt;\r\n             &lt;/uses&gt;\r\n            &lt;uses&gt;\r\n                &lt;name&gt;Used library/software 2&lt;/name&gt;\r\n                &lt;license&gt;Used library/software 2  license&lt;/license&gt;\r\n                &lt;copyright&gt;Used library/software 2  copyright&lt;/copyright&gt;\r\n                &lt;info_url&gt;Used library/software 2  URL&lt;/info_url&gt;s\r\n                &lt;version&gt;Used library/software 2  version&lt;/version&gt;\r\n            &lt;/uses&gt;\r\n \r\n         &lt;/software&gt;\r\n \r\n     &lt;/metadata&gt;\r\n \r\n     &lt;dependencies&gt;\r\n         &lt;uses&gt;\r\n             &lt;extension name=&quot;usedExtension&quot; /&gt;\r\n         &lt;/uses&gt;\r\n        &lt;requires&gt;\r\n            &lt;extension name=&quot;requiredExtension&quot; /&gt;\r\n        &lt;/requires&gt;\r\n         &lt;extends&gt;\r\n             &lt;extension name=&quot;extendedExtension&quot; /&gt;\r\n         &lt;/extends&gt;\r\n     &lt;/dependencies&gt;\r\n \r\n &lt;/software&gt;' ); return false;" /></p>
+<![endif]--><p>The first block (software/metadata) replaces &quot;ezinfo.php&quot;. The fields are equivalent to those found in the info() method of the 'old' ezinfo. The sub-node software/metadata/software replaces the previous 3rdparty_libraries entry. One software/metadata/software/uses node must be used for each library.</p><p>The second block (software/dependencies) replaces the loading.php file described above. It can contain 3 sub-nodes:</p>
+<ul>
+<li><div>&nbsp;<b>uses:</b> indicates that the referenced extension is used by this extension. Will be considered as an 'after' entry in the loading.php scheme. </div></li><li><div>&nbsp;<b>requires:</b> indicates that the referenced extension is required by this extension. Will be considered as an 'after' entry in the loading.php scheme. </div></li><li><div>&nbsp;<b>extends:</b> indicates that the referenced extension is overloaded by this extension. Will be considered as a 'before' entry in the loading.php scheme. </div></li>
+</ul>
+<p><b>Note:</b> 'uses' and 'requires' currently have the same effect, but their behavior will change when real dependencies checking is developed in the future.</p><p>This means eZ Find will now automatically be loaded after ezjscore, but before ezwebin and ezflow.</p><p>For more information regarding the load order please visit the documentation regarding <a href="../../../../eZ-Publish/Technical-manual/4.4/Installation/Extensions/Extension-load-ordering.html" target="_self">extension load ordering</a>.</p><a name="eztoc110149_3" id="eztoc110149_3"></a><h2>Added Features</h2>
+<ul>
+<li><div><p>&nbsp;A commit utility script &quot;ezsolrcommit.php&quot; was added. It is located here:</p><pre class="wordwrap"><span class="line">(root eZ Publish &nbsp;installation)/extension/ezfind/bin/php/ezsolrcommit.php</span>
+</pre></div></li>
+</ul>
+
+<ul>
+<li><div>&nbsp;An initial skeleton for serializing attributes into the Solr back-end was added. </div></li>
+</ul>
+<a name="eztoc110149_4" id="eztoc110149_4"></a><h2>Bug fixes</h2><p>For information regarding the bugs fixed for this version please read the change logs included in your eZ Find 2.3 installation, located here:</p><pre class="wordwrap"><span class="line">(root eZ Publish installation)/extensions/ezfind/doc/2.3/changelogs</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-2.3/What-s-new-in-eZ-Find-2.3 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:51:34 GMT -->
+</html>

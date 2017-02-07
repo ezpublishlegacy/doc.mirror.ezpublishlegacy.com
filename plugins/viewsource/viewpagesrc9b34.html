@@ -1,0 +1,175 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=13467868 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:50:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage9b34.html?pageId=13467868" />
+        <link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch934e.css?media=print" media="print">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 8]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1f2a9c4c7f2593422cc9b02d1a652a22/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/26ac2724af3c6ece1051365650d982fa/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins.confluence-highlight-ac" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/12/_/styles/colors.css" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p>This section describes how to set up a virtual host for eZ Publish using the Apache web-server. A virtual host setup is only needed if eZ Publish has been configured to use the host access method, which is the recommended, most secure method.</p><p>For an introduction and thorough description of the concept of virtual hosts, you can refer to the <a href="http://httpd.apache.org/docs/2.2/vhosts/">Apache documentation</a>.</p><p>Do not forget to restart the web server after any change of the configuration files.</p><h2>Generic virtual host setup</h2><p>Virtual hosts are usually defined at the bottom of &quot;<code>httpd.conf</code>&quot;, which is the main configuration file for Apache, or in a separate configuration file included from <code>httpd.conf</code>.</p><p>Adding a virtual host for eZ Publish can be done by copying the following lines and replacing the text encapsulated by the square brackets with actual values. Please refer to the next section for a real life example of using virtual hosts.</p><table class="wysiwyg-macro" data-macro-name="noformat" style="background-image: url(../servlet/confluence/placeholder/macro-heading8813.png?definition=e25vZm9ybWF0fQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>NameVirtualHost [IP_ADDRESS]
+ 
+&lt;VirtualHost [IP_ADDRESS]:[PORT]&gt;
+    &lt;Directory [PATH_TO_EZPUBLISH]/web>
+        Options FollowSymLinks
+        AllowOverride None
+        # depending on your global Apache settings, you may need to uncomment and adapt
+        #Allow from all
+    &lt;/Directory>
+ 
+    &lt;IfModule mod_php5.c>
+        php_admin_flag safe_mode Off
+        php_admin_value register_globals 0
+        php_value magic_quotes_gpc 0
+        php_value magic_quotes_runtime 0
+        php_value allow_call_time_pass_reference 0
+    &lt;/IfModule>
+ 
+    DirectoryIndex index.php
+ 
+    &lt;IfModule mod_rewrite.c>
+        RewriteEngine On
+ 
+        # Uncomment in FastCGI mode or when using PHP-FPM, to get basic auth working.
+        #RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+         # v1 Rest API is on Legacy
+        RewriteRule ^/api/[^/]+/v1/ /index_rest.php [L]
+ 
+        # If using cluster, uncomment the following two lines:
+        #RewriteRule ^/var/([^/]+/)?storage/images(-versioned)?/.* /index_cluster.php [L]
+        #RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* /index_cluster.php [L]
+ 
+        RewriteRule ^/var/([^/]+/)?storage/images(-versioned)?/.* - [L]
+        RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* - [L]
+        RewriteRule ^/design/[^/]+/(stylesheets|images|javascript|fonts)/.* - [L]
+        RewriteRule ^/share/icons/.* - [L]
+        RewriteRule ^/extension/[^/]+/design/[^/]+/(stylesheets|flash|images|lib|javascripts?)/.* - [L]
+        RewriteRule ^/packages/styles/.+/(stylesheets|images|javascript)/[^/]+/.* - [L]
+        RewriteRule ^/packages/styles/.+/thumbnail/.* - [L]
+        RewriteRule ^/var/storage/packages/.* - [L]
+ 
+        # Makes it possible to place your favicon at the root of your
+        # eZ Publish instance. It will then be served directly.
+        RewriteRule ^/favicon\.ico - [L]
+        # Uncomment the line below if you want you favicon be served
+        # from the standard design. You can customize the path to
+        # favicon.ico by changing /design/standard/images/favicon\.ico
+        #RewriteRule ^/favicon\.ico /design/standard/images/favicon.ico [L]
+        RewriteRule ^/design/standard/images/favicon\.ico - [L]
+ 
+        # Give direct access to robots.txt for use by crawlers (Google,
+        # Bing, Spammers..)
+        RewriteRule ^/robots\.txt - [L]
+ 
+        # Platform for Privacy Preferences Project ( P3P ) related files
+        # for Internet Explorer
+        # More info here : http://en.wikipedia.org/wiki/P3p
+        RewriteRule ^/w3c/p3p\.xml - [L]
+ 
+        # Uncomment the following lines when using popup style debug in legacy
+        #RewriteRule ^/var/([^/]+/)?cache/debug\.html.* - [L]
+ 
+        # Following rule is needed to correctly display assets from eZ Publish5 / Symfony bundles
+        RewriteRule ^/bundles/ - [L]
+ 
+        # Additional Assetic rules for eZ Publish 5.1 / 2013.4 and higher.
+        # Don't forget to run php ezpublish/console assetic:dump --env=prod
+        # Comment when in dev environment
+        RewriteRule ^/css/.*\.css - [L]
+        RewriteRule ^/js/.*\.js - [L]
+ 
+        # In dev environment, use index_dev.php
+        RewriteRule .* /index.php
+    &lt;/IfModule>
+ 
+    DocumentRoot [PATH_TO_EZPUBLISH]/web/
+    ServerName [SERVER_NAME]
+    ServerAlias [SERVER_ALIAS]
+ 
+&lt;/VirtualHost></pre></td></tr></table><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Reference</th><th class="confluenceTh">Description</th></tr><tr><td class="confluenceTd">[IP_ADDRESS]</td><td class="confluenceTd">The IP address of the virtual host, for example &quot;<code>128.39.140.28</code>&quot;. Apache allows the usage of a wildcards here (&quot;*&quot;).</td></tr><tr><td class="confluenceTd">[PORT]</td><td class="confluenceTd">The port on which the web server listens for incoming requests. This is an optional setting, the default port is 80. The combination of an IP address and a port is often referred to as a socket. Apache allows the usage of a wildcards here (&quot;*&quot;).</td></tr><tr><td class="confluenceTd">[PATH_TO_EZPUBLISH]</td><td class="confluenceTd">Path to the directory that contains eZ Publish. This must be the full path, for example &quot;<code>/var/www/ezpublish-3.6.0</code>&quot;.</td></tr><tr><td class="confluenceTd">[SERVER_NAME]</td><td class="confluenceTd">The host or the IP address that Apache should look for. If a match is found, the virtual host settings will be used.</td></tr><tr><td class="confluenceTd">[SERVER_ALIAS]</td><td class="confluenceTd">Additional hosts/IP addresses that Apache should look for. If a match is found, the virtual host settings will be used.</td></tr></tbody></table><table class="wysiwyg-macro" data-macro-name="note" style="background-image: url(../servlet/confluence/placeholder/macro-headingdd57.png?definition=e25vdGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>Please note that the &quot;<code>mod_rewrite</code>&quot; module must be enabled in &quot;<code>httpd.conf</code>&quot; in order to use the Rewrite Rules.</p></td></tr></table><h2>NameVirtualHost</h2><p>The &quot;<code>NameVirtualHost</code>&quot; setting might already exist in the default configuration. Defining a new one will result in a conflict. If Apache reports errors such as &quot;<code><em>NameVirtualHost [IP_ADDRESS] has no VirtualHosts</em></code>&quot; or &quot;<em><code>Mixing * ports and non-* ports with a NameVirtualHost address is not supported</code></em>&quot;, try skipping the <code>NameVirtualHost</code> line. For more info about the <code>NameVirtualHost</code> directive, see <a href="http://httpd.apache.org/docs/2.2/mod/core.html#namevirtualhost">http://httpd.apache.org/docs/2.2/mod/core.html#namevirtualhost</a>.</p><h2>SOAP and WebDAV</h2><p>If you would like to use the SOAP and/or the WebDAV features of eZ Publish, you'll have to add the following lines in the virtual host configuration (replace appropriately the host names used):<span class="line"><br /></span></p><table class="wysiwyg-macro" data-macro-name="noformat" style="background-image: url(../servlet/confluence/placeholder/macro-heading8813.png?definition=e25vZm9ybWF0fQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>RewriteCond %{HTTP_HOST} ^webdav\..*
+RewriteRule ^(.*) /webdav.php [L]
+ 
+RewriteCond %{HTTP_HOST} ^soap\..*
+RewriteRule ^(.*) /soap.php [L]
+ 
+ServerAlias soap.example.com
+ServerAlias webdav.example.com</pre></td></tr></table><h2>Optional re-write rules to improve performance</h2><p class="wordwrap copytoclipboard">Using the Apache module <code>mod_expires</code> is recommended to improve site performance, by preventing users from downloading too frequently static assets. The following lines can added to the virtualhost configuration to take advantage of it:</p><table class="wysiwyg-macro" data-macro-name="noformat" style="background-image: url(../servlet/confluence/placeholder/macro-heading8813.png?definition=e25vZm9ybWF0fQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>    # Everything below is optional to improve performance by forcing
+    # clients to cache image and design files, change the expires time
+    # to suite project needs.
+    &lt;IfModule mod_expires.c>
+        &lt;LocationMatch "^/var/[^/]+/storage/images/.*">
+            # eZ Publish appends the version number to image URL (ezimage
+            # datatype) so when an image is updated, its URL changes to
+            ExpiresActive on
+            ExpiresDefault "now plus 10 years"
+        &lt;/LocationMatch>
+ 
+        &lt;LocationMatch "^/extension/[^/]+/design/[^/]+/(stylesheets|images|javascripts?|flash)/.*">
+            # A good optimization if you don't change your design often
+            ExpiresActive on
+            ExpiresDefault "now plus 5 days"
+        &lt;/LocationMatch>
+ 
+        &lt;LocationMatch "^/extension/[^/]+/design/[^/]+/lib/.*">
+            # Libraries get a new url (version number) on updates
+            ExpiresActive on
+            ExpiresDefault "now plus 90 days"
+        &lt;/LocationMatch>
+ 
+        &lt;LocationMatch "^/design/[^/]+/(stylesheets|images|javascripts?|lib|flash)/.*">
+            # Same as above for bundled eZ Publish designs
+            ExpiresActive on
+            ExpiresDefault "now plus 7 days"
+        &lt;/LocationMatch>
+ 
+        &lt;LocationMatch "^/share/icons/.*">
+            # Icons as used by admin interface, barly change
+            ExpiresActive on
+            ExpiresDefault "now plus 7 days"
+        &lt;/LocationMatch>
+ 
+        # When ezjscore.ini/[Packer]/AppendLastModifiedTime=enabled
+        # so that file names change when source files are modified
+        #&lt;LocationMatch "^/var/[^/]+/cache/public/.*">
+            # Force ezjscore packer js/css files to be cached 30 days
+            # at client side
+            #ExpiresActive on
+            #ExpiresDefault "now plus 30 days"
+        #&lt;/LocationMatch>
+        &lt;/IfModule></pre></td></tr></table><p class="wordwrap copytoclipboard"> </p><p class="wordwrap copytoclipboard"> </p><pre> </pre>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=13467868 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:50:56 GMT -->
+</html>

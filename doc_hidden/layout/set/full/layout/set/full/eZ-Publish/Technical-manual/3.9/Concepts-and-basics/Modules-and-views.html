@@ -1,0 +1,98 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Concepts-and-basics/Modules-and-views by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:07:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Modules and views / Concepts and basics / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Modules and views</h1>
+</div>
+
+ <p>A <i>module</i> offers an HTTP interface which can be used for web based interaction with eZ publish. While some modules offer an interface to kernel functionality, others are more or less independent of the kernel. The system comes with a collection of modules that cover the needs of typical everyday tasks. For example, the content module provides an interface that makes it possible to use a web browser to manage actual content. It is possible to extend the system by creating custom modules for special needs. Custom modules have to be programmed in PHP. The following table gives an overview of some of the most commonly used modules that come with eZ publish.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Module</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="../Reference/Modules/content.html" target="_self">Content</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Content&quot; module provides an interface to the content engine in the eZ publish kernel. This module makes it possible to display, edit, search and translate the contents of objects, manage the node tree and so on.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="../Reference/Modules/user.html" target="_self">User</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;User&quot; module provides an interface to the user management system in the kernel. This module makes it possible to log users in and out of the system. In addition, it also provides functionality related to user registration, user activation, password changing, etc.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="../Reference/Modules/role.html" target="_self">Role</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Role&quot; module provides an interface to the access control system in the kernel. This module makes it possible to create, modify and delete roles and policies. In addition, it provides functionality for assigning roles to different users and user groups.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>Please refer to the <a href="../Reference/Modules.html" target="_self">&quot;Modules&quot;</a> section of the reference chapter for a comprehensive list of all the built-in modules.</p>  <a name="eztoc63397_1" id="eztoc63397_1"></a><h2>Module execution</h2> <p>Every time eZ publish is accessed using a web browser, the client application indirectly interacts with one of the modules that are present in the system. The requested URL tells eZ publish about which module it should execute in order to process the request. In particular, the first part of the URL reveals the name of the module. This is usually the part that comes directly after &quot;index.php&quot; unless the <a href="Configuration/Access-methods.html#uri" target="_self">URI access method</a> is used. The following example shows a typical eZ publish URL:</p> <pre class="wordwrap"><span class="line">http://www.example.com/index.php/content/edit/13/03</span>
+</pre> <p>A quick glance at this URL reveals that the request is directed at the content module. Another typical example of an eZ publish URL could be something like this:</p> <pre class="wordwrap"><span class="line">http://www.example.com/index.php/user/login</span>
+</pre> <p>By looking at the URL, we can immediately tell that eZ publish will attempt to execute the user module when processing this request. Obviously, some additional information is also specified in the URLs. In the first example, the name of the module is followed by &quot;/edit/13/03&quot;. In the second example, the name of module is followed by &quot;/login&quot;. These additional strings control the behavior of the requested module and are explained below.</p>   <a name="eztoc63397_2" id="eztoc63397_2"></a><h2>Module views</h2> <p>A module consists of a set <i>views</i>. A view can be thought of as an interface to a module. By using views, it is possible to reach various functions that a module provides. For example, among other things, the content module provides views for displaying, editing, searching and translating the contents of objects. The name of the view that should be accessed appears after the name of the module (separated by a slash) in the URL. In the first example above, eZ publish is instructed to access the &quot;edit&quot; view within the content module. In the second example, eZ publish is instructed to access the &quot;login&quot; view within the user module.</p> <p>When a view is called, eZ publish starts up the program code that is associated with that view. Upon completion, the view returns a result to the module, which in turn returns it to the rest of the system. The result is put inside a template variable called $module_result.content which is available from the main template, the pagelayout. Please refer to the <a href="../Templates/Template-basics.html#template_generation" target="_self">&quot;Template generation&quot;</a> section of the &quot;Templates&quot; chapter for more information about this part of the system.</p> <p> <a name="view_parameters"></a>
+ </p>  <a name="eztoc63397_2_1" id="eztoc63397_2_1"></a><h3>View parameters</h3> <p>Some views support on one or more parameters. A <i>view parameter</i> makes it possible to pass information to the view itself and thus allows the view to be controlled from within the requested URL. The view parameters are appended after the name of the view in the URL. In the first example above, the following parameters are passed to the view: &quot;13&quot; and &quot;03&quot;. These parameters will instruct the edit view of the content module to provide an interface for editing the third version of the thirteenth content object in the system. The URL given in the second example does not make use of any view parameters. The view mechanism supports two types of parameters:</p> 
+<ul>
+ <li><div> Ordered parameters </div></li> <li><div> Unordered parameters </div></li> 
+</ul>
+ <p>The ordered parameters have to be separated by slashes and they must come after the name of the view. In addition, they have to be provided in the same order as it is specified in the module's definition. For example, if the view parameters in the first example get mixed up, eZ publish will attempt to edit the thirteenth version of object number three (instead of version number three of object number thirteen).</p> <p>As the name suggests, the unordered parameters can be provided in an arbitrary order. If the view supports ordered parameters, the unordered parameters must come after the ordered parameters If the view doesn't support ordered parameters, the unordered parameters will come directly after the name of the view in the URL. The unordered parameters must be provided in pairs. A pair consists of the parameter's name and value separated by a slash. The following example shows an imaginary eZ publish URL with unordered parameters passed to the requested view:</p> <pre class="wordwrap"><span class="line">http://www.example.com/index.php/video/dvd/button/play</span>
+</pre> <p>The address in the example above tells eZ publish to run the imaginary &quot;video&quot; module and execute the &quot;dvd&quot; view. A variable called &quot;button&quot; will be created and made available for the view code. The value of the variable will be set to &quot;play&quot;. It is up to the PHP code of the view to discover this variable and to carry out a necessary sequence of actions.</p>   <a name="eztoc63397_2_2" id="eztoc63397_2_2"></a><h3>POST variables</h3> <p>Some views make use of parameters that are submitted by the way of forms through the HTTP POST method. For example, the action view of the content module makes an extensive use of POST variables.</p>    <a name="eztoc63397_3" id="eztoc63397_3"></a><h2>The default request</h2> <p>In order to be able to produce proper output, eZ publish must know which module it should run and which view that should be executed. In other words, every URL has to contain at least the name of an existing module and a view. If an incomplete or mistyped URL is provided, eZ publish will display an error page revealing what's wrong (missing/mistyped module or view). If the requested URL doesn't contain anything after &quot;index.php&quot; (except maybe a slash), the default module/view combination will be executed. The default module/view combination can be configured using the &quot;IndexPage&quot; setting under &quot;[SiteSettings]&quot; in an override for &quot;site.ini&quot;. The default setting is &quot;/content/view/full/2&quot;. It instructs eZ publish to show a full view of node 2, the content top level node. In other words, if the following request is made:</p> <pre class="wordwrap"><span class="line">http://www.example.com/index.php</span>
+</pre> <p>...eZ publish will behave as if the following URL was requested:</p> <pre class="wordwrap"><span class="line">http://www.example.com/index.php/content/view/full/2</span>
+</pre> <p>No redirection or page reload will be made, which means that the address field of the browser will remain unchanged.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Concepts-and-basics/Modules-and-views by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:07:03 GMT -->
+</html>

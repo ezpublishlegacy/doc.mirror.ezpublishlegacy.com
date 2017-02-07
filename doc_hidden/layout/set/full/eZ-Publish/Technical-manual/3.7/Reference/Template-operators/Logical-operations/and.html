@@ -1,0 +1,151 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.7/Reference/Template-operators/Logical-operations/and by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:12:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>and / Logical operations / Template operators / Reference / 3.7 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>and</h1>
+</div>
+<h3>Summary</h3>
+Evaluates all parameters to check if any are evaluated as FALSE.<h3>Usage</h3>
+<pre>and( value1 [, value2 [, ... ] ] )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>value1</td>
+        <td>any</td>
+        <td>A variable/value to be evaluated.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>value2</td>
+        <td>any</td>
+        <td>Another variable/value to be evaluated.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+One of the parameters or TRUE (see below).<h3>Description</h3>
+ <p>
+This operator evaluates all parameters.<br />
+When one of them is found to be FALSE, the operator will then return that parameter. Under some circumstances shortcutting is then applied, which means that once a parameter in found to be FALSE, the evaluation of the rest of the parameters stops. However this is not always the case, and depends on personal settings.<br />If none of the parameters are found to be FALSE, the operator will return TRUE.</p> <p>The following table shows how the different types are evaluated by this operator.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Type</p> 
+  </th> <th >   <p>Evaluation</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Number</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>TRUE if the value is non-zero, FALSE otherwise.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>String</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>TRUE if the string consists of at least one character, FALSE otherwise.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Boolean</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>TRUE if the boolean is a TRUE value, FALSE is otherwise.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Array</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>TRUE if the array has one or more elements, FALSE otherwise.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Object</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>TRUE if the object provides the &quot;attributes&quot; and the &quot;attribute&quot; methods, FALSE otherwise.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>NULL</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Always FALSE.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Other</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Other types will be evaluated in the same way as PHP would do.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+<h3>Examples</h3>
+    <a name="eztoc21294_0_0_1" id="eztoc21294_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{if and( false(), true(), false() )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The truth is out there.</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The day the earth stood still.</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{if and( false(), true(), false() )}\r\n    The truth is out there.\r\n{else}\r\n    The day the earth stood still.\r\n{/if}' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced: &quot;The day the earth stood still.&quot;.</p>       <a name="eztoc21294_0_0_2" id="eztoc21294_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $a=array()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$b=array( 1, 2, 3 )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$c=array( 4, 5, 6 )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{and( $a, $b, $c )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $a=array()\r\n     $b=array( 1, 2, 3 )\r\n     $c=array( 4, 5, 6 )}\r\n\r\n{and( $a, $b, $c )}' ); return false;" /></p>
+<![endif]--> <p>The code above will return the empty array that is represented by $a.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.7/Reference/Template-operators/Logical-operations/and by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:12:32 GMT -->
+</html>

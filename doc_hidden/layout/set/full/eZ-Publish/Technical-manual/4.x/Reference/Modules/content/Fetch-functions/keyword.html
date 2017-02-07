@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Modules/content/Fetch-functions/keyword by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>keyword / Fetch functions / content / Modules / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>keyword</h1>
+</div>
+<h3>Summary</h3>
+Fetches nodes that use keywords starting with a given sequence.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'content', &nbsp;'keyword',</span>
+<span class="line">&nbsp;hash( 'alphabet', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alphabet,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'strict_matching', &nbsp;&nbsp;&nbsp;&nbsp;strict_matching, &nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'classid', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classid, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'offset', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offset, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'limit', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'owner', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'parent_node_id', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent_node_id, &nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'include_duplicates', &nbsp;include_duplicates, ]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'sort_by', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sort_by &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>alphabet</td>
+        <td>string</td>
+        <td>The sequence that should be matched.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>strict_matching</td>
+        <td>boolean</td>
+        <td>Enables or disables exact matching. If FALSE (or omitted), the function will look for keywords that start with the specified sequence.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>classid</td>
+        <td>array</td>
+        <td>Filtering: the ID number of the class or an array of the ID numbers.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>offset</td>
+        <td>integer</td>
+        <td>The offset to start at.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>limit</td>
+        <td>integer</td>
+        <td>The number of elements that should be returned.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>owner</td>
+        <td>integer</td>
+        <td>Filtering by owner: the ID number of the object representing the user.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>parent_node_id</td>
+        <td>integer</td>
+        <td>The ID number of the parent node.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>include_duplicates</td>
+        <td>boolean</td>
+        <td>Makes it possible to avoid duplicates (different keywords but same nodes) in the result. If TRUE (or omitted), duplicates are allowed.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>sort_by</td>
+        <td>array</td>
+        <td>The sorting mechanism that should be used.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An array of hashes (see below) or FALSE.</p><h3>Description</h3>
+ <p>This function fetches nodes that encapsulate objects which make use of certain keywords. It returns an array of hashes where each hash represents a &quot;keyword-node&quot; pair.</p> <p>The keyword must be provided using the &quot;alphabet&quot; parameter. This parameter can be a letter, a part of a word or an entire word - the function will look for keywords that start with the specified sequence. This means that if you specify &quot;car&quot; in the &quot;alphabet&quot; parameter, the system will look for keywords like &quot;car&quot;, &quot;card&quot;, &quot;carnival&quot;, &quot;car painting&quot; and so on (but not &quot;scarf&quot; for example). Every time such a keyword is found, the main node of the object that uses this keyword will be included in the result along with the matching keyword. Note that if an object contains multiple keywords that start from the specified sequence, the main node of this object will be fetched several times. The following table shows an example of the structure that may be returned if there are three articles that contain matching keywords:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Keyword</p> 
+  </th> <th >   <p>Node</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>car enamel</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The main node of the &quot;Auto&quot; article (as a <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> object).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>car painting</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The main node of the &quot;Auto&quot; article (as a <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> object).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>car sickness</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The main node of the &quot;Driving&quot; article (as a <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> object).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>cars</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The main node of the &quot;Traffic&quot; article (as a <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> object).</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>As you can see from the table, the article called &quot;Auto&quot; uses two keywords that start from &quot;car&quot;: &quot;car enamel&quot; and &quot;car painting&quot;. The remaining two articles (&quot;Driving&quot; and &quot;Traffic&quot;) make use of one keyword each: &quot;car sickness&quot; and &quot;cars&quot;.</p> <p>The &quot;strict_matching&quot; parameter is optional and can be set to either true() or false(). When set to true(), the fetch function will look for the exactly same keyword as the specified sequence. For example, if the &quot;alphabet&quot; parameter is set to &quot;car&quot;, only items that use &quot;car&quot; as a keyword will be fetched; keywords like &quot;card&quot;, &quot;carnival&quot;, &quot;car painting&quot; and so on will be ignored.</p> <p>By default, the function will fetch nodes that encapsulate objects of all types created by any user. However, it is possible to fetch objects of a certain type or that were created by a specific user, by using the optional &quot;classid&quot; and &quot;owner&quot; parameters. The &quot;offset&quot; and &quot;limit&quot; parameters can be used to limit the result. </p> <p>The optional &quot;parent_node_id&quot; parameter makes it possible to fetch nodes that are directly under the specified parent node. If an object makes use of a keyword that starts with the specified sequence, the function will check if the main node of this object is a child on the specified parent node. If yes, it will be included in the result.</p> <p>The &quot;include_duplicates&quot; parameter makes it possible to avoid duplicates (different keywords but same nodes) in the result. This parameter is optional and can be set to either true() or false(). When set to false(), the result will only contain unique nodes. For example, if an article contains both &quot;car enamel&quot; and &quot;car painting&quot; keywords, and you specify &quot;car&quot; in the &quot;alphabet&quot; parameter, the main node of this article will be included in the result once. The corresponding keyword-node pair will contain the original sequence (&quot;car&quot;) instead of the actual keyword that was matched (&quot;car enamel&quot; or &quot;car painting&quot;). The following table shows the structure that would be returned if the &quot;include_duplicates&quot; parameter is set to false() in the three-articles example above:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Keyword</p> 
+  </th> <th >   <p>Node</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>car</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The main node of the &quot;Auto&quot; article (as a <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> object).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>car sickness</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The main node of the &quot;Driving&quot; article (as a <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> object).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>cars</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The main node of the &quot;Traffic&quot; article (as a <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> object).</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>The &quot;sort_by&quot; parameter makes it possible to sort the result in different ways. This parameter must be provided as an array. The first element of the array must be the desired sorting method. The second element of the array must be the sorting direction, it can be either true() or false() - ascending or descending. Note that this parameter works in the very same way as the &quot;sort_by&quot; parameter of the <a href="list.html" target="_self">list</a> fetch function. However, it currently only supports the following sorting methods:</p> 
+<ul>
+ <li><div> attribute </div></li> <li><div> class_identifier </div></li> <li><div> class_name </div></li> <li><div> modified </div></li> <li><div> name </div></li> <li><div> published </div></li> <li><div> section </div></li> 
+</ul>
+ <p>Note that using other sort methods will lead to an error.</p> <p>The function returns an array of hashes. Each hash consists of the following elements:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Key</p> 
+  </th> <th >   <p>Type</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>keyword</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The keyword that was matched.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>link_object</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>object</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The node (as a <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> object) that encapsulates an object which uses the matched keyword.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>If no match is found, the function will return FALSE.</p><h3>Examples</h3>
+    <a name="eztoc87587_0_0_1" id="eztoc87587_0_0_1"></a><h4>Example 1</h4> <p>&nbsp;</p><pre class="wordwrap copytoclipboard"><span class="line">{def $list=fetch( 'content', 'keyword',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( alphabet, 'computer',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classid, &nbsp;&nbsp;3 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $list as $element}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$element.link_object.name|wash} ({$element.keyword|wash}) &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $list=fetch( \'content\', \'keyword\',\r\n                  hash( alphabet, \'computer\', \r\n                        classid,   3 ) )}\r\n\r\n{foreach $list as $element}\r\n    {$element.link_object.name|wash} ({$element.keyword|wash}) &lt;br /&gt;\r\n{/foreach}' ); return false;" /></p>
+<![endif]--><p>
+ <br />Outputs the names of nodes that encapsulate objects which make use of keywords starting with the string &quot;computer&quot;. In addition, the matched keywords are also printed.</p>       <a name="eztoc87587_0_0_2" id="eztoc87587_0_0_2"></a><h4>Example 2</h4> <p>&nbsp;</p><pre class="wordwrap"><span class="line">{def $list=fetch( 'content', 'keyword',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( alphabet, 'computer',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classid, array( 1, 3 ) ) )}</span>
+</pre><p>
+ <br />Only nodes that encapsulate objects of the specified two classes will be fetched.</p>       <a name="eztoc87587_0_0_3" id="eztoc87587_0_0_3"></a><h4>Example 3</h4> <p>&nbsp;</p><pre class="wordwrap copytoclipboard"><span class="line">{def $list=fetch( 'content', 'keyword',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( alphabet, 'computer',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classid, array( 1, 3 ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner, 14,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sort_by, array( 'modified', false() ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $list=fetch( \'content\', \'keyword\',\r\n                  hash( alphabet, \'computer\', \r\n                        classid, array( 1, 3 ),\r\n                        owner, 14,\r\n                        sort_by, array( \'modified\', false() ) ) )}' ); return false;" /></p>
+<![endif]--><p>
+ <br />Only the nodes/objects that are created by the user that has ID number 14 will be included in the result. The nodes will be sorted by the modification time of the objects; the node that encapsulates the most recently modified object will be the first element in the collection.</p>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Modules/content/Fetch-functions/keyword by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:52 GMT -->
+</html>

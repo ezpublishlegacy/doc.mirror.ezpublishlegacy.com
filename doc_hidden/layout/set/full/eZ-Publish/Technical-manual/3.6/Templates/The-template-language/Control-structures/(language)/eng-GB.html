@@ -1,0 +1,147 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.6/Templates/The-template-language/Control-structures/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:45:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Control structures / The template language / Templates / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Control structures</h1>
+</div>
+
+ <p>The eZ publish template language offers a selection of mechanisms that can be used to solve common programmatic issues like for example condition control, looping, etc. The following list shows an overview of the available mechanisms:</p> 
+<ul>
+ <li><div> IF-THEN-ELSE </div></li> <li><div> SWITCH </div></li> <li><div> WHILE </div></li> <li><div> DO...WHILE </div></li> <li><div> FOR </div></li> <li><div> FOREACH </div></li> 
+</ul>
+  <a name="eztoc1327_1" id="eztoc1327_1"></a><h2>IF-THEN-ELSE</h2> <p>The <a href="../../../../Reference/Template-control-structures/Conditional-control/if.html" target="_self">IF</a> construct allows for conditional execution of code fragments. It is one of the most important features of many programming languages. The eZ publish implementation makes it possible to do conditional branching by the way of the following elements: IF, ELSE and ELSEIF. The ELSE and ELSEIF elements are optional. The following examples demonstrate the use of this construct.</p>  <a name="eztoc1327_1_1" id="eztoc1327_1_1"></a><h3>Example 1</h3> <pre class="wordwrap copytoclipboard"><span class="line">{if eq( $var, 128 )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Hello world &lt;br /&gt;</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;No world here, move along. &lt;br /&gt;</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{if eq( $var, 128 )}\r\n    Hello world &lt;br /&gt;\r\n{else}\r\n    No world here, move along. &lt;br /&gt;\r\n{/if}\r\n' ); return false;" /></p>
+<![endif]-->   <a name="eztoc1327_1_2" id="eztoc1327_1_2"></a><h3>Example 2</h3> <pre class="wordwrap copytoclipboard"><span class="line">{if eq( $fruit, 'apples' )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Apples &lt;br /&gt;</span>
+<span class="line">{elseif eq( $fruit, 'oranges' )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Oranges &lt;br /&gt;</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Bananas &lt;br /&gt;</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{if eq( $fruit, \'apples\' )}\r\n    Apples &lt;br /&gt;\r\n{elseif eq( $fruit, \'oranges\' )}\r\n    Oranges &lt;br /&gt;\r\n{else}\r\n    Bananas &lt;br /&gt;\r\n{/if}\r\n' ); return false;" /></p>
+<![endif]-->    <a name="eztoc1327_2" id="eztoc1327_2"></a><h2>SWITCH</h2> <p>The <a href="../../../../Reference/Template-control-structures/Conditional-control/switch.html" target="_self">SWITCH</a> mechanism is similar to a series of IF statements used on the same expression. This construct is typically useful when the same variable needs to be compared to different values. It executes a piece of code depending on which value that matched a given criteria. The following example demonstrates basic use of this construct.</p> <pre class="wordwrap copytoclipboard"><span class="line">{switch match=$fruits}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{case match='apples'}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apples &lt;br /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{/case}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{case match='oranges'}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Oranges &lt;br /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{/case}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{case}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unidentified fruit! &lt;br /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{/case}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/switch}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{switch match=$fruits}\r\n\r\n    {case match=\'apples\'}\r\n        Apples &lt;br /&gt;\r\n    {/case}\r\n\r\n    {case match=\'oranges\'}\r\n        Oranges &lt;br /&gt;\r\n    {/case}\r\n\r\n    {case}\r\n        Unidentified fruit! &lt;br /&gt;\r\n    {/case}\r\n\r\n{/switch}\r\n' ); return false;" /></p>
+<![endif]--> <p>If the value of the $fruits variable is &quot;oranges&quot;, the following output will be produced:</p> <div class="output"> <p>Oranges</p> </div>   <a name="eztoc1327_3" id="eztoc1327_3"></a><h2>WHILE</h2> <p>The <a href="../../../../Reference/Template-control-structures/Looping/while.html" target="_self">WHILE</a> construct is the simplest loop mechanism that the template language offers. It tells eZ publish to execute the nested statement(s) repeatedly, as long as a given expression evaluates to TRUE. The value of the expression is checked for every loop iteration (at the beginning of the iteration). If the given expression evaluates to FALSE from the very beginning, the nested statement(s) will not be executed. The following example demonstrates basic use of this construct.</p> <pre class="wordwrap copytoclipboard"><span class="line">{while ne( $counter, 8 )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Print this line eight times ({$counter}) &lt;br /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{set $counter=inc( $counter )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/while}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{while ne( $counter, 8 )}\r\n\r\n    Print this line eight times ({$counter}) &lt;br /&gt;\r\n    {set $counter=inc( $counter )}\r\n\r\n{/while}\r\n' ); return false;" /></p>
+<![endif]--> <p>If the initial value of $counter is zero, the following output will be produced:</p> <div class="output"> <p>
+Print this line eight times (0)<br />
+Print this line eight times (1)<br />
+Print this line eight times (2)<br />
+Print this line eight times (3)<br />
+Print this line eight times (4)<br />
+Print this line eight times (5)<br />
+Print this line eight times (6)<br />Print this line eight times (7)</p> </div>   <a name="eztoc1327_4" id="eztoc1327_4"></a><h2>DO...WHILE</h2> <p>A <a href="../../../../Reference/Template-control-structures/Looping/do.html" target="_self">DO...WHILE</a> loop is very similar to WHILE loops, except that the expression is checked at the end of each iteration instead of in the beginning. The main difference is that this construct will always execute the first iteration (regardless of how the test expression evaluates). The following example demonstrates basic use of this construct.</p> <pre class="wordwrap copytoclipboard"><span class="line">{do}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Keep printing this line ({$counter}) &lt;br /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{set $counter=inc( $counter )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/do while ne( $counter, 8 )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{do}\r\n\r\n    Keep printing this line ({$counter}) &lt;br /&gt;\r\n    {set $counter=inc( $counter )}\r\n\r\n{/do while ne( $counter, 8 )}\r\n' ); return false;" /></p>
+<![endif]--> <p>If the initial value of $counter is 0, the following output will be produced:</p> <div class="output"> <p>
+Keep printing this line (0)<br />
+Keep printing this line (1)<br />
+Keep printing this line (2)<br />
+Keep printing this line (3)<br />
+Keep printing this line (4)<br />
+Keep printing this line (5)<br />
+Keep printing this line (6)<br />
+Keep printing this line (7)<br />Keep printing this line (8)</p> </div>   <a name="eztoc1327_5" id="eztoc1327_5"></a><h2>FOR</h2> <p>Generic looping may be achieved using <a href="../../../../Reference/Template-control-structures/Looping/for.html" target="_self">FOR</a> loops. This construct supports looping over numerical ranges in both directions. In addition it also supports breaking, continual and skipping. The following example demonstrates basic use of this construct.</p> <pre class="wordwrap copytoclipboard"><span class="line">{for 0 to 7 as $counter}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Value of counter: {$counter} &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/for}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{for 0 to 7 as $counter}\r\n\r\n    Value of counter: {$counter} &lt;br /&gt;\r\n\r\n{/for}\r\n' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced:</p> <div class="output"> <p>
+Value of counter: 0<br />
+Value of counter: 1<br />
+Value of counter: 2<br />
+Value of counter: 3<br />
+Value of counter: 4<br />
+Value of counter: 5<br />
+Value of counter: 6<br />Value of counter: 7</p> </div>   <a name="eztoc1327_6" id="eztoc1327_6"></a><h2>FOREACH</h2> <p>The <a href="../../../../Reference/Template-control-structures/Looping/foreach.html" target="_self">FOREACH</a> construct can be used to iterate over arrays in different ways. The loop can be tweaked using miscellaneous techniques. The following example demonstrates basic use of this construct.</p> <pre class="wordwrap copytoclipboard"><span class="line">{foreach $objects as $object}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$object.name} &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{foreach $objects as $object}\r\n\r\n    {$object.name} &lt;br /&gt;\r\n\r\n{/foreach}\r\n' ); return false;" /></p>
+<![endif]--> <p>The example above will print out the names of the objects that are stored in the $objects array. If this array stores 4 objects with the following names: &quot;Emmett Brown&quot;, &quot;Marty McFly&quot;, &quot;Lorraine Baines&quot; and &quot;Biff Tannen&quot;, the following output will be produced:</p> <div class="output"> <p>
+Emmett Brown<br />
+Marty McFly<br />
+Lorraine Baines<br />Biff Tannen</p> </div> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.6/Templates/The-template-language/Control-structures/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:45:11 GMT -->
+</html>

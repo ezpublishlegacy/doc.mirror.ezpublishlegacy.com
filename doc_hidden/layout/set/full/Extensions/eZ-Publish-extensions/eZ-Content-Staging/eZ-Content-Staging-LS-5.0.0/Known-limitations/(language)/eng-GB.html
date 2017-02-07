@@ -1,0 +1,59 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Content-Staging/eZ-Content-Staging-LS-5.0.0/Known-limitations/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:26:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Known limitations / eZ Content Staging LS 5.0.0 / eZ Content Staging / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Known limitations</h1>
+</div>
+
+<p>This page contains details about known limitations on Content Staging.</p><a name="eztoc136085_1" id="eztoc136085_1"></a><h2>Editing content on target servers</h2><p>
+Please be aware that editing content on the target server can generate issues regarding content synchronization.<br />
+The concept behind Content Staging is to have a staging environment and one or more target environments, allowing editors to manage the content in one single place, and synchronize all to the target server(s) without effort.<br />However, the content management should only be done in the staging server. Doing that on one of the target servers can make the content to differ among servers (staging and targets), which is already identified as a cause of synchronization failure.</p><p>For instance, deleting a content object in one of the target servers won't mean that the content object has been permanently deleted. This is because it has been deleted from a target server only. If an editor updates the same content object existing in the staging server this modification will be sent to the target servers, and when Content Staging tries to update the object on the server from where it has been removed it will encounter an exception, returning that the object being updated doesn't exist. According to this a create action will be sent instead to that target server, and the content object will be automatically re-created.</p><p>So, we always advise users to manage the content in the staging server only.</p><a name="eztoc136085_2" id="eztoc136085_2"></a><h2>Content Staging on eZ Publish with URL access method</h2><p>As eZ Content Staging uses REST api, and due to a known limitation, you will require additional configuration in order to make Content Staging work properly.</p><p>To do so, please make sure to add your admin siteaccess to the <i>APIPrefix</i> setting, in an override of the <i>rest.ini</i> settings file, as follows:</p><pre class="wordwrap"><span class="line">[System]</span>
+<span class="line">ApiPrefix=/&lt;admin_siteaccess&gt;/api</span>
+</pre><p><b>Note:</b> This configuration is only required on the target eZ Publish installations.</p><p>In some cases it's also required to apply the patch from jira&nbsp;<a href="https://jira.ez.no/browse/EZP-21304" title="REST api incorrectly parses requests with uri siteaccess" target="_blank">EZP-21304</a>&nbsp;in the target eZ Publish installations as well.</p><p>If you installed eZ Publish with &quot;Port&quot; or &quot;Hostname&quot; access method you will not be affected by this issue.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Content-Staging/eZ-Content-Staging-LS-5.0.0/Known-limitations/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:26:11 GMT -->
+</html>

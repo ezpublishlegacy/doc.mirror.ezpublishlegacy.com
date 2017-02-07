@@ -1,0 +1,102 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=13468116 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:32:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage9215.html?pageId=13468116" />
+        <link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch934e.css?media=print" media="print">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 8]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1f2a9c4c7f2593422cc9b02d1a652a22/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/26ac2724af3c6ece1051365650d982fa/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins.confluence-highlight-ac" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/12/_/styles/colors.css" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p> </p><p> </p><p>The ContentService implemented in eZ Publish 5.x has no knowledge of the Legacy workflow engine. This means that all features in the 4.x series that used workflows need a workaround. One of the most common use-cases is pre-publishing approval, for instance of user generated content.</p><h2>Legacy kernel callbacks</h2><p>Fortunately, there is a quite simple way to trigger workflows from eZ Publish 5 code: by using a Legacy Kernel Callback. The overall process is described in the <a class="confluence-link" href="../../display/EZP/Legacy%2bcode%2band%2bfeatures.html" data-linked-resource-id="8323433" data-linked-resource-type="page" data-linked-resource-default-alias="Legacy code and features" data-base-url="../../index.html">Legacy code and features</a> documentation chapter.</p><h1>Create with the Public API, publish with the Legacy Kernel</h1><p>Thanks to this, it is possible to create a draft using native eZ Publish 5 code, and get this draft pre-approved using the legacy workflow &amp; collaboration systems, including email notifications.</p><h3>Legacy workflow configuration</h3><p>Let's take an approval workflow as an example. It needs to be configured the old way, using the backoffice. Create a workflow, add an <a href="../../eZ-Publish/Technical-manual/4.x/Reference/Workflow-events/Approve.html">Approve event</a> to it, and connect it to the content/publish/before trigger.</p><h3>Create a draft using the public API</h3><p>This is the the usual way, as extensively covered in the <a class="confluence-link" href="../../display/EZP/3.html" data-linked-resource-id="6292982" data-linked-resource-type="page" data-linked-resource-default-alias="3. Managing Content" data-base-url="../../index.html">Public API Cookbook</a>. The main different is that we will NOT call <code>ContentService::publishVersion()</code>.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="language=php|title=Create content using the Public API" style="background-image: url(../servlet/confluence/placeholder/macro-heading06f0.png?definition=e2NvZGU6dGl0bGU9Q3JlYXRlIGNvbnRlbnQgdXNpbmcgdGhlIFB1YmxpYyBBUEl8bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>$contentType = $contentTypeService->loadContentTypeByIdentifier( $contentTypeIdentifier );
+
+$contentCreateStruct = $contentService->newContentCreateStruct( $contentType, 'eng-GB' );
+$contentCreateStruct->setField( 'title', $title );
+$contentCreateStruct->setField( 'intro', $intro );
+$contentCreateStruct->setField( 'body', $body );
+
+$locationCreateStruct = $locationService->newLocationCreateStruct( $parentLocationId );
+
+
+// create a draft using the content and location create struct and publish it
+$draft = $contentService->createContent( $contentCreateStruct, array( $locationCreateStruct ) );
+
+</pre></td></tr></table><h2>Publish a Public API draft using the Legacy Kernel</h2><p>First, a method must be used to obtain a legacy kernel. This can be used, given that getContainer() returns the Symfony Dependency Injection Container:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="language=php" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>/**
+ * Returns the legacy kernel object.
+ *
+ * @return \eZ\Publish\Core\MVC\Legacy\Kernel
+ */
+protected function getLegacyKernel()
+{
+    $closure = $this->getContainer()->get( 'ezpublish_legacy.kernel' );
+    return $closure();
+}</pre></td></tr></table><p>Then, you need to use the object to run a Legacy Kernel Callback (e.g. code fragment). This legacy code will execute the publish operation with the given content id and version number. It will then check the operation result, and return true or false, depending if the operation went all the way through, or if it was interrupted (approval workflow event, for instance). This handling could and should <em>of course</em> be enhanced, with error handling to begin with, but it doesn't change the core principle.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="language=php" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>/**
+ * @param $contentId
+ * @param $versionId
+ * @return bool true if the operation was completed, false if it was interrupted
+ */
+protected function runLegacyPublish( $contentId, $versionId, $runAsUserId = null )
+{
+    $legacyKernel = $this->getLegacyKernel();
+    return $legacyKernel->runCallback(
+        function () use ( $contentId, $versionId, $runAsUserId )
+        {
+            $script = \eZScript::instance( array( 'use-modules' => true ) );
+            $script->initialize();
+            $db = \eZDB::instance();
+            $transactionCounter = $db->transactionCounter();
+            if ( $runAsUserId )
+            {
+                \eZUser::setCurrentlyLoggedInUser( \eZUser::fetch( $runAsUserId ), $runAsUserId );
+            }
+            $operationResult = \eZOperationHandler::execute(
+                'content', 'publish', array( 'object_id' => $contentId, 'version' => $versionId )
+            );
+            if ( ( array_key_exists( 'status', $operationResult ) &amp;&amp; $operationResult['status'] != \eZModuleOperationInfo::STATUS_CONTINUE ) )
+            {
+                // Required by https://jira.ez.no/browse/EZP-20558
+                for ( $i = 0, $counter = ( $db->transactionCounter() - $transactionCounter ); $i &lt; $counter; ++$i )
+                {
+                    $db->commit();
+                }
+                return false;
+            }
+            return true;
+        }
+    );
+}</pre></td></tr></table><p>Any Legacy code can be executed this way. While it is a <em>backward compatibility</em> feature, it is considered good practice to work around missing features. It is however not recommended to rely heavily on </p><table class="wysiwyg-macro" data-macro-name="note" data-macro-parameters="title=Pay attention to the user" style="background-image: url(../servlet/confluence/placeholder/macro-headingd8b2.png?definition=e25vdGU6dGl0bGU9UGF5IGF0dGVudGlvbiB0byB0aGUgdXNlcn0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>Public API code is always executed as a user, by default anonymous. Since workflows are often user dependent (Approval is), it is important that this code is executed as an editor, or as a user who will trigger the workflow.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="language=php|title=Logging in a user on the Public API repository" style="background-image: url(../servlet/confluence/placeholder/macro-headingaced.png?definition=e2NvZGU6dGl0bGU9TG9nZ2luZyBpbiBhIHVzZXIgb24gdGhlIFB1YmxpYyBBUEkgcmVwb3NpdG9yeXxsYW5ndWFnZT1waHB9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>$repository->setCurrentUser( $repository->getUserService()->loadUser( $userId ) );</pre></td></tr></table><p>Of course, this isn't required when using Public API code in controllers, since those will use the currently-logged in user.</p><p><strong>Legacy code</strong><strong> also requires a user</strong></p><p>By default, code in LegacyKernel::runCallback() calls is executed as anonymous. You'll have to log the executing user manually <em>on legacy as well</em>.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="language=php|title=Logging in a user with the Legacy Kernel" style="background-image: url(../servlet/confluence/placeholder/macro-heading7726.png?definition=e2NvZGU6dGl0bGU9TG9nZ2luZyBpbiBhIHVzZXIgd2l0aCB0aGUgTGVnYWN5IEtlcm5lbHxsYW5ndWFnZT1waHB9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>\eZUser::setCurrentlyLoggedInUser( \eZUser::fetch( $runAsUserId ), $runAsUserId );</pre></td></tr></table></td></tr></table><p> </p><h1>Data compatibility and workflow collaboration</h1><p>Content created using the Public API does appear as expected in the dashboard, and the draft can be checked from here. Collaboration options from the backoffice are available, and the object's lifecycle can be managed the way it used to with eZ Publish 4.x.</p><h1>Test script</h1><p>The code below is a working Command script example that demonstrates the workaround. Just drop it in a bundle and update the namespace: <a href="https://gist.github.com/bdunogier/e05ed564770fa6a51e51" style="font-size: 10.0pt;line-height: 13.0pt;">https://gist.github.com/bdunogier/e05ed564770fa6a51e51</a></p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=13468116 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:32:31 GMT -->
+</html>

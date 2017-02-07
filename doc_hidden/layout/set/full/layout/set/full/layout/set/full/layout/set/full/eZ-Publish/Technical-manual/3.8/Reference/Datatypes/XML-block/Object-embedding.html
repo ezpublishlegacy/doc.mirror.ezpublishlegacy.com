@@ -1,0 +1,137 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Reference/Datatypes/XML-block/Object-embedding by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:54:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>Object embedding / XML block / Datatypes / Reference / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Object embedding</h1>
+</div>
+
+ <p>The &quot;embed&quot; tag makes it possible to insert an arbitrary content object directly in the XML block. It can for example be used to embed images. Usage:</p> <pre class="wordwrap"><span class="line">&lt;embed href=&quot;&quot; [class=&quot;&quot;] [view=&quot;&quot;] [align=&quot;&quot;] [target=&quot;&quot;] [size=&quot;&quot;] [id=&quot;&quot;] /&gt;</span>
+</pre> <p>With this tag, embedded objects are inserted as &quot;block elements&quot;. Such an element always begins on a new line when it is displayed. It exists in its own virtual box and is always followed by a carriage return (like if someone hit the &quot;Enter&quot; key after inserting the object). This means that, for example, inserting an image using the &quot;embed&quot; tag will break the current paragraph. The &quot;embed&quot; tag is represented by <a href="http://www.w3.org/TR/REC-html40/struct/global.html#h-7.5.3" target="_blank">block-level</a> tags in the resulting XHTML code.</p> <p>The &quot;embed-inline&quot; tag makes it possible to insert objects as inline elements. For example, this tag allows you to insert an image inside a text line. Usage:</p> <pre class="wordwrap"><span class="line">&lt;embed-inline href=&quot;&quot; [class=&quot;&quot;] [view=&quot;&quot;] [align=&quot;&quot;] [target=&quot;&quot;] [size=&quot;&quot;] [id=&quot;&quot;] /&gt;</span>
+</pre> <p>This tag is represented by inline tags in the resulting XHTML code. The templates that are used for rendering &quot;embed-inline&quot; tags must not contain block-level XHTML tags.</p> <p>The following table reveals the list of parameters supported by the &quot;embed&quot; and &quot;embed-inline&quot; tags.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Parameter</p> 
+  </th> <th >   <p>Description</p> 
+  </th> <th >   <p>Required</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>href</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;href&quot; parameter must be a valid link to either a node or an object using the same notation as for hyperlinks (for example &quot;eznode://134&quot;, &quot;eznode://path/to/some/node&quot; and &quot;ezobject://1024&quot;). If the provided link is a link to a node, eZ Publish will use the object that is encapsulated by that node. In other words, in both cases it is the object that will be inserted (the node notation is just a wrapper).</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Yes.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>class</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;class&quot; parameter makes it possible to specify a custom stylesheet that should be used. In the template, the specified stylesheet will be available in the $classification variable.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>view</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;view&quot; parameter makes it possible to specify the view mode that should be used when the object is rendered (for example &quot;full&quot;, &quot;line&quot; and so on). By default, the system uses the &quot;embed&quot; view mode when rendering objects that are inserted using the &quot;embed&quot; tag, while the &quot;embed-inline&quot; view mode is used together with &quot;embed-inline&quot; tags.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>align</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;align&quot; parameter can be used to specify the positioning of the embedded object; possible values are &quot;left&quot;, &quot;center&quot; and &quot;right&quot;.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>target</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;target&quot; parameter can be used to set the opening method (same browser tab/window or new browser tab/window) for the embedded item (for example &quot;_self&quot;, &quot;_blank&quot;, etc.).</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>size</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;size&quot; parameter can be used to set the image size that should be used when an image object is embedded (for example &quot;small&quot;, &quot;medium&quot;, &quot;large&quot;, etc.). The available sizes are defined by image.ini.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>id</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;id&quot; parameter makes it possible to assign a unique ID which will be the ID attribute in the resulting HTML.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Reference/Datatypes/XML-block/Object-embedding by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:54:49 GMT -->
+</html>

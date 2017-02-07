@@ -1,0 +1,93 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Content-Staging/eZ-Content-Staging-LS-5.2.0/Installation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:08:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Installation / eZ Content Staging LS 5.2.0 / eZ Content Staging / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installation</h1>
+</div>
+
+<a name="eztoc136109_0_0_0_1" id="eztoc136109_0_0_0_1"></a><h5>Get the packages</h5><p>As of eZ Publish Enterprise 4.7, if you install the demo design package, setup is already done for you.&nbsp;</p><p>If you have a eZ Publish Enterprise, you'll be able to download a supported stable version for your eZ Publish Enterprise version from your service portal on <a href="http://support.ez.no/" target="_self">support.ez.no</a>.</p><a name="eztoc136109_0_0_0_2" id="eztoc136109_0_0_0_2"></a><h5>Copy the extension</h5><p>After downloading the source code of eZ Content Staging (folder named <i>ezcontentstaging</i>), you must copy <i>ezcontentstaging</i> into your <i>ezpublish_legacy/extension</i> directory.</p><a name="eztoc136109_0_0_0_3" id="eztoc136109_0_0_0_3"></a><h5>Target and Source Servers Installation</h5><a name="eztoc136109_0_0_0_4" id="eztoc136109_0_0_0_4"></a><h5>Target Server:</h5><p>1. Unzip the extension and enable it. Make sure to regenerate autoloads and clear caches (please refer to the end of the document for instructions);</p><p>2. Add a table in the database used by your eZ Publish instance. You can do so as follows:</p><p>&nbsp;&nbsp;&nbsp; From eZ Publish root directory, in case you are using MySQL:</p><pre class="wordwrap"><span class="line">$ mysql -u &lt;user&gt; -p &lt;database_name&gt; &lt; (your eZ Publish root)/ezpublish_legacy/extension/ezcontentstaging/sql/mysql/mysql.sql</span>
+</pre><p><i><b>Note:</b> The procedure is very similar in case you are using another RDMS. You may want to have a look at the sql/oracle and sql/postgresql for Oracle and PostgreSQL databases respectively. Please refer to the documentation reference for your DBMS if you are experiencing issues.</i></p><p>3. Enable rewrite rules to make the REST api accessible. See the documentation <a href="../../../../../../eZ-Publish/Technical-manual/4.5/Features/Rest-API.html" target="_self">here</a>.</p><p>4. Disable oauth authentication (use basic auth with or without https:</p><pre class="wordwrap"><span class="line">edit rest.ini.append.php:</span>
+<span class="line">[Authentication]</span>
+<span class="line">AuthentitacionStyle=ezpRestBasicAuthStyle</span>
+</pre><p>5. Make sure there is a user account that has enough rights to create/read/update/delete any content, e.g.: admin</p><a name="eztoc136109_0_0_0_5" id="eztoc136109_0_0_0_5"></a><h5>Source Server:</h5><p>1. Unzip the extension and enable it. Make sure to regenerate autoloads and clear (please refer to the end of the document for instructions);</p><p>2. Add a table in the database used by your eZ Publish instance. You can do so as follows:</p><p>&nbsp;&nbsp;&nbsp; From eZ Publish root directory, in case you are using MySQL:</p><pre class="wordwrap"><span class="line">$ mysql -u &lt;user&gt; -p &lt;database_name&gt; &lt; (your eZ Publish root)/ezpublish_legacy/extension/ezcontentstaging/sql/mysql/mysql.sql</span>
+</pre><p>&nbsp;&nbsp;<i>&nbsp; <b>Note:</b>&nbsp; The procedure is very similar in case you are using another RDMS. You may want to have a look at the sql/oracle and sql/postgresql for Oracle and PostgreSQL databases respectively. Please refer to the documentation reference for your DBMS if you are experiencing issues.</i></p><p>3. Enable all the needed workflow events:</p><p>&nbsp;&nbsp;&nbsp; 3.1. Create one workflow per trigger for all content-related triggers</p><p>&nbsp;&nbsp;&nbsp; 3.2. Add, to each workflow, one event of &quot;stage <b>&lt;XXX&gt;</b>&quot; type</p><p>&nbsp;&nbsp;&nbsp; 3.3. Add each workflow to one trigger</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . add location: after</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; . remove location: before</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Note that for each one of the 15 operations relating to content, 2 triggers are available: Before and After.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; You do not need to create 30 workflows, but only 15. Each workflow will be usable with the correct trigger type (either Before or After).</p><p>&nbsp;&nbsp;&nbsp; 3.4. If you have existing workflows (e.g.: Content Approval), insert the &quot;stage&quot; event where you find appropriate</p><p>4. Define target feed:</p><p>&nbsp;&nbsp;&nbsp; 4.1. Make sure all content classes, sections, languages, object stages, are have the same definition on source and target server (this must be done manually).</p><p>&nbsp;&nbsp;&nbsp; 4.2. Edit contentstagingsource.ini.append.php:</p><pre class="wordwrap copytoclipboard"><span class="line">[GeneralSettings]</span>
+<span class="line">TargetList[]=&lt;feedname&gt;</span>
+<span class="line">[Target_&lt;feedname&gt;]</span>
+<span class="line">Name=&lt;A descriptive name for this export feed&gt;</span>
+<span class="line">TransportClass=eZRestApiEmbeddedClientStagingTransport</span>
+<span class="line">RemoteIdGeneratorClass=eZContentStagingSameRemoteIdGenerator</span>
+<span class="line">Server=&lt;server_feedname&gt; note: this can be the same or different from feedname, but has to be the same as used in wsproviders.ini</span>
+<span class="line">Subtrees[]=&lt;local_root_node_id&gt;</span>
+<span class="line">RemoteSubtrees[]=&lt;target_root_node_id&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[GeneralSettings]    \r\nTargetList[]=&lt;feedname&gt;   \r\n[Target_&lt;feedname&gt;]    \r\nName=&lt;A descriptive name for this export feed&gt;    \r\nTransportClass=eZRestApiEmbeddedClientStagingTransport    \r\nRemoteIdGeneratorClass=eZContentStagingSameRemoteIdGenerator    \r\nServer=&lt;server_feedname&gt; note: this can be the same or different from feedname, but has to be the same as used in wsproviders.ini    \r\nSubtrees[]=&lt;local_root_node_id&gt;    \r\nRemoteSubtrees[]=&lt;target_root_node_id&gt;' ); return false;" /></p>
+<![endif]--><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Make sure that for all root nodes of the feed in the source server, there is a corresponding root node on the target server</p><p>&nbsp;&nbsp;&nbsp;&nbsp; 4.3. Edit wsproviders.ini.append.php:</p><pre class="wordwrap copytoclipboard"><span class="line">[&lt;server_feedname&gt;]</span>
+<span class="line">providerType=REST</span>
+<span class="line">providerUri=&lt;url to rest api on target server, including the final part, eg: http://my.server.com/api/contentstaging/v1/&gt;</span>
+<span class="line">Options[]</span>
+<span class="line">Options[authType]=1 (for basic auth)</span>
+<span class="line">Options[login]=&lt;username&gt;</span>
+<span class="line">Options[password]=&lt;password&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[&lt;server_feedname&gt;]\r\nproviderType=REST\r\nproviderUri=&lt;url to rest api on target server, including the final part, eg: http://my.server.com/api/contentstaging/v1/&gt;\r\nOptions[]\r\nOptions[authType]=1 (for basic auth)\r\nOptions[login]=&lt;username&gt;\r\nOptions[password]=&lt;password&gt;' ); return false;" /></p>
+<![endif]--><p>5. In the Administration Interface, go to the &quot;Setup&quot; tab and click on the &quot;Content Staging&quot; link, in the left-col menu. You should see the target feed listed. Click on the &quot;Check&quot; link to verify that it is properly setup. Click on the &quot;Initialize Feeds&quot; button and synchronize the event generated.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><a name="eztoc136109_0_0_0_6" id="eztoc136109_0_0_0_6"></a><h5>Remember to:</h5><a name="eztoc136109_0_0_0_7" id="eztoc136109_0_0_0_7"></a><h5>Activate eZ Content Staging</h5><p>As with other common extensions, the extension can be activated both from the Administrator Interface and the setting file. Using the first way, you must log in to the Administrator Interface, click the <b>Setup</b> tab, then open the <b>Extensions</b> link in the left hand menu. A list will appear with all the <b>Available extensions</b>, where you must check the <b>ezcontentstaging</b> box to select the extension. The click the button <b>Update</b> to activate the extension.</p><p>If you prefer to use the second way, open <i>(your eZ Publish root)/ezpublish_legacy/settings/override/site.ini.append.php</i> and add the activation configuration under the &quot;ExtensionSettings&quot; section like this:</p><pre class="wordwrap"><span class="line">[ExtensionSettings]ActiveExtensions[]=ezcocontentstaging</span>
+</pre><p><b>Note:</b> ezcontentstaging should be before ezwebin in site.ini.</p><a name="eztoc136109_0_0_0_8" id="eztoc136109_0_0_0_8"></a><h5>Regenerate autoload arrays</h5><p>After activating eZ Content Staging, it is necessary to regenerate the autoload arrays. This can be done from the Administrator Interface after you have activated the extension as described in the previous step. When you have applied the changes simply click on the <b>Regenerate autoload arrays for extensions</b>.</p><p>You can also generate the autoload arrays by running the following script from your <i>ezpublish_legacy</i> directory:</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php -e</span>
+</pre><a name="eztoc136109_0_0_0_9" id="eztoc136109_0_0_0_9"></a><h5>Clear cache</h5><p>Don't forget to clear the cache. You can clear INI and template caches from the <b>Setup</b> tab in the Administrator Interface or by running the following command from your <i>ezpublish_legacy</i>&nbsp;directory:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --ini --template</span>
+</pre><p>And clear Symfony's cache, from your eZ Publish's root folder:</p><pre class="wordwrap"><span class="line">php ezpublish/console cache:clear --env=prod</span>
+</pre><a name="eztoc136109_0_0_0_10" id="eztoc136109_0_0_0_10"></a><h5>Troubleshooting</h5>
+<ul>
+<li><div>For configuration/connectivity problems, see the &quot;check feed&quot; link in the Admin Interface page listing feeds</div></li><li><div>If you get error messages sating: &quot;Response received from server is not valid (unsupported format text/html)&quot; when trying to synchronize events, a possible cause is that you might have DebugOutput enabled on the target server. There are two ways to workaround this:
+<ul>
+<li><div>Disable DebugOutput on the target server (for the siteaccess used for the REST calls) or </div></li><li><div>In wsproviders.ini.append.php configuration file, force the correct content type for your server definition: </div></li>
+</ul>
+</div></li>
+</ul>
+<pre class="wordwrap"><span class="line">Options[responseType]=application/json</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Content-Staging/eZ-Content-Staging-LS-5.2.0/Installation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:08:10 GMT -->
+</html>

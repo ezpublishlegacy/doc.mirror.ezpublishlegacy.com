@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Configuration-files/content.ini/ISBNSettings/StrictValidation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>StrictValidation / [ISBNSettings] / content.ini / Configuration files / Reference / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>StrictValidation</h1>
+</div>
+<h3>Summary</h3>
+Enables or disables the strict validation of the ISBN-13 numbers.<h3>Usage</h3>
+<pre class="pfix"> <p>StrictValidation=true|false</p></pre><h3>Description</h3>
+ <p>This directive makes it possible to enable or disable strict validation of ISBN-13 numbers. All ISBN-13 numbers consist of five elements called &quot;Prefix&quot;, &quot;Registration group&quot;, &quot;Registrant&quot;, &quot;Publication&quot; and &quot;Check digit&quot;; they are separated by dashes (refer to the documentation of the &quot;<a href="../../../Datatypes/ISBN.html" target="_self">ISBN</a>&quot; datatype for more information).</p> <p>The default value of this setting is &quot;true&quot;, which means that strict validation is enforced. All elements of each ISBN-13 number will be validated according to the rules stored in three range tables of the database. Note that the rules may be outdated. It is possible to add new areas (regions) to the list of group identifiers. You can update the ranges stored in the database by running the &quot;updateisbn13.php&quot; script. If an incorrect ISBN-13 number is entered, it will not be accepted and a warning will be shown. For example, currently the system does not accept &quot;978-650-123-456-4&quot; because the area number &quot;650&quot; doesn't exist in the corresponding range table.</p> <p>If set to &quot;false&quot;, only the &quot;Prefix&quot; and &quot;Check digit&quot; elements will be validated. In other words, the system will accept input regardless if the &quot;Registration group&quot;, &quot;Registrant&quot; and &quot;Publication&quot; elements are correct or not. This is typically useful if you need to enter ISBN-13 numbers containing values that aren't present in the range tables at the moment. </p> <p>Note that the system will automatically add missing dashes and/or correct misplaced ones. However, this will only happen if the range exists in the database. If it doesn't, you will need to separate the ISBN-13 elements by entering the dashes manually.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Configuration-files/content.ini/ISBNSettings/StrictValidation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:13 GMT -->
+</html>

@@ -1,0 +1,64 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/Session/SessionTimeout by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:14:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>SessionTimeout / [Session] / site.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>SessionTimeout</h1>
+</div>
+<h3>Summary</h3>
+This setting will define the number of seconds a session will last.<h3>Usage</h3>
+<pre class="pfix"><p>SessionTimeout=&lt;integer&gt;</p></pre><h3>Description</h3>
+<p>This setting will define the number of seconds a session will last. After the specified time has passed the session will no longer be considered valid, and the user will be logged out even if he/she is active on the site.</p><p>259200 seconds, the equivalent of 3 days, is standard.</p><p>This setting is a DB handler specific setting and is therefore only used if the eZSessionHandlerDB is set in the setting Handler in the block [Session]. For the PHP handler see note below.</p><p>This setting is case sensitive.</p><p>
+<b>Notes on PHP-handler:</b><br />1. For the php-based session handler, you'll need to set the php.ini value of:</p><pre class="wordwrap"><span class="line">session.gc_maxlifetime=&lt;int&gt;</span>
+</pre><p>to something higher then default value of 1440 (24 minutes) to avoid session being garbage collected after 24 minutes.&nbsp;For example set it to 259200 for 3 days.</p><p>eZ Publish sets this value to value of SessionTimeout during execution, but if there are other applications then eZ Publish 4.4+ running on the same server, or if system is Debian Linux based (including Ubuntu), then you need to set this in php.ini as garbage collection happens outside of eZ Publish execution as well.</p><p>
+2. Session gc scripts / cronjobs in eZ Publish has no effect when you use PHP based handler.<br />
+You should instead change your php.ini settings to make sure they are cleared&nbsp;regular:<br /><a href="http://php.net/manual/en/session.configuration.php" target="_self">http://php.net/manual/en/session.configuration.php</a></p><p>
+3. On Debian based Linux distroes&nbsp;(including Ubuntu) there is a out of the box cronjob&nbsp;(/etc/cron.d/php5) which uses a script to&nbsp;determine session.gc_maxlifetime (/usr/lib/php5/maxlifetime).<br />This script only looks for&nbsp;session.gc_maxlifetime in&nbsp;/etc/php5/*/php.ini, so make sure you have placed your value there.</p><h3>Examples</h3>
+<pre class="wordwrap"><span class="line">SessionTimeout=259200</span>
+</pre><p>259200 seconds, the equivalent of 3 days, is standard.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/Session/SessionTimeout by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:14:51 GMT -->
+</html>

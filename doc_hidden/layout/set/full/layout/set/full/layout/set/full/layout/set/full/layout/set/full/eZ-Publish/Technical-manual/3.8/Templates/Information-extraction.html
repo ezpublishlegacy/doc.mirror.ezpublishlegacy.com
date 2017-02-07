@@ -1,0 +1,164 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Templates/Information-extraction by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:53:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Information extraction / Templates / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Information extraction</h1>
+</div>
+
+ <p>Information that is stored by eZ publish can be extracted using the <a href="../Reference/Template-operators/Data-and-information-extraction/fetch.html" target="_self">&quot;fetch&quot;</a> template operator. This operator gives access to the fetch functions that a module provides. It is typically used to extract nodes, objects, etc. using the content module. The fetch operator can only be used with modules that provide support for data fetching. Please refer to the <a href="../Reference/Template-fetch-functions.html" target="_self">&quot;Fetch functions&quot;</a> section of the reference chapter for a complete overview of the fetch functions. The following model and table shows the usage and the parameters of the fetch operator.</p> <pre class="wordwrap"><span class="line">fetch( &lt;module&gt;, &lt;function&gt;, &lt;parameters&gt; )</span>
+</pre> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Parameter</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>module</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the target module.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>function</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the fetch function within the target module.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>parameters</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>An associative array containing the function parameters.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>A module's fetch functions and parameters are defined in the &quot;function_definition.php&quot; file within the directory of the module.</p>  <a name="eztoc23944_1" id="eztoc23944_1"></a><h2>Fetching a single node</h2> <p>The following example demonstrates how the fetch operator can be used to extract a single node from the database.</p> <pre class="wordwrap copytoclipboard"><span class="line">{def $my_node=fetch( content, node, hash( node_id, 13 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">...</span>
+<span class="line">&nbsp;</span>
+<span class="line">{undef}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $my_node=fetch( content, node, hash( node_id, 13 ) )}\r\n\r\n...\r\n\r\n{undef}' ); return false;" /></p>
+<![endif]--> <p>The example above instructs eZ publish to fetch a single <i>node</i> from the <i>content</i> module. Only one parameter is given, which is the ID number of the node that should be fetched. The operator will return an <a href="../Reference/Objects/ezcontentobjecttreenode.html" target="_self">&quot;ezcontentobjecttreenode&quot;</a> object which will be stored in the $my_node variable. This variable can then be used to extract information about the node and the object that it encapsulates. For example, it is possible to extract the name, attributes and the time when the object was published. If the node is unavailable / non-existing or the currently logged in user doesn't have read access to it, the operator will return a FALSE boolean value.</p>   <a name="eztoc23944_2" id="eztoc23944_2"></a><h2>Fetching multiple nodes</h2> <p>It is possible to fetch all the nodes that are directly below a specific node. This can be done by using <i>list</i> instead of <i>node</i> as the second parameter to the &quot;fetch&quot; operator. The following example demonstrates how the fetch operator can be used to extract all the nodes that are directly below node number 13.</p> <pre class="wordwrap copytoclipboard"><span class="line">{def $my_node=fetch( content, list, hash( parent_node_id, 13 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">...</span>
+<span class="line">&nbsp;</span>
+<span class="line">{undef}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $my_node=fetch( content, list, hash( parent_node_id, 13 ) )}\r\n\r\n...\r\n\r\n{undef}' ); return false;" /></p>
+<![endif]--> <p>The operator will return an array of <a href="../Reference/Objects/ezcontentobjecttreenode.html" target="_self">&quot;ezcontentobjecttreenode&quot;</a> objects. The list fetch function of the content module can take several parameters. These parameters are optional and can be used to finetune the fetch for example by filtering out specific nodes. The following table gives an overview of the most commonly used parameters.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Parameter</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>sort_by</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The method and direction that should be used when the nodes are sorted (must be specified as an array).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>limit</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The number of nodes that should be fetched.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>offset</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The offset at which the fetch should start.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>class_filter_type</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The type of filter that should be used, either &quot;include&quot; or &quot;exclude&quot;.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>class_filter_array</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The type of nodes that should be included or excluded by the filter (must be specified as an array).</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>The following example demonstrates how to fetch an alphabetically sorted array of the ten latest articles that are directly below node number 13.</p> <pre class="wordwrap copytoclipboard"><span class="line">{def $my_node=fetch( content,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( parent_node_id, &nbsp;&nbsp;&nbsp;&nbsp;13,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class_filter_type, &nbsp;include,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class_filter_array, array( 'article' ) ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">...</span>
+<span class="line">&nbsp;</span>
+<span class="line">{undef}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $my_node=fetch( content, \r\n                     list, \r\n                     hash( parent_node_id,     13,\r\n                           limit,              10,\r\n                           class_filter_type,  include,\r\n                           class_filter_array, array( \'article\' ) ) )}\r\n\r\n...\r\n\r\n{undef}' ); return false;" /></p>
+<![endif]--> <p>Please refer to the documentation page of the <a href="../Reference/Modules/content/Fetch-functions/list.html" target="_self">&quot;list&quot;</a> fetch function for a complete overview of the available parameters and examples of usage.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Templates/Information-extraction by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:53:28 GMT -->
+</html>

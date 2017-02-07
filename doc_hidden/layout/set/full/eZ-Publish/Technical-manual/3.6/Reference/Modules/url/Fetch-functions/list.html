@@ -1,0 +1,90 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Modules/url/Fetch-functions/list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:14:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>list / Fetch functions / url / Modules / Reference / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>list</h1>
+</div>
+<h3>Summary</h3>
+Fetches the URLs that are stored in the URL table.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'url', 'list', hash( [ 'is_valid', is_valid, ]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'offset', &nbsp;&nbsp;offset, &nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'limit', &nbsp;&nbsp;&nbsp;limit &nbsp;&nbsp;&nbsp;&nbsp;] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>is_valid</td>
+        <td>boolean</td>
+        <td>Instructs the system to only fetch valid or invalid URLs.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>offset</td>
+        <td>integer</td>
+        <td>The offset to start at.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>limit</td>
+        <td>integer</td>
+        <td>The number of URLs that should be fetched.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An array of <a href="../../../Objects/ezurl.html" target="_self">ezurl</a> objects or FALSE.</p><h3>Description</h3>
+ <p>This function fetches URLs from the URL table.The URL table stores addresses that have been input using the <a href="../../../Datatypes/URL.html" target="_self">URL</a> or the <a href="../../../Datatypes/XML-block.html" target="_self">XML block</a> datatype. Please refer to the <a href="../../../../Concepts-and-basics/Content-management/URL-storage.html" target="_self">&quot;URL storage&quot;</a> section of the &quot;Concepts and basics&quot; chapter for more information about how the system handles URLs.</p> <p>The &quot;is_valid&quot;, &quot;offset&quot; and &quot;limit&quot; parameters are optional. While the &quot;is_valid&quot; parameter can be used to filter out only valid (TRUE) or invalid (FALSE) URLs, the &quot;offset&quot; and &quot;limit&quot; parameters can narrow down the result. If the &quot;is_valid&quot; parameter is omitted, both valid and invalid URLs will be fetched. The function returns an array of <a href="../../../Objects/ezurl.html" target="_self">ezurl</a> objects. If no URLs can be found, the function will return FALSE.</p><h3>Examples</h3>
+    <a name="eztoc5835_0_0_1" id="eztoc5835_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $urls=fetch( 'url', 'list', hash( 'is_valid', true(),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'offset', &nbsp;&nbsp;0,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'limit', &nbsp;&nbsp;&nbsp;10 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $urls as $url}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$url.url} &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{def $urls=fetch( \'url\', \'list\', hash( \'is_valid\', true(),\r\n                                       \'offset\',   0,\r\n                                       \'limit\',    10 ) )}\r\n\r\n{foreach $urls as $url}\r\n    {$url.url} &lt;br /&gt;\r\n{/foreach}\r\n' ); return false;" /></p>
+<![endif]--> <p>Outputs the first ten valid URLs that are stored in the URL table.</p>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Modules/url/Fetch-functions/list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:14:01 GMT -->
+</html>

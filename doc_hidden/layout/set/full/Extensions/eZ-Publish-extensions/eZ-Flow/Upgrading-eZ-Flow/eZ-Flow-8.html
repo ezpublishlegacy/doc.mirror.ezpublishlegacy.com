@@ -1,0 +1,96 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-2.1-upgrade by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>eZ Flow 2.1 upgrade / Upgrading eZ Flow / eZ Flow / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>eZ Flow 2.1 upgrade</h1>
+</div>
+
+<a name="eztoc109049_0_1" id="eztoc109049_0_1"></a><h3>Back-up</h3><p>Before starting the eZ Flow upgrading process make sure that you have a working backup of the existing website state including database, extensions, INI settings, etc. During the upgrade process the existing eZ Flow extension will be removed and replaced with a new version.</p><a name="eztoc109049_0_2" id="eztoc109049_0_2"></a><h3>Packages</h3><p>
+Download following packages from <a href="http://packages.ez.no/ezpublish/4.3/4.3.0" target="_self">http://packages.ez.no/ezpublish/4.3/4.3.0</a>:<br />
+&nbsp;&quot;ezflow_extension.ezpkg&quot;<br />
+&nbsp;&quot;ezwebin_extension.ezpkg&quot;<br />
+&nbsp;&quot;ezstarrating_extension.ezpkg&quot;<br />
+&nbsp;&quot;ezgmaplocation_extension.ezpkg&quot;<br />&nbsp;&quot;ezwt_extension.ezpkg&quot;</p><p>Go to the packages management interface in the Administration Interface. This can be done via the Setup-tab, where you can click on the &quot;Packages&quot;-link in the left menu:</p>
+<div class="object-center">        <img src="../../../../../../../../var/doc/storage/images/media/images/package_management_interface_ez_flow_upgrade/109053-1-eng-GB/package_management_interface_ez_flow_upgrade.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>
+From the Repository drop-down box choose eZ-system then click the &quot;Change repository&quot;-button. From the list of available packages remove following packages:<br />
+&nbsp;&quot;ezflow_extension&quot;<br />
+&nbsp;&quot;ezwebin_extension&quot;<br />
+&nbsp;&quot;ezstarrating_extension&quot;<br />
+&nbsp;&quot;ezgmaplocation_extension&quot;<br />&nbsp;&quot;ezwt_extension&quot;</p><p>Next change repository again to the &quot;eZ-systems&quot; and click on the &quot;Import new package&quot;-button. In the next view select <i>ezflow_extension</i> and click the &quot;Import package&quot;-button. Once the <i>ezflow_extension</i> is imported click on &quot;Install package&quot;. In the next view choose the &quot;Replace extension&quot;-option and click the Continue&quot;-button. Repeat these steps for rest of new extensions ( <i>ezwebin_extension, ezstarrating_extension, ezgmaplocation_extension and ezwt_extension</i>).</p><p>Once all new extensions are imported they need to be activated in the proper order under the <i>[ExtensionSettings]</i> block in the &quot;settings/site.ini.append.php&quot;:</p><pre class="wordwrap copytoclipboard"><span class="line">[ExtensionSettings]</span>
+<span class="line">[...]</span>
+<span class="line">ActiveExtensions[]=ezjscore</span>
+<span class="line">ActiveExtensions[]=ezstarrating</span>
+<span class="line">ActiveExtensions[]=ezgmaplocation</span>
+<span class="line">ActiveExtensions[]=ezflow</span>
+<span class="line">ActiveExtensions[]=ezwt</span>
+<span class="line">ActiveExtensions[]=ezwebin</span>
+<span class="line">[¦]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ExtensionSettings]\r\n[...]\r\nActiveExtensions[]=ezjscore\r\nActiveExtensions[]=ezstarrating\r\nActiveExtensions[]=ezgmaplocation\r\nActiveExtensions[]=ezflow\r\nActiveExtensions[]=ezwt\r\nActiveExtensions[]=ezwebin\r\n[¦]' ); return false;" /></p>
+<![endif]--><a name="eztoc109049_0_3" id="eztoc109049_0_3"></a><h3>Autoload update</h3><p>Next the autoload array needs to be updated for the new extensions. In order to do so, execute following command from eZ Publish root folder:</p><pre class="wordwrap"><span class="line">$ php bin/php/ezpgenerateautoloads.php -e -p</span>
+</pre><a name="eztoc109049_0_4" id="eztoc109049_0_4"></a><h3>Content classes</h3><p>eZ Flow 2.1 does not provide any new content classes.</p><a name="eztoc109049_0_5" id="eztoc109049_0_5"></a><h3>INI settings</h3><p>Update &quot;settings/siteaccess/(public_site_name)/design.ini.append.php&quot; and replace old settings with new ones:</p><pre class="wordwrap copytoclipboard"><span class="line">[StylesheetSettings]</span>
+<span class="line">SiteCSS=var/storage/packages/eZ-systems/ezflow_design/files/default/file/site-colors.css</span>
+<span class="line">ClassesCSS=var/storage/packages/eZ-systems/ezflow_design/files/default/file/classes-colors.css</span>
+<span class="line">CSSFileList[]</span>
+<span class="line">[JavaScriptSettings]</span>
+<span class="line">JavaScriptList[]=insertmedia.js</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[StylesheetSettings]\r\nSiteCSS=var/storage/packages/eZ-systems/ezflow_design/files/default/file/site-colors.css\r\nClassesCSS=var/storage/packages/eZ-systems/ezflow_design/files/default/file/classes-colors.css\r\nCSSFileList[]\r\n[JavaScriptSettings]\r\nJavaScriptList[]=insertmedia.js' ); return false;" /></p>
+<![endif]--><a name="eztoc109049_0_6" id="eztoc109049_0_6"></a><h3>Clear Cache</h3><p>Once the upgrade script is done, you need to clear the cache by executing following command from eZ Publish root folder:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-2.1-upgrade by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:49 GMT -->
+</html>

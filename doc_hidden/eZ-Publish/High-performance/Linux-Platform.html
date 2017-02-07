@@ -1,0 +1,1161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/eZ-Publish/High-performance/Linux-Platform by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 11:55:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/core.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/header-footer.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/header-footer-lookfeel.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/pagelayout.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/buttons.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/960.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/superfish.css" /><script type="text/javascript" src="https://ez.no/extension/ez_ezno/design/ezno_2011/javascript/jquery-1.6.3.min.js" charset="utf-8"></script><script type="text/javascript" src="https://ez.no/extension/ez_ezno/design/ezno_2011/javascript/superfish.js" charset="utf-8"></script><script type="text/javascript" src="https://ez.no/extension/ez_ezno/design/ezno_2011/javascript/jquery.popmenu.min.js" charset="utf-8"></script>
+<style type="text/css">
+    @import url(../../../extension/ezdoc/design/doc/stylesheets/core.css);
+    @import url(../../../extension/ezdoc/design/doc/stylesheets/classes.css);
+    @import url(../../../extension/ezdoc/design/doc/stylesheets/doc.css);
+    @import url(../../../extension/ezdoc/design/doc/stylesheets/print.css) print;</style>
+
+<link type="text/css" rel="stylesheet" href="../../../extension/ezdoc/design/doc/stylesheets/print.css" media="print" />
+
+<!-- IE conditional comments; for bug fixes for different IE versions -->
+<!--[if IE 5]>     <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie5.css);    </style>     <![endif]-->
+<!--[if lte IE 6]> <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie6lte.css); </style>     <![endif]-->
+<!--[if lte IE 6]> <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie6lte-doc.css); </style> <![endif]-->
+<!--[if IE 6]>     <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie6.css);    </style>     <![endif]-->
+
+<!-- Load special stylesheet (if necessary) for newer Netscape decendants, Mozilla and Firefox, using the Gecko renderer -->
+<script type="text/javascript"><!-- if ((navigator.userAgent.indexOf("Gecko") != -1)&&(navigator.userAgent.indexOf("KHTML") == -1)) document.write("<style type=\"text/css\">@import url(/extension/ezdoc/design/doc/stylesheets/gecko.css);</style>"); --></script>
+
+<script type="text/javascript" src="../../../extension/ezdoc/design/doc/javascripts/mainmenu-hover.js"></script>
+<script type="text/javascript" src="../../../extension/ezdoc/design/doc/javascripts/dropdownmenu.js"></script>
+<script type="text/javascript" src="../../../extension/ezdoc/design/doc/javascripts/ezno-searchbox.js"></script>
+                                  
+    <title>Linux Platform / High performance / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../doc_hidden.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+<body onload="initDocSearch();menuInit();">
+
+<!-- Complete page area: START -->
+<div id="page">
+
+
+	<div id="header-bg">
+			<div id="header" class="container_12">
+				<div class="grid_12">
+					<div class="searchboxes" id="searchbox">
+	  <form action="https://ez.no/headerandfooteraccess/content/search">
+	    <label for="searchtext" class="hide">Search text:</label>
+	    	    <div class="ezautocomplete">
+	        <button value="Search" title="Search" type="submit"><span class="w"><span class="l"></span><span class="c">Search</span><span class="r"></span></span></button>
+	        <div class="searchtext-wrap"><input class="searchtext" id="searchtext" name="SearchText" type="text" value="Search" size="12" onblur="if(this.value=='') this.value='Search';" onfocus="if(this.value=='Search') this.value='';" /></div>
+	        <div class="ezautocompletecontainer"></div>
+	    </div>
+	    
+	    	  </form>
+	</div>
+
+                <div id="header-social-connect">
+    <a href="http://www.youtube.com/user/ezpublish/" class="youtube" target="_blank">youtube</a>
+    <a href="https://google.com/+ezsystems" class="googleplus" target="_blank">google plus</a>
+    <a href="http://www.linkedin.com/groups?gid=2759&amp;trk=myg_ugrp_ovr" class="linkedin" target="_blank">linkedin</a>
+    <a href="https://www.facebook.com/eZPublishEnterprise" class="facebook" target="_blank">facebook</a>
+    <a href="http://twitter.com/#!/ezsystems" class="twitter" target="_blank">twitter</a>
+</div>
+				<div id="links">
+		
+							
+					<ul class="clearfix">
+																					<li class="nid-2384 first ">
+						<a href="https://ez.no/headerandfooteraccess/Partner-Portal">Partner Portal<span></span></a></li>
+																										<li class="nid-1859 ">
+						<a href="https://ez.no/headerandfooteraccess/Customer-Log-In">Customer Log In<span></span></a></li>
+																										<li class="nid-1831 ">
+						<a href="https://ez.no/headerandfooteraccess/Community">Community<span></span></a></li>
+																										<li class="nid-1944 last ">
+						<a href="https://ez.no/headerandfooteraccess/Blog">Blog<span></span></a></li>
+												</ul>
+		
+		</div>                <div id="languages" class="popmenu">	<div class="eng"><a href="#">English&nbsp;<span></span></a></div></div>
+
+				<p class="hide"><a href="#main">Skip to main content</a></p>
+				</div>
+			</div>
+
+			
+	</div>
+
+    <div class="topmenu-anchor"></div>
+    <div id="topmenu-bg">
+	    <div id="logo" class="container_12">
+
+    <div class="grid_3">
+        <a href="https://ez.no/headerandfooteraccess" title="eZ Publish Platform, CXM &amp; CMS">
+            <img src="https://ez.no/extension/ez_ezno/design/ezno_2011/images/ez-logo.png"
+                 alt="eZ Publish®"/>
+        </a>
+    </div>
+
+    <div class="grid_9">
+                <div class="topmenu-design">
+	<!-- Top menu content: START -->
+	<div id="topmenu-firstlevel-position">
+	<ul id="topmenu-firstlevel" class="sf-menu sf-js-enabled sf-shadow">
+		
+																																																														
+																																										
+
+                                	                																					                                    <li id="node_id_1795" class="li-first-level firstli">
+                    	<a href="https://ez.no/headerandfooteraccess/Products/The-eZ-Publish-Platform" class="menu-item-link">
+                    		<span>Products</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_21578" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/The-eZ-Publish-Platform" class="a-second-level">The eZ Publish Platform</a>
+																			</li>
+																	<li id="node_id_19870" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Content-Management" class="a-second-level">Content Management </a>
+																			</li>
+																	<li id="node_id_15645" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Digital-Marketing" class="a-second-level has-more">Digital Marketing</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_15685" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Digital-Marketing/Marketing-Automation" class="a-third-level">
+															Marketing Automation
+														</a>
+													</li>
+																									<li id="node_id_15686" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Digital-Marketing/Smart-Analytics" class="a-third-level">
+															Smart Analytics
+														</a>
+													</li>
+																									<li id="node_id_15689" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Digital-Marketing/Personalization-Recommendation" class="a-third-level">
+															Personalization &amp; Recommendation
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_19872" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/e-Commerce" class="a-second-level">e-Commerce</a>
+																			</li>
+																	<li id="node_id_14954" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Compare-Versions" class="a-second-level">Compare Versions</a>
+																			</li>
+																	<li id="node_id_1800" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Demos-Videos" class="a-second-level">Demos &amp; Videos</a>
+																			</li>
+																	<li id="node_id_20778" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base" class="a-second-level has-more">Knowledge Base</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_19570" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base/eZ-Publish-Platform-5.3" class="a-third-level">
+															eZ Publish Platform 5.3
+														</a>
+													</li>
+																									<li id="node_id_11694" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base/eZ-Live-Viewer" class="a-third-level">
+															eZ Live Viewer
+														</a>
+													</li>
+																									<li id="node_id_11693" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base/eZ-Recommendation-Service" class="a-third-level">
+															eZ Recommendation Service
+														</a>
+													</li>
+																									<li id="node_id_13246" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base/eZ-Marketing-Automation" class="a-third-level">
+															eZ Marketing Automation
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_1846" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/eZ-Market" class="a-second-level has-more">eZ Market</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_1848" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/eZ-Market/Explore-the-eZ-Market" class="a-third-level">
+															Explore the eZ Market
+														</a>
+													</li>
+																									<li id="node_id_1851" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/eZ-Market/How-to-Sell-on-eZ-Market" class="a-third-level">
+															How to Sell on eZ Market
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_20872" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software" class="a-second-level has-more">About our Software</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_20875" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/Documentation" class="a-third-level">
+															Documentation
+														</a>
+													</li>
+																									<li id="node_id_20876" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/Requirements" class="a-third-level">
+															Requirements
+														</a>
+													</li>
+																									<li id="node_id_20877" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/Roadmap-and-lifecycle" class="a-third-level">
+															Roadmap and lifecycle
+														</a>
+													</li>
+																									<li id="node_id_20878" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/Licenses" class="a-third-level">
+															Licenses
+														</a>
+													</li>
+																									<li id="node_id_20874" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/SLA" class="a-third-level">
+															sla
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                            																									
+
+                                	                																					                                    <li id="node_id_2264" class="li-first-level ">
+                    	<a href="https://ez.no/headerandfooteraccess/Services/Overview" class="menu-item-link">
+                    		<span>Services</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_1816" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Services/Overview" class="a-second-level">Overview</a>
+																			</li>
+																	<li id="node_id_2570" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Services/Support-Maintenance" class="a-second-level">Support &amp; Maintenance</a>
+																			</li>
+																	<li id="node_id_1819" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Services/Consulting" class="a-second-level">Consulting</a>
+																			</li>
+																	<li id="node_id_15863" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Services/Trainings" class="a-second-level has-more">Trainings</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_15864" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Training-Calendar" class="a-third-level">
+															Training Calendar
+														</a>
+													</li>
+																									<li id="node_id_15870" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Courses" class="a-third-level">
+															Courses
+														</a>
+													</li>
+																									<li id="node_id_15875" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Certification" class="a-third-level">
+															Certification
+														</a>
+													</li>
+																									<li id="node_id_16248" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Developer-Knowledge-Path" class="a-third-level">
+															Developer Knowledge Path
+														</a>
+													</li>
+																									<li id="node_id_16252" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Onsite-Trainings" class="a-third-level">
+															Onsite Trainings
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                            																									
+
+                                	                																					                                    <li id="node_id_1824" class="li-first-level ">
+                    	<a href="https://ez.no/headerandfooteraccess/Customers/Success-Stories" class="menu-item-link">
+                    		<span>Customers</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_1863" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies" class="a-second-level has-more">Case Studies</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_20669" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Sound-Harley-Davidson-Hitting-the-Road-with-the-eZ-Publish-Platform" class="a-third-level">
+															Sound Harley-Davidson - Hitting the Road with the eZ Publish Platform
+														</a>
+													</li>
+																									<li id="node_id_18787" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/49th-Shelf-Canada-s-Online-Resource-Center-for-Books" class="a-third-level">
+															49th Shelf - Canada's Online Resource Center for Books
+														</a>
+													</li>
+																									<li id="node_id_17303" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/CASDEN-Groupe-Banque-Populaire" class="a-third-level">
+															CASDEN, Groupe Banque Populaire
+														</a>
+													</li>
+																									<li id="node_id_16193" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Orange-UA-Jeux-and-Transmedia" class="a-third-level">
+															Orange - UA Jeux and Transmédia
+														</a>
+													</li>
+																									<li id="node_id_15317" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/CSMonitor-Digital-First-Strategy-with-eZ-Publish" class="a-third-level">
+															CSMonitor - Digital-First Strategy with eZ Publish
+														</a>
+													</li>
+																									<li id="node_id_15216" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Bauknecht-KitchenAid-and-Whirlpool-Web-Sites" class="a-third-level">
+															Bauknecht, KitchenAid and Whirlpool Web Sites
+														</a>
+													</li>
+																									<li id="node_id_13911" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/CEVA" class="a-third-level">
+															CEVA
+														</a>
+													</li>
+																									<li id="node_id_12027" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Grazia.fr" class="a-third-level">
+															Grazia.fr
+														</a>
+													</li>
+																									<li id="node_id_8661" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Sparda-Bank-West" class="a-third-level">
+															Sparda-Bank West
+														</a>
+													</li>
+																									<li id="node_id_8141" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Christian-Science-Monitor-recreates-itself-for-digital-era" class="a-third-level">
+															Christian Science Monitor recreates itself for digital era  
+														</a>
+													</li>
+																									<li id="node_id_8108" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Rechtsportal-powered-by-Deubner-a-WEKA-Group-company" class="a-third-level">
+															Rechtsportal, powered by Deubner, a WEKA Group company
+														</a>
+													</li>
+																									<li id="node_id_7948" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/tagesschau.sf.tv" class="a-third-level">
+															tagesschau.sf.tv
+														</a>
+													</li>
+																									<li id="node_id_7641" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Nouvelle-Republique-Centre-Ouest" class="a-third-level">
+															Nouvelle République Centre-Ouest
+														</a>
+													</li>
+																									<li id="node_id_7638" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/EMI-France" class="a-third-level">
+															EMI France
+														</a>
+													</li>
+																									<li id="node_id_6930" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Discover21-online-bookstore-in-Japan-uses-eZ-Publish" class="a-third-level">
+															Discover21 online bookstore in Japan uses eZ Publish
+														</a>
+													</li>
+																									<li id="node_id_6824" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/William-Reed-Business-Media" class="a-third-level">
+															William Reed Business Media
+														</a>
+													</li>
+																									<li id="node_id_6546" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Phantasialand-relaunch-rich-media-multilingual-highly-available-and-search-engine-optimized" class="a-third-level">
+															Phantasialand relaunch – rich media, multilingual, highly available and search engine optimized
+														</a>
+													</li>
+																									<li id="node_id_6543" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/New-online-customer-area-for-Tyczka-Totalgaz" class="a-third-level">
+															New online customer area for Tyczka Totalgaz
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_2271" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Customers/Success-Stories" class="a-second-level">Success Stories</a>
+																			</li>
+																	<li id="node_id_1825" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry" class="a-second-level has-more">By Industry</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_19860" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/All-Industries" class="a-third-level">
+															All Industries
+														</a>
+													</li>
+																									<li id="node_id_10207" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Retail-and-Consumer" class="a-third-level">
+															Retail and Consumer
+														</a>
+													</li>
+																									<li id="node_id_2501" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Telecommunications" class="a-third-level">
+															Telecommunications
+														</a>
+													</li>
+																									<li id="node_id_2500" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Governmental-Non-Profit-Education" class="a-third-level">
+															Governmental, Non-Profit &amp; Education
+														</a>
+													</li>
+																									<li id="node_id_2499" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Finance" class="a-third-level">
+															Finance
+														</a>
+													</li>
+																									<li id="node_id_2498" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Service-Industry" class="a-third-level">
+															Service Industry
+														</a>
+													</li>
+																									<li id="node_id_2497" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Media-Entertainment" class="a-third-level">
+															Media &amp; Entertainment
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                            																									
+
+                                	                																					                                    <li id="node_id_1832" class="li-first-level ">
+                    	<a href="https://ez.no/headerandfooteraccess/Partners/Success-with-eZ" class="menu-item-link">
+                    		<span>Partners</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_2272" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Partners/Success-with-eZ" class="a-second-level">Success with eZ </a>
+																			</li>
+																	<li id="node_id_1833" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Partners/Become-a-Partner" class="a-second-level">Become a Partner</a>
+																			</li>
+																	<li id="node_id_2035" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Partners/Find-a-Partner" class="a-second-level">Find a Partner</a>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                            																																		
+
+                                	                																					                                    <li id="node_id_1836" class="li-first-level lastli">
+                    	<a href="https://ez.no/headerandfooteraccess/About-eZ/Company-Overview" class="menu-item-link">
+                    		<span>About eZ</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_2273" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/Company-Overview" class="a-second-level">Company Overview </a>
+																			</li>
+																	<li id="node_id_20956" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers" class="a-second-level has-more">Careers</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_21234" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Financial-Accountant-Norway" class="a-third-level">
+															Financial Accountant - Norway
+														</a>
+													</li>
+																									<li id="node_id_21134" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Professional-Services-Consultant-Norway" class="a-third-level">
+															Professional Services Consultant - Norway
+														</a>
+													</li>
+																									<li id="node_id_21133" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Professional-Services-Consultant-France" class="a-third-level">
+															Professional Services Consultant - France
+														</a>
+													</li>
+																									<li id="node_id_20998" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Junior-Marketing-Manager-Cologne" class="a-third-level">
+															Junior Marketing Manager - Cologne
+														</a>
+													</li>
+																									<li id="node_id_20957" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Graphic-Designer" class="a-third-level">
+															Graphic Designer
+														</a>
+													</li>
+																									<li id="node_id_20958" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/User-Interface-Designer" class="a-third-level">
+															User Interface Designer 
+														</a>
+													</li>
+																									<li id="node_id_20960" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Product-Manager-Dev-Ex" class="a-third-level">
+															Product Manager Dev Ex
+														</a>
+													</li>
+																									<li id="node_id_20959" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Product-Manager-Web-UX" class="a-third-level">
+															Product Manager Web  UX
+														</a>
+													</li>
+																									<li id="node_id_20961" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Junior-UI-Developer-Poland" class="a-third-level">
+															Junior UI Developer - Poland
+														</a>
+													</li>
+																									<li id="node_id_20962" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Senior-UI-Developer-Poland" class="a-third-level">
+															Senior UI Developer - Poland
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_1839" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/Events-News" class="a-second-level has-more">Events &amp; News</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_1841" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Events-News/News" class="a-third-level">
+															News
+														</a>
+													</li>
+																									<li id="node_id_1844" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Events-News/Events" class="a-third-level">
+															Events
+														</a>
+													</li>
+																									<li id="node_id_1845" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Events-News/Upcoming-Webinars" class="a-third-level">
+															Upcoming Webinars
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_1838" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/eZ-Management" class="a-second-level">eZ Management</a>
+																			</li>
+																	<li id="node_id_1840" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" class="a-second-level">Contact Us</a>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                                            </ul>
+    </div>
+        <!-- Top menu content: END -->
+</div>        </div>
+</div>    </div>
+
+
+<div id="page-content-position"><div id="page-content-position-inner"><div id="page-content">
+
+<!-- Path area: START -->
+<div id="path">
+
+<div id="page-width4">
+<h2 class="hide">Path</h2>
+
+<!-- Path content: START -->
+<p> <a href="http://ez.no/">ez.no</a> /
+                        <a href="../../../doc_hidden.html">documentation</a>
+        
+                        /
+                            <a href="../../eZ-Publish.html">ez publish</a>
+        
+                        /
+                            <a href="../High-performance.html">high performance</a>
+        
+                        /
+                            linux platform
+        
+            </p>
+<!-- Path content: END -->
+
+</div>
+
+</div>
+<!-- Path area: END -->
+
+<hr class="hide" />
+
+<!-- Main area: START -->
+<div id="ezp5disclaimer">
+<p><strong style="color: red">Caution:</strong> This documentation is for <strong>eZ Publish</strong> <em>legacy</em>, from version 3.x to 5.x.<br/>
+For 5.x documentation covering <em>Platform</em> see <a href="../../../display/MAIN/eZ%2bDocumentation%2bCenter.html">eZ Documentation Center</a>, for difference between <em>legacy</em> and <em>Platform</em> see <a href="../../../pages/viewpage0139.html?pageId=11403666">5.x Architecture overview</a>.</p>
+</div>
+
+<div id="page-width5">
+<div id="main" class="float-break">
+
+
+<div class="template-design area-docmenu-normal">
+<div class="template-module">
+<div class="template-object">
+<div id="contentmenu">
+                        <div class="attribute-heading"><h2 class="bullet"><a href="Linux-Platform.html">Table of contents</a></h2></div>
+<div class="boxcontent">
+
+<map id="contentstructure">
+
+    
+    
+</map>
+
+</div>            
+</div>
+</div>
+</div>
+</div>
+<div class="area-docmain-normal">
+<div class="template-design">
+<div class="template-module content-view-full">
+<div class="template-object">
+
+<div class="attribute-heading">
+<h1>Linux Platform</h1>
+</div>
+
+<a name="eztoc104318_1" id="eztoc104318_1"></a><h2>Network</h2>
+<ul>
+<li><div>&nbsp;<b>tcp_wmem</b> </div></li>
+</ul>
+<p>The configuration file is available in</p><pre class="wordwrap"><span class="line">/proc/sys/net/ipv4/tcp_wmem</span>
+</pre><p>The ideal value is</p><pre class="wordwrap"><span class="line">(maxcontentsize * maxclients) / pagesize.</span>
+</pre><p>This makes it possible to increase the TCP receive window size above its standard capacity. But if the server has low memory, do not change anything as you would get strange behaviour.</p><p>Reference: <a href="http://en.wikipedia.org/wiki/TCP_window_scale_option" target="_self">http://en.wikipedia.org/wiki/TCP_window_scale_option</a></p><a name="eztoc104318_2" id="eztoc104318_2"></a><h2>FileSystem</h2>
+<ul>
+<li><div>&nbsp;<b>noatime</b> </div></li>
+</ul>
+<p>You can use the noatime option for the /kernel and /lib directories. By using this it should be possible to save disk I/O.</p><a name="eztoc104318_3" id="eztoc104318_3"></a><h2>Apache</h2><a name="eztoc104318_3_1" id="eztoc104318_3_1"></a><h3>Installation</h3><p>If you plan to compile your own Apache you might want to use the ICC compiler which gives an overall 10% performance boost without much effort only by using it.</p><p>More informations about ICC can be found here:<a href="http://software.intel.com/en-us/intel-compilers/" target="_self">&nbsp;http://software.intel.com/en-us/intel-compilers/</a></p><p>You should also think about using specific CFLAGS for your CPU. There is an interesting list of Intel CFLAGS available on the Gentoo Wiki: <a href="http://wiki.gentoo.org/wiki/Safe_CFLAGS" target="_self">http://en.gentoo-wiki.com/wiki/Safe_Cflags/Intel</a></p><p>At the minimum you should consider using the following CFLAGS</p><pre class="wordwrap"><span class="line">export CFLAGS=&quot;-O3 -DREWRITELOG_DISABLED&quot;</span>
+</pre><p>The -DREWRITELOG_DISABLED disables any custom log for mod_rewrite.</p><p>Please refer to mod_rewrite.c for more informations about this: <a href="http://svn.apache.org/repos/asf/httpd/httpd/trunk/modules/mappers/mod_rewrite.c" target="_self">http://svn.apache.org/repos/asf/httpd/httpd/trunk/modules/mappers/mod_rewrite.c</a></p><p>Compile modules as shared objects and compile only the one you need. If you are not sure of what you can do, you can use the following option for ./configure:</p><pre class="wordwrap"><span class="line">--enable-mods-shared=most</span>
+</pre><p>If you know exactly which modules you want, then you can use the following option:</p><pre class="wordwrap"><span class="line">--enable-mods-shared=module1 module2 moduleN</span>
+</pre><p>If possible, do not use mod_negotiation , it is not useful for eZ Publish: <a href="http://httpd.apache.org/docs/2.2/mod/mod_negotiation.html" target="_self">http://httpd.apache.org/docs/2.2/mod/mod_negotiation.html</a></p><a name="eztoc104318_3_2" id="eztoc104318_3_2"></a><h3>General configuration</h3><p>
+If you compiled more modules than necessary, and you can still not load them: The only thing you have to do, is to comment any unwanted &quot;LoadModule xxxx yyyy&quot; lines.<br />&nbsp;You will need to restart Apache after that.</p>
+<ul>
+<li><div>&nbsp;<b>KeepAlive</b> </div></li>
+</ul>
+<p>Reference: <a href="http://httpd.apache.org/docs/2.2/mod/core.html#keepalive" target="_self">http://httpd.apache.org/docs/2.2/mod/core.html#keepalive</a></p><p>KeepAlive should be set to off as it is does not help a lot with dynamic contents.</p><p>Furthermore if there are many KeepAlives you will generate some overhead on MySQL because one connection to Apache generally means one connection to MySQL.</p><p>So the best advice that can be given here, is to disable it by default and enable it only if it is absolutely necessary. The only use case for eZ Publish is a static version of an eZ Publish instance, i.e a site made static by makestaticcache.php</p><p>You might also want to give LingerD a try <a href="http://www.iagora.com/about/software/lingerd/" target="_self">http://www.iagora.com/about/software/lingerd/</a></p><p>But please note that LingerD is only available for Apache 1.3 and is not compatible with Apache 2.</p>
+<ul>
+<li><div>&nbsp;<b>MaxClient</b> </div></li>
+</ul>
+<p>Reference: <a href="http://httpd.apache.org/docs/2.2/mod/mpm_common.html#maxclients" target="_self">http://httpd.apache.org/docs/2.2/mod/mpm_common.html#maxclients</a></p><p>This is the maximum number of simultaneous requests Apache should handle. Here is a method to calculate a good value:</p><pre class="wordwrap"><span class="line">MaxClients = (RAM - size_all_other_processes)/(size_apache_process)</span>
+</pre><p>You can find out which size an Apache process is, by running the following command:</p><pre class="wordwrap"><span class="line">ps -ylC apache2 --sort:rss</span>
+</pre><p>The value you get is in Kb so do not forget to multiply it to get the value in Mb.</p><p>
+Using &quot;top&quot; is fine as well, you can try &quot;top -u UID&quot;, for example on Debian, &quot;top -u 33&quot; (or &quot;top -U www-data&quot;).<br />&nbsp;Use &quot;free -m&quot; to get the amount of free RAM available and take the &quot;-/+ buffers/cache&quot; line. You can also use &quot;vmstat 2 5&quot; to get more informations about running processes, page-ins and page-outs (swap/si, swap/so), and IO (blocks received/sent)</p><p>In case you get a result below 20 for &quot;MaxClients&quot;, you have a very serious performance issue and you should consider fixing all bad templates first. Note that ignoring the problem and using Varnish to workaround it, is not the right way to fix the issue.</p>
+<ul>
+<li><div>&nbsp;<b>MaxSpareServers</b> </div></li>
+</ul>
+<p>Reference: <a href="http://httpd.apache.org/docs/2.2/mod/prefork.html#maxspareservers" target="_self">http://httpd.apache.org/docs/2.2/mod/prefork.html#maxspareservers</a></p><p>Keep the number high so Apache can handle unexpected traffic spikes or expected traffic spikes (for example between 8-9am, 12-1pm, 7-8pm). Start with using &quot;MaxSpareServer=20&quot;.</p>
+<ul>
+<li><div>&nbsp;<b>StartServer</b> </div></li>
+</ul>
+<p>Reference: <a href="http://httpd.apache.org/docs/2.2/mod/mpm_common.html#startservers" target="_self">&nbsp;http://httpd.apache.org/docs/2.2/mod/mpm_common.html#startservers</a></p><p>Set it to the expected average number of requests. Start with using &quot;StartServer=10&quot;.</p>
+<ul>
+<li><div>&nbsp;<b>AllowOverride</b> </div></li>
+</ul>
+<p>Reference: <a href="http://httpd.apache.org/docs/2.2/mod/core.html#allowoverride" target="_self">http://httpd.apache.org/docs/2.2/mod/core.html#allowoverride</a></p><p>This directive should be set to &quot;Off&quot;. This will save a lot of disk I/O and will give you a nice performance improvement. This basically means that any custom configuration for a specific site must be done in its VirtualHost and never in a .htaccess file.</p>
+<ul>
+<li><div>&nbsp;<b>SendBufferSize</b> </div></li>
+</ul>
+<p>Reference: <a href="http://httpd.apache.org/docs/2.2/mod/mpm_common.html#sendbuffersize" target="_self">http://httpd.apache.org/docs/2.2/mod/mpm_common.html#sendbuffersize</a></p><p>This is related to the network configuration described earlier in this document. You should consider tweaking this value if you get an important latency, around 100ms or more.</p>
+<ul>
+<li><div>&nbsp;<b>Options</b> </div></li>
+</ul>
+<p>Reference: <a href="http://httpd.apache.org/docs/2.2/mod/core.html#options" target="_self">http://httpd.apache.org/docs/2.2/mod/core.html#options</a></p><p>Use &quot;Options FollowSymLinks&quot; and never &quot;Options SymLinksIfOwnerMatch&quot;. This will save a lot of processing time for checking user/group etc.</p>
+<ul>
+<li><div>&nbsp;<b>Timeout</b> </div></li>
+</ul>
+<p>Reference: <a href="http://httpd.apache.org/docs/2.2/mod/core.html#timeout" target="_self">http://httpd.apache.org/docs/2.2/mod/core.html#timeout</a></p><p>Set to &quot;Timeout 10&quot; and ditch long waiting connections.</p>
+<ul>
+<li><div>&nbsp;<b>MaxRequestsPerChild</b> </div></li>
+</ul>
+<p>Reference: <a href="http://httpd.apache.org/docs/2.2/mod/mpm_common.html#maxrequestsperchild" target="_self">http://httpd.apache.org/docs/2.2/mod/mpm_common.html#maxrequestsperchild</a></p><p>You can start with a value of 5000. If you notice issues, in particularly memory leaks, consider reducing this number.</p>
+<ul>
+<li><div>&nbsp;<b>HostnameLookups</b> </div></li>
+</ul>
+<p>Reference: <a href="http://httpd.apache.org/docs/2.2/mod/core.html#hostnamelookups" target="_self">http://httpd.apache.org/docs/2.2/mod/core.html#hostnamelookups</a></p><p>Make sure it is always set to &quot;Off&quot;, if set to &quot;On&quot; it will consume a lot of network traffic and you will get a very poor performances.</p><p>Disable any input/output filter if possible. The list of these filters is available here (take mod_*.c): <a href="http://svn.apache.org/repos/asf/httpd/httpd/trunk/modules/filters/" target="_self">http://svn.apache.org/repos/asf/httpd/httpd/trunk/modules/filters/</a></p><a name="eztoc104318_3_3" id="eztoc104318_3_3"></a><h3>Module specific configuration</h3>
+<ul>
+<li><div>&nbsp;<b>mod_expires</b> </div></li>
+</ul>
+<p>You can use the following configuration:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;IfModule mod_expires.c&gt;</span>
+<span class="line">ExpiresActive On</span>
+<span class="line"># Images and javascript files from the desgin are not meant to change often</span>
+<span class="line">&lt;LocationMatch /design/[^/]+/(images|javascript|stylesheets)/&gt;</span>
+<span class="line">ExpiresDefault &quot;access plus 1 week&quot;</span>
+<span class="line">&lt;/LocationMatch&gt;</span>
+<span class="line"># Images and javascript files from the extensions are not meant to change often</span>
+<span class="line">&lt;LocationMatch /extension/[^/]+/design/[^/]+/(yui-assets|images|javascript|stylesheets)/&gt;</span>
+<span class="line">ExpiresDefault &quot;access plus 1 week&quot;</span>
+<span class="line">&lt;/LocationMatch&gt;</span>
+<span class="line"># Uploaded images and image variations may be meant to change often</span>
+<span class="line">&lt;LocationMatch /var/&lt;siteaccess&gt;/storage/(images|images-versioned)/&gt;</span>
+<span class="line">ExpiresDefault &quot;access plus 1 week&quot;</span>
+<span class="line">&lt;/locationMatch&gt;</span>
+<span class="line">&lt;/IfModule&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;IfModule mod_expires.c&gt;\r\nExpiresActive On\r\n# Images and javascript files from the desgin are not meant to change often\r\n&lt;LocationMatch /design/[^/]+/(images|javascript|stylesheets)/&gt;\r\nExpiresDefault &quot;access plus 1 week&quot;\r\n&lt;/LocationMatch&gt;\r\n# Images and javascript files from the extensions are not meant to change often\r\n&lt;LocationMatch /extension/[^/]+/design/[^/]+/(yui-assets|images|javascript|stylesheets)/&gt;\r\nExpiresDefault &quot;access plus 1 week&quot;\r\n&lt;/LocationMatch&gt;\r\n# Uploaded images and image variations may be meant to change often\r\n&lt;LocationMatch /var/&lt;siteaccess&gt;/storage/(images|images-versioned)/&gt;\r\nExpiresDefault &quot;access plus 1 week&quot;\r\n&lt;/locationMatch&gt;\r\n&lt;/IfModule&gt;' ); return false;" /></p>
+<![endif]--><p>You can also use &quot;ExpiresByType&quot;, but using this directive (even though it is easier to read) will force &quot;mod_expire&quot; to act as an output filter and will not be as efficient as the &quot;ExpiresDefault&quot; configuration directive.</p>
+<ul>
+<li><div>&nbsp;<b>mod_rewrite</b> </div></li>
+</ul>
+<p>Make sure &quot;RewriteLog&quot; and &quot;RewriteLogLevel&quot; are disabled.</p><p>RewriteLog: <a href="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html#rewritelog" target="_self">http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html#rewritelog</a></p><p>RewriteLogLevel: <a href="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html#rewriteloglevel" target="_self">http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html#rewriteloglevel</a></p><p>If Apache has been compiled with the following CFLAG &quot;-DREWRITELOG_DISABLED&quot;, you do not have to think about this.</p>
+<ul>
+<li><div>&nbsp;<b>mod_status</b> </div></li>
+</ul>
+<p>Disable it if possible or at least use &quot;ExtendedStatus Off&quot;.</p>
+<ul>
+<li><div>&nbsp;<b>mod_dir</b> </div></li>
+</ul>
+<p>Using &quot;DirectoryIndex index.php&quot; is enough.</p><a name="eztoc104318_3_4" id="eztoc104318_3_4"></a><h3>Extra stuff</h3><a name="eztoc104318_3_4_1" id="eztoc104318_3_4_1"></a><h4>Logging in a tmpfs</h4><p>You can consider mounting /var/log/apache in a tmpfs:</p><pre class="wordwrap"><span class="line">mount --bind -ttmpfs /var/log/apache /var/log/apache</span>
+</pre><p>But please note than in some situations using TMPFS may have the opposite effect and make things slower than using a non TMPFS partition.You must benchmark both solution before making any decision.</p><a name="eztoc104318_4" id="eztoc104318_4"></a><h2>MySQL</h2>
+<ul>
+<li><div>&nbsp;<b>Note</b> </div></li>
+</ul>
+<p>In order to get the best performances with MySQL, running it on a 64 bit OS is recommended.</p><a name="eztoc104318_4_5" id="eztoc104318_4_5"></a><h3>Installation</h3><p>
+If you consider compiling MySQL by yourself, then you might find the the Google's tcmalloc malloc library interesting. It gives good results on multi threaded applications.<br />&nbsp;If you can not compile MySQL you can use GPerftool anyway by using the following line:</p><pre class="wordwrap"><span class="line">LD_PRELOAD=&quot;/usr/lib/libtcmalloc.so&quot;</span>
+</pre><p>Everything is explained at this URL: <a href="http://goog-perftools.sourceforge.net/doc/tcmalloc.html" target="_self">http://goog-perftools.sourceforge.net/doc/tcmalloc.html</a></p><a name="eztoc104318_4_6" id="eztoc104318_4_6"></a><h3>General configuration</h3>
+<ul>
+<li><div>&nbsp;<b>key_buffer</b> </div></li>
+</ul>
+<p>
+Decent start value: 500M<br />
+&nbsp;To find a suitable value for the key buffer, investigate the status variables &quot;key_read_requests&quot; and &quot;key_reads&quot;.<br />
+&nbsp;The &quot;key_read_requests&quot; is the total number of key requests served from the cache.<br />
+&nbsp;The &quot;key_reads&quot; shows the number of times MySQL had to access the filesystem to fetch the keys. The lower the number of &quot;key_reads&quot; the better.<br />
+&nbsp;The more memory you allocate to the key buffer, the more requests will be served from the cache. There will always be some keys that need to be read from disk (for example when data changes), so the value will never be zero.<br />&nbsp;By comparing the two values you see the hit ratio of your key buffer. The key_read_requests should be much larger than the key_reads. 99% cached requests is a good number to aim for in a read-intensive environment.</p>
+<ul>
+<li><div>&nbsp;<b>table_cache</b> </div></li>
+</ul>
+<p>
+Decent start value: 4000<br />&nbsp;The rule of thumb is that you should multiply the maximum number of connections (described below) by the maximum number of tables used in joins. For example, if the maximum number of connections is set to 400, the table cache should be at least 400 * 10.</p>
+<ul>
+<li><div>&nbsp;<b>max_connections</b> </div></li>
+</ul>
+<p>The rule of thumb here is &quot;max_connections = MaxClient&quot; value in Apache.</p>
+<ul>
+<li><div>&nbsp;<b>sort_buffer_size</b> </div></li>
+</ul>
+<p>
+The sort buffer is per connection, so you must multiply the size of the sort buffer by the maximum number of connections to predict the server memory requirements.<br />&nbsp;So if you use a 3MB sort buffer with 400 max connections, you can use a total of 1.2GB of memory.</p>
+<ul>
+<li><div>&nbsp;<b>query_cache_type=1</b> </div></li>
+</ul>
+<p>Enables the query cache</p>
+<ul>
+<li><div>&nbsp;<b>query_cache_limit=1M</b> </div></li>
+</ul>
+<p>Do not cache result sets larger than 1Mb</p>
+<ul>
+<li><div>&nbsp;<b>query_cache_size</b> </div></li>
+</ul>
+<p>Use SHOW STATUS LIKE &quot;qcache%&quot;; to see how your configuration changes affects MySQL.</p><a name="eztoc104318_4_7" id="eztoc104318_4_7"></a><h3>InnoDB specific</h3>
+<ul>
+<li><div>&nbsp;<b>Note</b> </div></li>
+</ul>
+<p>There is an interesting article on InnoDB memory usage here: <a href="http://www.mysqlperformanceblog.com/2006/05/30/innodb-memory-usage/" target="_self">http://www.mysqlperformanceblog.com/2006/05/30/innodb-memory-usage/</a></p>
+<ul>
+<li><div>&nbsp;<b>innodb_buffer_pool_size</b> </div></li>
+</ul>
+<p>If the server has 8Gb RAM, give 6Gb to MySQL pool size, if it has 10 Gb, gives 8Gb, etc, etc</p>
+<ul>
+<li><div>&nbsp;<b>innodb_flush_method</b> </div></li>
+</ul>
+<p>Use &quot;O_DIRECT&quot; to avoid double buffering (which does not make much sense with MySQL) and thus reduce disk pressure. To disable swap you can also try the following, but you might get nasty side effects:</p><pre class="wordwrap"><span class="line">echo 0 &gt; /proc/sys/vm/swappiness</span>
+</pre><p>&nbsp;There is a nice article about this here: <a href="http://feedblog.org/2007/09/29/using-o_direct-on-linux-and-innodb-to-fix-swap-insanity/" target="_self">http://feedblog.org/2007/09/29/using-o_direct-on-linux-and-innodb-to-fix-swap-insanity/</a></p>
+<ul>
+<li><div>&nbsp;<b>innodb_log_file_size</b> </div></li>
+</ul>
+<p>Using 256M is a good start and is generally the best configuration.</p>
+<ul>
+<li><div>&nbsp;<b>innodb_log_buffer_size</b> </div></li>
+</ul>
+<p>Using 4M is enough for eZ Publish needs, even if you use the eZ Publish cluster which is supposed to store a lot of BLOBs. Since each file is split in 64Kb packets it does not change anything.</p>
+<ul>
+<li><div>&nbsp;<b>innodb_flush_log_at_trx_commit</b> </div></li>
+</ul>
+<p>Use &quot;2&quot; so you avoid committing all the time. However if MySQL crashes, you might loose the transactions made in the last 2 seconds (But are you working on such a write intensive site?)</p>
+<ul>
+<li><div>&nbsp;<b>innodb_thread_concurrency</b> </div></li>
+</ul>
+<p>Using &quot;8&quot; is a decent start.</p>
+<ul>
+<li><div>&nbsp;<b>innodb_file_per_table</b> </div></li>
+</ul>
+<p>Set it to &quot;On&quot; at the very beginning of the server installation. If you want to do it once the site is live, you will have to export data, change the configuration value and re-import everything which will take a lot of time.</p>
+<ul>
+<li><div>&nbsp;<b>transaction-isolation</b> </div></li>
+</ul>
+<p>Use &quot;READ-COMMITTED&quot; if you use eZ Publish cluster with the eZDB file handler. This might avoid a few problems and it can certainly not make things worse.</p><a name="eztoc104318_5" id="eztoc104318_5"></a><h2><b>PHP</b></h2><a name="eztoc104318_5_8" id="eztoc104318_5_8"></a><h3>Installation</h3><p>If you want to compile PHP you can use ICC for Apache. The advice about CFLAGS is the same, except that &quot;-DREWRITELOG_DISABLED&quot; will not be useful to you in this case. Feel free to compile PHP as a dso (i.e with APXS) since it seems that compiling it statically does not help that much.</p>
+<ul>
+<li><div>&nbsp;<b>Debian</b> </div></li>
+</ul>
+<p>If you want to use a binary package on Debian, the dotdeb mirrors are recommended: <a href="http://www.dotdeb.org/mirrors/" target="_self">http://www.dotdeb.org/mirrors/</a></p>
+<ul>
+<li><div>&nbsp;<b>Red Hat Enterprise Linux</b> </div></li>
+</ul>
+<p>Do not use their binaries, they are too old. Compiling PHP by yourself is the only acceptable option on this platform.</p><a name="eztoc104318_5_9" id="eztoc104318_5_9"></a><h3>Configuration</h3><p>You can use the following php.ini values:</p><pre class="wordwrap copytoclipboard"><span class="line">safe_mode=Off</span>
+<span class="line">register_globals=Off</span>
+<span class="line">magic_quotes_gpc=Off</span>
+<span class="line">magic_quotes_runtime=Off</span>
+<span class="line">allow_call_time_pass_reference=Off</span>
+<span class="line">expose_php=Off</span>
+<span class="line">register_argc_argv=Off</span>
+<span class="line">; For non CLI SAPI</span>
+<span class="line">always_populate_raw_post_data=Off</span>
+<span class="line">; If eZ Components are bundled with eZ Publish</span>
+<span class="line">include_path=&quot;.&quot;</span>
+<span class="line">date.timezone = &quot;&lt;Continent&gt;/&lt;Town&gt;&quot;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'safe_mode=Off\r\nregister_globals=Off\r\nmagic_quotes_gpc=Off\r\nmagic_quotes_runtime=Off\r\nallow_call_time_pass_reference=Off\r\nexpose_php=Off\r\nregister_argc_argv=Off\r\n; For non CLI SAPI\r\nalways_populate_raw_post_data=Off\r\n; If eZ Components are bundled with eZ Publish\r\ninclude_path=&quot;.&quot;\r\ndate.timezone = &quot;&lt;Continent&gt;/&lt;Town&gt;&quot;' ); return false;" /></p>
+<![endif]--><a name="eztoc104318_5_10" id="eztoc104318_5_10"></a><h3>APC</h3><p>
+A few useful links on APC information:<br />&nbsp;<a href="http://php.net/apc" target="_self">http://php.net/apc</a></p><p>You can use the following configuration in php.ini:</p><pre class="wordwrap copytoclipboard"><span class="line">; Check with apc.php how much it is full.</span>
+<span class="line">; If it's &gt; 90% full, increase the size.</span>
+<span class="line">apc.shm_size = 512</span>
+<span class="line">apc.shm_segments = 1</span>
+<span class="line">apc.file_update_protection = 2</span>
+<span class="line">apc.max_file_size = 1M</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '; Check with apc.php how much it is full.\r\n; If it\'s &gt; 90% full, increase the size.\r\napc.shm_size = 512\r\napc.shm_segments = 1\r\napc.file_update_protection = 2\r\napc.max_file_size = 1M' ); return false;" /></p>
+<![endif]--><a name="eztoc104318_6" id="eztoc104318_6"></a><h2>Varnish</h2><a name="eztoc104318_6_11" id="eztoc104318_6_11"></a><h3>Installation</h3><p>Varnish compiles fine, but you can still use the same CFLAGS (O3, march...) as described above. Using a binary package is also an option.</p><a name="eztoc104318_6_12" id="eztoc104318_6_12"></a><h3>Configuration</h3><p>Since configuring Varnish is not that easy. You will find all the needed information is the &quot;Using Varnish with eZ Publish&quot; paragraph.</p><a name="eztoc104318_7" id="eztoc104318_7"></a><h2>Using varnish with eZ Publish</h2><a name="eztoc104318_7_13" id="eztoc104318_7_13"></a><h3>HTTP Caching tutorial for the impatient</h3>
+<ul>
+<li><div>&nbsp;<b>Cache-Control</b> </div></li>
+</ul>
+<p>&quot;The Cache-Control general-header field is used to specify directives that MUST be obeyed by all caching mechanisms along the request/response chain.&quot;<a href="Linux-Platform.html#%5B1%5D" target="_self">[1]</a></p><p>This header will instruct the browser (as well as any other stakeholder in the request/response chain) to cache the result of the response for a given TTL. This means that after the first HTTP request for a specific resource, the browser will send aIf-Modified-Since header for validation with the ReverseProxy / WebServer. If the cache's ttl is still valid then the local copy is used, if it is not then the HTTP transaction continues and the local copy will be updated.</p>
+<ul>
+<li><div>&nbsp;<b>Pragma</b> </div></li>
+</ul>
+<p>&quot;The Pragma general-header field is used to include implementation specific directives that might apply to any recipient along the request/response chain.&quot;<a href="Linux-Platform.html#%5B2%5D" target="_self">&nbsp;[2]</a></p><p>In practice, this field is useless since HTTP 1.1 is out, but it is a good practice to unset it by giving it no value.</p>
+<ul>
+<li><div>&nbsp;<b>Expires</b> </div></li>
+</ul>
+<p>&quot;The Expires entity-header field gives the date/time after which the response is consideredstale.&quot;<a href="Linux-Platform.html#%5B3%5D" target="_self">[3]</a></p><p>The Expires header is quite useful but somewhat more &quot;radical&quot; then the Cache-Control. If the browser requests a resource and gets an Expires header returned, it will keep a local copy during TTL returned by Expires and will no longer ask for this resource during this period. For example, when you ask for an image foo.jpg, the WebServer returns the image plus Expires: one year in the future. Next time you will request this image, it will come from the local copy only. This makes it possible to save quite a lot of HTTP request.</p>
+<ul>
+<li><div>&nbsp;<b>Etag</b> </div></li>
+</ul>
+<p>&quot;The Etag response-header field provides the current value of the entity tag for the requested variant.&quot;<a href="Linux-Platform.html#%5B4%5D" target="_self">&nbsp;[4]</a></p><p>The Etag header is something that is under-used in eZ Publish, as this header is sort of a unique identifier for each file returned by a HTTP request. It could for example be really helpful for content re-validation and to update the browser's cache.</p><a name="eztoc104318_7_14" id="eztoc104318_7_14"></a><h3>Useful links</h3><p>
+Caching in HTTP:<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13" target="_self">&nbsp;http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13</a> <br /><a href="Linux-Platform/HTTP-workflow-diagram.html" target="_self">Complete HTTP workflow by Alan Dean</a></p><a name="eztoc104318_7_15" id="eztoc104318_7_15"></a><h3>Making eZ Publish HTTP friendly</h3>
+<ul>
+<li><div>&nbsp;<b>site.ini</b> </div></li>
+</ul>
+<p>The only configuration group we have to work with is HTTPHeaderSettings. Basically you have to take all the standard configuration in settings/site.ini and copy it in your siteaccess. Copying everything is required, because if you just override the current configuration values, you will always get the unwanted &quot;no-cache&quot; directive.</p><p>As a configuration example:</p><pre class="wordwrap copytoclipboard"><span class="line">[HTTPHeaderSettings]</span>
+<span class="line">CustomHeader=enabled</span>
+<span class="line">OnlyForAnonymous=disabled</span>
+<span class="line">HeaderList[]</span>
+<span class="line">HeaderList[]=Cache-Control</span>
+<span class="line">HeaderList[]=Pragma</span>
+<span class="line">Cache-Control[]</span>
+<span class="line">Cache-Control[/]=public, must-revalidate, max-age=200</span>
+<span class="line">Cache-Control[/Varnish-tests/Article-which-should-be-cached]=public, must-revalidate, max-age=200</span>
+<span class="line">Pragma[]</span>
+<span class="line">Pragma[/]=</span>
+<span class="line">Pragma[/Varnish-tests/Article-which-should-be-cached]=</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[HTTPHeaderSettings]\r\nCustomHeader=enabled\r\nOnlyForAnonymous=disabled\r\nHeaderList[]\r\nHeaderList[]=Cache-Control\r\nHeaderList[]=Pragma\r\nCache-Control[]\r\nCache-Control[/]=public, must-revalidate, max-age=200\r\nCache-Control[/Varnish-tests/Article-which-should-be-cached]=public, must-revalidate, max-age=200\r\nPragma[]\r\nPragma[/]=\r\nPragma[/Varnish-tests/Article-which-should-be-cached]=' ); return false;" /></p>
+<![endif]--><p>Cache-Control always overrides Expires, however experience has shown that Varnish does not really like the presence of both Cache-Control and Expires, so it is highly recommend no to use Expires here.</p><a name="eztoc104318_7_16" id="eztoc104318_7_16"></a><h3>Making Apache HTTP more caching friendly with binary files</h3>
+<ul>
+<li><div>&nbsp;<b>mod_expires</b> </div></li>
+</ul>
+<p>mod_expires is quite powerful, so please read the following documentation which is quite short and clear: <a href="http://httpd.apache.org/docs/2.2/mod/mod_expires.html" target="_self">http://httpd.apache.org/docs/2.2/mod/mod_expires.html</a></p><p>The configuration for mod_expires is available in the mod_expires_configuration. This configuration could be somewhat reduced and re-factored, but it is more readable like this.</p><p>With this configuration browsers are forced to cache any binary file which comes from the eZ Publish' design directories:</p>
+<ul>
+<li><div>&nbsp;design/* </div></li><li><div>&nbsp;extension/*/design/* </div></li>
+</ul>
+<p>The last part forces browsers to cache content images for a week. If an image is updated, it is always done in a new version so the filename will change and there is no risk of getting an un-updated image here. Once you are OK with the configuration, do not forget to reload Apache's configuration with:</p><pre class="wordwrap"><span class="line">sudo /etc/ini.d/apache2 reload</span>
+</pre><p>A quick &quot;before/after&quot; to show that it is helpful. On the RBA corporate project we have the following numbers:</p>
+<ul>
+<li><div>&nbsp;Without mod_expires configured: 106 HTTP requests </div></li><li><div>&nbsp;With mod_expires configured: 5 HTTP requests </div></li>
+</ul>
+<p>To add/change the configuration:<a href="http://varnish.projects.linpro.no/wiki/FAQ#ShouldIusepipeorpassinmyVCLcodeWhatisthedifference" target="_self">http://varnish.projects.linpro.no/wiki/FAQ#ShouldIusepipeorpassinmyVCLcodeWhatisthedifference</a></p>
+<ul>
+<li><div>&nbsp;<b>Note</b> </div></li>
+</ul>
+<p>In order to get everything working Apache listens on port 8080 and Varnish on port 80.</p>
+<ul>
+<li><div>&nbsp;<b>Note</b> </div></li>
+</ul>
+<p>If you want to know what the difference is between pipe; and pass; there is an interesting page which explains it: <a href="http://varnish.projects.linpro.no/wiki/FAQ#ShouldIusepipeorpassinmyVCLcodeWhatisthedifference" target="_self">http://varnish.projects.linpro.no/wiki/FAQ#ShouldIusepipeorpassinmyVCLcodeWhatisthedifference</a></p><p>Tested with Varnish 2.0.2</p><pre class="wordwrap copytoclipboard"><span class="line">backend default</span>
+<span class="line">{</span>
+<span class="line">.host = &quot;127.0.0.1&quot;;</span>
+<span class="line">.port = &quot;8080&quot;;</span>
+<span class="line">}</span>
+<span class="line">sub vcl_recv</span>
+<span class="line">{</span>
+<span class="line">set req.backend = default;</span>
+<span class="line">/***************************************************/</span>
+<span class="line">/* Never cache pages with POST parameters */</span>
+<span class="line">/* Typical use case : /user/login or /usr/register */</span>
+<span class="line">/* You do not want to get those pages cached */</span>
+<span class="line">/***************************************************/</span>
+<span class="line">if (req.request == &quot;POST&quot;)</span>
+<span class="line">{</span>
+<span class="line">pass;</span>
+<span class="line">}</span>
+<span class="line">/******************************************************/</span>
+<span class="line">/* do not use Varnish when the user is authenticated */</span>
+<span class="line">/* This configuration requires the ezvlogin extension */</span>
+<span class="line">/* http://projects.ez.no/ezvlogin */</span>
+<span class="line">/* With the default configuration for LoginSettings */</span>
+<span class="line">/* in vlogin.ini.append.php */</span>
+<span class="line">/******************************************************/</span>
+<span class="line">if(req.http.Cookie ~ &quot;^is_logged_in=true.*$&quot;)</span>
+<span class="line">{</span>
+<span class="line">pass;</span>
+<span class="line">}</span>
+<span class="line">/********************************************************/</span>
+<span class="line">/* Returns the item from the cache for any GET request */</span>
+<span class="line">/* All the configuration done in HTTPHeaderSettings in */</span>
+<span class="line">/* eZ Publish as well as Apache's mod_expires will come */</span>
+<span class="line">/* into play here */</span>
+<span class="line">/********************************************************/</span>
+<span class="line">if (req.request == &quot;GET&quot;)</span>
+<span class="line">{</span>
+<span class="line">lookup;</span>
+<span class="line">}</span>
+<span class="line">/*********************************************************/</span>
+<span class="line">/* We want Varnish to return binary files from its cache */</span>
+<span class="line">/* all the configuration we used for mod_expires is used */</span>
+<span class="line">/* in this case */</span>
+<span class="line">/*********************************************************/</span>
+<span class="line">if (req.url ~ &quot;\.(gif|jpg|jpeg|swf|css|js|flv|mp3|mp4|pdf|ico)$&quot;)</span>
+<span class="line">{</span>
+<span class="line">lookup;</span>
+<span class="line">}</span>
+<span class="line">/************************************************************************************************************/</span>
+<span class="line">/* Nirvana /* Never ever remove this line /* cf: /* http://projects.ez.no/ezvlogin/forum/general/working_with_custom_headers/re_working_with_custom_headers5 /* for more informations /************************************************************************************************************/</span>
+<span class="line">remove req.http.cookie;</span>
+<span class="line">}</span>
+<span class="line">sub vcl_fetch</span>
+<span class="line">{</span>
+<span class="line">/**************************************************************/</span>
+<span class="line">/* I remove any cookies from the request as Varnish is */</span>
+<span class="line">/* really picky with cookies, and never cache the page */</span>
+<span class="line">/* when they are present which is the safest way to prevent */</span>
+<span class="line">/* issues but which does not help in our case */</span>
+<span class="line">/** **/</span>
+<span class="line">/** **/</span>
+<span class="line">/* Should Works with eZ Publish 3.*, 4.0.* with eZ Vlogin */</span>
+<span class="line">/* if (obj.http.Set-Cookie ~ &quot;^eZSESSID.*=.*$&quot;) */</span>
+<span class="line">/** **/</span>
+<span class="line">/** **/</span>
+<span class="line">/* Works with eZ Publish 4.1 and + */</span>
+<span class="line">/* if (obj.http.Set-Cookie ~ &quot;^is_logged_in=deleted.*$&quot;) */</span>
+<span class="line">/**************************************************************/</span>
+<span class="line">if (obj.http.Set-Cookie ~ &quot;^is_logged_in=deleted.*$&quot;)</span>
+<span class="line">{</span>
+<span class="line">remove obj.http.Set-Cookie;</span>
+<span class="line">}</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'backend default\r\n{\r\n.host = &quot;127.0.0.1&quot;;\r\n.port = &quot;8080&quot;;\r\n}\r\nsub vcl_recv\r\n{\r\nset req.backend = default;\r\n/***************************************************/\r\n/* Never cache pages with POST parameters */\r\n/* Typical use case : /user/login or /usr/register */\r\n/* You do not want to get those pages cached */\r\n/***************************************************/\r\nif (req.request == &quot;POST&quot;)\r\n{\r\npass;\r\n}\r\n/******************************************************/\r\n/* do not use Varnish when the user is authenticated */\r\n/* This configuration requires the ezvlogin extension */\r\n/* http://projects.ez.no/ezvlogin */\r\n/* With the default configuration for LoginSettings */\r\n/* in vlogin.ini.append.php */\r\n/******************************************************/\r\nif(req.http.Cookie ~ &quot;^is_logged_in=true.*$&quot;)\r\n{\r\npass;\r\n}\r\n/********************************************************/\r\n/* Returns the item from the cache for any GET request */\r\n/* All the configuration done in HTTPHeaderSettings in */\r\n/* eZ Publish as well as Apache\'s mod_expires will come */\r\n/* into play here */\r\n/********************************************************/\r\nif (req.request == &quot;GET&quot;)\r\n{\r\nlookup;\r\n}\r\n/*********************************************************/\r\n/* We want Varnish to return binary files from its cache */\r\n/* all the configuration we used for mod_expires is used */\r\n/* in this case */\r\n/*********************************************************/\r\nif (req.url ~ &quot;\.(gif|jpg|jpeg|swf|css|js|flv|mp3|mp4|pdf|ico)$&quot;)\r\n{\r\nlookup;\r\n}\r\n/************************************************************************************************************/\r\n/* Nirvana /* Never ever remove this line /* cf: /* http://projects.ez.no/ezvlogin/forum/general/working_with_custom_headers/re_working_with_custom_headers5 /* for more informations /************************************************************************************************************/\r\nremove req.http.cookie;\r\n}\r\nsub vcl_fetch\r\n{\r\n/**************************************************************/\r\n/* I remove any cookies from the request as Varnish is */\r\n/* really picky with cookies, and never cache the page */\r\n/* when they are present which is the safest way to prevent */\r\n/* issues but which does not help in our case */\r\n/** **/\r\n/** **/\r\n/* Should Works with eZ Publish 3.*, 4.0.* with eZ Vlogin */\r\n/* if (obj.http.Set-Cookie ~ &quot;^eZSESSID.*=.*$&quot;) */\r\n/** **/\r\n/** **/\r\n/* Works with eZ Publish 4.1 and + */\r\n/* if (obj.http.Set-Cookie ~ &quot;^is_logged_in=deleted.*$&quot;) */\r\n/**************************************************************/\r\nif (obj.http.Set-Cookie ~ &quot;^is_logged_in=deleted.*$&quot;)\r\n{\r\nremove obj.http.Set-Cookie;\r\n}\r\n}' ); return false;" /></p>
+<![endif]--><p>You might be interested in the following thread: <a href="http://projects.ez.no/ezvlogin/forum/general/working_with_custom_headers" target="_self">http://projects.ez.no/ezvlogin/forum/general/working_with_custom_headers</a></p><a name="eztoc104318_7_17" id="eztoc104318_7_17"></a><h3>Testing your work</h3><p>Here comes the hard part, testing your site with Varnish is really difficult. It is recommend to use the following helpful tools.</p><a name="eztoc104318_7_18" id="eztoc104318_7_18"></a><h3>Using Firefox</h3>
+<ul>
+<li><div>&nbsp;<b>LiveHTTPHeader</b> </div></li>
+</ul>
+<p>This can be downloaded at: <a href="http://addons.mozilla.org/en-US/firefox/addon/3829" target="_self">https://addons.mozilla.org/en-US/firefox/addon/3829</a></p><p>It is possible to filter what you do not want to see reported in the headers, I recommend to use the following configuration:</p><pre class="wordwrap"><span class="line">.gif$|.jpg$|.ico$|.css$|.js$|.png$</span>
+</pre><p>Next you will have the possibility to exclude URLs with a regex in the &quot;Configuration&quot; tab. Use the one given above.</p>
+<ul>
+<li><div>&nbsp;<b>Tips when using CTRL + R and Shift + CTRL + R</b> </div></li>
+</ul>
+<p>If you use Firefox for testing, you should know that refreshing a page sends different HTTPheaders in the request so you may have a different behaviour. Here is a summary of what is sent:</p><pre class="wordwrap"><span class="line">CTRL+R : &lt;i&gt;Cache-Control: max-age=0</span>
+<span class="line">&lt;/i&gt;Shift+CTRL+R : &lt;i&gt;Pragma: no-cache &lt;/i&gt;and &lt;i&gt;Cache-Control: no-cache&lt;/i&gt;</span>
+</pre><p>This is really important as it instructs Varnish to send an appropriate request or not.</p><a name="eztoc104318_7_19" id="eztoc104318_7_19"></a><h3>CURL</h3><p>You can use curl from the command line if you want, something like this:</p><pre class="wordwrap"><span class="line">curl -I -X HEAD http://site.com</span>
+</pre><p>or</p><pre class="wordwrap"><span class="line">curl -I -X GET http://site.com</span>
+</pre><p>But you must know that, it will not accept any client side caching used as shown above. It is the equivalent to using Shift + CTRL + R in Firefox. If Varnish is not prepared to lookup files for GET request, you will not get the expected result. You can add the following line to fix this:</p><pre class="wordwrap copytoclipboard"><span class="line">if (req.request == &quot;HEAD&quot;)</span>
+<span class="line">{</span>
+<span class="line">lookup;</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'if (req.request == &quot;HEAD&quot;)\r\n{\r\nlookup;\r\n}' ); return false;" /></p>
+<![endif]--><a name="eztoc104318_7_20" id="eztoc104318_7_20"></a><h3>Apache Benchmark</h3><p>Apache Benchmark will behave like multiple CURLs sending GET request. Which means it will not accept client cache and will not send If-Modified-Since header either. However this is ideal to brute force your server. Using &quot;ab&quot; is a good idea, because it simulates a ton of users on the site who do not have anything in their cache. Varnish take almost all the requests here.</p><p>If you like to get results with GNUPlot and ab, there is a interesting utility available here: <a href="http://sourceforge.net/projects/abgraph" target="_self">http://sourceforge.net/projects/abgraph</a></p><a name="eztoc104318_8" id="eztoc104318_8"></a><h2>Robots.txt</h2><a name="eztoc104318_8_21" id="eztoc104318_8_21"></a><h3>Configuration</h3><p>Reference: <a href="http://en.wikipedia.org/wiki/Robots.txt" target="_self">http://en.wikipedia.org/wiki/Robots.txt</a></p><p>In order to avoid Google or other crawlers to hammer your site during traffic spikes you might want to tell them to crawl the site only during the &quot;stressless&quot; hours, for example every night. This can be done like this:</p><pre class="wordwrap"><span class="line">User-agent: *</span>
+<span class="line">Visit-time:0600-0845 # only visit between 06:00 and 08:45 UTC (GMT)</span>
+</pre><a name="eztoc104318_9" id="eztoc104318_9"></a><h2>Surviving to site switches</h2><p>It is quite common to work on a migration project. Let's say your customer used CMS XXX and decided to use eZ Publish, so you do all you have to do and code all you have to code. And then comes the crucial moment when you switch the old application to the new eZ Publish one. This generally means that old URLs will not be valid anymore in eZ Publish and it will generate a lot of kernel XX errors to inform visitors the page foo/bar is not available.</p><p>In an application switch context, you can not survive this if you rely only on eZ Publish. This amount of &quot;old&quot; traffic (i.e coming from old and obsolete URLs) will be so important that it will just kill your machines. In order to solve this issue Nicolas Pastorino and Jérôme Renard wrote the eZURLMapper extension:<a href="http://projects.ez.no/ezurlmapper" target="_self">&nbsp;http://projects.ez.no/ezurlmapper</a></p><p>With a simple INI file you will be able to generate a set of Apache RewriteRules to use during your switch so any URL redirection is done by Apache. This will make eZ Publish beter and more efficient.</p><p>
+<a name="[1]"></a>
+[1] http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9<br />
+&nbsp;<a name="[2]"></a>
+[2] http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32<br />
+&nbsp;<a name="[3]"></a>
+[3] http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21<br />&nbsp;<a name="[4]"></a>
+[4] http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19</p>
+
+<div class="break"></div>
+<hr class="hide" />
+
+</div>
+</div>
+</div>
+</div>
+<!-- Main area content: END -->
+
+</div>
+</div>
+<!-- Main area: END -->
+<hr class="hide" />
+
+</div></div></div>
+
+        <div id="footer-bg">
+        <div id="footer" class="container_12">
+
+            <div class="grid_3">
+                <img src="https://ez.no/extension/ez_ezno/design/ezno_2011/images/ez-logo-white.png" alt="ez-publish" />
+                <div id="footer-copyright" class="grid_3 alpha omega">
+                    
+<p>eZ Systems has been providing Web Content Management Solutions since 1999. With a global presence in Europe, Asia and the Americas, we are the power platform driving more than 250,000 sites in over 170 countries.</p>                </div>
+            </div>
+
+            <div class="grid_6 middle">
+                <div class="grid_6 alpha omega">
+                    <div class="grid_3 alpha"><div>
+<a name="eztoc411316_0_0_0_1" id="eztoc411316_0_0_0_1"></a><h5>PRODUCTS</h5>
+<ul>
+
+<li><a href="https://ez.no/headerandfooteraccess" target="_self">eZ Publish 5&nbsp;Platform</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Products/Compare-Versions" target="_self">Compare Versions</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Products/Demos-Videos" target="_self">Demos &amp; Videos</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Products/eZ-Market" target="_self">eZ Market</a></li>
+
+</ul>
+<a name="eztoc411316_0_0_0_2" id="eztoc411316_0_0_0_2"></a><h5>eZ DELIVERS RESULTS</h5>
+<ul>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-Delivers-Results/Monetize-Your-Content" target="_self">Monetize Your Content</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-Delivers-Results/Digitize-Your-Business" target="_self">Digitalize Your Business</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-Delivers-Results/Deliver-a-Better-Brand-Experience" target="_self">Deliver a Better Brand Experience</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-Delivers-Results/Engage-With-Customers" target="_self">Engage With Customer</a></li>
+
+</ul>
+</div></div>
+                    <div class="grid_3 omega"><div>
+<a name="eztoc411317_0_0_0_1" id="eztoc411317_0_0_0_1"></a><h5>eZ FOR YOU</h5>
+<ul>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-For-You/For-Executives" target="_self">For Executives</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-For-You/For-Online-Digital-Strategists" target="_self">For Online Digital Strategists</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-For-You/For-Marketing-Professionals" target="_self">For Marketing Professionals</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-For-You/For-Business-Systems-Managers" target="_self">For Business Systems Managers</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess" title="eZ Publish Documentation" target="_self">For Developers</a></li>
+
+</ul>
+<a name="eztoc411317_0_0_0_2" id="eztoc411317_0_0_0_2"></a><h5>GET STARTED NOW</h5>
+<ul>
+
+<li><a href="https://ez.no/headerandfooteraccess/Products/Demos-Videos" target="_self">See a Demo</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Forms/HTML-forms/Contact-eZ" target="_self">Ask a Question</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Forms/HTML-forms/Contact-Support" target="_self">Contact Support</a></li>
+
+</ul>
+</div></div>
+                </div>
+            </div>
+
+            <div class="grid_3 right">
+                <div class="contact-ez">
+                        <a id="cta-contact" href="https://ez.no/headerandfooteraccess/Forms/HTML-forms/Contact-eZ/(origin)/footer" title="Contact eZ!" class="btn-green btn--small">Contact eZ!</a>
+                </div>
+
+                <div class="adress">
+<a name="eztoc411321_0_0_0_1" id="eztoc411321_0_0_0_1"></a><h5>LOCATIONS:</h5><p><a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" target="_self">Cologne, London </a></p><p><a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" id="__mce_tmp" target="_self">Lyon, New York</a></p><p><a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" id="__mce_tmp" target="_self">Oslo, Paris</a></p><p><a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" id="__mce_tmp" target="_self">Skien, Tokyo</a></p></div>
+            </div>
+
+        </div>
+    </div>
+<div id="footer-connect-bg">
+    <div id="footer" class="container_12">
+        <div id="footer-connect-copyright" class="grid_8 alpha omega">
+            Copyright © 2013 eZ Systems AS (except where otherwise noted). All rights reserved.
+            
+
+<div class="">    <a href="https://ez.no/headerandfooteraccess/Privacy-policy">Privacy policy</a></div><br/><br/>
+            Powered by <a href="http://ez.no/ezpublish" title="eZ Publish Platform">the eZ Publish Platform</a>.<br />
+        </div>
+
+        <div id="footer-connect-social" class="grid_4 right">
+            <a href="http://www.youtube.com/user/ezpublish/" class="youtube" target="_blank">youtube</a>
+            <a href="https://google.com/+ezsystems" class="googleplus" target="_blank">google plus</a>
+            <a href="http://www.linkedin.com/groups?gid=2759&amp;trk=myg_ugrp_ovr" class="linkedin" target="_blank">linkedin</a>
+            <a href="https://www.facebook.com/eZPublishEnterprise" class="facebook" target="_blank">facebook</a>
+            <a href="http://twitter.com/#!/ezsystems" class="twitter" target="_blank">twitter</a>
+        </div>
+
+
+    </div>
+</div>
+
+
+</div>
+<!-- Complete page area: END -->
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-303624-13', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+<script type="text/javascript">
+(function()
+{var ff=document.createElement('script');ff.type='text/javascript';ff.async=true;ff.src='https://secure.liveviewer.ez.no/statjs/sst-120-1304513615/stat.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ff,s);}
+)();
+</script>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/eZ-Publish/High-performance/Linux-Platform by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 11:55:23 GMT -->
+</html>
+
+<!-- th[eZ] 20050804 -->

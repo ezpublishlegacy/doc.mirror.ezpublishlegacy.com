@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Installation/Normal-installation/Requirements-for-doing-a-normal-installation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:24:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Requirements for doing a normal installation / Normal installation / Installation / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Requirements for doing a normal installation</h1>
+</div>
+
+ <p>eZ Publish makes use of and depends on four important things:</p> 
+<ol>
+ <li><div> A web server </div></li> <li><div> A server-side PHP scripting engine </div></li> <li><div> A database server </div></li> <li><div> An image conversion system (optional) </div></li> 
+</ol>
+ <p>The first three things should be in place before an eZ Publish installation is deployed. The image conversion system is optional and is only needed if you're planning to use eZ Publish with images. The web server and the server-side PHP scripting engine has to run on the same machine. The database server may run on a different computer. For the moment, the following software solutions can be used:</p>  <a name="eztoc292_1" id="eztoc292_1"></a><h2>Web server</h2> <p>Currently, only the Apache web server is supported. It is recommended to use the latest version of the 1.3 branch. However, it is possible to use the 2.x series. When using Apache 2.x, it must run in &quot;prefork&quot; mode instead of &quot;threaded&quot; mode - the reason for this is because the PHP libraries are not threadsafe. Please note that Apache 2.x for Windows only exists in &quot;threaded&quot; mode and thus it should not be used to run an eZ Publish solution on Windows. The Apache web server is the most popular web server on the planet. It is free, open source and can be downloaded from <a href="http://www.apache.org/" target="_blank">http://www.apache.org</a>.</p>   <a name="eztoc292_2" id="eztoc292_2"></a><h2>Server-side PHP scripting engine</h2> <p>Since most of the eZ Publish system is written using the PHP scripting language, a PHP (hypertext preprocessor) server-side engine is needed. Make sure you have PHP 4.3.4 or later version of the 4.3 branch. Please note that eZ Publish 3.6 will not work correctly with PHP 4.4 and PHP 5 and thus these versions should not be used. PHP needs to have compiled-in support for either MySQL or PostgreSQL.</p> <p>PHP is free software and can be downloaded from <a href="http://www.php.net/" target="_blank">http://www.php.net</a>.</p>  <a name="eztoc292_2_1" id="eztoc292_2_1"></a><h3>PHP CLI</h3> <p>It is strongly recommended to have <a href="http://php.net/manual/en/features.commandline.php" target="_blank">PHP CLI</a> installed, otherwise some features will not be available.</p>   <a name="eztoc292_2_2" id="eztoc292_2_2"></a><h3>PHP memory limit issue</h3> <p>eZ Publish needs at least 64 MB in order to complete the setup wizard. This means that you'll have to increase the default &quot;memory_limit&quot; setting which is located in the &quot;php.ini&quot; configuration file. (Don't forget to restart apache after editing &quot;php.ini&quot;.) Normal operation requires about 16 MB. However, it is highly recommended that you keep the 64 MB setting since eZ Publish consumes a lot more memory as soon as you use PDF export feature, reindex the search, etc. Multi-lingual sites that store the content in Unicode (UTF-8) will also require at least 64 MB.</p>    <a name="eztoc292_3" id="eztoc292_3"></a><h2>Database server</h2> <p>eZ Publish stores miscellaneous data structures and actual content using a database. This means that a database server has to be available for eZ Publish at all times. By default, eZ Publish is compatible with the following database solutions:</p> 
+<ul>
+ <li><div> 
+MySQL 3.23 or later (<a href="http://www.mysql.com/" target="_blank">http://www.mysql.com</a>)<br />Note that MySQL 5.x is currently not supported. </div></li> <li><div> PostgreSQL (<a href="http://www.postgresql.org/" target="_blank">http://www.postgresql.org</a>) </div></li> 
+</ul>
+ <p>The setup wizard will automatically detect the database server as long as it is running on the same computer that functions as the web server.</p> <p>
+ <a name="digest_function"></a>
+ <br />If you are going to use PostgreSQL, make sure the &quot;<a href="http://www.postgresql.org/docs/8.3/static/pgcrypto.html" target="_blank">pgcrypto</a>&quot; module is installed. On Linux/UNIX, you may need to install a separate package called &quot;postgresql-contrib&quot; (refer to the <a href="http://www.postgresql.org/docs/8.3/static/contrib.html" target="_blank">PostgreSQL documentation</a> for more information), which contains the &quot;pgcrypto&quot; module. The &quot;pgcrypto&quot; module provides cryptographic functions for PostgreSQL, including the &quot;digest&quot; function, which is needed for eZ Publish. When setting up a PostgreSQL database for eZ Publish, you will have to register these functions in the database as described in the &quot;<a href="../../Installing-eZ-Publish-on-a-Linux-UNIX-based-system.html#postgresql" target="_self">Setting up a database</a>&quot; part of the installation instructions.</p>  <a name="eztoc292_3_3" id="eztoc292_3_3"></a><h3>Oracle compatibility</h3> <p>The eZ Publish Database Extension makes it possible to use Oracle as a database for eZ Publish. Refer to <a href="http://ez.no/download/add_ons/ez_publish_extension_for_oracle_r_database" target="_blank">this page</a> for more information.</p>    <a name="eztoc292_4" id="eztoc292_4"></a><h2>Image conversion system (optional)</h2> <p>In order to scale, convert or modify images, eZ Publish needs to make use of an image conversion system. One of the following software packages (both are free) can be used:</p>
+<ul>
+ <li><div> GD (comes with PHP) </div></li> <li><div> ImageMagick (<a href="http://www.imagemagick.org/" target="_blank">http://www.imagemagick.org</a>) </div></li> 
+</ul>
+ <p>ImageMagick supports more formats than GD and usually produces better results (better scaling, etc.). The setup wizard will automatically detect the pre-installed image conversion system(s).</p> <p>The installation and setup of required software solutions (outlined above) is far beyond the scope of this document. Please refer to the homepage and documentation of the different software solutions.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Installation/Normal-installation/Requirements-for-doing-a-normal-installation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:24:42 GMT -->
+</html>

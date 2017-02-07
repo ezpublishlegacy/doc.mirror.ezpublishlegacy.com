@@ -1,0 +1,65 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Features/Multi-language/Configuring-your-site-locale by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:59:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Configuring your site locale / Multi-language / Features / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Configuring your site locale</h1>
+</div>
+
+<p>eZ Publish uses the &quot;eng-GB&quot; <a href="../Multi-language.html#locales" target="_self">locale</a> by default. This behavior is determined by the &quot;Locale&quot; INI setting located in the &quot;[RegionalSettings]&quot; block of the &quot;settings/site.ini&quot; configuration file. If you wish to use another locale for your site then you have to override this setting. Please note that the specified locale will be used as the default value for the &quot;<a href="../../Reference/Template-operators/Formatting-and-internationalization/l10n.html" target="_self">l10n</a>&quot; operator unless you explicitly specify the desired locale when using this operator in your templates. The following examples demonstrate how you can set the site locale.</p><a name="eztoc32229_0_1" id="eztoc32229_0_1"></a><h3>Example 1</h3><p>Let's say that you need to use &quot;nor-NO&quot; as system locale for all your siteaccesses. The following instructions reveal how this can be done.</p>
+<ol>
+<li><div> Open the &quot;site.ini.append.php&quot; configuration file located in the &quot;settings/override&quot; directory and edit it (if the file does not exist, create it). </div></li><li><div> Add the following lines under the &quot;[RegionalSettings]&quot; block:<pre class="wordwrap"><span class="line">Locale=nor-NO</span>
+</pre></div></li><li><div> Clear the caches. </div></li>
+</ol>
+<p>The system will start to use the locale settings specified in the &quot;share/locale/nor-NO.ini&quot; file for all your siteaccesses.</p><a name="eztoc32229_0_2" id="eztoc32229_0_2"></a><h3>Example 2</h3><p>Let's say that you need to use the &quot;nor-NO&quot; locale for one of your siteaccesses. To do this, edit the &quot;site.ini.append.php&quot; file located in the &quot;settings/siteaccess/example/&quot; directory (where &quot;example&quot; is the name of your siteaccess) as described in the previous example and make sure that no locale is specified in the &quot;settings/override/site.ini.append.php&quot; file. After clearing the caches, the &quot;example&quot; siteaccess will start to use the &quot;nor-NO&quot; locale. However, this may not result in the translation of all parts of the interface for this siteaccess (like &quot;Login&quot; and &quot;Sign up&quot; links/buttons etc.) into Norwegian. To do this, you should add the following line under the &quot;[RegionalSettings]&quot; block of the siteaccess &quot;site.ini.append.php&quot; file:</p><pre class="wordwrap"><span class="line">TextTranslation=enabled</span>
+</pre><p>This will instruct the system that the strings marked with &quot;<a href="../../Reference/Template-operators/Formatting-and-internationalization/i18n.html" target="_self">i18n</a>&quot; in the templates should be translated according to the current locale. This means that if you set the &quot;nor-NO&quot; locale for your admin siteaccess and enable the &quot;<a href="../../Reference/Configuration-files/site.ini/RegionalSettings/TextTranslation.html" target="_self">TextTranslation</a>&quot; setting then everything in the administration interface will be translated into Norwegian. (The &quot;TextTranslation&quot; configuration setting is disabled by default.)</p><p>You can also specify different locales for the remaining siteaccesses in the same way, otherwise the default &quot;eng-GB&quot; locale will be used for them.</p><a name="eztoc32229_1" id="eztoc32229_1"></a><h2>Adding missing locales</h2><p>eZ Publish provides many default locale settings where each locale is described in an INI file named by the locale identifier and placed in the &quot;share/locale&quot; directory. &quot;To contribute new locales and/or translations to eZ Publish, visit the Community Translation project page here: <a href="http://projects.ez.no/ezpublish_translation" target="_self">http://projects.ez.no/ezpublish_translation</a>, log-in, navigate to the team page ( <a href="http://projects.ez.no/ezpublish_translation/team/members" target="_self">http://projects.ez.no/ezpublish_translation/team/members</a> ) and request membership. You will be promptly able to contribute new translations and locale to eZ Publish ! &quot;. The following example demonstrates how to add a missing locale.</p><a name="eztoc32229_1_3" id="eztoc32229_1_3"></a><h3>Example</h3><p>Let's say that you need to use the &quot;ell-GR&quot; locale on your site. To do this, download Greek translation for eZ Publish from the eZ Publish translation pages <a href="http://projects.ez.no/ezpublish_translation" target="_self">http://projects.ez.no/ezpublish_translation</a> (you have to be a member as described in &quot;Adding missing locales above&quot;) and unpack it into a temporary location. You should see there a sub-directory called &quot;share&quot; which contains the locale configuration file (share/locale/ell-GR.ini) and the translation file for eZ Publish (share/translations/ell-GR/translation.ts). In addition, the downloaded package may contain a flag icon (share/icons/flags/ell-GR.gif) and/or translation file(s) for some extensions located in the &quot;extension&quot; sub-directory.</p><p>Please note that the &quot;translation.ts&quot; file contains eZ Publish specific strings translated into Greek language (the strings that are used in the templates and PHP code). If the &quot;TextTranslation&quot; setting is enabled, the strings from this file will be used for translating different parts of the interface, system messages, warnings etc.</p><p>If you copy the &quot;share&quot; sub-directory to the root directory of your eZ Publish installation, set the &quot;ell-GR&quot; locale (as described in the previous two examples) and <a href="../../../../../Extensions/eZ-Publish-extensions/Online-Editor/4.x/Installation.html#clear_caches" target="_self">clear the caches</a>, the system will start to use Greek locale.</p><a name="eztoc32229_2" id="eztoc32229_2"></a><h2>Custom locales</h2><p>In addition to the default locale settings that come with eZ Publish, it is possible to create custom locales. The following example demonstrates how this can be done.</p><a name="eztoc32229_2_4" id="eztoc32229_2_4"></a><h3>Example</h3><p>Let's say that you wish to use Icelandic locale on your site. You can create a custom locale configuration file for this based on the &quot;eng-GB&quot; locale settings. To do this, do the following:</p>
+<ol>
+<li><div> Go to the &quot;share/locale&quot; directory and copy the &quot;eng-GB.ini&quot; configuration file to a new file called &quot;ice-IS.ini&quot;. </div></li><li><div> Open this file and edit the locale settings. </div></li><li><div> Set your site locale to &quot;ice-IS&quot;. </div></li>
+</ol>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Features/Multi-language/Configuring-your-site-locale by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:59:07 GMT -->
+</html>

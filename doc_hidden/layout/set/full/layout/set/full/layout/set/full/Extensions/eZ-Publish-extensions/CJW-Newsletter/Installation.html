@@ -1,0 +1,157 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/CJW-Newsletter/Installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:34:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Installation / CJW Newsletter / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installation</h1>
+</div>
+
+<p>The following steps describes how to install the CJW Newsletter extension:</p>
+<ol>
+<li><div>When all the requirements are met, download the CJW Newsletter extension from the <a href="http://projects.ez.no/CJW_newsletter" target="_self">eZ projects website</a>.</div></li><li><div><p>Extract the downloaded files to this location:</p><pre class="wordwrap"><span class="line">...&lt;root of your eZ Publish installation&gt;/extension</span>
+</pre></div></li><li><div><p>Activate your CJW Newsletter extension at this location:</p><pre class="wordwrap"><span class="line">settings/override/site.ini.append.php</span>
+</pre><p>or</p><pre class="wordwrap"><span class="line">extension/site_example/settings/override/site.ini.append.php</span>
+</pre><p>By adding the CJW Newsletter extension:</p><pre class="wordwrap copytoclipboard"><span class="line">[ExtensionSettings]</span>
+<span class="line">...</span>
+<span class="line">ActiveAccessExtensions[]=cjw_newsletter</span>
+<span class="line">&nbsp;...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ExtensionSettings]\r\n...\r\nActiveAccessExtensions[]=cjw_newsletter\r\n ...' ); return false;" /></p>
+<![endif]--><p><b>Note:</b> From eZ Publish 4.4 the CJW Newsletter will be part of the new <a href="../../../eZ-Publish/Technical-manual/4.4/Installation/Extensions/Extension-load-ordering.html" target="_self">Extension Load Ordering</a> functionality. In 4.4 you will need to enter the metadata for each extension you wish to install in</p><pre class="wordwrap"><span class="line">extension/my_extension/extension.xml</span>
+</pre><p>Then the extension load ordering will take care of the correct sequential loading of the extensions.</p></div></li><li><div><p>Next update your autoload settings for this extension. From the command line you could use the following command:</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php -e -v</span>
+</pre><p>It is also possible to update the autoloads from the Administration Interface. Under the&nbsp;<b>Setup&nbsp;</b>tab, click on the&nbsp;<b>Extensions&nbsp;</b>link in the menu on the left. In the list displayed check the added extension (cjw newsletter) and press the&nbsp;<b>Regenerate autoload arrays for extensions</b>&nbsp;button.</p></div></li><li><div><p>Add tables to the database used by your eZ Publish instance. If you are using MySQL, you can import the tables from the eZ Publish's root directory with the following command:</p><pre class="wordwrap"><span class="line">mysql -u &lt;user&gt; -p &lt;database_name&gt; &lt; extension/cjw_newsletter/sql/mysql/schema.sql</span>
+</pre><p>
+Don't forget to replace the placeholders &lt;USER&gt; and &lt;DATABASE_NAME&gt; with the actual user name of your database and the name of the database used by eZ Publish.<br />If you are using another DBMS, the procedure is very similar. Please refer to the documentation of your DBMS if you are experiencing issues.</p></div></li><li><div><p>Assign the newsletter admin design in your admin siteaccess only if your eZ Publish version is &lt; ez4.2.0 in order to adjust the eZ Publish Administration Interface with the left CJW Newsletter menu. Note that this setting does not apply if you have newer versions than eZ Publish 4.3. To assign the newsletter design to version 4.2.0 or older go to:&nbsp;</p><pre class="wordwrap"><span class="line">settings/siteaccess/&lt;example_admin_en&gt;/site.ini.append.php</span>
+</pre><p>or</p><pre class="wordwrap"><span class="line">extension/&lt;site_example&gt;/settings/&lt;example_admin_en&gt;/site.ini.append.php</span>
+</pre><p>and make the following changes:</p><pre class="wordwrap copytoclipboard"><span class="line">[DesignSettings]</span>
+<span class="line">SiteDesign=&lt;cjw-example_admin_en&gt;</span>
+<span class="line">AdditionalSiteDesignList[]=newsletter_admin_ez4.0.0</span>
+<span class="line">AdditionalSiteDesignList[]=admin</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[DesignSettings]\r\nSiteDesign=&lt;cjw-example_admin_en&gt; \r\nAdditionalSiteDesignList[]=newsletter_admin_ez4.0.0\r\nAdditionalSiteDesignList[]=admin' ); return false;" /></p>
+<![endif]--></div></li><li><div><p>Check if you have an override menu.ini.append.php in your siteaccess. If so, you should add the new CJW Newsletter tab manually at one of the following locations:</p><pre class="wordwrap"><span class="line">settings/siteaccess/&lt;example_admin_en&gt;/menu.ini.append.php</span>
+</pre><p>or</p><pre class="wordwrap"><span class="line">extension/&lt;site_example&gt;/settings/&lt;example_admin_en&gt;/menu.ini.append.php</span>
+</pre><p>Add the tab as follows:</p><pre class="wordwrap"><span class="line">[TopAdminMenu] Tabs[]=newsletter</span>
+</pre></div></li><li><div><p>Now you should clear the cache. &nbsp;The following command can be used:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-id=template-override</span>
+</pre><p>Or if you prefer, this can be done from the administrator interface. Under the Setup tab, click on the Cache Management link in the menu on the right. And select the caches to clear.</p></div></li><li><div>Next you should import the CJW Newsletter content classes and demo structure. &nbsp;The package &quot;newsletter_root-1.0.1.ezpkg.ezpkg&quot; can be imported to the system, this means you must upload, unpack and place it under an appropriate internal repository within the installation. The following example demonstrates how to import such a site style package:
+<ol>
+<li><div>
+Go to the <b>Setup </b>tab in your administrator interface and then click on the <b>Packages </b>link in the menu on the left side. Choose the local repository and click the <b>Import new package button</b> located under the list of packages (it is marked in red in the next screenshot):<br />
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../var/doc/storage/images/media/images/import-cjw-newsletter-content-classes/121223-1-eng-GB/Import-CJW-Newsletter-content-classes_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div></div></li><li><div><p>
+Choose the desired file, in this case &quot;cjw_newsletter/packages/newsletter_root-1.0.1.ezpkg.ezpkg&quot;, on your local computer (as shown in the following screenshot) and click the<b>&nbsp;Import package </b>button.<br /></p>
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../var/doc/storage/images/media/images/import-cjw-newsletter-content-classes-22/121229-1-eng-GB/Import-CJW-Newsletter-content-classes-2_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>The system will import the package from &quot;cjw_newsletter/packages/newsletter_root-1.0.1.ezpkg.ezpkg&quot; and show it in the list of packages.</p></div></li>
+</ol>
+</div></li><li><div>
+You must now create a CJW Newsletter root folder (for example: Newsletter Root) which is used for all CJW Newsletter content. Follow the procedure below to create a new root folder as a starting point for your newsletter structures:<br />Please note that you need to create your Newsletter structure in the following sequence - Create a root folder - create a section - assign the section to the root.
+<ol>
+<li><div>Create a folder called &quot;Newsletter Root&quot; under the &quot;Content structure&quot; tab</div></li><li><div>Create a section called &quot;CJW Newsletter&quot; in &quot;Setup&quot; - &quot;Sections&quot;</div></li><li><div>Assign the new section to the &quot;Newsletter Root&quot; folder.</div></li><li><div>You have now created a folder called &quot;Newsletter Root&quot;. This will appear when you click the &quot;Newsletter&quot; tab. From the &quot;Newsletter Root&quot; you create the new Newsletter structure with Newsletter systems, newsletter lists, newsletter editions and newsletter articles.</div></li>
+</ol>
+</div></li><li><div><p>
+You can now create the CJW Newsletter structure manually like described in the bullet-points below:<br /><b>Note:</b> Make sure that you follow this sequence and that every new object is created within the previous structure.</p><p>
+&nbsp;&nbsp; 1. At the CJW Newsletter Root (if you need a new newsletter system later start at the root folder again)<br />
+&nbsp;&nbsp; 2. create your newsletter system (you can create new newsletter systems as the need may be)<br />
+&nbsp;&nbsp; 3. then create a newsletter list within that system (this will list all newsletters create in this particular newsletter system)<br />
+&nbsp;&nbsp; 4. create a newsletter edition within the newsletter list (all editions created in this structure will be listed here)<br />
+&nbsp;&nbsp; 5. In the newsletter edition you can either:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * create all your articles within the same edition, or<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * create separate articles in a new structure below the newsletter edition.</p></div></li><li><div>Next you check roles for user access. To do this go to the <b>User accounts&nbsp;</b>tab in the Administrator Interface and click on the<b>&nbsp;Roles and Policies</b> link in left hand menu (Access control). Set policies according to your own preferences and necessities.&nbsp; </div></li><li><div><p>Next create a cjw_newsletter.ini.append.php file for the CJW Newsletter settings at the following location:</p><pre class="wordwrap"><span class="line">/settings/override/cjw_newsletter.ini.append.php</span>
+</pre><p>or preferred</p><pre class="wordwrap"><span class="line">/extension/&lt;site_example&gt;/settings/override/cjw_newsletter.ini.append.php</span>
+</pre><p>The content could for example look like this:</p><pre class="wordwrap copytoclipboard"><span class="line">[NewsletterSettings]</span>
+<span class="line">PhpCli=php</span>
+<span class="line">AvailableSkinArray[]=default</span>
+<span class="line">&nbsp;</span>
+<span class="line">[NewsletterMailSettings]</span>
+<span class="line"># smtp, sendmail, file</span>
+<span class="line">TransportMethodCronjob=sendmail</span>
+<span class="line"># test newsletter</span>
+<span class="line">TransportMethodPreview=sendmail</span>
+<span class="line"># subscribe, infomail</span>
+<span class="line">TransportMethodDirectly=sendmail</span>
+<span class="line"># Configuration for SMTP</span>
+<span class="line">SmtpTransportServer=</span>
+<span class="line">SmtpTransportPort=25</span>
+<span class="line">SmtpTransportUser=</span>
+<span class="line">SmtpTransportPassword=</span>
+<span class="line">EmailSender=newsletter@example.com</span>
+<span class="line">EmailSenderName=Example.com Newsletter</span>
+<span class="line">EmailSubjectPrefix=[Newsletter Example.com]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[NewsletterSettings]\r\nPhpCli=php\r\nAvailableSkinArray[]=default\r\n\r\n[NewsletterMailSettings]\r\n# smtp, sendmail, file\r\nTransportMethodCronjob=sendmail\r\n# test newsletter\r\nTransportMethodPreview=sendmail\r\n# subscribe, infomail\r\nTransportMethodDirectly=sendmail\r\n# Configuration for SMTP\r\nSmtpTransportServer=\r\nSmtpTransportPort=25\r\nSmtpTransportUser=\r\nSmtpTransportPassword=\r\nEmailSender=newsletter@example.com\r\nEmailSenderName=Example.com Newsletter\r\nEmailSubjectPrefix=[Newsletter Example.com]' ); return false;" /></p>
+<![endif]--><p>Keep in mind to adjust these settings according to your needs.</p></div></li><li><div><p>Update the default cjw Newsletter skin or create a new one. By default the CJW Newsletter default skins are located here:</p><pre class="wordwrap"><span class="line">/extension/cjw_newsletter/design/newsletter_design/templates/newsletter/skin/default/outputformat</span>
+</pre><p>The files are &quot;text.tpl&quot; and &quot;html.tpl&quot;. Lets say you have designed a custom skin called &quot;my_custom_skin&quot;. The related text.tpl and html.tpl files should be located here:</p><pre class="wordwrap"><span class="line">/extension/cjw_newsletter/design/newsletter_design/templates/newsletter/skin/my_custom_skin/outputformat</span>
+</pre><p>The new skin should then be definded in cjw_newsletter.ini.append.php (created in step 13) like this:</p><pre class="wordwrap"><span class="line">[NewsletterSettings]</span>
+<span class="line">AvailableSkinArray[]=my_custom_skin</span>
+</pre><p>And don't forget to clear the cache after adding new templates!</p></div></li><li><div><p>
+Check the SiteURL settings in site.ini of the siteaccess which is used for rendering the newsletter. This setting is used to create absolute links to images:<br />site.ini.append.php</p><pre class="wordwrap"><span class="line">[SiteSettings]</span>
+<span class="line"># URL of site, often used to link to site in emails etc.</span>
+<span class="line">SiteURL=example.com</span>
+</pre></div></li><li><div><p>Next activate the ts files in &quot;cjw_newsletter.ini.append.php&quot; This setting you should copy to your siteaccess &quot;site.ini&quot; so you have full control of which ts files are loaded</p><pre class="wordwrap"><span class="line">[RegionalSettings]</span>
+<span class="line">TranslationExtensions[]=cjw_newsletter</span>
+</pre></div></li><li><div><p>To create all mails for a CJW Newsletter edition which are ready to be sent out run, the following command can be used:</p><pre class="wordwrap"><span class="line">php runcronjobs.php -s siteaccess cjw_newsletter_mailqueue_create</span>
+</pre></div></li><li><div><p>To send out all mails which are in the mail queue created by step 15, the following command can be used:</p><pre class="wordwrap"><span class="line">php runcronjobs.php -s siteaccess cjw_newsletter_mailqueue_process</span>
+</pre></div></li><li><div>Your CJW Newsletter should now be properly installed and ready for use!</div></li>
+</ol>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/CJW-Newsletter/Installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:34:51 GMT -->
+</html>

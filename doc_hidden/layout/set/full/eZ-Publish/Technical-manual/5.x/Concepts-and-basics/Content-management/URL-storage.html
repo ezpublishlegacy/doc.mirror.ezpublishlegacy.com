@@ -1,0 +1,61 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Concepts-and-basics/Content-management/URL-storage by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>URL storage / Content management / Concepts and basics / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>URL storage</h1>
+</div>
+
+<p>
+Every address that is input as a link into an attribute using the <a href="../../../4.x/Reference/Datatypes/XML-block.html" target="_self">&quot;XML block&quot;</a> or the <a href="../../../4.x/Reference/Datatypes/URL.html" target="_self">&quot;URL&quot;</a> datatype is stored in a separate part of the database. Actual data stored using these datatypes only contain references to entries in the separate URL table. This feature makes it possible to inspect and edit the published URLs without having to interact with the content objects. The addresses in the URL table can be checked by running the &quot;linkcheck.php&quot; script (which is also executed by the cronjob script) that comes with eZ Publish. This script will simply check if the links in the table actually work by accessing them one by one. If the target server of an URL returns an invalid response (404 Page not found, 500 Internal Server Error, 403 Access Denied, etc.) or if there is simply no response, the URL will be marked invalid.<br />
+ Keep in mind that if an URL is marked as invalid by this cronjob, the has_content attribute for the matching attribute will return FALSE. The has_content attribute normally only returns FALSE if the attribute has no content.<br /> Invalid URLs and the objects that are using them can be easily filtered out and edited using the &quot;URL management&quot; part of the administration interface. An entry in the URL table consists of the following data:</p>
+<ul>
+<li><div> ID </div></li><li><div> Address </div></li><li><div> Creation time </div></li><li><div> Modification time </div></li><li><div> Last checked </div></li><li><div> Status </div></li>
+</ul>
+<p>Every URL has a unique identification number. The address contains the actual link. The creation time is the exact date/time when the object containing that URL was published. The modification time is updated every time the URL is changed using the URL management part of the administration interface (and not when the object containing that URL is edited). Whenever a URL is checked by the script, the last checked field will be updated. The status of a URL can be either valid or invalid. By default, all URLs are valid. When the cronjob script is running, it will automatically update the status of the URLs. If a broken link is found, its status will be set to &quot;invalid&quot;. Whenever an already existing URL is stored, the system will simply reuse the existing entry in the table.</p><p>Please note that the link check script must be able to contact the outside world through port 80. In other words, the firewall must be opened for outgoing HTTP traffic from the web server that is running eZ Publish.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Concepts-and-basics/Content-management/URL-storage by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:14 GMT -->
+</html>

@@ -1,0 +1,79 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Templates/The-template-override-system by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:32:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>The template override system / Templates / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>The template override system</h1>
+</div>
+
+ <p>The template override system makes it possible to use other templates than the default ones (specified in the code for the different views and templates). This mechanism allows the creation of template overrides for virtually any template that is used by eZ publish (including templates that are requested by the <a href="../Reference/Template-functions/Miscellaneous/include.html" target="_self">&quot;include&quot;</a> template function using the &quot;design:&quot; prefix). In particular, template overrides are typically useful for displaying different types of nodes in different ways.</p> <p>An override for a view template is usually activated by a set of conditions. If the conditions match, the alternate template will be used. Different views provide different conditions, some views do not provide any conditions at all. Please refer to the <a href="../Reference/Template-override-conditions.html" target="_self">&quot;Template override conditions&quot;</a> section of the &quot;Reference&quot; chapter for a complete overview of the available match rules. The most flexible set of conditions are provided by the &quot;view&quot; view of the &quot;content&quot; module (used when a node is displayed). The following illustration shows how the override mechanism plugs into the rest of the system.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/templates/the_override_system/6279-2-eng-GB/the_override_system_doc.png" alt="The override system." />
+ <p>The override system.</p>
+
+
+
+
+
+
+
+</div> <p>The template overrides must be defined in the &quot;override.ini.append.php&quot; file of a siteaccess. This file consists of override blocks. A block is a named set of rules that tells eZ publish to use an alternate template in a specific situation. For each block, the following information must be specified:</p> 
+<ul>
+ <li><div> A unique name for the override. </div></li> <li><div> The template that should be overridden. </div></li> <li><div> The template that should be used instead of the one being overridden. </div></li> <li><div> The name of the directory in which the override template resides (usually &quot;templates&quot;). </div></li> <li><div> A set of conditions/rules that control when the override should be activated. </div></li> 
+</ul>
+ <p>Please note that the rules/conditions are optional. If no rules are specified, the override will always be active. The following illustration shows a typical example of a template override with additional explanations.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/templates/template_override_example/6286-3-eng-GB/template_override_example_doc.png" alt="Template override example." />
+ <p>Template override example.</p>
+
+
+
+
+
+
+
+</div> <p>The example above defines an override called &quot;special_folders&quot;. This override will be used when the system is requested to display a node using the full view mode. The override will only be activated if the object referenced by the node is an instance of the folder class and if it belongs to section number 34. When the override is activated, the system will attempt to use the alternate template (&quot;/override/templates/special_folder.tpl&quot;, located in the main design). If eZ publish is unable to find the alternate template, it will look for it in the additional designs and the standard design. Please refer to the documentation page of the <a href="../Concepts-and-basics/Designs/Design-combinations.html#automatic_fallback" target="_self">&quot;Automatic fallback system&quot;</a> for more information about this feature.</p>   <a name="eztoc63583_0_1" id="eztoc63583_0_1"></a><h3>Multiple / conflicting overrides</h3> <p>The priorities of the overrides are determined by their positions in the file. If there are several overrides with similar/equal rules, eZ publish will use the first override that matches and thus the rest of the overrides will be omitted. Because of this, overrides that are for example activated on a node ID or an object ID basis should always be placed first; otherwise they might never be triggered because of the presence of a more generic override with a higher priority.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Templates/The-template-override-system by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:32:07 GMT -->
+</html>

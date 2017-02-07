@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/Multi-currency/Creating-a-new-currency by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:03:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Creating a new currency / Multi-currency / Features / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Creating a new currency</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><p>The administration interface allows you to add new currencies to the webshop system. Let's say that you already have three currencies (USD, UAH and NOK) and you wish to add another one (EUR). The following example demonstrates how to add EUR when you already have USD, UAH, NOK.</p>
+<ol>
+<li><div>
+&nbsp;Click the &quot;Webshop&quot; tab in the administration interface, select the &quot;Currencies&quot; link on the left and click the &quot;New currency&quot; button located under the list of existing currencies. (This interface can also be accessed by requesting &quot;/shop/currencylist&quot; in the URL.) <br />&nbsp; 
+<div class="">        <img src="../../../../../../../../../var/doc/storage/images/media/images/available-currencies/133450-1-eng-GB/Available-Currencies_pdf.jpg" alt="Available Currencies" />
+<p>Available Currencies</p>
+
+
+
+
+
+
+
+</div>&nbsp;The system will bring up the currency edit interface where you can specify the desired properties for a new currency (look at the next screenshot). </div></li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+<div class="">        <img src="../../../../../../../../../var/doc/storage/images/media/images/creating-new-currency/133453-1-eng-GB/Creating-New-Currency_reference.jpg" alt="Creating New Currency" />
+<p>Creating New Currency</p>
+
+
+
+
+
+
+
+</div><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Specify the currency attributes (these are described below) and click the &quot;Create&quot; button. The system will add a new currency to the list.&nbsp;</p><p>Please note that after creating a new currency the system will automatically create zero auto prices in this currency for all your products. It is recommended to click the &quot;Update autoprices&quot; button when you have finished managing your currencies. This will instruct the system to update auto prices for all products. <a name="attributes"></a>
+</p><a name="eztoc86106_1" id="eztoc86106_1"></a><h2>Currency code</h2><p>The three-character currency code which is generally used to represent this currency (&quot;USD&quot;, &quot;EUR&quot; and so on). This parameter is required. This code can be thought of as an unique identifier of the currency. You can not use two currencies with the same codes. The currency code consists of three English capital letters and often (but not always) corresponds to the ISO 4217 standard.</p><p>Once the currency code is specified, the system will be able to display the currency name (&quot;European euro&quot;, &quot;U.S. dollar&quot; and so on). These currency names can be changed by providing a custom version of the &quot;currencynames.tpl&quot; template which is located in the &quot;templates/shop/&quot; directory of the standard design. This template does not have any effect on the shop functionality available for site visitors. The currency names are displayed only in the administration interface. If you have created a new currency with unknown code for example &quot;ABC&quot; which is not listed in the &quot;currencynames.tpl&quot; template, the system will display the currency name as &quot;Unknown currency name&quot;.</p><a name="eztoc86106_2" id="eztoc86106_2"></a><h2>Currency symbol</h2><p>A <i>currency symbol</i> is a string that will be displayed near the numerical price value (&quot;$&quot;, &quot;€&quot; and so on). Currency symbols are used in everyday life to denote that a number is a monetary value. This parameter is not required. If the currency symbol is not defined, the visitors who prefer using this currency will see the numerical price values without any additional symbols. Please note that if you are not able to type in the desired symbol then you can copy and paste it from your browser or text editor.</p><a name="eztoc86106_3" id="eztoc86106_3"></a><h2>Formatting locale</h2><p>A <i>formatting locale</i> is a locale which is used for price formatting. This parameter is required. You can choose the desired locale from the drop-down list of available locales. By default, the current system locale is selected (this locale is determined by the &quot;Locale&quot; setting located in the &quot;[RegionalSettings]&quot; section of the &quot;settings/site.ini&quot; configuration file or its override). The available locales and their settings are defined by the locale INI files located in the &quot;share/locale&quot; directory of your eZ Publish installation.</p><p>Once the formatting locale is specified, the system will automatically format the prices using the &quot;DecimalSymbol&quot;, &quot;ThousandsSeparator&quot;, &quot;FractDigits&quot; and &quot;PositiveFormat&quot; settings specified in the &quot;[Currency]&quot; section of the locale's INI file. Please note that the &quot;Symbol&quot;, &quot;Name&quot; and &quot;ShortName&quot; settings defined in the same section will not have any effect in this case.</p><a name="eztoc86106_3_1" id="eztoc86106_3_1"></a><h3>Example</h3><p>
+Let's create a new currency &quot;ABC&quot; and specify its properties as shown in the following screenshot. <br />&nbsp; </p>
+<div class="">        <img src="../../../../../../../../../var/doc/storage/images/media/images/currency-properties/133456-1-eng-GB/Currency-Properties_reference.jpg" alt="Currency Properties" />
+<p>Currency Properties</p>
+
+
+
+
+
+
+
+</div><p>
+&nbsp;Since the &quot;ABC&quot; code is not listed in the &quot;currencynames.tpl&quot; template, the system will display the currency name as &quot;Unknown currency name&quot; (look at the next screenshot). <br />&nbsp; </p>
+<div class="">        <img src="../../../../../../../../../var/doc/storage/images/media/images/unknown-currency-name/133459-1-eng-GB/Unknown-Currency-Name_pdf.jpg" alt="Unknown Currency Name" />
+<p>Unknown Currency Name</p>
+
+
+
+
+
+
+
+</div><p>&nbsp;This problem can be solved by creating a custom version of the &quot;currencynames.tpl&quot; which is located in the &quot;templates/shop/&quot; directory of the standard design. To do this, copy the &quot;currencynames.tpl&quot; template into the &quot;templates/shop/&quot; directory of the admin design and edit it. Add a new key/value pair to the list of pairs that are passed to the &quot;hash&quot; template operator which creates the &quot;set_currency_names&quot; associative array as shown below:</p><pre class="wordwrap copytoclipboard"><span class="line">{set currency_names = hash( 'ABC', 'AB-Currency',</span>
+<span class="line">'AUD', 'Australian dollar',</span>
+<span class="line">...</span>
+<span class="line">'USD', 'U.S.dollar' ) }</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{set currency_names = hash( \'ABC\', \'AB-Currency\',\r\n\'AUD\', \'Australian dollar\',\r\n...\r\n\'USD\', \'U.S.dollar\' ) }' ); return false;" /></p>
+<![endif]--><p>After clearing the eZ Publish caches, the system will display the currency name as &quot;AB-Currency&quot;.</p><p>The &quot;eng-US.ini&quot; configuration file located in the &quot;share/locale&quot; directory contains the following section:</p><pre class="wordwrap copytoclipboard"><span class="line">[Currency]</span>
+<span class="line">Symbol=$</span>
+<span class="line">Name=US Dollar</span>
+<span class="line">ShortName=USD</span>
+<span class="line">DecimalSymbol=.</span>
+<span class="line">ThousandsSeparator=,</span>
+<span class="line">FractDigits=2</span>
+<span class="line">PositiveSymbol=</span>
+<span class="line">NegativeSymbol=-</span>
+<span class="line">PositiveFormat=%c%p%q</span>
+<span class="line">NegativeFormat=%c%p%q</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[Currency]\r\nSymbol=$\r\nName=US Dollar\r\nShortName=USD\r\nDecimalSymbol=.\r\nThousandsSeparator=,\r\nFractDigits=2\r\nPositiveSymbol=\r\nNegativeSymbol=-\r\nPositiveFormat=%c%p%q\r\nNegativeFormat=%c%p%q' ); return false;" /></p>
+<![endif]--><p>Since the &quot;eng-US&quot; locale is selected for the &quot;ABC&quot; currency, the system will use &quot;.&quot; as a decimal symbol and &quot;,&quot; as thousands separator, with 2 digits after decimal point and the currency symbol placed before the numeric value as specified in the &quot;DecimalSymbol&quot;, &quot;ThousandsSeparator&quot;, &quot;FractDigits&quot; and &quot;PositiveFormat&quot; settings. (The &quot;Symbol&quot;, &quot;Name&quot; and &quot;ShortName&quot; settings will not be used.)</p><p>Let's say that some product costs for example 550 units in this currency. In this case, the visitors who prefer using this currency will see the price of this product like this:</p><p>abc550.00</p><a name="eztoc86106_4" id="eztoc86106_4"></a><h2>Custom rate</h2><p>This required parameter tells the system about which rate to use for calculating <a href="Custom-prices-and-auto-prices.html" target="_self">auto prices</a> for/in this currency. By default, the custom rate is set to 0 so the system will use <a href="Currency-rates.html#auto_rates" target="_self">auto rate</a> for this currency. However, it is possible to specify a non-zero fixed <a href="Currency-rates.html#custom_rates" target="_self">custom rate</a> value that will be used for calculating auto prices in this currency.</p><a name="eztoc86106_5" id="eztoc86106_5"></a><h2>Rate factor</h2><p>This required parameter is intended for supporting a kind of virtual rate that can be used for calculating <a href="Custom-prices-and-auto-prices.html" target="_self">auto prices</a> in this currency. If a non-zero custom rate is specified, the system will multiply it by rate factor in order to calculate the final rate, otherwise the system will multiply the auto rate by this factor. The default value of the rate factor is 1. The following table reveals how the final rate is calculated according to the auto rate, custom rate and rate factor values.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Custom rate</p>
+  </th><th >  <p>Rate factor</p>
+  </th><th >  <p>Auto rate</p>
+  </th><th >  <p>Final rate</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0.85</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0.85</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.4</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0.85</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0.85*1.4=1.19</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>0.75</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0.85</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0.75</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>0.75</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1.4</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0.85</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0.75*1.4=1.05</p>
+  </td>
+
+</tr>
+
+</table>
+<p><a name="status"></a>
+</p><a name="eztoc86106_6" id="eztoc86106_6"></a><h2>Status</h2><p>The status of the currency can be either &quot;active or &quot;inactive&quot;. When you create a new currency, the status will be automatically set to &quot;Active&quot;. Inactive currencies will be invisible for the site visitors. In other words, you can hide a currency from your customers if you don't wish them to use this currency.</p><p>
+Inactive currencies are displayed in red color in the list of currencies as shown in the following screenshot. <br />&nbsp;</p>
+<div class="">        <img src="../../../../../../../../../var/doc/storage/images/media/images/currency-status/133462-1-eng-GB/Currency-Status_pdf.jpg" alt="Currency Status" />
+<p>Currency Status</p>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/Multi-currency/Creating-a-new-currency by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:03:51 GMT -->
+</html>

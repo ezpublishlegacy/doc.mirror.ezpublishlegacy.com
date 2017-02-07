@@ -1,0 +1,58 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Multivariate-Testing/Installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Installation / Multivariate Testing / 5.x / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installation</h1>
+</div>
+
+<p>This section explains in few steps how to install the <b>ezmultivariatetest Extension</b>.</p><p>1. Extract the ezmultivariatetest extension, and place it in the extensions folder.</p><p>2. Enable the extension in eZ Publish. Do this by opening the file <i>settings/override/site.ini.append.php</i> and adding the following command to the <i>[ExtensionSettings]</i> block:</p><pre class="wordwrap"><span class="line">ActiveExtensions[]=ezmultivariatetest</span>
+</pre><p>3. Update the&nbsp;<i>autoloads</i> class by running the script: <i>php bin/php/ezpgenerateautoloads.php</i></p><p>4. Add a table to the database used by your eZ Publish instance. You can do this as follows, from eZ Publish's root directory:</p><p>In case you are using MySQL:</p><pre class="wordwrap"><span class="line">$ mysql -u &lt;user&gt; -p &lt;database_name&gt; &lt; extension/ezmultivariatetest/sql/mysql/schema.sql</span>
+</pre><p>The procedure is very similar in case you are using another RDMS. You may want to have a look at the <i>sql/oracle</i> and <i>sql/postgresql</i> for Oracle and PostgreSQL databases, respectively.</p><p><i><b>Note:</b> Please, refer to the reference documentation for your DBMS if you experience issues.</i></p><p>5. Import the <b>“Multivariate Test Container” </b>content class: Log in into the <b>eZ Publish administration interface</b> and navigate to the <b>Setup tab</b>. On the left side menu click on the <b>“Packages” </b>label. From the “Packages” view click on the <b>“Import new package” </b>button and proceed with the import wizard instructions. eZ Publish package with content class definition is located in <i>ezmultivariatetest/packages/multivariate_test_container.ezpkg.</i></p><p>6. Clear the template override cache with the command:</p><pre class="wordwrap"><span class="line">$ php bin/php/ezcache.php --clear-id=template-override</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Multivariate-Testing/Installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:40 GMT -->
+</html>

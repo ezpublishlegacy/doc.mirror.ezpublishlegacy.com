@@ -1,0 +1,81 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/UserSettings/UserNameValidationRegex by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>UserNameValidationRegex / [UserSettings] / site.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>UserNameValidationRegex</h1>
+</div>
+<h3>Summary</h3>
+Settings regarding custom validation of user names <h3>Usage</h3>
+<pre class="pfix"><p>UserNameValidationRegex[]=</p></pre><h3>Description</h3>
+<p>This setting is available since eZ Publish 4.1. It is used for custom validation of user names which will affect new users, and existing users when they edit their credentials.</p><h3>Examples</h3>
+<p><b>Example 1</b></p><pre class="wordwrap"><span class="line">UserNameValidationRegex[sw]=/^\s/</span>
+<span class="line">UserNameValidationErrorText[sw]=The user name cannot start with a white-space.</span>
+</pre><p><b>More examples</b></p><pre class="wordwrap copytoclipboard"><span class="line">#UserNameValidationRegex[ew]=/\s$/</span>
+<span class="line">#UserNameValidationErrorText[ew]=The user name cannot end with a white-space.</span>
+<span class="line">#UserNameValidationRegex[rw]=/\s+/</span>
+<span class="line">#UserNameValidationErrorText[rw]=The user name cannot contain repeated white-space.</span>
+<span class="line">#UserNameValidationRegex[lb]=/\n|\r/</span>
+<span class="line">#UserNameValidationErrorText[lb]=The user name cannot contain line breaks.</span>
+<span class="line">#UserNameValidationRegex[t]=/\t/</span>
+<span class="line">#UserNameValidationErrorText[t]=The user name cannot contain tabs.</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '#UserNameValidationRegex[ew]=/\s$/\r\n#UserNameValidationErrorText[ew]=The user name cannot end with a white-space.\r\n#UserNameValidationRegex[rw]=/\s+/\r\n#UserNameValidationErrorText[rw]=The user name cannot contain repeated white-space.\r\n#UserNameValidationRegex[lb]=/\n|\r/\r\n#UserNameValidationErrorText[lb]=The user name cannot contain line breaks.\r\n#UserNameValidationRegex[t]=/\t/\r\n#UserNameValidationErrorText[t]=The user name cannot contain tabs.\r\n' ); return false;" /></p>
+<![endif]--><p><b>Alternative example only allowing 'word' characters</b></p><pre class="wordwrap copytoclipboard"><span class="line">#UserNameValidationRegex[w]=/\W/</span>
+<span class="line">#UserNameValidationErrorText[w]=The user name can only contain a-z, digits or underline.</span>
+<span class="line"># Or</span>
+<span class="line">#UserNameValidationRegex[wh]=/[^A-Za-z0-9_-]/</span>
+<span class="line">#UserNameValidationErrorText[wh]=The user name can only contain a-z, digits, underline or hyphen.</span>
+<span class="line">&nbsp;</span>
+<span class="line"># While testing add this at the end, just remember to remove it when your done.</span>
+<span class="line">#UserNameValidationRegex[test]=/\w/</span>
+<span class="line">#UserNameValidationErrorText[test]=The username seems to be ok!</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '#UserNameValidationRegex[w]=/\W/\r\n#UserNameValidationErrorText[w]=The user name can only contain a-z, digits or underline.\r\n# Or\r\n#UserNameValidationRegex[wh]=/[^A-Za-z0-9_-]/\r\n#UserNameValidationErrorText[wh]=The user name can only contain a-z, digits, underline or hyphen.\r\n\r\n# While testing add this at the end, just remember to remove it when your done.\r\n#UserNameValidationRegex[test]=/\w/\r\n#UserNameValidationErrorText[test]=The username seems to be ok!' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/UserSettings/UserNameValidationRegex by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:18 GMT -->
+</html>

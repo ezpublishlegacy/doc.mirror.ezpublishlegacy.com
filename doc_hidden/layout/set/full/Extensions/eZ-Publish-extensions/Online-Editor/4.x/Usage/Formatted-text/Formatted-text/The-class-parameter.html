@@ -1,0 +1,114 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/Online-Editor/4.x/Usage/Formatted-text/Formatted-text/The-class-parameter by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>The class parameter / Formatted text / Formatted text / Usage / 4.x / Online Editor / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>The class parameter</h1>
+</div>
+
+ <p>Most of the elements can be classified meaning that you can assign some value to the &quot;class&quot; attribute of their XML tags. This allows you to tweak the appearance and/or behavior of the different elements. Elements of the same type can be classified in different ways. For example, if you want some of your paragraphs to look different from others, you can define custom stylesheets and use the &quot;class&quot; parameter as a style selector (to determine which CSS class that should be used).</p> <p>The &quot;class&quot; parameter can be set for the following elements:</p> 
+<ul>
+ <li><div> Headings </div></li> <li><div> Bold text </div></li> <li><div> Italic text </div></li> <li><div> Numbered lists </div></li> <li><div> Bullet lists </div></li> <li><div> Embedded objects </div></li> <li><div> Hyperlinks </div></li> <li><div> Literals </div></li> <li><div> Tables </div></li> <li><div> Table headers </div></li> <li><div> Table cells </div></li> <li><div> Paragraphs </div></li> 
+</ul>
+ <p>To set the &quot;class&quot; parameter for a particular element, you'll have to access the element's <a href="Element-properties.html" target="_self">properties</a>. Choose the necessary class from the drop-down list and click the &quot;OK&quot; button. If there are no available classes specified for the selected item then the drop-down list will be empty.</p>  <a name="eztoc13349_1" id="eztoc13349_1"></a><h2>Available classes</h2> <p>Use the &quot;AvailableClasses[]&quot; array from within an override for the &quot;content.ini&quot; configuration file to specify the available classes for the different tags.</p> <p>
+For example, the following lines will allow the &quot;html&quot; class to be selected for literal text.<br /></p><pre class="wordwrap"><span class="line">[literal]</span>
+<span class="line">AvailableClasses[]=html</span>
+</pre><p>&nbsp;</p> <p>
+The following lines define &quot;pRed&quot;, &quot;pBlue&quot; and &quot;apple&quot; classes for paragraphs.<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[paragraph]</span>
+<span class="line">AvailableClasses[]=pRed</span>
+<span class="line">AvailableClasses[]=pBlue</span>
+<span class="line">AvailableClasses[]=apple</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[paragraph]\r\nAvailableClasses[]=pRed\r\nAvailableClasses[]=pBlue\r\nAvailableClasses[]=apple' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p>   <a name="custom_templates" /><a name="eztoc13349_2" id="eztoc13349_2"></a><h2>Using alternate/custom templates</h2> <p>The default templates in the directory &quot;design/standard/templates/content/datatype/view/ezxmltags/&quot; determine how the content of XML tags should be rendered.</p>   <a name="eztoc13349_2_0_1" id="eztoc13349_2_0_1"></a><h4>Example</h4> <p>When the XML code is rendered, the system will replace the XML code </p><pre class="wordwrap"><span class="line">&lt;emphasize&gt;Emphasized text.&lt;/emphasize&gt;</span>
+</pre> <p>by the following XHTML code: </p><pre class="wordwrap"><span class="line">&lt;i&gt;Emphasized text.&lt;/i&gt;</span>
+</pre> <p>so that it will be displayed on the site as follows:</p> <p> <i>Emphasized text.</i> </p> <p>This behavior is dictated by the following instruction: </p><pre class="wordwrap"><span class="line">&lt;i{section show=ne($classification|trim,'')} class=&quot;{$classification|wash}&quot;{/section}&gt;{$content}&lt;/i&gt;</span>
+</pre> <p>that is specified in the default template &quot;emphasize.tpl&quot; located in the &quot;design/standard/templates/content/datatype/view/ezxmltags/&quot; directory.</p> <p>The templates are written using the <a href="../../../../../../../eZ-Publish/Technical-manual/3.6/Templates/The-template-language.html" target="_self">eZ Publish template language</a>. In the template, the tag contents is available in the &quot;$content&quot; variable.</p> <p>All the XML tags can be fully customized by changing the templates.</p> <p>If you need to specify custom rendering for your tags, you can use custom templates in your design directory. For example, you can create a template called &quot;paragraph.tpl&quot; inside the &quot;templates/content/datatype/view/ezxmltags/&quot; subdirectory of your design. The system will then use this template whenever it is about to render the contents of a paragraph. The value of the &quot;class&quot; parameter will be available in the $classification variable.</p> <p>It is also possible to use the <a href="../../../../../../../eZ-Publish/Technical-manual/3.6/Templates/The-template-override-system.html" target="_self">template override system</a>. This approach allows you to trigger custom templates based on a set of conditions. For example, if some of your paragraphs are classified as &quot;apple&quot;, you can create a new template called &quot;apple_paragraph.tpl&quot; in the &quot;override/templates/&quot; directory of your design. In order to trigger the new template, you'll have to make sure that the &quot;override.ini.append.php&quot; file that belongs to the siteaccess contains the following lines:</p> <pre class="wordwrap copytoclipboard"><span class="line">[apple_paragraph]</span>
+<span class="line">Source=content/datatype/view/ezxmltags/paragraph.tpl</span>
+<span class="line">MatchFile=apple_paragraph.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[classification]=apple</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[apple_paragraph] \r\nSource=content/datatype/view/ezxmltags/paragraph.tpl \r\nMatchFile=apple_paragraph.tpl\r\nSubdir=templates \r\nMatch[classification]=apple' ); return false;" /></p>
+<![endif]--> <p>After the caches are cleared, all paragraphs classified as &quot;apple&quot; will be rendered using your custom template. Other paragraphs using none or alternative classes will be rendered using the default paragraph template.</p>     <a name="eztoc13349_3" id="eztoc13349_3"></a><h2>Appearance of classified elements on the site</h2> <p>It is possible to control how the different elements should look like on the site pages. In other words, it is possible to tweak the final look/output that will be seen when the site is being browsed by visitors. The following text explains how this can be done.</p> 
+<ol>
+ <li><div> Create a custom CSS file, for example &quot;abc.css&quot; inside the &quot;stylesheets&quot; directory of your design. </div></li> <li><div> 
+Add some CSS code. The following example will set a blue background and center the text for the paragraphs of &quot;apple&quot; class:<br /> <pre class="wordwrap copytoclipboard"><span class="line">p.apple</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;background-color: blue;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;text-align: center;</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'p.apple\r\n{\r\n   background-color: blue;\r\n   text-align: center;\r\n}' ); return false;" /></p>
+<![endif]-->In this example, CSS settings are specified for XHTML tag &quot;p&quot;, not for <a href="../../../../../../../eZ-Publish/Technical-manual/3.6/Reference/XML-tags.html#paragraphs" target="_self">XML tag &quot;paragraph&quot;</a>. Please note that it is impossible to specify CSS settings directly for original <a href="../../../../../../../eZ-Publish/Technical-manual/3.6/Reference/XML-tags.html" target="_self">XML tags</a>. To learn which XHTML tag that corresponds to a particular element please refer to the section that describes it (this is usually defined by templates). </div></li> <li><div> 
+Specify the custom CSS file using the &quot;CSSFileList[]&quot; array within an override for the &quot;design.ini&quot; configuration file:<br /> <pre class="wordwrap"><span class="line">CSSFileList[]=abc.css</span>
+</pre>  </div></li> 
+</ol>
+ <p>The main template &quot;pagelayout.tpl&quot; will now use the custom CSS file &quot;abc.css&quot;.</p> <p>
+Please note that you can also specify the custom CSS file by including it directly in the pagelayout. To do this, add the following code after the already existing stylesheet-related lines in the head section:<br /></p><pre class="wordwrap"><span class="line">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href={'stylesheets/abc.css'|ezdesign} /&gt;</span>
+</pre><p>&nbsp;</p>   <a name="eztoc13349_4" id="eztoc13349_4"></a><h2>Appearance of classified elements inside OE</h2> <p>
+It is possible to control how the different elements should look like inside the Online Editor.<br />To set the different styles edit the &quot;editor_classes.css&quot; file located in the &quot;extension/ezdhtml/design/standard/stylesheets/ezdhtml/&quot; directory. Please note that the CSS files will only control the appearance in the OE but will not affect the actual site itself.</p> <p>The files &quot;editor_classes.css&quot; and &quot;editor.css&quot; are determined by the &quot;EditorCSSFileList[]&quot; array in the &quot;[StylesheetSettings]&quot; section of the configuration file &quot;extension/ezdhtml/settings/design.ini.append&quot;.</p> <p>In the beginning of the &quot;editor_classes.css&quot; file the CSS rules for visualization of eZXML elements are listed. We strongly recommend that you follow these instructions. Please note that no templates are used to define the XML tags appearance and/or behavior inside OE.</p> <p>
+The following example shows how you can set a red background and center the text for &quot;pRed&quot; classified paragraphs.<br /></p><pre class="wordwrap copytoclipboard"><span class="line">p.pRed</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;background-color: red;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;text-align: center;</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'p.pRed\r\n{\r\n   background-color: red;\r\n   text-align: center;\r\n}' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>The following screenshot shows the appearance of the &quot;pRed&quot; classified paragraph and another (non-classified one) in the OE text area.</p> 
+<div class="object-center linked">            <a href="../../../../../../../layout/set/full/Extensions/eZ-Publish-extensions/Online-Editor/4.x/Images/oe_classes_pRed.html" target="_self"><img src="../../../../../../../../../../../var/doc/storage/images/extensions/online_editor/4_x/images/oe_classes_pred/13290-1-eng-GB/oe_classes_pred_doc.png" alt="" /></a>
+ <p>The appearance of the &quot;pRed&quot; classified paragraph in the OE text area.</p>
+
+
+
+
+
+
+
+</div> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/Online-Editor/4.x/Usage/Formatted-text/Formatted-text/The-class-parameter by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:50 GMT -->
+</html>

@@ -1,0 +1,78 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-4.1/4.1.x-to-4.1.y by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>4.1.x to 4.1.y / Upgrading to 4.1 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>4.1.x to 4.1.y</h1>
+</div>
+
+<p>This section describes how to upgrade your existing eZ Publish 4.1.x installation to version 4.1.y. If you are upgrading from a version prior to eZ Publish 4.1.0, refer to the &quot;<a href="4.0.x-to-4.1.html" target="_self">Upgrading from 4.0.x to 4.1.y</a>&quot; section for upgrade instructions.</p><p>In order to benefit from the latest bug fixes, you should upgrade directly to the latest stable release in the 4.1 branch (4.1.2 at the time of writing). Refer to the <a href="https://github.com/ezsystems/ezpublish-legacy/tree/master/doc/changelogs/4.1" target="_blank">changelogs</a> and <a href="http://ez.no/developer/security/security_advisories/ez_publish_4_1" target="_blank">security advisories</a> for more information about the issues that were fixed in the latest releases.</p><a name="eztoc102751_0_1" id="eztoc102751_0_1"></a><h3>Important upgrade notes:</h3>
+<ul>
+<li><div>&quot;updateimagesystem.php&quot; needs to be run before the &quot;dbupdate&quot; scripts, otherwise the tables being upgraded will be removed. </div></li>
+</ul>
+<p>Please make a backup of your files and your database before proceeding. The procedure for upgrading directly from version 4.1.x to 4.1.y consists of the following steps:</p>
+<ol>
+<li><div> Check eZ Components version </div></li><li><div> Update distribution files </div></li><li><div> Transfer custom extensions </div></li><li><div> Check updateimagesystem.php </div></li><li><div> Upgrade database </div></li><li><div> Regenerate autoload data for extensions </div></li><li><div> Run system upgrade scripts </div></li><li><div> Run eZ OE update script </div></li><li><div> Clear caches </div></li>
+</ol>
+<a name="eztoc102751_1" id="eztoc102751_1"></a><h2>Step 1: Check the eZ Components 2008.2.x requirements</h2><p>With eZ Publish 4.1.1 and later, eZ Components 2008.2.2 is the minimum version required. If you installed a previous version with PEAR, please upgrade to version 2008.2.2. For more information about installing eZ Components see also http://ezcomponents.org/docs/install</p><a name="eztoc102751_2" id="eztoc102751_2"></a><h2>Step 2: Updating the distribution files</h2><p>The easiest way to upgrade the distribution files is to unpack eZ Publish 4.1.1 to a separate directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p>
+<ul>
+<li><div> design/example </div></li><li><div> design/example_admin </div></li><li><div> var </div></li><li><div> settings/siteaccess </div></li><li><div> settings/override </div></li>
+</ul>
+<p>Replace &quot; <i>example</i>&quot; and &quot; <i>example_admin</i>&quot; with the actual names of your siteaccesses.</p><a name="eztoc102751_3" id="eztoc102751_3"></a><h2>Step 3: Custom extensions</h2><p>If you are using custom extensions, the sub directories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that come with eZ Publish (currently &quot;ezoe&quot;, &quot;ezodf&quot;). Note that upgrading the distribution files will overwrite the autoload arrays for extensions. You will need to re-generate the autoload arrays for active extensions late. See below for dedicated upgrade instructions for ez flow and ez webin.</p><p>Note that ezdhtml is now replaced by ezoe, so you should not copy it over.</p><p>For eZ OE 5.0.x, you will need to have the following rewrite rule if using Virtual Hosts:</p><pre class="wordwrap"><span class="line">RewriteRule ^/var/[^/]+/cache/public/.* - [L]</span>
+</pre><p>For more detailed instructions, see the dedicated doc page: http://ez.no/doc/extensions/online_editor/5_x/installation</p><a name="eztoc102751_4" id="eztoc102751_4"></a><h2>Step 4: updateimagesystem.php</h2><p>(If your upgrading from 4.1.0 and not directly from 4.0.x) First of all, if you don't have image data from before version 3.3 of eZ Publish, you don't have to do anything, you can skip running the &quot;updateimagesystem.php&quot; script</p><p>If you do have old data or you suspect you might (installation is based on eZ Publish &lt; 3.3), which you want to upgrade, then you have to import the tables ezimage and ezimagevariation from a database backup, as these tables were unfortunately removed in the dbupdate scripts of 4.1.0. After the tables have been restored, the updateimagesystem.php script needs to be run.</p><a name="eztoc102751_5" id="eztoc102751_5"></a><h2>Step 5: Upgrading the database</h2><p>The update script for the database is located in:</p><pre class="wordwrap"><span class="line">&lt;eZP root&gt;/update/database/&lt;mysql|postgresql&gt;/4.1/dbupdate-4.1.x-to-4.1.y.sql</span>
+</pre><p>You can run this with the appropriate command line tool or application</p><a name="eztoc102751_6" id="eztoc102751_6"></a><h2>Step 6: Regenerate the autoload array for extensions</h2><p>The autoload system has also some changes, for example the autoload array for extensions is now placed in var/autoload of your eZ Publish installation.</p><p>To regenerate the autoload array, execute the following script:</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php --extension</span>
+</pre><a name="eztoc102751_7" id="eztoc102751_7"></a><h2>Step 7: Running the system upgrade scripts</h2><p>The update scripts are located in:</p><pre class="wordwrap"><span class="line">&lt;eZP root&gt;/update/common/scripts/4.1</span>
+</pre><p>Please note, that if these scripts were executed as part of the initial upgrade in 4.1.0, they do not have to be executed again this time.</p>
+<ul>
+<li><div> addlockstategroup.php (Used for creating locked states, part of the object states functionality. Updated in 4.1.1) </div></li><li><div> fixclassremoteid.php (Fixing remote IDs of classes. Updated in 4.1.2 for PostgreSQL compatibility.) </div></li><li><div> fixobjectremoteid.php (Fixes non-unique usage of content object remote IDs. Updated in 4.1.2 for PostgreSQL compatibility.) </div></li><li><div> correctxmlalign.php: after upgrading to 4.1 the default alignment for embedded images in ezxmltext datatype was removed, this script will allow you to have the correct xmlalignment. </div></li>
+</ul>
+<a name="eztoc102751_8" id="eztoc102751_8"></a><h2>Step 8: Run the eZ OE upgrade database script</h2><p>(If you upgrade ezoe from 5.0.0 or earlier beta versions of the 5.0.x version) One of the bugs ( <a href="http://issues.ez.no/14670" target="_self">#14670</a>) fixed in OE 5.0.1 caused object relations to be stored with wrong relation type id, so they where not removed as relation when you removed them from editor area (ezxmltext). In order to fix the problem on existing relations created with OE 5.0.0 (also affected all prior beta- and rc-releases), apply the following:</p><pre class="wordwrap"><span class="line">&lt;eZP root&gt;/extension/ezoe/update/database/5.0/dbupdate-5.0.0-to-5.0.1.sql</span>
+</pre><a name="eztoc102751_9" id="eztoc102751_9"></a><h2>Step 9: Clearing the caches</h2><p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p><p>
+Navigate into the eZ Publish 4.0.y directory.<br /> Run the script using the following shell command:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-4.1/4.1.x-to-4.1.y by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:15 GMT -->
+</html>

@@ -1,0 +1,245 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/Multi-language-support-for-URL-aliases by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:01:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Multi-language support for URL aliases / Features / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Multi-language support for URL aliases</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><p>In eZ Publish 3.10, a new feature that makes it possible to use multilingual <a href="../Concepts-and-basics/URL-translation.html#virtual_url" target="_self">virtual URLs</a> (also known as nice URLs or URL aliases) has been introduced. This feature allows URL aliases to exist in several <a href="Multi-language.html#translation_languages" target="_self">translation languages</a>.</p><a name="eztoc86310_1" id="eztoc86310_1"></a><h2>Auto-generated aliases</h2><p>From 3.10, the <a href="../Concepts-and-basics/URL-translation.html#automated_virtual_url_generation" target="_self">automated virtual URL generation</a> mechanism allows URL aliases to exist in several languages, depending on which languages the actual objects exist in. In other words, the URL aliases for nodes are now created in accordance with the existing translations of the objects encapsulated by the nodes. When a new translation is added to an object, the system will automatically generate a new set of URL aliases (based on the translations) for the node(s) that encapsulate that object.</p><p>A new field &quot;<a href="../Concepts-and-basics/Content-management/The-content-class.html#url_alias_name_pattern" target="_self">URL alias name pattern</a>&quot; has been added to the class edit interface. It controls how the virtual URLs of the nodes will be generated when the objects (instances of the classes) are created.</p><p>It is not possible to create, edit or remove auto-generated aliases using the administration interface. They are updated automatically when objects are changed. The only way to change an auto-generated alias is to edit the object itself in the corresponding language. <a name="history"></a>
+</p><a name="eztoc86310_2" id="eztoc86310_2"></a><h2>URL history entries</h2><p>
+When the name of an object is changed, <b>the system will take care of changing the auto-generated URL aliases for the associated nodes</b>. In addition, an internal redirection will be created, which will make sure that the old URL still works. In other words, instead of deleting the old URL alias from the database, the system will convert it into a <i>URL history entry</i>. <br />The old virtual URL will continue to redirect until a new node is created that uses the same URL. In this case, the old virtual URL will be deleted.</p><p>The internal redirection mechanism is intentionally hidden from the user. You cannot view or manage URL history entries using the administration interface.</p><p>
+<b>Note:</b> <br />
+If&nbsp;the URL history entry for translation A would have had the same name as an existing, active entry in translation B, the history entry will not be created, so the old URL will not work for translation A.<br />To workaround this behavior, you can use external redirection at the vhost level, to override eZ Publish behaviour, for example, a rewrite rule in Apache server.</p><a name="eztoc86310_2_1" id="eztoc86310_2_1"></a><h3>Example</h3><p>Let's say that a folder called &quot;Computers&quot; contains an article called &quot;Monitors&quot;, which can be accessed at &quot;http://www.example.com/Computers/Monitors&quot;. If you rename the folder to &quot;Hardware&quot;, the new URLs for accessing the folder and the article will be &quot;http://www.example.com/Hardware&quot; and &quot;http://www.example.com/Hardware/Monitors&quot;. If someone tries to use one of the old URLs, the system will automatically redirect the user to the corresponding new URL. If you then rename the article into &quot;LCD&quot;, the following three URLs will redirect the user to &quot;http://www.example.com/Hardware/LCD&quot;:</p>
+<ul>
+<li><div>&nbsp;http://www.example.com/Computers/Monitors </div></li><li><div>&nbsp;http://www.example.com/Computers/LCD </div></li><li><div>&nbsp;http://www.example.com/Hardware/Monitors </div></li>
+</ul>
+<p><a name="manual"></a>
+</p><a name="eztoc86310_3" id="eztoc86310_3"></a><h2>Manual/user-defined aliases</h2><p>The following two types of virtual URLs can be <a href="Multi-language-support-for-URL-aliases/Managing-URL-aliases.html" target="_self">managed using the administration interface</a>:</p>
+<ul>
+<li><div>&nbsp;Global URL aliases </div></li><li><div>&nbsp;Node URL aliases </div></li>
+</ul>
+<p>The list of <i>global URL aliases</i> contains all user-defined virtual URLs, except from those that are created for destinations (system URLs) like &quot;content/view/full/node_id&quot;, where &quot;node_id&quot; is the ID number of a node. These are called <i>node URL aliases</i> and can be managed separately for individual nodes.</p><p>While global aliases always start from the root of the site, an alias of a node can either start from the parent node or from the root of the site. This is controlled by the &quot;Relative to parent&quot; flag.</p><p>A node URL alias applies only to the specific node that it references; in other words, a user-defined alias of a node does not apply to the URLs for the node's children. Refer to the example below for more information.</p><a name="eztoc86310_3_2" id="eztoc86310_3_2"></a><h3>Example</h3><p>Let's say that a folder called &quot;Norway&quot; contains two articles that can be accessed using the following URLs:</p>
+<ul>
+<li><div>&nbsp;http://www.example.com/norway/oslo </div></li><li><div>&nbsp;http://www.example.com/norway/bergen </div></li>
+</ul>
+<p>and you have created a new URL alias &quot;Kingdom&quot; for this folder. In this case, the &quot;Norway&quot; folder will be accessible through any of the following URLs:</p>
+<ul>
+<li><div>&nbsp;http://www.example.com/norway </div></li><li><div>&nbsp;http://www.example.com/kingdom </div></li>
+</ul>
+<p>However, the following two URLs will bring up a &quot;Module not found&quot; error:</p>
+<ul>
+<li><div>&nbsp;http://www.example.com/kingdom/oslo </div></li><li><div>&nbsp;http://www.example.com/kingdom/bergen </div></li>
+</ul>
+<a name="eztoc86310_3_3" id="eztoc86310_3_3"></a><h3>Redirection of URL aliases and wildcards</h3><p>
+In 4.0.0, it is possible to choose whether an alias will work as a &quot;direct&quot; or &quot;forward&quot; one (&quot;direct&quot; == the entered URL in the address bar of a browser stays the same, &quot;forward&quot; == the system will redirect to the original URL), but only for URL wildcards. This is controlled by the &quot;Redirecting URL&quot; checkbox when creating URL wildcards.<br />&nbsp;URL aliases also gained a new feature. You have now the possibility to choose if a URL alias should be direct or re-direct . Previously aliases have always re-directed (HTTP 301). Versions prior to 3.10 did not redirect URLs pointing to modules. With this new feature this behavior is back.</p><p>Find an example of redirection of URL aliases in the screenshot below:</p>
+<div class="object-center">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/url_alias_redirection/114995-1-eng-GB/url_alias_redirection_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Use the &quot;Alias should redirect to its destination &quot; checkbox to redirect the alias.</p><p><a name="wildcard_based_url_forwarding"></a>
+</p><a name="eztoc86310_4" id="eztoc86310_4"></a><h2>Wildcard based URL forwarding</h2><p>eZ Publish supports wildcard based URL forwarding. This means that you can create a URL alias that contains one or more asterisks (*) and the system will automatically replace the corresponding parts in URLs according to the destination URL specified. For example, you can create a URL alias called &quot;pictures/*/*&quot; and specify &quot;media/images/{1}/{2}&quot; as a destination. In this case, a URL like &quot;http://www.example.com/pictures/home/photo/&quot; will load &quot;http://www.example.com/media/images/home/photo/&quot;. In other words, you will be able to use &quot;pictures&quot; instead of &quot;media/images&quot; in the URLs when accessing content nodes that are located two or more levels beneath the &quot;media/images&quot; node.</p><p>
+<a name="redirecting"></a>
+ <br />&nbsp;It is possible to choose whether an alias will work as a &quot;direct&quot; or &quot;forward&quot; one. In the example above, a &quot;direct&quot; alias means that when someone enters &quot;http://www.example.com/pictures/home/photo/&quot; in the address bar of a browser, the entered address will stay the same while the actual node will be displayed. If the alias is of the &quot;forward&quot; type, the system will redirect to &quot;http://www.example.com/media/images/home/photo/&quot; instead.</p><p>Wildcard URL aliases can be <a href="Multi-language-support-for-URL-aliases/Managing-URL-aliases.html#wildcard" target="_self">managed using the administration interface</a>.</p><a name="eztoc86310_5" id="eztoc86310_5"></a><h2>Availability</h2><p>An alias is only available for a siteaccess if the language of the alias matches one of the <a href="Multi-language.html#site_languages" target="_self">site languages</a> specified for this siteaccess. If a siteaccess is configured to <a href="Multi-language.html#show_untranslated" target="_self">display untranslated content</a>, then aliases in all languages will be available.</p><p>If an object is <a href="Multi-language.html#always_available" target="_self">always available</a>, the URL aliases for the object's node assignments will be available for all siteaccesses. This is true for both auto-generated and user-defined aliases.</p><a name="eztoc86310_5_4" id="eztoc86310_5_4"></a><h3><a name="always_available"></a>
+Aliases which are always available</h3><p>Some global aliases always need to be available regardless of which languages that are configured for a siteaccess. Because of this, a new flag called &quot;Include in other languages&quot; has been introduced for global aliases. It makes it possible to individually control the availability of the different aliases.</p><a name="eztoc86310_6" id="eztoc86310_6"></a><h2>Languages</h2><p>Multilingual URL aliases do not control which languages the requested pages will be displayed in. When a virtual URL of a node is requested, the system will figure out the correct language based on the language configuration of the current siteaccess (refer to the example below).</p><a name="eztoc86310_6_5" id="eztoc86310_6_5"></a><h3>Example</h3><p>If you create an article called &quot;Company&quot; and translate it into French, there will be two auto-generated URL aliases called &quot;Company&quot; and &quot;Compagnie&quot;.</p><p>Let's say that you have two public siteaccesses called &quot;gb&quot; and &quot;fr&quot; with the following language configuration:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Siteaccess &quot;gb&quot;</p>
+  </th><th >  <p>Siteaccess &quot;fr&quot;</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <pre class="wordwrap copytoclipboard"><span class="line">[RegionalSettings]</span>
+<span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=eng-GB</span>
+<span class="line">SiteLanguageList[]=fre-FR</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[RegionalSettings]\r\nSiteLanguageList[]\r\nSiteLanguageList[]=eng-GB\r\nSiteLanguageList[]=fre-FR' ); return false;" /></p>
+<![endif]-->
+  </td>
+<td valign="top" style="vertical-align: top">  <pre class="wordwrap copytoclipboard"><span class="line">[RegionalSettings]</span>
+<span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=fre-FR</span>
+<span class="line">SiteLanguageList[]=eng-GB</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[RegionalSettings]\r\nSiteLanguageList[]\r\nSiteLanguageList[]=fre-FR\r\nSiteLanguageList[]=eng-GB' ); return false;" /></p>
+<![endif]-->
+  </td>
+
+</tr>
+
+</table>
+<p>As the table shows, the &quot;gb&quot; siteaccess is configured to use English as the most prioritized language and French as a second one. This means that both &quot;Company&quot; and &quot;Compagnie&quot; aliases will work. The system will bring up the English version of the article when one of the following URLs is requested:</p>
+<ul>
+<li><div>&nbsp;http://www.example.com/gb/Company </div></li><li><div>&nbsp;http://www.example.com/gb/Compagnie </div></li>
+</ul>
+<p>Note that if you configure only one language (English) for this siteaccess, the French alias will not be available.</p><p>While the most prioritized language for the &quot;fr&quot; siteaccess is French, the second one is English. This means that both aliases will work and the corresponding URLs will bring up the French version:</p>
+<ul>
+<li><div>&nbsp;http://www.example.com/fr/Company </div></li><li><div>&nbsp;http://www.example.com/fr/Compagnie </div></li>
+</ul>
+<p><a name="transformation"></a>
+</p><a name="eztoc86310_7" id="eztoc86310_7"></a><h2>Character transformation</h2><p>The multilingual URL aliases feature includes 3 recommended character transformation options for URLs, out-of-the-box. Their usage is controlled by the &quot;<a href="../Reference/Configuration-files/site.ini/URLTranslator/TransformationGroup.html" target="_self">TransformationGroup</a>&quot; directive located in the [URLTranslator] section of an override for &quot;site.ini&quot;. The following table reveals the recommended transformation options.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Name</p>
+  </th><th >  <p>Description</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>urlalias_compat</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>This method supports lowercase Latin letters from &quot;a&quot; to &quot;z&quot;, digits and underscores in URLs. It provides the same behavior as in eZ Publish 3.9.x and earlier versions. Capital characters are not preserved.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>urlalias</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>This method supports more characters, but the URLs are still restricted to the ASCII table (with a few exceptions). Capital characters are preserved.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>urlalias_iri</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>This method allows all Unicode characters in the URLs (with a few exceptions). It preserves the original text as much as possible, which results in more user-friendly URLs. Multiple whitespaces are converted to one. Capital characters are preserved. This is the recommended method for both single- and multi-language sites.</p>
+  </td>
+
+</tr>
+
+</table>
+<p>
+<a name="url_encoding"></a>
+ <br />&nbsp;If you use the &quot;urlalias_iri&quot; type of transformation for URL aliases, be aware of the fact that some web browsers use <a href="http://en.wikipedia.org/wiki/Percent-encoding" target="_blank">percent encoding</a> for Unicode characters in the URLs. For example, if a visitor enters a URL like &quot;http://www.example.no/Ostehøvel&quot; in the address bar of a browser, it might be automatically converted to &quot;http://www.example.no/Osteh%C3%B8vel&quot;. However, this won't prevent eZ Publish from serving the requested web page. Users of Mozilla Firefox can disable this behavior by typing <a href="http://www.mozilla.org/support/firefox/edit#aboutconfig" target="_blank">about:config</a> in the browser's address bar to edit the &quot;<a href="http://kb.mozillazine.org/Network.standard-url.escape-utf8" target="_blank">network.standard-url.escape-utf8</a>&quot; preference.</p><p>Refer to the following example to learn how the multilingual URL alias feature actually works.</p><a name="eztoc86310_7_6" id="eztoc86310_7_6"></a><h3>Example</h3><p>Let's say that we have the following site structure:</p>
+<ul>
+<li><div>
+&nbsp;Company (node ID: 10)<br />&nbsp;
+<ul>
+<li><div>&nbsp;About us (node ID: 11) </div></li><li><div>&nbsp;Contacts (node ID: 12) </div></li>
+</ul>
+</div></li>
+</ul>
+<p>If node 10 (&quot;Company&quot;) gets translated into French, it will get the second alias &quot;Compagnie&quot;. The structure of the site will look like this:</p>
+<ul>
+<li><div>
+&nbsp;Company|Compagnie (node ID: 10)<br />&nbsp;
+<ul>
+<li><div>&nbsp;About us (node ID: 11) </div></li><li><div>&nbsp;Contacts (node ID: 12) </div></li>
+</ul>
+</div></li>
+</ul>
+<p>At this point, node 10 can be accessed by using both aliases for all siteaccesses that have both English and French on the list of <a href="Multi-language.html#site_languages" target="_self">site languages</a>. If a siteaccess is configured to use English as the most prioritized language, both aliases will bring up the English version. If the most prioritized language is French, both aliases will bring up the French version of the company page for this siteaccess.</p><p>The &quot;About&quot; page (node 11) can be accessed using either &quot;Company/About&quot; or &quot;Compagnie/About&quot; as the URL. The &quot;Company/About&quot; alias will work for any siteaccess that has English on the list of site languages. The &quot;Compagnie/About&quot; alias will only work for the siteaccesses that are configured to use both English and French languages. In both cases, it is the English translation that will be displayed (since the object only exists in English). If you edit the &quot;About&quot; page and enable the &quot;<a href="Multi-language.html#always_available" target="_self">Always available</a>&quot; flag, the page will be accessible through both aliases for all siteaccesses regardless of their language configuration (even if a siteaccess does not have English on the list of site languages).</p><p>If the &quot;Contacts&quot; page (node 12) is translated into German, it will get the second alias &quot;Kontakten&quot;. In this case, the structure of the site will look like this:</p>
+<ul>
+<li><div>
+&nbsp;Company|Compagnie (node - id 10)<br />&nbsp;
+<ul>
+<li><div>&nbsp;About us (node - id 11) </div></li><li><div>&nbsp;Contacts|Kontakten (node - id 12) </div></li>
+</ul>
+</div></li>
+</ul>
+<p>At this point, it will be possible to access the page &quot;Contacts|Kontakten&quot; (node 12) by using one of the four URL aliases listed below. The following table shows which language configuration of a siteaccess is required for each alias to work.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>URL alias</p>
+  </th><th >  <p>Site languages that must be enabled</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&quot;Company/Contacts&quot;</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>English</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&quot;Compagnie/Contacts&quot;</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>English and French</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&quot;Company/Kontakten&quot;</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>English and German</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&quot;Compagnie/Kontakten&quot;</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>French and German</p>
+  </td>
+
+</tr>
+
+</table>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/Multi-language-support-for-URL-aliases by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:01:56 GMT -->
+</html>

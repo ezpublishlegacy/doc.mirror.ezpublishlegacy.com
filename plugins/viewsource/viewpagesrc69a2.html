@@ -1,0 +1,124 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=2720480 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:29:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage69a2.html?pageId=2720480" />
+        <link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch934e.css?media=print" media="print">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 8]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1f2a9c4c7f2593422cc9b02d1a652a22/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/26ac2724af3c6ece1051365650d982fa/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins.confluence-highlight-ac" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/12/_/styles/colors.css" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro4170.png?definition=e3RvY30&amp;locale=en_GB&amp;version=2" data-macro-name="toc"></p><h1>ViewManager &amp; ContentViewProvider</h1><p>The role of the <code>ViewManager</code> is to select the right template for displaying a given content or location. It aggregates objects called <em>content view providers</em> that implement <code>eZ\Publish\MVC\View\ContentViewProvider</code> interface.</p><p>Each time a content is to be displayed through the <code>Content\ViewController</code>, the <code>ViewManager</code> iterates over the registered <code>ContentViewProvider</code> objects and calls either <code>getViewForContent()</code> or <code>getViewForLocation()</code> depending on the context.</p><h3>Provided ContentViewProvider implementations</h3><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Name</th><th class="confluenceTh">Usage</th></tr><tr><td class="confluenceTd"><code>ConfiguredContentViewProvider</code></td><td class="confluenceTd"><p>Based on application configuration.<br />Formerly known as <em>Template override system</em>.</p><p><a class="confluence-link unresolved" data-content-title="ConfiguredContentViewProvider" data-space-key="EZP" data-linked-resource-default-alias="ConfiguredContentViewProvider" href="#">See dedicated page</a>.</p></td></tr><tr><td class="confluenceTd"><code>LegacyContentViewProvider</code></td><td class="confluenceTd"><p>Forwards view selection to the legacy kernel by running the old content/view module.<br />Pagelayout used is the one configured in <code>ezpublish_legacy.view.default_layout</code>.</p></td></tr></tbody></table><h2>Custom ContentViewProvider</h2><h3>When to develop a custom ContentViewProvider</h3><ul><li>You want a custom template selection based on a very specific state of your application</li><li>You depend on external resources for view selection</li><li>You want to override the default one (based on configuration) for some reason</li></ul><p><code>ContentViewProvider</code> objects need to be properly registered in the service container with the <code><strong>ezpublish.content_view_provider</strong></code> service tag.</p><table class="wysiwyg-macro" data-macro-name="code" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>parameters:
+    ezdemo.content_view_provider.class: EzSystems\DemoBundle\Content\ViewProvider
+
+services:
+    ezdemo.content_view_provider:
+        class: %ezdemo.content_view_provider.class%
+        tags:
+            - {name: ezpublish.content_view_provider, priority: 30}
+
+</pre></td></tr></table><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Tag attribute name</th><th class="confluenceTh">Usage</th></tr><tr><td class="confluenceTd">priority</td><td class="confluenceTd"><p>An integer giving the priority to the ContentViewProvider in the <code>ViewManager</code>.</p><p>The priority range is <strong>from -255 to 255</strong></p></td></tr></tbody></table><h3>Example</h3><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="language=php|title=Custom ContentViewProvider" style="background-image: url(../servlet/confluence/placeholder/macro-headingf82e.png?definition=e2NvZGU6dGl0bGU9Q3VzdG9tIENvbnRlbnRWaWV3UHJvdmlkZXJ8bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;?php
+
+namespace Acme\DemoBundle\Content;
+use eZ\Publish\MVC\View\ContentViewProvider,
+    eZ\Publish\API\Repository\Values\Content\Location,
+    eZ\Publish\API\Repository\Values\Content\ContentInfo,
+    eZ\Publish\MVC\View\ContentView;
+
+class ViewProvider implements ContentViewProvider
+{
+    /**
+     * Returns a ContentView object corresponding to $contentInfo, or void if not applicable
+     *
+     * @param \eZ\Publish\API\Repository\Values\Content\ContentInfo $contentInfo
+     * @param string $viewType
+     * @return \eZ\Publish\MVC\View\ContentView|void
+     */
+    public function getViewForContent( ContentInfo $contentInfo, $viewType )
+    {
+        // ContentType identifier (formerly "class identifier")
+        switch ( $contentInfo->contentType->identifier )
+        {
+            // For view full, it will load AcmeDemoBundle:full:small_folder.html.twig
+            case 'folder':
+                return new ContentView( "AcmeDemoBundle:$viewType:small_folder.html.twig" );
+                break;
+        }
+    }
+    /**
+     * Returns a ContentView object corresponding to $location, or void if not applicable
+     *
+     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param string $viewType
+     * @return \eZ\Publish\MVC\View\ContentView|void
+     */
+    public function getViewForLocation( Location $location, $viewType )
+    {
+        // Let's check location Id
+        switch ( $location->id )
+        {
+            // Special template for home page, passing "foo" variable to the template
+            case 2:
+                return new ContentView( "AcmeDemoBundle:$viewType:home.html.twig", array( 'foo' => 'bar' ) );
+                break;
+        }
+ 
+        // Fallback to ContentInfo based rules
+        return $this->getViewForContent( $location->getContentInfo(), $viewType );
+    }
+}</pre></td></tr></table><h3>Parameters injection in content views</h3><p>It is possible to dynamically inject variables in content view templates by listening to the <code><strong>ezpublish.pre_content_view</strong></code> event.</p><p>The event listener method receives an<code>eZ\Publish\MVC\Event\PreContentViewEvent </code>object</p><h3>Example</h3><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="language=php" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;?php
+
+namespace Acme\DemoBundle\EventListener;
+use eZ\Publish\MVC\Event\PreContentViewEvent;
+
+class PreContentViewListener
+{
+    public function onPreContentView( PreContentViewEvent $event )
+    {
+        // Get content view object and inject whatever no need.
+        // You may add some custom business logic here.
+        $contentView = $event->getContentView();
+        $contentView->addParameters(
+            array(
+                 'foo'          => 'bar',
+                 'osTypes'      => array( 'osx', 'linux', 'win' )
+            )
+        );
+    }
+}
+</pre></td></tr></table><h1>Render embedded content objects</h1><p>Rendering an embedded content from a Twig template is pretty straight forward:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="title=Rendering from a location Id" style="background-image: url(../servlet/confluence/placeholder/macro-heading6b74.png?definition=e2NvZGU6dGl0bGU9UmVuZGVyaW5nIGZyb20gYSBsb2NhdGlvbiBJZH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{% render "ez_content:viewLocation" with {"locationId": 123, "viewMode": "full"} %}</pre></td></tr></table><h2>ESI</h2><p>Just as for regular Symfony controllers, you can take advantage of ESI and use different cache levels:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="title=Using ESI" style="background-image: url(../servlet/confluence/placeholder/macro-headingd41c.png?definition=e2NvZGU6dGl0bGU9VXNpbmcgRVNJfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{% render "ez_content:viewLocation" with {"locationId": 123, "viewMode": "line"}, {"standalone": true} %}</pre></td></tr></table><h2>Asynchronous rendering</h2><p>Symfony also supports asynchronous content rendering with the help of <a href="http://mnot.github.com/hinclude/">hinclude.js</a> library.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="title=Asynchronous rendering" style="background-image: url(../servlet/confluence/placeholder/macro-heading3ca4.png?definition=e2NvZGU6dGl0bGU9QXN5bmNocm9ub3VzIHJlbmRlcmluZ30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{% render "ez_content:viewLocation" with {"locationId": 123, "viewMode": "line"}, {"standalone": "js"} %}</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="info" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><a href="http://mnot.github.com/hinclude/">hinclude.js</a> needs to be properly included in your layout to work.</td></tr></table><p> </p><hr /><p> </p><p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro6e15.png?definition=e2NoaWxkcmVuOmFsbD10cnVlfQ&amp;locale=en_GB&amp;version=2" data-macro-name="children" data-macro-parameters="all=true"></p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=2720480 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:29:17 GMT -->
+</html>

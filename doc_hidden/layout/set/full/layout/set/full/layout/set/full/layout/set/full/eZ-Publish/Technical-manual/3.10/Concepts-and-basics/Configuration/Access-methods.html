@@ -1,0 +1,90 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Concepts-and-basics/Configuration/Access-methods by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:47:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Access methods / Configuration / Concepts and basics / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Access methods</h1>
+</div>
+
+ <p>Based on a set of rules, eZ publish determines which siteaccess it should use every time it processes an incoming request. The rules must be set up in the global override for the site.ini configuration file: &quot;/settings/override/site.ini.append.php&quot;. The behavior of the siteaccess system is controlled by the &quot;MatchOrder&quot; setting within the [SiteAccessSettings] block. This setting controls the way eZ publish interprets the incoming requests. There are three possible methods:</p> 
+<ul>
+ <li><div> URI </div></li> <li><div> Host </div></li> <li><div> Port </div></li> 
+</ul>
+ <p>The following text gives a brief explanation of the different access methods. Please note that the access methods can be combined. The documentation page of the <a href="../../Reference/Configuration-files/site.ini/SiteAccessSettings/MatchOrder.html" target="_self">&quot;MatchOrder&quot;</a> directive reveals how this can be done.</p> <p> <a name="uri"></a>
+ </p>  <a name="eztoc75081_1" id="eztoc75081_1"></a><h2>URI</h2> <p>This is the default setting for the &quot;MatchOrder&quot; directive. When the URI access method is used, the name of the target siteaccess will be the first parameter that comes after the &quot;index.php&quot; part of the requested URL. For example, the following URL will tell eZ publish to use the &quot;admin&quot; siteaccess: http://www.example.com/index.php/admin. If another siteaccess by the name of &quot;public&quot; exists, then it would be possible to reach it by pointing the browser to the following address: http://www.example.com/index.php/public. If the last part of the URL is omitted then the default siteaccess will be used. The default siteaccess is defined by the &quot;<a href="../../Reference/Configuration-files/site.ini/SiteSettings/DefaultAccess.html" target="_self">DefaultAccess</a>&quot; setting within the [SiteSettings] block. The following example shows how to set up &quot;/settings/override/site.ini.append.php&quot; in order to make eZ publish use the URI access method and to use a siteaccess called &quot;public&quot; by default:</p> <pre class="wordwrap copytoclipboard"><span class="line">...</span>
+<span class="line">[SiteSettings]</span>
+<span class="line">DefaultAccess=public</span>
+<span class="line">&nbsp;</span>
+<span class="line">[SiteAccessSettings]</span>
+<span class="line">MatchOrder=uri</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n...\r\n[SiteSettings]\r\nDefaultAccess=public\r\n\r\n[SiteAccessSettings]\r\nMatchOrder=uri\r\n...\r\n' ); return false;" /></p>
+<![endif]--> <p>The URI access method is typically useful for testing / demonstration purposes. In addition it is quite handy because it doesn't require any configuration of the web server and the DNS server.</p> <p> <a name="host"></a>
+ </p> <a name="eztoc75081_2" id="eztoc75081_2"></a><h2>Host</h2> <p>The host access method makes it possible to map different host/domain combinations to different siteaccesses. This access method requires configuration outside eZ publish. First of all, the DNS server must be configured to resolve the desired host/domain combinations to the IP address of the web server. Secondly, the web server must be configured to trigger a virtual host configuration (unless eZ publish is located in the main document root). Please refer to the <a href="../../Installation/Virtual-host-setup.html" target="_self">&quot;Virtual Host Setup&quot;</a> part of the installation chapter for information about how to set up a virtual host for eZ publish. Once the DNS and the web server is configured properly, eZ publish can be set up to use different siteaccesses based on the host/domain combinations of the incoming requests. The following example shows how to set up &quot;/settings/override/site.ini.append.php&quot; in order to make eZ publish use the host access method. In addition, it reveals the basic usage of the host matching mechanism.</p> <pre class="wordwrap copytoclipboard"><span class="line">...</span>
+<span class="line">[SiteAccessSettings]</span>
+<span class="line">MatchOrder=host</span>
+<span class="line">HostMatchType=map</span>
+<span class="line">HostMatchMapItems[]=www.example.com;public</span>
+<span class="line">HostMatchMapItems[]=admin.example.com;admin</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n...\r\n[SiteAccessSettings]\r\nMatchOrder=host\r\nHostMatchType=map\r\nHostMatchMapItems[]=www.example.com;public\r\nHostMatchMapItems[]=admin.example.com;admin\r\n...\r\n' ); return false;" /></p>
+<![endif]--> <p>The example above tells eZ publish to use the &quot;public&quot; siteaccess if the requested URL starts with &quot;www.example.com&quot;. In other words, the configuration files in &quot;/settings/siteaccess/public&quot; will be used. If the requested URL starts with &quot;admin.example.com&quot;, then the admin siteaccess will be used. The example above demonstrates only a fragment of the host matching capabilities of eZ publish. Please refer to the reference documentation for a full explanation of the <a href="../../Reference/Configuration-files/site.ini/SiteAccessSettings/HostMatchType.html" target="_self">&quot;HostMatchType&quot;</a> directive.</p> <p> <a name="port"></a>
+ </p> <a name="eztoc75081_3" id="eztoc75081_3"></a><h2>Port</h2> <p>The port access method makes it possible to map different ports to different siteaccesses. This access method requires configuration outside eZ publish. The web server must be configured to listen to the desired ports (by default, a web server typically listens for requests on port 80, which is the standard port for HTTP traffic). In addition, the firewall will most likely have to be opened so that the traffic on port 81 actually reaches the web server. The following example shows how to set up &quot;/settings/override/site.ini.append.php&quot; in order to make eZ publish use the port access method. It also shows how to map different ports to different siteaccesses.</p> <pre class="wordwrap copytoclipboard"><span class="line">...</span>
+<span class="line">[SiteAccessSettings]</span>
+<span class="line">MatchOrder=port</span>
+<span class="line">&nbsp;</span>
+<span class="line">[PortAccessSettings]</span>
+<span class="line">80=public</span>
+<span class="line">81=admin</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n...\r\n[SiteAccessSettings]\r\nMatchOrder=port\r\n\r\n[PortAccessSettings]\r\n80=public\r\n81=admin\r\n...\r\n' ); return false;" /></p>
+<![endif]--> <p>The example above tells eZ publish to use the &quot;public&quot; siteaccess if the requested URL is sent to the web server using port 80. In other words, the configuration files inside &quot;/settings/siteaccess/public&quot; will be used. If the URL is requested on port 81 (usually by appending a :81 to the URL, like this: http://www.example.com:81), then the admin siteaccess will be used.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Concepts-and-basics/Configuration/Access-methods by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:47:31 GMT -->
+</html>

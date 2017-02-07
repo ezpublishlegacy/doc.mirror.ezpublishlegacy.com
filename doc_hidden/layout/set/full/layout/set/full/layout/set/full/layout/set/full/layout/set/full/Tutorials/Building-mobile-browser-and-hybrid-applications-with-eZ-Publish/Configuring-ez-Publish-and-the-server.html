@@ -1,0 +1,188 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Tutorials/Building-mobile-browser-and-hybrid-applications-with-eZ-Publish/Configuring-ez-Publish-and-the-server by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:39:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                  
+    <title>Configuring ez Publish and the server / Building mobile browser and hybrid applications with eZ Publish / Tutorials / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Configuring ez Publish and the server</h1>
+</div>
+
+<p>Creating a sub-domain is probably the most popular option for enabling users to access a mobile version of your site. Using a sub-domain (such as “mobile”, or just “m” to keep it short) keeps your mobile site part of your brand without creating confusion. A sub-domain gives you the flexibility to grow or scale back the mobile site without impacting the traditional website.</p><p>Note that this article does not cover mobile browser detection, for example if you want to automatically redirect mobile users to the mobile sub-domain whenever they visit the main domain. There are many different approaches to this, such as using an Apache module.</p><p>This section demonstrates how to set up a virtual host on the Apache web server for an eZ Publish installation located in &quot;/var/www/example&quot;. Let's say that we want to access the eZ Publish mobile web channel by using the following URL: m.example.com</p><p>In order to achieve this, we need to set up both eZ Publish and the web server so that they respond correctly to different URL requests.</p><a name="eztoc126783_0_1" id="eztoc126783_0_1"></a><h3>Apache configuration: virtual host settings</h3><p>Assuming that...</p>
+<ul>
+<li><div>eZ Publish is located in &quot;/var/www/example&quot;</div></li><li><div>the server's IP address is 128.39.140.28</div></li><li><div>we wish to access the eZ Publish mobile web channel using the sub-domain &quot;m.example.com&quot;</div></li>
+</ul>
+<p>...edit your existing virtual host configuration for your eZ Publish site at the bottom of &quot;httpd.conf&quot; (or in the relevant configuration file depending on your server setup):</p><pre class="wordwrap copytoclipboard"><span class="line">NameVirtualHost 128.39.140.28</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&lt;VirtualHost 128.39.140.28&gt;</span>
+<span class="line">&nbsp;&lt;Directory /var/www/example&gt;</span>
+<span class="line">&nbsp;Options FollowSymLinks</span>
+<span class="line">&nbsp;AllowOverride None</span>
+<span class="line">&nbsp;&lt;/Directory&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&lt;IfModule mod_php5.c&gt;</span>
+<span class="line">&nbsp;php_admin_flag safe_mode Off</span>
+<span class="line">&nbsp;php_admin_value register_globals 0</span>
+<span class="line">&nbsp;php_value magic_quotes_gpc 0</span>
+<span class="line">&nbsp;php_value magic_quotes_runtime 0</span>
+<span class="line">&nbsp;php_value allow_call_time_pass_reference 0</span>
+<span class="line">&nbsp;&lt;/IfModule&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;DirectoryIndex index.php</span>
+<span class="line">&nbsp;&lt;IfModule mod_rewrite.c&gt;</span>
+<span class="line">&nbsp;RewriteEngine On</span>
+<span class="line">&nbsp;RewriteRule ^api/ index_rest.php [L]</span>
+<span class="line">&nbsp;RewriteRule ^/([^/]+/)?content/treemenu.* /index_treemenu\.php [L]</span>
+<span class="line">&nbsp;RewriteRule ^/var/([^/]+/)?storage/images(-versioned)?/.* - [L]</span>
+<span class="line">&nbsp;RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* - [L]</span>
+<span class="line">&nbsp;RewriteRule ^/design/[^/]+/(stylesheets|images|javascript)/.* - [L]</span>
+<span class="line">&nbsp;RewriteRule ^/share/icons/.* - [L]</span>
+<span class="line">&nbsp;RewriteRule ^/extension/[^/]+/design/[^/]+/(stylesheets|flash|images|lib|javascripts?)/.* - [L]</span>
+<span class="line">&nbsp;RewriteRule ^/packages/styles/.+/(stylesheets|images|javascript)/[^/]+/.* - [L]</span>
+<span class="line">&nbsp;RewriteRule ^/packages/styles/.+/thumbnail/.* - [L]</span>
+<span class="line">&nbsp;RewriteRule ^/var/storage/packages/.* - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Makes it possible to place your favicon at the root of your</span>
+<span class="line">&nbsp;# eZ Publish instance. It will then be served directly.</span>
+<span class="line">&nbsp;RewriteRule ^/favicon\.ico - [L]</span>
+<span class="line">&nbsp;# Uncomment the line below if you want you favicon be served from the standard design.</span>
+<span class="line">&nbsp;# You can customize the path to favicon.ico by replacing design/standard/images/favicon.ico</span>
+<span class="line">&nbsp;# by the adequate path.</span>
+<span class="line">&nbsp;#RewriteRule ^/favicon\.ico /design/standard/images/favicon\.ico [L]</span>
+<span class="line">&nbsp;RewriteRule ^/design/standard/images/favicon\.ico - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;# Give direct access to robots.txt for use by crawlers (Google, Bing, Spammers..)</span>
+<span class="line">&nbsp;RewriteRule ^/robots\.txt - [L]</span>
+<span class="line">&nbsp;# Platform for Privacy Preferences Project ( P3P ) related files for Internet Explorer</span>
+<span class="line">&nbsp;# More info here : http://en.wikipedia.org/wiki/P3p</span>
+<span class="line">&nbsp;RewriteRule ^/w3c/p3p\.xml - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;# Uncomment the following lines when using popup style debug.</span>
+<span class="line">&nbsp;# RewriteRule ^/var/cache/debug\.html.* - [L]</span>
+<span class="line">&nbsp;# RewriteRule ^/var/[^/]+/cache/debug\.html.* - [L]</span>
+<span class="line">&nbsp;RewriteRule .* /index\.php</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;/IfModule&gt;</span>
+<span class="line">&nbsp;DocumentRoot /var/www/example</span>
+<span class="line">&nbsp;ServerName www.example.com</span>
+<span class="line">&nbsp;ServerAlias m.example.com</span>
+<span class="line">&nbsp;&lt;/VirtualHost&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'NameVirtualHost 128.39.140.28\r\n\r\n &lt;VirtualHost 128.39.140.28&gt;\r\n &lt;Directory /var/www/example&gt;\r\n Options FollowSymLinks\r\n AllowOverride None\r\n &lt;/Directory&gt;\r\n\r\n &lt;IfModule mod_php5.c&gt;\r\n php_admin_flag safe_mode Off\r\n php_admin_value register_globals 0\r\n php_value magic_quotes_gpc 0\r\n php_value magic_quotes_runtime 0\r\n php_value allow_call_time_pass_reference 0\r\n &lt;/IfModule&gt;\r\n\r\n DirectoryIndex index.php\r\n &lt;IfModule mod_rewrite.c&gt;\r\n RewriteEngine On\r\n RewriteRule ^api/ index_rest.php [L]\r\n RewriteRule ^/([^/]+/)?content/treemenu.* /index_treemenu\.php [L]\r\n RewriteRule ^/var/([^/]+/)?storage/images(-versioned)?/.* - [L]\r\n RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* - [L]\r\n RewriteRule ^/design/[^/]+/(stylesheets|images|javascript)/.* - [L]\r\n RewriteRule ^/share/icons/.* - [L]\r\n RewriteRule ^/extension/[^/]+/design/[^/]+/(stylesheets|flash|images|lib|javascripts?)/.* - [L]\r\n RewriteRule ^/packages/styles/.+/(stylesheets|images|javascript)/[^/]+/.* - [L]\r\n RewriteRule ^/packages/styles/.+/thumbnail/.* - [L]\r\n RewriteRule ^/var/storage/packages/.* - [L]\r\n \r\n# Makes it possible to place your favicon at the root of your\r\n # eZ Publish instance. It will then be served directly.\r\n RewriteRule ^/favicon\.ico - [L]\r\n # Uncomment the line below if you want you favicon be served from the standard design.\r\n # You can customize the path to favicon.ico by replacing design/standard/images/favicon.ico\r\n # by the adequate path.\r\n #RewriteRule ^/favicon\.ico /design/standard/images/favicon\.ico [L]\r\n RewriteRule ^/design/standard/images/favicon\.ico - [L]\r\n\r\n # Give direct access to robots.txt for use by crawlers (Google, Bing, Spammers..)\r\n RewriteRule ^/robots\.txt - [L]\r\n # Platform for Privacy Preferences Project ( P3P ) related files for Internet Explorer\r\n # More info here : http://en.wikipedia.org/wiki/P3p\r\n RewriteRule ^/w3c/p3p\.xml - [L]\r\n\r\n # Uncomment the following lines when using popup style debug.\r\n # RewriteRule ^/var/cache/debug\.html.* - [L]\r\n # RewriteRule ^/var/[^/]+/cache/debug\.html.* - [L]\r\n RewriteRule .* /index\.php\r\n \r\n&lt;/IfModule&gt;\r\n DocumentRoot /var/www/example\r\n ServerName www.example.com\r\n ServerAlias m.example.com\r\n &lt;/VirtualHost&gt;' ); return false;" /></p>
+<![endif]--><p>Note that we have added &quot;m.example.com&quot; using the &quot;ServerAlias&quot; directive for a server name of www.example.com.</p><a name="eztoc126783_0_2" id="eztoc126783_0_2"></a><h3>eZ Publish configuration: siteaccess settings</h3><p>A single eZ Publish installation is capable of hosting multiple sites by making use of something called the siteaccess system. This system makes it possible to use different configuration settings based on a set of rules.</p><p>The rules control which group of settings should be used in a particular case. Refer to the “Site management” section of the “Concepts and basics” chapter for a detailed description of the siteaccess functionality.</p><p>eZ Publish needs to be configured to use the host access method. This can be done by manually editing the global override for the &quot;site.ini&quot; configuration file: <i><b>/settings/override/site.ini.append.php</b></i>. A typical configuration would look something like this:</p><pre class="wordwrap copytoclipboard"><span class="line">...</span>
+<span class="line">&nbsp;[SiteAccessSettings]</span>
+<span class="line">&nbsp;AvailableSiteAccessList[]</span>
+<span class="line">&nbsp;AvailableSiteAccessList[]=example</span>
+<span class="line">&nbsp;AvailableSiteAccessList[]=mobile</span>
+<span class="line">&nbsp;MatchOrder=host</span>
+<span class="line">&nbsp;HostMatchMapItems[]=www.example.com;example</span>
+<span class="line">&nbsp;HostMatchMapItems[]=m.example.com;mobile</span>
+<span class="line">&nbsp;...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '...\r\n [SiteAccessSettings]\r\n AvailableSiteAccessList[]\r\n AvailableSiteAccessList[]=example\r\n AvailableSiteAccessList[]=mobile\r\n MatchOrder=host\r\n HostMatchMapItems[]=www.example.com;example\r\n HostMatchMapItems[]=m.example.com;mobile\r\n ...' ); return false;" /></p>
+<![endif]--><p>This configuration tells eZ Publish that it should use the &quot;example&quot; siteaccess if a request starts with &quot;www.example.com&quot; and the &quot;mobile&quot; siteaccess if a request starts with &quot;m.example.com&quot;.</p><p>In addition, the configuration for the “mobile” siteaccess itself must be created in the following directory &quot;settings/siteaccess/mobile&quot;. In this directory, create a file &quot;site.ini.append.php&quot; with contents similar to the following:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /* #?ini charset=&quot;utf-8&quot;?</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;[DatabaseSettings]</span>
+<span class="line">&nbsp;DatabaseImplementation=ezmysqli</span>
+<span class="line">&nbsp;Server=localhost</span>
+<span class="line">&nbsp;Port=</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;User=root</span>
+<span class="line">&nbsp;Password=</span>
+<span class="line">&nbsp;Database=</span>
+<span class="line">&nbsp;Charset=</span>
+<span class="line">&nbsp;Socket=disabled</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;[InformationCollectionSettings]</span>
+<span class="line">&nbsp;EmailReceiver=</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;[Session]</span>
+<span class="line">&nbsp;SessionNamePerSiteAccess=disabled</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;[SiteSettings]</span>
+<span class="line">&nbsp;SiteName=Mobile Web Example</span>
+<span class="line">&nbsp;SiteURL=m.example.com</span>
+<span class="line">&nbsp;LoginPage=embedded</span>
+<span class="line">&nbsp;AdditionalLoginFormActionURL=http://m.example.com/user/login</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;[UserSettings]</span>
+<span class="line">&nbsp;RegistrationEmail=</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;[SiteAccessSettings]</span>
+<span class="line">&nbsp;RequireUserLogin=false</span>
+<span class="line">&nbsp;RelatedSiteAccessList[]</span>
+<span class="line">&nbsp;RelatedSiteAccessList[]=example</span>
+<span class="line">&nbsp;ShowHiddenNodes=false</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;[DesignSettings]</span>
+<span class="line">&nbsp;SiteDesign=mobile</span>
+<span class="line">&nbsp;AdditionalSiteDesignList[]</span>
+<span class="line">&nbsp;AdditionalSiteDesignList[]=ezwebin</span>
+<span class="line">&nbsp;AdditionalSiteDesignList[]=base</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;[RegionalSettings]</span>
+<span class="line">&nbsp;Locale=eng-GB</span>
+<span class="line">&nbsp;ContentObjectLocale=eng-GB</span>
+<span class="line">&nbsp;ShowUntranslatedObjects=disabled</span>
+<span class="line">&nbsp;SiteLanguageList[]</span>
+<span class="line">&nbsp;SiteLanguageList[]=eng-GB</span>
+<span class="line">&nbsp;TextTranslation=disabled</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;[FileSettings]</span>
+<span class="line">&nbsp;VarDir=var/ezwebin_site</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;[MailSettings]</span>
+<span class="line">&nbsp;AdminEmail=nospam@ez.no</span>
+<span class="line">&nbsp;EmailSender=</span>
+<span class="line">&nbsp;*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /* #?ini charset=&quot;utf-8&quot;?\r\n\r\n [DatabaseSettings]\r\n DatabaseImplementation=ezmysqli\r\n Server=localhost\r\n Port=\r\n \r\n User=root\r\n Password=\r\n Database=\r\n Charset=\r\n Socket=disabled\r\n\r\n [InformationCollectionSettings]\r\n EmailReceiver=\r\n\r\n [Session]\r\n SessionNamePerSiteAccess=disabled\r\n\r\n [SiteSettings]\r\n SiteName=Mobile Web Example\r\n SiteURL=m.example.com\r\n LoginPage=embedded\r\n AdditionalLoginFormActionURL=http://m.example.com/user/login\r\n\r\n [UserSettings]\r\n RegistrationEmail=\r\n\r\n [SiteAccessSettings]\r\n RequireUserLogin=false\r\n RelatedSiteAccessList[]\r\n RelatedSiteAccessList[]=example\r\n ShowHiddenNodes=false\r\n\r\n [DesignSettings]\r\n SiteDesign=mobile\r\n AdditionalSiteDesignList[]\r\n AdditionalSiteDesignList[]=ezwebin\r\n AdditionalSiteDesignList[]=base\r\n\r\n [RegionalSettings]\r\n Locale=eng-GB\r\n ContentObjectLocale=eng-GB\r\n ShowUntranslatedObjects=disabled\r\n SiteLanguageList[]\r\n SiteLanguageList[]=eng-GB\r\n TextTranslation=disabled\r\n\r\n [FileSettings]\r\n VarDir=var/ezwebin_site\r\n\r\n [MailSettings]\r\n AdminEmail=nospam@ez.no\r\n EmailSender=\r\n */ ?&gt;' ); return false;" /></p>
+<![endif]--><p>Settings for the [DatabaseSettings] section must be properly configured per your specific setup. Note that the [DesignSettings].SiteDesign setting contains the name of the design (that we will create) that is dedicated to the mobile site.</p><a name="eztoc126783_0_3" id="eztoc126783_0_3"></a><h3>4.3 eZ Publish configuration: permissions</h3><p>Once the new siteaccess has been configured, anonymous users will need permission to view it. In order to grant the appropriate permissions, take the following steps:</p>
+<ol>
+<li><div>Log in to the eZ Publish Administration Interface</div></li><li><div>Click the “User accounts” tab</div></li><li><div>Click the “Roles and policies” link at the bottom of the left sidebar</div></li><li><div>Click the “Edit” button for the “Anonymous” role</div></li><li><div>Click the “Edit” button for the policy for the “user” module and “login” function</div></li><li><div>Add the “mobile” siteaccess to the existing selection</div></li><li><div>Click the “OK” button to return to the “Policies” list</div></li><li><div>Click the “Save” button</div></li>
+</ol>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Tutorials/Building-mobile-browser-and-hybrid-applications-with-eZ-Publish/Configuring-ez-Publish-and-the-server by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:39:45 GMT -->
+</html>

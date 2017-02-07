@@ -1,0 +1,113 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Password-Expiry/Installation-and-Requirements/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Installation and Requirements / Password Expiry / 5.x / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installation and Requirements</h1>
+</div>
+
+<a name="eztoc134445_1" id="eztoc134445_1"></a><h2>Requirements</h2><p>Compatible since eZ Publish 4.1.</p><a name="eztoc134445_2" id="eztoc134445_2"></a><h2>Installation</h2>
+<ol>
+<li><div>&nbsp;Copy the ezmbpaex folder into the &quot;extension&quot; directory in the root of your eZ Publish installation and unpack the files. </div></li><li><div><p>Update the eZ Publish database by running</p><pre class="wordwrap"><span class="line">$ mysql -u&lt;username&gt; -p&lt;password&gt; &lt;ezdatabase&gt; -P&lt;port&gt; &lt; extension/ezmbpaex/sql/install/mbpaex.sql</span>
+</pre><p>in the command line from the root of your eZ Publish installation.</p></div></li><li><div><p>The default settings in extension/ezmbpaex/settings/mbpaex.ini (or an override) must be customized as follows:</p><pre class="wordwrap copytoclipboard"><span class="line">[mbpaexSettings]</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Regular expression used for password validation when</span>
+<span class="line"># none is defined in the contentobject</span>
+<span class="line">PasswordValidationRegexp=</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Default lifetime for password in DAYS</span>
+<span class="line"># 0 means no limit (passwords never expire)</span>
+<span class="line">DefaultPasswordLifeTime=0</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Number of seconds before password expiration to send a</span>
+<span class="line"># mail notification to the user</span>
+<span class="line"># Default 172800 (2 days)</span>
+<span class="line">ExpirationNotification=172800</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Number of seconds that the forgot password generated hash will be valid</span>
+<span class="line"># Default 86400 (1 day)</span>
+<span class="line">ForgotPasswordHashLifeTime=86400</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Login of the eZ user used in the updatechildren cronjob, must have access to</span>
+<span class="line"># read the Users section.</span>
+<span class="line">UpdateChildrenUser=admin</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[mbpaexSettings]\r\n\r\n# Regular expression used for password validation when\r\n# none is defined in the contentobject\r\nPasswordValidationRegexp=\r\n\r\n# Default lifetime for password in DAYS\r\n# 0 means no limit (passwords never expire)\r\nDefaultPasswordLifeTime=0\r\n\r\n# Number of seconds before password expiration to send a\r\n# mail notification to the user\r\n# Default 172800 (2 days)\r\nExpirationNotification=172800\r\n\r\n# Number of seconds that the forgot password generated hash will be valid\r\n# Default 86400 (1 day)\r\nForgotPasswordHashLifeTime=86400\r\n\r\n# Login of the eZ user used in the updatechildren cronjob, must have access to\r\n# read the Users section.\r\nUpdateChildrenUser=admin' ); return false;" /></p>
+<![endif]--></div></li><li><div><p>
+Enable the extension in &quot;site.ini.append(.php)&quot; in the /settings/override folder of your eZ Publish installation.<br />&nbsp;In &quot;site.ini.append(.php)&quot; you must add &quot;ActiveExtensions[]=ezmbpaex&quot; to the block [ExtensionSettings]. It will then most likely look like this:</p><pre class="wordwrap copytoclipboard"><span class="line">[ExtensionSettings]</span>
+<span class="line">&nbsp;</span>
+<span class="line">ActiveExtensions[]=ezoe</span>
+<span class="line">ActiveExtensions[]=ezodf</span>
+<span class="line">ActiveExtensions[]=ezwebin</span>
+<span class="line">ActiveExtensions[]=ezmbpaex</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ExtensionSettings]\r\n\r\nActiveExtensions[]=ezoe\r\nActiveExtensions[]=ezodf\r\nActiveExtensions[]=ezwebin\r\nActiveExtensions[]=ezmbpaex' ); return false;" /></p>
+<![endif]--></div></li><li><div><p>To prevent a user, whose password has expired, from having undesired access to default user module views which are not effected by the password expiration settings, you should only enable users to access the views you need them to. All standard views will then get access denied. These changes should be added to the global override of site.ini: (Note: these adjustments can be done in the site.ini of you eZ Publish installation as well as in the site.ini of ezmbpaex.)</p><pre class="wordwrap copytoclipboard"><span class="line">[SiteAccessSettings]</span>
+<span class="line">&nbsp;</span>
+<span class="line">AnonymousAccessList[]</span>
+<span class="line">AnonymousAccessList[]=user/success</span>
+<span class="line">AnonymousAccessList[]=user/activate</span>
+<span class="line">AnonymousAccessList[]=userpaex/password</span>
+<span class="line">AnonymousAccessList[]=userpaex/forgotpassword</span>
+<span class="line">&nbsp;</span>
+<span class="line">[RoleSettings]</span>
+<span class="line">PolicyOmitList[]</span>
+<span class="line">PolicyOmitList[]=user/login</span>
+<span class="line">PolicyOmitList[]=user/logout</span>
+<span class="line">PolicyOmitList[]=userpaex/password</span>
+<span class="line">PolicyOmitList[]=userpaex/forgotpassword</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[SiteAccessSettings]\r\n\r\nAnonymousAccessList[]\r\nAnonymousAccessList[]=user/success\r\nAnonymousAccessList[]=user/activate\r\nAnonymousAccessList[]=userpaex/password\r\nAnonymousAccessList[]=userpaex/forgotpassword\r\n\r\n[RoleSettings]\r\nPolicyOmitList[]\r\nPolicyOmitList[]=user/login\r\nPolicyOmitList[]=user/logout\r\nPolicyOmitList[]=userpaex/password\r\nPolicyOmitList[]=userpaex/forgotpassword' ); return false;" /></p>
+<![endif]--></div></li><li><div>
+&nbsp;The setup overrides the template used in replacement of node/view/full.tpl to display users and users groups in Administration Interface.<br />
+&nbsp;In the root of your eZ Publish installation at /extension/ezmbpaex/settings/siteaccess, you will find a folder that will be used for the &quot;admin&quot; siteaccess.<br />&nbsp;But if your admin siteaccess has a different name than this folder, you should add the content of the override.ini.append.php file to the override.ini of your custom admin siteaccess. </div></li><li><div>
+&nbsp;Next you must regenerate the autoloads array to include the new classes present in Password Expiry Extension.<br />&nbsp;This can be done with the following command:<pre class="wordwrap"><span class="line">$ php bin/php/ezpgenerateautoloads.php --extension</span>
+</pre></div></li><li><div>&nbsp;Clear all caches to complete the installation. </div></li>
+</ol>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Password-Expiry/Installation-and-Requirements/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:13 GMT -->
+</html>

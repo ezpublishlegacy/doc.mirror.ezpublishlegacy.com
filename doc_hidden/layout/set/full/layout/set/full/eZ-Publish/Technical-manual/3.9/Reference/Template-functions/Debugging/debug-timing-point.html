@@ -1,0 +1,77 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Template-functions/Debugging/debug-timing-point by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:45:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>debug-timing-point / Debugging / Template functions / Reference / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>debug-timing-point</h1>
+</div>
+<h3>Summary</h3>
+Measures the time it takes to process a block of template code.<h3>Usage</h3>
+<pre>{debug-timing-point [ id=id ]}
+...
+{/debug-timing-point}</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>id</td>
+        <td>string</td>
+        <td>An identification string for the timing point.</td>
+        <td>No.</td>
+    </tr></table><h3>Description</h3>
+ <p>This mechanism starts a timer, executes the template code that is encapsulated by &quot;{debug-timing-point...}&quot; and &quot;{/debug-timing-point}&quot;, finally it stops the timer. It can be used to figure out how much time it takes to process a block of template code and/or to isolate debug messages that are generated between the timing points. The measurements will show up in the debug message. The optional &quot;id&quot; parameter can be used to assign an identification string to the block.</p><h3>Examples</h3>
+    <a name="eztoc69596_0_0_1" id="eztoc69596_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{debug-timing-point id='test'}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{def $nodes=fetch( 'content', 'tree', hash( 'parent_node_id', 2 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach( $nodes as $node )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$node.name|wash()}</span>
+<span class="line">{/foreach}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/debug-timing-point}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{debug-timing-point id=\'test\'}\r\n\r\n{def $nodes=fetch( \'content\', \'tree\', hash( \'parent_node_id\', 2 ) )}\r\n\r\n{foreach( $nodes as $node )}\r\n    {$node.name|wash()}\r\n{/foreach}\r\n\r\n{/debug-timing-point}' ); return false;" /></p>
+<![endif]--> <p>This example demonstrates how the &quot;debug-timing-point&quot; mechanism can be used to measure the amount of time it takes to fetch and print the names of all nodes that are below node number 2.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Template-functions/Debugging/debug-timing-point by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:45:08 GMT -->
+</html>

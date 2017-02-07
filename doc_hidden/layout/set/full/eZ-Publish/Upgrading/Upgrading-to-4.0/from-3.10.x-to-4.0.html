@@ -1,0 +1,105 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-4.0/from-3.10.x-to-4.0.y by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:35:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>from 3.10.x to 4.0.y / Upgrading to 4.0 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>from 3.10.x to 4.0.y</h1>
+</div>
+
+ <p>This section describes how to upgrade your existing eZ Publish 3.10.x installation to version 4.0.y. If you are upgrading from version 3.10.0 or earlier, you need to first upgrade to 3.10.1 before you can upgrade to 4.0. (Refer to either &quot;<a href="../Upgrading-to-3.10/from-3.9.x-to-3.10.html" target="_self">Upgrading from 3.9.x to 3.10.y</a>&quot; or &quot;<a href="../Upgrading-to-3.10/from-3.10.x-to-3.10.html" target="_self">Upgrading from 3.10.x to 3.10.y</a>&quot; depending on which version you are currently running.)</p> <p>In order to benefit from the latest bug fixes, you should upgrade directly to the latest stable release in the 4.0 branch (4.0.1 at the time of writing). Refer to the <a href="https://github.com/ezsystems/ezpublish-legacy/tree/master/doc/changelogs/4.0" target="_blank">changelogs</a> and <a href="http://ez.no/developer/security/security_advisories/ez_publish_4_0" target="_blank">security advisories</a> for more information about the issues that were fixed in the latest releases. Note that there is a significant problem with eZ Publish 4.0.0. More precisely, the &quot;ezsmtp&quot; class contains a <a href="http://issues.ez.no/12321" target="_blank">bug</a> that prevents the system from sending outgoing mails through an SMTP server. This bug was fixed in version 4.0.1.</p> <p>Note that in some cases, it is not possible or not recommended to upgrade from 3.10 to 4.0. Read the &quot;<a href="Important-notes.html" target="_self">Important notes</a>&quot; section in order to find out whether you can upgrade immediately or have to delay upgrading until new software releases are available.</p> <p>The upgrade procedure described below is generic and does not cover any specific cases (for example, running eZ Publish in a clustered environment).</p> <p>Make sure that you have a working <a href="../../Upgrading.html#backup" target="_self">backup</a> of the site before you do the actual upgrade.</p> <p>The procedure for upgrading directly from version 3.10.x to 4.0.y consists of the following steps:</p> 
+<ol>
+ <li><div> Upgrading the distribution files to 4.0.y </div></li> <li><div> Upgrading the database to 4.0.y </div></li> <li><div> Running the system upgrade scripts for versions from 3.10.x to 4.0.y </div></li> <li><div> Updating the system configuration </div></li> <li><div> Clearing the caches </div></li> 
+</ol>
+  <a name="eztoc98376_1" id="eztoc98376_1"></a><h2>Step 1: Upgrading the distribution files</h2> <p>The easiest way to upgrade the distribution files is to unpack eZ Publish 4.0.y to a separate directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories: </p> 
+<ul>
+ <li><div> design/example </div></li> <li><div> design/example_admin </div></li> <li><div> var </div></li> <li><div> settings/siteaccess </div></li> <li><div> settings/override </div></li> 
+</ul>
+ <p>Replace &quot;example&quot; and &quot;example_admin&quot; with the actual names of your siteaccesses. </p>  <a name="eztoc98376_1_1" id="eztoc98376_1_1"></a><h3>Custom extensions</h3> <p>If you are using custom extensions, the subdirectories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that come with eZ Publish (currently &quot;ezdhtml&quot;, &quot;ezodf&quot; and &quot;ezurlaliasmigration&quot;).</p> <p>If you are using the <a href="../../../Extensions/eZ-Publish-extensions/Website-Interface.html" target="_self">Website Interface</a> front-end, you will need to upgrade the extension to version 1.3 as earlier versions are not compatible with eZ Publish 4. Refer to the &quot;Upgrading the Website Interface&quot; chapter of the <a href="../../../Extensions/eZ-Publish-extensions/Website-Interface.html#download" target="_self">Website Interface installation guide</a> for more information and instructions.</p>   <a name="eztoc98376_1_2" id="eztoc98376_1_2"></a><h3> Switching to PHP 5</h3> <p>After upgrading the distribution files, switch your site to use PHP 5 (make sure all the <a href="../../Technical-manual/4.x/Installation/Normal-installation/Requirements-for-doing-a-normal-installation.html" target="_self">requirements</a> are met). <a name="timezone"></a>
+ </p> <p>Note that you need to set the &quot;<a href="http://www.php.net/manual/en/ref.datetime.php#ini.date.timezone" target="_blank">date.timezone</a>&quot; value in the &quot;php.ini&quot; configuration file. If this setting is not specified, you will most likely receive error messages like &quot;It is not safe to rely on the system's timezone settings&quot; when running eZ Publish on PHP 5. The following example shows how the corresponding line in &quot;php.ini&quot; looks like:</p> <pre class="wordwrap"><span class="line">date.timezone = &lt;timezone&gt;</span>
+</pre> <p>Refer to the <a href="http://www.php.net/timezones" target="_blank">PHP documentation</a> for the list of supported timezones. Don't forget to restart Apache after editing &quot;php.ini&quot;. </p>    <a name="eztoc98376_2" id="eztoc98376_2"></a><h2>Step 2: Upgrading the database</h2> <p>The following text describes how to upgrade your eZ Publish database from version 3.10.x to 4.0.y.</p>  <a name="eztoc98376_2_3" id="eztoc98376_2_3"></a><h3>Switching to UTF-8</h3> <p>eZ Publish 4 requires UTF-8 as the character set. If your site makes use of another character set, you must switch to UTF-8. To find out about the current character set in your database, you can run the following command using the <a href="http://mysql.com/mysql" target="_blank">MySQL command-line tool</a> (replace &quot;db_name&quot; with the actual name of your database):</p> <pre class="wordwrap"><span class="line">mysql&gt; SHOW CREATE DATABASE db_name;</span>
+</pre> <p>PostgreSQL users can view the list of available databases along with their character sets by running the following command from within the system shell:</p> <pre class="wordwrap"><span class="line">psql -l</span>
+</pre> <p>In eZ Publish 4.0.1, the &quot;bin/php/ezconvertdbcharset.php&quot; script was added in order to convert databases to use UTF-8. (Refer to the <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/features/4.0/dbcharserconversion.txt" target="_blank">developer documentation</a> for more information and troubleshooting tips).</p> <p>This script should be run once for each database, specifying one siteaccess per database. If you only have a public and an administration siteaccess that share the same database (which is the most typical/usual case), you only need to run the script for one of the siteaccesses. If the siteaccess isn't specified, the <a href="../../Technical-manual/4.x/Reference/Configuration-files/site.ini/SiteSettings/DefaultAccess.html" target="_self">default siteaccess</a> will be used.</p> <p>Before running the script, make sure that eZ Publish knows the current character set in the database. Basically, the script will rely on the &quot;<a href="../../Technical-manual/4.x/Reference/Configuration-files/site.ini/DatabaseSettings/Charset.html" target="_self">Charset</a>&quot; setting located in the &quot;[DatabaseSettings]&quot; section of &quot;settings/override/site.ini.append.php&quot; or &quot;settings/siteaccess/&lt;your_siteacess&gt;/site.ini.append.php&quot;. If this setting is empty, the value of the &quot;<a href="../../Technical-manual/4.x/Reference/Configuration-files/i18n.ini/CharacterSettings/Charset.html" target="_self">Charset</a>&quot; setting located in the [CharacterSettings] section of &quot;i18n.ini&quot; (or an override) will be used.</p> <p>The following example shows how to run the script:</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 4.0.1 directory. </div></li> <li><div> 
+Run the script (replace &quot;example&quot; with the actual name of your siteaccess):<br /> <pre class="wordwrap"><span class="line">php bin/php/ezconvertdbcharset.php -s example</span>
+</pre>  </div></li> 
+</ol>
+ <p>The script will convert the database to use UTF-8 as the character set. After running the script, make sure that eZ Publish knows about the database's new character, and also update the eZ Publish internal character set accordingly, in the correct override files:</p> 
+<ul>
+ <li><div> File: &quot;site.ini&quot;: </div></li> 
+</ul>
+ <pre class="wordwrap"><span class="line">[DatabaseSettings]</span>
+<span class="line">&nbsp;Charset=utf-8</span>
+</pre> 
+<ul>
+ <li><div> File: &quot;i18n.ini&quot;: </div></li> 
+</ul>
+ <pre class="wordwrap"><span class="line">[CharacterSettings]</span>
+<span class="line">Charset=utf-8</span>
+</pre>   <a name="eztoc98376_2_4" id="eztoc98376_2_4"></a><h3>Switching to InnoDB (MySQL only)</h3> <p>If you are using MySQL, note that the <a href="../../Technical-manual/4.x/Installation/Normal-installation/Requirements-for-doing-a-normal-installation.html#innodb" target="_self">recommended storage engine is InnoDB</a>. This storage engine is used by default during the installation process when the setup wizard initializes the database structure for eZ Publish. In addition, InnoDB will most likely be required for future versions of eZ Publish to run on MySQL. Contact your database administrator if you are unsure about whether InnoDB is available on your server.</p> <p>In eZ Publish 4.0.1, the database upgrade scripts use the InnoDB storage engine when creating new tables. Before running these scripts, it is recommended (but not required) to make sure that all existing tables in your database use InnoDB. If you want to use the MyISAM (or another) storage engine instead, all existing tables in your database must use this engine. In addition, you will have to replace &quot;InnoDB&quot; with &quot;MyISAM&quot; in the database upgrade scripts before running them. Read the following text for more detailed instructions. <a name="ezconvertmysqltabletype"></a>
+ </p> <p>To find out about the current storage engine in your database, navigate into the eZ Publish directory and run the &quot;bin/php/ezconvertmysqltabletype.php&quot; script with the &quot;--list&quot; parameter:</p> <pre class="wordwrap"><span class="line">php bin/php/ezconvertmysqltabletype.php --list</span>
+</pre> <p>The script will output the list of tables in the database along with the name of the storage engine for each table.</p> <p>With the command above, the script will check the table types in the database that is used by the <a href="../../Technical-manual/4.x/Reference/Configuration-files/site.ini/SiteSettings/DefaultAccess.html" target="_self">default siteaccess</a>. If your site makes use of two or more databases, you need to run the script once for each database, specifying one siteaccess per database. Use the &quot;-s&quot; parameter to specify the target siteaccess as shown below (replace &quot;example&quot; with the actual name of your siteaccess):</p> <pre class="wordwrap"><span class="line">php bin/php/ezconvertmysqltabletype.php --list -s example</span>
+</pre> <p>If all tables in your eZ Publish database use the InnoDB storage engine, no changes are needed. If some tables use MyISAM or another storage engine, it is recommended (but not required) to convert them to InnoDB. To do this, run the script with the &quot;--newtype&quot; parameter as shown below:</p> <pre class="wordwrap"><span class="line">php bin/php/ezconvertmysqltabletype.php --newtype=innodb -s example</span>
+</pre> <p>The script will convert all tables in your database to InnoDB. Note that the script will automatically skip the tables that already use the InnoDB storage engine from before (if any).</p> <p>You can also convert tables individually by using the following SQL query for each table:</p> <pre class="wordwrap"><span class="line">ALTER TABLE &lt;name_of_table&gt; TYPE = innodb;</span>
+</pre> <p>If you wish to use a storage engine other than InnoDB, make sure that all tables in your database use this engine. In addition, you will have to change the engine specified in the first line of the database upgrade scripts before running them (otherwise, the upgrade will leave you with a mix of table types). </p> <p>You will find the database upgrade scripts in the &quot;update/database/mysql/4.0/&quot; directory. Each database upgrade script that creates new tables contains the following line in the beginning:</p> <pre class="wordwrap"><span class="line">SET storage_engine=INNODB;</span>
+</pre> <p>Before you run such a script, replace &quot;INNODB&quot; with the name of your storage engine. For example, if all existing tables in your database use MyISAM, you need to modify the first line as shown below:</p> <pre class="wordwrap"><span class="line">SET storage_engine=MYISAM;</span>
+</pre> <p>This will make the database upgrade script use MyISAM instead of InnoDB when creating new tables.</p>   <a name="eztoc98376_2_5" id="eztoc98376_2_5"></a><h3>Running the database upgrade scripts</h3> <p>To upgrade your database from version 3.10.1 to 4.0.1, you need to navigate into the eZ Publish 4.0.1 directory and run the following database upgrade scripts one after another: </p> 
+<ol>
+ <li><div> dbupdate-3.10.0-to-4.0.0.sql </div></li> <li><div> dbupdate-4.0.0-to-4.0.1.sql </div></li> 
+</ol>
+ <p>Note that some of the database changes from eZ Publish 3.10.0 to 4.0.1 have been included in the 3.10.1 release as well. This means that you need to skip some parts of the database upgrade scripts when upgrading from version 3.10.1 to 4.0.1. These are marked with &quot;from 3.10.1&quot; comments in the &quot;.sql&quot; files.</p>  <a name="eztoc98376_2_5_1" id="eztoc98376_2_5_1"></a><h4>MySQL</h4> <p>The database upgrade scripts are located in the &quot;update/database/mysql/4.0/&quot; directory of your eZ Publish installation. Each of these scripts can be launched using the following shell command (replace &quot;script_name&quot; with the actual name of the script): </p> <pre class="wordwrap"><span class="line">mysql -u &lt;username&gt; -p&lt;password&gt; &lt;database&gt; &lt;</span>
+<span class="line">update/database/mysql/4.0/script_name.sql</span>
+</pre>   <a name="eztoc98376_2_5_2" id="eztoc98376_2_5_2"></a><h4>PostgreSQL</h4> <p>The database upgrade scripts are located in the &quot;update/database/postgresql/4.0/&quot; directory of your eZ Publish installation. Each of these scripts can be launched using the following shell command (replace &quot;script_name&quot; with the actual name of the script): </p> <pre class="wordwrap"><span class="line">psql -d &lt;database&gt; -U &lt;dbowner&gt; &lt; update/database/mysql/4.0/script_name.sql</span>
+</pre>     <a name="eztoc98376_3" id="eztoc98376_3"></a><h2>Step 3: Running the system upgrade scripts</h2> <p>You are not required to run any system upgrade scripts when upgrading from 3.10.1 to 4.0.1.</p>   <a name="eztoc98376_4" id="eztoc98376_4"></a><h2>Step 4: Updating the system configuration</h2> <p>In eZ Publish versions prior to 4.0.0, the order of design resources used by the &quot;<a href="../../Technical-manual/4.x/Reference/Template-operators/URLs/ezdesign.html" target="_self">ezdesign</a>&quot; and &quot;<a href="../../Technical-manual/4.x/Reference/Template-operators/URLs/ezimage.html" target="_self">ezimage</a>&quot; template operators was not the same as used by the &quot;<a href="../../Technical-manual/4.x/Reference/Template-functions/Miscellaneous/include.html" target="_self">include</a>&quot; template function and eZTemplate::fetch(). This might lead to problems with overriding templates in extensions (refer to <a href="http://issues.ez.no/9595" target="_blank">http://issues.ez.no/9595</a> for more information). This issue was fixed in eZ Publish 4.0.0. </p> <p>In eZ Publish 4, templates that override default ones must be placed in the &quot;override/templates&quot; directory of your design. If you are not sure about the location of override templates in your eZ Publish installation, review the settings in your &quot;override.ini.append.php&quot; configuration file. (Refer to &quot;<a href="../../Technical-manual/4.x/Templates/The-template-override-system.html" target="_self">The template override system</a>&quot; for more information.) The names of the override templates are specified using the &quot;MatchFile&quot; directive, which makes it possible to find the corresponding files on a filesystem. </p> <p>Note that custom templates that are not connected with the override system must be placed in the &quot;templates&quot; directory of a custom design.</p>   <a name="eztoc98376_5" id="eztoc98376_5"></a><h2>Step 5: Clearing the caches</h2> <p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 4.0 directory. </div></li> <li><div> 
+Run the script using the following shell command:<br /> <pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre>  </div></li> 
+</ol>
+ <p>Purging ensures that the caches are physically removed. When the &quot;--purge&quot; parameter is not specified, the caches will be expired but not removed (refer to <a href="../../Technical-manual/4.x/Reference/Scripts/Generic/ezcache.html" target="_self">this page</a> for more information). </p> <p>Sometimes the script is unable to clear all cache files because of restrictive file/directory permission settings. Make sure that all cache files have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory (typically the &quot;var/cache/&quot; and &quot;var/&lt;name_of_siteaccess&gt;/cache/&quot; directories). If there are any cache files left, you need to remove them manually.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-4.0/from-3.10.x-to-4.0.y by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:35:31 GMT -->
+</html>

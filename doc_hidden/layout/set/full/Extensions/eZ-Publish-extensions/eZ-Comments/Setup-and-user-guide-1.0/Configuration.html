@@ -1,0 +1,96 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Comments/Setup-and-user-guide-1.0/Configuration by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:35:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Configuration / Setup and user guide 1.0 / eZ Comments / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Configuration</h1>
+</div>
+
+ <p>eZ Comments provides some configurations to customize comment sorting, the number of comments per page, the notification format, etc. All of these settings are defined in <i>settings/ezcomments.ini.append.php</i>. For the full settings description please read <a href="../../../../../full.html" target="_self">Appendix A</a>. </p>    <a name="eztoc108625_0_0_1" id="eztoc108625_0_0_1"></a><h4>Set comment sort</h4> <p>You can change the sort order of comments in the content view, which has comments embedded, or in the comment view, which lists all the comment in a separate page. </p> <p>
+In the content view, the default setting is that comments are sorted chronologically by the commenting time in descending order. To change the sorting, you can override <i>settings/ezcomments.ini.append.php</i> as follows:<br /></p><pre class="wordwrap"><span class="line">[GlobalSettings]</span>
+<span class="line">DefaultEmbededSortField=created</span>
+<span class="line">DefaultEmbededSortOrder=asc</span>
+</pre><p>&nbsp;</p> <p>The the oldest comments will now be shown first in the content view.</p> <p>
+Similarly, in the comment view, to change the sorting to update time in descending order you can override <i>settings/ezcomments.ini.append.php</i> as follows:<br /></p><pre class="wordwrap"><span class="line">[CommentSettings]</span>
+<span class="line">DefaultSortField=modified</span>
+<span class="line">DefaultSortOrder=desc</span>
+</pre><p>&nbsp;</p>       <a name="eztoc108625_0_0_2" id="eztoc108625_0_0_2"></a><h4>Set number of comment shown in content</h4> <p>
+You can define how many comments are shown in the content by overriding <i>settings/ezcomments.ini.append.php</i> like this:<br /></p><pre class="wordwrap"><span class="line">[GlobalSettings]</span>
+<span class="line">DefaultEmbededCount=15</span>
+</pre><p>&nbsp;</p> <p>This will display the 15 latest or oldest comments, depending on the sort setting defined in the content view (see 4.1 Set comment sort) </p>       <a name="eztoc108625_0_0_3" id="eztoc108625_0_0_3"></a><h4>Hide comment fields</h4> <p>
+By default, eZ Comments has some predefined fields in the comment form such as title, name, website, email, content. But often, you don't need this many fields. To hide fields, remove the unnecessary fields in <i>settings/ezcomments.ini.append.php</i>:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[FormSettings]</span>
+<span class="line">AvailableFields[]=title</span>
+<span class="line">AvailableFields[]=name</span>
+<span class="line">AvailableFields[]=website</span>
+<span class="line">AvailableFields[]=email</span>
+<span class="line">AvailableFields[]=comment</span>
+<span class="line">AvailableFields[]=notificationField</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[FormSettings]\r\nAvailableFields[]=title\r\nAvailableFields[]=name\r\nAvailableFields[]=website\r\nAvailableFields[]=email\r\nAvailableFields[]=comment\r\nAvailableFields[]=notificationField' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>Afterwards, the removed field will not be shown in the comment form. But note that the field <i>comment</i> (comment content) can not be deleted.</p> <p> <b>Note:</b> if email is removed but <i>notificationField</i> is kept, the anonymous user will not able to subscribe to comment updates when he/she comments. But a user who logged in can subscribe comment update using his/her registration email. In this case, editor can not update commentor's notification in comment editing page.</p>       <a name="eztoc108625_0_0_4" id="eztoc108625_0_0_4"></a><h4>Configure activation settings</h4> <p>When an anonymous user comments on content with notification, the user should activate the subscription in order to receive a confirmation email. In addition, the activation link should expire after some time. You can configure the settings in <i>settings/ezcomments.ini.append.php </i>to enable the activation and set expiry time.</p>  <a name="eztoc108625_0_0_4_1" id="eztoc108625_0_0_4_1"></a><h5>Enable activation</h5> <p>To disable the activation feature change the setting like this:</p> <pre class="wordwrap"><span class="line">SubscriptionActivated=false</span>
+</pre> <p>If the activation is disabled, the user can subscribe to comment updates without confirming his/her email address, although this is usually not considered safe or recommended.</p>   <a name="eztoc108625_0_0_4_2" id="eztoc108625_0_0_4_2"></a><h5>Set expiry time</h5> <p>
+If a user does not activate the subscription in a set period of time, the activation should not remain valid. You can set expiry time by changing the setting like this<br /></p><pre class="wordwrap"><span class="line">DaysToCleanupSubscription=20</span>
+</pre><p>&nbsp;</p> <p>In this example the activation will expire after 20 days.</p>        <a name="eztoc108625_0_0_5" id="eztoc108625_0_0_5"></a><h4>Configure Notification email settings</h4> <p>
+When there is a new comment on a content, the user who has subscribed to the comment update should receive a notification. A typical setting for the notification is shown here:<br />Email from: To change the 'from' in the notification email, you can override <i>ezcomment.ini.append.php</i> like this:</p> <pre class="wordwrap"><span class="line">MailFrom=noreply@yourdomain.com</span>
+</pre> <p>Multi-comment updates in one email: Some users don't want to receive an email every time a new comment is posted. You can easily configure the settings to avoid this:</p> <pre class="wordwrap"><span class="line">CommentsInOne=true</span>
+</pre> <p>When the value is set to true, the system will send a notification with all the updated comments inside. </p> <p> <b>Note:</b> to ensure this setting makes sense, we suggest you set the eZ Comments cronjob to run infrequently, for example every day at 7:00 am. Otherwise the subscribers will still receive notification every 5 minutes according to the setup setting. The infrequent cronjob setting might be like</p> <pre class="wordwrap"><span class="line">0 7 * * * cd $EZPUBLISHROOT &amp;&amp; $PHP &nbsp;runcronjobs.php -q ezcomments 2&gt;&amp;1</span>
+</pre> <p>Or you can just specify ezcomments cronjob to be infrequent by changing <i>extension/ezcomments/settings/cronjobini.append.php</i> to be:</p> <pre class="wordwrap copytoclipboard"><span class="line">[CronjobSettings]</span>
+<span class="line">ExtensionDirectories[]=ezcomments</span>
+<span class="line">[CronjobPart-infrequent]</span>
+<span class="line">Scripts[]=ezcomcleanupsubscription.php</span>
+<span class="line">Scripts[]=ezcomhandlenotification.php</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[CronjobSettings]\r\nExtensionDirectories[]=ezcomments\r\n[CronjobPart-infrequent]\r\nScripts[]=ezcomcleanupsubscription.php\r\nScripts[]=ezcomhandlenotification.php' ); return false;" /></p>
+<![endif]-->       <a name="eztoc108625_0_0_6" id="eztoc108625_0_0_6"></a><h4>Disable/enable captcha</h4> <p>In eZ Comments, captcha is treated as a special field, like other fields. To disable captcha, you just need to remove or comment out the captcha field in <i>&quot;settings/ezcomments.ini.append.php&quot;</i> like this:</p> <pre class="wordwrap copytoclipboard"><span class="line">[FormSettings]</span>
+<span class="line">&nbsp;...</span>
+<span class="line">&nbsp;#Comment out the next line if you want to disable the captcha feature</span>
+<span class="line">&nbsp;#AvailableFields[]=recaptcha</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[FormSettings]\r\n ...\r\n #Comment out the next line if you want to disable the captcha feature\r\n #AvailableFields[]=recaptcha\r\n' ); return false;" /></p>
+<![endif]--> <p>By contrary, removing the # before AvailableFields[]=recaptcha will enable captcha.</p>       <a name="eztoc108625_0_0_7" id="eztoc108625_0_0_7"></a><h4>Bypass captcha for special role</h4> <p>For some roles, such as &quot;Editor&quot;, there is no need to use captcha. Please see setup permission for bypassing captcha as documented in the <a href="../../../../../full.html" target="_self">User Guide</a>.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Comments/Setup-and-user-guide-1.0/Configuration by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:35:36 GMT -->
+</html>

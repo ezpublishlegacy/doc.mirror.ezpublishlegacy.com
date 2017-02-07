@@ -1,0 +1,139 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.2.0/Customization/Customizing-Facets-and-Drill-Down-Navigation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:54:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Customizing Facets and Drill Down Navigation / Customization / eZ Find LS 5.2.0 / eZ Find / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Customizing Facets and Drill Down Navigation</h1>
+</div>
+
+<p>Facets were introduced in eZ Find 2.0 to enable you to create browse-based search functionality. In other words, the search results can be further narrowed after the original search has been made. This is sometimes called “drilling down” into the results. Facets refer to the characteristics of the content objects in the results, such as their class, author, and translation. The default templates provide some simple facet examples, although eZ Find is capable of providing much more functionality.</p><p>In order to use facets you must customize the search templates. To make this easier, the template operators <i>facetParameters </i>and <i>filterParameters </i>have been added, which provide default parameters to implement facet functionality. Facet-related parameters are described in more detailed in the next section about the eZ Find fetch function.</p><a name="eztoc135982_0_0_1" id="eztoc135982_0_0_1"></a><h4><b>Range Facets</b></h4><a name="eztoc135982_0_0_1_1" id="eztoc135982_0_0_1_1"></a><h5><b>Audience</b></h5><p>This feature is for (template) developers building advanced search and navigation interfaces.</p><a name="eztoc135982_0_0_1_2" id="eztoc135982_0_0_1_2"></a><h5><b>Goals and Use Cases</b></h5><p>
+Range facets are a general type of facets, like date facets. They should be used to stitch together what otherwise could also be obtained with discrete query facets operating on numeric and date types.<br />
+&nbsp;<br /><i><b>I</b><b>mportant:</b> Range facets should also be used for date facets as the latter one is deprecated also in Solr!</i></p><a name="eztoc135982_0_0_1_3" id="eztoc135982_0_0_1_3"></a><h5><b>How to Use</b></h5><p>There can be multiple range facets specified, just like the field facets (but unlike the date facets in previous releases, where only one date facet could be called per fetch query).</p><p><b>Example of template code:</b></p><pre class="wordwrap"><span class="line">fetch( ezfind, search, hash( 'query', '$queryString, facet',array( hash( 'range', hash('field', 'published', 'start', 'NOW/YEAR-3YEARS', 'end', 'NOW/YEAR+1YEAR', 'gap', '+1YEAR' ) ) ) ) )</span>
+</pre><p>The parameters accepted as a hash array for the 'range' facet type are:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><b>Name</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>Required</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>Value/Description</b></p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>field</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>yes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The field name to use (meta data or attribute).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>start</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>yes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Range start: any value valid for the numeric/data type.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>end</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>yes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Range end: any value valid for the numeric/data type.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>hardend</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>no</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Strig 'true' or 'false' (default) instructing Solr what to do if the intervals do not divide nicely between start and end.</p><p>If 'true', the 'end' parameter will be enforced. Otherwise, the gap will be used to determine the real end value.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>other</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>no</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>String. Will be used to tell the back end&nbsp; to provide more, less, all or no counts other than the ones in specified range:</p>
+<ul>
+<li><div><b>before:</b> all records with field values lower than the lower bound value of the first range</div></li><li><div><b>after:</b> all records with field values greater than the upper bound value of the last range</div></li><li><div><b>between:</b> all records with field values between the start and the end bound values of all ranges</div></li><li><div><b>none:</b> no records will be computed</div></li><li><div><b>all:</b> means all counts (shortcut to 'before', 'between' and 'after')</div></li>
+</ul>
+
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>include</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>no</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>By default, the ranges used to compute range faceting between range start and range end.</p><p>The lower bounds are inclusive and the upper bounds are exclusive (i.e.: the 'before' range is exclusive and the 'after' range is inclusive).</p><p>This is the default behaviour, equivalent to 'lower' (see description below), and will <i>not</i> result in double counting at the boundaries.</p><p>This behaviour can be modified by the facet range.include parameter, which can be any combination of the following options:</p>
+<ul>
+<li><div><b>'lower'</b>: all gap based ranges include their lower bound</div></li><li><div><b>'upper'</b>: all gap based ranges include their upper bound</div></li><li><div><b>'edge'</b>: the first and last gap ranges include their edge bounds (i.e.: lower for the first one, upper for the last one), even if the corresponding upper/lower option is not specified</div></li><li><div><b>'outer'</b>: the &quot;before&quot; and &quot;after&quot; ranges will include their bounds, even if the first or last ranges already include those boundaries</div></li><li><div><b>'all'</b>: shorthand for lower, upper, edge, outer</div></li>
+</ul>
+
+  </td>
+
+</tr>
+
+</table>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.2.0/Customization/Customizing-Facets-and-Drill-Down-Navigation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:54:38 GMT -->
+</html>

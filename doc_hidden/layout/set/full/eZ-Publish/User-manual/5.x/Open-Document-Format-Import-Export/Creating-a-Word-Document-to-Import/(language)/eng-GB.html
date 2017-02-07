@@ -1,0 +1,92 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Open-Document-Format-Import-Export/Creating-a-Word-Document-to-Import/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Creating a Word Document to Import / Open Document Format Import / Export / 5.x / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Creating a Word Document to Import</h1>
+</div>
+
+<p>Follow the steps described in this documentation page in order to be able to create a Word (.doc) document that can be inported into eZ Publish through eZ ODF Extension.</p>
+<ol>
+<li><div>You may want to create a new class. If that is the case, you can create one on&nbsp;<b>eZ Publish Administration Interface --&gt; Setup --&gt; Classes</b>. Select the Class Group and then click on the &quot;<b>New Class</b>&quot; button:</div></li>
+</ol>
+
+<div class="">        <img src="../../../../../../../../../../var/doc/storage/images/media/images/creating-a-new-class2/134432-1-eng-GB/Creating-a-New-Class_reference.jpg" alt="Creating a New Class" />
+
+
+
+
+
+
+
+
+</div><p>Add the attributes you want your new class to have by clicking on the button &quot;Add Atribute&quot;. The attributes will be used on the Word (.doc) document to be imported, to match the exact content you want to import.</p><p>2. Include your class in RegisteredClassArray[] on&nbsp;<b>odf.ini.append.php</b>, under [ODFImport]:</p><pre class="wordwrap"><span class="line">RegisteredClassArray[]=your_class</span>
+</pre><p>This is just an example. 'Your class' is the name of the class you have created on eZ Publish Administration Interface.</p><p>3. Add your class definition to the&nbsp;<b>odf.ini.append.php</b>&nbsp;file:</p><pre class="wordwrap copytoclipboard"><span class="line">[your_class]</span>
+<span class="line">DefaultImportTitleAttribute=attribute1</span>
+<span class="line">DefaultImportBodyAttribute=attribute2</span>
+<span class="line">Attribute[attribute1]=attribute1</span>
+<span class="line">Attribute[attribute2]=attribute2</span>
+<span class="line">Attribute[attribute3]=attribute3</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[your_class] \r\nDefaultImportTitleAttribute=attribute1 \r\nDefaultImportBodyAttribute=attribute2 \r\nAttribute[attribute1]=attribute1 \r\nAttribute[attribute2]=attribute2 \r\nAttribute[attribute3]=attribute3 ' ); return false;" /></p>
+<![endif]--><p>Replace 'attribute' with the name of the attribute you created for the class.</p><p>4. Now, follow these steps on creating the settings inside your word document:</p>
+<ol>
+<li><div>Open the Word 2003 application;</div></li><li><div>Create a new style in Word named&nbsp;<b>eZSectionDefinition</b>&nbsp;with any formatting you want (please refer to the link <a href="http://office.microsoft.com/en-us/word-help/create-a-new-style-HP005240626.aspx" target="_self">http://office.microsoft.com/en-us/word-help/create-a-new-style-HP005240626.aspx</a> in order to see how to create a style on Word 2003);</div></li><li><div>Add the desired attributes inside your text content, one per line. The attributes added to the document must be the same that you added to your class);</div></li><li><div>Apply your eZSectionDefinition style to each attribute;</div></li><li><div>Save your document as Word 2003 (.doc) format.</div></li>
+</ol>
+<p>Here is a sample of a document created on Word 2003 with the Class attributes defined:</p>
+<div class="">        <img src="../../../../../../../../../../var/doc/storage/images/media/images/word-document-sample/131327-1-eng-GB/Word-Document-Sample_reference.jpg" alt="Word Document Sample" />
+<p>Word Document Sample</p>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Open-Document-Format-Import-Export/Creating-a-Word-Document-to-Import/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:12 GMT -->
+</html>

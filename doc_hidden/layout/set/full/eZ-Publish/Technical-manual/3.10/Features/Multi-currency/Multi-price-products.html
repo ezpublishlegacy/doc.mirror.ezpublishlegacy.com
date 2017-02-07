@@ -1,0 +1,116 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.10/Features/Multi-currency/Multi-price-products by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:03:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Multi-price products / Multi-currency / Features / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Multi-price products</h1>
+</div>
+
+ <p>An actual product is represented by a content object (with at least one node assignment) that contains information about the product itself along with a price. The price can be represented by an attribute that makes use of the built-in <a href="../../Reference/Datatypes/Price.html" target="_self">price</a> or <a href="../../Reference/Datatypes/Multi-price.html" target="_self">multi-price</a> datatype. These are special datatypes which plug more deeply into the system and connect content objects with the webshop system. The main difference is that the price datatype allows to specify only one price value for each object (simple price product) whereas the multi-price datatype makes it possible to specify several price values in different currencies for each object (multi-price product). Please note that simple price products are incompatible with multi-currency feature.</p> <p>A content class can only contain one price attribute or one multi-price attribute. There is no way to have a simple price product and a multi-price one in the shopping basket at the same time and it is not recommended to use both price and multi-price datatype on your site.</p> <p>If you are going to use multi-price products, you should create at least one content class containing an attribute of the <a href="../../Reference/Datatypes/Multi-price.html" target="_self">multi-price</a> datatype as described in the next subsections. Instances/objects of this class will be treated as multi-price products. If you already have simple price products, you can automatically convert these to multi-price products as described in the &quot;<a href="Upgrading-your-webshop.html" target="_self">Upgrading your webshop</a>&quot; section.</p>  <a name="eztoc74526_1" id="eztoc74526_1"></a><h2>Creating a product class</h2> <p>Access the &quot;Setup&quot; tab in the administration interface, click &quot;Classes&quot; on the left, select the &quot;Content&quot; class group and click the &quot;New class&quot; button located in the bottom of the list. You will be taken to the class edit interface as shown in the screenshot below. </p>
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_10/images/features/multi_currency/new_class/30619-1-eng-GB/new_class_doc.png" alt="The class edit interface for a product class." />
+ <p>The class edit interface for a product class.</p>
+
+
+
+
+
+
+
+</div><p>Specify <a href="../../Concepts-and-basics/Content-management/The-content-class.html#structure" target="_self">name, identifier, object name pattern and container flag</a> for the newly created class and add the desired attributes using the drop-down list located in the bottom of the class edit interface.</p>  <a name="eztoc74526_1_1" id="eztoc74526_1_1"></a><h3>Multi-price attribute</h3> <p>To add an attribute of the multi-price datatype, select the desired datatype from this list, click the &quot;Add attribute&quot; button and edit the newly added attribute (see the screenshot below). </p>
+<div class="object-center linked">            <a href="../../../../../layout/set/full/eZ-Publish/Technical-manual/3.10/Images/Features/Multi-currency/multiprice_class_attribute_edit.html" target="_self"><img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_10/images/features/multi_currency/multiprice_class_attribute_edit/30634-1-eng-GB/multiprice_class_attribute_edit_doc.png" alt="Class attribute edit interface for the &quot;Multi-price&quot; datatype. " /></a>
+ <p>Class attribute edit interface for the &quot;Multi-price&quot; datatype. </p>
+
+
+
+
+
+
+
+</div><p>It is recommended to specify &quot;price&quot; as the identifier (this value is used in the <a href="#templates" target="_self">additional view templates</a>). You have to select one of the predefined currencies as &quot;default currency&quot;. This currency will be used for <a href="Custom-prices-and-auto-prices.html" target="_self">custom prices</a> by default.</p>  <a name="eztoc74526_1_1_1" id="eztoc74526_1_1_1"></a><h4>Example</h4> <p>Let's say that there are four predefined currencies: NOK, EUR, USD, UAH, and you are creating a class called &quot;Products&quot; with a multi-price attribute. If you set EUR as &quot;default currency&quot;, the system will create a <a href="Custom-prices-and-auto-prices.html" target="_self">base price</a> in EUR and auto prices in NOK, USD, UAH for each new object of this class. When a new product is created, the system will set this base price to 0.00 but you can specify the desired value instead (for example € 50). It is also possible to remove this price and create a new base price in some other currency (for example $60).</p> <p>After adding the attributes, click &quot;OK&quot; to save the class.</p> <p>Please note that if you need several different structures for storing info about your products, you can create several multi-product classes. If you sell for example computer hardware, you may need several content classes called &quot;Monitors&quot;, &quot;Printers&quot;, &quot;Scanners&quot; and so on. In this case, you will be able to filter products by class name in the <a href="Products-overview.html" target="_self">products overview</a> interface.</p>     <a name="eztoc74526_2" id="eztoc74526_2"></a><h2>Creating a product</h2> <p>If you have a content class with multi-price datatype, you can create objects of this class i.e. your multi-price products. Please refer to the &quot;<a href="../../../../User-manual/3.8/Daily-tasks/Adding-content.html" target="_self">Adding content</a>&quot; chapter of the &quot;User manual&quot; for more information about adding content objects. <a name="templates"></a>
+ </p>   <a name="eztoc74526_3" id="eztoc74526_3"></a><h2>Templates for viewing multi-price products</h2> <p>By default, the system will display prices in all currencies to a user. This is determined by the default &quot;ezmultiprice.tpl&quot; template located in the &quot;templates/content/datatype/view/&quot; directory of the standard design.</p> <p>If you wish to display only price in the preferred currency, you can use the &quot;multiprice.tpl&quot; template located in the &quot;override/templates/datatype/&quot; directory of the base design. To do this, add the following lines to the &quot;override.ini.append.php&quot; file located in the &quot;settings/siteaccess/example&quot; directory where &quot;example&quot; is the name of your siteaccess (actual site but not the administration interface): </p> <pre class="wordwrap copytoclipboard"><span class="line">[multiprice]</span>
+<span class="line">Source=content/datatype/view/ezmultiprice.tpl</span>
+<span class="line">MatchFile=datatype/multiprice.tpl</span>
+<span class="line">Subdir=templates</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[multiprice]\r\nSource=content/datatype/view/ezmultiprice.tpl\r\nMatchFile=datatype/multiprice.tpl\r\nSubdir=templates' ); return false;" /></p>
+<![endif]--> <p>It is also recommended to add a possibility for site visitors to change their preferred currency &quot;on-the-fly&quot; as described in the &quot;<a href="Preferred-currency.html#toolbar" target="_self">Adding a toolbar for customers</a>&quot; section.</p> <p>The following templates for viewing multi-price products are also available: </p>
+<ul>
+ <li><div> design/base/override/templates/full/multiprice_product.tpl </div></li> <li><div> design/base/override/templates/line/multiprice_product.tpl </div></li> <li><div> design/base/override/templates/embed/multiprice_product.tpl </div></li> <li><div> design/base/override/templates/listitem/multiprice_product.tpl </div></li> 
+</ul>
+ <p>To use these templates, add the following lines to the &quot;override.ini.append.php&quot; file: </p> <pre class="wordwrap copytoclipboard"><span class="line">[multiprice_product_full]</span>
+<span class="line">Source=node/view/full.tpl</span>
+<span class="line">MatchFile=full/multiprice_product.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=myproduct</span>
+<span class="line">&nbsp;</span>
+<span class="line">[multiprice_product_line]</span>
+<span class="line">Source=node/view/line.tpl</span>
+<span class="line">MatchFile=line/multiprice_product.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=myproduct</span>
+<span class="line">&nbsp;</span>
+<span class="line">[multiprice_product_embed]</span>
+<span class="line">Source=content/view/embed.tpl</span>
+<span class="line">MatchFile=embed/multiprice_product.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=myproduct</span>
+<span class="line">&nbsp;</span>
+<span class="line">[multiprice_product_listitem]</span>
+<span class="line">Source=node/view/listitem.tpl</span>
+<span class="line">MatchFile=listitem/multiprice_product.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=myproduct</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[multiprice_product_full]\r\nSource=node/view/full.tpl\r\nMatchFile=full/multiprice_product.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=myproduct\r\n\r\n[multiprice_product_line]\r\nSource=node/view/line.tpl\r\nMatchFile=line/multiprice_product.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=myproduct\r\n\r\n[multiprice_product_embed]\r\nSource=content/view/embed.tpl\r\nMatchFile=embed/multiprice_product.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=myproduct\r\n\r\n[multiprice_product_listitem]\r\nSource=node/view/listitem.tpl\r\nMatchFile=listitem/multiprice_product.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=myproduct' ); return false;" /></p>
+<![endif]--> <p>and replace &quot;myproduct&quot; with the actual class identifier of your multi-price products. (To check the class identifier, access the &quot;Setup&quot; tab in the administration interface, click &quot;Classes&quot; on the left, select the &quot;Content&quot; class group and find your multi-price product class.)</p> <p>If you are going to use these templates, you will have to specify &quot;user_preferred_currency&quot; in the &quot;<a href="../../Reference/Configuration-files/site.ini/ContentSettings/CachedViewPreferences.html" target="_self">CachedViewPreferences</a>[full]&quot; setting for all siteaccesses. To do this, open the &quot;site.ini.append.php&quot; configuration file located in the &quot;settings/siteaccess/example&quot; directory (replace &quot;example&quot; with the actual name of the siteaccess) and edit it. If the &quot;[ContentSettings]&quot; section of the configuration file already contains something like </p> <pre class="wordwrap"><span class="line">CachedViewPreferences[full]=&lt;list_of_user_preferences&gt;</span>
+</pre> <p>then you will have to append a semicolon and &quot;user_preferred_currency&quot; at the end of the line, for example:</p> <pre class="wordwrap"><span class="line">CachedViewPreferences[full]=admin_navigation_content=0;</span>
+<span class="line">admin_navigation_details=0;&lt;...&gt;;admin_bookmarkmenu=1;</span>
+<span class="line">admin_left_menu_width=13;user_preferred_currency=''</span>
+</pre> <p>Note that this configuration line tends to be very long. It is simplified in the example above (a lot of settings were replaced with &lt;...&gt; in order to keep things short).</p> <p>If the &quot;[ContentSettings]&quot; section does not contain a line that starts from &quot;CachedViewPreferences[full]&quot;, create it:</p> <pre class="wordwrap"><span class="line">CachedViewPreferences[full]=user_preferred_currency=''</span>
+</pre> <p>If this setting is not specified, your customers will have problems when changing the preferred currency setting (the interface will not be updated because of the cache problem).</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.10/Features/Multi-currency/Multi-price-products by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:03:59 GMT -->
+</html>

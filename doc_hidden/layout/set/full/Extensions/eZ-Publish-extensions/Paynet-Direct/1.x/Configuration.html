@@ -1,0 +1,123 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/Paynet-Direct/1.x/Configuration by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:35:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Configuration / 1.x / Paynet Direct / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Configuration</h1>
+</div>
+
+ <p>The &quot;Paynet Direct&quot; solution can be configured using the &quot;paynetdirect.ini&quot; configuration file which is located in the &quot;settings&quot; subdirectory of the extension (for example: &quot;/path/to/ez_publish/extension/ezpaynetdirect/settings/paynetdirect.ini&quot;). The following text reveals the different configuration settings and options.</p>  <a name="eztoc9889_1" id="eztoc9889_1"></a><h2>Configuration settings</h2> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Setting</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>MerchantID= <i>number</i> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;MerchantID&quot; must be a valid Paynet merchant ID number. For more information about becoming a Paynet merchant, please refer to the following address: <a href="http://www.paynet.no/index.php/paynet/sign_up/merchant_application.html" target="_blank">http://www.paynet.no/index.php/paynet/sign_up/merchant_application.html</a>. For testing with the test certificate any number can be used as MerchantID.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>SSL= <i>enabled|disabled</i> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>This setting controls whether the extension should redirect the user to an SSL secured version of the page that is used for entering the credit card number, etc. This setting should always be enabled because of security issues. However, it may be disabled for testing purposes. When enabled, the server specified by the &quot;SecureHost&quot; setting will be used.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>SecureHost= <i>string</i> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>
+This setting is only available in version 1.0. <br />Use this setting when the &quot;SSL&quot; directive is set to &quot;enabled&quot;. The extension will use the specified host when redirecting to an SSL secured page. For example, if eZ publish is running on a webserver called &quot;www.example.com&quot;, then the &quot;SecureHost&quot; should be set to &quot;https://www.example.com&quot;. Redirecting to another hostname will result in a session loss. Therefore this setting is quite useless, and is removed from version 1.1 and up.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>SSLCertFile= <i>string</i> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The value of this setting must be a path to the SSL certificate file that should be used during encrypted connections between eZ publish and the Paynet server. For testing with fake transactions you can use the test certificate. To use the test certificate, set this value to: extension/ezpaynetdirect/settings/paynet-demo-keycert.pem.php</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>StoreCreditCardInfo= <i>enabled|disabled</i> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>This setting controls whether eZ publish should let the customers store their creditcard information for later use. When enabled, the system will provide a smoother experience for frequent shoppers. If users can shop anonymously then set this feature to disabled! Otherwise people can see the creditcard information from a previous anonymous user.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>FakeError= <i>enabled|disabled</i> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>This option can be used to generate fake error messages. When set to &quot;enabled&quot;, the Paynet server will return a random error whenever the test credit card is accepted.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>Please note that the solution should always be re-tested whenever the configuration is changed. Please refer to the <a href="Testing.html" target="_self">&quot;Testing&quot;</a> section for more information about testing.</p>   <a name="eztoc9889_2" id="eztoc9889_2"></a><h2>Example configuration file</h2> <p>
+The following example shows an example configuration for the &quot;Paynet Direct&quot; extension.<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[PaynetDirectSettings]</span>
+<span class="line">MerchantID=12345</span>
+<span class="line">SSL=enabled</span>
+<span class="line">SecureHost=https://www.example.com</span>
+<span class="line">SSLCertFile=extension/ezpaynetdirect/settings/paynet-demo-keycert.pem.php</span>
+<span class="line">StoreCreditCardInfo=enabled</span>
+<span class="line">FakeError=disabled</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[PaynetDirectSettings]\r\nMerchantID=12345\r\nSSL=enabled\r\nSecureHost=https://www.example.com\r\nSSLCertFile=extension/ezpaynetdirect/settings/paynet-demo-keycert.pem.php\r\nStoreCreditCardInfo=enabled\r\nFakeError=disabled' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/Paynet-Direct/1.x/Configuration by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:35:48 GMT -->
+</html>

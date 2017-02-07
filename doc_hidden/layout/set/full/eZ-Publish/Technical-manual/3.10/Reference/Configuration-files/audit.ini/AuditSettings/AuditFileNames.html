@@ -1,0 +1,77 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Configuration-files/audit.ini/AuditSettings/AuditFileNames by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:06:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>AuditFileNames / [AuditSettings] / audit.ini / Configuration files / Reference / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>AuditFileNames</h1>
+</div>
+<h3>Summary</h3>
+Sets which types of activities that should be logged and to which files.<h3>Usage</h3>
+<pre class="pfix"> <p>
+AuditFileNames[audit_function1]=logfile1<br />
+AuditFileNames[audit_function2]=logfile2<br />...</p></pre><h3>Description</h3>
+ <p>This directive makes it possible to control which types of activities that should be logged and to which files they should be logged. By default, this configuration array lists all the built-in audit functions along with a default set of corresponding log file names (see below). The target directory of the audit logs is defined by the &quot;<a href="LogDir.html" target="_self">LogDir</a>&quot; directive. Note that the master &quot;<a href="Audit.html" target="_self">Audit</a>&quot; configuration directive must be enabled for auditing to work.</p> <p>The default configuration enables all the built-in audit function and suggests a default set of files:</p> <pre class="wordwrap copytoclipboard"><span class="line">AuditFileNames[]</span>
+<span class="line">AuditFileNames[user-login]=login.log</span>
+<span class="line">AuditFileNames[user-failed-login]=failed_login.log</span>
+<span class="line">AuditFileNames[content-delete]=content_delete.log</span>
+<span class="line">AuditFileNames[content-move]=content_move.log</span>
+<span class="line">AuditFileNames[role-change]=role_change.log</span>
+<span class="line">AuditFileNames[role-assign]=role_assign.log</span>
+<span class="line">AuditFileNames[section-assign]=section_assign.log</span>
+<span class="line">AuditFileNames[order-delete]=order_delete.log</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'AuditFileNames[]\r\nAuditFileNames[user-login]=login.log\r\nAuditFileNames[user-failed-login]=failed_login.log\r\nAuditFileNames[content-delete]=content_delete.log\r\nAuditFileNames[content-move]=content_move.log\r\nAuditFileNames[role-change]=role_change.log\r\nAuditFileNames[role-assign]=role_assign.log\r\nAuditFileNames[section-assign]=section_assign.log\r\nAuditFileNames[order-delete]=order_delete.log' ); return false;" /></p>
+<![endif]--> <p>Refer to the “<a href="../../../../Features/Audit-trailing.html" target="_self">Audit trailing</a>” section of the &quot;Features&quot; chapter for more information. </p><h3>Examples</h3>
+    <a name="eztoc79666_0_0_1" id="eztoc79666_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">Audit=enabled</span>
+<span class="line">LogDir=var/log/audit</span>
+<span class="line">AuditFileNames[]</span>
+<span class="line">AuditFileNames[user-login]=login.log</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'Audit=enabled\r\nLogDir=var/log/audit\r\nAuditFileNames[]\r\nAuditFileNames[user-login]=login.log' ); return false;" /></p>
+<![endif]--> <p>With this configuration, the system will only record information about successful login attempts (all other audit functions will be skipped). The information will be put to the &quot;login.log&quot; file located in the &quot;var/log/audit&quot; directory. Each record in the file will contain information about the user's name and ID number, IP address, plus the date and time when the user logged into the system.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Configuration-files/audit.ini/AuditSettings/AuditFileNames by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:06:11 GMT -->
+</html>

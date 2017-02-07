@@ -1,0 +1,79 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.5/from-3.5.x-to-3.5.y by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:05:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>from 3.5.x to 3.5.y / Upgrading to 3.5 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>from 3.5.x to 3.5.y</h1>
+</div>
+
+ <p>This section describes how to upgrade your existing eZ publish 3.5.x installation to version 3.5.y, for example from 3.5.0 to 3.5.11. If you are upgrading from a version prior to eZ publish 3.5.0, you should first upgrade to 3.5.0 as described <a href="from-3.4.4-to-3.5.html" target="_self">here</a>.</p> <p>Please make sure that you have a working <a href="../../Upgrading.html#backup" target="_self">backup</a> of the site before you do the actual upgrade. The upgrade procedure consists of the following steps:</p> 
+<ol>
+ <li><div> Upgrading the distribution files to 3.5.11 </div></li> <li><div> Upgrading the database to 3.5.11 </div></li> <li><div> Running the system upgrade scripts </div></li> <li><div> Updating the system configuration </div></li> <li><div> Clearing the caches </div></li> 
+</ol>
+  <a name="eztoc33069_1" id="eztoc33069_1"></a><h2>Step 1: Upgrading the distribution files</h2> <p>The easiest way to upgrade the distribution files is to unpack eZ publish 3.5.11 to a directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p> 
+<ul>
+ <li><div> design/example </div></li> <li><div> design/example_admin </div></li> <li><div> var </div></li> <li><div> settings/siteaccess </div></li> <li><div> settings/override </div></li> 
+</ul>
+ <p>Replace &quot;example&quot; and &quot;example_admin&quot; with actual names used by your siteaccesses.</p>  <a name="eztoc33069_1_1" id="eztoc33069_1_1"></a><h3>Custom extensions</h3> <p>If you are using custom extensions then the subdirectories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that come with eZ publish (for example the &quot;PayPal&quot; extension).</p>    <a name="eztoc33069_2" id="eztoc33069_2"></a><h2>Step 2: Upgrading the database</h2> <p>To upgrade 3.5.0 database to 3.5.11, you should navigate into the eZ publish 3.5.11 directory and run the following database upgrade scripts one after another:</p> 
+<ol>
+ <li><div> dbupdate-3.5.0-to-3.5.1.sql </div></li> <li><div> dbupdate-3.5.1-to-3.5.2.sql </div></li> <li><div> dbupdate-3.5.2-to-3.5.3.sql </div></li> <li><div> dbupdate-3.5.3-to-3.5.4.sql </div></li> <li><div> dbupdate-3.5.4-to-3.5.5.sql </div></li> <li><div> dbupdate-3.5.5-to-3.5.6.sql </div></li> <li><div> dbupdate-3.5.6-to-3.5.7.sql </div></li> <li><div> dbupdate-3.5.7-to-3.5.8.sql </div></li> <li><div> dbupdate-3.5.8-to-3.5.9.sql </div></li> <li><div> dbupdate-3.5.9-to-3.5.10.sql </div></li> <li><div> dbupdate-3.5.10-to-3.5.11.sql </div></li> 
+</ol>
+  <a name="eztoc33069_2_2" id="eztoc33069_2_2"></a><h3>MySQL</h3> <p>The database upgrade scripts are located in the &quot;update/database/mysql/3.5/&quot; directory of your eZ publish installation. Each of these scripts can be launched using the following shell command: </p><pre class="wordwrap"><span class="line">mysql -u &lt;username&gt; -p&lt;password&gt; &lt;database&gt; &lt; update/database/mysql/3.5/dbupdate-3.5.x-to-3.5.y.sql</span>
+</pre>   <a name="eztoc33069_2_3" id="eztoc33069_2_3"></a><h3>PostgreSQL</h3> <p>The database upgrade scripts are located in the &quot;update/database/postgresql/3.5/&quot; directory of your eZ publish installation. Each of these scripts can be launched using the following shell command: </p><pre class="wordwrap"><span class="line">psql -d &lt;database&gt; -U &lt;dbowner&gt; &lt; update/database/postgresql/3.5/dbupdate-3.5.x-to-3.5.y.sql</span>
+</pre>    <a name="eztoc33069_3" id="eztoc33069_3"></a><h2>Step 3: Running the system upgrade scripts</h2>  <a name="eztoc33069_3_4" id="eztoc33069_3_4"></a><h3>Top level nodes/objects changes</h3> <p>In eZ publish 3.5.1, a new top level node/object called &quot;Design&quot; has been added. You need to run the &quot;updatetoplevel.php&quot; script for your admin siteaccess in order to make sure that all your top level nodes are properly configured (replace &quot;example_admin&quot; with the actual name of your admin siteaccess): </p><pre class="wordwrap"><span class="line">./update/common/scripts/updatetoplevel.php -s example_admin</span>
+</pre> <p>The script will check the top level nodes and match them with the values defined in the &quot;menu.ini&quot; configuration file or its override. If &quot;menu.ini&quot; or its override contains incorrect information about the top level nodes, it will be automatically updated. If some of the top level nodes are missing, these will be created. (Please note that this script has been improved in eZ publish 3.5.2. If you are upgrading to a version prior to 3.5.2, it is recommended to copy the script from 3.5.2.)</p>   <a name="eztoc33069_3_5" id="eztoc33069_3_5"></a><h3>Converting the &quot;eztime&quot; attributes</h3> <p>In eZ publish 3.5.3, the &quot;<a href="../../Technical-manual/3.8/Reference/Datatypes/Time.html" target="_self">Time</a>&quot; datatype has been modified in order to make it possible to interpret the value of hours and minutes properly and independently from DST and GMT transformations (see the <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/features/3.6/eztime_datatype_modification.txt" target="_self">feature doc</a> for more information). You need to run the &quot;updateeztimetype.php&quot; script in order to convert the attributes of the &quot;eztime&quot; datatype from GMT to the server local time (replace &quot;example&quot; with the name of the siteaccess): </p><pre class="wordwrap"><span class="line">./update/common/scripts/updateeztimetype.php -s example</span>
+</pre> <p>Please note that it is recommended to create a database backup before using this script. The script must be run for each siteaccess.</p>   <a name="eztoc33069_3_6" id="eztoc33069_3_6"></a><h3>Changes related to 32bit/64bit compatibility</h3> <p>
+Since some PHP functions (like <a href="http://php.net/manual/en/function.crc32.php" target="_self">crc32</a> and <a href="http://php.net/manual/en/function.ip2long.php" target="_self">ip2long</a>) work in different ways on 64bit and 32bit servers, changes have been made in eZ publish 3.5.8 in order to avoid problems when migrating from 32bit to 64bit architecture. You need to run the &quot;updatecrc32.php&quot; script when upgrading even if you don't have a 64bit machine:<br /></p><pre class="wordwrap"><span class="line">./update/common/scripts/updatecrc32.php</span>
+</pre><p>&nbsp;</p> <p>The script will update old signed to unsigned values in the database. It is also recommended to specify &quot;64bitCompatibilityMode=enabled&quot; in your &quot;site.ini.append.php&quot; configuration file.</p>    <a name="eztoc33069_4" id="eztoc33069_4"></a><h2>Step 4: Updating the system configuration</h2> <p>You are not required to do any configuration changes when upgrading from 3.5.x to 3.5.y. However, it is recommended to specify &quot;64bitCompatibilityMode=enabled&quot; in your &quot;site.ini.append.php&quot; configuration file after running the &quot;updatecrc32.php&quot; script.</p>   <a name="eztoc33069_5" id="eztoc33069_5"></a><h2>Step 5: Clearing the caches</h2> <p>Whenever an eZ publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p> 
+<ol>
+ <li><div> Navigate into the eZ publish 3.5.11 directory. </div></li> <li><div> 
+Run the clear cache script:<br /> <pre class="wordwrap"><span class="line">bin/shell/clearcache.sh --clear-all</span>
+</pre>  </div></li> 
+</ol>
+ <p>Please make sure that all caches are cleared. Sometimes the script is unable to clear caches because of restrictive file/directory permission settings. Make sure that all caches have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.5/from-3.5.x-to-3.5.y by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:05:45 GMT -->
+</html>

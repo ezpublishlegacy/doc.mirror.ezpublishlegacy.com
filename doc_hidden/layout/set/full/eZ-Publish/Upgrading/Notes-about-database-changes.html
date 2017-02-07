@@ -1,0 +1,128 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Upgrading/Notes-about-database-changes by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:10:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                  
+    <title>Notes about database changes / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Notes about database changes</h1>
+</div>
+
+ <p>This section explains which database upgrade scripts can be skipped when upgrading an eZ Publish database to a newer version. In addition, it provides an overview of the database schema changes within stable release branches of eZ Publish. <a name="skip_db_upgrades"></a>
+ </p>  <a name="eztoc97855_1" id="eztoc97855_1"></a><h2>Version-focused database upgrade scripts</h2> <p>When upgrading an eZ Publish database from version X to version Y, you have to run a set of the database upgrade scripts following the <a href="Releases.html#upgrade_path" target="_self">official upgrade path</a>. This basically means that you need to run one database upgrade script for each stable release between X and Y. However, it often happens that a &quot;.sql&quot; file of the script only contains one or two lines with something like this:</p> <pre class="wordwrap"><span class="line">UPDATE ezsite_data SET value='Z' WHERE name='ezpublish-version';</span>
+<span class="line">UPDATE ezsite_data SET value='N' WHERE name='ezpublish-release';</span>
+</pre> <p>In this case, a database upgrade script is called &quot;version-focused&quot;, since it does not do anything except update the current version number, which is stored internally in the system. When upgrading an eZ Publish database, you can skip all version-focused scripts for intermediary versions, as shown in the example below.</p>  <a name="eztoc97855_1_1" id="eztoc97855_1_1"></a><h3>Example</h3> <p>In order to upgrade an eZ Publish database from version 3.6.0 to 3.8.10, you should run eleven database upgrade scripts:</p> 
+<ul>
+ <li><div> dbupdate-3.6.0-to-3.8.0.sql </div></li> <li><div> dbupdate-3.8.0-to-3.8.1.sql </div></li> <li><div> dbupdate-3.8.1-to-3.8.2.sql </div></li> <li><div> dbupdate-3.8.2-to-3.8.3.sql </div></li> <li><div> ... </div></li> <li><div> dbupdate-3.8.9-to-3.8.10.sql </div></li> 
+</ul>
+ <p>There are seven version-focused upgrade scripts, meaning that seven of the scripts in the list contain only two lines (that simply update the version number) and can be skipped. Therefore, the list of scripts to run contains four items instead of eleven:</p> 
+<ul>
+ <li><div> dbupdate-3.6.0-to-3.8.0.sql </div></li> <li><div> dbupdate-3.8.0-to-3.8.1.sql </div></li> <li><div> dbupdate-3.8.4-to-3.8.5.sql </div></li> <li><div> dbupdate-3.8.9-to-3.8.10.sql </div></li> 
+</ul>
+ <p>Running these four scripts is equivalent to running all the eleven scripts mentioned above. <a name="db_schema_changes"></a>
+ </p>    <a name="eztoc97855_2" id="eztoc97855_2"></a><h2>Database schema changes</h2> <p>If a database upgrade script is not version-focused (contains more than two lines), this usually means that the database structure was changed since the previous release. This is very typical for the first stable release in a branch, since there are usually some database schema changes as compared to the previous branch.</p> <p>Within stable release branches, database schemas are generally not changed. In other words, once the first stable release in a branch is out, the database schema should remain unchanged. However, exceptions are made for changes that are needed for important bugs and enhancements. When the next stable release in the current branch is out, the change will be present in the database upgrade script for it. In addition, such a bug fix also gets included in the next / upcoming branch for which there are no stable releases yet; the fix will be present in the database upgrade script for the first stable release in this branch (these are mentioned as 3.x.0 versions in the table below). </p> <p>The following table provides an overview of the database changes within stable release branches of eZ Publish, starting from version 3.6.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Database changes</p> 
+  </th> <th >   <p>Introduced in</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <pre class="wordwrap"><span class="line">UPDATE ezpolicy SET function_name='administrate' WHERE module_name='shop' AND function_name='adminstrate';</span>
+</pre> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>3.6.1, 3.5.4, 3.7.0, 3.8.0</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Bug fix for problems with <a href="http://issues.ez.no/8259" target="blank_">performance of the &quot;Keywords&quot; datatype</a> and <a href="http://issues.ez.no/8342" target="blank_">missing indexes in database tables</a>.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>3.6.9, 3.7.7, 3.8.1, 3.9.0</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Bug fix for <a href="http://issues.ez.no/9091" target="blank_">missing indexes in 3.8 database</a>.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>3.8.5, 3.9.0</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Bug fix for <a href="http://issues.ez.no/11284" target="blank_">problem with storing long URLs</a>.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>3.8.10, 3.9.4, 3.10.0</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <pre class="wordwrap"><span class="line">ALTER TABLE ezcontentclass CHANGE COLUMN serialized_name_list serialized_name_list longtext default NULL;</span>
+<span class="line">ALTER TABLE ezcontentclass_attribute CHANGE COLUMN serialized_name_list serialized_name_list longtext NOT NULL;</span>
+</pre> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>3.9.1, 3.10.0</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <pre class="wordwrap"><span class="line">ALTER TABLE ezvatrule CHANGE country country_code varchar(255) DEFAULT '' NOT NULL;</span>
+</pre> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>3.9.3, 3.10.0</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Upgrading/Notes-about-database-changes by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:10:19 GMT -->
+</html>

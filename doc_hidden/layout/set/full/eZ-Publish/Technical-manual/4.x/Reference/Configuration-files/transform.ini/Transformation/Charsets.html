@@ -1,0 +1,87 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/transform.ini/Transformation/Charsets by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Charsets / [Transformation] / transform.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Charsets</h1>
+</div>
+<h3>Summary</h3>
+Matches a charset to a group.<h3>Usage</h3>
+<pre class="pfix"> <p>Charsets[&lt;group ID&gt;]=&lt;charset&gt;;&lt;group&gt;</p></pre><h3>Description</h3>
+ <p>
+This setting maps a charset to a group. The group identifier can be used to load certain extra transformation files when that charset is used.<br />
+Each entry consists of the following syntax:<br /></p><pre class="wordwrap"><span class="line">Charsets[&lt;group ID&gt;]=&lt;charset&gt;;&lt;group&gt;</span>
+</pre><p>
+ <br />
+As explained in the setting File in block [Transformation], the process of selecting the proper files to use by the system starts with the system checking the Charset setting. This first step is best described through an example.<br />
+Let's say that the current eZ Publish installation uses the &quot;utf-8&quot; charset. The first step the system will take, is to check the Charset setting. This setting consists of two parts, the charset and the group it maps to, separated with a semicolon. If the first part matches the current charset, the second part is added to the list of blocks that will be used.<br />
+So if we for example have the following Charsets settings:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[Transformation]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Charsets[]=cp437;latin</span>
+<span class="line">Charsets[]=utf-8;latin</span>
+<span class="line">Charsets[]=utf-8;cyrillic</span>
+<span class="line">Charsets[]=cp437;greek</span>
+<span class="line">Charsets[]=windows-1255;hebrew</span>
+<span class="line">Charsets[]=utf-8;hebrew</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[Transformation]\r\n\r\nCharsets[]=cp437;latin\r\nCharsets[]=utf-8;latin\r\nCharsets[]=utf-8;cyrillic\r\nCharsets[]=cp437;greek\r\nCharsets[]=windows-1255;hebrew\r\nCharsets[]=utf-8;hebrew' ); return false;" /></p>
+<![endif]--><p>
+ <br />Then the system would find three matches for the &quot;utf-8&quot; charset, the groups latin, cyrillic and hebrew. Next the system will search for the transformation files in the corresponding blocks [latin], [cyrillic], [hebrew].</p><h3>Examples</h3>
+ <pre class="wordwrap copytoclipboard"><span class="line">Charsets[]=koi8;cyrillic</span>
+<span class="line">Charsets[]=koi8-r;cyrillic</span>
+<span class="line">Charsets[]=koi8-u;cyrillic</span>
+<span class="line">Charsets[]=iso-8859-5;cyrillic</span>
+<span class="line">Charsets[]=cp932;cyrillic</span>
+<span class="line">Charsets[]=cp866;cyrillic</span>
+<span class="line">Charsets[]=cp855;cyrillic</span>
+<span class="line">Charsets[]=windows-1251;cyrillic</span>
+<span class="line">Charsets[]=utf-8;cyrillic</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'Charsets[]=koi8;cyrillic\r\nCharsets[]=koi8-r;cyrillic\r\nCharsets[]=koi8-u;cyrillic\r\nCharsets[]=iso-8859-5;cyrillic\r\nCharsets[]=cp932;cyrillic\r\nCharsets[]=cp866;cyrillic\r\nCharsets[]=cp855;cyrillic\r\nCharsets[]=windows-1251;cyrillic\r\nCharsets[]=utf-8;cyrillic' ); return false;" /></p>
+<![endif]--> <p>These are the default settings for the cyrrilic group.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/transform.ini/Transformation/Charsets by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:22 GMT -->
+</html>

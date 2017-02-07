@@ -1,0 +1,89 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Modules/section/Fetch-functions/object_list_count by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:39:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>object_list_count / Fetch functions / section / Modules / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>object_list_count</h1>
+</div>
+<h3>Summary</h3>
+Fetches the number of objects that belong to certain section.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'section', 'object_list_count',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'section_id', section_id,							</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'status', &nbsp;&nbsp;&nbsp;&nbsp;status &nbsp;&nbsp;&nbsp;&nbsp;] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>section_id</td>
+        <td>integer</td>
+        <td>The ID number of the target section.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>status</td>
+        <td>string</td>
+        <td>The status of the target objects ('published' by default).</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+ <p>The number of objects (as an integer) that belong to the section.</p><h3>Description</h3>
+ <p>This function counts the number of objects that belong to a section specified by the &quot;section_id&quot; parameter. The optional &quot;status&quot; parameter works in the same way as in the &quot;<a href="object_list.html" target="_self">object_list</a>&quot; fetch function.</p> <p>The function returns the count as an integer. </p><h3>Examples</h3>
+    <a name="eztoc88512_0_0_1" id="eztoc88512_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $count=fetch( 'section', 'object_list_count',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'section_id', 13 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">There are {$count} number of &nbsp;objects in section number 13.</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $count=fetch( \'section\', \'object_list_count\',\r\n                   hash( \'section_id\', 13 ) )}\r\n\r\nThere are {$count} number of  objects in section number 13.' ); return false;" /></p>
+<![endif]--> <p>Outputs the number of published objects that belong to section number 13.</p>       <a name="eztoc88512_0_0_2" id="eztoc88512_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $count=fetch( 'section', 'object_list_count',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'section_id', 5,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'status', 'archived' ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">There are {$count} number of archived objects in section number 5.</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $count=fetch( \'section\', \'object_list_count\',\r\n                   hash( \'section_id\', 5,\r\n                         \'status\', \'archived\' ) )}\r\n\r\nThere are {$count} number of archived objects in section number 5.' ); return false;" /></p>
+<![endif]--> <p>Outputs the number of objects that belong to section number 5 and are moved to the trash. </p>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Modules/section/Fetch-functions/object_list_count by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:39:28 GMT -->
+</html>

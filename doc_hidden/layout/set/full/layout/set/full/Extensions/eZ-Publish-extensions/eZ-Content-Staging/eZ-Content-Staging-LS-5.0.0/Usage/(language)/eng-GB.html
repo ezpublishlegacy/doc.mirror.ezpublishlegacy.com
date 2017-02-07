@@ -1,0 +1,121 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Content-Staging/eZ-Content-Staging-LS-5.0.0/Usage/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:51:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Usage / eZ Content Staging LS 5.0.0 / eZ Content Staging / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Usage</h1>
+</div>
+
+<a name="eztoc136082_0_1" id="eztoc136082_0_1"></a><h3><b>eZ Content Staging</b></h3><p>eZ Content Staging LS 5.0.0 is an extension to eZ Publish 5.0 for synchronizing publication contents between two (or more) different eZ Publish installations.</p><p>The extension aims to synchronize content with a 100% accuracy, including e.g. objects states, sections, multiple locations etc. Whenever a content is edited on the source server, the changes are recorded locally in the database (not sent immediately). Editors and Administrators can decide which contents to synchronize, via either a dashboard panel or a dedicated page in the administration interface.</p><p>eZ Content Staging needs to be installed on both, source and target servers. This means that SQL queries with DB schema must be executed on staging and target servers.</p><a name="eztoc136082_0_1_0_1" id="eztoc136082_0_1_0_1"></a><h5><b>Architecture Type (example):</b></h5>
+<div class="object-center">        <img src="../../../../../../../../../../../../../var/doc/storage/images/media/images/architecture-type-example3/127281-1-eng-GB/Architecture-Type-Example_doc.jpg" alt="Content Staging Architecture Type" />
+<p>Example of Content Staging Architecture Type</p>
+
+
+
+
+
+
+
+</div><p>In this example there is a source server (Server eZsource 1), and target servers (Server eZtarget 1, Server eZtarget 2 and Server eZtarget 3). The synchronization is performed through the REST Service. There is one repository for each environment.</p><p><i><b>Note:</b> This is only an example. The architecture is flexible and users can configure multiple source and target servers, and create connections between target servers, for example. Although not usual, it can be done, due to the flexibility of the extension.</i></p><a name="eztoc136082_0_1_0_2" id="eztoc136082_0_1_0_2"></a><h5>Triggers and Workflows</h5><p>The staging set up process involves creating/configuring triggers and workflows.</p><p>Workflows and triggers are configured on eZ Publish Administration Interface:</p>
+<div class="">        <img src="../../../../../../../../../../../../../var/doc/storage/images/media/images/workflow-groups-content-staging5/127320-1-eng-GB/Workflow-Groups-Content-Staging_doc.jpg" alt="Content Staging Workflows" />
+<p>Content Staging Workflows</p>
+
+
+
+
+
+
+
+</div><p>You can edit Content Staging workflow groups on this screen.</p><p>When you click on &quot;Staging&quot;, you can see the workflows available in this group:</p>
+<div class="">        <img src="../../../../../../../../../../../../../var/doc/storage/images/media/images/content-staging-workflows2/127335-1-eng-GB/Content-Staging-Workflows_pdf.jpg" alt="Content Staging Workflows" />
+<p>Content Staging Workflows</p>
+
+
+
+
+
+
+
+</div><p>You can edit Content Staging workflows on this screen.</p><p><i><b>Note:</b> The workflows must be configured manually in the Admin Interface. To see how to configure workflows, click <a href="../../../../../../../../../../../../../doc_inside_admin/eZ-Publish/Technical-manual/4.6/Concepts-and-basics/Workflows.html" id="workflow" title="Workflows" target="_blank"><b>here</b></a><i>.</i></i></p><a name="eztoc136082_0_1_0_3" id="eztoc136082_0_1_0_3"></a><h5>Synchronization</h5><p>As editors edit publication contents, events are queued on separate feeds (event logs) and can be synchronized (by a Content Manager, or an Administrator, for instance) between servers/environments.</p><p><b>About Feeds:</b></p>
+<ul>
+<li><div>The synchronization feeds are defined on the source server; </div></li><li><div>Every feed is used to relay content to one target server;</div></li><li><div>For every feed, a set of &quot;root nodes&quot; has to be defined;</div></li><li><div>Every content that is a child of one of the feed root nodes will be synchronized to the target server;</div></li><li><div>The same content can be part of many feeds that synchronize to different target servers.</div></li>
+</ul>
+<a name="eztoc136082_0_1_0_4" id="eztoc136082_0_1_0_4"></a><h5>Content Staging Back Office Administration Interface:</h5>
+<div class="">        <img src="../../../../../../../../../../../../../var/doc/storage/images/media/images/synchronization-feeds2/127287-1-eng-GB/Synchronization-Feeds_pdf.jpg" alt="Synchronization Feeds" />
+<p>Synchronization Feeds</p>
+
+
+
+
+
+
+
+</div><p>There are two events on &quot;ContentTree&quot; feed to synchronize:</p>
+<div class="">        <img src="../../../../../../../../../../../../../var/doc/storage/images/media/images/feed-content3/127326-1-eng-GB/Feed-Content_pdf.jpg" alt="Feed Content" />
+<p>Feed Content</p>
+
+
+
+
+
+
+
+</div><p><i><b>Actions:</b></i></p>
+<ul>
+<li><div>You can synchronize only one event, several events, or all events at a time. Only <b>content events</b> can be synchronized;</div></li>
+</ul>
+
+<ul>
+<li><div>You can delete event logs from the events list.</div></li>
+</ul>
+<p>When deleting event logs, note:</p>
+<ul>
+<li><div><b>Create and delete content before synchronization:</b> If you create a folder and delete it, it must be manually deleted from events list before synchronization (&quot;object published&quot; and &quot;object removed&quot; event must be deleted manually from the events list);</div></li><li><div><b>Create and synchronize, then edit, delete and synchronize:</b> The edit (&quot;object publish&quot;) event must be deleted manually;</div></li><li><div><b>Create and synchronize, then edit, delete and synchronize:</b> If you delete an object which has children, all events concerning those children will must be also deleted manually.</div></li>
+</ul>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Content-Staging/eZ-Content-Staging-LS-5.0.0/Usage/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:51:58 GMT -->
+</html>

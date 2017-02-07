@@ -1,0 +1,113 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Flow/eZ-Flow-LS-5.x/Configuration/Video-streaming-configuration by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:26:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Video streaming configuration / Configuration / eZ Flow LS 5.x / eZ Flow / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Video streaming configuration</h1>
+</div>
+
+<p>The video streaming functionality included in eZ Flow enables recording and streaming live video and playback of recorded videos. It works in conjunction with the Red5 streaming server. For installation information on Red5 visit: <a href="http://www.red5.org/" target="_self">http://www.red5.org/</a>.</p><a name="eztoc136359_1" id="eztoc136359_1"></a><h2><b>Configuring the video recorder</b></h2><p>You can create multiple video recorder interfaces in eZ Flow. Each needs to be connected with the streaming server (Red5) and a file server (Apache). The screenshot below shows the dialog for creating a new <b>Video recorder</b> object.</p>
+<ul>
+<li><div>&nbsp;<b>Name: </b>The name of the recorder. </div></li><li><div>&nbsp;<b>Streaming server:</b> The URL of the rtmp location of Red5. </div></li><li><div>
+&nbsp;<b>File server:</b> The server where you have configured Apache to list and serve the previously recorded videos.<br />&nbsp;
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/media/images/video-streaming-1/136507-1-eng-GB/Video-streaming-1_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div> </div></li>
+</ul>
+<a name="eztoc136359_2" id="eztoc136359_2"></a><h2><b>Configuring the file server</b></h2><p>Red5 must be installed on a web-server where Apache is also installed. Apache can be used to list and serve the files that have already been recorded. This is an example of the Apache configuration:</p><pre class="wordwrap copytoclipboard"><span class="line"># Red5 Streams sharing</span>
+<span class="line">&lt;VirtualHost *:100&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory /Applications/Red5/webapps/test/streams&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Options FollowSymLinks</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AllowOverride None</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Directory&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;DocumentRoot /Applications/Red5/webapps/test/streams</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;ServerName localhost</span>
+<span class="line">&lt;/VirtualHost&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '# Red5 Streams sharing\r\n&lt;VirtualHost *:100&gt;\r\n    &lt;Directory /Applications/Red5/webapps/test/streams&gt;\r\n        Options FollowSymLinks\r\n        AllowOverride None\r\n    &lt;/Directory&gt;\r\n\r\n    DocumentRoot /Applications/Red5/webapps/test/streams\r\n    ServerName localhost\r\n&lt;/VirtualHost&gt;' ); return false;" /></p>
+<![endif]--><p>The following path should point to the directory in Red5 where the uploaded/streamed files are stored:</p><pre class="wordwrap"><span class="line">/Applications/Red5/webapps/test/streams</span>
+</pre><p>The path location depends on the Red5 configuration - please refer to the <a href="http://www.red5.org/downloads/docs/" target="_blank">Red5 documentation</a> for details. The file &quot;<i>flash_video_list.php</i>&quot; needs to be stored in the same directory. This example makes the &quot;<i>flash_video_list.php&quot;</i> and the streamed files available on port 100. Refer to your Apache virtualhost configuration for more information on how to configure this for your site.</p><a name="eztoc136359_3" id="eztoc136359_3"></a><h2>Recording video</h2><p>Once the player object has been created you can create video recordings. The screenshot below shows the video recorder's initial dialog where you must allow Flash to access your camera.</p>
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/media/images/recording_video/107752-1-eng-GB/recording_video_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>After Flash is connected to the camera, you have access to the video recorder as shown in the screenshot below. The title of the video can be entered before you start recording. When recording the video is available as a live stream for site visitors. Once you stop the recording, the file is encoded as a Flash video and made available for download. Alternatively, the file can be edited in video editing software.</p>
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/media/images/access_to_video_recorder/107755-1-eng-GB/access_to_video_recorder_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>The screenshot below shows the streaming interface and a list of the most recently added videos. If there is currently a live streaming session, it will automatically be listed.</p>
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/media/images/live_stream_session/107758-1-eng-GB/live_stream_session_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Flow/eZ-Flow-LS-5.x/Configuration/Video-streaming-configuration by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:26:16 GMT -->
+</html>

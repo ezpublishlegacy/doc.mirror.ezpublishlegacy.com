@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-control-structures/Looping/foreach by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>foreach / Looping / Template control structures / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>foreach</h1>
+</div>
+<h3>Summary</h3>
+Iterates over arrays in different ways. <h3>Usage</h3>
+<pre>{foreach &lt;array&gt; as [ $keyVar =&gt; ] $itemVar  
+         [ sequence &lt;array&gt; as $sequenceVar ]
+         [ offset &lt;offset&gt;                  ]
+         [ max &lt;max&gt;                        ]
+         [ reverse                          ]}
+
+    [ {delimiter}...{/delimiter} ]
+    [ {break}    ]
+    [ {continue} ]
+    [ {skip}     ]
+    
+{/foreach}</pre><h3>Description</h3>
+ <p>This construct makes it possible to iterate over arrays in different ways. The loop can be tweaked using parameters:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Parameter</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Description</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Value</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td rowspan="1" valign="top" style="vertical-align: top">   <p>sequence</p> 
+  </td>
+ <td rowspan="1" valign="top" style="vertical-align: top">   <p>Defines a sequence which is iterated together with the normal loop parameter (see example below)</p> 
+  </td>
+ <td rowspan="1" valign="top" style="vertical-align: top">   <p>array</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>offset</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Determines the start of the loop array for the iterations</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>integer</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>max</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Determines the maximum number of iterations</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>integer</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>reverse</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The loop is performed in the reverse order if this is set</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>There are also a set of inline template loop control structures available, these need to be a direct child of the foreach structure:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <td rowspan="1" valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ <td rowspan="1" valign="top" style="vertical-align: top">   <p>Description</p> 
+  </td>
+ <td rowspan="1" valign="top" style="vertical-align: top">   <p>Value</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td rowspan="1" valign="top" style="vertical-align: top">   <p>delimiter</p> 
+  </td>
+ <td rowspan="1" valign="top" style="vertical-align: top">   <p>Determines a block of template elements which should be placed in between two iterations</p> 
+  </td>
+ <td rowspan="1" valign="top" style="vertical-align: top">   <p>mixed</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>skip</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Jumps to next iteration, does NOT output delimiter</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td rowspan="1" valign="top" style="vertical-align: top">   <p>breaks</p> 
+  </td>
+ <td rowspan="1" valign="top" style="vertical-align: top">   <p>Breaks out of the foreach</p> 
+  </td>
+ <td rowspan="1" valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>continue</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Jumps to next iteration, but outputs delimiter</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ 
+</tr>
+ 
+</table>
+<h3>Examples</h3>
+    <a name="eztoc91932_0_0_1" id="eztoc91932_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{foreach $objects as $object}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$object.name} &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{foreach $objects as $object}\r\n\r\n    {$object.name} &lt;br /&gt;\r\n\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>This example will print out the names of the objects that are stored in the $objects array. If this array stores 4 objects with the following names: &quot;Emmett Brown&quot;, &quot;Marty McFly&quot;, &quot;Lorraine Baines&quot; and &quot;Biff Tannen&quot;, the following output will be produced:</p> <div class="output"> <p>
+Emmett Brown<br />
+Marty McFly<br />
+Lorraine Baines<br />Biff Tannen</p> </div>       <a name="eztoc91932_0_0_2" id="eztoc91932_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap copytoclipboard"><span class="line">{foreach $objects as $index =&gt; $object}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$index} : {$object.name} &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{foreach $objects as $index =&gt; $object}\r\n\r\n    {$index} : {$object.name} &lt;br /&gt;\r\n\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>This example demonstrates how to create an iteration counter.</p> <div class="output"> <p>
+0: Emmett Brown<br />
+1: Marty McFly<br />
+2: Lorraine Baines<br />3: Biff Tannen</p> </div>       <a name="eztoc91932_0_0_3" id="eztoc91932_0_0_3"></a><h4>Example 3</h4> <pre class="wordwrap copytoclipboard"><span class="line">{foreach $objects as $object sequence array( 'dark', 'light' ) as $style}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;{$style}&quot;&gt;{$object.name}&lt;/div&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{foreach $objects as $object sequence array( \'dark\', \'light\' ) as $style}\r\n\r\n    &lt;div class=&quot;{$style}&quot;&gt;{$object.name}&lt;/div&gt;\r\n\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>This example demonstrates how to create a loop where the iterations are displayed using alternating styles (in this case dark, light, dark, light and so on).</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-control-structures/Looping/foreach by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:52 GMT -->
+</html>

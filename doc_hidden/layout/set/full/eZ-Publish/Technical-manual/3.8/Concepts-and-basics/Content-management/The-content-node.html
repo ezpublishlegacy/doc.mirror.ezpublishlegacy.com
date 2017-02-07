@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Concepts-and-basics/Content-management/The-content-node by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>The content node / Content management / Concepts and basics / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>The content node</h1>
+</div>
+
+ <p>When the system is in use, new content objects are created on the fly. For example, when a news article is composed, a new article object is created. Obviously, the content objects can't just hover around in space, they have to be organized in some way. This is where the <i>nodes</i> and the <i>content node tree</i> comes in. A content node is nothing more than an encapsulation of a content object. In eZ publish, every object is usually represented by one or more nodes. The following illustration shows a simplified example of a node and a corresponding object (which is referenced by the node) as it would have been represented inside the system.</p> 
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/concepts_and_basics/object_node/29994-1-eng-GB/object_node_doc.png" alt="Object - node relation" />
+ <p>Object - node relation</p>
+
+
+
+
+
+
+
+</div> <p>The content node tree is built up of nodes. A node is simply a location of an object within the tree structure. The tree is the actual mechanism used to hierarchically organize the objects that are present on the system. The content node tree is explained in the next section.</p>  <a name="eztoc23671_1" id="eztoc23671_1"></a><h2>Node structure</h2> <p>A content node consists of the following elements:</p> 
+<ul>
+ <li><div> Node ID </div></li> <li><div> Parent node ID </div></li> <li><div> Object ID </div></li> <li><div> Sort method </div></li> <li><div> Sort order </div></li> <li><div> Priority </div></li> 
+</ul>
+  <a name="eztoc23671_1_1" id="eztoc23671_1_1"></a><h3>Node ID</h3> <p>Every node has a unique identification number. The ID numbers are used by the system to organize and keep track of the different nodes. These ID numbers are not recycled. In other words, if a node is deleted, the ID number of that node will not be reused when a new node is created.</p>   <a name="eztoc23671_1_2" id="eztoc23671_1_2"></a><h3>Parent node ID</h3> <p>The parent node ID of a node reveals the node's superior node in the tree.</p>   <a name="eztoc23671_1_3" id="eztoc23671_1_3"></a><h3>Object ID</h3> <p>Every object that exists in the system has a unique identification number. The object ID of a node pinpoints the actual object that the node encapsulates.</p> <p> <a name="sort_method"></a>
+ </p>   <a name="eztoc23671_1_4" id="eztoc23671_1_4"></a><h3>Sort method</h3> <p>The sorting method of a node determines how the children of the node should be sorted. The following sorting methods are possible:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Method</p> 
+  </th> <th >   <p>ID</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Class identifier</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>6</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The nodes are sorted by the class identifiers of the objects.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Class name</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>7</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The nodes are sorted by the class names of the objects.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Depth</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>5</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The nodes are sorted by their depth in the tree. A node further down in the three has a higher level of depth. The root node has a depth of 1.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Modified</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>3</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The nodes are sorted by the modification time of the objects.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Modified subnode</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>10</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The nodes are sorted based on the modification time of their children.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Name</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>9</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The nodes are sorted by the names of the objects.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Path</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The nodes are sorted by their path strings.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Priority</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>8</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The nodes are sorted by their priority. Every node has a priority field that can be set by the user. This solution allows the nodes to be sorted in a custom order. The priority field is described below.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Published</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>2</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The nodes are sorted by the creation time of the objects' current/published versions.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Section</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>4</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The nodes are sorted by the section IDs of the objects.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>Please note that it is possible to combine the available sort methods in order to sort nodes in a more complex way. However, since a node is incapable of &quot;remembering&quot; a combination (you can only set one method and one order for each node), this has to be done in the templates.</p> <p> <a name="sort_order"></a>
+ </p>   <a name="eztoc23671_1_5" id="eztoc23671_1_5"></a><h3>Sort order</h3> <p>The sorting order determines the order in which the children of the node should be sorted. There are two possibilities:</p> 
+<ul>
+ <li><div> Descending (0 / FALSE) </div></li> <li><div> Ascending (1 / TRUE) </div></li> 
+</ul>
+ <p>For example, if the sorting method is set to &quot;Name&quot; and the sort method is set to &quot;Ascending&quot;, the underlying nodes will be alphabetically sorted from A to Z. If the sort method is set to &quot;Descending&quot;, the underlying nodes will be sorted from Z to A.</p>   <a name="eztoc23671_1_6" id="eztoc23671_1_6"></a><h3>Priority</h3> <p>The priority field allows a user to assign both positive and negative integer values to a node (zero is also allowed). This field makes it possible to sort nodes in a custom way. If the sorting method of a node is set to &quot;Priority&quot;, the children of that node will be sorted by their priorities.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Concepts-and-basics/Content-management/The-content-node by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:44 GMT -->
+</html>

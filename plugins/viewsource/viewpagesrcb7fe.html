@@ -1,0 +1,54 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=2720010 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:32:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpageb7fe.html?pageId=2720010" />
+        <link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch934e.css?media=print" media="print">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 8]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1f2a9c4c7f2593422cc9b02d1a652a22/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/26ac2724af3c6ece1051365650d982fa/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins.confluence-highlight-ac" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/12/_/styles/colors.css" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <h1>Introduction</h1><p>This document explains how to <u>register</u> a custom FieldType in eZ Publish 5. It will <u>not</u> contain the development part as it is already covered <a class="confluence-link unresolved" data-content-title="Field Type API &amp; best practices" data-linked-resource-default-alias="Field Type API &amp;amp; best practices" href="#">in the API section</a>.</p><p>Please be sure you first have read the <a class="confluence-link unresolved" data-content-title="Field Type API &amp; best practices" data-linked-resource-default-alias="Field Type API &amp;amp; best practices" href="#">basic documentation on how to develop a custom FieldType</a>.</p><h1>Service container configuration</h1><table class="wysiwyg-macro" data-macro-name="info" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>To be able to declare a FieldType, you need to have <a href="http://symfony.com/doc/master/book/page_creation.html#the-bundle-system">registered a bundle in your application kernel</a>.</p><p>This bundle needs to expose some configuration for the service container somehow (read <a href="http://symfony.com/doc/master/book/service_container.html#importing-other-container-configuration-resources">related Symfony documentation</a>)</p></td></tr></table><h2>Basic configuration</h2><table class="wysiwyg-macro" data-macro-name="info" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body">This part relates to the <a class="confluence-link unresolved" data-content-title="Field Type API &amp; best practices" data-anchor="PublicAPIinteraction" data-linked-resource-default-alias="Field Type API &amp;amp; best practices" href="#">base FieldType class that interacts with the Publish API</a>.</td></tr></table><p>Let's take a basic example from <code>ezstring</code> configuration.</p><table class="wysiwyg-macro" data-macro-name="code" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>parameters:
+    ezpublish.fieldType.ezstring.class: eZ\Publish\Core\FieldType\TextLine\Type
+ 
+services:
+    ezpublish.fieldType.ezstring:
+        class: %ezpublish.fieldType.ezstring.class%
+        parent: ezpublish.fieldType
+        tags:
+            - {name: ezpublish.fieldType, alias: ezstring}</pre></td></tr></table><p>So far, this is a regular service configuration but 2 parts worth particular attention.</p><ul><li><code>parent</code></li></ul><p style="margin-left: 60.0px;">As described in the <a href="http://symfony.com/doc/master/components/dependency_injection/parentservices.html">Symfony Dependency Injection Component documentation</a>, the <code>parent</code> config key indicates that you want your service to inherit from the parent's dependencies, including constructor arguments and method calls. This is actually a helper avoiding repetition in your field type configuration and keeping consistency between all field types.</p><p style="margin-left: 60.0px;">Defining <code>ezpublish.fieldtype</code> as your field type's parent will basically inject the <code>ValidatorService</code> (<em>@ezpublish.api.fieldTypeValidator</em>) and the <code>FieldTypeTools</code> (<em>@ezpublish.api.fieldTypeTools</em>) services in the constructor. You can of course override the constructor, but then be sure to inject them anyhow.</p><ul><li><code>tags</code></li></ul><p style="margin-left: 60.0px;">Tagging your field type service with <code>ezpublish.fieldType</code> is mandatory to be recognized by the API loader as a regular field type, the <code>alias</code> key being simply the <em>fieldTypeIdentifier</em> (formerly called <em>datatype string</em>)</p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=2720010 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:32:29 GMT -->
+</html>

@@ -1,0 +1,83 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/Creating-a-new-extension by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                  
+    <title>Creating a new extension / Developing eZ Publish extensions / Tutorials / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Creating a new extension</h1>
+</div>
+
+<p>Now we will study the example “jacextension” to learn the basics of extension development in eZ Publish. We will walk through the steps of creating an extension and will look at the basic PHP classes in the eZ Publish Framework.</p><p>The tutorial will cover the following concepts:</p>
+<ul>
+<li><div>Access to the database (eZ Framework – class eZPersistentObject)</div></li><li><div>Access to .ini configuration files (eZ Framework – class eZINI)</div></li><li><div>Access to GET and POST session variables (eZ Framework – class eZHTTPTool)</div></li><li><div>Creation of custom debug messages / log files (eZ Framework – class eZDebug)</div></li><li><div>Use of the privilege system for new views of a module</div></li><li><div>Extending the template system for your own template fetch functions or operators</div></li>
+</ul>
+<a name="eztoc123553_0_1" id="eztoc123553_0_1"></a><h3>Requirements</h3><p>To work through the tutorial, eZ Publish must be properly installed (<a href="http://share.ez.no/download-develop/downloads" target="_self">download the latest version here</a>). To do this, create a default site using the eZ Publish Setup Wizard, specifying “URL” in the siteaccess configuration and a MySQL database called “ezp_plain” (character set utf-8).</p><p>
+This creates two siteaccesses: plain_site and plain_site_admin, accessed through the following URLs:<br />
+http://localhost/ez/index.php/plain_site (User view)<br />
+http://localhost/ez/index.php/plain_site_admin (Administrator view)<br />(localhost/ez/ is the root path of the eZ Publish directory.)</p><a name="eztoc123553_0_2" id="eztoc123553_0_2"></a><h3>Setting up the extension</h3><p>Now we will create and activate a new extension called “jacextension”. It will contain one module called “modul1”, with a view list that runs the PHP script &quot;list.php&quot;. To do this we navigate to the directory extension/ beneath the main eZ Publish directory on the system command line and create a new directory called jacextension/ with the following sub-directories and PHP files:</p><pre class="wordwrap copytoclipboard"><span class="line">ez/</span>
+<span class="line">|-- extension/</span>
+<span class="line">| &nbsp;&nbsp;|-- jacextension/</span>
+<span class="line">| &nbsp;&nbsp;| &nbsp;&nbsp;|-- modules/</span>
+<span class="line">| &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|-- modul1/</span>
+<span class="line">| &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|-- list.php</span>
+<span class="line">| &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|-- module.php</span>
+<span class="line">| &nbsp;&nbsp;| &nbsp;&nbsp;|-- settings/</span>
+<span class="line">| &nbsp;&nbsp;| &nbsp;&nbsp;| &nbsp;&nbsp;|-- module.ini.append.php</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'ez/\r\n|-- extension/\r\n|   |-- jacextension/\r\n|   |   |-- modules/\r\n|   |   |   |-- modul1/\r\n|   |   |   |   |-- list.php\r\n|   |   |   |   |-- module.php \r\n|   |   |-- settings/\r\n|   |   |   |-- module.ini.append.php' ); return false;" /></p>
+<![endif]--><p>In the configuration file module.ini.append.php we tell eZ Publish to search for modules in &quot;jacextension&quot;. This will make eZ Publish try to load all modules (such as modul1), which are in the directory extension/jacextension/modules/ .</p><p><b>Hint:</b> Be careful not to leave any blank spaces at the end of lines in INI entries, as the variables might not be parsed correctly.</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php/* #?ini charset=&quot;utf-8&quot;?</span>
+<span class="line"># tell ez publish to search after modules in the extension jacextension</span>
+<span class="line">[ModuleSettings]</span>
+<span class="line">ExtensionRepositories[]=jacextension</span>
+<span class="line"># For eZ Publish 4.1 and up you'll need to specify your module name as well</span>
+<span class="line">ModuleList[]=modul1</span>
+<span class="line">*/</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php/* #?ini charset=&quot;utf-8&quot;?\r\n# tell ez publish to search after modules in the extension jacextension\r\n[ModuleSettings]\r\nExtensionRepositories[]=jacextension\r\n# For eZ Publish 4.1 and up you\'ll need to specify your module name as well\r\nModuleList[]=modul1\r\n*/\r\n?&gt;' ); return false;" /></p>
+<![endif]--><p><i>Listing 1. Module configuration file: extension/jacextension/settings/module.ini.append.php</i></p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/Creating-a-new-extension by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:33 GMT -->
+</html>

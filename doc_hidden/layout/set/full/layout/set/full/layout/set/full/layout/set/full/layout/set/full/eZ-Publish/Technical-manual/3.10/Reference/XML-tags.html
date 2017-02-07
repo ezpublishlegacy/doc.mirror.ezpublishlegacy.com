@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/XML-tags by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:49:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>XML tags / Reference / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>XML tags</h1>
+</div>
+
+ <p>The <a href="Datatypes/XML-block.html" target="_self">&quot;XML block&quot;</a> datatype supports the following tags / elements:</p> <p> 
+<ul><li><a href="#headings">Headings</a></li><li><a href="#bold_text">Bold text</a></li><li><a href="#italic_text">Italic text</a></li><li><a href="#unformatted_text">Unformatted text</a></li><li><a href="#lists">Lists</a></li><li><a href="#tables">Tables</a></li><li><a href="#hyperlinks">Hyperlinks</a></li><li><a href="#anchors">Anchors</a></li><li><a href="#object_embedding">Object embedding</a></li><li><a href="#custom_tags">Custom tags</a></li><li><a href="#paragraphs">Paragraphs</a></li></ul>
+<a name="headings"></a>
+<h2>Headings</h2>
+ <p>
+Headings/titles can be added by making use of either the &quot;h&quot; or the &quot;header&quot; tag. The &quot;level&quot; parameter controls the size/level of the heading, it must be a number between 1 and 6. The optional &quot;class&quot; parameter allows the use of a desired CSS class. The optional &quot;anchor_name&quot; parameter makes it possible to add an anchor to the heading. Usage:<br /></p><pre class="wordwrap"><span class="line">&lt;h [level=&quot;&quot;] [class=&quot;&quot;] [anchor_name=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Example&lt;/h&gt;</span>
+</pre><p>
+ <br />
+or<br /></p><pre class="wordwrap"><span class="line">&lt;header [level=&quot;&quot;] [class=&quot;&quot;] [anchor_name=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Example&lt;/header&gt;</span>
+</pre><p>
+ <br />The custom parameters are optional. Their names must be specified using the &quot;<a href="Configuration-files/content.ini/name_of_XML_tag/CustomAttributes.html" target="_self">CustomAttributes[]</a>&quot; array in the [header] block within an override for the &quot;content.ini&quot; configuration file. When used, a custom parameter will be available as a template variable with the same name as it was specified in the tag itself. </p> <p>By default, the specified levels are increased by one. In other words, a level 1 header in the XML block will become a level 2 header (H2) in the resulting HTML. The reason for this is because the H1 tag is reserved for the name / main title of the content object. The headings inside the XML block will thus become subheadings of the main title. This behavior can be changed by creating an override template for the &quot;/content/datatype/view/ezxmltags/header.tpl&quot; template (it can not be controlled from within an configuration file).</p><a name="bold_text"></a>
+<h2>Bold text</h2>
+ <p>
+Bold text can be achieved by using one of the following tags: &quot;b&quot;, &quot;bold&quot; or &quot;strong&quot;. The optional &quot;class&quot; parameter allows the use of a desired CSS class. Usage:<br /></p><pre class="wordwrap"><span class="line">&lt;b [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Bold text.&lt;/b&gt;</span>
+</pre><p>&nbsp;</p> <p>
+or<br /></p><pre class="wordwrap"><span class="line">&lt;bold [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Bold text.&lt;/bold&gt;</span>
+</pre><p>&nbsp;</p> <p>
+or<br /></p><pre class="wordwrap"><span class="line">&lt;strong [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Bold text.&lt;/strong&gt;</span>
+</pre><p>&nbsp;</p> <p>The custom parameters are optional. Their names must be specified using the &quot;<a href="Configuration-files/content.ini/name_of_XML_tag/CustomAttributes.html" target="_self">CustomAttributes[]</a>&quot; array in the [strong] block within an override for the &quot;content.ini&quot; configuration file. When used, a custom parameter will be available as a template variable with the same name as it was specified in the tag itself.</p><a name="italic_text"></a>
+<h2>Italic text</h2>
+ <p>
+Italic/emphasized text can be achieved by using one of the following tags: &quot;i&quot;, &quot;em&quot; or &quot;emphasize&quot;. The optional &quot;class&quot; parameter allows the use of a desired CSS class. Usage:<br /></p><pre class="wordwrap"><span class="line">&lt;i [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Emphasized text.&lt;/i&gt;</span>
+</pre><p>&nbsp;</p> <p>
+or<br /></p><pre class="wordwrap"><span class="line">&lt;em [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Emphasized text.&lt;/em&gt;</span>
+</pre><p>&nbsp;</p> <p>
+or<br /></p><pre class="wordwrap"><span class="line">&lt;emphasize [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Emphasized text.&lt;/emphasize&gt;</span>
+</pre><p>
+ <br />The custom parameters are optional. Their names must be specified using the &quot;<a href="Configuration-files/content.ini/name_of_XML_tag/CustomAttributes.html" target="_self">CustomAttributes[]</a>&quot; array in the [emphasize] block within an override for the &quot;content.ini&quot; configuration file. When used, a custom parameter will be available as a template variable with the same name as it was specified in the tag itself.</p><a name="unformatted_text"></a>
+<h2>Unformatted text</h2>
+ <p>
+The &quot;literal&quot; tag can be used to output unformatted text, for example program source code, HTML code, XML content, etc. Everything that is inside an a literal block will be rendered in the same way (character by character) as it is within the literal tags (the text will be output using the HTML PRE tags). The optional &quot;class&quot; parameter allows the use of a desired CSS class. Usage:<br /></p><pre class="wordwrap"><span class="line">&lt;literal [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Example&lt;\literal&gt;</span>
+</pre><p>&nbsp;</p> <p>Please note that in the example above, the slash is in the wrong way within the tag that terminates the literal block. This was done in order to make the tag appear on the documentation page (since we're using literal tags to make code blocks). In other words, it should be terminated with a frontslash instead of a backslash.</p> <p>The custom parameters are optional. Their names must be specified using the &quot;<a href="Configuration-files/content.ini/name_of_XML_tag/CustomAttributes.html" target="_self">CustomAttributes[]</a>&quot; array in the [literal] block within an override for the &quot;content.ini&quot; configuration file. When used, a custom parameter will be available as a template variable with the same name as it was specified in the tag itself. </p><a name="lists"></a>
+<h2>Lists</h2>
+ <p>It is possible to create lists in the same way as in HTML by making use of the &quot;ol&quot;, &quot;ul&quot; and &quot;li&quot; tags. The lists can be nested. The optional &quot;class&quot; parameter allows the use of a desired CSS class. The following examples demonstrate the usage of ordered and unordered lists.</p>   <a name="eztoc75739_0_1" id="eztoc75739_0_1"></a><h3>Ordered lists</h3> <pre class="wordwrap copytoclipboard"><span class="line">&lt;ol [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Element 1&lt;/li&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Element 2&lt;/li&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Element 3&lt;/li&gt;</span>
+<span class="line">&lt;/ol&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;ol [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;\r\n    &lt;li [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Element 1&lt;/li&gt;\r\n    &lt;li [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Element 2&lt;/li&gt;\r\n    &lt;li [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Element 3&lt;/li&gt;\r\n&lt;/ol&gt;' ); return false;" /></p>
+<![endif]-->     <a name="eztoc75739_0_2" id="eztoc75739_0_2"></a><h3>Unordered lists</h3> <pre class="wordwrap copytoclipboard"><span class="line">&lt;ul [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Element 1&lt;/li&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Element 2&lt;/li&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Element 3&lt;/li&gt;</span>
+<span class="line">&lt;/ul&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;ul [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;\r\n    &lt;li [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Element 1&lt;/li&gt;\r\n    &lt;li [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Element 2&lt;/li&gt;\r\n    &lt;li [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Element 3&lt;/li&gt;\r\n&lt;/ul&gt;' ); return false;" /></p>
+<![endif]--> <p>The custom parameters are optional. In order to use them, their names must be specified using the &quot;<a href="Configuration-files/content.ini/name_of_XML_tag/CustomAttributes.html" target="_self">CustomAttributes[]</a>&quot; array in the [ol], [ul], [li] blocks within an override for the &quot;content.ini&quot; configuration file. When used, a custom parameter will be available as a template variable with the same name as it was specified in the tag itself.</p>  <a name="tables"></a>
+<h2>Tables</h2>
+ <p>Tables can be created in the same way as in HTML using &quot;table&quot;, &quot;tr&quot;, &quot;th&quot; and &quot;td&quot; tags. The tables can be nested. Usage:</p> <pre class="wordwrap"><span class="line">&lt;table [class=&quot;&quot;] [border=&quot;&quot;] [width=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;</span>
+<span class="line">...</span>
+<span class="line">&lt;/table&gt;</span>
+</pre> <p>The &quot;class&quot;, &quot;border&quot; and &quot;width&quot; parameters are optional. The &quot;class&quot; parameter can be used to assign a desired CSS class. The &quot;border&quot; parameter can be used to set a border (number of pixels). The &quot;width&quot; parameter can be used to control the table width (either 0-100% or number of pixels). Table content should be written according to normal HTML table syntax with &quot;tr&quot;, &quot;th&quot; and &quot;td&quot; tags, see below.</p>   <a name="eztoc75754_0_1" id="eztoc75754_0_1"></a><h3>Table rows</h3> <p>
+Table rows can be created in the same way as in HTML:<br /></p><pre class="wordwrap"><span class="line">&lt;tr [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Table row content goes here.&lt;/tr&gt;</span>
+</pre><p>
+ <br />The &quot;class&quot; parameter can be used to set the desired CSS class.</p>     <a name="eztoc75754_0_2" id="eztoc75754_0_2"></a><h3>Table headers</h3> <p>Table headers can be created in the same way as in HTML:</p> <pre class="wordwrap"><span class="line">&lt;th [class=&quot;&quot;] [width=&quot;&quot;] [rowspan=&quot;&quot;] [colspan=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Example.&lt;/th&gt;</span>
+</pre> <p>All parameters are optional. The &quot;class&quot; parameter can be used to set the desired CSS class. The &quot;width&quot; parameter can be used to set the width (either as percentage or number of pixels). The &quot;rowspan&quot; and &quot;colspan&quot; parameters are the same as in HTML.</p>     <a name="eztoc75754_0_3" id="eztoc75754_0_3"></a><h3>Table data/cell</h3> <p>Table data/cells can be created in the same way as in HTML:</p> <pre class="wordwrap"><span class="line">&lt;td [class=&quot;&quot;] [width=&quot;&quot;] [rowspan=&quot;&quot;] [colspan=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Example.&lt;/td&gt;</span>
+</pre> <p>All parameters are optional. The &quot;class&quot; parameter can be used to set the desired CSS class. The &quot;width&quot; parameter can be used to set the width (either as percentage or number of pixels). The &quot;rowspan&quot; and &quot;colspan&quot; parameters are the same as in HTML.</p> <p>Note that all custom parameters mentioned in the usage examples are optional as well. In order to use them, their names must be specified using the &quot;<a href="Configuration-files/content.ini/name_of_XML_tag/CustomAttributes.html" target="_self">CustomAttributes[]</a>&quot; array in the [table], [tr], [th], [td] blocks within an override for the &quot;content.ini&quot; configuration file. When used, a custom parameter will be available as a template variable with the same name as it was specified in the tag itself.</p>  <a name="hyperlinks"></a>
+<h2>Hyperlinks</h2>
+ <p>
+Hyperlinks can be inserted by making use of the &quot;a&quot; or the &quot;link&quot; tags. Usage:<br /></p><pre class="wordwrap"><span class="line">&lt;a href=&quot;&quot; [view=&quot;&quot;] [target=&quot;&quot;] [ class=&quot;&quot;] [title=&quot;&quot;] [id=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Example.&lt;/a&gt;</span>
+</pre><p>&nbsp;</p> <p>
+or<br /></p><pre class="wordwrap"><span class="line">&lt;link href=&quot;&quot; [view=&quot;&quot;] [target=&quot;&quot;] [ class=&quot;&quot;] [title=&quot;&quot;] [id=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Example.&lt;/link&gt;</span>
+</pre><p>&nbsp;</p> <p>The &quot;href&quot; parameter is required and it must be set to a valid address (either external or internal). </p> <p>The &quot;view&quot; parameter will only have effect when used together with internal links (see below). This parameter makes it possible to specify the view that will be used when the node (or object) which the internal link points to is shown. By default, the system always uses the &quot;full&quot; view to show the contents of internal links. </p> <p>The &quot;target&quot; parameter can be used to control how the target URL should be opened (inside the existing/active browser window/tab or within a new window/tab). The &quot;class&quot; parameter can be used to specify a CSS class that should be used when the link is rendered. The &quot;title&quot; parameter can be used to specify a short title text (will be shown when the pointer is hovering over the link). The &quot;id&quot; parameter is for assigning unique identifiers.</p> <p>The custom parameters are optional. Their names must be specified using the &quot;<a href="Configuration-files/content.ini/name_of_XML_tag/CustomAttributes.html" target="_self">CustomAttributes[]</a>&quot; array in the [link] block within an override for the &quot;content.ini&quot; configuration file. When used, a custom parameter will be available as a template variable with the same name as it was specified in the tag itself. </p>   <a name="eztoc75757_0_1" id="eztoc75757_0_1"></a><h3>Internal links</h3> <p>It is possible to create internal links (to other nodes and objects) by making use of the &quot;eznode://&quot; and the &quot;ezobject://&quot; notation. The internal links will be created dynamically based on the node/object ID numbers. In other words, if a node is moved, the link(s) will point to the new location(s) and thus they will not be broken.</p>  <a name="eztoc75757_0_1_1" id="eztoc75757_0_1_1"></a><h4>Link to a node</h4> <p>
+A link to a node can be created either by specifying the target node's ID number or the node path. The following examples demonstrate how an internal link to node number 128 can be created.<br /></p><pre class="wordwrap"><span class="line">&lt;a href=&quot;eznode://128&quot;&gt;Example.&lt;/a&gt;</span>
+</pre><p>&nbsp;</p> <p>
+or<br /></p><pre class="wordwrap"><span class="line">&lt;link href=&quot;eznode://128&quot;&gt;Example.&lt;/link&gt;</span>
+</pre><p>&nbsp;</p> <p>
+The following examples demonstrate how an internal link to a node located at &quot;products/computers/example&quot; can be created.<br /></p><pre class="wordwrap"><span class="line">&lt;a href=&quot;eznode://products/computers/example&quot;&gt;Example.&lt;/a&gt;</span>
+</pre><p>&nbsp;</p> <p>
+or<br /></p><pre class="wordwrap"><span class="line">&lt;link href=&quot;eznode://products/computers/example&quot;&gt;Example.&lt;/link&gt;</span>
+</pre><p>&nbsp;</p>   <a name="eztoc75757_0_1_2" id="eztoc75757_0_1_2"></a><h4>Link to an object</h4> <p>
+The following examples demonstrate how an internal link to object number 1024 can be created.<br /></p><pre class="wordwrap"><span class="line">&lt;a href=&quot;ezobject://1024&quot;&gt;Example.&lt;/a&gt;</span>
+</pre><p>&nbsp;</p> <p>
+or<br /></p><pre class="wordwrap"><span class="line">&lt;link href=&quot;ezobject://1024&quot;&gt;Example.&lt;/link&gt;</span>
+</pre><p>&nbsp;</p> <p>When object linking is used, the destination address will be generated using the main node assignment of the target object.</p>   <a name="eztoc75757_0_1_3" id="eztoc75757_0_1_3"></a><h4>Alternate views</h4> <p>The &quot;view&quot; parameter can be used together with both &quot;eznode://&quot; and &quot;ezobject://&quot; links. It makes it possible to display the specified node (if object, its main node will be used) using a specific view instead of the default &quot;full&quot; view. The following example shows how to create an internal link that (when clicked/followed) brings up node number 1024 using the &quot;line&quot; view.</p> <pre class="wordwrap"><span class="line">&lt;a href=&quot;eznode://1024&quot; view=&quot;line&quot;&gt;Example (as line).&lt;/a&gt;</span>
+</pre>   <a name="anchors"></a>
+<h2>Anchors</h2>
+ <p>
+The &quot;anchor&quot; tag makes it possible to insert HTML anchors inside the XML block. The inserted anchors will work like standard HTML anchors. Usage:<br /></p><pre class="wordwrap"><span class="line">&lt;anchor name=&quot;&quot; [custom_parameter=&quot;&quot; [...] ] /&gt;</span>
+</pre><p>&nbsp;</p> <p>The &quot;name&quot; parameter must be set to a unique identifier for the anchor. Anchors can be reached by appending the hash character (#) followed directly by the name of the anchor that the browser should jump to. Example: http://www.example.com/hobbies#music</p> <p>The custom parameters are optional. Their names must be specified using the &quot;<a href="Configuration-files/content.ini/name_of_XML_tag/CustomAttributes.html" target="_self">CustomAttributes[]</a>&quot; array in the [anchor] block within an override for the &quot;content.ini&quot; configuration file. When used, a custom parameter will be available as a template variable with the same name as it was specified in the tag itself.</p><a name="object_embedding"></a>
+<h2>Object embedding</h2>
+ <p>The &quot;embed&quot; tag makes it possible to insert an arbitrary content object directly in the XML block. It can for example be used to embed images. Usage:</p> <pre class="wordwrap"><span class="line">&lt;embed href=&quot;&quot; [class=&quot;&quot;] [view=&quot;&quot;] [align=&quot;&quot;] [target=&quot;&quot;] [size=&quot;&quot;] [id=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ] /&gt;</span>
+</pre> <p>With this tag, embedded objects are inserted as &quot;block elements&quot;. Such an element always begins on a new line when it is displayed. It exists in its own virtual box and is always followed by a carriage return (like if someone hit the &quot;Enter&quot; key after inserting the object). This means that, for example, inserting an image using the &quot;embed&quot; tag will break the current paragraph. The &quot;embed&quot; tag is represented by <a href="http://www.w3.org/TR/REC-html40/struct/global.html#h-7.5.3" target="_blank">block-level</a> tags in the resulting XHTML code.</p> <p>The &quot;embed-inline&quot; tag makes it possible to insert objects as inline elements. For example, this tag allows you to insert an image inside a text line. Usage:</p> <pre class="wordwrap"><span class="line">&lt;embed-inline href=&quot;&quot; [class=&quot;&quot;] [view=&quot;&quot;] [align=&quot;&quot;] [target=&quot;&quot;] [size=&quot;&quot;] [id=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ] /&gt;</span>
+</pre> <p>This tag is represented by inline tags in the resulting XHTML code. The templates that are used for rendering &quot;embed-inline&quot; tags must not contain block-level XHTML tags.</p> <p>The following table reveals the list of parameters supported by the &quot;embed&quot; and &quot;embed-inline&quot; tags.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Parameter</p> 
+  </th> <th >   <p>Description</p> 
+  </th> <th >   <p>Required</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>href</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;href&quot; parameter must be a valid link to either a node or an object using the same notation as for hyperlinks (for example &quot;eznode://134&quot;, &quot;eznode://path/to/some/node&quot; and &quot;ezobject://1024&quot;). If the provided link is a link to a node, eZ Publish will use the object that is encapsulated by that node. In other words, in both cases it is the object that will be inserted (the node notation is just a wrapper).</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Yes.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>class</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;class&quot; parameter makes it possible to specify a custom stylesheet that should be used. In the template, the specified stylesheet will be available in the $classification variable.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>view</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;view&quot; parameter makes it possible to specify the view mode that should be used when the object is rendered (for example &quot;full&quot;, &quot;line&quot; and so on). By default, the system uses the &quot;embed&quot; view mode when rendering objects that are inserted using the &quot;embed&quot; tag, while the &quot;embed-inline&quot; view mode is used together with &quot;embed-inline&quot; tags.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>align</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;align&quot; parameter can be used to specify the positioning of the embedded object; possible values are &quot;left&quot;, &quot;center&quot; and &quot;right&quot;.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>target</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;target&quot; parameter can be used to set the opening method (same browser tab/window or new browser tab/window) for the embedded item (for example &quot;_self&quot;, &quot;_blank&quot;, etc.).</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>size</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;size&quot; parameter can be used to set the image size that should be used when an image object is embedded (for example &quot;small&quot;, &quot;medium&quot;, &quot;large&quot;, etc.). The available sizes are defined by image.ini.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>id</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;id&quot; parameter makes it possible to assign a unique ID which will be the ID attribute in the resulting HTML.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>custom parameters</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The available custom parameters must be specified using the &quot;<a href="Configuration-files/content.ini/name_of_XML_tag/CustomAttributes.html" target="_self">CustomAttributes[]</a>&quot; array in either the [embed] or [embed-inline] block within an override for the &quot;content.ini&quot; configuration file. When used, a custom parameter will be available as a template variable with the same name as it was specified in the tag itself. </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>No.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+<a name="custom_tags"></a>
+<h2>Custom tags</h2>
+ <p>In addition to the default tags described above, the &quot;XML block&quot; datatype makes it possible to use custom tags. A custom tag can be used both as a block or an inline element. Custom tags must be specified using the &quot;AvailableCustomTags[]&quot; array in the [CustomTagSettings] block within an override for the &quot;content.ini&quot; configuration file. When the XML is rendered, the contents of a custom tag will be replaced by a custom template. The name of the template must be specified using the &quot;name&quot; parameter. Example of usage:</p> <pre class="wordwrap"><span class="line">&lt;custom name=&quot;template_name&quot; [custom_parameter=&quot;value&quot; [...] ]&gt;</span>
+<span class="line">The quick brown fox jumps over the lazy dog.</span>
+<span class="line">&lt;/custom&gt;</span>
+</pre> <p>The custom tag in the example above will be replaced by a template called &quot;template_name.tpl&quot;. This template must be located in the following directory within the current design: &quot;/templates/content/datatype/view/ezxmltags/&quot; (or one of the fallback designs). It is also possible to create an override template. The contents of the tag will be available in the &quot;$content&quot; variable within the inserted template. </p> <p>The custom parameters are optional. Their names must be specified using the &quot;<a href="Configuration-files/content.ini/name_of_XML_tag/CustomAttributes.html" target="_self">CustomAttributes[]</a>&quot; array within an override for the &quot;content.ini&quot; configuration file. When used, a custom parameter will be available as a template variable with the same name as it was specified in the tag itself.</p><a name="paragraphs"></a>
+<h2>Paragraphs</h2>
+ <p>Paragraphs can be added by making use of either the 'p' or the 'paragraph' tag.</p> <p>The optional 'class' parameter allows the use of a desired CSS class. If you do not specify the class parameter, the paragraph will be displayed in a natural way (without tags) in the administration interface. To create a non-classified paragraph, you can simply press 'Enter' key twice.</p> <p>
+Usage:<br /></p><pre class="wordwrap"><span class="line">&lt;p [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Example&lt;/p&gt;</span>
+</pre><p>&nbsp;</p> <p>
+or<br /></p><pre class="wordwrap"><span class="line">&lt;paragraph [class=&quot;&quot;] [custom_parameter=&quot;&quot; [...] ]&gt;Example&lt;/paragraph&gt;</span>
+</pre><p>&nbsp;</p> <p>By default, the system will use 'p' tag in the resulting XHTML code. This behavior can be changed by creating an override template for the '/content/datatype/view/ezxmltags/paragraph.tpl'.</p> <p>The custom parameters are optional. Their names must be specified using the &quot;<a href="Configuration-files/content.ini/name_of_XML_tag/CustomAttributes.html" target="_self">CustomAttributes[]</a>&quot; array in the [paragraph] block within an override for the &quot;content.ini&quot; configuration file. When used, a custom parameter will be available as a template variable with the same name as it was specified in the tag itself.</p>
+ </p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/XML-tags by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:49:13 GMT -->
+</html>

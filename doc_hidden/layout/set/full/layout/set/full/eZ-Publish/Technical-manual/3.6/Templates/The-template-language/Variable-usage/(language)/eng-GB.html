@@ -1,0 +1,145 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Templates/The-template-language/Variable-usage/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:27:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Variable usage / The template language / Templates / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Variable usage</h1>
+</div>
+
+ <p>Template variables must be referenced using dollar ($) notation, for example: $my_variable, $object_array, etc. An eZ publish template variable is case sensitive. In other words, $lollipop is not the same variable as $LolliPop. Template variables can be created by the system (from PHP code) or by the author of the template (from within template code). Regardless of where a variable was created, it can be changed using the <a href="../../../../Reference/Template-functions/Variables/set.html" target="_self">&quot;set&quot;</a> function. Some templates have preset variables, for example, the main template (pagelayout) provides access to a collection of <a href="../../../The-pagelayout/Variables-in-pagelayout.html" target="_self">variables</a>.</p>  <a name="eztoc1309_1" id="eztoc1309_1"></a><h2>Creating and destroying variables</h2> <p>All variables used in a template must be declared and defined by the <a href="../../../../Reference/Template-functions/Variables/def.html" target="_self">&quot;def&quot;</a> function (short for define) before they can be used. A variable exists until the <a href="../../../../Reference/Template-functions/Variables/undef.html" target="_self">&quot;undef&quot;</a> function (short for undefine) is used in order to destroy it. A previously declared variable will be automatically destroyed at the end of the template file in which it was created. The following example demonstrates the most basic use of the &quot;def&quot; and &quot;undef&quot; functions.</p> <pre class="wordwrap copytoclipboard"><span class="line">{def $temperature=32}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$temperature}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{undef}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $temperature=32}\r\n\r\n    {$temperature}\r\n\r\n{undef}' ); return false;" /></p>
+<![endif]--> <p>The output of the example will be &quot;32&quot;. After the {undef} function is called, the $temperature variable will not be available. Both the &quot;def&quot; and the &quot;undef&quot; function can be used with multiple variables at the same time. In addition, the &quot;undef&quot; function can be used without any parameters. When called without parameters the &quot;undef&quot; function automatically destroys all variables that were previously created within the template. The following example demonstrates how the &quot;def&quot; and &quot;undef&quot; functions can be used to create and destroy multiple variables at the same time.</p> <pre class="wordwrap copytoclipboard"><span class="line">{def $weather='warm' $celsius=32 $fahrenheit=90}</span>
+<span class="line">&nbsp;</span>
+<span class="line">The weather is {$weather}: {$celsius} C / {$fahrenheit} F &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{undef $celsius $fahrenheit}</span>
+<span class="line">&nbsp;</span>
+<span class="line">The weather is still {$weather}. &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{undef}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $weather=\'warm\' $celsius=32 $fahrenheit=90}\r\n\r\nThe weather is {$weather}: {$celsius} C / {$fahrenheit} F &lt;br /&gt;\r\n\r\n{undef $celsius $fahrenheit}\r\n\r\nThe weather is still {$weather}. &lt;br /&gt;\r\n\r\n{undef}' ); return false;" /></p>
+<![endif]--> <p>The output of this example will be:</p> <div class="output"> <p>
+The weather is warm: 32 C / 90 F<br />The weather is still warm.</p> </div> <p>In the example above, the &quot;def&quot; function is used to create three new variables: $temperature, $celsius and $fahrenheit. The &quot;undef&quot; function is used twice. The first time, it is used to destroy the $celsius and $fahrenheit variables. The second is time it is called without parameters and thus the remaining variables (in this case only $temperature) will be destroyed. For more information, please refer to the documentation page of the <a href="../../../../Reference/Template-functions/Variables/def.html" target="_self">&quot;def&quot;</a> and <a href="../../../../Reference/Template-functions/Variables/undef.html" target="_self">&quot;undef&quot;</a> functions.</p>   <a name="eztoc1309_2" id="eztoc1309_2"></a><h2>Changing the contents of variables</h2> <p>The contents/value of a variable can be changed at any time using the <a href="../../../../Reference/Template-functions/Variables/set.html" target="_self">&quot;set&quot;</a> function. Please note that this function can be used to change the value of any variable, regardless of if it was created by the system or inside a template. No warning will be given if a system variable is changed. The &quot;set&quot; function can be used to change the value of any variable regardless of the variable's current type and the type of the new value. In other words, this function is capable of changing the type of a variable. The &quot;set&quot; function can not be used to change the value of an element/attribute of an array, hash or an object. In fact, the elements/attributes of arrays, hashes and objects can not be changed from within template code. The following example demonstrates the usage of the &quot;set&quot; function.</p> <pre class="wordwrap copytoclipboard"><span class="line">{def $weather='warm'}</span>
+<span class="line">&nbsp;</span>
+<span class="line">The weather is {$weather}. &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{set $weather='cold'}</span>
+<span class="line">&nbsp;</span>
+<span class="line">The weather is {$weather}.</span>
+<span class="line">&nbsp;</span>
+<span class="line">{undef}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $weather=\'warm\'}\r\n\r\nThe weather is {$weather}. &lt;br /&gt;\r\n\r\n{set $weather=\'cold\'}\r\n\r\nThe weather is {$weather}.\r\n\r\n{undef}' ); return false;" /></p>
+<![endif]--> <p>The output of the example will be:</p> <div class="output"> <p>
+The weather is warm.<br />The weather is cold.</p> </div> <p>Just like the &quot;def&quot; and &quot;undef&quot; functions, the &quot;set&quot; function can work with multiple variables at the same time. For more information, please refer to the documentation page of the <a href="../../../../Reference/Template-functions/Variables/set.html" target="_self">&quot;set&quot;</a> function.</p>   <a name="eztoc1309_3" id="eztoc1309_3"></a><h2>Accessing array elements</h2> <p>The elements of a simple/vector array can only be accessed using numerical indexes. This method is called &quot;index lookup&quot;. The elements of an associative array can be accessed by using the key identifiers. This method is called &quot;identifier lookup&quot;. In addition, the elements of an associative array can also be accessed using index values. The following example demonstrates the different lookup methods.</p>  <a name="eztoc1309_3_1" id="eztoc1309_3_1"></a><h3>Index lookup</h3> <p>Index lookup is carried out by appending a period/dot and an index number to the name of a simple/vector or associative array. Index lookup may also be carried out by appending a matching pair of brackets that encapsulate the desired index value. The following example demonstrates how to access the elements of a simple array using index lookup. Please note the different syntaxes (dot and brackets).</p> <pre class="wordwrap copytoclipboard"><span class="line">{def $sentence=array( 'Life', 'is', 'very', 'good!' )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">The 1st element is: {$sentence.0} &lt;br /&gt;</span>
+<span class="line">The 2nd element is: {$sentence.1} &lt;br /&gt;</span>
+<span class="line">The 3rd element is: {$sentence[2]} &lt;br /&gt;</span>
+<span class="line">The 4th element is: {$sentence[3]} &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{undef}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $sentence=array( \'Life\', \'is\', \'very\', \'good!\' )}\r\n\r\nThe 1st element is: {$sentence.0} &lt;br /&gt;\r\nThe 2nd element is: {$sentence.1} &lt;br /&gt;\r\nThe 3rd element is: {$sentence[2]} &lt;br /&gt;\r\nThe 4th element is: {$sentence[3]} &lt;br /&gt;\r\n\r\n{undef}' ); return false;" /></p>
+<![endif]--> <p>The code above will output the following:</p><div class="output"> <p>
+The 1st element is: Life<br />
+The 2nd element is: is<br />
+The 3rd element is: very<br />The 4th element is: good!</p> </div>   <a name="eztoc1309_3_2" id="eztoc1309_3_2"></a><h3>Identifier lookup</h3> <p>
+Identifier lookup can be carried out by appending a period/dot and an identifier name to the name of an associative array. Identifier lookup may also be carried out by appending a matching pair of brackets that encapsulate the desired index value. The following example demonstrates how to access the elements of an associative array using the identifier lookup method. Notice the different syntax (use of dot and brackets).<br /></p><pre class="wordwrap copytoclipboard"><span class="line">{def $sentence=hash( 'first', &nbsp;'Life',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'second', 'is',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'third', &nbsp;'very',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'fourth', 'good!' )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">The 1st element is: {$sentence.first} &lt;br /&gt;</span>
+<span class="line">The 2nd element is: {$sentence.second} &lt;br /&gt;</span>
+<span class="line">The 3rd element is: {$sentence[third]} &lt;br /&gt;</span>
+<span class="line">The 4th element is: {$sentence[fourth]} &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{undef}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $sentence=hash( \'first\',  \'Life\', \r\n                    \'second\', \'is\', \r\n                    \'third\',  \'very\', \r\n                    \'fourth\', \'good!\' )}\r\n\r\nThe 1st element is: {$sentence.first} &lt;br /&gt;\r\nThe 2nd element is: {$sentence.second} &lt;br /&gt;\r\nThe 3rd element is: {$sentence[third]} &lt;br /&gt;\r\nThe 4th element is: {$sentence[fourth]} &lt;br /&gt;\r\n\r\n{undef}' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>The following output will be produced:</p><div class="output"> <p>
+The 1st element is: Life<br />
+The 2nd element is: is<br />
+The 3rd element is: very<br />The 4th element is: good!</p> </div>   <a name="eztoc1309_3_3" id="eztoc1309_3_3"></a><h3>Index lookup and associative arrays</h3> <p>
+As pointed out earlier, the elements of an associative array may also be accessed using the index method. The following example demonstrates this.<br /></p><pre class="wordwrap copytoclipboard"><span class="line">{def $sentence=hash( 'first', &nbsp;'Life',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'second', 'is',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'third', &nbsp;'very',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'fourth', 'good!' )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">The 4th element is: {$sentence.3} &lt;br /&gt;</span>
+<span class="line">The 3rd element is: {$sentence.2} &lt;br /&gt;</span>
+<span class="line">The 2nd element is: {$sentence[1]} &lt;br /&gt;</span>
+<span class="line">The 1st element is: {$sentence[0]} &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{undef}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $sentence=hash( \'first\',  \'Life\', \r\n                    \'second\', \'is\', \r\n                    \'third\',  \'very\', \r\n                    \'fourth\', \'good!\' )}\r\n\r\nThe 4th element is: {$sentence.3} &lt;br /&gt;\r\nThe 3rd element is: {$sentence.2} &lt;br /&gt;\r\nThe 2nd element is: {$sentence[1]} &lt;br /&gt;\r\nThe 1st element is: {$sentence[0]} &lt;br /&gt;\r\n\r\n{undef}' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>The following output will be produced:</p><div class="output"> <p>
+The 4th element is: good!<br />
+The 3rd element is: very<br />
+The 2nd element is: is<br />The 1st element is: Life</p> </div>    <a name="eztoc1309_4" id="eztoc1309_4"></a><h2>Accessing object attributes</h2> <p>The attributes of an object can only be accessed using the attributes' identifiers. An identifier is just the name of an attribute (similar to the keys of an associative array). The following example demonstrates how the different attributes of a node object can be accessed from within a template.</p> <pre class="wordwrap copytoclipboard"><span class="line">The ID of the node: {$node.node_id} &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">The ID of the object encapsulated by the node: {$node.object.id} &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">The name of the object: {$node.object.name} &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">First time the object was published: {$node.object.published|l10n( shortdate )} &lt;br /&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'The ID of the node: {$node.node_id} &lt;br /&gt;\r\n\r\nThe ID of the object encapsulated by the node: {$node.object.id} &lt;br /&gt; \r\n\r\nThe name of the object: {$node.object.name} &lt;br /&gt; \r\n\r\nFirst time the object was published: {$node.object.published|l10n( shortdate )} &lt;br /&gt;' ); return false;" /></p>
+<![endif]--> <p>If the $node variable contains a node that has ID number 44 and encapsulates object number 13 named &quot;Birthday&quot; published on the first of April in 2003, the following output will be produced:</p> <div class="output"> <p>
+The ID of the node: 44<br />
+The ID of the object encapsulated by the node: 13<br />
+The name of the object: Birthday<br />First time the object was published: 01/04/2003</p> </div> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Templates/The-template-language/Variable-usage/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:27:03 GMT -->
+</html>

@@ -1,0 +1,275 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Datatypes/ISBN by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>ISBN / Datatypes / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ISBN</h1>
+</div>
+
+<h3>Summary</h3>
+Validates and stores an ISBN value.
+<h3>Properties</h3>
+<table class="renderedtable" cellspacing="0">
+<tr><th>Name</th><th>Internal name</th><th>Searchable</th><th>Information collector</th></tr>
+<tr>
+    <td>ISBN</td>
+    <td>ezisbn</td>
+    <td>Yes.</td>
+    <td>No.</td>
+</tr>
+</table>
+
+<h3>Description</h3>
+ <p>The &quot;ISBN&quot; datatype allows the validation, storage and retrieval of a single ISBN (International Standard Book Number) code. From version 3.10 of eZ Publish, this datatype uses the new ISBN-13 format by default. </p> <p>Note that from the 1st of January, 2007, the book industry started using 13 digit ISBN codes (<a href="http://www.isbn.org/standards/home/isbn/transition.asp" target="_blank">ISBN-13</a>) to identify all books in their supply chains.</p> <p>According to the ISBN-13 standard, the 13-digit number consists of five parts. The parts are separated by dashes. The following table describes each of the five parts using the ISBN-13 code &quot;978-0-14026-690-0&quot; as an example.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>#</p> 
+  </th> <th >   <p>Name</p> 
+  </th> <th >   <p>Description</p> 
+  </th> <th >   <p>Example</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>1</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Prefix</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>A three digit prefix that can be either 978 or 979. Note that the new 979 prefix will not be utilized until all 978 prefixes have been assigned.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>978</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>2</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Registration group</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>A variable set of digits that identify the country/region in which the ISBN code was assigned. Zero (&quot;0&quot;) means that the book belongs to an English speaking area.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0 </p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>3</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Registrant</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>A variable set of digits that identify the publisher to whom the ISBN code was originally allocated.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>14026</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>4</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Publication</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>A variable set of digits that identify the title of the book.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>690</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>5</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Check digit</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>A one digit control number that makes it possible to validate the ISBN code. The check digit is calculated using a formula that makes use of the preceding parts (Prefix, Registration group, Registrant and Publication).</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0 </p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>While the &quot;Prefix&quot; and &quot;Check digit&quot; elements have a fixed length (3 and 1 digits accordingly), the length of the remaining elements may vary. However, the total length of an ISBN-13 is always 13 digits. The length of the &quot;Registration group&quot;, &quot;Registrant&quot; and &quot;Publication&quot; elements can be calculated according to the rules set by the <a href="http://www.isbn-international.org/index.html" target="_blank">International ISBN Agency</a>. The calculation of these elements is based on the distribution of ranges for the different regions. </p> <p>In eZ Publish, the ISBN codes are stored as text. The digits are separated by dashes. The different ranges are stored in the database, allowing the system to fix up incorrectly entered ISBN-13 codes (codes with misplaced or missing dashes). When a new version of eZ Publish is released, the latest information about the different ranges is downloaded from <a href="http://www.isbn-international.org/" target="_blank">http://www.isbn-international.org</a> and stored in the &quot;db_data.dba&quot; file located in the &quot;kernel/classes/datatypes/ezisbn/share/&quot; directory. During the installation process, the setup wizard imports this information to the database. If the information about ranges is missing from the database, the system will display a warning at the class attribute edit interface for this datatype (see below).</p> <p>Note that the calculation rules can be changed on a monthly basis and thus you should run the &quot;updateisbn13.php&quot; script regularly in order to keep the range-information in the database up to date. The following example shows how to get the latest ranges from the ISBN International website:</p> 
+<ol>
+ <li><div> Download a &quot;.js&quot; file containing the list of ranges using the following link: <a href="http://www.isbn-international.org/converter/ranges.js" target="_blank">http://www.isbn-international.org/converter/ranges.js</a>  </div></li> <li><div> Navigate into the eZ Publish directory and copy the downloaded file there. </div></li> <li><div> Run the &quot;updateisbn13.php&quot; script using the following shell command: <pre class="wordwrap"><span class="line">php bin/php/updateisbn13.php --file=ranges.js</span>
+</pre>  </div></li> 
+</ol>
+ <p>The script will import information from the &quot;range.js&quot; file to the database.</p> <p>The following screenshot shows the class attribute edit interface for this datatype. </p> 
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/reference/datatypes/isbn_class_attribute_edit_interface/70148-3-eng-GB/isbn_class_attribute_edit_interface_doc.png" alt="Class attribute edit interface for the &quot;ISBN&quot; datatype." />
+ <p>Class attribute edit interface for the &quot;ISBN&quot; datatype.</p>
+
+
+
+
+
+
+
+</div> <p>The &quot;ISBN-13 format&quot; checkbox makes it possible to configure the datatype so that it validates and stores ISBN codes according to the ISBN-13 standard. From version 3.10, this checkbox is checked by default when a new attribute using the ISBN datatype is created. Note that the object edit interface will appear differently (four input fields instead of one) when the checkbox is unchecked (see below). </p> <p>The following screenshot shows how the class attribute edit interface for the ISBN datatype looks like if the information about ranges is missing from the database.</p> 
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/reference/datatypes/class_attribute_edit_interface_for_the_isbn_dat/84733-2-eng-GB/class_attribute_edit_interface_for_the_isbn_datatype_if_the_range_data_for_isbn_1" alt="Class attribute edit interface for the &quot;ISBN&quot; datatype if the range data for ISBN-13 was not imported." />
+ <p>Class attribute edit interface for the &quot;ISBN&quot; datatype if the range data for ISBN-13 was not imported.</p>
+
+
+
+
+
+
+
+</div> <p>Click the &quot;Import ISBN range data&quot; button to import ranges to the database.</p>    <a name="eztoc87149_0_0_1" id="eztoc87149_0_0_1"></a><h4>Object attribute edit interface</h4> <p>The following screenshot shows the default object attribute edit interface for this datatype. </p> 
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/reference/datatypes/isbn_object_attribute_edit_interface__1/72430-1-eng-GB/isbn_object_attribute_edit_interface_doc.png" alt="Object attribute edit interface for the &quot;ISBN&quot; datatype." />
+ <p>Object attribute edit interface for the &quot;ISBN&quot; datatype.</p>
+
+
+
+
+
+
+
+</div> <p>As the screenshot shows, an ISBN-13 code consists of five parts separated by dashes.</p> <p>The system will automatically add dashes in case they were omitted during input (for example, &quot;9780140266900&quot; will be converted to &quot;978-0-14026-690-0&quot;). The system will also automatically fix incorrectly placed dashes (for example, &quot;978-0-140266-90-0&quot; will be converted to &quot;978-0-14026-690-0&quot;). If an ISBN-10 code is entered, the system will automatically convert it into a valid ISBN-13 code unless the &quot;ISBN-13 format&quot; checkbox is disabled at the class level. Note that there is no support for automatic conversion of ISBN-13 codes to ISBN-10 codes since the ISBN-10 format is considered to be obsolete.</p> <p>In eZ Publish 3.10, a feature for checking the validity of ISBN codes has been introduced. By default, the system will check all elements of an ISBN-13 code and display a warning if one or more of the entered elements are invalid. For example, &quot;978-0-14026-690-6&quot; is considered to be an invalid code; according to the standard, the last digit should have been a zero (&quot;0&quot;). The validity checking feature can be turned on (default) or off. It is controlled by the &quot;<a href="../Configuration-files/content.ini/ISBNSettings/StrictValidation.html" target="_self">StrictValidation</a>&quot; setting located in the [ISBNSettings] section of the &quot;settings/content.ini&quot; configuration file. Note that the &quot;Prefix&quot; and &quot;Check digit&quot; parts will be validated regardless if the &quot;StrictValidation&quot; setting is enabled or not.</p> <p>The following screenshot shows the object attribute edit interface for this datatype when ISBN-13 support is disabled. </p> 
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/reference/datatypes/isbn_object_attribute_edit_interface/82313-5-eng-GB/isbn_object_attribute_edit_interface_doc.png" alt="Object attribute edit interface for the &quot;ISBN&quot; datatype when in ISBN-10 mode." />
+ <p>Object attribute edit interface for the &quot;ISBN&quot; datatype when in ISBN-10 mode.</p>
+
+
+
+
+
+
+
+</div>       <a name="eztoc87149_0_0_2" id="eztoc87149_0_0_2"></a><h4>Raw output</h4> <p>The &quot;.content&quot; of an <a href="../Objects/ezcontentobjectattribute.html" target="_self">ezcontentobjectattribute</a> object using this datatype returns a hash containing eight elements. The hash-structure of the elements is given in the table below.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Key</p> 
+  </th> <th >   <p>Type</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>prefix</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Prefix&quot; part of the ISBN code (for example 978).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>field1</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Registration group&quot; part of the ISBN code (for example 0).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>field2</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Registrant&quot; part of the ISBN code (for example 14026).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>field3</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Publication group&quot; part of the ISBN code (for example 690).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>field4</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Check digit&quot; part of the ISBN code (for example 0).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>value</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The entire ISBN code with dashes (for example 978-0-14026-690-0).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>value_without_hyphens</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The entire ISBN code without dashes (for example 9780140266900).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>value_with_spaces</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The entire ISBN code with spaces (for example 978 0 14026 690 0).</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Datatypes/ISBN by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:33 GMT -->
+</html>

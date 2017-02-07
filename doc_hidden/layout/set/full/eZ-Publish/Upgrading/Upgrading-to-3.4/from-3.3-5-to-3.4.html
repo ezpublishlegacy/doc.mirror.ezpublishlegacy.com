@@ -1,0 +1,98 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.4/from-3.3-5-to-3.4.0 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:35:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>from 3.3-5 to 3.4.0 / Upgrading to 3.4 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>from 3.3-5 to 3.4.0</h1>
+</div>
+
+ <p>This section describes how to upgrade your existing eZ publish 3.3-5 installation to version 3.4.0. If you are upgrading from a version prior to eZ publish 3.3-5, you need to first <a href="../Upgrading-to-3.3/from-3.3-x-to-3.html" target="_self">upgrade to 3.3-5</a> before you can upgrade to 3.4.0.</p> <p>Please make sure that you have a working <a href="../../Upgrading.html#backup" target="_self">backup</a> of the site before you do the actual upgrade. The upgrade procedure consists of the following steps:</p> 
+<ol>
+ <li><div> Upgrading the distribution files to 3.4.0 </div></li> <li><div> Upgrading the database to 3.4.0 </div></li> <li><div> Running the 3.4.0 upgrade scripts </div></li> <li><div> Updating the system configuration </div></li> <li><div> Clearing the caches </div></li> 
+</ol>
+  <a name="eztoc33084_1" id="eztoc33084_1"></a><h2>Step 1: Upgrading the distribution files</h2> <p>The easiest way to upgrade the distribution files is to unpack eZ publish 3.4.0 to a directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p> 
+<ul>
+ <li><div> design/example </div></li> <li><div> design/example_admin </div></li> <li><div> var </div></li> <li><div> settings/siteaccess </div></li> <li><div> settings/override </div></li> 
+</ul>
+ <p>Replace &quot;example&quot; and &quot;example_admin&quot; with actual names used by your siteaccesses.</p>  <a name="eztoc33084_1_1" id="eztoc33084_1_1"></a><h3>Custom extensions</h3> <p>If you are using custom extensions then the subdirectories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that come with eZ publish (for example the &quot;PayPal&quot; extension).</p>    <a name="eztoc33084_2" id="eztoc33084_2"></a><h2>Step 2: Upgrading the database</h2> <p>The following text describes how a 3.3-5 database can be upgraded to 3.4.0.</p>  <a name="eztoc33084_2_2" id="eztoc33084_2_2"></a><h3>MySQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ publish 3.4.0 directory. </div></li> <li><div> Run the database upgrade script:<pre class="wordwrap"><span class="line">mysql -u&lt;username&gt; -p&lt;password&gt; &lt;database&gt; &lt; update/database/mysql/3.4/dbupdate-3.3-5-to-3.4.0.sql</span>
+</pre>  </div></li> 
+</ol>
+ <a name="eztoc33084_2_3" id="eztoc33084_2_3"></a><h3>PostgreSQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ publish 3.4.0 directory. </div></li> <li><div> Run the database upgrade script:<pre class="wordwrap"><span class="line">psql -d &lt;database&gt; -U &lt;dbowner&gt; &lt; update/database/postgresql/3.4/dbupdate-3.3-5-to-3.4.0.sql</span>
+</pre>  </div></li> 
+</ol>
+    <a name="eztoc33084_3" id="eztoc33084_3"></a><h2>Step 3: Running the 3.4.0 upgrade scripts</h2> <p>The 3.4.0 version of eZ publish introduces a couple of new features. In order to make sure that your site is compatible with these features, you'll have to run a couple of upgrade scripts.</p>  <a name="eztoc33084_3_4" id="eztoc33084_3_4"></a><h3>Remote ID</h3> <p>In eZ publish 3.4.0, a new attribute called &quot;remote_id&quot; has been added to content objects, classes and nodes. This attribute stores a global unique ID for an object/class/node. The remote ID is an MD5 hash of the time when the object/class/node was created plus a random value. These IDs are used in order to avoid collisions of identical objects/classes/nodes when importing and exporting data from one site to another. You need to run the &quot;updateremoteid.php&quot; script in order to make sure that all your items that support the remote ID gets one generated:</p>
+<ol>
+ <li><div> Navigate into the eZ publish 3.4.0 directory. </div></li> <li><div> Run the script (replace &quot;example&quot; with the name of your siteaccess(es)):<pre class="wordwrap"><span class="line">php update/common/scripts/updateremoteid.php</span>
+</pre>  </div></li> 
+</ol>
+ <a name="eztoc33084_3_5" id="eztoc33084_3_5"></a><h3>Updating the session data</h3> <p>In eZ publish 3.4.0, the <a href="http://ez.no/products/ez_publish/documentation/incoming/session" target="_self">session functionality</a> has been improved in order to relate a session to a user (see the <a href="http://ez.no/download/ez_publish/changelogs/ez_publish_3_4/changelog_3_4_0" target="_self">3.4.0 changelog</a> for more information). The session data in the &quot;ezsession&quot; table now contain information about the session user. This allows to easily count the number of active registered users and anonymous users. When a user is being removed or disabled, the system will remove the corresponding session(s) in order to automatically log out invalid users. In order to update the entries in the &quot;ezsession&quot; table, you need to run the &quot;updatesession.php&quot; script:</p>
+<ol>
+ <li><div> Navigate into the eZ publish 3.4.0 directory. </div></li> <li><div> Run the script:<pre class="wordwrap"><span class="line">php update/common/scripts/updatesession.php</span>
+</pre>  </div></li> 
+</ol>
+ <a name="eztoc33084_3_6" id="eztoc33084_3_6"></a><h3>Top level nodes/objects changes</h3> <p>In eZ publish 3.4.0, a new top level node/object called &quot;Setup&quot; has been added. You need to run the &quot;updatetoplevel.php&quot; script for your admin siteaccess in order to make sure that all your top level nodes are properly configured (replace &quot;example_admin&quot; with the actual name of your admin siteaccess): </p>
+<ol>
+ <li><div> Navigate into the eZ publish 3.4.0 directory. </div></li> <li><div> Run the script:<pre class="wordwrap"><span class="line">php update/common/scripts/updatetoplevel.php</span>
+</pre>  </div></li> 
+</ol>
+ <p>The script will check the top level nodes and match them with the values defined under the &quot;[NodeSettings]&quot; section of the &quot;content.ini&quot; configuration file or its override. If &quot;content.ini&quot; or its override contains incorrect IDs of the top level nodes, these will be automatically updated. If some of the top level nodes are missing, these will be created.</p> <a name="eztoc33084_3_7" id="eztoc33084_3_7"></a><h3>Changes in the shop order system</h3> <p>In eZ publish 3.4.0, the webshop functionality has been improved (see the <a href="http://ez.no/download/ez_publish/changelogs/ez_publish_3_4/changelog_3_4_0" target="_self">3.4.0 changelog</a> for more information). The list of orders that is stored in the &quot;ezorder&quot; database table now includes the customer's email for each order. If you are using the eZ publish webshop functionality on your site and your order list is not empty, then you need to run the &quot;addorderemail.php&quot; script when upgrading to 3.4.0:</p>
+<ol>
+ <li><div> Navigate into the eZ publish 3.4.0 directory. </div></li> <li><div> Run the script:<pre class="wordwrap"><span class="line">php update/common/scripts/addorderemail.php</span>
+</pre>  </div></li> 
+</ol>
+ <p>The script will modify the &quot;ezorder&quot; table in the database.</p>    <a name="eztoc33084_4" id="eztoc33084_4"></a><h2>Step 4: Updating the system configuration</h2> <p>You are not required to do any configuration changes when upgrading from 3.3-5 to 3.4.0. However, please note that it is not recommended to use &quot;admin&quot; as a name of your administration siteaccess. This name is reserved by the system and your changes to the &quot;admin&quot; siteaccess will be lost during the upgrade process because of overwriting the files in the &quot;settings/siteaccess/admin&quot; directory. Trying to use the &quot;admin&quot; siteaccess may cause problems when upgrading. A typical symptom is that everything is working fine after upgrading, except for some parts of your administration interface, e.g. media and user tabs do not work. To solve this, create a new siteaccess called for example &quot;my_admin&quot; and copy the altered files from your backup to &quot;settings/siteaccess/my_admin&quot;.</p> <a name="eztoc33084_5" id="eztoc33084_5"></a><h2>Step 5: Clearing the caches</h2> <p>Whenever an eZ publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p>
+<ol>
+ <li><div> Navigate into the eZ publish 3.4.0 directory. </div></li> <li><div> Run the clear cache script:<pre class="wordwrap"><span class="line">bin/shell/clearcache.sh --clear-all</span>
+</pre>  </div></li> 
+</ol>
+ <p>Please make sure that all caches are cleared. Sometimes the script is unable to clear caches because of restrictive file/directory permission settings. Make sure that all caches have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.4/from-3.3-5-to-3.4.0 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:35:38 GMT -->
+</html>

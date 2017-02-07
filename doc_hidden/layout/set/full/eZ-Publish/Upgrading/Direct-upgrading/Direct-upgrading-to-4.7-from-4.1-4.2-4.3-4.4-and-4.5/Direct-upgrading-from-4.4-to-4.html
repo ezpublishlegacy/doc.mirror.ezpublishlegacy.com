@@ -1,0 +1,184 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Upgrading/Direct-upgrading/Direct-upgrading-to-4.7-from-4.1-4.2-4.3-4.4-and-4.5/Direct-upgrading-from-4.4-to-4.7 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Direct upgrading from 4.4 to 4.7 / Direct upgrading to 4.7 from 4.1, 4.2, 4.3, 4.4 and 4.5 / Direct upgrading / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Direct upgrading from 4.4 to 4.7</h1>
+</div>
+
+<p>This section describes how to upgrade your existing eZ Publish 4.4 installation&nbsp;directly&nbsp;to version 4.7. Make sure that you have a working backup of the site before you do the actual upgrade, and make sure the installation you are performing&nbsp;the upgrade on is offline.</p><a name="eztoc126939_0_1" id="eztoc126939_0_1"></a><h3>Important upgrade notes:</h3><p>The procedure for upgrading directly from version 4.4 to 4.7 consists of the following steps:</p>
+<ul>
+<li><div>Upgrade the distribution files to 4.7</div></li><li><div>Upgrade custom extensions
+<ul>
+<li><div>4.4 to 4.5</div></li><li><div>4.5 to 4.6</div></li><li><div>4.6 to 4.7</div></li>
+</ul>
+</div></li><li><div>Upgrade the database to 4.7 
+<ul>
+<li><div>4.4 to 4.5</div></li><li><div>4.5 to 4.6</div></li><li><div>4.6 to 4.7</div></li>
+</ul>
+</div></li><li><div>Regenerate the autoload array for extensions</div></li><li><div>Run the system upgrade scripts for 4.7
+<ul>
+<li><div>4.4 to 4.5</div></li><li><div>4.5 to 4.6</div></li><li><div>4.6 to 4.7</div></li>
+</ul>
+</div></li><li><div>Additional upgrade step</div></li><li><div>Enable ezjscore</div></li><li><div>Enable admin2-design for back-end</div></li><li><div>Clear the caches</div></li><li><div>Upgrade extensions</div></li>
+</ul>
+<a name="eztoc126939_1" id="eztoc126939_1"></a><h2>Check for requirements</h2><a name="eztoc126939_1_2" id="eztoc126939_1_2"></a><h3>The eZ Components and PHP requirements</h3><p>The minimum version required of eZ Components with eZ Publish 4.7 is &quot;ezcomponents-ezp47&quot;, containing a fix to the package. This version is bundled in eZ Publish 4.7 Enterprise. eZ Publish 4.7 is compatible with PHP version 5.3 and above, but certified on RHEL 6 and Debian 6, PHP 5.3.x distros. See eZ Publish Requirements for more info.</p><a name="eztoc126939_2" id="eztoc126939_2"></a><h2>Step 1: Upgrade the distribution files</h2><p>The easiest way to upgrade the distribution files is to unpack eZ Publish 4.7 to a separate directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p>
+<ul>
+<li><div>design/example</div></li><li><div>design/example_admin</div></li><li><div>var</div></li><li><div>settings/siteaccess</div></li><li><div>settings/override</div></li><li><div>
+index_cluster.php if running cluster mode<br /><b>Important:&nbsp;f your cluster index file is named this way, copy it under a new, temporary &nbsp;name. Migrating this file is explained later in the procedure.</b></div></li>
+</ul>
+<p>Replace &quot;example&quot; and &quot;example_admin&quot; with the actual names of your site accesses.</p><p><b>Important note: </b>Because the new directory has replaced the original directory, the directory permissions need to be fixed. You have the choice between Shell commands or Alternative shell commands.</p><p>Use the following commands to do this:</p>
+<ul>
+<li><div><b>Shell commands</b></div></li>
+</ul>
+<p>These shell commands will give proper permission to the web server:</p><pre class="wordwrap"><span class="line">cd &lt;/path/to/your/eZ/Publish/directory&gt;</span>
+<span class="line">chmod -R a+rwx design extension settings var</span>
+</pre>
+<ul>
+<li><div><b>Alternative shell commands</b></div></li>
+</ul>
+<p>&nbsp;These commands will setup the permission more correctly, but require knowledge about the running web server (change 'nouser' to http server user).</p><pre class="wordwrap"><span class="line">cd &lt;/path/to/your/eZ/Publish/directory&gt;</span>
+<span class="line">chmod -R og+rwx design extension settings var</span>
+<span class="line">chown -R nouser:nouser design extension settings var</span>
+</pre><a name="eztoc126939_3" id="eztoc126939_3"></a><h2>Step 2: Upgrade custom extensions</h2><p>If you are using custom extensions, the sub-directories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that are included in eZ Publish, which currently are eZ Flow (2.x), eZ Online Editor (5.x), eZ OpenOffice Document format (2.x), eZ JSCore (1.x), eZ Image Editor (1.x), eZ Comments (1.x), eZ Multiupload (1.x), eZ MB Password Expiry (1.x), eZ Network (1.x), eZ REST API Provider (1.x), eZ Script Monitor (1.x), eZ SI, eZ Find (2.x). Note that upgrading the distribution files will overwrite the autoload arrays for extensions. You will need to regenerate the autoload arrays for active extensions later.</p><p>See the dedicated upgrade instructions for eZ Flow and Website Interface below.</p><p>The updated versions of eZ Flow and Website Interface will also install the following extensions:</p>
+<ul>
+<li><div>eZ Website Toolbar</div></li><li><div>eZ Star Rating</div></li><li><div>eZ Google Maps Location</div></li>
+</ul>
+<p><b>Note:</b> For eZ Online Editor 5.x and eZ JS Core you will need to replace the following rewrite rules when using Virtual Hosts:</p><pre class="wordwrap"><span class="line">RewriteRule ^/var/cache/texttoimage/.* - [L]</span>
+<span class="line">RewriteRule ^/var/[^/]+/cache/(texttoimage|public)/.* - [L]</span>
+</pre><p>with:</p><pre class="wordwrap"><span class="line">RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* - [L]</span>
+</pre><p>For more detailed instructions, see the dedicated <a href="../../../../Extensions/eZ-Publish-extensions/Online-Editor.html" target="_self">eZ OE</a> and <a href="../../../../Extensions/eZ-Publish-extensions/eZ-JS-Core.html" target="_self">eZ JS Core</a> doc pages.</p><a name="eztoc126939_4" id="eztoc126939_4"></a><h2>Step 3: Upgrade the database</h2><p>The update script for the database is located in the following locations. Skip the ones that don't apply to the version your upgrading from:</p><pre class="wordwrap"><span class="line">&lt;eZ Publish root&gt;/update/database/&lt;mysql|postgresql&gt;/4.5/dbupdate-4.4.0-to-4.5.0.sql</span>
+<span class="line">&lt;eZ Publish root&gt;/update/database/&lt;mysql|postgresql&gt;/4.6/dbupdate-4.5.0-to-4.6.0.sql</span>
+<span class="line">&lt;eZ Publish root&gt;/update/database/&lt;mysql|postgresql&gt;/4.6/dbupdate-4.6.0-to-4.7.0.sql</span>
+</pre><p>You can run these with the appropriate sql command line tool or application.</p><p>If you are using a DFS&nbsp;cluster, you must run the following query:</p><pre class="wordwrap"><span class="line">ALTER TABLE `ezdfsfile` CHANGE `datatype` `datatype` VARCHAR(255);</span>
+</pre><p>and if you are using a DB cluster, you ust run the following query:</p><pre class="wordwrap"><span class="line">ALTER TABLE `ezdbfile` CHANGE `datatype` `datatype` VARCHAR(255);</span>
+</pre><a name="eztoc126939_4_2_1" id="eztoc126939_4_2_1"></a><h4>MySQL</h4><p>The &quot;ezmysql&quot; database driver has been deprecated in 4.5 and it is recommended to use the &quot;ezmysqli&quot; driver instead. This requires that the &quot;mysqli&quot; extension in PHP is enabled and can be archived by changing the driver in your override or siteaccesses &quot;site.ini.append.php&quot; settings to:</p><pre class="wordwrap"><span class="line">[DatabaseSettings]</span>
+<span class="line">DatabaseImplementation=ezmysqli</span>
+</pre><a name="eztoc126939_4_2_1_0_1" id="eztoc126939_4_2_1_0_1"></a><h6>Cluster</h6><p>The &quot;Mysql DB/DFS Cluster&quot; database back-end has not yet been deprecated, but it is recommended to use the same driver as the main database driver, so change your &quot;file.ini.append.php&quot; settings in override or siteaccesses to use&quot; eZDFSFileHandlerMySQLiBackend&quot; for DFS Cluster or &quot;eZDBFileHandlerMysqliBackend&quot; for DB Cluster.</p><p>Note: The &quot;index_cluster.php&quot; file should be updated to</p><pre class="wordwrap"><span class="line">define( 'STORAGE_BACKEND', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'dfsmysqli' &nbsp;&nbsp;&nbsp;)</span>
+</pre><p>If you use DB cluster, remove &quot;dfs&quot; from the string.</p><a name="eztoc126939_4_2_1_0_2" id="eztoc126939_4_2_1_0_2"></a><h6>Cluster</h6><p>In version 4.7, the way the eZ Publish cluster is configured has completely changed. Until this version, a custom index_cluster.php file had to be created, that contained the configuration, and included the file actually delivevring the assets. This method is deprecated. index_cluster.php now exists by default in the distribution, and cluster configuration is done in the custom config.cluster.php file (or config.php).</p><p>Upgrading will be as simple as replicating the configuration variables (up to a dozen) previously defined in index_cluster.php, and put them in config.cluster.php.</p><p>More details about these directives can be found in the&nbsp;<a href="../../../Technical-manual/4.7/Features/Clustering/Setting-it-up-for-an-eZDFSFileHandler.html" target="_self">DFS</a>&nbsp;or&nbsp;<a href="../../../Technical-manual/4.7/Features/Clustering/Setting-it-up-for-an-eZDBFileHandler.html" target="_self">DB</a>&nbsp;clusters configuration instructions, and more in-depth information about the configuration directives can be found in the&nbsp;<a href="../../../Technical-manual/4.7/Features/Clustering/Cluster-Configuration-Settings.html" target="_self">cluster configuration settings documentation</a>.</p><a name="eztoc126939_5" id="eztoc126939_5"></a><h2>Step 4: Regenerate the autoload array for extensions</h2><p>The autoload system also has some changes, for example the autoload array for extensions is now placed in var/autoload of your eZ Publish installation (along the class changes in extensions itself).</p><p>To regenerate the autoload array, execute the following script from the root of your eZ Publish directory:&nbsp;</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php --extension</span>
+</pre><a name="eztoc126939_6" id="eztoc126939_6"></a><h2>Step 5: Run the system upgrade scripts</h2><a name="eztoc126939_6_2_2" id="eztoc126939_6_2_2"></a><h4>4.4 to 4.5</h4><p>For eZ Publish 4.4 which was upgraded from 4.3, run the following command from the root of your eZ Publish directory:</p><pre class="wordwrap"><span class="line">php update/common/scripts/4.5/updatesectionidentifier.php -s $SITE_ACCESS</span>
+</pre><p><b>Note:</b> Skip this step if your 4.4 installation is not an upgrade from 4.3. If you are uncertain, please run the script.</p><a name="eztoc126939_6_2_3" id="eztoc126939_6_2_3"></a><h4>4.5 to 4.6</h4><p>There are two system upgrade scripts that can be run for the eZ Publish 4.6 upgrade, &quot;<i>removetrashedimages.php</i>&quot; and &quot;<i>updateordernumber.php</i>&quot;.</p><p><b>Script 1:</b> If you want to ensure that no trashed images remain on your setup because of image aliases not being restored when restoring object from trash (issue #017781), you must do the following:</p>
+<ol>
+<li><div>Make sure that no items remain in trash for any users (images from objects in trash would be impossible to restore not doing so)</div></li><li><div>Run the following cleanup script by executing this command:</div></li>
+</ol>
+<pre class="wordwrap"><span class="line">$ php update/common/scripts/4.6/removetrashedimages.php</span>
+</pre><p><b>Note:</b> It is safe to skip this test, this is only to free extra space.</p><p><b>Script 2:</b> You need to run an upgrade script to update webshop order numbers issue (#018233) by running:</p><pre class="wordwrap"><span class="line">$ php update/common/scripts/4.6/updateordernumber.php</span>
+</pre><p><b>Note:</b> If you don’t have webshop or you don’t have orders (table &quot;<i>ezorder</i>&quot;) in your eZ Publish, you don’t have to run this script.</p><a name="eztoc126939_6_2_4" id="eztoc126939_6_2_4"></a><h4>4.6 to 4.7</h4><a name="eztoc126939_6_2_4_1" id="eztoc126939_6_2_4_1"></a><h5>Mobile device detection</h5><p>When upgrading from eZ Publish 4.6 to 4.7 and you are using eZ Flow, you can benefit from the new mobile device detection feature. Put the following settings in your &quot;<i>site.ini.append.php</i>&quot; file:</p><pre class="wordwrap copytoclipboard"><span class="line">[SiteAccessSettings]</span>
+<span class="line">&nbsp;[...]</span>
+<span class="line">&nbsp;DetectMobileDevice=enabled</span>
+<span class="line">&nbsp;MobileSiteAccessURL=http://example.com/iphone</span>
+<span class="line">&nbsp;MobileSiteAccessList[]=iphone</span>
+<span class="line">&nbsp;[...]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[SiteAccessSettings]\r\n [...]\r\n DetectMobileDevice=enabled\r\n MobileSiteAccessURL=http://example.com/iphone\r\n MobileSiteAccessList[]=iphone\r\n [...]' ); return false;" /></p>
+<![endif]--><p>An &quot;iphone&quot; siteaccess is provided out-of-the-box with your eZ Flow installation. Make sure that the MobileSiteAccessURL= points to the &quot;iphone&quot; site access. Note that this is a full URL and needs to include the http:// part.</p><a name="eztoc126939_6_2_4_2" id="eztoc126939_6_2_4_2"></a><h5>The new object edit form in the Administration interface</h5><p>While upgrading eZ Flow to the next release, you will have to replace the following override condition in &quot;settings/siteaccess/&lt;admin siteaccess&gt;/override.ini.append.php&quot;. This is to adjust to the changes in the object edit form in the Administration interface.</p><pre class="wordwrap copytoclipboard"><span class="line">[edit_frontpage]</span>
+<span class="line">Source=content/edit.tpl</span>
+<span class="line">MatchFile=edit/frontpage.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=frontpage</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[edit_frontpage]\r\nSource=content/edit.tpl \r\nMatchFile=edit/frontpage.tpl \r\nSubdir=templates\r\nMatch[class_identifier]=frontpage\r\n' ); return false;" /></p>
+<![endif]--><p>with this new one</p><pre class="wordwrap copytoclipboard"><span class="line">[add_to_block_frontpage]</span>
+<span class="line">Source=content/parts/add_to_block.tpl</span>
+<span class="line">MatchFile=content/parts/add_to_block_frontpage.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=frontpage</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[add_to_block_frontpage]\r\nSource=content/parts/add_to_block.tpl\r\nMatchFile=content/parts/add_to_block_frontpage.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=frontpage' ); return false;" /></p>
+<![endif]--><p>The same operation may have to be done if the same override condition has been added for other class_identifier than &quot;frontpage&quot;.</p><a name="eztoc126939_7" id="eztoc126939_7"></a><h2>Step 6: Additional upgrade steps</h2><p><b>Update &quot;override.ini.append.php&quot;</b></p><p>Content panes are not visible on the &quot;User accounts&quot; tab in the back-end. To fix it on an already-installed eZPublish, remove the following rules from your &quot;override.ini.append.php&quot; for your admin siteaccess:</p><pre class="wordwrap copytoclipboard"><span class="line">[window_controls]</span>
+<span class="line">Source=window_controls.tpl</span>
+<span class="line">MatchFile=window_controls_user.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[navigation_part_identifier]=ezusernavigationpart</span>
+<span class="line">&nbsp;</span>
+<span class="line">[windows]</span>
+<span class="line">Source=windows.tpl</span>
+<span class="line">MatchFile=windows_user.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[navigation_part_identifier]=ezusernavigationpart</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[window_controls]\r\nSource=window_controls.tpl\r\nMatchFile=window_controls_user.tpl\r\nSubdir=templates\r\nMatch[navigation_part_identifier]=ezusernavigationpart\r\n\r\n[windows]\r\nSource=windows.tpl\r\nMatchFile=windows_user.tpl\r\nSubdir=templates\r\nMatch[navigation_part_identifier]=ezusernavigationpart' ); return false;" /></p>
+<![endif]--><p><b>Deprecated function (ezi18n()) in eZ Starrating</b></p><p>There is a deprecated function (ezi18n()) in extension eZ Starrating for eZ Publish versions 4.2, 4.3, 4.4.</p><p>This will generate an error if you try to clear the cache, when doing a direct upgrade to 4.7.</p><p>You need to manually disable this extension:</p><pre class="wordwrap"><span class="line">edit settings/override/site.ini.append.php and remove or comment the following line</span>
+<span class="line">ActiveExtensions[]=ezstarrating</span>
+</pre><p>You need to activate the extension again after upgrading the respective packages</p><p>... and clear the cache after disabling it. See separate step below.</p><a name="eztoc126939_8" id="eztoc126939_8"></a><h2>Step 7: Clear the caches</h2><p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p>
+<ol>
+<li><div>Navigate into the eZ Publish 4.5 directory.</div></li><li><div>Run the script using the following shell command:</div></li>
+</ol>
+<pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre><p>Purging ensures that the caches are physically removed. When the &quot;--purge&quot; parameter is not specified, the caches will be expired but not removed.</p><p>Sometimes the script is unable to clear all cache files because of restrictive file/directory permission settings. Make sure that all cache files have been cleared by inspecting the contents of the various cache sub-directories within the &quot;var&quot; directory (typically the &quot;var/cache/&quot; and &quot;var/&lt;name_of_siteaccess&gt;/cache/&quot; directories). If there are any cache files left, you need to remove them manually.</p><a name="eztoc126939_9" id="eztoc126939_9"></a><h2>Step 8: Upgrade extensions</h2><p>The first thing to do is to change the extensions permissions. An example on how this is done:</p><pre class="wordwrap"><span class="line">$chmod -R a+rwx extension</span>
+</pre><a name="eztoc126939_9_3" id="eztoc126939_9_3"></a><h3>Mobile device detection</h3><p>When upgrading from eZ Publish 4.6 to 4.7 and you are using eZ Flow, you can benefit from the new mobile device detection feature. Put the following settings in your &quot;<i>site.ini.append.php</i>&quot; file:</p><pre class="wordwrap copytoclipboard"><span class="line">[SiteAccessSettings]</span>
+<span class="line">[...]</span>
+<span class="line">DetectMobileDevice=enabled</span>
+<span class="line">MobileSiteAccessURL=http://m.example.com/</span>
+<span class="line">MobileSiteAccessList[]=ezresponsive</span>
+<span class="line">MobileSiteAccessList[]=ezdemo</span>
+<span class="line">[...]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[SiteAccessSettings]\r\n[...]\r\nDetectMobileDevice=enabled\r\nMobileSiteAccessURL=http://m.example.com/\r\nMobileSiteAccessList[]=ezresponsive\r\nMobileSiteAccessList[]=ezdemo\r\n[...]' ); return false;" /></p>
+<![endif]--><p>An &quot;iphone&quot; siteaccess is provided out-of-the-box with your eZ Flow installation. Make sure that the MobileSiteAccessURL= points to the &quot;iphone&quot; site access. Note that this is a full URL and needs to include the http:// part.</p><a name="eztoc126939_9_4" id="eztoc126939_9_4"></a><h3>New object edit form in the Administration interface</h3><p>While upgrading eZ Flow to the next release, you will have to replace the following override condition in &quot;settings/siteaccess/&lt;admin siteaccess&gt;/override.ini.append.php&quot;. This is to adjust to the changes in the object edit form in the Administration interface.</p><pre class="wordwrap copytoclipboard"><span class="line">[edit_frontpage]</span>
+<span class="line">Source=content/edit.tpl</span>
+<span class="line">MatchFile=edit/frontpage.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=frontpage</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[edit_frontpage]\r\nSource=content/edit.tpl\r\nMatchFile=edit/frontpage.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=frontpage' ); return false;" /></p>
+<![endif]--><p>with this new one</p><pre class="wordwrap copytoclipboard"><span class="line">[add_to_block_frontpage]</span>
+<span class="line">Source=content/parts/add_to_block.tpl</span>
+<span class="line">MatchFile=content/parts/add_to_block_frontpage.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=frontpage</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[add_to_block_frontpage]\r\nSource=content/parts/add_to_block.tpl\r\nMatchFile=content/parts/add_to_block_frontpage.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=frontpage\r\n' ); return false;" /></p>
+<![endif]--><p>The same operation may have to be done if the same override condition has been added for other class_identifier than &quot;frontpage&quot;.</p><a name="eztoc126939_9_5" id="eztoc126939_9_5"></a><h3>eZ Flow &amp; eZ Webin</h3><p>When using eZ Webin and eZ Flow, these extensions will also need to be updated. Follow the dedicated upgrade instructions, depending on what version you are upgrading from.</p><p>4.4 to 4.5</p><p>
+<a href="../../../../Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-2.html" id="vmvc" title="http://ez.no/doc/extensions/website_interface/website_interface_1_7_upgrade" target="_self">eZ Webin</a>&nbsp;1.7 to 1.8<br />
+or<br /><a href="../../../../Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-7.html" id="qorj" title="http://ez.no/doc/extensions/ez_flow/ez_flow_2_2_upgrade" target="_self">eZ Flow</a>&nbsp;2.2 to 2.3</p><a name="eztoc126939_9_5_5" id="eztoc126939_9_5_5"></a><h4>4.5 to 4.6</h4><p>
+<a href="../../../../Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-2.html" id="vmvc" title="http://ez.no/doc/extensions/website_interface/website_interface_1_7_upgrade" target="_self">eZ Webin</a>&nbsp;1.8 to 1.9<br />
+or<br /><a href="../../../../Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-7.html" id="qorj" title="http://ez.no/doc/extensions/ez_flow/ez_flow_2_2_upgrade" target="_self">eZ Flow</a>&nbsp;2.3 to 2.4</p><a name="eztoc126939_9_5_6" id="eztoc126939_9_5_6"></a><h4>4.6 to 4.7</h4><p>
+<a href="../../../../Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-10.html" id="vmvc" title="http://ez.no/doc/extensions/website_interface/website_interface_1_7_upgrade" target="_self">eZ Webin</a>&nbsp;1.9 to 2.0<br />
+or<br /><a href="../../../../Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-3.html" id="qorj" title="http://ez.no/doc/extensions/ez_flow/ez_flow_2_2_upgrade" target="_self">eZ Flow</a>&nbsp;2.4 to 2.5</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Upgrading/Direct-upgrading/Direct-upgrading-to-4.7-from-4.1-4.2-4.3-4.4-and-4.5/Direct-upgrading-from-4.4-to-4.7 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:49 GMT -->
+</html>

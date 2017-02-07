@@ -1,0 +1,65 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Content-Staging/eZ-Content-Staging-LS-5.1.0/FAQ/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:08:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>FAQ / eZ Content Staging LS 5.1.0 / eZ Content Staging / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>FAQ</h1>
+</div>
+
+<p>This document includes a list of frequently asked questions about eZ Content Staging LS 5.1.0 extension.</p><p>
+<b>Q:</b> Can a feed be defined on a subtree of already existing content?<br /><b>A:</b> It is recommended to have no content for either source or target feed sources when creating the feed.&nbsp;However, synchronization is possible if both source and target servers share the same data (for example, if target servers use a DB copy of the source).&nbsp;In this case, the feed initialization event may seem to fail, but it should not be needed as the the &quot;<i>remote_id</i>&quot; for the main nodes is already the same. Also, if we apply a copy of the source's database into the targets the&nbsp;feed initialization event won't be necessary. The&nbsp;feed initialization event exists to make sure that the content in source and target servers share the same remote-id, and using a database dump from the source to build the content subtree on target servers will make them to have the same information, including the same remote-id's. So, in this case, the&nbsp;feed initialization event&nbsp;will not be required.</p><p>
+<b>Q:</b> Can content sync happen immediately without intervention of the editor?<br /><b>A:</b> Not yet.</p><p>
+<b>Q:</b> Can content sync happen via a cronjob?<br /><b>A:</b> Yes.</p><p>
+<b>Q:</b> Are all datatypes supported?<br /><b>A:</b> The extension support all datatypes from eZ Publish, plus datatypes that support fully <i>toString()</i>, <i>fromString()</i> calls and do not rely on <i>object_id/node_id</i> or other database data.</p><p>
+<b>Q:</b> Are custom tags for rich text supported?<br /><b>A:</b> All tags that do not rely on <i>object_id/node_id</i> or other database data should be fine.</p><p>
+<b>Q:</b> Is the REST protocol used for communication between the two servers documented?<br /><b>A:</b> Yes. It is in fact a &quot;preview&quot; version of the protocol that will be the official next version of the ezrest api. Additional&nbsp;documentation is provided with the sources,&nbsp;in the <i>doc/</i> folder within the extension, in the <i>specs.ods</i> file.</p><p>
+<b>Q:</b> How does the extension cope with synchronization of &quot;dictionary&quot; data, such as sections, object states, content class definition?<br /><b>A:</b> So far, this is left to manual synchronization.</p><p>
+<b>Q:</b>&nbsp;Can I continue using node id's and object id's in override settings?<br /><b>A:</b>&nbsp;Not for new synchronized content as these will get separate id's over time, remote id's and identifier's are however safe to use.</p><p>
+<b>Q:</b>&nbsp;Can I use the REST API in this extension independently of a staging context, and have AJAX clients use it to edit content on a single eZ Publish server?<br />
+<b>A:</b>&nbsp;Yes but No. This has not been extensively tested or supported, but it should work in theory. The main hurdle is setting up the REST layer to use the current eZ session cookie for authentication purposes;&nbsp; to this end you should set in&nbsp;<i>rest.ini AuthenticationStyle=ezpRestSessionAuthStyle</i>.<br />Note: Doing so means that the &quot;anonymous user&quot; can access all methods available via the REST API. Be aware that some methods may not enforce proper policy checking.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Content-Staging/eZ-Content-Staging-LS-5.1.0/FAQ/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:08:11 GMT -->
+</html>

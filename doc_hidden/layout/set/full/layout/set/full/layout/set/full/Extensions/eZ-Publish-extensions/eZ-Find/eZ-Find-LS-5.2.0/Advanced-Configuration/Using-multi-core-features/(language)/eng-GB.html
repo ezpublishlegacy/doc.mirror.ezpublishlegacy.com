@@ -1,0 +1,87 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.2.0/Advanced-Configuration/Using-multi-core-features/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:43:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Using multi-core features / Advanced Configuration / eZ Find LS 5.2.0 / eZ Find / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Using multi-core features</h1>
+</div>
+
+<p>As mentioned before, you are able to set up a single Solr instance, the backend engine of eZ Find, to serve multiple sites (it does not even matter if these are on the same box). Similar to a database, Solr is capable of having multiple search indexes from one servlet, because Solr supports the concepts of multiple &quot;cores&quot;. This means that it can run multiple instances of itself inside a servlet container. Each core has its own set of configuration files (including the &quot;schema&quot;) and dedicated directories.</p><p>Lets go through the steps of setting up a Solr instance which must serve two sites. To keep it simple we'll call them <b>ezlabs</b> <b>.no</b> and <b>ez.no.</b></p>
+<ol>
+<li><div><p>The easiest way is to first prepare a central location for the Solr Index. This can for example be:</p><pre class="wordwrap"><span class="line">/srv/solr</span>
+</pre></div></li><li><div>&nbsp;Next you should create two additional directories inside it, as follows:<pre class="wordwrap"><span class="line">/srv/solr/java</span>
+<span class="line">/srv/solr/cores</span>
+</pre></div></li><li><div>
+&nbsp;Inside /srv/solr/java you should store a copy of the contents of the java directory of your eZ Find installation, or if you don't have one yet, download it from <a href="http://share.ez.no/downloads" target="_self">http://share.ez.no/downloads</a>.<br /><b> Note:</b>&nbsp;Enterprise customers can download from the download page in the Service Portal&nbsp;</div></li><li><div>&nbsp;Next create a symlink for the <b>solr/lib</b> plugin directory inside /srv/solr/cores like this:<pre class="wordwrap"><span class="line">ln -s /srv/solr/java/solr/lib /srv/solr/cores</span>
+</pre></div></li><li><div>
+&nbsp;Create additional directories for each of your sites, called <b>ezlabs</b> and <b>ez</b> in your /srv/solr/cores. Both of them must contain a data and a conf sub-directory.<br />&nbsp;Your file structure should look something like this:<pre class="wordwrap copytoclipboard"><span class="line">/srv/solr/cores</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ezlabsno/data</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ezlabsno/conf</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ezno/data</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ezno/conf</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '/srv/solr/cores\r\n       ezlabsno/data\r\n       ezlabsno/conf\r\n\r\n       ezno/data\r\n       ezno/conf' ); return false;" /></p>
+<![endif]--></div></li><li><div>&nbsp;In both conf directories you must then copy the contents of the folder extension/ezfind/java/solr/conf/* and adapt the Solr dataDir. </div></li><li><div>&nbsp;Next create a solr.xml file inside /srv/solr/cores/solr.xml with the following content:<pre class="wordwrap copytoclipboard"><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
+<span class="line">&lt;!-- snip the comments from Apache wiki --&gt;</span>
+<span class="line">&lt;solr persistent=&quot;true&quot; sharedLib=&quot;lib&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;cores adminPath=&quot;/admin/cores&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;core name=&quot;ezlabsno&quot; instanceDir=&quot;ezlabsno&quot; /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;core name=&quot;ezno&quot; instanceDir=&quot;ezno&quot; /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/cores&gt;</span>
+<span class="line">&lt;/solr&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;\r\n&lt;!-- snip the comments from Apache wiki --&gt;\r\n&lt;solr persistent=&quot;true&quot; sharedLib=&quot;lib&quot;&gt;\r\n    &lt;cores adminPath=&quot;/admin/cores&quot;&gt;\r\n         &lt;core name=&quot;ezlabsno&quot; instanceDir=&quot;ezlabsno&quot; /&gt;\r\n         &lt;core name=&quot;ezno&quot; instanceDir=&quot;ezno&quot; /&gt;\r\n    &lt;/cores&gt;\r\n&lt;/solr&gt;' ); return false;" /></p>
+<![endif]--></div></li><li><div>&nbsp;If you already have indexed data for one or both of your sites, you may stop Solr from indexing them again. You should then copy the index and spellchecker directories to your data directories (in /srv/solr/cores/ezlabsno/data and /srv/solr/cores/ezno/data). </div></li><li><div>&nbsp;Now you should restart Solr with the following parameters:<pre class="wordwrap"><span class="line">cd /srv/solr/java; java -Dsolr.solr.home=/srv/solr/cores -jar start.jar</span>
+</pre></div></li><li><div>&nbsp;It's important to keep an eye on the output, in case of potential errors (for example things that are permission related). </div></li><li><div>&nbsp;And finally you can configure the individual eZ Publish and eZ Find instances with the dedicated <b>&nbsp;</b>URLs as base URLs in solr.ini: </div></li>
+</ol>
+<pre class="wordwrap"><span class="line">http://localhost:8983/solr/ezlabsno</span>
+<span class="line">&nbsp;</span>
+<span class="line">http://localhost:8983/solr/ezno</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.2.0/Advanced-Configuration/Using-multi-core-features/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:43:31 GMT -->
+</html>

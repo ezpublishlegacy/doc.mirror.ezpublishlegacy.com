@@ -1,0 +1,66 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/SiteAccessSettings/RedirectOnNormalize/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:02:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>RedirectOnNormalize / [SiteAccessSettings] / site.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>RedirectOnNormalize</h1>
+</div>
+<h3>Summary</h3>
+Enable redirection to the normalized siteaccess<h3>Usage</h3>
+<pre class="pfix"><pre class="wordwrap"><span class="line">RedirectOnNormalize=disabled|enabled</span>
+</pre></pre><h3>Description</h3>
+<p>This setting is disabled by default.</p><p>If enabled, it will do a HTTP 301 redirect to the correct siteaccess. If you use the URL as a cache block key, caches will only be generated for the siteaccess you are redirected to.</p><p>If disabled, the page URL stays the same (like &quot;engæøå&quot;) but the correct siteaccess (like &quot;eng&quot;) is matched. So you get the same page as if you had typed &quot;eng&quot;. If you use the URL as a cache block key, different caches will be generated for all requested siteaccesses (like &quot;eng&quot;, &quot;engæøå&quot;, &quot;eng_&quot;, &quot;eng__&quot;...).&nbsp;Because of this, it is strongly recommended to set RedirectOnNormalize to enabled.</p><p>This setting has no effect if <a href="../../NormalizeSANames.html" target="_self">NormalizeSANames</a> is disabled.</p><h3>Examples</h3>
+<pre class="wordwrap copytoclipboard"><span class="line"># Enabling non automatic conversion of siteaccess names</span>
+<span class="line"># NormalizeSANames=enabled - for backward compability (all non alpha characters are converted to underscore)</span>
+<span class="line"># RedirectOnNormalize=enabled - when transformation occurs, the page will hold a 301 status</span>
+<span class="line">NormalizeSANames=enabled</span>
+<span class="line">RedirectOnNormalize=disabled</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '# Enabling non automatic conversion of siteaccess names\r\n# NormalizeSANames=enabled - for backward compability (all non alpha characters are converted to underscore)\r\n# RedirectOnNormalize=enabled - when transformation occurs, the page will hold a 301 status\r\nNormalizeSANames=enabled\r\nRedirectOnNormalize=disabled' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/SiteAccessSettings/RedirectOnNormalize/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:02:19 GMT -->
+</html>

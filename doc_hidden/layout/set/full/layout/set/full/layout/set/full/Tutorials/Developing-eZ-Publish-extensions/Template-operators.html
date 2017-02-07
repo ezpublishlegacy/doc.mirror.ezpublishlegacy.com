@@ -1,0 +1,147 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/Template-operators by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:02:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                  
+    <title>Template operators / Developing eZ Publish extensions / Tutorials / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Template operators</h1>
+</div>
+
+<p>Another way to access functions in your extensions is to use template operators. While eZ Publish contains many template operators, we will define a new template operator called &quot;result_type&quot; with a $result_type parameter.</p><p>We will use the parameter to control the amount of data that is shown in our database table. The template command {jac('list')} shows an array of data and {jac('count')} shows the amount of data. We will use the same functions as in the template fetch example: fetch('modul1', 'list' , ...) and fetch( 'modul1', 'count', ... )</p><p>The definition of the existing template operators in the jacextension is done in the file extension/jacextension/autoloads/ eztemplateautoload.php (see Listing 18). The template operator’s actions are defined in a custom PHP class (in our case, in JACOperator of the file extension/jacextension/autoloads/ jacoperator.php) (see Listing 19).</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">// Which operators will load automatically?</span>
+<span class="line">$eZTemplateOperatorArray = array();</span>
+<span class="line">&nbsp;</span>
+<span class="line">// Operator: jacdata</span>
+<span class="line">$eZTemplateOperatorArray[] = array( 'class' =&gt; 'JACOperator',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'operator_names' =&gt; array( 'jac' ) );</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt; \r\n\r\n// Which operators will load automatically? \r\n$eZTemplateOperatorArray = array();\r\n\r\n// Operator: jacdata \r\n$eZTemplateOperatorArray[] = array( \'class\' =&gt; \'JACOperator\',\r\n                            \'operator_names\' =&gt; array( \'jac\' ) ); \r\n?&gt;\r\n' ); return false;" /></p>
+<![endif]--><p><i>Listing 18. extension/jacextension/autoloads/eztemplateautoload.php</i></p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">/**</span>
+<span class="line">&nbsp;* Operator: jac('list') and jac('count') &lt;br&gt;</span>
+<span class="line">&nbsp;* Count: {jac('count')} &lt;br&gt;</span>
+<span class="line">&nbsp;* Liste: {jac('list')|attribute(show)}</span>
+<span class="line">&nbsp;*/</span>
+<span class="line">class JACOperator</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;public $Operators;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;public function __construct( $name = 'jac' )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;Operators = array( $name );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Returns the template operators.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return array</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;function operatorList()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $this-&gt;Operators;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Returns true to tell the template engine that the parameter list</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* exists per operator type.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;public function namedParameterPerOperator()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @see eZTemplateOperator::namedParameterList</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;public function namedParameterList()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return array( 'jac' =&gt; array( 'result_type' =&gt; array( 'type' =&gt; 'string',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'required' =&gt; true,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'default' =&gt; 'list' ))</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Depending of the parameters that have been transmitted, fetch objects JACExtensionData</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* {jac('list)} or count data {jac('count')}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public function modify( $tpl, $operatorName, $operatorParameters, &nbsp;$rootNamespace, $currentNamespace, &amp;$operatorValue, $namedParameters &nbsp;)</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$result_type = $namedParameters['result_type'];</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if( $result_type == 'list')</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$operatorValue = JACExtensionData::fetchList(true);</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if( $result_type == 'count')</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$operatorValue = JACExtensionData::getListCount();</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">}</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\n/** \r\n * Operator: jac(\'list\') and jac(\'count\') &lt;br&gt; \r\n * Count: {jac(\'count\')} &lt;br&gt; \r\n * Liste: {jac(\'list\')|attribute(show)} \r\n */ \r\nclass JACOperator\r\n{ \r\n    public $Operators;\r\n\r\n    public function __construct( $name = \'jac\' )\r\n    { \r\n        $this-&gt;Operators = array( $name ); \r\n    }\r\n\r\n    /** \r\n     * Returns the template operators.\r\n     * @return array\r\n     */ \r\n    function operatorList()\r\n    { \r\n        return $this-&gt;Operators; \r\n    }\r\n \r\n    /**\r\n     * Returns true to tell the template engine that the parameter list \r\n     * exists per operator type. \r\n     */ \r\n    public function namedParameterPerOperator() \r\n    { \r\n        return true; \r\n    }\r\n\r\n    /**\r\n     * @see eZTemplateOperator::namedParameterList \r\n     **/ \r\n    public function namedParameterList() \r\n    { \r\n        return array( \'jac\' =&gt; array( \'result_type\' =&gt; array( \'type\' =&gt; \'string\',\r\n                                                     \'required\' =&gt; true, \r\n                                                     \'default\' =&gt; \'list\' ))\r\n                      ); \r\n    }\r\n\r\n    /**\r\n     * Depending of the parameters that have been transmitted, fetch objects JACExtensionData \r\n     * {jac(\'list)} or count data {jac(\'count\')} \r\n     */ \r\n     public function modify( $tpl, $operatorName, $operatorParameters,  $rootNamespace, $currentNamespace, &amp;$operatorValue, $namedParameters  )\r\n    { \r\n        $result_type = $namedParameters[\'result_type\']; \r\n        if( $result_type == \'list\') \r\n            $operatorValue = JACExtensionData::fetchList(true); \r\n        else if( $result_type == \'count\') \r\n            $operatorValue = JACExtensionData::getListCount(); \r\n    } \r\n} \r\n?&gt;\r\n' ); return false;" /></p>
+<![endif]--><p>
+<i>Listing 19. extension/jacextension/autoloads/jacoperator.php</i><br />And of course, do not forget to regenerate the autoloads :).</p><p>To tell eZ Publish that jacextension contains template operators, we have to define it in the eZ Publish configuration file extension/jacextension/settings/site.ini.append.php with ExtensionAutoloadPath[]=jacextension (see Listing 20).</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /* #?ini charset=&quot;utf-8&quot;?</span>
+<span class="line">...</span>
+<span class="line"># search for template operators in jaceextension</span>
+<span class="line">[TemplateSettings]</span>
+<span class="line">ExtensionAutoloadPath[]=jacextension</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /* #?ini charset=&quot;utf-8&quot;? \r\n... \r\n# search for template operators in jaceextension \r\n[TemplateSettings]\r\nExtensionAutoloadPath[]=jacextension\r\n*/ ?&gt;\r\n' ); return false;" /></p>
+<![endif]--><p><i>Listing 20. extension/jacextension/settings/site.ini.append.php</i></p><p>To check our template fetch functions fetch('modul1', 'list', hash('as_object', true() ) ) and fetch( 'modul1', 'count', hash() ) of the template operator jac('list') or jac('count') we extend the template list.tpl of the view list (see Listing 21) .</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;h2&gt;Template Operator: jac('count') and jac('list')&lt;/h2&gt;</span>
+<span class="line">Count: {jac( 'count' )} &lt;br /&gt;</span>
+<span class="line">List: {jac( 'list' )|attribute( 'show' )}</span>
+<span class="line">&lt;hr /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;h2&gt;Template Fetch Functions:</span>
+<span class="line">fetch( 'modul1','count', hash() )&lt;br /&gt;&lt;br /&gt;</span>
+<span class="line">fetch( 'modul1','list', hash( 'as_object', true() ) )&lt;/h2&gt;</span>
+<span class="line">Count: {fetch( 'modul1', 'count', hash() )} &lt;br&gt;</span>
+<span class="line">List: {fetch( 'modul1', 'list', hash( 'as_object', true() ) )|attribute( 'show' )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;h2&gt;Template Operator: jac(\'count\') and jac(\'list\')&lt;/h2&gt; \r\nCount: {jac( \'count\' )} &lt;br /&gt; \r\nList: {jac( \'list\' )|attribute( \'show\' )} \r\n&lt;hr /&gt;\r\n\r\n&lt;h2&gt;Template Fetch Functions: \r\nfetch( \'modul1\',\'count\', hash() )&lt;br /&gt;&lt;br /&gt; \r\nfetch( \'modul1\',\'list\', hash( \'as_object\', true() ) )&lt;/h2&gt; \r\nCount: {fetch( \'modul1\', \'count\', hash() )} &lt;br&gt; \r\nList: {fetch( \'modul1\', \'list\', hash( \'as_object\', true() ) )|attribute( \'show\' )}\r\n' ); return false;" /></p>
+<![endif]--><p><i>Listing 21. Testing the custom Template Fetch functions and the template operator - extension/jacextension/design/standard/templates/modul1/list.tpl</i></p><p>We open the view by, for example, accessing the URL http://localhost/ez/index.php/plain_site/modul1/list/tableblue/1234</p><p>Apart from the example array $data_array, it must show the data of the database table jacextension_data twice, once with the template operators and another time with the template fetch functions. This shows that there are different options for accessing the same functions in your extension in a template.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/Template-operators by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:02:17 GMT -->
+</html>

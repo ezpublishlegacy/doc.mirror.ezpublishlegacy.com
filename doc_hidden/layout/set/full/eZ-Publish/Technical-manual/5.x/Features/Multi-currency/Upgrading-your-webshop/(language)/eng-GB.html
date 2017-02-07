@@ -1,0 +1,133 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-currency/Upgrading-your-webshop/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Upgrading your webshop / Multi-currency / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Upgrading your webshop</h1>
+</div>
+
+ <p>If you have just upgraded your eZ Publish installation in order to start using multiple currencies, you will need to <a href="../../Creating-a-new-currency.html" target="_self">create currencies</a> and convert all your products to multi-price format using the &quot;convertprice2multiprice.php&quot; script located in the &quot;bin/php/&quot; directory. Please note that you should launch this script from the root of your eZ Publish installation.</p> <p>The script will go through all classes and objects containing an attribute of the <a href="../../../../../4.x/Reference/Datatypes/Price.html" target="_self">price</a> datatype and create an attribute of the <a href="../../../../../4.x/Reference/Datatypes/Multi-price.html" target="_self">multi-price</a> datatype instead without changing the identifiers of the attributes, objects and classes. This means that your overrides will still be applied to converted objects (please refer to the &quot;<a href="../../Multi-price-products.html#templates" target="_self">Templates for viewing multiple products</a>&quot; section if you wish to display only price in the preferred currency to a customer).</p> <p>It is recommended to create all the currencies (including your locale currency) and check their exchange rates before launching the script.</p>  <a name="eztoc132479_1" id="eztoc132479_1"></a><h2>Example</h2> <p>If your locale currency is USD, one of your simple price products costs for example $100 and you wish to start using the multi-currency feature, you can create for example the following three currencies: </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Currency code</p> 
+  </th> <th >   <p>Currency rate</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>EUR</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>NOK</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>7.9675</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>USD</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1.2104</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>These rates can be for example auto rates retrieved from the website of the European central bank.</p> <p>
+After successful execution of the &quot;convertprice2multiprice.php&quot; script the product with $100 simple price will be automatically converted to a multi-price product with one custom price (base price) and two auto prices as shown in the following screenshot. <br /></p>
+<div class="object-center">        <img src="../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/features/multi_currency/after_update_script/30640-1-eng-GB/after_update_script_doc.png" alt="The resulting prices after product upgrading." />
+ <p>The resulting prices after product upgrading.</p>
+
+
+
+
+
+
+
+</div><p>
+ <br />As you can see, the script converts the base price from USD to EUR and NOK using the existing currency exchange rates.</p> <p>If you have forgotten to create your locale currency, the script will automatically create it with custom rate set to 1. The table of currencies will then look like this: </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Currency code</p> 
+  </th> <th >   <p>Currency rate</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>EUR</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>NOK</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>7.9675</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>USD</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>These rates are incorrect (1 USD does not cost 1 EUR). The auto prices for all converted products will be also incorrect since generated according to incorrect currency rates.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-currency/Upgrading-your-webshop/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:14 GMT -->
+</html>

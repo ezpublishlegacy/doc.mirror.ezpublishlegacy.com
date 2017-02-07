@@ -1,0 +1,81 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/SiteAccessSettings/HostMatchType by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>HostMatchType / [SiteAccessSettings] / site.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>HostMatchType</h1>
+</div>
+<h3>Summary</h3>
+Sets which type of host matching to use to select the siteaccess.<h3>Usage</h3>
+<pre class="pfix"> <p>HostMatchType=disabled|map|element|text|regexp</p></pre><h3>Description</h3>
+ <p>Use host match when you want to select the siteaccess based on the host part of the URL. Host matching can be used in four different modes or be disabled completely. The available options are:</p>
+<ul>
+ <li><div>  <b>disabled</b> - Disables host matching. If host matching is specified in the <a href="MatchOrder.html" target="_self">MatchOrder</a> setting it will be ignored. </div></li> <li><div>  <b>map</b> - Select the siteaccess based on the complete hostname. Specify the mapping between a hostname and the siteaccess to use with the <a href="HostMatchMapItems.html" target="_self">HostMatchMapItems</a> setting. </div></li> <li><div>  <b>element</b> - The siteaccess is specified by a one of the subdomains that are part of the hostname. Select which part of the hostname (separated by dots) that specifies the siteaccess with the <a href="HostMatchElement.html" target="_self">HostMatchElement</a> setting. </div></li> <li><div>  <b>text</b> - The siteaccess is given by some arbitrary part of the hostname with a fixed pre and post text. Set the pre and post text with the <a href="HostMatchSubtextPre.html" target="_self">HostMatchSubtextPre</a> and <a href="HostMatchSubtextPost.html" target="_self">HostMatchSubtextPost</a> settings. </div></li> <li><div>  <b>regexp</b> - Use a regular expression to obtain the siteaccess name from the hostname. Set the regular expression and the submatch to use with the <a href="HostMatchRegexp.html" target="_self">HostMatchRegexp</a> and <a href="HostMatchRegexpItem.html" target="_self">HostMatchRegexpItem</a> settings. </div></li> 
+</ul>
+<h3>Examples</h3>
+   <a name="eztoc89450_0_1" id="eztoc89450_0_1"></a><h3>Map matching</h3> <pre class="wordwrap copytoclipboard"><span class="line">HostMatchType=map</span>
+<span class="line">HostMatchMapItems[]=mydomain.no;user</span>
+<span class="line">HostMatchMapItems[]=admin.mydomain.no;admin</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\nHostMatchType=map\r\nHostMatchMapItems[]=mydomain.no;user\r\nHostMatchMapItems[]=admin.mydomain.no;admin\r\n' ); return false;" /></p>
+<![endif]--> <p>This configuration uses the map hostmatching type. If the site is acccessed using the domain mydomain.no the siteaccess named <i>user</i> is used. If the domain admin.mydomain.no is used the <i>admin</i> siteaccess is used instead.</p>   <a name="eztoc89450_0_2" id="eztoc89450_0_2"></a><h3>Element matching</h3> <pre class="wordwrap copytoclipboard"><span class="line">HostMatchType=element</span>
+<span class="line">HostMatchElement=1</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\nHostMatchType=element\r\nHostMatchElement=1\r\n' ); return false;" /></p>
+<![endif]--> <p>This configuration uses the second element in the hostname as siteaccess using element matching. For example the hostname first.second.third.com yields the siteaccess <i>second</i>.</p>   <a name="eztoc89450_0_3" id="eztoc89450_0_3"></a><h3>Text matching</h3> <pre class="wordwrap copytoclipboard"><span class="line">HostMatchType=text</span>
+<span class="line">HostMatchSubtextPre=my</span>
+<span class="line">HostMatchSubtextPost=site.ez.no</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\nHostMatchType=text\r\nHostMatchSubtextPre=my\r\nHostMatchSubtextPost=site.ez.no\r\n' ); return false;" /></p>
+<![endif]--> <p>This text mathcing configuration uses everything between my and site.ez.no as the siteaccess. E.g myadminsite.ez.no would produce the siteaccess <i>admin</i>. The hostname myusersite.ez.no produces the siteaccessname <i>user</i>.</p>   <a name="eztoc89450_0_4" id="eztoc89450_0_4"></a><h3>Regexp matching</h3> <pre class="wordwrap copytoclipboard"><span class="line">HostMatchType=regexp</span>
+<span class="line">HostMatchRegexp=^(.+)\.example\.com</span>
+<span class="line">HostMatchRegexpItem=1</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\nHostMatchType=regexp\r\nHostMatchRegexp=^(.+)\.example\.com\r\nHostMatchRegexpItem=1\r\n' ); return false;" /></p>
+<![endif]--> <p>This regexp setup uses the regular expression ^(.+)\.example\.com to match anything in front of .example.com. The first match is set up to hold the siteaccess. E.g the hostname test.example.com yields the siteaccess <i>test</i>.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/SiteAccessSettings/HostMatchType by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:22 GMT -->
+</html>

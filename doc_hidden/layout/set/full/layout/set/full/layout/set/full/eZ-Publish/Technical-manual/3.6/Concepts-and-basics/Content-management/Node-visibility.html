@@ -1,0 +1,143 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Concepts-and-basics/Content-management/Node-visibility by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:22:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Node visibility / Content management / Concepts and basics / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Node visibility</h1>
+</div>
+
+ <p>Since publishing means adding an object (by the way of a node) to the content tree, unpublishing would imply the removal of the object from the tree. Once an object is published, it can not be unpublished because eZ publish does not provide such a feature. Instead, the system provides a hiding mechanism which can be used to change the visibility of nodes. The hide feature makes it possible to prevent the system from displaying the contents of published objects. This is achieved by denying access to the nodes. A single node or a subtree of nodes can be hidden either by a user or by the system. A node can have one of the following visibility statuses:</p> 
+<ul>
+ <li><div> Visible </div></li> <li><div> Hidden </div></li> <li><div> Hidden by superior </div></li> 
+</ul>
+ <p>All nodes are visible by default and thus the objects they reference can be accessed. A user can hide or unhide a node using the administration interface. Once a node is hidden, all its descendants will automatically be marked &quot;Hidden by superior&quot; and thus the descendants will also become hidden. A node can not become visible if its parent is hidden.</p> <p>A hidden node will not be available unless the &quot;ShowHiddenNodes&quot; directive within the &quot;[SiteAccessSettings]&quot; block of a configuration override for &quot;site.ini&quot; is set to true. The most common way to use this setting is to disallow all but the administration interface to show hidden nodes.</p>  <a name="eztoc3314_1" id="eztoc3314_1"></a><h2>Implementation</h2> <p>Each node has two flags: &quot;H&quot; and &quot;X&quot;. While &quot;H&quot; means &quot;hidden&quot;, &quot;X&quot; means &quot;invisible&quot;. The hidden flag reveals whether the node has been hidden by a user or not. A raised invisibility flag means that the node is invisible either because it was hidden by a user or by the system. Together, the flags represent the three visibility statuses that were described above:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>H</p> 
+  </th> <th >   <p>X</p> 
+  </th> <th >   <p>Status</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>-</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>-</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The node is visible.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>1</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The node is invisible. It was hidden by a user.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>-</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The node is invisible. It was hidden by the system because its ancestor is hidden/invisible.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>If a user tries to hide an already invisible node then the node's hidden flag will be set in addition to the invisible flag. If a node is hidden and its parent becomes visible, the node will remain hidden while the descendants will remain invisible. The following illustrations show how the node hiding algorithm works.</p>  <a name="eztoc3314_1_1" id="eztoc3314_1_1"></a><h3>Case 1: Hiding a visible node</h3> <p>
+The following illustration shows what happens when a visible node is hidden by a user. The node will be marked hidden. Underlying nodes will be marked invisible (hidden by superior). The visibility status of underlying nodes already marked hidden or invisible will not be changed.<br /></p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_5/images/concepts_and_basics/node_visibility_1/4605-1-eng-GB/node_visibility_1_doc.png" alt="Hiding a visible node" />
+ <p>Hiding a visible node</p>
+
+
+
+
+
+
+
+</div><p>&nbsp;</p>   <a name="eztoc3314_1_2" id="eztoc3314_1_2"></a><h3>Case 2: Hiding an invisible node</h3> <p>
+The following illustration shows what happens when an invisible node (hidden by superior) is explicitly hidden by a user. The node will be marked as hidden. Since the underlying nodes are already either hidden or invisible, their visibility status will not be changed.<br /></p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_5/images/concepts_and_basics/node_visibility_2/4608-1-eng-GB/node_visibility_2_doc.png" alt="Hiding an invisible node" />
+ <p>Hiding an invisible node</p>
+
+
+
+
+
+
+
+</div><p>&nbsp;</p>   <a name="eztoc3314_1_3" id="eztoc3314_1_3"></a><h3>Case 3: Unhiding a node with a visible ancestor</h3> <p>
+The following illustration shows what happens when a user unhides a node that has a visible ancestor. Underlying invisible nodes will become visible. An underlying node that was explicitly hidden by a user will remain hidden (and its children will be remain invisible).<br /></p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_6/images/concepts_and_basics/node_visibility_3/4611-2-eng-GB/node_visibility_3_doc.png" alt="Unhiding a node with a visible ancestor" />
+ <p>Unhiding a node with a visible ancestor</p>
+
+
+
+
+
+
+
+</div><p>&nbsp;</p>   <a name="eztoc3314_1_4" id="eztoc3314_1_4"></a><h3>Case 4: Unhiding a node with an invisible ancestor</h3> <p>
+The following illustration shows what happens when a user unhides a node that has an invisible ancestor. Since the target node is unhided in a subtree that is currently invisible (because a node further up in the hierarchy has been explicitly hidden), the node will not become visible. Instead, it will be marked as invisible and will become visible when the hidden superior node is unhided.<br /></p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_5/images/concepts_and_basics/node_visibility_4/4614-1-eng-GB/node_visibility_4_doc.png" alt="Unhiding a node with an invisible ancestor" />
+ <p>Unhiding a node with an invisible ancestor</p>
+
+
+
+
+
+
+
+</div><p>&nbsp;</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Concepts-and-basics/Content-management/Node-visibility by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:22:02 GMT -->
+</html>

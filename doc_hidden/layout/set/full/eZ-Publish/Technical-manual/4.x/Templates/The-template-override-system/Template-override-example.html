@@ -1,0 +1,127 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Templates/The-template-override-system/Template-override-example by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Template override example / The template override system / Templates / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Template override example</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><p>The following example demonstrates how the template override system can be used to display alternate templates in different situations.</p><p>Let's say that we have a simple content tree made up of two folders: &quot;News&quot; and &quot;Products&quot;. The &quot;News&quot; folder contains news articles and the &quot;Products&quot; folder contains products. The following illustration shows an example of such a tree.</p>
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/templates/template_override_example_content_node_tree/6289-3-eng-GB/template_override_example_content_node_tree_doc.png" alt="Example content node tree." />
+ <p>Example content node tree.</p>
+
+
+
+
+
+
+
+</div><p>Without any overrides, eZ publish will most likely display all the nodes using the same template. This would probably be the default full view template located in the standard design. However, what if we wish to display custom/alternate templates for the different nodes? We would perhaps like the system to behave in the following way:</p>
+<ul>
+<li><div> Display a special &quot;welcome&quot; template when the &quot;My site&quot; node is accessed. </div></li><li><div> Display a custom folder template when a folder is accessed. </div></li><li><div> Display a custom article template when a news article is accessed. </div></li><li><div> Display a custom product template when a product is accessed. </div></li>
+</ul>
+<p>The requests in the list above can be easily achieved by creating a couple of overrides. The welcome page should be solved using an override that is triggered by the identification number of the &quot;My site&quot; node. The rest of the requests can be solved using the class identifier key, which allows an override to be triggered when an object of a certain class is accessed. The following example shows the contents of an &quot;override.ini.append.php&quot; file that makes this possible:</p><pre class="wordwrap copytoclipboard"><span class="line"># Override for welcome page</span>
+<span class="line">[welcome_page]</span>
+<span class="line">Source=node/view/full.tpl</span>
+<span class="line">MatchFile=my_welcome.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[node]=2</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Override for folders</span>
+<span class="line">[my_folder]</span>
+<span class="line">Source=node/view/full.tpl</span>
+<span class="line">MatchFile=my_folder.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=folder</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Override for articles</span>
+<span class="line">[news_articles]</span>
+<span class="line">Source=node/view/full.tpl</span>
+<span class="line">MatchFile=my_article.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=article</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Override for products</span>
+<span class="line">[products]</span>
+<span class="line">Source=node/view/full.tpl</span>
+<span class="line">MatchFile=my_product.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=product</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '# Override for welcome page\r\n[welcome_page]\r\nSource=node/view/full.tpl\r\nMatchFile=my_welcome.tpl\r\nSubdir=templates\r\nMatch[node]=2\r\n\r\n# Override for folders\r\n[my_folder]\r\nSource=node/view/full.tpl\r\nMatchFile=my_folder.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=folder\r\n\r\n# Override for articles\r\n[news_articles]\r\nSource=node/view/full.tpl\r\nMatchFile=my_article.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=article\r\n\r\n# Override for products\r\n[products]\r\nSource=node/view/full.tpl\r\nMatchFile=my_product.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=product' ); return false;" /></p>
+<![endif]--><p>The alternate templates must be placed in the &quot;override/templates&quot; subdirectory of the main design used by the siteaccess. The following illustration shows where the templates would be located in a design called &quot;example&quot;.</p>
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/templates/filesystem_pagelayout_override_templates/6292-3-eng-GB/filesystem_pagelayout_override_templates_doc.png" alt="Pagelayout + override templates in example design." />
+ <p>Pagelayout + override templates in example design.</p>
+
+
+
+
+
+
+
+</div><p>When the system is in use, the different overrides would be activated based on the given conditions. The following illustration shows where/when the different alternate templates would be used.</p>
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/templates/template_override_example_overrides/6302-1-eng-GB/template_override_example_overrides_doc.png" alt="Template override example." />
+ <p>Template override example.</p>
+
+
+
+
+
+
+
+</div><p>Every time a node referencing a folder object is viewed, the system will use the &quot;my_folder.tpl&quot; template. When an article is viewed, the &quot;my_article.tpl&quot; template will be used. When a product is viewed, the &quot;my_product.tpl&quot; template will be used. When node number 2 (the &quot;My site&quot; node) is viewed, the &quot;my_welcome.tpl&quot; will be used.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Templates/The-template-override-system/Template-override-example by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:16 GMT -->
+</html>

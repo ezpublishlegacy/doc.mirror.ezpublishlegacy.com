@@ -1,0 +1,78 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-operators/URLs/ezurl by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:39:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>ezurl / URLs / Template operators / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ezurl</h1>
+</div>
+<h3>Summary</h3>
+Returns a working version of an eZ Publish URL (provided as input).<h3>Usage</h3>
+<pre>input|ezurl( [ quote [, type ] ] )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>quote</td>
+        <td>string</td>
+        <td>Quote style: &quot;no&quot;, &quot;single&quot; or &quot;double&quot; (default).</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>type</td>
+        <td>string</td>
+        <td>URL type: &quot;full&quot; or &quot;relative&quot; (default).</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+A quoted string containing a valid / working version of the input URL.<h3>Description</h3>
+ <p>This operator takes an eZ Publish URL as input (either a <a href="../../../Concepts-and-basics/URL-translation.html#system_url" target="_self">system URL</a> or a <a href="../../../Concepts-and-basics/URL-translation.html#virtual_url" target="_self">virtual URL</a>); based on the location of the eZ Publish folder, the access settings and the environment, it will produce a valid address. All eZ Publish URLs that are specified in templates should always be piped through this operator; it will make sure that the URLs work regardless where eZ Publish is installed, which access method is used, and so on.</p> <p>By default, this operator returns a relative URL as a double-quoted string. The optional &quot;quote&quot; parameter can be used to control the way the address is returned: &quot;no&quot; (no quotes), &quot;single&quot; (single quotes) or &quot;double&quot; (double quotes, the default). The optional &quot;type&quot; parameter controls whether relative or full URL is returned.</p><h3>Examples</h3>
+    <a name="eztoc93256_0_0_1" id="eztoc93256_0_0_1"></a><h4>Example 1</h4> <p>Let's say that we're running a site called &quot;my_company&quot; (name of the siteaccess) and that we wish to create a link to the full view of node number 1024. Instead of specifying the entire URL (domain and all included) in the link tag, we pipe &quot;/content/view/full/1024&quot; or the virtual URL (for example &quot;/test&quot;) through the &quot;ezurl&quot; operator:</p> <pre class="wordwrap"><span class="line">&lt;a href={'/content/view/full/1024'|ezurl(,'full')}&gt;Test&lt;/a&gt;</span>
+<span class="line">&lt;a href={'/test'|ezurl(,'full')}&gt;Test&lt;/a&gt;</span>
+</pre> <p>The operator will take care of translating the URLs into valid addresses depending on the setup and the environment eZ Publish is running in. If eZ Publish is running in a <a href="../../../../../../../full.html" target="_self">virtual host environment</a> and uses the <a href="../../../Concepts-and-basics/Configuration/Access-methods.html#host" target="_self">host access method</a>, the following type of URLs will be produced:</p> <div class="output"> <p>
+&quot;http://www.example.com/content/view/full/1024&quot;<br />&quot;http://www.example.com/test&quot;</p> </div> <p>The &quot;index.php&quot; part of the URL will be supressed by the <a href="../../../../../../../full.html" target="_self">virtual host configuration</a>. The name of the siteaccess will not appear in the URL because eZ Publish will use the domain/host to figure out which siteaccess to use.</p> <p>If eZ Publish is running in a non-virtual host environment and uses the <a href="../../../Concepts-and-basics/Configuration/Access-methods.html#uri" target="_self">uri access method</a>, the following URLs will be produced:</p><div class="output"> <p>
+&quot;http://www.example.com/index.php/my_company/content/view/full/1024&quot;<br />&quot;http://www.example.com/index.php/my_company/test&quot;</p> </div> <a name="eztoc93256_0_0_2" id="eztoc93256_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap"><span class="line">&lt;a href={'/content/view/full/1024'|ezurl()}&gt;Test&lt;/a&gt;</span>
+<span class="line">&lt;a href={'/test'|ezurl()}&gt;Test&lt;/a&gt;</span>
+</pre> <p>If eZ Publish is running in a virtual host environment and uses the host access method, the following type of URLs will be produced:</p> <div class="output"> <p>
+&quot;/content/view/full/1024&quot;<br />&quot;/test&quot;</p> </div> <p>The &quot;index.php&quot; part of the URL will be supressed by the virtual host configuration. The name of the siteaccess will not appear in the URL because eZ Publish will use the domain/host to figure out which siteaccess to use.</p> <p>If eZ Publish is running in a non-virtual host environment and uses the uri access method, the following URLs will be produced:</p><div class="output"> <p>
+&quot;/index.php/my_company/content/view/full/1024&quot;<br />&quot;/index.php/my_company/test&quot;</p> </div>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-operators/URLs/ezurl by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:39:27 GMT -->
+</html>

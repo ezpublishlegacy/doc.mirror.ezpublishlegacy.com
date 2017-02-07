@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/2.0/Oracle-specific-notes by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:35:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Oracle specific notes / 2.0 / eZ Publish Extension for Oracle® database / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Oracle specific notes</h1>
+</div>
+
+<p>&nbsp;This section describes some Oracle specific terms and concepts mentioned in the documentation of the eZ Publish Extension for Oracle® Database. Refer to the <a href="http://www.oracle.com/technology/documentation/index.html" target="_blank">official documentation of Oracle</a> for more information.</p><p><b>Note:</b>&nbsp;Be aware of all the differences before migrating to Oracle, since it has several conceptual differences when comparing it to other database management systems like MySQL or&nbsp;PL/pgSQL. For example, in most part of DBMS consider a given number of characters (eg. 255) for field size limits. In Oracle a size in bytes is used instead. In oracle if you set a field's limit to 255 it will be size for the content in bytes, not the number or characters, since lots of characters can use more than 1 byte.</p><p>&nbsp;An Oracle database is a collection of specific files (control files, redo log files, data files, undo files and temp files). Every running Oracle database is associated with an Oracle instance. When a database is started on a database server, Oracle allocates a memory area (SGA) and starts one or more background processes (SMON, PMON and others). This combination of processes and shared memory is called an <i>Oracle instance</i>. An instance only exists when it is running. A database is normally managed by one and only one instance, unless the <a href="http://en.wikipedia.org/wiki/Oracle_RAC" target="_blank">Oracle Real Application Clusters (RAC)</a> technology is used.</p><p>&nbsp;You can also look at an Oracle database as a <i>service</i> that stores and retrieves data for clients. In a single instance environment (non-RAC), the words &quot;service&quot; and &quot;instance&quot; are often used as synonyms; the target instance to connect to is identified by a database <a href="http://download.oracle.com/docs/cd/B19306_01/network.102/b14212/glossary.htm#i1000589" target="_blank">service name</a>.</p><p>&nbsp;In order to connect to an Oracle instance, a client needs a connect descriptor, which is a specially formatted description of the destination for a network connection. In most cases, such a descriptor specifies the protocol, host, port and service name that should be used. It is possible to define simple names that map to connect descriptors. For example, these can be defined in a &quot;tnsnames.ora&quot; file stored on a client. Users initiate a connect request by passing a username and password along with a simple name using the following format:</p><pre class="wordwrap"><span class="line">username/password@simple_name</span>
+</pre><p>&nbsp;In the latest versions of Oracle, the <a href="http://download.oracle.com/docs/cd/B19306_01/network.102/b14212/naming.htm#i498306" target="_blank">easy connect naming method</a> can be used. It allows a client to connect to a database server with a connect string for a simple TCP/IP address, consisting of a host name and optional port and service name:</p><pre class="wordwrap"><span class="line">username/password@[//]host[:port][/service_name]</span>
+</pre><p>&nbsp;A <i>schema</i> is a named collection of objects (tables, indexes, procedures, etc.) associated with a user account. The word &quot;schema&quot; can also be used to refer to an Oracle account. Oracle database installations usually come with a default schema that can be accessed using &quot;scott&quot; as the username and &quot;tiger&quot; as the password.</p><p>&nbsp;An Oracle database is divided into one or more logical storage units called <i>tablespaces</i>. Tables and indexes are created within a particular tablespace. The primary tablespace in any database is the SYSTEM tablespace, which Oracle creates automatically when the database is created. This tablespace is always online when the database is open. You can assign each user a tablespace <i>quota</i> in order to limit the amount of space allocated for storage of the user's objects within the specified tablespace. By default, a user has no quota on any tablespace in the database. If the user has the privilege to create a schema object, you must assign a quota to allow the user to create objects.</p><p><i>SQL*Plus</i> is an Oracle command line tool for running SQL and PL/SQL commands. This utility is often used by database administrators and developers to interact with the Oracle database. You can interact with SQL*Plus directly through the command line or through scripts. Refer to the <a href="http://docs.oracle.com/cd/B19306_01/server.102/b14357/ch7.htm" target="_blank">documentation of SQL*Plus</a> for more information.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/2.0/Oracle-specific-notes by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:35:38 GMT -->
+</html>

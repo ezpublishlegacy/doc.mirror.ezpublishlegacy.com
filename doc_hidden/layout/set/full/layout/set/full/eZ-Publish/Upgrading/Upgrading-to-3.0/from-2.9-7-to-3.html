@@ -1,0 +1,93 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.0/from-2.9-7-to-3.0-1 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:23:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>from 2.9-7 to 3.0-1 / Upgrading to 3.0 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>from 2.9-7 to 3.0-1</h1>
+</div>
+
+ <p>This section describes how to upgrade your existing eZ Publish 2.9-7 installation to version 3.0-1. If you are upgrading from a version prior to eZ Publish 2.9-7, you need to first upgrade to 2.9-7 before you can upgrade to 3.0-1.</p> <p>Please make sure that you have a working <a href="../../Upgrading.html#backup" target="_self">backup</a> of the site before you do the actual upgrade. The upgrade procedure consists of the following steps:</p> 
+<ol>
+ <li><div> Upgrading the distribution files to 3.0-1 </div></li> <li><div> Upgrading the database to 3.0-1 </div></li> <li><div> Running the 3.0-1 upgrade scripts </div></li> <li><div> Updating the system configuration </div></li> <li><div> Clearing the caches </div></li> 
+</ol>
+  <a name="eztoc33274_1" id="eztoc33274_1"></a><h2>Step 1: Upgrading the distribution files</h2> <p>The easiest way to upgrade the distribution files is to unpack eZ Publish 3.0-1 to a directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p> 
+<ul>
+ <li><div> design/example </div></li> <li><div> design/example_admin </div></li> <li><div> var </div></li> <li><div> settings/siteaccess </div></li> <li><div> settings/override </div></li> 
+</ul>
+ <p>Replace &quot;example&quot; and &quot;example_admin&quot; with actual names used by your siteaccesses.</p>  <a name="eztoc33274_1_1" id="eztoc33274_1_1"></a><h3>Custom extensions</h3> <p>If you are using custom extensions then the subdirectories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that come with eZ Publish (for example the &quot;PayPal&quot; extension).</p>    <a name="eztoc33274_2" id="eztoc33274_2"></a><h2>Step 2: Upgrading the database</h2> <p>The following text describes how a 2.9-7 database can be upgraded to 3.0-1.</p>  <a name="eztoc33274_2_2" id="eztoc33274_2_2"></a><h3>MySQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.0-1 directory. </div></li> <li><div> Run the database upgrade script: <pre class="wordwrap"><span class="line">mysql -u&lt;username&gt; -p&lt;password&gt; &lt;database&gt; &lt; update/database/mysql/3.0/dbupdate-2.9-7-to-3.0-1.sql</span>
+</pre>  </div></li> 
+</ol>
+ <a name="eztoc33274_2_3" id="eztoc33274_2_3"></a><h3>PostgreSQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.0-1 directory. </div></li> <li><div> Run the database upgrade script:<pre class="wordwrap"><span class="line">psql -d &lt;database&gt; -U &lt;dbowner&gt; &lt; update/database/postgresql/3.0/dbupdate-2.9-7-to-3.0-1.sql</span>
+</pre>  </div></li> 
+</ol>
+    <a name="eztoc33274_3" id="eztoc33274_3"></a><h2>Step 3: Running the 3.0-1 upgrade scripts</h2> <p>The 3.0-1 version of eZ Publish introduces a couple of new features. In order to make sure that your site is compatible with these feature, you'll have to run a couple of upgrade scripts.</p>  <a name="eztoc33274_3_4" id="eztoc33274_3_4"></a><h3>Updating nice URLs</h3> <p>In eZ Publish 3.0, the <a href="../../Technical-manual/3.8/Concepts-and-basics/URL-translation.html#virtual_url" target="_self">virtual URLs</a> (nice URLs, URL aliases) are automatically generated and maintained for all nodes. The generated URL for a node is based on the node's location in the tree and the actual name of the object that the node encapsulates. In order to be compatible with this feature, you will need to run the &quot;updateniceurls.php&quot; script:</p>
+<ol>
+ <li><div> Navigate into the eZ Publish 3.0-1 directory. </div></li> <li><div> Run the script using the following shell command:<pre class="wordwrap"><span class="line">php update/common/scripts/updateniceurls.php</span>
+</pre>  </div></li> 
+</ol>
+ <p>The script will generate virtual URLs for all your content nodes.</p> <a name="eztoc33274_3_5" id="eztoc33274_3_5"></a><h3>Updating XML fields</h3> <p>In eZ Publish 3.0-1, the &quot;<a href="../../Technical-manual/3.8/Reference/Datatypes/XML-block.html" target="_self">ezxmltext</a>&quot; datatype has been changed in order to store an XML code using UTF-8 encoding (see the <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/changelogs/3.0/CHANGELOG-3.0-1" target="_self">3.0-1 changelog</a> for more information). In order to be compatible with this feature, you will need to run the &quot;updatexmltext.php&quot; script:</p>
+<ol>
+ <li><div> Navigate into the eZ Publish 3.0-1 directory. </div></li> <li><div> Run the script using the following shell command:<pre class="wordwrap"><span class="line">php update/common/scripts/updatexmltext.php</span>
+</pre>  </div></li> 
+</ol>
+ <p>The script will automatically convert your XML fields to new format. It is recommended to create a database backup before using this script.</p> <a name="eztoc33274_3_6" id="eztoc33274_3_6"></a><h3>Updating the search index data</h3> <p>In eZ Publish 3.0-1, the built-in <a href="../../Technical-manual/3.8/Features/Search-engine.html" target="_self">search engine</a> has been improved (see the <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/changelogs/3.0/CHANGELOG-3.0-1" target="_self">3.0-1 changelog</a> for more information) and thus you will need to update the search index of your site when upgrading. To do this, clear the search index tables in your database (these are called &quot;ezsearch_word&quot; and &quot;ezsearch_object_word_link&quot;) and run the &quot;updatesearchindex.php&quot; script:</p>
+<ol>
+ <li><div> Navigate into the eZ Publish 3.0-1 directory. </div></li> <li><div> Run the script using the following shell command:<pre class="wordwrap"><span class="line">php update/common/scripts/updatesearchindex.php</span>
+</pre>  </div></li> 
+</ol>
+    <a name="eztoc33274_4" id="eztoc33274_4"></a><h2>Step 4: Updating the system configuration</h2> <p>You are not required to do any configuration changes when upgrading from 2.9-7 to 3.0-1.</p> <a name="eztoc33274_5" id="eztoc33274_5"></a><h2>Step 5: Clearing the caches</h2> <p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.0-1 directory. </div></li> <li><div> Run the clear cache script:<pre class="wordwrap"><span class="line">bin/shell/clearcache.sh --clear-all</span>
+</pre>  </div></li> 
+</ol>
+ <p>Please make sure that all caches are cleared. Sometimes the script is unable to clear caches because of restrictive file/directory permission settings. Make sure that all caches have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.0/from-2.9-7-to-3.0-1 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:23:59 GMT -->
+</html>

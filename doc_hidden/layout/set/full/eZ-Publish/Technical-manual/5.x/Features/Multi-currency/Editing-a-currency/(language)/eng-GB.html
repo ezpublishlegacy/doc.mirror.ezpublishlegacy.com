@@ -1,0 +1,121 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-currency/Editing-a-currency/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Editing a currency / Multi-currency / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Editing a currency</h1>
+</div>
+
+<p>The administration interface allows you to edit currencies. The following text reveals how this can be done.</p>
+<ol>
+<li><div>
+ Open the list of currencies by clicking the &quot;Webshop&quot; tab in the administration interface and selecting the &quot;Currencies&quot; link on the left. Find the target currency in the list and click the &quot;Edit&quot; button for this currency. You will be taken to the currency edit interface that allows to modify the following attributes (these are described in the <a href="../../Creating-a-new-currency.html#attributes" target="_self">previous section</a>): <br /> 
+<ul>
+<li><div> Currency code </div></li><li><div> Currency symbol </div></li><li><div> Formatting locale </div></li><li><div> Custom rate </div></li><li><div> Rate factor </div></li>
+</ul>
+</div></li><li><div> Specify the desired currency attributes. </div></li><li><div> Click the &quot;Store changes&quot; button. </div></li>
+</ol>
+<a name="eztoc132458_1" id="eztoc132458_1"></a><h2>Changing the currency status</h2><p>The currency edit interface does not support changing the statuses of the currencies. The following text reveals how you can change the status for one or more currencies.</p>
+<ol>
+<li><div> Open the list of currencies by clicking the &quot;Webshop&quot; tab in the admin interface and selecting the &quot;Currencies&quot; link on the left. </div></li><li><div> Choose the desired status value from the drop-down list in the &quot;Status&quot; column (this can be done for several currencies). </div></li><li><div> Click the &quot;Apply changes&quot; button to save your changes. </div></li>
+</ol>
+<a name="eztoc132458_2" id="eztoc132458_2"></a><h2>Changing rates for multiple currencies</h2><p>You can update currency rates and/or rate factors for several currencies at the same time using the list of currencies.</p><a name="eztoc132458_2_1" id="eztoc132458_2_1"></a><h3>Updating auto rates</h3><p>To update auto rates, do the following:</p>
+<ol>
+<li><div> Open the list of currencies by clicking the &quot;Webshop&quot; tab in the administration interface and selecting the &quot;Currencies&quot; link on the left. </div></li><li><div>
+ If the &quot;Update auto rates&quot; button is inactive, this means that the system can not update auto rates because no update handler is specified. The following screenshot shows the situation when the custom rates are specified for all currencies and therefore the system will not use the auto rates. In this case, the auto rates are displayed in gray color. When no updates are performed, the &quot;N/A&quot; marks are displayed in the &quot;Auto rate&quot; column. <br />&nbsp; 
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/inactive-auto-rate/133478-1-eng-GB/Inactive-Auto-Rate_pdf.jpg" alt="Inactive Auto Rate" />
+<p>Inactive Auto Rate</p>
+
+
+
+
+
+
+
+</div></div></li><li><div> Since no update handler is specified, the &quot;Update auto rates&quot; button is inactive. To activate this button, you should choose the desired handler as described in the &quot;<a href="../../Exchange-rates-update-handlers.html" target="_self">Exchange rates update handlers</a>&quot; section and clear the eZ Publish caches. The &quot;Update auto rates&quot; button will become active. </div></li><li><div>
+ Click the &quot;Update auto rates&quot; button. The auto rates will be automatically updated. <br />&nbsp; 
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/active-auto-rate/133481-1-eng-GB/Active-Auto-Rate_pdf.jpg" alt="Active Auto Rate" />
+<p>Active Auto Rate</p>
+
+
+
+
+
+
+
+</div> This screenshot shows the situation when the auto rates are updated using EUR as the <a href="../../Currency-rates.html#base_currency" target="_self">base currency</a> (the EUR auto rate value is 1.00000). As you can see, the retrieved auto rates are still displayed in gray color because the custom rates are available. However, you can remove the custom rates in order to enable the auto rates.</div></li>
+</ol>
+<a name="eztoc132458_2_2" id="eztoc132458_2_2"></a><h3>Enabling auto rates</h3><p>
+An auto rate for a currency will not be used if a non-zero custom rate is specified. If you remove the custom rate or set it to 0, the auto rate will be enabled. For example, if you remove all the values from the &quot;Custom rate&quot; column and click the &quot;Apply changes&quot; button, the system will start to use auto rates (look at the next screenshot).<br />&nbsp; </p>
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/enabling-auto-rates/133484-1-eng-GB/Enabling-Auto-Rates_reference.jpg" alt="Enabling Auto Rates" />
+<p>Enabling Auto Rates</p>
+
+
+
+
+
+
+
+</div><p> <a name="update"></a>
+Please note that changing the rates will not result in updating auto prices for your products. It is recommended to click the &quot;Update auto-prices&quot; button when you have finished managing your currencies. This will instruct the system to update auto prices for all products.</p><a name="eztoc132458_2_3" id="eztoc132458_2_3"></a><h3>Changing custom rates and/or rate factors</h3><p>It is possible to change custom rates and/or rate factors for several currencies at the same time. The following text reveals how this can be done.</p>
+<ol>
+<li><div> Open the list of currencies by clicking the &quot;Webshop&quot; tab in the administration interface and selecting the &quot;Currencies&quot; link on the left. </div></li><li><div> Set the desired custom rate in the &quot;Custom rate&quot; column and/or specify the desired rate factor value in the &quot;Factor&quot; column (this can be done for several currencies). </div></li><li><div>
+ Click the &quot;Apply changes&quot; button to save your changes. The system will automatically re-calculate the final rates indicated in the &quot;Rate&quot; column. <br />&nbsp; 
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/changing-custom-rates/133487-1-eng-GB/Changing-Custom-Rates_pdf.jpg" alt="Changing Custom Rates" />
+<p>Changing Custom Rates</p>
+
+
+
+
+
+
+
+</div> The screenshot above shows the list of currencies after changing the NOK custom rate and the USD rate factor.</div></li>
+</ol>
+<p>Please note that clicking the &quot;Apply changes&quot; button will not result in updating auto prices for your products. It is recommended to click the &quot;Update auto-prices&quot; button when you have finished managing your currencies. This will instruct the system to update auto prices for all products.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-currency/Editing-a-currency/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:13 GMT -->
+</html>

@@ -1,0 +1,114 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-4.3/Upgrading-from-4.2.x-to-4.3.x by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:25:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Upgrading from 4.2.x to 4.3.x / Upgrading to 4.3 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Upgrading from 4.2.x to 4.3.x</h1>
+</div>
+
+<p>This section describes how to upgrade your existing eZ Publish 4.2.x installation to version 4.3. The upgrade procedure described below is generic and does not cover any specific cases (for example, running eZ Publish in a clustered environment).</p><p>Make sure that you have a working <a href="http://ez.no/doc/ez_publish/upgrading#backup" target="_self">backup</a> of the site before you do the actual upgrade.</p><a name="eztoc109274_0_1" id="eztoc109274_0_1"></a><h3><b>Important upgrade notes:</b></h3><p>The procedure for upgrading directly from version 4.2.x to 4.3 consists of the following steps:</p>
+<ol>
+<li><div>Upgrade the distribution files to 4.3 </div></li><li><div>Upgrade custom extensions </div></li><li><div>Upgrade the database to 4.3 </div></li><li><div>Regenerate the autoload array for extensions </div></li><li><div>Run the system upgrade scripts for 4.3 </div></li><li><div>(Optional) Enable Admin2 design for the eZ Publish Administration interface</div></li><li><div>Clear the caches </div></li>
+</ol>
+<a name="eztoc109274_1" id="eztoc109274_1"></a><h2>Check for requirements</h2><a name="eztoc109274_1_2" id="eztoc109274_1_2"></a><h3><b>The eZ Components 2009.1 requirements</b></h3><p>With eZ Publish 4.2, <b>eZ Components 2009.2.1</b> is the minimum version required. When downloading eZ Publish 4.3 it is possible to choose between a package bundled with eZ Components 2009.2.1, or a package without eZ Components. If you choose the latter, you must install eZ Components separately. For more information see <a href="http://ezcomponents.org/docs/install" target="_self">http://ezcomponents.org/docs/install</a></p><a name="eztoc109274_1_3" id="eztoc109274_1_3"></a><h3><b>The PHP requirements</b></h3><p>eZ Publish 4.3 is now also compatible with PHP version 5.3. For more information regarding system requirements check out <a href="../../../../../../../../../../../../../../../../eZ-Publish/Technical-manual/5.x/Installation/Requirements.html" target="_self">http://ez.no/ezpublish/requirements</a></p><a name="eztoc109274_2" id="eztoc109274_2"></a><h2>Step 1: Upgrade the distribution files</h2><p>The easiest way to upgrade the distribution files is to unpack eZ Publish 4.3 to a separate directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p>
+<ul>
+<li><div>&nbsp;design/ <i>example</i> </div></li><li><div>&nbsp;design/ <i>example_admin</i> </div></li><li><div>&nbsp;var </div></li><li><div>&nbsp;settings/siteaccess </div></li><li><div>&nbsp;settings/override </div></li>
+</ul>
+<p>Replace &quot;example&quot; and &quot;example_admin&quot; with the actual names of your site accesses.</p><a name="eztoc109274_2_3_0_1" id="eztoc109274_2_3_0_1"></a><h5>Important note</h5><p>Because the new directory has replaced the original directory, the directory permissions need to be fixed. Use the following commands to do this.</p><p>(You have the choice between Shell commands or Alternative shell commands):</p>
+<ul>
+<li><div>&nbsp;<b>Shell commands</b> </div></li>
+</ul>
+<p>These shell commands will give proper permission to the web server:</p><pre class="wordwrap"><span class="line">cd &lt;/path/to/your/eZ/Publish/directory&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">chmod -R a+rwx design &nbsp;extension settings var</span>
+</pre>
+<ul>
+<li><div>&nbsp;<b>Alternative shell commands</b> </div></li>
+</ul>
+<p>These commands will setup the permission more correctly, but require knowledge about the running web server.</p><pre class="wordwrap"><span class="line">chmod -R og+rwx design extension settings var</span>
+<span class="line">&nbsp;</span>
+<span class="line">chown -R nouser:nouser &nbsp;design extension settings var</span>
+</pre><a name="eztoc109274_3" id="eztoc109274_3"></a><h2>Step 2: Custom extensions</h2><p>If you are using custom extensions, the sub directories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that are included in eZ Publish, which currently are eZ Online Editor (5.x), eZ OpenOffice.org (2.x) and eZ JSCore (1.x). Note that upgrading the distribution files will overwrite the autoload arrays for extensions. You will need to re-generate the autoload arrays for active extensions later.</p><p>See below for dedicated upgrade instructions for eZ Flow and eZ Webin.</p><p>The updated versions of eZ Flow and eZ Website Interface will also install the following extensions:</p>
+<ul>
+<li><div>&nbsp;eZ Website Toolbar </div></li><li><div>&nbsp;eZ Star Rating </div></li><li><div>&nbsp;eZ Google Maps Location </div></li>
+</ul>
+<p>For eZ OE 5.x and eZ JS Core you will need to replace the following rewrite rules when using Virtual Hosts:</p><pre class="wordwrap"><span class="line">RewriteRule ^/var/cache/texttoimage/.* - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">RewriteRule &nbsp;^/var/[^/]+/cache/(texttoimage|public)/.* - [L]</span>
+</pre><p>with:</p><pre class="wordwrap"><span class="line">RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* - [L]</span>
+</pre><p>For more detailed instructions, see the dedicated <a href="http://ez.no/doc/extensions/online_editor/4.x/installation" target="_self">eZ OE</a> and <a href="../../../Extensions/eZ-Publish-extensions/eZ-Teamroom/Setup-and-User-Guide/Requirements/eZ-JS-Core/Installation.html" target="_self">eZ JS Core</a> doc pages.</p><a name="eztoc109274_4" id="eztoc109274_4"></a><h2>Step 3: Upgrade the database</h2><p>The update script for the database is located in</p><pre class="wordwrap"><span class="line">&lt;eZP &nbsp;root&gt;/update/database/&lt;mysql|postgresql&gt;/4.3/dbupdate-4.2.0-to-4.3.0.sql</span>
+</pre><p>You can run this with the appropriate command line tool or application</p><a name="eztoc109274_5" id="eztoc109274_5"></a><h2>Step 4: Regenerate the autoload array for extensions</h2><p>The autoload system also has some changes, for example the autoload array for extensions is now placed in var/autoload of your eZ Publish installation (along the class changes in extensions itself).</p><p>To regenerate the autoload array, execute the following script from the root of your eZ Publish directory:</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php --extension</span>
+</pre><a name="eztoc109274_6" id="eztoc109274_6"></a><h2>Step 5: Run the system upgrade scripts</h2><p>Run the following command from the root of your eZ Publish directory:</p><pre class="wordwrap"><span class="line">php update/common/scripts/4.3/updatenodeassignment.php</span>
+</pre><a name="eztoc109274_7" id="eztoc109274_7"></a><h2>Step 6: [optional] Enable admin2 design for eZ Publish Administration interface</h2><p>To enable admin2 open site.ini for your admin site access. For an eZ Flow site this would for instance be:</p><pre class="wordwrap"><span class="line">settings/siteaccess/ezflow_site_admin/site.ini.append.php</span>
+</pre><p>In this file include AdditionalSiteDesignList[]=admin2 to your [DesignSettings]. It is important that you add the admin2 design before the admin design, in order to let extensions that have admin templates to continue to work. On an eZ Flow site, it would mean changing the settings from:</p><pre class="wordwrap copytoclipboard"><span class="line">[DesignSettings]</span>
+<span class="line">SiteDesign=ezflow_site_admin</span>
+<span class="line">AdditionalSiteDesignList[]=admin</span>
+<span class="line">AdditionalSiteDesignList[]=ezflow</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[DesignSettings]\r\nSiteDesign=ezflow_site_admin\r\nAdditionalSiteDesignList[]=admin\r\nAdditionalSiteDesignList[]=ezflow' ); return false;" /></p>
+<![endif]--><p>to</p><pre class="wordwrap copytoclipboard"><span class="line">[DesignSettings]SiteDesign=ezflow_site_admin</span>
+<span class="line">AdditionalSiteDesignList[]=admin2</span>
+<span class="line">AdditionalSiteDesignList[]=admin</span>
+<span class="line">AdditionalSiteDesignList[]=ezflow</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[DesignSettings]SiteDesign=ezflow_site_admin\r\nAdditionalSiteDesignList[]=admin2\r\nAdditionalSiteDesignList[]=admin\r\nAdditionalSiteDesignList[]=ezflow' ); return false;" /></p>
+<![endif]--><p>When using a plain or eZ Webin install you should make the same changes. In this case you will of course have a different SiteDesign setting and no AdditionalSiteDesignList[]=ezflow line.</p><p>To enable users to change their Administration Interface preferences (for example their preview tab preferences), add the following line to the [Toolbar_admin_right] block in settings/siteaccess/&lt;siteaccess_name&gt;/toolbar.ini.append.php:</p><pre class="wordwrap"><span class="line">Tool[]=admin_preferences</span>
+</pre><p>So the block will then look like this:</p><pre class="wordwrap copytoclipboard"><span class="line">[Toolbar_admin_right]</span>
+<span class="line">Tool[]</span>
+<span class="line">Tool[]=admin_current_user</span>
+<span class="line">Tool[]=admin_bookmarks</span>
+<span class="line">Tool[]=admin_preferences</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[Toolbar_admin_right]\r\nTool[]\r\nTool[]=admin_current_user\r\nTool[]=admin_bookmarks\r\nTool[]=admin_preferences' ); return false;" /></p>
+<![endif]--><p>Last step is to make sure ezjscore (extension) is enabled. For enabling extensions in general, <a href="../../Technical-manual/4.3/Installation/Extensions/Activating-the-extension.html" target="_self">look here</a>, for 4.3 just make sure ezjscore is before ezwebin in ActiveExtensions if you use webin.</p><a name="eztoc109274_8" id="eztoc109274_8"></a><h2>Step 7: Clear the caches</h2><p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. <b>Note:</b> You should not be a root user when you start the caching process (refer to <a href="http://issues.ez.no/15823" target="_self">http://issues.ez.no/15823</a>). The caching should be done from within a system shell:</p>
+<ol>
+<li><div>&nbsp;Navigate into the eZ Publish 4.3 directory. </div></li><li><div><p>Run the script using the following shell command:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre></div></li>
+</ol>
+<p>Purging ensures that the caches are physically removed. When the &quot;--purge&quot; parameter is not specified, the caches will be expired but not removed.</p><p>Sometimes the script is unable to clear all cache files because of restrictive file/directory permission settings. Make sure that all cache files have been cleared by inspecting the contents of the various cache sub directories within the &quot;var&quot; directory (typically the &quot;var/cache/&quot; and &quot;var/&lt;name_of_siteaccess&gt;/cache/&quot; directories). If there are any cache files left, you need to remove them manually.</p><a name="eztoc109274_8_4" id="eztoc109274_8_4"></a><h3>Upgrade eZ Flow and/or Website Interface separately</h3><p>Please visit the <a href="../../../Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-8.html" target="_self">eZ Flow</a> and<a href="../../../Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-4.html" target="_self">&nbsp;eZ Webin</a> upgrade documentation for more info.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-4.3/Upgrading-from-4.2.x-to-4.3.x by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:25:35 GMT -->
+</html>

@@ -1,0 +1,60 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Configuration-files/site.ini/URLTranslator/TransformationGroup by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:55:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>TransformationGroup / [URLTranslator] / site.ini / Configuration files / Reference / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>TransformationGroup</h1>
+</div>
+<h3>Summary</h3>
+Sets the type of transformation for the URLs.<h3>Usage</h3>
+<pre class="pfix"> <p>TransformationGroup=urlalias_iri|urlalias|urlalias_compat</p></pre><h3>Description</h3>
+ <p>This directive sets which method of transformation that should be used when generating <a href="../../../../Concepts-and-basics/URL-translation.html#virtual_url" target="_self">virtual URLs</a>. The default value is &quot;urlalias_iri&quot; (it will be changed to &quot;urlalias&quot; in eZ Publish 3.10.1 and later versions). Refer to the &quot;<a href="../../../../Features/Multi-language-support-for-URL-aliases.html#transformation" target="_self">Character transformation</a>&quot; part of the &quot;Multi-language support for URL aliases&quot; documentation page for information about the available transformation methods. Make sure you specify the same value for all siteaccesses that share the same database.</p> <p>
+Every time this setting is changed, the &quot;bin/php/updateniceurls.php&quot; script must be run in order to update the URL aliases stored in the database. This script should be run once for each database, specifying one siteaccess per database (replace &quot;example&quot; with the actual name of your siteaccess):<br /></p><pre class="wordwrap"><span class="line">php bin/php/updateniceurls.php -s example</span>
+</pre><p>
+ <br />The script will create new virtual URLs for all content object nodes in accordance with the selected method of transformation. The time it takes to update all URL aliases is proportional to the number of nodes on your site.</p> <p>Note that after running the &quot;updateniceurls.php&quot; script, you need to review your configuration settings and update the URL aliases that are used in configuration files. For example, if your site makes use of the &quot;PathPrefix&quot; and &quot;PathPrefixExclude&quot; directives, this functionality might stop working if the specified URL aliases have changed. Also, you need to review the configuration settings in your &quot;override.ini.append.php&quot; file(s), otherwise your override templates activated by the &quot;url_alias&quot; condition will most likely stop working.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Configuration-files/site.ini/URLTranslator/TransformationGroup by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:55:10 GMT -->
+</html>

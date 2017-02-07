@@ -1,0 +1,119 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Concepts-and-basics/Content-management/Sections by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:12:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Sections / Content management / Concepts and basics / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Sections</h1>
+</div>
+
+ <p>A <i>section</i> is a number that can be assigned to an object. The section ID of an object denotes which section the object belongs to. Each object can belong to one section. By assigning different sections to objects, it is possible to have different groups of objects. Although the sectioning mechanism is implemented at the object level, it is more likely to be used in conjunction with the content node tree. This is why the administration interface makes it possible to manage sections on the node level. Using sections makes it possible to:</p> 
+<ul>
+ <li><div> Segment the node tree into different subtrees </div></li> <li><div> Set up custom template override rules </div></li> <li><div> Limit and control access to content </div></li> <li><div> Assign discount rules to a group of products </div></li> 
+</ul>
+ <p>A default eZ publish installation comes with the following sections:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>ID</p> 
+  </th> <th >   <p>Name</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>1</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Standard</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Standard&quot; section is the default section. The &quot;Content&quot; top level node makes use of this section.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>2</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Users</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Users&quot; section is dedicated for user accounts and user groups that exist on the system. The &quot;Users&quot; top level node makes use of this section.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>3</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Media</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Media&quot; section is used by the &quot;Media&quot; top level node.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>4</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Setup</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Setup&quot; section is used by the &quot;Setup&quot; top level node.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>Section definitions can be added, modified and removed using the administration interface. The following illustration shows an example of how the section feature can be used to segment the content node tree.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/concepts_and_basics/sections/1211-3-eng-GB/sections_doc.png" alt="Example of sections." />
+ <p>Example of sections.</p>
+
+
+
+
+
+
+
+</div>  <a name="eztoc63316_1" id="eztoc63316_1"></a><h2>Behavior</h2> <p>When a new object is created, its section ID will be set to the default section (which is usually the standard section). When the object is published, it will automatically inherit the section that is assigned to the object encapsulated by the parent node. For example, if an object is created in a folder that belongs to section 13, the section ID of the newly created object will be set to 13. If an object has multiple node assignments then it is always the section ID of the object referenced by the parent of the main node that will be used. In addition, if the main node of an object with multiple node assignments is changed then the section ID of that object will be updated.</p> <p>The administration interface makes it possible to assign sections to objects using the node tree. When a section is assigned to a node, the section ID of the object referenced by that node will be updated. In addition, the section assignment of all subsequent children of that node will also be changed. For example, if the section ID of a folder containing news articles is changed, then the section ID of the articles in that folder will also be changed.</p> <p>The removal of sections may corrupt permission settings, template output and other things in the system. In other words, a section should only be removed if it is completely unused. When a section is removed, it is only the section definition itself that will be removed. Other references to the section will remain and thus the system will most likely be in an inconsistent state. The section ID numbers are not recycled. If a section is removed, the ID number of that section will not be reused when a new section is created.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Concepts-and-basics/Content-management/Sections by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:12:54 GMT -->
+</html>

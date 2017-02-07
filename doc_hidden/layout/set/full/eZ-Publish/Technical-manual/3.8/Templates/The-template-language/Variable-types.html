@@ -1,0 +1,218 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Templates/The-template-language/Variable-types by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:35:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Variable types / The template language / Templates / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Variable types</h1>
+</div>
+
+ <p>The eZ Publish template language supports the following variable types:</p> 
+<ul>
+ <li><div> Numbers </div></li> <li><div> Strings </div></li> <li><div> Booleans </div></li> <li><div> Arrays </div></li> <li><div> Objects </div></li> 
+</ul>
+ <p>While some variable types can be created on the fly, others need to be created using an operator. Types that may be created directly are numbers and strings. Booleans and arrays must be created using operators, objects may be created using miscellaneous functions and operators. In addition to the types listed above, it is also possible to create and use custom variables. Custom variable types must be represented as objects.</p>  <a name="eztoc23911_1" id="eztoc23911_1"></a><h2>Numbers</h2> <p>Numbers are numerical values. A number can be a positive or a negative integer or a floating point value. The following example demonstrates how different numbers can be used directly within template code:</p> <pre class="wordwrap copytoclipboard"><span class="line">{13}</span>
+<span class="line">{1986}</span>
+<span class="line">{3.1415}</span>
+<span class="line">{102.5}</span>
+<span class="line">{-1024}</span>
+<span class="line">{-273.16}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{13}\r\n{1986}\r\n{3.1415}\r\n{102.5}\r\n{-1024}\r\n{-273.16}' ); return false;" /></p>
+<![endif]--> <p> <a name="strings"></a>
+ </p>   <a name="eztoc23911_2" id="eztoc23911_2"></a><h2>Strings</h2> <p>A string is an arbitrary sequence of characters (text) that is encapsulated by a matching pair of either single or double quotes, ' or &quot;. If the quotes are omitted, the string will most likely be interpreted as a function name. Strings are usually defined in the following way:</p> <pre class="wordwrap"><span class="line">{'This is a string.'}</span>
+<span class="line">{&quot;This is another string.&quot;}</span>
+</pre> <p>The output of the example above would be:</p><div class="output"> <p>
+This is a string.<br />This is another a string.</p> </div>  <a name="eztoc23911_2_1" id="eztoc23911_2_1"></a><h3>Using quotes</h3> <p>It is possible to use quotes inside strings. This can be done by either using a different kind of quote or by making use of the escape character (backslash). The following examples demonstrate the use of quotes inside strings:</p> <pre class="wordwrap copytoclipboard"><span class="line">{'The following text is double quoted: &quot;Rock and roll!&quot; &nbsp;'}</span>
+<span class="line">{&quot;The following text is single quoted: 'Rock and roll!' &nbsp;&quot;}</span>
+<span class="line">{'Using both single and double quotes: &quot;Rock\'n roll!&quot; &nbsp;&nbsp;'}</span>
+<span class="line">{'Using both single and double quotes: \'Rock\'n roll!\' '}</span>
+<span class="line">{&quot;Using both single and double quotes: 'Rock'n roll!' &nbsp;&nbsp;&nbsp;&quot;}</span>
+<span class="line">{&quot;Using both single and double quotes: \&quot;Rock'n roll\&quot; &nbsp;&nbsp;&quot;}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{\'The following text is double quoted: &quot;Rock and roll!&quot;  \'}\r\n{&quot;The following text is single quoted: \'Rock and roll!\'  &quot;}\r\n{\'Using both single and double quotes: &quot;Rock\\'n roll!&quot;   \'}\r\n{\'Using both single and double quotes: \\'Rock\\'n roll!\\' \'}\r\n{&quot;Using both single and double quotes: \'Rock\'n roll!\'    &quot;}\r\n{&quot;Using both single and double quotes: \&quot;Rock\'n roll\&quot;   &quot;}' ); return false;" /></p>
+<![endif]--> <p>The output of the example above will be:</p><div class="output"> <p>
+The following text is double quoted: &quot;Rock and roll!&quot;<br />
+The following text is single quoted: 'Rock and roll!'<br />
+Using both single and double quotes: &quot;Rock'n roll!&quot;<br />
+Using both single and double quotes: 'Rock'n roll!'<br />
+Using both single and double quotes: 'Rock'n roll!'<br />Using both single and double quotes: &quot;Rock'n roll!&quot;</p> </div> <p>Because of the way template code is defined (encapsulated in a matching pair of curly brackets), the right curly bracket, &quot;}&quot;, must also be prepended by the backslash escape character. The following example demonstrates this.</p> <pre class="wordwrap"><span class="line">{'{ This text is inside curly brackets.\}'}</span>
+</pre> <p>The output of the template code above will be:</p><div class="output"> <p>{This text is inside curly brackets.}</p> </div> <p>Template strings do not support inline expansion of variables (as in Perl and PHP). In other words, it is not possible to mix variables into strings. However, the <a href="../../Reference/Template-operators/Strings/concat.html" target="_self">concat</a> operator can be used to append the contents of some variable to a string; which means that this operator can be used to build strings consisting of other strings and/or miscellaneous variables.</p> <p> <a name="booleans"></a>
+ </p>    <a name="eztoc23911_3" id="eztoc23911_3"></a><h2>Booleans</h2> <p>Booleans are binary, they are either TRUE (1) or FALSE (0). A boolean must be created using either the <a href="../../Reference/Template-operators/Logical-operations/true.html" target="_self">&quot;true&quot;</a> or the <a href="../../Reference/Template-operators/Logical-operations/false.html" target="_self">&quot;false&quot;</a> template operator. Example:</p> <pre class="wordwrap"><span class="line">{true()}</span>
+<span class="line">{false()}</span>
+</pre> <p>For some operators and functions, it is possible to use integers as booleans. However, these are not &quot;real&quot; booleans. Zero means FALSE; all non-zero values mean TRUE. Some operators are able to treat an array as if it were a boolean value. While an empty array means FALSE, a non-empty array means TRUE.</p>   <a name="eztoc23911_4" id="eztoc23911_4"></a><h2>Arrays</h2> <p>Arrays are containers that are capable of holding a collection of any other variable type including other arrays. An array can be a simple vector or a hash map (associative array). An element of a vector can be accessed using an index number. The number denotes the position of the element inside the array (the first element is zero, the second element is one, and so on). An element of an associative array can be accessed using an identifier. Regular arrays can be created with the <a href="../../Reference/Template-operators/Arrays/array.html" target="_self">&quot;array&quot;</a> operator. Associative arrays can be created with the <a href="../../Reference/Template-operators/Arrays/hash.html" target="_self">hash</a> operator. The following examples demonstrate the creation of arrays and hashes.</p>  <a name="eztoc23911_4_2" id="eztoc23911_4_2"></a><h3>Example 1: Array of numbers</h3> <pre class="wordwrap"><span class="line">{array( 2, 4, 8, 16 )}</span>
+</pre> <p>This example creates an array containing four numbers. The array will consist of the following elements:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Index</p> 
+  </th> <th >   <p>Value of element</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>0</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>2</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>1</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>4</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>2</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>8</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>3</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>16</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+   <a name="eztoc23911_4_3" id="eztoc23911_4_3"></a><h3>Example 2: Array of strings</h3> <pre class="wordwrap"><span class="line">{array( 'This', 'is', 'a', 'test' )}</span>
+</pre> <p>This example creates an array containing four strings. The array will consist of the following elements:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Index</p> 
+  </th> <th >   <p>Value</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>0</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>'This'</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>1</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>'is'</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>2</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>'a'</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>3</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>'test'</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+   <a name="eztoc23911_4_4" id="eztoc23911_4_4"></a><h3>Example 3: Associative array</h3> <pre class="wordwrap"><span class="line">{hash( 'Red', 16, 'Green', 24, 'Blue', 32 )}</span>
+</pre> <p>This example creates an associative array containing three key-value pairs. The array will consist of the following elements:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Key</p> 
+  </th> <th >   <p>Value</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Red</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>16</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Green</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>24</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Blue</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>32</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+<p> <a name="objects"></a>
+ </p>    <a name="eztoc23911_5" id="eztoc23911_5"></a><h2>Objects</h2> <p>Template objects are created by PHP code or by special template operators. The system uses objects to represent data structures of different kinds and sizes. For example, objects are used to represent information about content nodes, translations, webshop orders, user accounts, roles, policies and so on. Refer to the <a href="../../Reference/Objects.html" target="_self">&quot;Objects&quot;</a> section of the &quot;Reference&quot; chapter for a complete overview of the objects and their contents.</p> <p> <a name="attributes"></a>
+ </p>  <a name="eztoc23911_5_5" id="eztoc23911_5_5"></a><h3>Object attributes</h3> <p>Objects consist of named attributes where each attribute can be a different type. The attributes may represent any type of data (numbers, strings, arrays, etc.) and even other objects. Since the attributes are named (each one has an identifier associated to it), their contents can be easily accessed using the different identifiers. This is done in the same way as when accessing the values of associative arrays using identifiers. </p> <p>The following illustration shows the structure (with example values) of an object (<a href="../../Reference/Objects/ezdate.html" target="_self">&quot;ezdate&quot;</a>) that contains information about a date.</p> 
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/templates/date_object/30174-1-eng-GB/date_object_doc.png" alt="The structure of the &quot;ezdate&quot; object." />
+ <p>The structure of the &quot;ezdate&quot; object.</p>
+
+
+
+
+
+
+
+</div> <p>The illustration above reveals that the &quot;ezdate&quot; object consists of five attributes (&quot;timestamp&quot;, &quot;is_valid&quot;, &quot;year&quot;, &quot;month&quot; and &quot;day&quot;). All attributes are represented as <a href="#strings" target="_self">strings</a> except the &quot;is_valid&quot; attribute, which is a <a href="#booleans" target="_self">boolean</a>. The values are the actual data that the object contains.</p>  <a name="eztoc23911_5_5_1" id="eztoc23911_5_5_1"></a><h4>Attribute availability</h4> <p>It is worth noting that while some attributes are pre-fetched/calculated when an object itself is fetched, others are not. This means that accessing the contents of attributes may require additional processing (usually in the form of database queries). The &quot;static&quot; column in the reference documentation for objects indicates whether the different attributes provide pre-fetched values or if they need to be computed upon request. This information should be helpful when it comes to optimizing your templates.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Templates/The-template-language/Variable-types by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:35:59 GMT -->
+</html>

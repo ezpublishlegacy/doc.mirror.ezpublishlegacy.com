@@ -1,0 +1,127 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Templates/Template-basics/System-templates by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:12:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>System templates / Template basics / Templates / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>System templates</h1>
+</div>
+
+ <p>Whenever eZ publish is requested to do something else than displaying a node (in other words the URL does not contain &quot;/content/view&quot; or isn't the virtual URL of a node), it will use a system template. There are two main differences between system templates and node templates:</p> 
+<ul>
+ <li><div> System templates provide access to various variables (depending on the view that was requested). A node template only provides access to a $node variable representing the node that was requested. </div></li> <li><div> The override rules for node templates are much more flexible than the override rules for system templates. </div></li> 
+</ul>
+ <p>An eZ publish distribution provides default templates for all views. These templates are located in the &quot;templates&quot; directory of the standard design. A view typically uses a template that is located in a subdirectory that has the same name as the module which the view belongs to. The name of the template is usually the same as the name of the view (with a &quot;.tpl&quot; extension). For example, the &quot;login&quot; view of the &quot;user&quot; module is looks for a template called &quot;login.tpl&quot; inside a directory called &quot;user&quot;. Another example would be the &quot;basket&quot; view of the &quot;shop&quot; module. This view looks for a template called &quot;basket.tpl&quot; within the &quot;shop&quot; directory.</p>  <a name="eztoc63505_1" id="eztoc63505_1"></a><h2>Custom system templates</h2> <p>Although eZ publish provides all the necessary system templates (by the way of the standard design), a typical eZ publish site always makes use of customized system templates. The main reason for this is because the default templates usually need to be tailored in order to fit perfectly in with the style of a custom design. Unlike custom node templates which are mostly provided using the template override system, custom system templates are usually just modified copies of the standard templates located in the custom design. For example, a custom template for the &quot;login&quot; view of the &quot;user&quot; module in a design called &quot;example&quot; would be &quot;/design/example/templates/user/login.tpl&quot;. A custom template for the &quot;search&quot; view of the &quot;content&quot; module would be &quot;/design/example/templates/content/search.tpl&quot;.</p>  <a name="eztoc63505_1_1" id="eztoc63505_1_1"></a><h3>Design combinations</h3> <p>As mentioned in the text above, a custom design typically contains a set of customized system templates. However, creating a custom design that provides templates for all possible scenarios would be too much / unnecessary work. This is why the standard design always should be used as the last fallback resort. The <a href="../../Concepts-and-basics/Designs/Design-combinations.html#automatic_fallback" target="_self">automatic fallback system</a> makes it possible to combine several designs so that the main design (which is usually a custom design) does not have to provide all the necessary templates. Whenever eZ publish is unable to find a template within the main design of the siteaccess, the system will look for it in the additional designs and the standard design.</p>    <a name="eztoc63505_2" id="eztoc63505_2"></a><h2>Commonly used system templates</h2> <p>The following table shows some of the most commonly used system templates.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Request</p> 
+  </th> <th >   <p>URL</p> 
+  </th> <th >   <p>Module</p> 
+  </th> <th >   <p>View</p> 
+  </th> <th >   <p>Template</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Search interface</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>/content/search</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>content</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>search</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>/templates/content/search.tpl</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Shopping basket</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>/shop/basket</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>shop</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>basket</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>/templates/shop/basket.tpl</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Login page</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>/user/login</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>user</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>login</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>/templates/user/login.tpl</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>User registration</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>/user/register</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>user</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>register</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>/templates/user/register.tpl</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Templates/Template-basics/System-templates by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:12:48 GMT -->
+</html>

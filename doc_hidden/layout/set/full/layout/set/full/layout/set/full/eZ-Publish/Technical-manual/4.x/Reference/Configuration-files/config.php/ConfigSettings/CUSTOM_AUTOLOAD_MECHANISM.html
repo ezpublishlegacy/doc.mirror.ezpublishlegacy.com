@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/config.php/ConfigSettings/CUSTOM_AUTOLOAD_MECHANISM by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>CUSTOM_AUTOLOAD_MECHANISM / [ConfigSettings] / config.php / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>CUSTOM_AUTOLOAD_MECHANISM</h1>
+</div>
+<h3>Summary</h3>
+Custom Autoload Mechanism <h3>Description</h3>
+<p>It is also possible to push a custom autoload method to the autoload function stack. Remember to check for class prefixes in such a method, if it will not serve classes from eZ Publish and eZ Components.Here is an example code snippet to be placed right in this file, in the case you would be using your custom Foo framework, in which all PHP classes would be prefixed by 'Foo':</p><pre class="wordwrap copytoclipboard"><span class="line">ini_set( 'include_path', ini_get( 'include_path' ). ':/usr/lib/FooFramework/' );</span>
+<span class="line">require 'Foo/ClassLoader.php';</span>
+<span class="line">&nbsp;</span>
+<span class="line">function fooAutoload( $className )</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;if ( 'Foo' == substr( $className, 0, 3 ) )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FooClassLoader::loadClass( $className );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">spl_autoload_register( 'fooAutoload' );</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'ini_set( \'include_path\', ini_get( \'include_path\' ). \':/usr/lib/FooFramework/\' );\r\nrequire \'Foo/ClassLoader.php\';\r\n\r\nfunction fooAutoload( $className )\r\n{\r\n    if ( \'Foo\' == substr( $className, 0, 3 ) )\r\n    {\r\n        FooClassLoader::loadClass( $className );\r\n    }\r\n}\r\n\r\nspl_autoload_register( \'fooAutoload\' );\r\n' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/config.php/ConfigSettings/CUSTOM_AUTOLOAD_MECHANISM by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:00 GMT -->
+</html>

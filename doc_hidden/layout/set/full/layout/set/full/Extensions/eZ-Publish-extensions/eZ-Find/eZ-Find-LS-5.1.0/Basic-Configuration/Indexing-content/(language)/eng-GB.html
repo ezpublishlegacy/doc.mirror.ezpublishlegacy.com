@@ -1,0 +1,60 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.1.0/Basic-Configuration/Indexing-content/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:25:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Indexing content / Basic Configuration / eZ Find LS 5.1.0 / eZ Find / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Indexing content</h1>
+</div>
+
+<a name="eztoc135719_0_1" id="eztoc135719_0_1"></a><h3>DelayedIndexing</h3><p>Indexing content in Solr can be a time-consuming operation and depending on the Solr index site it can have an impact on the publishing time. Therefore it's possible to delay content indexing by enabling [SearchSettings] <a href="../../../../../../../eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/SearchSettings/DelayedIndexing.html" target="_self">DelayedIndexing</a> in the global override &quot;site.ini&quot;. The indexing operations will then be queued for deferred handling. To actually index the objects you will need to enable two cronjobs: <i>indexcontent </i>and <i>ezfoptimizeindex</i>.&nbsp;Note that the&nbsp;<i>ezfindexcontent</i>&nbsp;cronjob is deprecated, and should not be used anymore.</p><a name="eztoc135719_0_1_1" id="eztoc135719_0_1_1"></a><h4>Cronjobs</h4><p>The&nbsp;<i>indexcontent</i>&nbsp;cronjob can be found under the&nbsp;<i>ezpublish_legacy/cronjobs/</i>&nbsp;folder, and the&nbsp;eZ Find cronjob&nbsp;<i>ezfoptimizeindex</i>&nbsp;can be found under&nbsp;<i>ezpublish_legacy/</i><i>extension/ezfind/cronjobs/</i>&nbsp;on your&nbsp;eZ Publish root folder.</p><p>To optimize search functionality the <i>indexcontent </i>cronjob must be executed frequently because objects published or modified between two executions of this cronjob will not be returned or up-to-date in search results. It is therefore wise to run it every five minutes. You can set the cronjob to run frequently by adding &quot;Scripts[]=indexcontent.php&quot; to the CronjobPart-frequent section in an override of your cronjob.ini.</p><p>By default, the&nbsp;<i>indexcontent.php</i>&nbsp;cronjob&nbsp;script only makes part of the default script list, and to make it run you will also execute the other existing cronjob scripts, which can be done by running the following from the root folder of your eZ Publish&nbsp;installation:</p><pre class="wordwrap"><span class="line">php ezpublish/console ezpublish:legacy:script runcronjobs.php --siteaccess &lt;siteaccess&gt;</span>
+</pre><p>Anyway, the <i>indexcontent.php</i>&nbsp;cronjob&nbsp;script&nbsp;isn't included in any cronjob &quot;CronjobPart&quot; group. If you intend to run this script in an independent&nbsp;CronjobPart group, you will need to make this configuration manually in an override of the <i>cronjob.ini</i> file, like in the example below:</p><pre class="wordwrap"><span class="line">[CronjobPart-indexcontent]</span>
+<span class="line">Scripts[]=indexcontent.php</span>
+</pre><p>The&nbsp;<i>indexcontent.php</i>&nbsp;cronjob&nbsp;script&nbsp;can also be run as part of your CronjobPart group using the following command&nbsp;from the root folder of your eZ Publish installation:</p><pre class="wordwrap"><span class="line">php ezpublish/console ezpublish:legacy:script runcronjobs.php --siteaccess &lt;siteaccess&gt; indexcontent</span>
+</pre><p>The <i>ezfoptimizeindex</i> cronjob will optimize the Solr index so that Solr can handle search queries faster. Unlike the former this cronjob doesn't have to be executed very frequently, as optimizing is a heavy operation. Depending on how frequent content is published it can be done once or twice a day, or in very active sites every X hours. Therefore the suggested frequency is set to 'infrequent'. This cronjob can be run by the following command:</p><pre class="wordwrap"><span class="line">php ezpublish/console ezpublish:legacy:script runcronjobs.php --siteaccess &lt;siteaccess&gt; ezfoptimizeindex</span>
+</pre><p>For more information about configuring eZ Publish cronjobs visit the online <a href="../../../../../../../eZ-Publish/Technical-manual/5.x/Features/Cronjobs/Running-cronjobs.html" target="_self">cronjob related documentation</a>.</p><p><b>Note:</b>&nbsp;After hiding a node the search index isn't updated instantly. For the changes to take effect the &quot;<a href="../../../../../../../eZ-Publish/Technical-manual/5.x/Features/Cronjobs/Running-cronjobs.html" target="_self">frequent</a>&quot; cronjob needs to be executed, and&nbsp;<a href="../../Updating-the-search-index.html" target="_self">Solr's search index</a>&nbsp;needs to be updated.</p><p><b>Important note:&nbsp;</b>Currently, the only possible way to be sure that a content object is correctly indexed is by using DelayedIndexing. This is because of its design, which marks the content to be indexed, and only considers the content has been correctly indexed after a valid response from solr. This way an object isn't skipped from the search index even if solr is unavailable or&nbsp;if the index fails for any other reason. In the case of failure the content object will still remain marked to be be indexed, and another try will take place the next time the cronjob runs.</p><a name="eztoc135719_0_2" id="eztoc135719_0_2"></a><h3>OptimizeOnCommit</h3><p>The <i>OptimizeOnCommit</i> setting controls the behaviour of the addObject and deleteObject calls with respect to optimizing the Solr index on commits. If the <i>DelayedIndexing</i> setting is enabled, the <i>OptimizeOnCommit</i> setting should be disabled in order to avoid useless optimization calls on commit during content indexing. This setting can be found in the [IndexOptions] section in your <a href="../../Configuration-settings-eZ-Find.html#indexoptions" target="_blank">ezfind.ini</a>.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.1.0/Basic-Configuration/Indexing-content/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:25:47 GMT -->
+</html>

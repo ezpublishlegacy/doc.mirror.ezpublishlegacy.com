@@ -1,0 +1,234 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/Audit-trailing by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:15:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Audit trailing / Features / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Audit trailing</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><p>It is possible to automatically generate audit logs based on what the users are doing with the system. This feature can be useful for big sites with many administrators and editors where information about various operations should be logged and stored. For example, auditing makes it possible to find out which user that removed content, from which IP address the request came from and so on.</p><p>The system provides a set of built-in audit functions that make it possible to generate audit logs for different types of activities. At minimum, for every operation, the system logs the following information:</p>
+<ul>
+<li><div>&nbsp;When it happened (time-stamp) </div></li><li><div>&nbsp;Where the request came from (IP address) </div></li><li><div>&nbsp;Which user that did it (username and ID number) </div></li>
+</ul>
+<p>Note that most audit functions provide additional information. The following example shows how a record in one of the log files look like after a node has been moved.</p><pre class="wordwrap copytoclipboard"><span class="line">[ May 23 2007 14:47:58 ] [127.0.0.1] [editor:16]</span>
+<span class="line">Node ID: 124</span>
+<span class="line">Old parent node ID: 2</span>
+<span class="line">New parent node ID: 59</span>
+<span class="line">Object ID: 114</span>
+<span class="line">Content Name: Folder</span>
+<span class="line">Comment: Moved the node to the given node: eZContentObjectTreeNode::move()</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ May 23 2007 14:47:58 ] [127.0.0.1] [editor:16]\r\nNode ID: 124\r\nOld parent node ID: 2\r\nNew parent node ID: 59\r\nObject ID: 114\r\nContent Name: Folder\r\nComment: Moved the node to the given node: eZContentObjectTreeNode::move()' ); return false;" /></p>
+<![endif]--><p>The following table shows the available built-in audit functions along with when they are triggered, what kind of information that is actually logged and the default log file where the information is stored.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Audit function</p>
+  </th><th >  <p>Activity</p>
+  </th><th >  <p>Logged information</p>
+  </th><th >  <p>Default log file</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>user-login</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Successful login attempts</p>
+  </td>
+<td valign="top" style="vertical-align: top">  
+<ul>
+<li><div>&nbsp;Timestamp </div></li><li><div>&nbsp;IP address </div></li><li><div>&nbsp;User (name:ID) </div></li>
+</ul>
+
+  </td>
+<td valign="top" style="vertical-align: top">  <p>login.log</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>user-failed-login</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Failed login attempts</p>
+  </td>
+<td valign="top" style="vertical-align: top">  
+<ul>
+<li><div>&nbsp;Timestamp </div></li><li><div>&nbsp;IP address </div></li><li><div>&nbsp;User (name:ID) </div></li>
+</ul>
+
+  </td>
+<td valign="top" style="vertical-align: top">  <p>failed_login.log</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>content-move</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Location change of content</p>
+  </td>
+<td valign="top" style="vertical-align: top">  
+<ul>
+<li><div>&nbsp;Timestamp </div></li><li><div>&nbsp;IP address </div></li><li><div>&nbsp;User (name:ID) </div></li><li><div>&nbsp;Old parent node ID </div></li><li><div>&nbsp;New parent node ID </div></li><li><div>&nbsp;Object ID </div></li><li><div>&nbsp;Object name </div></li><li><div>&nbsp;Comment </div></li>
+</ul>
+
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content_move.log</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>content-delete</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Removal of content</p>
+  </td>
+<td valign="top" style="vertical-align: top">  
+<ul>
+<li><div>&nbsp;Timestamp </div></li><li><div>&nbsp;IP address </div></li><li><div>&nbsp;User (name:ID) </div></li><li><div>&nbsp;Node ID </div></li><li><div>&nbsp;Object ID </div></li><li><div>&nbsp;Object name </div></li><li><div>&nbsp;Comment </div></li>
+</ul>
+
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content_delete.log</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>role-change</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Role and policy changes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  
+<ul>
+<li><div>&nbsp;Timestamp </div></li><li><div>&nbsp;IP address </div></li><li><div>&nbsp;User (name:ID) </div></li><li><div>&nbsp;Role ID </div></li><li><div>&nbsp;Role name </div></li><li><div>&nbsp;Comment </div></li>
+</ul>
+
+  </td>
+<td valign="top" style="vertical-align: top">  <p>role_change.log</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>role-assign</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Role assignment to users and groups</p>
+  </td>
+<td valign="top" style="vertical-align: top">  
+<ul>
+<li><div>&nbsp;Timestamp </div></li><li><div>&nbsp;IP address </div></li><li><div>&nbsp;User (name:ID) </div></li><li><div>&nbsp;Role ID </div></li><li><div>&nbsp;Role name </div></li><li><div>&nbsp;Object name </div></li><li><div>&nbsp;Comment </div></li>
+</ul>
+
+  </td>
+<td valign="top" style="vertical-align: top">  <p>role_assign.log</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>section-assign</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Section assignments</p>
+  </td>
+<td valign="top" style="vertical-align: top">  
+<ul>
+<li><div>&nbsp;Timestamp </div></li><li><div>&nbsp;IP address </div></li><li><div>&nbsp;User (name:ID) </div></li><li><div>&nbsp;Section ID </div></li><li><div>&nbsp;Section name </div></li><li><div>&nbsp;Node ID </div></li><li><div>&nbsp;Object ID </div></li><li><div>&nbsp;Object name </div></li><li><div>&nbsp;Comment </div></li>
+</ul>
+
+  </td>
+<td valign="top" style="vertical-align: top">  <p>section_assign.log</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>order-delete</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Removal of webshop orders</p>
+  </td>
+<td valign="top" style="vertical-align: top">  
+<ul>
+<li><div>&nbsp;Timestamp </div></li><li><div>&nbsp;IP address </div></li><li><div>&nbsp;User (name:ID) </div></li><li><div>&nbsp;Order ID </div></li><li><div>&nbsp;Comment </div></li>
+</ul>
+
+  </td>
+<td valign="top" style="vertical-align: top">  <p>order_delete.log</p>
+  </td>
+
+</tr>
+
+</table>
+<a name="eztoc86307_1" id="eztoc86307_1"></a><h2>Configuration</h2><p>By default, the auditing feature is turned off. In order to use audit trailing on your site, enable the &quot;<a href="../Reference/Configuration-files/audit.ini/AuditSettings/Audit.html" target="_self">Audit</a>&quot; setting located in the &quot;[AuditSettings]&quot; section of an override for the &quot;audit.ini&quot; configuration file. Using the &quot;<a href="../Reference/Configuration-files/audit.ini/AuditSettings/AuditFileNames.html" target="_self">AuditFileNames</a>&quot; configuration array located in the same file, you can specify which types of activities that should be logged (which audit functions that should be used) and to which files they should be logged. The audit function names must be the array keys and the log file names should be the values. Note that the default configuration logs everything to a collection of files (refer to the table in the previous section for details).</p><p>The &quot;<a href="../Reference/Configuration-files/site.ini/FileSettings/LogDir.html" target="_self">LogDir</a>&quot; setting can be used to specify where the audit log files should be stored. The default directory is &quot;log/audit&quot;. This path refers tp <a href="../Reference/Configuration-files/site.ini/FileSettings/VarDir.html" target="_self">VarDir</a> setting, defined in site.ini.</p><a name="eztoc86307_1_1" id="eztoc86307_1_1"></a><h3>Example</h3><p>Let's say that you wish to audit successful log-in attempts and changes to roles and policies while ignoring all other activities. Start by creating an override for &quot;audit.ini&quot; and making sure that it contains the following lines:</p><pre class="wordwrap copytoclipboard"><span class="line">[AuditSettings]</span>
+<span class="line">Audit=enabled</span>
+<span class="line">LogDir=log/my_audit</span>
+<span class="line">AuditFileNames[]</span>
+<span class="line">AuditFileNames[user-login]=login.log</span>
+<span class="line">AuditFileNames[role-change]=role_change.log</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[AuditSettings]\r\nAudit=enabled \r\nLogDir=log/my_audit\r\nAuditFileNames[]\r\nAuditFileNames[user-login]=login.log\r\nAuditFileNames[role-change]=role_change.log' ); return false;" /></p>
+<![endif]--><p>Information about successful log-in attempts will end up in the &quot;login.log&quot; file. Information about role and policy changes will be put in the &quot;role_change.log&quot; file. Both files will be located in the &quot;&lt;VarDir&gt;/log/my_audit&quot; directory. Each record in these files will contain a time-stamp pointing to the exact date and time when an operation was performed, which user that is associated with it (username and ID number) and which IP address the request came from. Records related to role and policy changes will have additional information.</p><a name="eztoc86307_2" id="eztoc86307_2"></a><h2>Creating new audit functions</h2><p>This section provides tips for PHP developers who want to create their own audit functions.</p><p>Sometimes you may need to create a new audit function, i.e. to make the system log information about a specific operation to a particular audit log file. For example, if you wish to create a new audit function called &quot;my-new-audit&quot; and store information about operations to a file called &quot;info.log&quot;, you can do the following:</p>
+<ol>
+<li><div><p>Make sure that the &quot;<a href="../Reference/Configuration-files/audit.ini/AuditSettings/Audit.html" target="_self">Audit</a>&quot; setting located in the [AuditSettings] section of an override for &quot;audit.ini&quot; is enabled and add a new element to the &quot;<a href="../Reference/Configuration-files/audit.ini/AuditSettings/AuditFileNames.html" target="_self">AuditFileNames</a>&quot; configuration array by inserting the following line:</p><pre class="wordwrap"><span class="line">AuditFileNames[my-new-audit]=info.log</span>
+</pre></div></li><li><div><p>In the PHP code which defines the operation that should be logged, you can do something like this:</p><pre class="wordwrap"><span class="line">eZAudit::writeAudit( 'my-new-audit', array( 'User id' =&gt; $userID,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Comment' =&gt; 'The operation XYZ was performed.' ) );</span>
+</pre><p>Elements like 'Name of something' =&gt; &lt;valueOfSomething&gt; define which information that should be written to the &quot;info.log&quot; file when the operation is performed.</p></div></li>
+</ol>
+<p>For example, a record in the log file can look like this:</p><pre class="wordwrap"><span class="line">[ May 23 2007 14:44:04 ] [127.0.0.1] [anonymous:10]</span>
+<span class="line">User id: 10</span>
+<span class="line">Comment: The operation XYZ was performed.</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/Audit-trailing by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:15:07 GMT -->
+</html>

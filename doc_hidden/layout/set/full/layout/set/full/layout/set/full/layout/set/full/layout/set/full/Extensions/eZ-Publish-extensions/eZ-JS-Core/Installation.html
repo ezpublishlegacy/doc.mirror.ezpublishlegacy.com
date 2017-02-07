@@ -1,0 +1,83 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-JS-Core/Installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:05:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Installation / eZ JS Core / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installation</h1>
+</div>
+
+<a name="eztoc113933_1" id="eztoc113933_1"></a><h2>Installation</h2><p>If you have installed eZ Teamroom according to the steps described <a href="../eZ-Teamroom/Setup-and-User-Guide/Installation.html" target="_self">here</a>, eZ JS Core is already installed. This is also the case if you have installed eZ Flow or eZ Webin.</p>
+<ol>
+<li><div>&nbsp;Download the eZ eZ JS Core package from http://projects.ez.no/ezjscore/downloads </div></li><li><div>&nbsp;Unpack the files into the 'Extension' directory of your eZ Publish installation. </div></li><li><div>&nbsp;Activate the extension by adding the following parameters to <i>/settings/override/site.</i> <i>ini</i> by to the [ExtensionSettings] section:<pre class="wordwrap"><span class="line">ActiveExtensions[]=ezjscore</span>
+</pre></div></li><li><div><p>Regenerate autoload array by running this script:</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php -e</span>
+</pre><p>Or if you prefer to update the autoloads from the Admin Interface go to the <b>Setup </b>tab and click on the <b>Extensions </b>link in the menu on the left. In the list displayed check the eZ JS Core extension and click the <b>Regenerate autoload arrays for extensions</b> button.</p></div></li><li><div>&nbsp;Clear the INI and template caches. To do this from the administration interface, select the Setup tab and click on the Cache Management link in the menu on the left. Next you are able to select the needed clear cache buttons. </div></li><li><div>
+&nbsp;Some rewrite rules are necessary for eZ CS Core<br />&nbsp;
+<ul>
+<li><div>
+&nbsp;<b>Rewrite Rules for lib folder</b> <br />&nbsp;eZ JSCore extension require correct Rewrite Rules in order to load the necessary yui (yahoo user interface) files from the file system. This is only required when this INI setting in ezjscore.ini is disabled/<pre class="wordwrap"><span class="line">[eZJSCore]LoadFromCDN=disabled</span>
+</pre>If this is the case add the following line to your Virtual-Host setup<pre class="wordwrap"><span class="line">RewriteRile ^/extension/[^/]+/design/[^/]+/(stylesheets|flash|images|lib|javascripts?)/.* - [L]</span>
+</pre></div></li><li><div>
+&nbsp;<b>Rewrite Rules for script/css packing</b> <br />&nbsp;eZ JSCore packs javascript/css files together in order to decrease server requests and file size for faster download. When using eZ Publish 4.0.x you will need to make the following changes, if you have not already, when installing ezoe (<a href="../../../../full.html" target="_blank">Online Editor 5.0</a>).
+<ul>
+<li><div><p>
+<b>&nbsp;<i>.htaccess</i> </b> <br />&nbsp;Change</p><pre class="wordwrap"><span class="line">RewriteRule !\.(gif|jpe?g|png|css|js|html)|var(.+)storage.pdf(.+)\.pdf$ index.php</span>
+</pre><p>in to<a href="../../../../full.html" target="_blank">Online Editor 5.0</a>:</p><pre class="wordwrap"><span class="line">RewriteRule &nbsp;!(\.(gif|jpe?g|png|css|js|html?)|var(.+)storage.pdf(.+)\.pdf)$ index.php</span>
+</pre></div></li><li><div>
+&nbsp;<b>&nbsp;<i>Virtual Host mode</i> </b> <br />&nbsp;add:<pre class="wordwrap"><span class="line">RewriteRule ^/var/([^/]+/)?cache/public/.* - [L]</span>
+</pre></div></li><li><div><p>If you don't manage to get these changes working, you can disable this feature setting ezjscore.ini</p><pre class="wordwrap"><span class="line">[eZJSCore]</span>
+<span class="line">Packer=disabled</span>
+</pre></div></li>
+</ul>
+</div></li><li><div>
+&nbsp;<b>Rewrite Rules for clustered enviroment</b> <br />&nbsp;In order to make eZ JS Core work in a cluster environment the following Rewrite Rule is required:<pre class="wordwrap"><span class="line">RewriteRule ^/var/([^/]+/)?cache/public/.* /index_cluster.php [L]</span>
+</pre></div></li>
+</ul>
+</div></li>
+</ol>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-JS-Core/Installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:05:53 GMT -->
+</html>

@@ -1,0 +1,144 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.6/Features/Clustering/Cluster-Configuration-Settings by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Cluster Configuration Settings / Clustering / Features / 4.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Cluster Configuration Settings</h1>
+</div>
+
+<p>
+The cluster settings are located in an override of your &quot;settings/file.ini&quot; file (most likely &quot;settings/override/file.ini.append.php&quot;or &quot;settings/siteaccess/&lt;SITE_ACCESS&gt;/file.ini.append.php&quot;)<br />
+&nbsp;When using the eZDB file handler the settings must be configured in the [ClusteringSettings] block. When using the eZDFS file handler the settings in the [eZDFSClusteringSettings] block must also be configured along with setting &quot;FileHandler=eZDFSFileHandler&quot; in [ClusterSettings] in the same file.<br />&nbsp;Note: It is recommended to use a distinct database server if you are clustering for a high traffic website</p><a name="eztoc126141_1" id="eztoc126141_1"></a><h2><b>[ClusteringSettings]</b></h2><a name="eztoc126141_1_1" id="eztoc126141_1_1"></a><h3>FileHandler</h3><p>Possible configuration settings are:</p>
+<ul>
+<li><div>&nbsp;FileHandler=eZFSFileHandler </div></li><li><div>&nbsp;FileHandler=eZDBFileHandler </div></li><li><div>&nbsp;FileHandler=eZDFSFileHandler </div></li>
+</ul>
+<p>This setting sets the cluster file handler. For more information regarding the cluster file handlers visit chapter &quot;<a href="Cluster-File-Handlers.html" target="_self">cluster file handlers</a>&quot;. Since eZ Publish 4.1 the names of the file handlers have changed. For instance 'ezdb' is no longer recognised, the correct setting here would be 'eZDBFileHandler'. When using an eZ DFS File Handler please refer to the settings in <a href="#dfs" target="_self">[eZDFSClusteringSettings]</a>.</p><a name="eztoc126141_1_2" id="eztoc126141_1_2"></a><h3>DBBackend</h3><p>Possible configuration settings are:</p>
+<ul>
+<li><div>&nbsp;DBBackend=eZDBFileHandlerMysqlBackend </div></li><li><div>&nbsp;DBBackend=eZDBFileHandlerOracleBackend </div></li>
+</ul>
+<p>
+Use this setting to define the database backend used by the eZDB file handler. When using an eZDFSFileHandler please refer to the settings in <a href="#dfs" target="_self">[eZDFSClusteringSettings]</a>.<br />&nbsp;For the database backend setting (DBBackend=) the previously used value &quot;mysql&quot; is deprecated. Possible values are &quot;eZDBFileHandlerMysqlBackend&quot; when using MySQL or &quot;eZDBFileHandlerOracleBackend&quot; when using Oracle (this will require the ezoracle extension)</p><a name="eztoc126141_1_3" id="eztoc126141_1_3"></a><h3>DBHost</h3><p>Possible configuration setting is:</p>
+<ul>
+<li><div>&nbsp;DBHost=&lt;string&gt; </div></li>
+</ul>
+<p>Use the actual host name as value. In most cases this value will be the same as the &quot;Server&quot; setting specified under the <a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/configuration_files/site_ini/databasesettings" target="_self">[DatabaseSettings]</a> block of your &quot;site.ini.append.php&quot; configuration file. When using an eZ DFS File Handler please refer to the settings in [<a href="#dfs" target="_self">eZDFSClusteringSettings</a>].</p><p><b>Note</b>: It is recommended to use a distinct database server if you are clustering for a high traffic website.</p><p>Default value is:</p><pre class="wordwrap"><span class="line">DBHost=localhost</span>
+</pre><a name="eztoc126141_1_4" id="eztoc126141_1_4"></a><h3>DBPort</h3><p>Possible configuration setting is:</p>
+<ul>
+<li><div>&nbsp;DBPort=&lt;integer&gt; </div></li>
+</ul>
+<p>This setting sets which port to use. When using an eZ DFS File Handler please refer to the settings in [<a href="Cluster-Configuration-Settings.html#dfs" target="_self">eZDFSClusteringSettings</a>].</p><p>Default value is:</p><pre class="wordwrap"><span class="line">DBPort=3306</span>
+</pre><p><b>Note about DFS/PostgreSQL</b>: since the default port is the MySQL one, specifying DBPort is required for PostgreSQL.</p><a name="eztoc126141_1_5" id="eztoc126141_1_5"></a><h3>DBSocket</h3><p>Possible configuration setting:</p>
+<ul>
+<li><div>&nbsp;DBSocket= </div></li>
+</ul>
+<p>Make sure that the &quot;DBSocket&quot; setting is correct. Leave it empty if you have &quot;Socket=disabled&quot; under the [DatabaseSettings] block in &quot;site.ini.append.php&quot;. When using and eZDFSFileHandler please refer to the settings in [<a href="Cluster-Configuration-Settings.html#dfs" target="_self">eZDFSClusteringSettings</a>].</p><p>Default value is:</p><pre class="wordwrap"><span class="line">DBSocket=</span>
+</pre><a name="eztoc126141_1_6" id="eztoc126141_1_6"></a><h3>DBName</h3><p>Possible configuration setting:</p>
+<ul>
+<li><div>&nbsp;DBName=&lt;string&gt; </div></li>
+</ul>
+<p>Use the actual database name as value. In most cases this value will be the same as the &quot;Database&quot; setting specified under the <a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/configuration_files/site_ini/databasesettings" target="_self">[DatabaseSettings]</a> block of your &quot;site.ini.append.php&quot; configuration file. When using an eZ DFS File Handler please refer to the settings in [<a href="#dfs" target="_self">eZDFSClusteringSettings</a>].</p><p>Default value is:</p><pre class="wordwrap"><span class="line">DBName=cluster</span>
+</pre><a name="eztoc126141_1_7" id="eztoc126141_1_7"></a><h3>DBUser</h3><p>Possible configuration setting:</p>
+<ul>
+<li><div>&nbsp;DBUser=&lt;string&gt; </div></li>
+</ul>
+<p>Use the user name as value. In most cases this value will be the same as the &quot;User&quot; setting specified under the <a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/configuration_files/site_ini/databasesettings" target="_self">[DatabaseSettings]</a> block of your &quot;site.ini.append.php&quot; configuration file. When using an eZ DFS File Handler please refer to the settings in [<a href="#dfs" target="_self">eZDFSClusteringSettings</a>].</p><p>Default value is:</p><pre class="wordwrap"><span class="line">DBUser=root</span>
+</pre><a name="eztoc126141_1_8" id="eztoc126141_1_8"></a><h3>DBPassword</h3><p>Possible configuration setting:</p>
+<ul>
+<li><div>&nbsp;DBPassword=&lt;string&gt; </div></li>
+</ul>
+<p>Use the actual password as value. In most cases this value will be the same as the &quot;Password&quot; setting specified under the <a href="http://ez.no/doc/ez_publish/technical_manual/4_x/reference/configuration_files/site_ini/databasesettings" target="_self">[DatabaseSettings]</a> block of your &quot;site.ini.append.php&quot; configuration file. When using an eZ DFS File Handler please refer to the settings in [<a href="#dfs" target="_self">eZDFSClusteringSettings</a>].</p><p>Default value is:</p><pre class="wordwrap"><span class="line">DBPassword=</span>
+</pre><a name="eztoc126141_1_9" id="eztoc126141_1_9"></a><h3>DBChunkSize</h3><p>Possible configuration setting:</p>
+<ul>
+<li><div>&nbsp;DBChunkSize=&lt;integer&gt; </div></li>
+</ul>
+<p>This setting determines the size of the blocks (in bytes) into which files are split when they are fetched and inserted from the database. This setting is only valid when using eZDB.</p><p>Default value is:</p><pre class="wordwrap"><span class="line">DBChunkSize=65535</span>
+</pre><a name="eztoc126141_1_10" id="eztoc126141_1_10"></a><h3>DBConnectRetries</h3><p>Possible configuration setting:</p>
+<ul>
+<li><div>&nbsp;DBConnectRetries=&lt;integer&gt; </div></li>
+</ul>
+<p>When using an eZ DFS File Handler please refer to the settings in [<a href="Cluster-Configuration-Settings.html#dfs" target="_self">eZDFSClusteringSettings</a>].</p><p>Default value is:</p><pre class="wordwrap"><span class="line">DBConnectRetries=3</span>
+</pre><a name="eztoc126141_1_11" id="eztoc126141_1_11"></a><h3>DBExecuteRetries</h3><p>Possible configuration setting:</p>
+<ul>
+<li><div>&nbsp;DBExecuteRetries=&lt;integer&gt; </div></li>
+</ul>
+<p>When using an eZ DFS File Handler please refer to the settings in [<a href="Cluster-Configuration-Settings.html#dfs" target="_self">eZDFSClusteringSettings</a>].</p><p>Default value is:</p><pre class="wordwrap"><span class="line">DBExecuteRetries=20</span>
+</pre><a name="eztoc126141_1_12" id="eztoc126141_1_12"></a><h3>NonExistantStaleCacheHandling</h3><p>Possible values are:</p>
+<ul>
+<li><div>&nbsp;NonExistantStaleCacheHandling[]=wait </div></li><li><div>&nbsp;NonExistantStaleCacheHandling[]=generate </div></li>
+</ul>
+<p>Possible key settings are:</p>
+<ul>
+<li><div>&nbsp;[viewcache] </div></li><li><div>&nbsp;[cacheblock] </div></li><li><div>&nbsp;[misc] </div></li>
+</ul>
+<p>
+This is an advanced setting and should only be customized if it is specifically required. This setting defines what happens when a requested cache file is already being generated and no expired cache file exists (for instance if the content is new). <br />&nbsp;There are two possible values:</p>
+<ul>
+<li><div>&nbsp;The default value is &quot;wait&quot;, which places the process in a wait loop for a limited time until the file is done generating. </div></li><li><div>&nbsp;The second value is &quot;generate&quot; which lets the requesting process generate its own data without storing the result. </div></li>
+</ul>
+<p>Use the [key] to define the type of cache that is impacted by the setting. The following three cache types are allowed ar key:</p>
+<ul>
+<li><div>&nbsp;viewcache </div></li><li><div>&nbsp;cacheblock </div></li><li><div>&nbsp;misc: this is used for any cache that is not viewcache nor cacheblock. </div></li>
+</ul>
+<p>Example configuration setting is:</p><pre class="wordwrap"><span class="line">NonExistantStaleCacheHandling[viewcache]=wait</span>
+</pre><a name="eztoc126141_2" id="eztoc126141_2"></a><h2><b>&nbsp;[eZDFSClusteringSettings]</b></h2><p>Specific configuration settings when using the eZ DFS File Handler. Most are similar to the ones mentioned in [ClusteringSettings], except &quot;MountPointPath&quot;, &quot;DBBackend&quot; and &quot;DBSocket&quot;.</p><a name="eztoc126141_3" id="eztoc126141_3"></a><h2>MountPointPath</h2><p>Possible configuration setting:</p>
+<ul>
+<li><div>&nbsp;MountPointPath=&lt;string&gt; </div></li>
+</ul>
+<p>Since the eZ DFS File Handler is based on NFS, each eZ Publish installation sharing the same relational database must use the same cluster database and each should have a local mount point to the same NFS export. The location of the local mount point must be set here.</p><p>Example setting is:</p><pre class="wordwrap"><span class="line">MountPointPath=var/nfsmount</span>
+</pre><a name="eztoc126141_3_13" id="eztoc126141_3_13"></a><h3>DBBackend</h3><p>Possible configuration setting:</p>
+<ul>
+<li><div>&nbsp;DBBackend=eZDFSFileHandlerMySQLBackend </div></li>
+</ul>
+<p>Use this setting to define the database back-end used by the eZ DB File Handler. Currently only MySQL is supported as database for the eZDFS file handler.</p><p>Default value is:</p><pre class="wordwrap"><span class="line">DBBackend=eZDFSFileHandlerMySQLBackend</span>
+</pre><a name="eztoc126141_3_14" id="eztoc126141_3_14"></a><h3>DBSocket</h3><p>Possible configuration setting:</p>
+<ul>
+<li><div>&nbsp;DBSocket=False </div></li>
+</ul>
+<p>Default and value is:</p><pre class="wordwrap"><span class="line">DBSocket=False</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.6/Features/Clustering/Cluster-Configuration-Settings by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:37 GMT -->
+</html>

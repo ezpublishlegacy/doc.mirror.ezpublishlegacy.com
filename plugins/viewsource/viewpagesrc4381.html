@@ -1,0 +1,60 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=12781226 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:30:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage4381.html?pageId=12781226" />
+        <link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch934e.css?media=print" media="print">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 8]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1f2a9c4c7f2593422cc9b02d1a652a22/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/26ac2724af3c6ece1051365650d982fa/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins.confluence-highlight-ac" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/12/_/styles/colors.css" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p style="margin-left: 0.0px;"><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macrob964.png?definition=e2V4Y2VycHQtaW5jbHVkZTplWiBQdWJsaXNoIERvY3VtZW50YXRpb259&amp;locale=en_GB&amp;version=2" data-macro-name="excerpt-include" data-macro-default-parameter="eZ Publish Documentation"></p><p style="margin-left: 0.0px;">This explains the content cache purge mechanism, while publishing a content from the admin interface or from a container aware script (will not work with pure <code>eZScript</code> atm, but will with new CLI scripts).<br />Note that the approach is fully compatible with native reverse proxies like <strong>Varnish</strong> (but in this case you won't use all <code>HttpCache</code> related code).</p><h2>Description</h2><p>On publish, one or several Http PURGE requests are sent to the backend. This request will have a specific header <code>X-Location-Id</code> (in the case of 1 request per location to purge) or <code>X-Group-Location-Id</code> (in the case of 1 request for all location to purge).</p><h2>Http PURGE requests</h2><h3>Emulated purge requests</h3><p>By default, PURGE requests will be emulated and sent to the cache Store. Cache purge will thus be synchronous.<br />This is the default behavior. <strong>No Http requests will be sent to the backend when publishing</strong>.</p><p><strong>Configuration:</strong></p><table class="wysiwyg-macro" data-macro-name="code" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    http_cache:
+        purge_type: local</pre></td></tr></table><h3>One purge request for all locations, aka &quot;SingleHttp&quot;</h3><p>Only one Http PURGE request is sent for purging every needed locations.</p><p>A request for purging locations <code>123</code> and <code>456</code> would be:</p><pre><code>PURGE / HTTP 1.1 <br />Host: localhost <br />X-Group-Location-Id: 123; 456 </code></pre><p><strong>Configuration</strong></p><table class="wysiwyg-macro" data-macro-name="code" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    http_cache:
+        purge_type: single_http</pre></td></tr></table><h3>One request per location, aka &quot;MultipleHttp&quot;</h3><p>One Http PURGE request will be sent <em>per location to purge</em></p><p>A request for purging locations <code>123</code> and <code>456</code> would result to:</p><pre><code>PURGE / HTTP 1.1 <br />Host: localhost <br />X-Location-Id: 123 </code></pre><p>AND</p><pre><code>PURGE / HTTP 1.1 <br />Host: localhost <br />X-Location-Id: 456 </code></pre><p><strong>Configuration:</strong></p><table class="wysiwyg-macro" data-macro-name="code" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    http_cache:
+        purge_type: multiple_http</pre></td></tr></table><h2>Purge all content</h2><p>When purging all cached content, a single Http PURGE request is sent (except for <em>local</em> purge type), with<code>X-Location-Id</code> set to <code>*</code>:</p><pre><code>PURGE / HTTP 1.1 <br />Host: localhost <br />X-Location-Id: * </code></pre><h2>Multiple servers</h2><p>If you need to purge several servers at once (e.g. multiple Varnish infrastructure), you can set this up in the siteaccess configuration:</p><table class="wysiwyg-macro" data-macro-name="code" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    http_cache:
+        purge_type: single_http
+
+    system:
+        my_siteacess:
+            http_cache:
+                purge_servers: ["http://varnish.server1/", "http://varnish.server2/", "http://varnish.server3/"]</pre></td></tr></table><h2>Manual purging</h2><p>Manual purging is also possible:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="language=php" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>$locationIds = array( 123, 456 );
+$container->get( 'ezpublish.http_cache.purger' )->purge( $locationIds );</pre></td></tr></table><p> </p><div class="highlight" style="margin-left: 0.0px;"><pre> </pre></div>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=12781226 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:30:33 GMT -->
+</html>

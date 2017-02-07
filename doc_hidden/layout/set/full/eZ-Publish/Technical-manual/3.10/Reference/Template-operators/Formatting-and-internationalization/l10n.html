@@ -1,0 +1,109 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Template-operators/Formatting-and-internationalization/l10n by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:06:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>l10n / Formatting and internationalization / Template operators / Reference / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>l10n</h1>
+</div>
+<h3>Summary</h3>
+Formats misc. numbers (times, dates, currencies, numbers, etc.). <h3>Usage</h3>
+<pre>input|l10n( type [, locale [, symbol ] ] )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>type</td>
+        <td>string</td>
+        <td>The format that should be used.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>locale</td>
+        <td>string</td>
+        <td>The locale that should be used (when type is set to &quot;currency&quot;).</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>symbol</td>
+        <td>string</td>
+        <td>The currency symbol that should be used (when type is set to &quot;currency&quot;).</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+A string containing a formatted version of the input parameter.<h3>Description</h3>
+ <p>This operator formats/localizes miscellaneous numeric values according to the current locale settings. The value that should be formatted must be input using the input parameter. The &quot;type&quot; parameter must be used to select the desired format. The following list reveals the available formats/types.</p> 
+<ul>
+ <li><div> time </div></li> <li><div> shorttime </div></li> <li><div> date </div></li> <li><div> shortdate </div></li> <li><div> datetime </div></li> <li><div> shortdatetime </div></li> <li><div> currency </div></li> <li><div> clean_currency </div></li> <li><div> number </div></li> 
+</ul>
+ <p>In addition, the operator also formats numeric values according to the specified &quot;locale&quot; and &quot;symbol&quot; parameters when the &quot;type&quot; parameter is set to &quot;currency&quot;.</p><h3>Examples</h3>
+    <a name="eztoc80729_0_0_1" id="eztoc80729_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $number=1234.567</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$timestamp=currentdate()}</span>
+<span class="line">&nbsp;</span>
+<span class="line">time: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$timestamp|l10n( 'time' )}</span>
+<span class="line">shorttime: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$timestamp|l10n( 'shorttime' )}</span>
+<span class="line">date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$timestamp|l10n( 'date' )}</span>
+<span class="line">shortdate: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$timestamp|l10n( 'shortdate' )}</span>
+<span class="line">datetime: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$timestamp|l10n( 'datetime' )}</span>
+<span class="line">shortdatetime: &nbsp;{$timestamp|l10n( 'shortdatetime' )}</span>
+<span class="line">currency: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$number|l10n( 'currency' )}</span>
+<span class="line">clean_currency: {$number|l10n( 'clean_currency' )}</span>
+<span class="line">number: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$number|l10n( 'number' )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{def $number=1234.567\r\n     $timestamp=currentdate()}\r\n\r\ntime:           {$timestamp|l10n( \'time\' )}\r\nshorttime:      {$timestamp|l10n( \'shorttime\' )}\r\ndate:           {$timestamp|l10n( \'date\' )}\r\nshortdate:      {$timestamp|l10n( \'shortdate\' )}\r\ndatetime:       {$timestamp|l10n( \'datetime\' )}\r\nshortdatetime:  {$timestamp|l10n( \'shortdatetime\' )}\r\ncurrency:       {$number|l10n( \'currency\' )}\r\nclean_currency: {$number|l10n( \'clean_currency\' )}\r\nnumber:         {$number|l10n( \'number\' )}' ); return false;" /></p>
+<![endif]--> <p>If the current locale is &quot;eng-GB&quot;, the following output will be produced:</p> <div class="output"> <p>
+time : 1:46:05 pm<br />
+shorttime : 1:46 pm<br />
+date : Friday 06 February 2004<br />
+shortdate : 06/02/2004<br />
+datetime : Friday 06 February 2004 1:46:05 pm<br />
+shortdatetime : 06/02/2004 1:46 pm<br />
+currency : £ 1,234.57<br />
+clean_currency : 1,234.57<br />number : 1,234.57</p> </div> <a name="eztoc80729_0_0_2" id="eztoc80729_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $price=1234.57}</span>
+<span class="line">The price in local currency : {$price|l10n( 'currency' )} &lt;br /&gt;</span>
+<span class="line">The price in Norwegian Krone : {$price|l10n( 'currency', 'nor-NO' )} &lt;br /&gt;</span>
+<span class="line">The price in Norwegian Krone with specified symbol : {$price|l10n( 'currency', 'nor-NO', 'nok' )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{def $price=1234.57}\r\nThe price in local currency : {$price|l10n( \'currency\' )} &lt;br /&gt;\r\nThe price in Norwegian Krone : {$price|l10n( \'currency\', \'nor-NO\' )} &lt;br /&gt;\r\nThe price in Norwegian Krone with specified symbol : {$price|l10n( \'currency\', \'nor-NO\', \'nok\' )}\r\n' ); return false;" /></p>
+<![endif]--> <p>If the current locale is &quot;eng-GB&quot;, the following output will be produced:</p><div class="output"> <p>
+The price in local currency : £ 1,234.57<br />
+The price in Norwegian Krone : kr 1.234,57<br />The price in Norwegian Krone with specified symbol : nok 1.234,57</p> </div>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Template-operators/Formatting-and-internationalization/l10n by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:06:10 GMT -->
+</html>

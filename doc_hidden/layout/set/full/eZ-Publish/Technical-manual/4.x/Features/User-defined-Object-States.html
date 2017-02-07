@@ -1,0 +1,150 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/User-defined-Object-States by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:15:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>User defined Object States / Features / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>User defined Object States</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><p>The introduction of freely definable object states, possibly grouped in object state collections and coupled to the role/policy system of eZ Publish, enables a wide range of applications including typical workflow processes. By default eZ Publish has only one content object state group: &quot;Lock&quot; with object states &quot;Locked&quot; and &quot;Not locked&quot;. But by creating freely definable object states groups with their own set of object states, the possibilities of the application can be more specifically tailored to user needs.</p><a name="eztoc106399_1" id="eztoc106399_1"></a><h2>How does it work?</h2><p>Object states are typically used in workflows and other workflow-like processes. It's useful to note that although they are used in workflow processes, not all workflows use object states, nor do object states employ the eZ Publish workflow engine or the workflow system themselves. In this article the term &quot;workflow&quot; should generally be understood as the succession of steps rather than an eZ Publish concept.</p><p>
+A workflow defines an organized sequence of actions that will be executed while the workflow is running. A simple example of a workflow could be a newly written article (object) that is sent for approval to an editor. Since by default eZ Publish only has one content object state group, &quot;Lock&quot;, the status of this article or object can only change from unlocked to locked during this workflow process. And once an object has been locked and submitted into such a workflow process, the object remains locked until it is either rejected or accepted. So during the time between submitting an object and its approval no further editing or correcting can be done.<br />
+&nbsp;But the possibilities of such workflow processes can be broadened simply through the use of freely defined object states. This allows for more states to be added, thus proving more steps in the process. By attaching policies to each state you are able to control who can do what to an object while it is in a specific state.<br />&nbsp;Because the states of an object changes throughout the work process, the transition between the states of objects must also be governed through specifically assigned policies to define who is allowed to change the state. Simply put: policies must be assigned to both the states individually, as to each state change. Keep in mind that an object can have multiple object states, but can only have one object state per object state group. <a href="http://share.ez.no/articles/ez-publish/ez-publish-knowledge-series-editorial-workflow-with-object-states" target="_blank">Learn more about the use of object states in an editorial workflow... </a></p><a name="eztoc106399_2" id="eztoc106399_2"></a><h2>Limitations</h2><p>Some limitations of this system must be taken in consideration. First of all, freely defined object states are assigned on object level, therefor they operate on published versions only, not on translations or drafts. The second limitation is that the roles and policies, that are at the heart of this system, are not yet elaborate enough to cover all possibilities.</p><p>Not so much a limitation as it is an observation, that, as mentioned before, object states can be used in workflow processes, but not all workflows use object states.</p><a name="eztoc106399_3" id="eztoc106399_3"></a><h2>Why not sections?</h2><p>Sections are also often used to imitate workflow object states. Although the use of sections also makes it possible to limit and control access to content through roles and policies, it isn't capable of defining policies on state changes. Whereas user definable object states can grant policies to both the states themselves as to the transitions between states. This being said sections are still used for secure sites, where for example anonymous users are only allowed to see the default view.</p><a name="eztoc106399_4" id="eztoc106399_4"></a><h2>How to create Object States</h2>
+<ol>
+<li><div>
+&nbsp;To create custom object states you must first create a Content Object States Group to place them in. This can be done in the Administration Interface, under the Setup-tab.<br />&nbsp;
+<ol>
+<li><div>&nbsp;Click on the &quot;States&quot;-link in the left menu. Here you'll be able to create a new Content Object States Group. </div></li>
+</ol>
+&nbsp;</div></li><li><div>&nbsp;In the newly created Content Object State Group you can then create object states matching the different phases of your work process by clicking &quot;Create new&quot;. The first state in the group will be applied by default to all newly created objects. </div></li><li><div>
+&nbsp;Next you must give the correct rights to each user or user group so they can do their part of the task and only their part, before handing over the content to the next group or user:<br />&nbsp;
+<ol>
+<li><div>&nbsp;Roles and policies can be created or modified through the User Accounts-tab. In the left menu, under &quot;Access control&quot; you'll find the &quot;Roles and Policies&quot;- link. Note that you can also be redirected to this location via the &quot;Roles and Policies&quot; link in the Setup-tab. </div></li><li><div>&nbsp;For each usergroup associated to this work process, specific roles and policies must be defined to limit their access and contribution to their specific tasks. </div></li><li><div>&nbsp;Furthermore roles must be assigned to control the state transitions between each phase of the workflow. </div></li>
+</ol>
+&nbsp;</div></li><li><div>&nbsp;Now that only authorized users can modify the state of an object and push it through the workflow, a handover-channel should be created between the different contributors. This implies that user(group)s should be notified when an object is ready for them to fulfill their task. However, this feature is not yet included by default in eZ Publish 4.1, but soon will be. For now this must be done manually by sending the URL of the object to the next user(group) in line. </div></li>
+</ol>
+<a name="eztoc106399_5" id="eztoc106399_5"></a><h2>An example</h2><p>It can be useful to implement a private waste bin and for this object states can easily be defined. In a private waste bin an owner can place articles without deleting them permanently, but still preventing others to read or edit them. The simplicity of removing an article out of the personal waste bin and making it visible for others is an added advantage. In this implementation an object also retains its node location(s).</p><a name="eztoc106399_5_1" id="eztoc106399_5_1"></a><h3>How to create a personal waste bin step-by-step</h3><p>To create a private waste bin through the Administration Interface, navigate to the Setup-tab. In the left menu, click on the the &quot;States&quot;-link. Here you will see a list of already existing content object state groups (by default you'll only find &quot;Lock&quot;) and you will be able to create a new content object state group:</p>
+<div class="object-center">        <img src="../../../../../../../../var/doc/storage/images/media/images/content_object_state_group/106448-1-eng-GB/content_object_state_group_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>For this example a group &quot;Private Wastebin&quot; was created, which includes two object states: &quot;Viewable Article&quot; and &quot;In Private Wastebin&quot;. Obviously the first allows an object to be viewed by all users, whereas the latter only allows the owner to view and edit the object. Note that the first state will always by applied as default state.</p>
+<div class="object-center">        <img src="../../../../../../../../var/doc/storage/images/media/images/private_waste_bin_with_object_states/106451-1-eng-GB/private_waste_bin_with_object_states_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Providing the correct rights to the owner is the next step. This must be done via the &quot;Roles and Policies&quot;-link, which can be accessed both under the left menu &quot;Access control&quot; in the &quot;User Accounts&quot;-tab, as through the &quot;Roles and Policies&quot;-link in the &quot;Setup&quot;-tab.Beneath the list of roles you can create a new role. The role &quot;Owner&quot; is added and includes policies that only allow the owner of an object to edit and read the content of an article when it has the object state &quot;In Private Wastebin&quot;. Furthermore the owner is given the sole right to control the state transitions.Next all user(group)s are assigned to the role &quot;Owner&quot;.</p>
+<div class="object-center">        <img src="../../../../../../../../var/doc/storage/images/media/images/policies_owner/106454-1-eng-GB/policies_owner_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Finally the policies in the Anonymous role must also be altered in order to prevent anonymous users from viewing articles in &quot;In Private Wastebin&quot;. In the policy regarding reading content the limitation of &quot;State_Group_Private_Wastebin&quot; is set to &quot;viewable article&quot;.</p>
+<div class="object-center">        <img src="../../../../../../../../var/doc/storage/images/media/images/anonymous_role/106457-1-eng-GB/anonymous_role_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><a name="eztoc106399_5_2" id="eztoc106399_5_2"></a><h3>Use of private waste bin</h3><p>After an article has been created and sent for publishing in the User Interface, the owner will be able to define the object state.</p>
+<div class="object-center">        <img src="../../../../../../../../var/doc/storage/images/media/images/user_interface/106460-1-eng-GB/user_interface_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>This can also be done with an already published article:</p>
+<div class="object-center">        <img src="../../../../../../../../var/doc/storage/images/media/images/object_states_in_user_interface/106463-1-eng-GB/object_states_in_user_interface_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>In the Administrator Interface, the state can be altered when you navigate to the &quot;Content Structure&quot;-tab. When viewing an article here, make sure the &quot;state assignment widget&quot; at the top of the page is enabled. If so, you'll be able to define the object state.</p>
+<div class="object-center">        <img src="../../../../../../../../var/doc/storage/images/media/images/object_states_in_administrator_interface/106466-1-eng-GB/object_states_in_administrator_interface_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>For another example of the use of object states, please read &quot;<a href="http://share.ez.no/articles/ez-publish/ez-publish-knowledge-series-editorial-workflow-with-object-states" target="_blank">eZ Publish Knowledge Series: Editorial workflow with Object States</a>&quot;.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/User-defined-Object-States by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:15:17 GMT -->
+</html>

@@ -1,0 +1,140 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/transform.ini/transformation-group/Files by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Files /  [{transformation group}] / transform.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Files</h1>
+</div>
+<h3>Summary</h3>
+Sets which transformation files are used by this transformation group (block name).<h3>Usage</h3>
+<pre class="pfix"> <p>Files[]=&lt;file.tr&gt;</p></pre><h3>Description</h3>
+ <p>
+Sets the transformation files that are used by this transformation group (the block name), and from which the rules of character transformation should be taken from. <br />
+The process of selecting the proper files which are to be used by the system, is described here through an example. Let's say that the current eZ Publish installation uses the &quot;utf-8&quot; charset.<br />
+On the first step the system will go through the Charset setting located under the [Transformation] block, which consists of two parts, the charset and the group it maps to, separated with a semicolon. If the first part matches the current charset, the second part is added to the list of blocks that will be used.<br />
+For the &quot;utf-8&quot; charset there will be four default matches in Charset:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">Charsets[]=utf-8;latin</span>
+<span class="line">Charsets[]=utf-8;cyrillic</span>
+<span class="line">Charsets[]=utf-8;greek</span>
+<span class="line">Charsets[]=utf-8;hebrew</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'Charsets[]=utf-8;latin\r\nCharsets[]=utf-8;cyrillic\r\nCharsets[]=utf-8;greek\r\nCharsets[]=utf-8;hebrew' ); return false;" /></p>
+<![endif]--><p>
+ <br />
+During the second step, the system will search for the transformation files in the corresponding blocks:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[latin]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Files[]=latin.tr</span>
+<span class="line">Extensions[]=my_extension</span>
+<span class="line">&nbsp;</span>
+<span class="line">[cyrillic]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Files[]=cyrillic.tr</span>
+<span class="line">Extensions[]</span>
+<span class="line">&nbsp;</span>
+<span class="line">[greek]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Files[]=greek.tr</span>
+<span class="line">Extensions[]</span>
+<span class="line">&nbsp;</span>
+<span class="line">[hebrew]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Files[]=hebrew.tr</span>
+<span class="line">Extensions[]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[latin]\r\n\r\nFiles[]=latin.tr\r\nExtensions[]=my_extension\r\n\r\n[cyrillic]\r\n\r\nFiles[]=cyrillic.tr\r\nExtensions[]\r\n\r\n[greek]\r\n\r\nFiles[]=greek.tr\r\nExtensions[]\r\n\r\n[hebrew]\r\n\r\nFiles[]=hebrew.tr\r\nExtensions[]' ); return false;" /></p>
+<![endif]--><p>
+ <br />
+Therefore, there are four transformation files to load that are mentioned in the Files setting (latin.tr, cyrillic.tr, greek.tr and hebrew.tr), also transformation files linked to the used extensions will be loaded.<br />
+The repository setting controls where the transformation files mentioned in the Files setting are located. The system will also look for the transformation files in the extensions defined in the Extensions setting, more specifically in the extensions &quot;transformations&quot; folder (for example &quot;my_extension/transformations/transform.tr&quot;).<br />
+So far five transformation files will be loaded by the system according to our example settings:<br />
+latin.tr<br />
+cyrillic.tr<br />
+greek.tr<br />
+hebrew.tr<br />
+transform.tr<br />
+On the third step the system will look through the other relevant blocks in transform.ini and add the transformation files to the list, if any are specified. Thus, if for example the search engine is working on request and the [search] block in transform.ini looks like this:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[search]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Files[]</span>
+<span class="line">Files[]=search.tr</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[search]\r\n\r\nFiles[]\r\nFiles[]=search.tr' ); return false;" /></p>
+<![endif]--><p>
+ <br />
+The system will then also load the &quot;search.tr&quot; file in addition to the other five files that are described above.<br />
+So now, when the search engine is working on a request and the current charset of eZ Publish is set to &quot;utf-8&quot;, the system will now take the rules of character transformation from the following transformation files:<br />
+latin.tr<br />
+cyrillic.tr<br />
+greek.tr<br />
+hebrew.tr<br />
+transform.tr<br />
+search.tr<br />
+In case these different loaded files have the same transformation rules, the system will use the rules from the file that was loaded last. Thus, in the following example the matching rules from &quot;latin.tr&quot; will be overridden with the rules from the &quot;my_extension&quot; extension.<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[latin]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Files[]</span>
+<span class="line">Files[]=latin.tr</span>
+<span class="line">&nbsp;</span>
+<span class="line">Extensions[]</span>
+<span class="line">Extensions[]=my_extension</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[latin]\r\n\r\nFiles[]\r\nFiles[]=latin.tr\r\n\r\nExtensions[]\r\nExtensions[]=my_extension' ); return false;" /></p>
+<![endif]--><p>
+ <br />
+This concludes our example.<br />The following files are located in the &quot;share/transformations&quot; folder, and can thus be used as value:</p> 
+<ul>
+ <li><div> basic.tr: contains the basic formatting rules. </div></li> <li><div> ascii.tr: contains the rules of transformation for ACII handling, which is the basis for all characters. </div></li> <li><div> cyrillic.tr: contains the rules of transformation related to Cyrillic characters. </div></li> <li><div> greek.tr: contains the rules of transformation related to Greek characters. </div></li> <li><div> hebrew.tr: contains the rules of transformation related to Hebrew characters. </div></li> <li><div> latin.tr: contains the rules of transformation related to Latin characters </div></li> <li><div> search.tr: contains the rules of transformation related to search handling, which is used to normalize search requests to make it clear for the search engine. </div></li> 
+</ul>
+<h3>Examples</h3>
+     <a name="eztoc113539_0_0_0_1" id="eztoc113539_0_0_0_1"></a><h5>example 1</h5> <p>&nbsp;</p><pre class="wordwrap"><span class="line">[latin]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Files[]=latin.tr</span>
+</pre><p>
+ <br />In this block the special transformations for latin (latin1, latin extended-a, latin extended-b) are set. And the extra transformation file latin.tr will be used for this group.</p>         <a name="eztoc113539_0_0_0_2" id="eztoc113539_0_0_0_2"></a><h5>example 2</h5> <p>&nbsp;</p><pre class="wordwrap"><span class="line">[cyrillic]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Files[]=cyrillic.tr</span>
+</pre><p>
+ <br />In this block the special transformations for cyrillic are set. And the extra transformation file cyrillic.tr will be used for this group.</p>    
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/transform.ini/transformation-group/Files by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:22 GMT -->
+</html>

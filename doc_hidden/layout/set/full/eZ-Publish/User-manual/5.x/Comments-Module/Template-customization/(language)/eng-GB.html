@@ -1,0 +1,67 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Comments-Module/Template-customization/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:05:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Template customization / Comments Module / 5.x / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Template customization</h1>
+</div>
+
+<p>Like eZ Publish template customization, the Comments module can also be customized to fit further demand. Below are some examples to show how to customize the comment template.</p><a name="eztoc134347_0_0_1" id="eztoc134347_0_0_1"></a><h4>Example 1: Change adding comment form to top</h4><p>
+Create an override of <i>template/content/datatype/view/ezcomcomments.tpl</i>, and copy the code of ezcomcomments.tpl to the new template file.<br />&nbsp;In the new template file, cut this code</p><pre class="wordwrap"><span class="line">{* Adding comment form START *}</span>
+<span class="line">......</span>
+<span class="line">{* Adding comment form END &nbsp;*}</span>
+</pre><p>to be before</p><pre class="wordwrap"><span class="line">{* Displaying comments START *}</span>
+</pre><a name="eztoc134347_0_0_2" id="eztoc134347_0_0_2"></a><h4>Example 2: Add comment attribute into existing class</h4><p>You can also add a comment attribute into an existing class. After adding the <b>Comments</b> attribute and if the content view template shows ezcomments attribute, the comment list and comment form will be added into the content. Remember to clear cache after editing class.</p><p>In the eZ Publish <b>web interface</b>, for instance, the article class does not show all the attributes. In order to show the comment, you can add this code into an overridden <i>full/article.tpl</i>:</p><pre class="wordwrap"><span class="line">{attribute_view_gui attribute=$node.data_map.comments}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{* &nbsp;'comments' is the attribute identifier in the class *}</span>
+</pre><a name="eztoc134347_0_0_3" id="eztoc134347_0_0_3"></a><h4>Example 3: Change notification template</h4><p>You can change the notification template by change template in</p><pre class="wordwrap"><span class="line">template/comment/notification_subject.tpl</span>
+<span class="line">template/comment/notification_body.tpl</span>
+</pre><p>If AllInOne is false in <i>settings/ezcomments.ini.append.php</i>.</p><p>If AllInOne is true in <i>settings/ezcomments.ini.append.php</i>, you can change template in</p><pre class="wordwrap"><span class="line">template/comment/notification_multi_body.tpl</span>
+<span class="line">template/comment/notification_multi_subject.tpl</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Comments-Module/Template-customization/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:05:41 GMT -->
+</html>

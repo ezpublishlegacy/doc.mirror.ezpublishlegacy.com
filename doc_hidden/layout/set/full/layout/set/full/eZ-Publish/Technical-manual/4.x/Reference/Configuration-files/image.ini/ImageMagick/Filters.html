@@ -1,0 +1,83 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/image.ini/ImageMagick/Filters by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Filters / [ImageMagick] / image.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Filters</h1>
+</div>
+<h3>Summary</h3>
+Sets the filters supported by ImageMagick.<h3>Usage</h3>
+<pre class="pfix"> <p>Filters[]=&lt;filter&gt;=&lt;filter-parameter&gt;</p></pre><h3>Description</h3>
+ <p>A list of filters to run which ImageMagick supports. Add all that are needed.The same filter names are used as the filters for the aliases and MIME types, but optional parameters are added.</p> <p>The parameter to use is the pixel size of the image. So when you need to use the width, use the horizontal pixel size of the image, and when you need to use the height use the vertical pixel size of the image.</p> <p>The following filters are supported by ImageMagick by default:</p> 
+<ul>
+ <li><div> geometry/scale: scales the image to the size specified, but maintaining the aspect ratio.  </div></li> <li><div> geometry/scalewidth: scales the image to the widthsize specified, but maintaining the aspect ratio. </div></li> <li><div> geometry/scaleheight: scales the image to the heightsize specified, but maintaining the aspect ratio. </div></li> <li><div> geometry/scaledownonly: scales the image to the size specified, but maintaining the aspect ratio. The image will not be scaled if the source size is smaller than the destination size. </div></li> <li><div> geometry/scalewidthdownonly: scales the image to the widthsize specified, but maintaining the aspect ratio. The image will not be scaled if the source size is smaller than the destination size. </div></li> <li><div> geometry/scaleheightdownonly: scales the image to the heightsize specified, but maintaining the aspect ratio. The image will not be scaled if the source size is smaller than the destination size. </div></li> <li><div> geometry/scaleexact: scales the image to the exact size specified, but without maintaining the aspect ratio. </div></li> <li><div> geometry/scalepercent: scales the image to the size specified, but without maintaining the aspect ratio. </div></li> <li><div> geometry/crop: crops the image to the crop size specified and according to the crop location specified. </div></li> <li><div> colorspace/gray </div></li> <li><div> luminance/gray: changes the colors of the image based on the luminance. </div></li> <li><div> luminance/sepia: changes the colors of the image based on the luminance </div></li> <li><div> color/monochrome: changes the colors of the image based on the threshold value. The luminance is calculated and if it is in the specified threshold range it will use the specified color for that range. </div></li> <li><div> border/color </div></li> <li><div> border/width </div></li> 
+</ul>
+ <p>The parameters to use here are:</p> 
+<ul>
+ <li><div> (scale%) : the height and width will both be scaled by the specified percentage. </div></li> <li><div> (scale-x%)x(scale-y%) : the width and height are individually scaled by specified percentages. (Only one % symbol needed.) </div></li> <li><div> (width) : the width is given, and the height will automagically be selected to preserve aspect ratio. </div></li> <li><div> x(height) : the height is given, and the width will automagically be selected to preserve aspect ratio. </div></li> <li><div> (width)x(height) : the maximum values of the width and height are given, but the aspect ratio is preserved. </div></li> <li><div> (width)x(height)^ : the minimum values of the width and height are given, but the aspect ratio is preserved. </div></li> <li><div> (width)x(height)! : the width and height are emphatically given, and the original aspect ratio is ignored. </div></li> <li><div> (width)x(height)&gt; : this will change the dimensions the same as &quot;widthxheight&quot;, but only if both the image dimension exceeds the specified dimension. </div></li> <li><div> (width)x(height)&lt; : this will change the dimensions the same as &quot;widhtxheight&quot;, but only if both the image dimensions exceed the specified dimensions </div></li> <li><div> (area)@ : will resize the image to have the specified area in pixels. Aspect ratio is preserved. </div></li> 
+</ul>
+ <p>This setting is case sensitive.</p><h3>Examples</h3>
+ <pre class="wordwrap copytoclipboard"><span class="line">Filters[]=geometry/scale=-geometry &nbsp;%1x%2</span>
+<span class="line">&nbsp;</span>
+<span class="line">Filters[]=geometry/scalewidth=-geometry &nbsp;%1</span>
+<span class="line">&nbsp;</span>
+<span class="line">Filters[]=geometry/scaleheight=-geometry x%1</span>
+<span class="line">&nbsp;</span>
+<span class="line">Filters[]=geometry/crop=-crop &nbsp;%1x%2+%3+%4</span>
+<span class="line">&nbsp;</span>
+<span class="line">Filters[]=filter/noise=-noise &nbsp;%1</span>
+<span class="line">&nbsp;</span>
+<span class="line">Filters[]=filter/swirl=-swirl %1</span>
+<span class="line">&nbsp;</span>
+<span class="line">Filters[]=flatten=-flatten</span>
+<span class="line">&nbsp;</span>
+<span class="line">Filters[]=resize=-resize &nbsp;%1</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'Filters[]=geometry/scale=-geometry  %1x%2\r\n\r\nFilters[]=geometry/scalewidth=-geometry  %1\r\n\r\nFilters[]=geometry/scaleheight=-geometry x%1\r\n\r\nFilters[]=geometry/crop=-crop  %1x%2+%3+%4\r\n\r\nFilters[]=filter/noise=-noise  %1\r\n\r\nFilters[]=filter/swirl=-swirl %1\r\n\r\nFilters[]=flatten=-flatten\r\n\r\nFilters[]=resize=-resize  %1' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/image.ini/ImageMagick/Filters by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:14 GMT -->
+</html>

@@ -1,0 +1,670 @@
+Message-ID: <1047105979.1226.1413891595812.JavaMail.confluence@ip-10-127-227-192>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_1225_1513918805.1413891595811"
+
+------=_Part_1225_1513918805.1413891595811
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>eZ Publish 5 Architecture - Introduction &amp; Overview</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+#main {
+    padding-bottom: 1em !important; /* The default padding of 6em is too mu=
+ch for printouts */
+}
+
+body {
+    font-family: Arial, Helvetica, FreeSans, sans-serif;
+    font-size: 10pt;
+    line-height: 1.2;
+}
+
+body, #full-height-container, #main, #page, #content, .has-personal-sidebar=
+ #content {
+    background: #fff    !important;
+    color: #000         !important;
+    border: 0           !important;
+    width: 100%         !important;
+    height: auto        !important;
+    min-height: auto    !important;
+    margin: 0           !important;
+    padding: 0          !important;
+    display: block      !important;
+}
+
+a, a:link, a:visited, a:focus, a:hover, a:active {
+    color: #000;
+}
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6 {
+    font-family: Arial, Helvetica, FreeSans, sans-serif;
+    page-break-after: avoid;
+}
+pre {
+    font-family: Monaco, "Courier New", monospace;
+}
+
+#header,
+.aui-header-inner,
+#navigation,
+#sidebar,
+.sidebar,
+#personal-info-sidebar,
+.ia-fixed-sidebar,
+.page-actions,
+.navmenu,
+.ajs-menu-bar,
+.noprint,
+.inline-control-link,
+.inline-control-link a,
+a.show-labels-editor,
+.global-comment-actions,
+.comment-actions,
+.quick-comment-container,
+#addcomment {
+    display: none !important;
+}
+
+.comment .date::before {
+    content: none !important; /* remove middot for print view */
+}
+
+h1.pagetitle img {
+    height: auto;
+    width: auto;
+}
+
+.print-only {
+    display: block;
+}
+#footer {
+    position: relative !important; /* CONF-17506 Place the footer at end of=
+ the content */
+    margin: 0;
+    padding: 0;
+    background: none;
+    clear: both;
+}
+
+#poweredby {
+    border-top: none;
+    background: none;
+}
+
+#poweredby li.print-only {
+    display: list-item;
+    font-style: italic;
+}
+
+#poweredby li.noprint {
+    display:none;
+}
+
+
+/* no width controls in print */
+.wiki-content .table-wrap,
+.wiki-content p,
+.panel .codeContent,
+.panel .codeContent pre,
+.image-wrap {
+    overflow: visible !important;
+}
+
+/* TODO - should this work? */
+#children-section,
+#comments-section .comment,
+#comments-section .comment .comment-body,
+#comments-section .comment .comment-content,
+#comments-section .comment p {
+    page-break-inside: avoid;
+}
+
+#page-children a {
+    text-decoration: none;
+}
+
+/**
+ hide twixies
+
+ the specificity here is a hack because print styles
+ are getting loaded before the base styles. */
+#comments-section.pageSection .section-header,
+#comments-section.pageSection .section-title,
+#children-section.pageSection .section-header,
+#children-section.pageSection .section-title,
+.children-show-hide {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.children-show-hide.icon {
+    display: none;
+}
+
+/* personal sidebar */
+.has-personal-sidebar #content {
+    margin-right: 0px;
+}
+
+.has-personal-sidebar #content .pageSection {
+    margin-right: 0px;
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>eZ Publish 5 Architecture - Introduction &amp; Overview</h1>
+    <div class=3D"Section1">
+        <h1 id=3D"eZPublish5Architecture-Introduction&amp;Overview-eZPublis=
+hTechnicalArchitecture"><span style=3D"color: rgb(0,0,0);text-decoration: n=
+one;">eZ Publish Technical Architecture</span></h1>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">With the 5.1 re=
+lease eZ Publish is making an important leap forwards in terms of technolog=
+y.<br />This document will explain why we are renewing our technology platf=
+orm, and to some degree explain what this evolution in architecture means t=
+o eZ Publish developers and users, and last but not least how eZ Systems is=
+ affected by these changes.</span></p>
+<h2 id=3D"eZPublish5Architecture-Introduction&amp;Overview-Whythischangeint=
+echnology"><span style=3D"color: rgb(0,0,0);text-decoration: none;">Why thi=
+s change in technology</span></h2>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">The background =
+for the changes is to meet the challenges ahead:</span></p>
+<p>&nbsp;</p>
+<ul>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">Customer and User Experience Management requirements<=
+/span><span style=3D"color: rgb(0,0,0);text-decoration: none;">: Beyond sim=
+ple web content management, enable the building of any digital user experie=
+nce</span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">Performance and scalability</span><span style=3D"colo=
+r: rgb(0,0,0);text-decoration: none;">: Deliver on the ever increasing need=
+ for performance and scalability</span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">The big data situation:</span><span style=3D"color: r=
+gb(0,0,0);text-decoration: none;"> &nbsp;Embrace big data situation as an o=
+pportunity to build new digital services and not view it as a hurdle</span>=
+</p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">Fulfill the multichannel vision</span><span style=3D"=
+color: rgb(0,0,0);text-decoration: none;">: Enable content to live in any s=
+creen, any app, any device</span></p></li>
+</ul>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">The overall goa=
+l is to reach Digital Service Excellence, ie, we would like our partners to=
+ be able to offer the customers exactly what they want, within acceptable t=
+imeframes and price tags on the eZ Publish platform.</span></p>
+<h2 id=3D"eZPublish5Architecture-Introduction&amp;Overview-Whatarethechange=
+s?"><span style=3D"color: rgb(0,0,0);text-decoration: none;">What are the c=
+hanges?</span></h2>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">eZ Systems is n=
+ow introducing the following:</span></p>
+<p>&nbsp;</p>
+<ul>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">An extended and sustainable Public API. This will spe=
+ed up developments on the platform and improve their quality and maintainab=
+ility both for eZ core developers and extension developers, which in turn w=
+ill lead to more efficient implementation projects</span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">An improved REST API with read and write functionalit=
+y and support all the core content management functionality. &nbsp;This way=
+, eZ Publish will better integrate with any programming framework, for inst=
+ance into mobile applications or any other web application. Better meaning =
+faster and simpler. in order to fulfill the multichannel vision and execute=
+ on the User Experience demands and needs of customers and users of the eZ =
+Publish platform</span></p></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">&nbsp;</span><span style=3D"color: rgb(0,0,0);text-de=
+coration: none;">Introducing Symfony as the PHP framework under the platfor=
+m to make developers lives easier and to make developments on eZ Publish ac=
+cessible for more developers to further support innovation in eZ Publish</s=
+pan></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">Introducing TWIG as the template engine to simplify w=
+orking with templates in eZ Publish. And as a standard template engine this=
+ will also make eZ Publish templating accessible to more developers</span><=
+/p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">Introducing a new storage system for scalability, per=
+formance and maintainability reasons</span></p></li>
+</ul>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">And as a result=
+ of all these changes, a major last item is</span></p>
+<p>&nbsp;</p>
+<ul>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">&nbsp;</span><span style=3D"color: rgb(0,0,0);text-de=
+coration: none;">Introducing a backward compatibility between the new archi=
+tecture resulting from the above and the legacy architecture as known in eZ=
+ Publish 4.x</span></p></li>
+</ul>
+<p>&nbsp;</p>
+<h2 id=3D"eZPublish5Architecture-Introduction&amp;Overview-Whatwillbegained=
+?"><span style=3D"color: rgb(0,0,0);text-decoration: none;">What will be ga=
+ined?</span></h2>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-"><span style=3D=
+"color: rgb(0,0,0);text-decoration: none;"><br /></span></h3>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-Symfony2"><span =
+style=3D"color: rgb(0,0,0);text-decoration: none;">Symfony2</span></h3>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">With Symfony as=
+ the web framework eZ Publish will be more accessible. Thanks to the framew=
+ork, it will be used for instance to extend eZ Publish applications with ne=
+w features, potentially not based at all on the content repository (for exa=
+mple, business specific application logic) using a standard PHP framework a=
+nd a very clean application design with minimum interlocking with eZ Publis=
+h itself.</span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">Any developer k=
+nowing Symfony will then be able to easily develop extensions for eZ Publis=
+h.</span></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">This will cater=
+ for:</span></p>
+<p>&nbsp;</p>
+<ul>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">&nbsp;</span><span style=3D"color: rgb(0,0,0);text-de=
+coration: none;">a better quality of the code</span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">&nbsp;</span><span style=3D"color: rgb(0,0,0);text-de=
+coration: none;">a lower entry point to do developments in eZ Publish</span=
+></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">&nbsp;</span><span style=3D"color: rgb(0,0,0);text-de=
+coration: none;">more innovation faster since more developers will use a st=
+andard PHP framework</span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">&nbsp;</span><span style=3D"color: rgb(0,0,0);text-de=
+coration: none;">Symfony has an open-source community that will help develo=
+pers</span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">&nbsp;</span><span style=3D"color: rgb(0,0,0);text-de=
+coration: none;">Symfony is commercially backed up, so they are in it for t=
+he long run and Sensio Lab (maker of Symfony) will naturally extend the eZ =
+offering to the framework level if need be.</span><span style=3D"color: rgb=
+(0,0,0);text-decoration: none;">&nbsp;</span></p></li>
+</ul>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-TWIG"><span styl=
+e=3D"color: rgb(0,0,0);text-decoration: none;">TWIG</span></h3>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">Initially, eZ S=
+ystems has developed its own templating engine. eZ has also worked and rede=
+veloped a second one at some point as part of the eZ Component project. Whe=
+n designing eZ Publish 5, we knew the old template engine was not good enou=
+gh anymore and needed to be replaced. We knew the eZ Components template en=
+gine we contributed and originated was an option, but we decided to go for =
+another one: TWIG. Reasons are multiple: quality of course (even if the eZ =
+components one was also very high quality), integration and cohesion to use=
+ it with the Symfony stack and finally again the strength and size of the c=
+ommunity using it today. Symfony has developed TWIG as a standard template =
+engine, and eZ Systems is using it to further the following:</span></p>
+<p>&nbsp;</p>
+<ul>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">to update the legacy template engine</span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">to simplify template coding in eZ Publish</span></p><=
+/li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">to have faster page rendering</span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">to benefit of more features which were not in the ori=
+ginal engine</span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">to make extension developments easier to speed up inn=
+ovation in eZ Publish</span></p></li>
+</ul>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">This is a move =
+that will influence every stakeholder in the eZ Publish development. As dev=
+elopers will implement faster, this also mean project will significantly im=
+prove in total cost of ownership as well as in time to market.</span><span =
+style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</span></p>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-Newstoragesystem=
+s"><span style=3D"color: rgb(0,0,0);text-decoration: none;">New storage sys=
+tems</span></h3>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">In order to mee=
+t performance and scalability requirements, eZ introduces new storage syste=
+ms with the version 5 serie. In 5.1, this storage system lives beside the l=
+egacy storage system and data model, but will use the new API to access the=
+ data. Also in 5.1 version, this new storage engine only support Mysql rela=
+tional database, nevertheless it is designed to allow the development of dr=
+ivers for other storage engines through the Persistence SPI (service provid=
+er interface) and in the future will include drivers for NoSQL and Document=
+ based storage engine. The ultimate goal is to open for custom storage deve=
+lopments. </span></p>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-RestAPI"><span s=
+tyle=3D"color: rgb(0,0,0);text-decoration: none;">Rest API</span></h3>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">In order to mee=
+t all multi-channel requirements we are developing a Rest API that cover al=
+l core feature of content management so we can integrate with any applicati=
+on on any channel in any programming language. The gain for users will be f=
+or anyone integrating eZ Publish with other applications, not only the deve=
+lopment will be significantly improved but more importantly, the value of a=
+n API also lies in the maintainability and sustainability it offers. the ne=
+w rest api is designed to stay and will remain identical in all future 5.x =
+version. this means that development done on top of the api will seamlessly=
+ support eZ Publish version upgrades.</span></p>
+<p>&nbsp;</p>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-PhpAPI"><span st=
+yle=3D"color: rgb(0,0,0);text-decoration: none;">Php API</span></h3>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">The PHP API, al=
+so called Public API, is the development glue and will a create shield betw=
+een internal and external developments on eZ Publish. This will cater for a=
+n easier maintainability of code and speed up the performance of eZ Publish=
+. PHP developers will experience a better extensibility which in turn &nbsp=
+;will enable them to create extensions to eZ Publish faster and easier.</sp=
+an></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">The Public API =
+is key to development speed, shorter projects and better quality. Important=
+ to be noted: the php api is the foundation for the rest api and the second=
+ is naturally relying on the 1st.</span></p>
+<p>&nbsp;</p>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-Compatibilitywit=
+hthelegacyarchitecture"><span style=3D"color: rgb(0,0,0);text-decoration: n=
+one;">Compatibility with the legacy architecture</span></h3>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">When we introdu=
+ce changes of this magnitude, eZ Systems as an international software house=
+ must also consider the reality of the installed customer base. Every insta=
+llation must be able to take care of the old and create on the new architec=
+ture. The reason for change is of course to be able to meet new requirement=
+s and the need to enable progressive changes.</span><span style=3D"color: r=
+gb(0,0,0);text-decoration: none;">&nbsp;</span></p>
+<h2 id=3D"eZPublish5Architecture-Introduction&amp;Overview-Understandingthe=
+architectureinmoredetail"><span style=3D"color: rgb(0,0,0);text-decoration:=
+ none;">Understanding the architecture in more detail</span></h2>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-.1"><span style=
+=3D"color: rgb(0,0,0);text-decoration: none;"><br /></span></h3>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-Thetargetarchite=
+cture"><span style=3D"color: rgb(0,0,0);text-decoration: none;">The target =
+architecture</span></h3>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">The first impor=
+tant thing to understand about the new architecture is to explain it standa=
+lone, without considering the old legacy architecture. The following diagra=
+m shows a simplistic view of this new architecture.</span></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</span><i=
+mg class=3D"confluence-embedded-image confluence-external-resource" width=
+=3D"500" src=3D"https://lh5.googleusercontent.com/HxSTBlMNSYkYyQxVCgj_zhHlE=
+cl_YbKv14x8B65gZ1D8ROJilIQqk5zfblgJr4-EQOD5RCB5T_tMF1V7aNCQ0wOlTgugHLl8e1gS=
+VEURJMvhqGecjvzx" data-image-src=3D"https://lh5.googleusercontent.com/HxSTB=
+lMNSYkYyQxVCgj_zhHlEcl_YbKv14x8B65gZ1D8ROJilIQqk5zfblgJr4-EQOD5RCB5T_tMF1V7=
+aNCQ0wOlTgugHLl8e1gSVEURJMvhqGecjvzx" /><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">&nbsp;</span></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">The new archite=
+cture is layered and uses clearly defined API=E2=80=99s between the layers.=
+</span></p>
+<p>&nbsp;</p>
+<ul>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">The business logic is defined in a new kernel. This b=
+usiness logic is exposed to applications via an API (the Public API). Devel=
+opers rely on this to develop websites and web applications using Symfony t=
+o organize the way they develop the user interface layer. </span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">User interfaces are developed using the TWIG template=
+ engine but directly querying the public API.</span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">Integration of eZ Publish in other applications are d=
+one using the REST API, which itself relies also on the Public API.</span><=
+/p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">finally development of extensions of eZ Publish is do=
+ne using the Symfony framework when it comes to the structure of the code, =
+and once again relying on the Public API when it comes to accessing content=
+ management functions</span></p></li>
+</ul>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">To a lower leve=
+l, the new architecture also totally redefined the way the system store dat=
+a. while this is not finalized in version 5.1 (where the new storage system=
+ is only shipped with mysql support), the architecture, when finalized will=
+ rely on a storage api that will be used to develop drivers to any kind of =
+storage subsystem.</span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">A motto for thi=
+s new architecture is to heavily use api=E2=80=99s that will be maintained =
+on the long term to ease upgrades and provide lossless couplings between ea=
+ch part of the architecture, improving the migration capabilities of the sy=
+stem at the same time. </span></p>
+<h4 id=3D"eZPublish5Architecture-Introduction&amp;Overview-.2"><span style=
+=3D"color: rgb(0,0,0);text-decoration: none;"><br /></span></h4>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-The&quot;real&qu=
+ot;version5architecture"><span style=3D"color: rgb(0,0,0);text-decoration: =
+none;">The &quot;real&quot; version 5 architecture</span></h3>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">The chapter abo=
+ve is only explaining the new architecture but, as mentioned below, version=
+ 5 also offers a way to run the legacy eZ Publish stack, in order to simpli=
+fy upgrade and switch to version 5. This result in the end in a more sophis=
+ticated architecture that is illustrated in the diagram below.</span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan><img class=3D"confluence-embedded-image confluence-external-resource" w=
+idth=3D"500" src=3D"https://lh4.googleusercontent.com/-HnGbujQWt5MWUdOYkKK_=
+6nBj3sc-vaFEuSzRPaEto-Hi_LRqKQZcf014eJ2e0be8P4yVwfAq8D4y0A4p2PahKy9f6Kd3gDM=
+v0A0X1lwNhV8HDu-0IJ2" data-image-src=3D"https://lh4.googleusercontent.com/-=
+HnGbujQWt5MWUdOYkKK_6nBj3sc-vaFEuSzRPaEto-Hi_LRqKQZcf014eJ2e0be8P4yVwfAq8D4=
+y0A4p2PahKy9f6Kd3gDMv0A0X1lwNhV8HDu-0IJ2" /><span style=3D"color: rgb(0,0,0=
+);text-decoration: none;">&nbsp;</span><br /><span style=3D"color: rgb(0,0,=
+0);text-decoration: none;">&nbsp;</span></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">The main differ=
+ence is, the cohabitation between the new architecture explained in the pre=
+vious chapter (on the right) and the previous architecture (on the left).</=
+span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">If we look at t=
+he old architecture, we can see that it is more monolithic: no defined publ=
+ic php api, a business logic implemented in the kernel but very dependent o=
+f the storage system and the underlying data model, an existing rest api bu=
+t limited to read access to the content repository.</span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">This whole lega=
+cy architecture is in its whole included with version 5, and can be used as=
+ is.</span></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">this means that=
+, for people having developed 4.x websites and that are reluctant to invest=
+ time in migrating or even learning the new architecture components, they c=
+an use version 5 exactly as they were using version 4. Even the controller =
+(access to the application through the web server) can totally bypass the n=
+ew architecture (in that case the Symfony framework controller) and directl=
+y call the legacy eZ Publish controller and the legacy template engine.</sp=
+an></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">On its side, th=
+e new architecture has been implemented, and eZ will implement new features=
+ and applications on top of it subsequently. So, as part of 5.1, the new ar=
+chitecture is in place, but does not provide yet the full application scope=
+.</span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">What is more in=
+teresting to understand is how these two integrate:</span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">First on the pr=
+esentation side, the new eZ Publish 5 controller makes it possible to serve=
+ pages and functions that are either resulting from the new template engine=
+ or the legacy template engine. This is a first level of dual compatibility=
+ that will help developers in a smooth transition from one architecture to =
+the other, starting with legacy templates and progressively replacing them =
+with templates for the new system, TWIG.</span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">Second, on the =
+api side, the Public API has been designed to work against the business log=
+ic and to be used either on top of the legacy storage or on top of the new =
+storage system. This means that, by implementing the new architecture and e=
+mbracing the php public api, developers enable an easy transition from the =
+old data model to the new one. &nbsp;An extension developed on top of the P=
+ublic API will equally work on an old content repository or on a brand new =
+one based on the new architecture.</span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">These two ways =
+to implement a compatibility between the past architecture and the new one =
+offers a wide range of possibilities and a smooth transition path.</span></=
+p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<h2 id=3D"eZPublish5Architecture-Introduction&amp;Overview-Summaryontheways=
+touseeZPublish5.1"><span style=3D"color: rgb(0,0,0);text-decoration: none;"=
+>Summary on the ways to use eZ Publish 5.1</span></h2>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-.3"><span style=
+=3D"color: rgb(0,0,0);text-decoration: none;"><br /></span></h3>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-UsingeZPublish5.=
+1infulllegacymode"><span style=3D"color: rgb(0,0,0);text-decoration: none;"=
+>Using eZ Publish 5.1 in full legacy mode</span></h3>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">This way is the=
+ less disruptive. In this way, eZ Publish 5.1 totally behave as if it was a=
+n eZ Publish 4.7, or we should say 4.8. This is ideal for users who have la=
+rge existing applications with large amount of data and who are not willing=
+ to invest in learning and migrating them immediately.</span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">In this way, ev=
+en the siteaccess and vhost configuration bypass the legacy stack, and deve=
+lopers will see almost no differences.</span></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</span><i=
+mg class=3D"confluence-embedded-image confluence-external-resource" width=
+=3D"500" src=3D"https://lh6.googleusercontent.com/Ad_iBlE0hJCQMJT8WGO5-6Hvx=
+1OxMt5xJCMNZVgJ5kL_4_Gp-TCi5_Zd5DMz0LZXv8AY3hrPvmtQtY2Qh_lheRF9Oa76iwSMRs6d=
+MyWhotL4hvIPCB5R" data-image-src=3D"https://lh6.googleusercontent.com/Ad_iB=
+lE0hJCQMJT8WGO5-6Hvx1OxMt5xJCMNZVgJ5kL_4_Gp-TCi5_Zd5DMz0LZXv8AY3hrPvmtQtY2Q=
+h_lheRF9Oa76iwSMRs6dMyWhotL4hvIPCB5R" /><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">&nbsp;</span></p>
+<p><br /><span style=3D"color: rgb(102,102,102);text-decoration: none;">&nb=
+sp;</span></p>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-Usingezpublish5.=
+1throughthelegacystackbutrelyingonthenewcontrollerandnewtemplatesystemaswel=
+lasthenewkernel."><span style=3D"color: rgb(0,0,0);text-decoration: none;">=
+Using ez publish 5.1 through the legacy stack but relying on the new contro=
+ller and new template system as well as the new kernel.</span></h3>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">This way offers=
+ a transition and allows to combine old template and new templates in the s=
+ame application. In this case, the users will rely on the administration in=
+terface of eZ Publish as well as on the ez tool bar for front-end editing, =
+through the legacy templates, but the front end will be either based on leg=
+acy or new twig based templates.</span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">In this model, =
+the two kernels can be used and the system can this way benefit from the Pu=
+blic API and the new REST API built on top.</span></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</span><i=
+mg class=3D"confluence-embedded-image confluence-external-resource" width=
+=3D"500" src=3D"https://lh5.googleusercontent.com/Lk9x17V7USgSzT537l_PBhrPF=
+WQzQXev9LkK5PwBDXSGHD2H5CGAAobyk5kCTJ_QOgZj0LptwkiNA31kykr9QcY9fFFFakkHBXbN=
+M1NgRsMduk-XrpJA" data-image-src=3D"https://lh5.googleusercontent.com/Lk9x1=
+7V7USgSzT537l_PBhrPFWQzQXev9LkK5PwBDXSGHD2H5CGAAobyk5kCTJ_QOgZj0LptwkiNA31k=
+ykr9QcY9fFFFakkHBXbNM1NgRsMduk-XrpJA" /><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">&nbsp;</span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<h3 id=3D"eZPublish5Architecture-Introduction&amp;Overview-Usingthebrandnew=
+architectureonly"><span style=3D"color: rgb(102,102,102);text-decoration: n=
+one;"><span style=3D"color: rgb(0,0,0);">Using the brand new architecture o=
+nly</span> </span></h3>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">This case is th=
+e one that will deliver very strong improvements in scalability and perform=
+ance, in this case the whole new architecture is used and there is no way t=
+o reuse components from the legacy architecture. </span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">This means that=
+:</span></p>
+<p>&nbsp;</p>
+<ul>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">the administration interface is not available in 5.1<=
+/span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">existing templates and site won=E2=80=99t run without=
+ having been migrated</span></p></li>
+<li style=3D"text-decoration: none;"><p><span style=3D"color: rgb(0,0,0);te=
+xt-decoration: none;">the old storage system is not used any more</span></p=
+></li>
+</ul>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan></p>
+<p><span style=3D"color: rgb(0,0,0);text-decoration: none;">While this migh=
+t sound restricting for the time being, it is clearly the foundation of the=
+ future of eZ Publish. In the context of eZ Publish 5, it can be useful for=
+ new projects relying only on the concept of &quot;content as a service&quo=
+t; the platform is a high performance and scalability content repository wi=
+th very advanced services but provide no editorial user interface. for trad=
+itional content management.</span></p>
+<p><br /><span style=3D"color: rgb(0,0,0);text-decoration: none;">&nbsp;</s=
+pan><img class=3D"confluence-embedded-image confluence-external-resource" w=
+idth=3D"500" src=3D"https://lh4.googleusercontent.com/f-3X7xtnw6j-powG51msj=
+XYT1HrJy4fah-bEK0lsmgxGrMiBixIoX9sQw78tjyNKD7xNqwauoDJJj4BJjl1XJoCcAvNKEp-T=
+ceIw5yKyJv7WlBmUi03g" data-image-src=3D"https://lh4.googleusercontent.com/f=
+-3X7xtnw6j-powG51msjXYT1HrJy4fah-bEK0lsmgxGrMiBixIoX9sQw78tjyNKD7xNqwauoDJJ=
+j4BJjl1XJoCcAvNKEp-TceIw5yKyJv7WlBmUi03g" /></p>
+    </div>
+</body>
+</html>
+------=_Part_1225_1513918805.1413891595811--

@@ -1,0 +1,78 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/eZ-Form-token-extension/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:44:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>eZ Form token extension / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>eZ Form token extension</h1>
+</div>
+
+<a name="eztoc132775_0_1" id="eztoc132775_0_1"></a><h3>Introduction</h3><p>This extension aims to stop any CSRF* (cross-fire request forgery) attack against eZ Publish. To accomplish that input and output filter events added in eZ Publish 4.5 &quot;Matterhorn&quot; is used to be able to verify all POST requests using a per user session form token.</p><p>This is all done transparently for html/xhtml forms, but requires changes to all Ajax POST code. The changes needed to eZ Publish are included in 4.5, and the last section in this documentation explains how you can modify your custom Ajax code to work with this extension.</p><p>If form token does not verify, an exception is currently thrown and an error 500 is send to the HTTP client.</p><p>*Cross-fire Request Forgery is an attack which forces an end user to execute unwanted actions on a web application in which he/she is currently authenticated. With a little help of social engineering (like sending a link via email/chat), an attacker may force the users of a web application to execute actions of the attacker's choosing. A successful CSRF exploit can compromise end user data and operation in case of a normal user. If the targeted end user is the administrator account, this can compromise the entire web application.</p><a name="eztoc132775_0_1_1" id="eztoc132775_0_1_1"></a><h4>Warning</h4><p>Make sure you test this extension extensively with your custom solution before putting it into production on an existing installation.</p><a name="eztoc132775_0_1_2" id="eztoc132775_0_1_2"></a><h4>Known issues (by design)</h4>
+<ul>
+<li><div>Will break any custom Ajax POST code, see last section for how to modify your code.</div></li><li><div>Mis-configured reverse proxies or mis-configured “site.ini[HTTPHeaderSettings]” settings causing logged in user response to be cached will lead to situations where form tokens does not verify.</div></li>
+</ul>
+<a name="eztoc132775_0_1_3" id="eztoc132775_0_1_3"></a><h4>Known issue</h4><p>When the extension is enabled, a filter is applied to add an hidden span tag as the first child of body. This filter does not work if an attribute of the body contains the character &quot;&gt;&quot;.</p><a name="eztoc132775_0_2" id="eztoc132775_0_2"></a><h3>Install</h3>
+<ul>
+<li><div>Unzip/copy “ezfromtoken” into extension/ folder</div></li><li><div>Re-generate autoloads for extensions using:</div></li>
+</ul>
+<pre class="wordwrap"><span class="line">$ php bin/php/ezpgenerateautoloads.php -e</span>
+</pre>
+<ul>
+<li><div>Enable the extension by adding it to [ExtensionSettings]ActiveExtensions[] in settings/override/site.ini.php. Example:</div></li>
+</ul>
+<pre class="wordwrap"><span class="line">[ExtensionSettings] ActiveExtensions[] ActiveExtensions[]=ezformtoken</span>
+</pre><a name="eztoc132775_0_3" id="eztoc132775_0_3"></a><h3>Modify custom Ajax code</h3><p>If your custom Ajax code only uses ezjscore jQuery.ez() or Y.io.ez(), you are already covered and don't need to look further. This section is about making sure code that uses Ajax functions directly on any library or natively includes the correct post form token if available.</p><p>The output filter will do the following changes on the html code:</p>
+<ul>
+<li><div>Add a hidden input tag with name='ezxform_token' for all form tags that have a post method</div></li><li><div>Add a hidden tag with id='ezxform_token_js' after body tag that contains token in title attribute for Ajax use.</div></li><li><div>Replaces any occurrence of @$ezxFormToken@ with form token.</div></li>
+</ul>
+<p>
+This is done in such a way to ensure it has no negative impact on the eZ Publish cache. Only the eZ Publish response is covered, not external javascript/stylesheet/image files. Hence example #A below uses DOM to get token for Ajax post requests.<br />Using the hidden tag with id='ezxform_token_js' is the best option for Ajax code and it is explained in example #A. If your Ajax code is executed before body tag, then you will have to use option #3 as explained in example #B.</p><a name="eztoc132775_0_3_4" id="eztoc132775_0_3_4"></a><h4>Examples:</h4><a name="eztoc132775_0_3_4_1" id="eztoc132775_0_3_4_1"></a><h5>A) Using DOM:</h5><p>Given code like this in template or javascript file:</p><pre class="wordwrap"><span class="line">$.post( url, {}, function(){} );</span>
+</pre><p>Replace it with something like:</p><pre class="wordwrap"><span class="line">var _token = '', _tokenNode = &nbsp;document.getElementById('ezxform_token_js'); if ( _tokenNode ) _token = &nbsp;'ezxform_token=' + _tokenNode.getAttribute('title'); $.post( url, &nbsp;_token, function(){} );</span>
+</pre><a name="eztoc132775_0_3_4_2" id="eztoc132775_0_3_4_2"></a><h5>B) Using form token replace string:</h5><p>Given code like this in your template before body tag:</p><pre class="wordwrap"><span class="line">jQuery.post( url, {}, function(){} );</span>
+</pre><p>Replace it with something like:</p><pre class="wordwrap"><span class="line">jQuery.post( url, 'ezxform_token=@$ezxFormToken@', function(){} );</span>
+</pre><p><b>Note:</b> Example #B only works if code is inside a template that is part of (x)html output from eZ Publish.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/eZ-Form-token-extension/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:44:49 GMT -->
+</html>

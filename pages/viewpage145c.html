@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from doc.ez.no/pages/viewpage.action?pageId=17104926 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:30:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Persistence cache - eZ Publish 5.1 - eZ Documentation</title>
+
+        
+
+                        
+    
+                        
+    
+                        
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE,chrome=IE7">
+<meta charset="UTF-8">
+<meta id="confluence-context-path" name="confluence-context-path" content="">
+<meta id="confluence-base-url" name="confluence-base-url" content="../index.html">
+
+<meta id="atlassian-token" name="atlassian-token" content="494111f00e28ced96046bfb6fbe8f75e18d44b71">
+
+<meta id="confluence-space-key" name="confluence-space-key" content="EZP51">
+<script type="text/javascript">
+        var contextPath = '';
+</script>
+
+    
+
+<!-- include system css resources -->
+
+
+    <link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch934e.css?media=print" media="print">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 8]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/47016f6b93087cd2003bf867318254ee/_/download/contextbatch/css/theme.doc/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.0.22/_/download/batch/confluence.extra.information_information-plugin/confluence.extra.information_information-plugin-adg-s" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.6.10/_/download/batch/org.randombits.confluence.toc_toc-plugin-styles/org.randombits.confluence.toc_toc-plugin-styles.117.d" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.1.4/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext.newcode-macro-plugin_synt" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.1.4/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext.newcode-macro-plugin_sh-t" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins.confluence-highlight-ac" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/5.3.3-m6/_/download/batch/confluence.extra.jira_web-resources-adg/confluence.extra.jira_web-resources-adg.css" media="all">
+<link type="text/css" rel="stylesheet" href="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/16/_/styles/colors556c.css?spaceKey=EZP51" media="all">
+<link type="text/css" rel="stylesheet" href="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/16/_/styles/custom556c.css?spaceKey=EZP51" media="all">
+
+<!-- end system css resources -->
+
+    <meta name="confluence-request-time" content="1413899327902">
+        
+    
+        
+            <meta name="ajs-is-confluence-admin" content="false">
+            <meta name="ajs-connection-timeout" content="10000">
+            <meta name="ajs-use-keyboard-shortcuts" content="true">
+            <meta name="ajs-keyboardshortcut-hash" content="ec556f85a7b4fc86b37ab7a78ce3d8b0">
+            <meta id="team-calendars-has-jira-link" content="true">
+            <meta name="ajs-team-calendars-display-time-format" content="displayTimeFormat12">
+            <meta id="team-calendars-user-timezone" content="UTC">
+            <script type="text/x-template" id="team-calendars-messages" title="team-calendars-messages">
+    <fieldset class="i18n hidden">
+                    <input type="hidden" name="calendar3.month.short.april" value="Apr">
+                    <input type="hidden" name="calendar3.month.short.november" value="Nov">
+                    <input type="hidden" name="calendar3.month.long.november" value="November">
+                    <input type="hidden" name="calendar3.day.short.friday" value="Fri">
+                    <input type="hidden" name="calendar3.month.long.february" value="February">
+                    <input type="hidden" name="calendar3.month.short.february" value="Feb">
+                    <input type="hidden" name="calendar3.day.long.wednesday" value="Wednesday">
+                    <input type="hidden" name="calendar3.month.long.december" value="December">
+                    <input type="hidden" name="calendar3.day.short.sunday" value="Sun">
+                    <input type="hidden" name="calendar3.month.long.april" value="April">
+                    <input type="hidden" name="calendar3.month.long.july" value="July">
+                    <input type="hidden" name="calendar3.month.long.september" value="September">
+                    <input type="hidden" name="calendar3.month.short.august" value="Aug">
+                    <input type="hidden" name="calendar3.month.short.june" value="Jun">
+                    <input type="hidden" name="calendar3.month.short.may" value="May">
+                    <input type="hidden" name="calendar3.day.short.tuesday" value="Tue">
+                    <input type="hidden" name="calendar3.day.short.wednesday" value="Wed">
+                    <input type="hidden" name="calendar3.day.long.thursday" value="Thursday">
+                    <input type="hidden" name="calendar3.month.long.march" value="March">
+                    <input type="hidden" name="calendar3.month.long.october" value="October">
+                    <input type="hidden" name="calendar3.day.short.saturday" value="Sat">
+                    <input type="hidden" name="calendar3.month.short.january" value="Jan">
+                    <input type="hidden" name="calendar3.month.long.may" value="May">
+                    <input type="hidden" name="calendar3.month.long.january" value="January">
+                    <input type="hidden" name="calendar3.month.short.october" value="Oct">
+                    <input type="hidden" name="calendar3.day.short.thursday" value="Thu">
+                    <input type="hidden" name="calendar3.day.long.friday" value="Friday">
+                    <input type="hidden" name="calendar3.day.long.sunday" value="Sunday">
+                    <input type="hidden" name="calendar3.month.long.june" value="June">
+                    <input type="hidden" name="calendar3.month.long.august" value="August">
+                    <input type="hidden" name="calendar3.day.long.tuesday" value="Tuesday">
+                    <input type="hidden" name="calendar3.day.long.saturday" value="Saturday">
+                    <input type="hidden" name="calendar3.month.short.september" value="Sep">
+                    <input type="hidden" name="calendar3.day.long.monday" value="Monday">
+                    <input type="hidden" name="calendar3.month.short.july" value="Jul">
+                    <input type="hidden" name="calendar3.month.short.march" value="Mar">
+                    <input type="hidden" name="calendar3.day.short.monday" value="Mon">
+                    <input type="hidden" name="calendar3.month.short.december" value="Dec">
+            </fieldset>
+</script>
+
+            
+
+    
+            
+    
+    
+            <meta name="ajs-page-id" content="17104926">
+            <meta name="ajs-content-type" content="page">
+            <meta name="ajs-page-title" content="Persistence cache">
+            <meta name="ajs-parent-page-id" content="">
+            <meta name="ajs-space-key" content="EZP51">
+            <meta name="ajs-space-name" content="eZ Publish 5.1">
+            <meta name="ajs-from-page-title" content="">
+            <meta name="ajs-can-remove-page" content="false">
+            <meta name="ajs-editor.loader.comment.resources" content="&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/9f01679814e63f4c0513d02c90477002/_/download/contextbatch/css/comment-editor/batch.html media=&quot;all&quot;&gt;
+">
+            <meta name="ajs-context-path" content="">
+            <meta name="ajs-base-url" content="https://doc.ez.no">
+            <meta name="ajs-version-number" content="5.4.4">
+            <meta name="ajs-build-number" content="4733">
+            <meta name="ajs-remote-user" content="">
+            <meta name="ajs-current-user-fullname" content="">
+            <meta name="ajs-current-user-avatar-url" content="">
+            <meta name="ajs-static-resource-url-prefix" content="/s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_">
+            <meta name="ajs-global-settings-attachment-max-size" content="10485760">
+            <meta name="ajs-user-locale" content="en_GB">
+            <meta name="ajs-enabled-dark-features" content="sync.event">
+            <meta name="ajs-atl-token" content="494111f00e28ced96046bfb6fbe8f75e18d44b71">
+            <meta name="ajs-confluence-flavour" content="VANILLA">
+            <meta name="ajs-editor.loader.resources" content="&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-editor%2c-v/batch.11b.delaye media=&quot;all&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11ca781.delaye?media=%28max-width%3A+1450px%29%22 media=&quot;(max-width: 1450px)&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11d23d0.delaye?media=print%22 media=&quot;print&quot;&gt;
+&lt;!--[if lt IE 9]&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11ed0b5.delaye?conditionalComment=lt+IE+9%22 media=&quot;all&quot;&gt;
+&lt;![endif]--&gt;
+&lt;!--[if IE]&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11fbe23.delaye?ieonly=true%22 media=&quot;all&quot;&gt;
+&lt;![endif]--&gt;
+&lt;script type=&quot;text/javascript&quot; src=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/js/editor%2cmacro-browser%2cfullpage-editor%2c-vi/batch.120.delaye &gt;&lt;/script&gt;
+">
+            <meta name="ajs-date.format" content="MMM dd, yyyy">
+    
+    <link rel="shortcut icon" href="../favicon.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.html">
+
+<link rel="search" type="application/opensearchdescription+xml" href="../opensearch/osd.action" title="eZ Documentation"/>
+
+    <!-- include system javascript resources -->
+    <script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/js/batch.js" ></script>
+<!--[if lte IE 8]>
+<script type="text/javascript" src="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/js/batch.js?conditionalComment=lte+IE+8" ></script>
+<![endif]-->
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/js/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batch.js" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/js/page/batch.js" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/84fc2bb4cbbfc06481d75335376bb250/_/download/contextbatch/js/atl.comments/batch.js" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.1.4/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext-2.newcode-macro-plugin_synt" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.1.4/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext-3.newcode-macro-plugin_synt" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins-2.confluence-highlight-ac" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.mywork.mywork-confluence-host-plu/com.atlassian.mywork.mywork-confluence-host-plugin_mw-he" ></script>
+
+    
+
+        
+    <!-- end system javascript resources -->
+
+        
+        
+
+    
+                <link rel="canonical" href="../display/EZP51/Persistence%2bcache.html">
+        <link rel="shortlink" href="../x/HgAFAQ.html">
+    <meta name="wikilink" content="[null:Persistence cache]">
+    <meta name="page-version" content="7">
+
+</head>
+
+<body             onload="placeFocus()"
+     id="com-atlassian-confluence" class="theme-documentation  aui-theme-default aui-layout">
+
+        
+    <div id="full-height-container">
+    <div id="header-precursor">
+        
+                    </div>
+
+
+
+
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation"><div class="aui-header-inner"><div class="aui-header-before"><a class="aui-dropdown2-trigger app-switcher-trigger" aria-owns="app-switcher" aria-haspopup="true" tabindex="0"><span class="aui-icon aui-icon-small aui-iconfont-appswitcher">Linked Applications</span></a><div id="app-switcher" class="aui-dropdown2 aui-style-default"><div class="app-switcher-loading">Loading&hellip;</div></div><script>
+            (function (NL) {
+                var initialise = function () {
+                    // For some milestones of AUI, the atlassian soy namespace was renamed to aui. Handle that here by ensuring that window.atlassian is defined.
+                    window.atlassian = window.atlassian || window.aui;
+                    new NL.AppSwitcher({
+                        dropdownContents: '#app-switcher'
+                    });
+                };
+                if (NL.AppSwitcher) {
+                    initialise();
+                } else {
+                    NL.onInit = initialise;
+                }
+            }(window.NL = (window.NL || {})));
+            window.NL.isUserAdmin = false</script></div><div class="aui-header-primary"><h1 id="logo" class="aui-header-logo aui-header-logo-custom"><a href="../index.html"><img src="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_/images/logo/atl.site.logo" alt="eZ Documentation" /></a></h1><ul class="aui-nav">
+                            <li>
+            
+        
+        
+<a  id="space-directory-link" href="../spacedirectory/view.html"  class=" aui-nav-imagelink"   title="Spaces">
+            <span>Spaces</span>
+    </a>
+        </li>
+                            <li id="browseMenu" role="menu">
+            
+    
+        <a id="browse-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="browse-menu-link-content" title="Browse">
+        <span class="browse">Browse</span>
+    </a>
+    <nav id="browse-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                <ul  id="browse-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+    
+            
+<a  id="space-pages-link" href="listpages-dirview2fd6.html?key=EZP51" class="    "      title="Browse pages in the eZ Publish 5.1 space" >
+        Pages
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-blogposts-link" href="viewrecentblogposts2fd6.html?key=EZP51" class="    "      title="Browse blogs in the eZ Publish 5.1 space" >
+        Blog
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-labels-link" href="../labels/listlabels-heatmap2fd6.html?key=EZP51" class="    "      title="Browse labels in the eZ Publish 5.1 space" >
+        Labels
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-advanced-link" href="../spaces/viewspacesummary2fd6.html?key=EZP51" class="    "      title="Browse additional space functions in the eZ Publish 5.1 space" >
+        Space Operations
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    
+        </li>
+        </ul>
+</div><div class="aui-header-secondary"><ul class="aui-nav">
+                <li>
+        
+    
+            
+<a  id="doctheme-anchor" href="#"  class=" aui-nav-imagelink"   title="">
+            <span></span>
+    </a>
+    </li>
+        <li>
+<form id="quick-search" class="aui-quicksearch dont-default-focus header-quicksearch" action="https://doc.ez.no/dosearchsite.action" method="get">
+    <fieldset>
+                    <input type='hidden' name='where' value='EZP51'/>
+                            <input type="hidden" name="spaceSearch" value="true"/>
+                <label for="quick-search-query" class="assistive">Quick Search</label>
+        <input id="quick-search-query" class="text app-search search quick-search-query" type="text"
+               accessKey="q" autocomplete="off" name="queryString" title="Quick Search"  placeholder="Search space" />
+        <input id="quick-search-submit" class="quick-search-submit" type="submit" value="Search"/>
+
+        <div class="aui-dd-parent quick-nav-drop-down"></div>
+    </fieldset>
+    <div class="hidden parameters">
+                    <!-- putMetadata failed to add value for key "quick-nav-enabled" so rendering metadata inline - see server debug log for details -->
+        <meta name="ajs-quick-nav-enabled" content="true">
+                </div>
+</form>
+</li>
+    <li>    
+        <a id="help-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="help-menu-link-content" title="Help">
+        <span class="aui-icon aui-icon-small aui-iconfont-help">Help</span>
+    </a>
+    <nav id="help-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                <ul  id="help-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+    
+            
+<a  id="confluence-help-link" href="http://docs.atlassian.com/confluence/docs-54/Getting+Help+And+Support" class="    "      title="Visit the Confluence documentation home"  target="_blank"
+>
+        Online Help
+</a>
+</li>
+                                            <li>
+    
+                
+<a  id="keyboard-shortcuts-link" href="#" class="    "      title="View available keyboard shortcuts" >
+        Keyboard Shortcuts
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="feed-builder-link" href="../dashboard/configurerssfeed.html" class="    "      title="Create your custom RSS feed." >
+        Feed Builder
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="whats-new-menu-link" href="http://docs.atlassian.com/confluence/docs-54/whatsnew/iframe" class="    "      title="" >
+        What’s new
+</a>
+</li>
+                                            <li>
+    
+                
+<a  id="gadget-directory-link" href="#" class="   user-item administration-link "      title="Browse gadgets provided by Confluence" >
+        Available Gadgets
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="confluence-about-link" href="../aboutconfluencepage.html" class="    "      title="Get more information about Confluence" >
+        About Confluence
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    </li>
+    <li>    
+    </li>
+                <li>                                    <li>
+    
+            
+<a  id="login-link" href="../login4709.html?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D17104926" class="   user-item login-link "      title="" >
+        Log in
+</a>
+</li>
+                        </li>
+</ul>
+</div></div><!-- .aui-header-inner--></nav><!-- .aui-header -->
+    <br class="clear">
+</header>
+
+    <div id="splitter">
+    <div id="splitter-sidebar"  class="padding-div" >
+        
+        <p>&nbsp;<br/>
+<strong>Navigation</strong><br/>
+&bull; <a href="https://confluence.ez.no/display/MAIN" class="external-link" rel="nofollow">eZ Documentation Center</a><br/>
+&nbsp;</p>
+    
+
+                    
+    
+
+
+<div class="plugin_pagetree">
+
+        
+        
+    <ul class="plugin_pagetree_children_list plugin_pagetree_children_list_noleftspace">
+        <div class="plugin_pagetree_children">
+        </div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input type="hidden" name="treeId" value="">
+        <input type="hidden" name="treeRequestId" value="/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=false&amp;sort=position&amp;reverse=false&amp;disableLinks=false&amp;expandCurrent=false">
+        <input type="hidden" name="treePageId" value="17104926">
+
+        <input type="hidden" name="noRoot" value="false">
+        <input type="hidden" name="rootPageId" value="12125259">
+
+        <input type="hidden" name="rootPage" value="">
+        <input type="hidden" name="startDepth" value="0">
+        <input type="hidden" name="spaceKey" value="EZP51" >
+
+        <input type="hidden" name="i18n-pagetree.loading" value="Loading...">
+        <input type="hidden" name="i18n-pagetree.error.permission" value="Unable to load page tree. It seems that you do not have permission to view the root page.">
+        <input type="hidden" name="i18n-pagetree.eeror.general" value="There was a problem retrieving the page tree. Please check the server log file for more information.">
+        <input type="hidden" name="loginUrl" value="/login.action?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D17104926">
+        <input type="hidden" name="mobile" value="false">
+
+                <fieldset class="hidden">
+                            <input type="hidden" name="ancestorId" value="12125259">
+                    </fieldset>
+    </fieldset>
+</div>
+
+
+
+            </div>
+    <div id="splitter-content">
+
+                    <script type="text/javascript" src="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/5.4.4/_/download/resources/com.atlassian.confluence.plugins.doctheme_resources/doc-theme.js"></script>
+    
+                        
+        <div id="theme-header">
+            <div class="sectionColumnWrapper"><div class="sectionMacro">
+<div class="sectionMacroRow"><div class="columnMacro" style="width:1%;min-width:1%;max-width:1%;"></div>
+<div class="columnMacro"><div class="panel" style="background-color: whitesmoke;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: whitesmoke;">
+<p>This is the documentation for <strong>eZ Publish Platform 5.1</strong>. It is scheduled to be moved into the <a href="../display/EZP/eZ%2bPublish%2bPlatform%2bDocumentation.html">5.x documentation</a>, so please go there for most up-to-date documentation.</p>
+</div></div></div>
+<div class="columnMacro" style="width:1%;min-width:1%;max-width:1%;"></div></div></div></div>
+        </div>
+    
+            
+<div id="main"  class="aui-page-panel" >
+    <div id="main-header">
+        
+        
+    <div id="navigation" class="content-navigation view">
+                    <ul class="ajs-menu-bar">
+                                    
+                    
+        <li class="normal ajs-menu-item">
+        <a id="action-menu-link" class="action ajs-menu-title aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="action-menu" data-container="#navigation"><span><span>Tools</span></span></a>         <div id="action-menu" class="aui-dropdown2 aui-style-default">
+                            <ul  id="action-menu-primary"                     class="section-primary first aui-dropdown2-section">
+                                            <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-view-history-link" href="viewpreviousversions145c.html?pageId=17104926" rel="nofollow"  class="action-view-history"   title="">
+                <span>Page History</span>    </a>
+</li>
+                                </ul>
+                            <ul  id="action-menu-secondary"                     class="section-secondary aui-dropdown2-section">
+                                            <li>
+
+    
+        
+                            
+    
+    
+    <a  id="view-page-info-link" href="viewinfo145c.html?pageId=17104926" rel="nofollow"  class="action-view-info"   title="">
+                <span>Page Information</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="view-in-hierarchy-link" href="../login5085.html?key=$page.space.key&amp;openId=17104926#selectedPageInHierarchy" rel="nofollow"  class=""   title="">
+                <span>View in Hierarchy</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-view-source-link" href="../plugins/viewsource/viewpagesrc145c.html?pageId=17104926" rel="nofollow"  class="action-view-source popup-link"   title="">
+                <span>View Source</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-export-pdf-link" href="../download/temp/pdfexport-20141021-211014-1348-1857/EZP51-Persistencecache-211014-1348-1858f1f7.pdf?pageId=17104926" rel="nofollow"  class=""   title="">
+                <span>Export to PDF</span>    </a>
+</li>
+                                </ul>
+                    </div>
+    </li>
+            </ul>
+    </div>
+
+        
+                <div id="title-heading" class="pagetitle with-breadcrumbs">
+        
+                            <div class="space-logo " data-key="EZP51" data-name="eZ Publish 5.1" data-entity-type="confluence.space">
+            <a><img class="logo space custom" src="../download/attachments/12125253/EZP51ccaa?version=2&amp;modificationDate=1370705476000&amp;api=v2" alt=""></a>
+        </div>            
+                            <div id="breadcrumb-section">
+                    
+    
+    
+    <ol id="breadcrumbs">
+                    
+                
+        <li class="first" >
+                
+
+                    <span class=""><a href="../display/EZP51/eZ%2bPublish%2bDocumentation.html">eZ Publish 5.1</a></span>
+                                                <li id="ellipsis" title="Show all breadcrumbs"><span><strong>&#8230;</strong></span></li>
+                                    
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="../display/EZP51/eZ%2bPublish%2bDocumentation.html">eZ Publish Documentation</a></span>
+                                        
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="../display/EZP51/Developer%2bGuide.html">Developer Guide</a></span>
+                                        
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="../display/EZP51/Developing%2bwith%2beZ%2bPublish%2b5.html">Developing with eZ Publish 5</a></span>
+                                        
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="../display/EZP51/MVC%2band%2bApplication.html">MVC and Application</a></span>
+                            
+                
+        <li>
+                
+
+                    <span class=""><a href="../display/EZP51/Cache.html">Cache</a></span>
+                </ol>
+
+
+                </div>
+            
+            <h1 id="title-text" class="with-breadcrumbs">
+                                        <a href="viewpage145c.html?pageId=17104926">Persistence cache</a>
+                            </h1>
+        </div>
+    </div>
+
+    
+
+    
+    
+    
+    
+    
+
+        
+
+
+
+
+        
+
+
+
+
+    
+
+    
+
+    
+
+
+
+
+
+
+
+    
+    
+        
+    
+    
+                    
+    
+
+    
+
+
+<div id="content" class="page view">
+    
+
+<div id="action-messages">
+                        </div>
+
+
+
+        <script type="text/x-template" title="searchResultsGrid">
+    <table class="aui">
+        <thead>
+            <tr class="header">
+                <th class="search-result-title">Page Title</th>
+                <th class="search-result-space">Space</th>
+                <th class="search-result-date">Updated</th>
+            </tr>
+        </thead>
+    </table>
+</script>
+<script type="text/x-template" title="searchResultsGridCount">
+    <p class="search-result-count">{0}</p>
+</script>
+<script type="text/x-template" title="searchResultsGridRow">
+    <tr class="search-result">
+        <td class="search-result-title"><a href="{1}" class="content-type-{2}"><span>{0}</span></a></td>
+        <td class="search-result-space"><a class="space" href="/display/{4}/" title="{3}">{3}</a></td>
+        <td class="search-result-date"><span class="date" title="{6}">{5}</span></td>
+    </tr>
+</script>
+        
+    
+    
+        <fieldset class="hidden parameters">
+            <input type="hidden" title="parentPageId" value="">
+        </fieldset>
+
+                            
+    
+
+                    
+
+                    
+        
+        <a href="#page-metadata-end" class="assistive">Skip to end of metadata</a>
+<div id="page-metadata-start" class="assistive"></div>
+
+    <div class="page-metadata">
+        <ul>
+                            <li class="page-metadata-item noprint">
+
+    
+            
+                            
+    
+    
+    <a  id="content-metadata-page-restrictions" href="#" rel="nofollow"  class="hidden"   title="Restrictions apply">
+                    <img alt="" src="../download/resources/com.atlassian.confluence.plugins.confluence-page-banner_page-banner-resources/images/red_padlock.png" height="16" width="16" title="">
+                <span></span>    </a>
+</li>
+                        <li class="page-metadata-modification-info">
+                
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'>     <a href="../logine6fa.html"
+                       class="url fn"
+                            >Ricardo Correia</a></span>, last modified by <span class='editor'>     <a href="../loginaee9.html"
+                       class="url fn"
+                            >Jérôme Vieilledent</a></span> on <a class='last-modified' title='Sep 12, 2013 07:12' href='diffpagesbyversion8521.html?pageId=17104926&amp;selectedPageVersions=6&amp;selectedPageVersions=7'>Sep 12, 2013</a>
+                </li>
+        </ul>
+    </div>
+
+
+<a href="#page-metadata-start" class="assistive">Go to start of metadata</a>
+<div id="page-metadata-end" class="assistive"></div>
+
+                            <div id="page-history-warning" class="aui-message warning">
+        <p>
+            <span class="aui-icon icon-warning"></span>
+            <strong>You are viewing an old version of this page. View the <strong><a href="../display/EZP51/Persistence%2bcache.html">current version</a>.</strong></strong>
+        </p>
+        <p class="page-history-view">
+            <a href="diffpagesbyversion3631.html?pageId=12125301&amp;originalVersion=7&amp;revisedVersion=10">Compare with Current</a>
+                        <a href="viewpreviousversionsffd3.html?pageId=12125301">View Page History</a>
+        </p>
+        <p class="version-navigation-block">
+                            <a class="version-navigation aui-button" href="viewpage13e6.html?pageId=17104919&amp;navigatingVersions=true">&laquo; Previous</a>
+            
+            <span class="current-version-margin">
+                                    <strong> Version 7</strong>
+                            </span>
+
+                            <a class="version-navigation aui-button" href="viewpaged7fe.html?pageId=17104946&amp;navigatingVersions=true">Next &raquo;</a>
+            
+        </p>
+    </div>
+            
+        <fieldset class="hidden parameters">
+                        <input type="hidden" title="browsePageTreeMode" value="view">
+        </fieldset>
+
+        <div class="wiki-content">
+                           
+            <div class="aui-message hint shadowed information-macro">
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            Persistence cache is a new feature introduced in 5.1. It does not exists in previous versions.
+                    </div>
+    </div>
+<p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1413899327936 {padding: 0px;}
+div.rbtoc1413899327936 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1413899327936 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1413899327936'>
+<ul class='toc-indentation'>
+<li><a href='#Persistencecache-Introduction'>Introduction</a></li>
+<li><a href='#Persistencecache-Persistentcache'>Persistent cache</a>
+<ul class='toc-indentation'>
+<li><a href='#Persistencecache-Layers'>Layers</a></li>
+<li><a href='#Persistencecache-Transparentcache'>Transparent cache</a>
+<ul class='toc-indentation'>
+<li><a href='#Persistencecache-Entitystoredonlyonce'>Entity stored only once</a></li>
+</ul>
+</li>
+<li><a href='#Persistencecache-Whatiscached?'>What is cached?</a></li>
+<li><a href='#Persistencecache-Legacykernelcachepurging'>Legacy kernel cache purging</a>
+<ul class='toc-indentation'>
+<li><a href='#Persistencecache-PersistenceCachePurger'>PersistenceCachePurger</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href='#Persistencecache-ReusingCacheservice'>Reusing Cache service</a>
+<ul class='toc-indentation'>
+<li><a href='#Persistencecache-GetCacheservice'>Get Cache service</a>
+<ul class='toc-indentation'>
+<li><a href='#Persistencecache-ViaDependencyinjection'>Via Dependency injection</a></li>
+<li><a href='#Persistencecache-ViaSymfony2Container'>Via Symfony2 Container</a></li>
+<li><a href='#Persistencecache-InlegacyviaSymfony2Container'>In legacy via Symfony2 Container</a></li>
+</ul>
+</li>
+<li><a href='#Persistencecache-Usingthecacheservice'>Using the cache service</a></li>
+</ul>
+</li>
+</ul>
+</div></p><h1 id="Persistencecache-Introduction">Introduction</h1><p> </p><p>This page describes how Persistence cache works, and how to reuse the cache service it uses.</p><p><strong>Configuration</strong></p><p>For configuring the cache service, look at the <a href="../display/EZP51/Persistence%2bcache%2bconfiguration.html">Persistence cache configuration</a> page.</p><h1 id="Persistencecache-Persistentcache">Persistent cache</h1><p><img class="confluence-embedded-image image-left" src="../download/attachments/10158280/SPI%20Cachea59a.png?version=2&amp;modificationDate=1370128139000&amp;api=v2" data-image-src="/download/attachments/10158280/SPI%20Cache.png?version=2&amp;modificationDate=1370128139000&amp;api=v2"></p><h4 id="Persistencecache-Layers">Layers</h4><p>Persistence cache can best be described as a implementation of SPI\Persistence that wraps around the main implementation (currently: &quot;Legacy Storage Engine&quot;).</p><p>As shown in the illustration this is done in the exact same way as the SignalSlot feature is a custom implementation of API\Repository wraps around the main Repository. In the case of Persistence Cache, instead of sending events on calls passed on to the wrapped implementation, most of the load calls are cached, and calls that perform changes purges the affected caches. This is done using a Cache service which is provided by StashBundle; this Service wraps around the Stash library to provide Symfony logging / debugging functionality, and allows configuration on cache handlers (Memcached, Apc, Filesystem, ..) to be configured using Symfony configuration. For how to reuse this Cache service in your own custom code, see below.</p><h4 id="Persistencecache-Transparentcache">Transparent cache</h4><p>The persistence cache, just like the HTTP cache, tries to follow principles of &quot;Transparent caching&quot;, this can shortly be described as a cache which is invisible to the end user and to the admin/editors of eZ Publish where content is always returned &quot;fresh&quot;. In other words there should not be a need to manually clear the cache like was frequently the case with eZ Publish 4.x (aka &quot;legacy&quot;). This is possible thanks to an interface that follows CRUD (Create Read Update Delete) operations per domain, and number of other operations capable of affecting a certain domain is kept to a minimum.</p><p> </p><h5 id="Persistencecache-Entitystoredonlyonce">Entity stored only once</h5><p>To make the transparent caching principle as effective as possible, entities are as much as possible only stored once in cache by their primary id. Lookup by a<span><span>lternative identifiers (identifier, remoteId, ..) is only cached with the identifier as cache key and primary id as it's cache value, and </span></span>compositions<span><span> (list of objects) usually keep only the array of primary id's as their cache value.</span></span></p><p><span>This means a couple of things:</span></p><ul><li><span>Memory consumption is kept low</span></li><li>Cache purging logic is kept simple ( Example: $sectionService-&gt;delete( 3 ) clears &quot;section/3&quot; cache entry )</li><li>Lookup by identifier and list of objects needs several cache lookups to be able to assemble the result value</li><li>Cache warmup usually takes several page loads to reach full as identifier is first cached, then the object</li></ul><h4 id="Persistencecache-Whatiscached?">What is cached?</h4><p>Persistence cache aimed in its first iteration for caching all SPI\Persistence calls used in a normal page load, including everything needed for permission checking and url alias lookups.<br />However Search queries are currently not cached as it is more difficult to make sure they stay fresh unless all search cache is purged on every modification, or a complicated search cache walking purge system is implemented that is able to detect which search result to clear (this is what is planned for future versions, but it is planned to be done when there is a background process system in place).</p><p>Anyway, the following SPI calls are not currently cached:</p><ul><li>ObjectStateHandler</li><li>TrashHandler</li><li>UrlWildCardHandler</li><li>SearchHandler::*</li><li>transactions</li></ul><p>For more details on which calls are cached or not, and where to contribute additional caches, check out the <a href="https://github.com/ezsystems/ezpublish-kernel/tree/master/eZ/Publish/Core/Persistence/Cache" class="external-link" rel="nofollow">source</a>.</p><h4 id="Persistencecache-Legacykernelcachepurging">Legacy kernel cache purging</h4><p>Currently with the Dual-kernel eZ Publish has in version 5.x, the &quot;Transparent caching principle&quot; referred to above has one major obstacle. eZ Publish 4.x (&quot;legacy&quot;) kernel was not made for such a thing and has a lot of API's that can make changes to the data in the database and hence make the persistence cache &quot;stale&quot; (aka out of date).</p><p>A couple of things are in place to try to avoid this from happening / making it less of a problem:</p><ul><li>The Persistence cache has a expiry time configurable in ezpublish.yml</li><li>LegacyBundle (the bundle that exposes legacy to Symfony and integrates Symfony with legacy) has a PersistenceCachePurger</li></ul><h5 id="Persistencecache-PersistenceCachePurger">PersistenceCachePurger</h5><p><a href="https://github.com/ezsystems/ezpublish-kernel/blob/master/eZ/Bundle/EzPublishLegacyBundle/Cache/PersistenceCachePurger.php" class="external-link" rel="nofollow">PersistenceCachePurger</a> is setup by LegacyBundle to receive all relevant <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/features/5.0/event.txt" class="external-link" rel="nofollow">cache</a> <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/features/5.1/event.txt" class="external-link" rel="nofollow">events</a> triggered by legacy kernel, and clear relevant Persistence cache based on the incoming data.<br />This means a &quot;Clear all cache&quot; operation done in legacy will also clear all persistence cache, it also means relevant content cache is cleared on publishing, so all code using the api's covered by these events should in effect be cache safe in regards to persistence cache.</p><p>So, in case of stale persistence cache, a clear all cache in legacy admin interface is thus still possible, however a manual cache clear is also possible but how to do it depends on which cache handler is currently used. </p><h1 id="Persistencecache-ReusingCacheservice">Reusing Cache service</h1><p>Using the cache service allows you to use a interface  and not have to care about if the system has been configured to place the cache in Memcached, Apc or on File system. And as eZ Publish requries that instances uses a cluster aware cache, you can safly assume your cache is shared across all eZ Publish web servers.</p>    <div class="aui-message problem shadowed information-macro">
+                    <p class="title">Interface warning</p>
+                            <span class="aui-icon icon-problem">Icon</span>
+                <div class="message-content">
+                            <p>Current implementation uses a caching library called <a class="external-link" href="http://stash.tedivm.com/" rel="nofollow">Stash</a>, via <a class="external-link" href="https://github.com/tedivm/TedivmStashBundle" rel="nofollow">Stash-bundle</a>. If this changes, then the Interface of the cache service will most likely change as well.</p>
+                    </div>
+    </div>
+    <div class="aui-message problem shadowed information-macro">
+                    <p class="title">Cache key warning</p>
+                            <span class="aui-icon icon-problem">Icon</span>
+                <div class="message-content">
+                            <p>When reusing the cache service within your own code, it is very important to not conflict with the cache keys used by eZ Publish, hence why example of usage starts with a unique &quot;myApp&quot; key for the namespace of your own cache, you must do the same!</p><p>Also, this means that when eZ Publish clears all cache, it will also wipe out your custom cache as well!</p>
+                    </div>
+    </div>
+    <div class="aui-message problem shadowed information-macro">
+                    <p class="title">Multi site warning</p>
+                            <span class="aui-icon icon-problem">Icon</span>
+                <div class="message-content">
+                            <p>Be aware that in some edge cases as of eZ Publish 5.1, we recommend that the cache system is practically disabled using a <em>Blackhole</em> driver. This is the case in multi repository (one eZ Publish install, several databases) because the current configuration does not support setting cache key prefixes pr database (the current configuration is global to installation and not possible to set pr site / site group).</p><p>In this case the cache service will only keep your cache during the request, if the recommended InMemory setting is enabled.</p>
+                    </div>
+    </div>
+<h2 id="Persistencecache-GetCacheservice">Get Cache service</h2><h3 id="Persistencecache-ViaDependencyinjection">Via Dependency injection</h3><p>In eZ Publish 5.x Symfony2 stack you can simply define that you requrie the &quot;cache&quot; serive in your configuration like so:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>yml configuration</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[    myApp.myService:
+        class: %myApp.myService.class%
+        arguments:
+            - @cache]]></script>
+</div></div><p>The &quot;cache&quot; service is an instance of the following class: Tedivm\StashBundle\Service\CacheService</p><h3 id="Persistencecache-ViaSymfony2Container">Via Symfony2 Container</h3><p>Like any other service, it is possible to get the &quot;cache&quot; service via container as well like so:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>getting the cache service in php</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[/** @var $cacheService \Tedivm\StashBundle\Service\CacheService */
+$cacheService = $container-&gt;get( &#39;cache&#39; );]]></script>
+</div></div><h3 id="Persistencecache-InlegacyviaSymfony2Container">In legacy via Symfony2 Container</h3><p>When eZ Publish legacy runs via eZ Publish 5.x Symfony2 stack, you will be able to get the service container in the following way:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Getting cache service in legacy</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[// From a legacy module or any PHP code running in legacy context.
+$container = ezpKernel::instance()-&gt;getServiceContainer();
+ 
+/** @var $cacheService \Tedivm\StashBundle\Service\CacheService */
+$cacheService = $container-&gt;get( &#39;stash.cache&#39; );]]></script>
+</div></div><h2 id="Persistencecache-Usingthecacheservice">Using the cache service</h2><p>Example usage of the cache service:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Actuall example from cache use in ezpublish-kernel</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[    $cacheItem = $cacheService-&gt;getItem( &#39;myApp&#39;, &#39;object&#39;, $id );
+    if ( $cacheItem-&gt;isMiss() )
+    {
+        $myObject = $container-&gt;get(&#39;my_app.backend_service&#39;)-&gt;loadObject( $id )
+        $cacheItem-&gt;set( $myObject );
+    }
+    else
+    {
+        $myObject = $cacheItem-&gt;get();
+    }
+    return $myObject;]]></script>
+</div></div><p><span>For more info on usage, take a look at </span><a href="http://stash.tedivm.com/" class="external-link" rel="nofollow">Stash's documentation</a><span>.</span></p><p> </p><p> </p><p> </p>
+
+                
+        
+    
+        </div>
+
+        <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://doc.ez.no/pages/viewpage.action?pageId=17104926"
+    dc:identifier="https://doc.ez.no/pages/viewpage.action?pageId=17104926"
+    dc:title="Persistence cache"
+    trackback:ping="https://doc.ez.no/rpc/trackback/17104926"/>
+</rdf:RDF>
+-->
+
+            
+    
+
+
+
+<div id="labels-section" class="pageSection group">
+    <div class="labels-section-content content-column" entityid="17104926" entitytype="page">
+	<div class="labels-content">
+		
+    <ul class="label-list label-list-right ">
+            <li class="no-labels-message">
+            No labels
+        </li>
+            </ul>
+
+    </div>
+</div></div>
+
+            
+            
+
+
+
+
+            
+    
+
+
+
+
+
+
+
+
+                    
+    
+<div id="comments-section" class="pageSection group">
+    
+    
+    
+    
+            <div class="bottom-comment-panels comment-panels">
+                                    
+    
+
+
+    
+            </div>
+    
+    </div>
+
+
+            
+</div>
+
+
+    
+
+
+
+
+    
+    
+
+    
+    
+    
+
+
+
+
+
+
+
+
+</div>
+  
+        <div id="theme-footer">
+            <div class="sectionColumnWrapper"><div class="sectionMacro">
+<div class="sectionMacroRow"><div class="columnMacro"></div>
+<div class="columnMacro">
+<div class="panel" style="background-color: #ecf0f1;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: #ecf0f1;">
+<p>Where Content Means Business</p>
+</div></div></div>
+<div class="columnMacro"></div></div></div></div>
+        </div>
+    
+    </div>
+</div>
+
+
+        
+            <div id="footer">
+
+    <section class="footer-body">
+
+                                                <p class="license license-opensource">
+                  Powered by a free <b>Atlassian Confluence Open Source Project License</b> granted to eZ Publish. <a href="http://www.atlassian.com/c/conf/11461">Evaluate Confluence today</a>.<br>
+                </p>
+                        
+    
+
+    <ul id="poweredby">
+        <li class="noprint">Powered by <a href="http://www.atlassian.com/software/confluence" class="hover-footer-link">Atlassian Confluence</a> <span id='footer-build-information'>5.4.4</span>, <a href="http://www.atlassian.com/software/confluence/overview/team-collaboration-software?utm_source=confluence-footer" class="hover-footer-link">Team Collaboration Software</a></li>
+        <li class="print-only">Printed by Atlassian Confluence 5.4.4, Team Collaboration Software.</li>
+        <li class="noprint"><a href="http://jira.atlassian.com/secure/BrowseProject.jspa?id=10470" class="hover-footer-link">Report a bug</a></li>
+        <li class="noprint"><a href="http://www.atlassian.com/about/connected.jsp?s_kwcid=Confluence-stayintouch" class="hover-footer-link">Atlassian News</a></li>
+    </ul>
+
+    
+
+            <script>
+AJS.toInit(function(){
+ if(AJS.params.spaceKey &&
+    AJS.params.spaceKey === 'MAIN' ||
+    AJS.params.spaceKey === 'EZMA' ||
+    AJS.params.spaceKey === 'ODC' ||
+    AJS.params.spaceKey === 'EZP50' ||
+    AJS.params.spaceKey === 'EZP51' ||
+    AJS.params.spaceKey === 'EZP52' ||
+    AJS.params.spaceKey === 'EZPCLOUD' ||
+    AJS.params.spaceKey === 'EZP' ||
+    AJS.params.spaceKey === 'EZRECO'
+){
+
+(function()
+{var isSecure=('https:'==document.location.protocol);var ff=document.createElement('script');ff.type='text/javascript';ff.async=true;ff.src=(isSecure?'https':'http')+'://'+(isSecure?'secure.':'lb.')+'liveviewer.ez.no/statjs/sst-120-1304513615/stat.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ff,s);}
+)();
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-303624-13', 'ez.no');
+  ga('send', 'pageview');
+}}
+);
+</script>
+    
+    </section>
+
+</div>
+
+            
+    </div>
+</body>
+
+<!-- Mirrored from doc.ez.no/pages/viewpage.action?pageId=17104926 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:30:11 GMT -->
+</html>

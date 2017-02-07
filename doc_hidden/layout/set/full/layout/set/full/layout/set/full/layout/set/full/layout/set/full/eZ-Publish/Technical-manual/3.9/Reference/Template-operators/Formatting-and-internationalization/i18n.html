@@ -1,0 +1,91 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Template-operators/Formatting-and-internationalization/i18n by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:57:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>i18n / Formatting and internationalization / Template operators / Reference / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>i18n</h1>
+</div>
+<h3>Summary</h3>
+Marks a string for translation.<h3>Usage</h3>
+<pre>input|i18n( [ context [, comment [, arguments ] ] ] )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>context</td>
+        <td>string</td>
+        <td>The context to which the string belongs.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>comment</td>
+        <td>string</td>
+        <td>A comment describing the text.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>arguments</td>
+        <td>hash</td>
+        <td>An associative array of arguments in the input parameter.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+A string containing a translated version of the input parameter.<h3>Description</h3>
+ <p>This operator makes it possible to translate static strings that are defined in various templates. It is typically useful to ensure that the HTML interface is available in several languages in a multilanguage scenario.</p> <p>The operator takes three optional parameters: &quot;context&quot;, &quot;comment&quot; and &quot;arguments&quot;. The &quot;context&quot; parameter can be used to specify a group to which the input parameter should be related. This is typically useful when there are a lot of strings that need to be structured/grouped. The &quot;comment&quot; parameter makes it possible to add additional comment which can help the person responsible for doing the actual translation. A comment could for example be &quot;Button label&quot; - revealing what that mysterious string actually is. The &quot;arguments&quot; parameter makes it possible to mix dynamic text into the translations. Please refer to <a href="#example_2" target="_self">&quot;Example 2&quot;</a> for a demonstration of this feature.</p><h3>Examples</h3>
+    <a name="eztoc68671_0_0_1" id="eztoc68671_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap"><span class="line">{&quot;This is a test&quot;|i18n}</span>
+</pre> <p>Outputs &quot;This is a test&quot; translated to the current language.</p> <p> <a name="example_2"></a>
+ </p>   <a name="eztoc68671_0_0_2" id="eztoc68671_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap"><span class="line">{def $number=5}</span>
+<span class="line">{&quot;Please enter %number characters.&quot;|i18n( '', '', hash( '%number', $number ) )}</span>
+</pre> <p>Outputs &quot;Please enter 5 characters.&quot;, the %number will be dynamically replaced by the variable.</p>   <a name="eztoc68671_0_0_3" id="eztoc68671_0_0_3"></a><h4>Example 3</h4> <pre class="wordwrap"><span class="line">{&quot;Are you sure you want to remove these items?&quot;|i18n('design/standard/node')}</span>
+</pre> <p>Outputs &quot;Are you sure you want to remove these items?&quot; translated to the current language. The translation is taken from the context block named &quot;design/standard/node&quot; located in the appropriate translation file.</p> <p>For example, let's say that the &quot;translation.ts&quot; file located in the &quot;share/translations/ita-IT/&quot; directory of your eZ Publish installation contains the following lines:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;context&gt;</span>
+<span class="line">&lt;name&gt;design/standard/node&lt;/name&gt;</span>
+<span class="line">&nbsp;...</span>
+<span class="line">&lt;message&gt;</span>
+<span class="line">&lt;source&gt;Are you sure you want to remove these items?&lt;/source&gt;</span>
+<span class="line">&lt;translation&gt;Sei sicuro di voler rimuovere questi elementi?&lt;/translation&gt;</span>
+<span class="line">&lt;/message&gt;</span>
+<span class="line">&nbsp;...</span>
+<span class="line">&lt;/context&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;context&gt;\r\n&lt;name&gt;design/standard/node&lt;/name&gt;\r\n ...\r\n&lt;message&gt;\r\n&lt;source&gt;Are you sure you want to remove these items?&lt;/source&gt;\r\n&lt;translation&gt;Sei sicuro di voler rimuovere questi elementi?&lt;/translation&gt;\r\n&lt;/message&gt;\r\n ...\r\n&lt;/context&gt;' ); return false;" /></p>
+<![endif]--> <p>If your current system locale is &quot;ita-IT&quot; (as specified in the &quot; <a href="../../Configuration-files/site.ini/RegionalSettings/Locale.html" target="_self">Locale</a>&quot; setting located in the &quot;[RegionalSettings]&quot; section of the &quot;settings/site.ini&quot; configuration file or its override) then the following output is produced: &quot;Sei sicuro di voler rimuovere questi elementi?&quot;</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Template-operators/Formatting-and-internationalization/i18n by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:57:28 GMT -->
+</html>

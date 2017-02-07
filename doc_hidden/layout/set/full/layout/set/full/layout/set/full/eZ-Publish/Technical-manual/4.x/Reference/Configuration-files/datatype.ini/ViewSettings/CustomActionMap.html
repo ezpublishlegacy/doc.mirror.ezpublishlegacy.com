@@ -1,0 +1,91 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/datatype.ini/ViewSettings/CustomActionMap by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>CustomActionMap / [ViewSettings] / datatype.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>CustomActionMap</h1>
+</div>
+<h3>Summary</h3>
+List of custom datatype actions and corresponding module or view or just view in case of content module where they should be executed<h3>Usage</h3>
+<pre class="pfix"> <p>CustomActionMap[ActionAddComment]=comment/add</p></pre><h3>Description</h3>
+ <p>List of custom datatype actions and corresponding &lt;module&gt;/&lt;view&gt; or just &lt;view&gt; in case of content module where they should be executed, eg:</p> 
+<ul>
+ <li><div> CustomActionMap[ActionAddToBasket]=shop/basket </div></li> <li><div> CustomActionMap[ActionCollectInformation]=collectinformation </div></li> 
+</ul>
+ <p> <b>Note:</b> Action definition should be defined in contentActionList function of the datatype, see ez[multi]pricetype.php for code example.</p> <p>eZ Comments, or any other extension, might want to provide a custom action, in the eZ Comments case the possibility to comment on content. With custom actions you don't get form in form issues, as all actions share one form, thus you can have both information collection, shop and comment actions on the same object. The form goes to content/action which then executes the &lt;module&gt;/&lt;view&gt; you defined in CustomActionMap, if it can't be found you'll get an error.</p><h3>Examples</h3>
+    <a name="eztoc114833_0_0_1" id="eztoc114833_0_0_1"></a><h4>Example</h4> <pre class="wordwrap copytoclipboard"><span class="line">extension/ezcomments/settings/datatype.ini:</span>
+<span class="line">&lt;code&gt;</span>
+<span class="line">#?ini charset=&quot;utf-8&quot;?</span>
+<span class="line">&nbsp;</span>
+<span class="line">[ViewSettings]</span>
+<span class="line">CustomActionMap[ActionAddComment]=comment/add</span>
+<span class="line">&lt;/code&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">extension/ezcomments/datatypes/ezcomcomments/ezcomcommentstype.php:</span>
+<span class="line">&lt;code&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Return content action(s) which can be performed on object containing</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* the current datatype. Return format is array of arrays with key 'name'</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* and 'action'. 'action' can be mapped to url in datatype.ini</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param eZContentClassAttribute $classAttribute</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return array</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;function contentActionList( $classAttribute )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$actionList = parent::contentActionList( $classAttribute );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$actionList[] = array( 'name' =&gt; ezpI18n::tr( 'ezcomments/datatype', 'Comment on content' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'action' =&gt; 'ActionAddComment'</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $actionList;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&lt;/code&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'extension/ezcomments/settings/datatype.ini:\r\n&lt;code&gt;\r\n#?ini charset=&quot;utf-8&quot;?\r\n\r\n[ViewSettings]\r\nCustomActionMap[ActionAddComment]=comment/add\r\n&lt;/code&gt;\r\n\r\nextension/ezcomments/datatypes/ezcomcomments/ezcomcommentstype.php:\r\n&lt;code&gt;\r\n    /**\r\n     * Return content action(s) which can be performed on object containing\r\n     * the current datatype. Return format is array of arrays with key \'name\'\r\n     * and \'action\'. \'action\' can be mapped to url in datatype.ini\r\n     *\r\n     * @param eZContentClassAttribute $classAttribute\r\n     * @return array\r\n    */\r\n    function contentActionList( $classAttribute )\r\n    {\r\n        $actionList = parent::contentActionList( $classAttribute );\r\n        $actionList[] = array( \'name\' =&gt; ezpI18n::tr( \'ezcomments/datatype\', \'Comment on content\' ),\r\n                               \'action\' =&gt; \'ActionAddComment\'\r\n        );\r\n        return $actionList;\r\n    }\r\n&lt;/code&gt;' ); return false;" /></p>
+<![endif]-->   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/datatype.ini/ViewSettings/CustomActionMap by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:01 GMT -->
+</html>

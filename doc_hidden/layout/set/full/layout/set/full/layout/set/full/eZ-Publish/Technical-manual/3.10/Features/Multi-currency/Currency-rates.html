@@ -1,0 +1,181 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Features/Multi-currency/Currency-rates by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:53:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Currency rates / Multi-currency / Features / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Currency rates</h1>
+</div>
+
+ <p>There are two types of currency rates: </p>
+<ul>
+ <li><div> Auto rates </div></li> <li><div> Custom rates </div></li> 
+</ul>
+ <p> <a name="auto_rates"></a>
+ </p>  <a name="eztoc74508_1" id="eztoc74508_1"></a><h2>Auto rates</h2> <p> <i>Auto rates</i> are retrieved via automatic update of the exchange rates from the external source. It is possible to get these rates from the website of the European Central Bank using the built-in &quot;eZECB&quot; handler or to extend the system by creating your own update handler. Please note that you should specify the desired handler in the &quot;ExchangeRatesUpdateHandler&quot; INI setting described in the &quot;<a href="Exchange-rates-update-handlers.html" target="_self">Exchange rates update handlers</a>&quot; section, otherwise the system will not be able to update auto rates.</p> <p> <a name="base_currency"></a>
+An auto rate of the currency is nothing more than the amount of this currency that must be given up in order to obtain one unit of the <i>base currency</i>. The base currency is determined by the &quot;BaseCurrency&quot; INI setting described in the &quot;<a href="Exchange-rates-update-handlers.html" target="_self">Exchange rates update handlers</a>&quot; section. It is recommended (but not required) that you specify one of the existing currencies in this setting.</p> <p>The website of the European Central Bank allows to get the currency exchange rates relative to EUR. If you use the &quot;eZECB&quot; handler and set for example USD as the base currency, the system will retrieve the exchange rates relative to EUR and then calculate the auto rates relative to USD. Please note that you will get an error if the exchange rate for USD was not retrieved.</p>  <a name="eztoc74508_1_1" id="eztoc74508_1_1"></a><h3>Example</h3> <p>Let's say that the following rates relative to EUR are indicated on the website of the European Central Bank: </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Currency</p> 
+  </th> <th >   <p>Rate</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>NOK</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>7.85620</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>USD</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1.20940</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>UAH</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>not available</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>If you specify EUR as the base currency, the system will set the following auto rates: </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Currency</p> 
+  </th> <th >   <p>Auto rate</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>EUR</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1.00000</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>NOK</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>7.85620</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>USD</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1.20940</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>UAH</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>N/A</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>If you do not specify the base currency, the result will be the same.</p> <p>If you specify USD as the base currency, the system will calculate the auto rates relative to USD as shown in the following table: </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Currency</p> 
+  </th> <th >   <p>Auto rate</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>EUR</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.82685 ( 1 / 1.20940 )</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>NOK</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>6.49594 ( 7.85620 / 1.20940 )</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>USD</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1.00000</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>UAH</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>N/A</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>If you specify UAH as the base currency, the system will display the following error message: &quot;Unable to calculate cross-rate for currency-pair EUR/UAH&quot; when trying to update the auto rates. Since the exchange rate for UAH was not retrieved from the website of the European Central Bank, the system will not be able to calculate the rates relative to UAH. <a name="custom_rates"></a>
+ </p>    <a name="eztoc74508_2" id="eztoc74508_2"></a><h2>Custom rates</h2> <p>You can specify a fixed <i>custom rate</i> for a currency so that this value will be used instead of the auto rate value (the auto rate will not be used and thus it will be displayed in gray color). Please note that the custom rates must be relative to the same <a href="#base_currency" target="_self">base currency</a> as the auto rates. If you have for example five currencies with auto rates relative to EUR and you wish to specify a custom rate for one of them, make sure this rate is also relative to EUR.</p> <p>If you are going to specify custom rates for all your currencies without exception, you may use some other currency as the base one. It is recommended (but not required) that you use one of the existing currencies as the base currency.</p>  <a name="eztoc74508_2_2" id="eztoc74508_2_2"></a><h3>Example</h3> <p>Let's say that you have four currencies: USD, EUR, NOK and UAH. You can consider USD as the base currency and specify the custom rates relative to this currency, for example: </p>
+<ul>
+ <li><div> 1 for USD </div></li> <li><div> 0.84 for EUR </div></li> <li><div> 6.52 for NOK </div></li> <li><div> 5.05 for UAH </div></li> 
+</ul>
+ <p>If you then remove the &quot;USD&quot; currency, the custom rates for EUR, NOK and UAH will not be changed.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Features/Multi-currency/Currency-rates by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:53:53 GMT -->
+</html>

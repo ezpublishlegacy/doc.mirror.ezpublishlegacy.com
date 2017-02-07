@@ -1,0 +1,102 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Features/VAT-charging-system/Creating-new-VAT-handlers by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Creating new VAT handlers / VAT charging system / Features / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Creating new VAT handlers</h1>
+</div>
+
+ <p>This section reveals some helpful tips for those developers who want to create a new <a href="../VAT-charging-system.html#vat_handlers" target="_self">VAT handler</a> (only for people who are familiar with PHP). Please note that it is not recommended to modify the eZ publish kernel and thus you should implement it as an extension.</p>  <a name="eztoc30855_1" id="eztoc30855_1"></a><h2>Handler interface</h2> <p>This section describes some implementation details that can be useful for PHP developers.</p> <p>A VAT handler is a file that contains a class implementing the following method: </p><pre class="wordwrap copytoclipboard"><span class="line">/**</span>
+<span class="line">*</span>
+<span class="line">* \public</span>
+<span class="line">* \static</span>
+<span class="line">* \param $object &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The product content object.</span>
+<span class="line">* \param $country &nbsp;&nbsp;&nbsp;&nbsp;Country the buyer is from, or false if not specified.</span>
+<span class="line">* \return &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VAT percent (integer), or null in case of an error.</span>
+<span class="line">*/</span>
+<span class="line">mixed function getVatPercent( eZContentObject $object, mixed $country );</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '/**\r\n*\r\n* \public\r\n* \static\r\n* \param $object      The product content object.\r\n* \param $country     Country the buyer is from, or false if not specified.\r\n* \return             VAT percent (integer), or null in case of an error.\r\n*/\r\nmixed function getVatPercent( eZContentObject $object, mixed $country );' ); return false;" /></p>
+<![endif]--> <p>A handler is not called directly but via eZVATManager class. Method getVAT() of that class returns the VAT percentage that should be charged for a given product: </p><pre class="wordwrap"><span class="line">$vatPercent = eZVATManager::getVAT( $object, $country );</span>
+</pre> <p>All that getVAT() method does is invoking getVatPercent() method of the handler specified in the &quot;Handler&quot; INI setting.</p> <p>The next subsection explains how you can implement your own VAT handler.</p> <a name="eztoc30855_2" id="eztoc30855_2"></a><h2>Creating your own handler</h2> <p>Let's say that you need to determine the VAT percentage for a product depending on the section this product belongs to. You can create your own VAT handler called &quot;mysectionbased&quot; as described below. </p>
+<ol>
+ <li><div> Create the following subdirectories in the &quot;extension&quot; directory of your eZ publish installation: 
+<ul>
+ <li><div> myextension </div></li> <li><div> myextension/settings </div></li> <li><div> myextension/vathandlers </div></li> 
+</ul>
+  </div></li> <li><div> Create a file called &quot;mysectionbasedvathandler.php&quot; in the &quot;myextension/vathandlers/&quot; directory (this file must contain a PHP class called &quot;MySectionBasedVATHandler&quot;) and add the following lines into it: <pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">class MySectionBasedVATHandler</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* \public</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* \static</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;function getVatPercent( $object, $country )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$section = $object-&gt;attribute( 'section_id' );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( $section == 1 )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$percentage = 10;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$percentage = 20;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $percentage;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">}</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\nclass MySectionBasedVATHandler\r\n{\r\n    /**\r\n     * \public\r\n     * \static\r\n     */\r\n    function getVatPercent( $object, $country )\r\n    {\r\n        $section = $object-&gt;attribute( \'section_id\' );\r\n        if ( $section == 1 )\r\n            $percentage = 10;\r\n        else\r\n            $percentage = 20;\r\n        return $percentage;\r\n    }\r\n}\r\n?&gt;' ); return false;" /></p>
+<![endif]-->  </div></li> <li><div> <p>Create a file called &quot;shop.ini.append.php&quot; in the &quot;myextension/settings&quot; directory and add the following lines into it: </p><pre class="wordwrap copytoclipboard"><span class="line">[VATSettings]</span>
+<span class="line">ExtensionDirectories[]=myextension</span>
+<span class="line">Handler=mysectionbased</span>
+<span class="line">RequireUserCountry=false</span>
+<span class="line">DynamicVatTypeName=Section based VAT</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[VATSettings]\r\nExtensionDirectories[]=myextension\r\nHandler=mysectionbased\r\nRequireUserCountry=false\r\nDynamicVatTypeName=Section based VAT' ); return false;" /></p>
+<![endif]-->This will instruct eZ publish to use the VAT handler located at &quot;extension/myextension/vathandlers/mysectionbasedvathandler.php&quot;. Since the VAT percentage determined by this handler does not depend on user country, the &quot;RequireUserCountry&quot; setting must be set to false. Since this handler does not use the VAT rules, it is reasonable to display the name of the dynamic VAT type as &quot;Section based VAT&quot; (not &quot;Determined by VAT charging rules&quot;). This is done by using the &quot;DynamicVatTypeName&quot; setting.</div></li> <li><div> To activate your extension in eZ publish, log in to your eZ publish administration interface, click on the &quot;Setup&quot; tab, and then click &quot;Extensions&quot; on the left. You will see the list of available extensions. Select the &quot;myextension&quot; item and click the &quot;Apply changes&quot; button. </div></li> 
+</ol>
+ 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Features/VAT-charging-system/Creating-new-VAT-handlers by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:43 GMT -->
+</html>

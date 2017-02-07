@@ -1,0 +1,121 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Reference/Configuration-files/viewcache.ini/ViewCacheSettings/ClearRelationTypes by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>ClearRelationTypes / [ViewCacheSettings] / viewcache.ini / Configuration files / Reference / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ClearRelationTypes</h1>
+</div>
+<h3>Summary</h3>
+Controls whether the view caches for objects related in various ways should be cleared or not.<h3>Usage</h3>
+<pre class="pfix"> <p>
+ClearRelationTypes[]=type1<br />
+ClearRelationTypes[]=type2<br />...</p></pre><h3>Description</h3>
+ <p>This directive sets which related and reverse related objects the view caches should be cleared for as a response to the view cache being cleared for a specific object. More precisely, it can be used to control whether the view caches for objects that are related in various ways should be cleared or not. This setting is an array of strings where only four pre-defined values can be used (refer to the following table).</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Type</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>object</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Clear cache for related objects that have relations at the object level.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>reverse_object</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Clear cache for reverse related objects that have relations at the object level.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>attribute</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Clear cache for related objects that have relations at the attribute level.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>reverse_attribute</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Clear cache for reverse related objects that have relations at the attribute level.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>Note that if you need to set up additional/custom rules that control which nodes the view cache should be cleared for when the view cache for a specific object is being cleared, you'll have to use <a href="../../../../Features/View-caching/Smart-view-cache-cleaning.html" target="_self">smart viewcache cleaning</a>.</p> <p>The &quot;ClearRelationTypes&quot; setting is only available in eZ Publish 3.8.7 and later versions.</p><h3>Examples</h3>
+    <a name="eztoc72122_0_0_1" id="eztoc72122_0_0_1"></a><h4>Example 1</h4> <p>&nbsp;</p><pre class="wordwrap"><span class="line">[ViewCacheSettings]</span>
+<span class="line">ClearRelationTypes[]</span>
+<span class="line">SmartCacheClear=disabled</span>
+</pre><p>
+ <br />When clearing the view cache for an object, the system will automatically clear the view cache for the following nodes:</p>
+<ul>
+ <li><div> All published nodes of this object and their parent nodes </div></li> <li><div> Nodes of the objects that have the same keyword (if any) </div></li> 
+</ul>
+<p>Since the &quot;ClearRelationTypes&quot; configuration array is empty, the view caches for related and reverse related objects will not be cleared.</p>       <a name="eztoc72122_0_0_2" id="eztoc72122_0_0_2"></a><h4>Example 2</h4> <p>&nbsp;</p><pre class="wordwrap copytoclipboard"><span class="line">[ViewCacheSettings]</span>
+<span class="line">ClearRelationTypes[]</span>
+<span class="line">ClearRelationTypes[]=object</span>
+<span class="line">ClearRelationTypes[]=reverse_object</span>
+<span class="line">SmartCacheClear=disabled</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ViewCacheSettings]\r\nClearRelationTypes[]\r\nClearRelationTypes[]=object\r\nClearRelationTypes[]=reverse_object\r\nSmartCacheClear=disabled' ); return false;" /></p>
+<![endif]--><p>
+ <br />When clearing the view cache for an object, the system will automatically clear the view cache for the following nodes:</p>
+<ul>
+ <li><div> All published nodes of this object and their parent nodes </div></li> <li><div> Nodes of the objects that have the same keyword (if any) </div></li> <li><div> Nodes of related and reverse related objects that have relations at the object level </div></li> 
+</ul>
+<p>Note that the first two items on the list are not controlled by the &quot;ClearRelationTypes&quot; setting.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Reference/Configuration-files/viewcache.ini/ViewCacheSettings/ClearRelationTypes by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:47 GMT -->
+</html>

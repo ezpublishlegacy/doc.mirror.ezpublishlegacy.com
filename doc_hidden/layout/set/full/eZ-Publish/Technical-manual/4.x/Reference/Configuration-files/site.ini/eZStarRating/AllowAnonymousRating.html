@@ -1,0 +1,77 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/eZStarRating/AllowAnonymousRating by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>AllowAnonymousRating / [eZStarRating] / site.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>AllowAnonymousRating</h1>
+</div>
+<h3>Summary</h3>
+Allows anonymous users to rate content<h3>Usage</h3>
+<pre class="pfix"><p>AllowAnonymousRating=enabled | <b>disabled</b></p></pre><h3>Description</h3>
+<p>
+This setting allows or disallows anonymous users to rate content using eZ Star Rating.<br />It expects an <i>enabled</i> or <i>disabled</i> state, and if set to <i>enabled</i>&nbsp;the native spam filter will be disabled for anonymous users, allowing them to apply rates.</p><p>If you want to allow anonymous users to rate, you will also need to:</p>
+<ul>
+<li><div><a href="../../../../../../User-manual/4.x/The-administration-interface/The-User-accounts-tab/Roles-and-policies.html" target="_blank">Give access</a> to anonymous users to <i>ezjscore</i> module, function <i>call</i>, and limitation <i>FunctionList( ezstarrating_rate , ezstarrating_user_has_rated )</i></div></li><li><div>Enable the <a href="UseUserSession.html" target="_blank">UseUserSession</a> setting to avoid anonymous to be considered as a single individual&nbsp;</div></li>
+</ul>
+<p>
+<b>Important!</b><br />Activating this option (along with <a href="UseUserSession.html" target="_blank">UseUserSession</a> set to enabled):</p>
+<ul>
+<li><div>Will create a session for every anonymous user rating content.</div></li><li><div>Might allow spamming since anonymous user is only authenticated by its session cookie.</div></li>
+</ul>
+<p>Relation with the <a href="../Session/ForceStart.html" target="_blank">Session/ForceStart</a> setting:</p>
+<ul>
+<li><div>If <a href="../Session/ForceStart.html" target="_blank">Session/ForceStart</a> is set to enabled: Existing sessions will be used</div></li><li><div>If <a href="../Session/ForceStart.html" target="_blank">Session/ForceStart</a> is set to disabled: New sessions will be created for any user who starts rating content</div></li>
+</ul>
+<p><b>Note:</b> As of eZ Publish 5, session cookies are always created by default, so, setting <i>ForceStart</i> to <i>disabled</i> won't change this behavior, and existing sessions will be re-used on future visits.</p><h3>Examples</h3>
+<pre class="wordwrap copytoclipboard"><span class="line">[eZStarRating]</span>
+<span class="line">UseUserSession=enabled</span>
+<span class="line">AllowAnonymousRating=enabled</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[eZStarRating]\r\nUseUserSession=enabled\r\nAllowAnonymousRating=enabled\r\n' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/eZStarRating/AllowAnonymousRating by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:20 GMT -->
+</html>

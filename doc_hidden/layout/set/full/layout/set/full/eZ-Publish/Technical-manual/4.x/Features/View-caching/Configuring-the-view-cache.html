@@ -1,0 +1,82 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/View-caching/Configuring-the-view-cache by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:22:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Configuring the view cache / View caching / Features / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Configuring the view cache</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><p>The view caching mechanism is enabled by default. However, you probably want to turn it off during site development (otherwise any changes being made in your custom <a href="../../Templates/Template-basics/Node-templates.html" target="_self">node templates</a> will not be visible on the site until you clear the caches). This can be done by adding the following line under the &quot;[ContentSettings]&quot; section in the &quot;site.ini.append.php&quot; file of your siteaccess:</p><pre class="wordwrap"><span class="line">ViewCaching=disabled</span>
+</pre><p>Note that it is strongly recommended to re-enable the view caching when development has finished. This can be done by changing it from &quot;disabled&quot; to &quot;enabled&quot;:</p><pre class="wordwrap"><span class="line">ViewCaching=enabled</span>
+</pre><p>The <a href="../../Reference/Configuration-files/site.ini/ContentSettings/CachedViewModes.html" target="_self">CachedViewModes</a> setting located in the &quot;[ContentSettings]&quot; section of the &quot;site.ini&quot; configuration file (or an override) controls which view modes the caching will be enabled for. The default value of this setting defines that view cache should be stored for &quot;full&quot;, &quot;sitemap&quot; view modes and for the &quot;pdf&quot; view:</p><pre class="wordwrap"><span class="line">CachedViewModes=full;sitemap;pdf</span>
+</pre><p>However, note that the &quot;pdf&quot; view of the content module is deprecated.</p><p>If you need to disable view caching for a specific page, add the following line in the beginning of the template that is used:</p><pre class="wordwrap"><span class="line">{set-block scope=root variable=cache_ttl}0{/set-block}</span>
+</pre><p>This will set the global variable &quot;cache_ttl&quot; to zero for the current template. The &quot;cache_ttl&quot; variable contains the TTL (Time To Live) value as seconds. A value of 0 means that the result should always be updated. Anyway, a cache file will be generated on the first access, but for content validation purposes only. This cache file will not be updated anymore, and will not be used to load content into the block, since the content (if cache_ttl is set to 0) will always be loaded dynamically. That means this cache block will always expire.</p><p>
+On the other hand, a value of -1 means that the view cache should never expire. A cache file will be generated on the first access, and it will be always used to load content to the block. No dynamic information will be fetched on this case, since the &quot;time to live&quot; of the cache block will be infinite.<br />See a usage example below:</p><pre class="wordwrap"><span class="line">{set-block scope=root variable=cache_ttl}-1{/set-block}</span>
+</pre><a name="eztoc86271_1" id="eztoc86271_1"></a><h2>Roles</h2><p>The cache files are different for dissimilar role combinations. This means that the templates can have conditions based on <a href="../../Concepts-and-basics/Access-control.html" target="_self">roles</a> even when view caching is on. <a name="user_preferences"></a>
+</p><a name="eztoc86271_2" id="eztoc86271_2"></a><h2>User preferences</h2><p>The following text describes handling of <a href="../../Reference/Template-operators/Data-and-information-extraction/ezpreference.html" target="_self">user preferences</a> and the way the preferences of the current user are taken into account when generating content view cache.</p><p>For example, whenever the user performs the following actions using the administration interface:</p>
+<ul>
+<li><div>&nbsp;Enabling or disabling the bookmark menu (+/-) </div></li><li><div>&nbsp;Adjusting the horizontal size of the content structure menu (small / medium / large) </div></li><li><div>&nbsp;Choosing the view mode (list / thumbnail / detailed) and &quot;items per page&quot; limitation (10 / 25 / 50) for the sub items window </div></li><li><div>&nbsp;Changing the visibility of different windows (Preview / Details / Translations / Locations / Relations) </div></li>
+</ul>
+<p>...or sets any other user preference, the system executes the &quot;<a href="../../Reference/Modules/user/Views/preferences.html" target="_self">preferences</a>&quot; view of the &quot;<a href="../../Reference/Modules/user.html" target="_self">user</a>&quot; module in order to save the selected value. The information about which preference has been changed is passed using view parameters:</p><pre class="wordwrap"><span class="line">.../user/preferences/set/&lt;name_of_preference&gt;/&lt;value&gt;</span>
+</pre><p>for example</p><pre class="wordwrap"><span class="line">http://my.com/myadmin/user/preferences/set/admin_left_menu_width/medium</span>
+</pre><p>After saving the selected value, the &quot;preference&quot; view of the &quot;user&quot; module will redirect the user back to the last accessed page.</p><p>If your templates of cached view modes have conditions based on user preferences, you should specify which preferences that are used together with the different view modes - this can be done using the <a href="../../Reference/Configuration-files/site.ini/ContentSettings/CachedViewPreferences.html" target="_self">CachedViewPreferences</a> setting located under the &quot;[ContentSettings]&quot; section of the &quot;site.ini.append.php&quot; configuration file.</p><a name="eztoc86271_2_1" id="eztoc86271_2_1"></a><h3>Example</h3><p>Let's say that you are using prices in several currencies for your products and the &quot;node/view/full.tpl&quot; template is overridden for products in order to display prices in the <a href="../Multi-currency/Preferred-currency.html" target="_self">user's preferred currency</a>. If view caching is enabled for the &quot;full&quot; view mode, the system will store view cache files for the product view pages. If the cache is generated regardless of the preferred currency, when another preferred currency is chosen, the same product page that is being viewed will be returned (in other words, it will not change).</p><p>In order to avoid this, you need to specify the &quot;user_preferred_currency&quot; preference in the &quot;CachedViewPreferences[]&quot; array using &quot;full&quot; as an array key so that the cache will be stored for each possible preferred currency on your site. To do this, open the &quot;site.ini.append.php&quot; configuration file located in the &quot;settings/siteaccess/example&quot; directory (replace &quot;example&quot; with the actual name of the siteaccess) and edit it. If the &quot;[ContentSettings]&quot; section of the configuration file already contains something like</p><pre class="wordwrap"><span class="line">CachedViewPreferences[full]=&lt;list_of_user_preferences&gt;</span>
+</pre><p>then you will have to append a semicolon and &quot;user_preferred_currency&quot; at the end of the line, for example:</p><pre class="wordwrap"><span class="line">CachedViewPreferences[full]=admin_navigation_content=0;</span>
+<span class="line">admin_navigation_details=0;&lt;...&gt;;admin_bookmarkmenu=1;</span>
+<span class="line">admin_left_menu_width=13;user_preferred_currency=''</span>
+</pre><p>Note that this configuration line tends to be very long. It is simplified in the example above (a lot of settings were replaced with &lt;...&gt; in order to keep things short).</p><p>If the &quot;[ContentSettings]&quot; section does not contain a line that starts from &quot;CachedViewPreferences[full]&quot;, create it:</p><pre class="wordwrap"><span class="line">CachedViewPreferences[full]=user_preferred_currency=''</span>
+</pre><a name="eztoc86271_3" id="eztoc86271_3"></a><h2>Related siteaccesses</h2><p>The <a href="../../Reference/Configuration-files/site.ini/SiteAccessSettings/RelatedSiteAccessList.html" target="_self">RelatedSiteAccessList</a> setting located under the &quot;[SiteAccessSettings]&quot; section of the &quot;site.ini.append.php&quot; configuration file controls which other siteaccesses the view cache should be cleared for when it is cleared for the current siteaccess. (This requires the <a href="../../Reference/Configuration-files/site.ini/FileSettings/VarDir.html" target="_self">VarDir</a> configuration setting to be the same for all related siteaccesses.) If the RelatedSiteAccessList setting is not specified, the cache subsystem will use the <a href="../../Reference/Configuration-files/site.ini/SiteAccessSettings/AvailableSiteAccessList.html" target="_self">AvailableSiteAccessList</a> setting instead.</p><p>Note that the <a href="../../Reference/Configuration-files/content.ini/VersionView/AvailableSiteDesignList.html" target="_self">AvailableSiteDesignList</a> setting located under the &quot;[VersionView]&quot; section of the &quot;content.ini&quot; configuration file is no longer (from eZ Publish 3.8) used by the cache system. In 3.7 and earlier versions, it could contain an array of designs that would be touched when the caches were cleared.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/View-caching/Configuring-the-view-cache by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:22:38 GMT -->
+</html>

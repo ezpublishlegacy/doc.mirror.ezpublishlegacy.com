@@ -1,0 +1,130 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/Template-system by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:36:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                  
+    <title>Template system / Developing eZ Publish extensions / Tutorials / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Template system</h1>
+</div>
+
+<p>Because the echo command in the PHP script &quot;list.php&quot; does not meet our needs, we want to use our own template. Therefore we put the file &quot;list.tpl&quot; into the folder jacextension/design/standard/templates/modul1/.</p><p>For eZ Publish to find the template, we have to declare &quot;jacextension&quot; as a design extension. To do this we create the configuration file &quot;design.ini.append.php&quot; in the folder jacextension/settings/ (see Listing 7).</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /* #?ini charset=&quot;utf-8&quot;?</span>
+<span class="line"># transmit to eZ, to search for designs in jacextension</span>
+<span class="line">[ExtensionSettings]</span>
+<span class="line">DesignExtensions[]=jacextension</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /* #?ini charset=&quot;utf-8&quot;? \r\n# transmit to eZ, to search for designs in jacextension \r\n[ExtensionSettings] \r\nDesignExtensions[]=jacextension\r\n*/ ?&gt;' ); return false;" /></p>
+<![endif]--><p><i>Listing 7. Declare jacextension as a design extension</i></p><p>In &quot;list.php&quot; we declare a variable $dataArray (array with strings). The values of this array we want to use later in the &quot;list.tpl&quot; template. To use the &quot;list.tpl&quot; template, we have to initialize the template object:</p><pre class="wordwrap"><span class="line">$tpl = eZTemplate::factory(); //</span>
+</pre><p><i>Notation from eZ Publish 4.3. Before this version, use templateInit() function</i></p><p>Then we put the parameter View Array ($viewParameters) and the Array with the example files ($dataArray) as template variables {$view_parameters}, like {$data_array}, with the instruction:</p><pre class="wordwrap"><span class="line">$tpl-&gt;setVariable( 'view_parameters', $viewParameters );</span>
+<span class="line">$tpl-&gt;setVariable( 'data_array', $dataArray );</span>
+</pre><p>Next we do a find / replace for the template &quot;list.tpl&quot; with the defined variables (in our example only $view_parameters and $dataArray) and save the result in $Result['content'].</p><p>By default the main &quot;pagelayout.tpl&quot; template of eZ Publish shows the result with the variable {$module_result.content}. Finally we put Modul1/list in the navigation path (the &quot;breadcrumbs&quot;) that are displayed in the browser. In our example this is done by clicking in the first part of the route, which links to modul1/list (see listing 8).</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">&nbsp;</span>
+<span class="line">// Example array with strings</span>
+<span class="line">$dataArray = array( 'Axel','Volker','Dirk','Jan','Felix' );</span>
+<span class="line">&nbsp;</span>
+<span class="line">...</span>
+<span class="line">// initialize Templateobject</span>
+<span class="line">$tpl = eZTemplate::factory();</span>
+<span class="line">// create view array parameter to put in the template</span>
+<span class="line">$viewParameters = array( 'param_one' =&gt; $valueParamOne,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'param_two' =&gt; $valueParamTwo,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'unordered_param3' =&gt; $valueParam3,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'unordered_param4' =&gt; $valueParam4 );</span>
+<span class="line">// transport the View parameter Array to the template</span>
+<span class="line">$tpl-&gt;setVariable( 'view_parameters', $viewParameters );</span>
+<span class="line">&nbsp;</span>
+<span class="line">// create example Array in the template =&gt; {$data_array}</span>
+<span class="line">$tpl-&gt;setVariable( 'data_array', $dataArray );</span>
+<span class="line">// ...</span>
+<span class="line">// use find/replace (parsing) in the template and save the result for $module_result.content</span>
+<span class="line">$Result['content'] = $tpl-&gt;fetch( 'design:modul1/list.tpl' );</span>
+<span class="line">//...</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\n\r\n// Example array with strings\r\n$dataArray = array( \'Axel\',\'Volker\',\'Dirk\',\'Jan\',\'Felix\' );\r\n\r\n...\r\n// initialize Templateobject\r\n$tpl = eZTemplate::factory();\r\n// create view array parameter to put in the template\r\n$viewParameters = array( \'param_one\' =&gt; $valueParamOne,\r\n                           \'param_two\' =&gt; $valueParamTwo,\r\n                           \'unordered_param3\' =&gt; $valueParam3,\r\n                           \'unordered_param4\' =&gt; $valueParam4 );\r\n// transport the View parameter Array to the template\r\n$tpl-&gt;setVariable( \'view_parameters\', $viewParameters );\r\n\r\n// create example Array in the template =&gt; {$data_array}\r\n$tpl-&gt;setVariable( \'data_array\', $dataArray );\r\n// ...\r\n// use find/replace (parsing) in the template and save the result for $module_result.content\r\n$Result[\'content\'] = $tpl-&gt;fetch( \'design:modul1/list.tpl\' );\r\n//...\r\n?&gt;\r\n' ); return false;" /></p>
+<![endif]--><p><i>Listing 8. modul1/list.php – extending Listing 3</i></p><p>Now we have access to the defined variables in the template &quot;list.tpl&quot; with {$view_parameters} and {$data_array}. We show the transmitted view parameters with {$view_parameters|attribute(show)}. Next we use the template operator is_set($data_array) to see if the variable $data_array exists and send a list with the data or a default message (see listing 9).</p><pre class="wordwrap copytoclipboard"><span class="line">{* list.tpl – Template for Modulview .../modul1/list/ParamOne/ParamTwo</span>
+<span class="line">Check if the variable $data_array exists</span>
+<span class="line">- yes: show data as list</span>
+<span class="line">- no: show message</span>
+<span class="line">*}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{*Show Array $view_parameters: *}</span>
+<span class="line">{$view_parameters|attribute('show')}&lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;h1&gt;Template: modul1/list.tpl&lt;/h1&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{if is_set($data_array)}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{foreach $data_array as $index =&gt; $item}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;{$index}: {$item}&lt;/li&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{/foreach}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Attention: no existing data!!&lt;/p&gt;</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{* list.tpl – Template for Modulview .../modul1/list/ParamOne/ParamTwo \r\nCheck if the variable $data_array exists \r\n- yes: show data as list \r\n- no: show message \r\n*}\r\n\r\n{*Show Array $view_parameters: *}\r\n{$view_parameters|attribute(\'show\')}&lt;br /&gt;\r\n\r\n&lt;h1&gt;Template: modul1/list.tpl&lt;/h1&gt;\r\n\r\n{if is_set($data_array)} \r\n    &lt;ul&gt; \r\n    {foreach $data_array as $index =&gt; $item} \r\n        &lt;li&gt;{$index}: {$item}&lt;/li&gt; \r\n    {/foreach} \r\n    &lt;/ul&gt; \r\n{else} \r\n    &lt;p&gt;Attention: no existing data!!&lt;/p&gt; \r\n{/if}\r\n' ); return false;" /></p>
+<![endif]--><p><i>Listing 9. eZ Template design modul1/list.tpl (e.g. extension/jacextension/design/&lt;your_design&gt;templates/modul1/list.tpl</i></p><p>If we now open our view with http://localhost/ez/index.php/plain_site/modul1/list/table/5, nothing much will happen. It only appears in the route Modul1/list. Why? We don't know yet.</p><p>To investigate the error, we activate eZ Debug, including the templates currently in use. We deactivate compiling and caching of templates to be sure that all changes in the templates will be shown. To do this we extend the global &lt;ezroot&gt;/settings/override/site.ini.append.php with the following entries (see listing 10).</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /* #?ini charset=&quot;utf-8&quot;?</span>
+<span class="line">&nbsp;</span>
+<span class="line">[DebugSettings]</span>
+<span class="line">Debug=inline</span>
+<span class="line">DebugOutput=enabled</span>
+<span class="line">DebugRedirection=disabled</span>
+<span class="line">&nbsp;</span>
+<span class="line">[TemplateSettings]</span>
+<span class="line">ShowXHTMLCode=disabled</span>
+<span class="line">ShowUsedTemplates=enabled</span>
+<span class="line">TemplateCompile=disabled</span>
+<span class="line">TemplateCache=disabled</span>
+<span class="line"># Optional, will save you from most cache clearings during development</span>
+<span class="line"># as modified time on tempaltes are always checked during execution</span>
+<span class="line">DevelopmentMode=enabled</span>
+<span class="line">*/?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /* #?ini charset=&quot;utf-8&quot;? \r\n\r\n[DebugSettings]\r\nDebug=inline\r\nDebugOutput=enabled\r\nDebugRedirection=disabled\r\n\r\n[TemplateSettings]\r\nShowXHTMLCode=disabled\r\nShowUsedTemplates=enabled\r\nTemplateCompile=disabled\r\nTemplateCache=disabled\r\n# Optional, will save you from most cache clearings during development\r\n# as modified time on tempaltes are always checked during execution\r\nDevelopmentMode=enabled\r\n*/?&gt;\r\n' ); return false;" /></p>
+<![endif]--><p><i>Listing 10. Activate Debug view with template list over global configuration file:  ezroot/settings/override/site.ini.append.php</i></p><p>We now open http://localhost/ez/index.php/plain_site/modul1/list/table/5 again. It generates an error message in the Debug view: 'No template could be loaded for &quot;modul1/list.tpl&quot; using resource &quot;design&quot;'.</p><p>It seems that the file &quot;list.tpl&quot; was not found. In this case it is useful to clear the cache of eZ Publish, as eZ has cached the list of the existing templates. So we load the URL http://localhost/ez/index.php/plain_site_admin/setup/cache and we click on “empty all caches”. Now the template list.tpl should appear with the table list, our view parameters and our example datalist. As well it should appear as modul/list.tpl in the Debug view “Templates used to render the page”.</p><p>In our example the viewparameters has the following values: $view_parameters.param_one='table' and $view_parameters.param_two='5'. The values of the viewparameters can be easily used to perform actions in PHP script list.php or in the template list.tpl, for example to display the ID or fetch some extended information to the given ID.</p><p><b>Hint:</b> the template variable $view_parameters is also available in the kernel module content of eZ and therefore in most templates, such as node/view/full.tpl.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/Template-system by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:36:04 GMT -->
+</html>

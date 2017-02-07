@@ -1,0 +1,100 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/WebDAV/Setting-it-up/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:15:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Setting it up / WebDAV / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Setting it up</h1>
+</div>
+
+<p>This section describes how eZ Publish can be configured in order to function as a WebDAV server. Please note that the DNS and the web server also needs to be configured.</p><a name="eztoc132323_1" id="eztoc132323_1"></a><h2>Step 1: Enable the WebDAV server</h2><p>The master WebDAV switch must be turned on. Create a global configuration override for &quot;webdav.ini&quot; and make sure that it contains the following lines:</p><pre class="wordwrap"><span class="line">[GeneralSettings]</span>
+<span class="line">EnableWebDAV=true</span>
+</pre><a name="eztoc132323_2" id="eztoc132323_2"></a><h2>Step 2: Add the desired siteaccesses</h2><p>In order to allow WebDAV access for a specific siteaccess, the name of the siteaccess must be specified in the &quot;SiteList[]&quot; array under &quot;[SiteSettings]&quot; in a configuration override for &quot;site.ini&quot;. Make sure that the global configuration override for &quot;site.ini&quot; contains the necessary lines. The following example shows how WebDAV can be opened up for a siteaccess called &quot;plain_user&quot; and another one called &quot;example&quot;.</p><pre class="wordwrap copytoclipboard"><span class="line">[SiteSettings]</span>
+<span class="line">SiteList[]</span>
+<span class="line">SiteList[]=plain_user</span>
+<span class="line">SiteList[]=example</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[SiteSettings]\r\nSiteList[]\r\nSiteList[]=plain_user\r\nSiteList[]=example' ); return false;" /></p>
+<![endif]--><a name="eztoc132323_3" id="eztoc132323_3"></a><h2>Step 3: Clear all caches</h2><p>The eZ Publish part of the configuration is done. Clear all caches in order to make sure that the system uses the updated version of the configuration.</p><a name="eztoc132323_4" id="eztoc132323_4"></a><h2>Step 4: Setup a DNS entry</h2><p>Set up a DNS entry (for example a subdomain) that will be used to access the WebDAV server. The entry must point to the IP address of the web server. For example, if you're using &quot;www.example.com&quot; to access the web pages, you could set up &quot;webdav.example.com&quot; for WebDAV.</p><a name="eztoc132323_5" id="eztoc132323_5"></a><h2>Step 5: Configure the web server</h2><p>There is a file called &quot;webdav.php&quot; in the root of the eZ Publish directory. This file provides the actual WebDAV interface. The web server must automatically execute this file whenever a WebDAV client sends a command to the server. The following lines show an example of how this can be done in the configuration file of the Apache web server.</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;Virtualhost 128.39.140.28&gt;</span>
+<span class="line">&nbsp;&nbsp;&lt;Directory /path/to/ezpublish&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Options FollowSymLinks Indexes ExecCGI</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;AllowOverride None</span>
+<span class="line">&nbsp;&nbsp;&lt;/Directory&gt;</span>
+<span class="line">&nbsp;&nbsp;DocumentRoot /path/to/ezpublish</span>
+<span class="line">&nbsp;&nbsp;RewriteEngine On</span>
+<span class="line">&nbsp;&nbsp;RewriteRule . /webdav.php</span>
+<span class="line">&nbsp;ServerAdmin admin@example.com</span>
+<span class="line">&nbsp;ServerName webdav.example.com</span>
+<span class="line">&lt;/VirtualHost&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;Virtualhost 128.39.140.28&gt;\r\n  &lt;Directory /path/to/ezpublish&gt;\r\n    Options FollowSymLinks Indexes ExecCGI\r\n    AllowOverride None\r\n  &lt;/Directory&gt;\r\n  DocumentRoot /path/to/ezpublish\r\n  RewriteEngine On\r\n  RewriteRule . /webdav.php\r\n ServerAdmin admin@example.com\r\n ServerName webdav.example.com\r\n&lt;/VirtualHost&gt;' ); return false;" /></p>
+<![endif]--><p>Note: make sure that you have a &quot;NamedVirtualHost&quot; line before the declaratoin of the virtual hosts.</p><a name="eztoc132323_6" id="eztoc132323_6"></a><h2>Step 6: Test</h2><p>Launch a WebDAV compatible client / application and attempt to connect to the server.</p><a name="eztoc132323_6_1" id="eztoc132323_6_1"></a><h3>Internet Explorer</h3><p>Recent versions of Microsoft's Internet Explorer (6.0.2800.1106 or later) contain a built-in WebDAV client. The target address must be opened as a web folder.</p>
+<ol>
+<li><div> Start Internet Explorer. </div></li><li><div> Access the &quot;File&quot; menu and select &quot;Open&quot;, a dialog should appear. </div></li><li><div><p>Type in the address of the WebDAV server along with a hash (&quot;#&quot;) character at the end, like this: http://webdav.example.com/#</p>
+<div class="object-center">        <img src="../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/features/webdav_ie_open_dialog/30053-3-eng-GB/webdav_ie_open_dialog_doc.png" alt="WebDAV - IE open dialog" />
+ <p>WebDAV - IE open dialog</p>
+
+
+
+
+
+
+
+</div></div></li><li><div> Make sure that the &quot;Open as web folder&quot; check-box is checked. </div></li><li><div> Click OK. You should be able to see the available siteaccesses as directories. </div></li>
+</ol>
+<a name="eztoc132323_6_2" id="eztoc132323_6_2"></a><h3>KDE/Konqueror</h3><p>Make sure you have a recent version of Konqueror (3.1.3 or later). Open up a Konqueror window and attempt to browse the WebDAV server by accessing it using a URL that resembles the following example: &quot;webdav://webdav.example.com/&quot;.</p>
+<div class="object-center">        <img src="../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/features/webdav_content_node_tree/94351-3-eng-GB/webdav_content_node_tree_doc.png" alt="WebDAV - Content node tree" />
+ <p>WebDAV - Content node tree</p>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/WebDAV/Setting-it-up/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:15:00 GMT -->
+</html>

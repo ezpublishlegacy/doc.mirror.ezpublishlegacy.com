@@ -1,0 +1,159 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Features/Packages/Installing-packages by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:15:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Installing packages / Packages / Features / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installing packages</h1>
+</div>
+
+ <p>It is possible to install packages that are located under internal repositories. Note that this is not true for site packages and design packages. When you install a package, the system will create content classes and content objects, apply configuration settings and so on. Please note that from eZ publish 3.8, information about installed packages is stored in the &quot;ezpackage&quot; table within the database.</p> <p>The following subsections explain how to install packages of different types.</p>  <a name="eztoc31633_1" id="eztoc31633_1"></a><h2>Content class packages</h2> <p>The following example demonstrates how to install a content class package. </p>
+<ol>
+ <li><div> Go to &quot;Setup - Packages&quot; in your administration interface, select the internal repository containing the package you wish to install and click the &quot;Change repository&quot; button. Find the desired package and click on its name. The system will display the package summary as shown in the following screenshot. 
+<div class="object-center linked">            <a href="../../../../../layout/set/full/eZ-Publish/Technical-manual/3.8/Images/Features/Packages/install_ccpackage_step0.html" target="_self"><img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/features/packages/install_ccpackage_step0/31711-1-eng-GB/install_ccpackage_step0_doc.png" alt="" /></a>
+ <p>The content class package summary.</p>
+
+
+
+
+
+
+
+</div>Click the &quot;Install&quot; button. </div></li> <li><div> The system starts by showing a list of items that will be created during the package installation (look at the next screenshot). 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/features/packages/install_ccpackage_step1/31714-2-eng-GB/install_ccpackage_step1_doc.png" alt="" />
+ <p>The content class package installation wizard, step 1.</p>
+
+
+
+
+
+
+
+</div>Read this information carefully and click the &quot;Install package&quot; button to continue. Use the &quot;Skip installation&quot; button to abort the operation. </div></li> <li><div> If some of the classes being installed already exist, the system will ask the user how this installation conflict should be handled (as shown in the screenshot below). 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/features/packages/install_ccpackage_step2/31717-2-eng-GB/install_ccpackage_step2_doc.png" alt="" />
+ <p>The content class package installation wizard, step 2.</p>
+
+
+
+
+
+
+
+</div>
+If you wish to replace the existing class with the new one, note that all the content objects of the existing class will be removed as well. Use this option only if you know what you're doing. The remaining options make it possible to skip installing the class or create a new one (in both cases, the existing class and its objects will stay untouched).<br />After clicking the &quot;Continue&quot; button, the system will install the package and display a summary. </div></li> 
+</ol>
+ <p> <a name="content_object_package"></a>
+ </p>   <a name="eztoc31633_2" id="eztoc31633_2"></a><h2>Content object packages</h2> <p>The following example demonstrates how to install a content object package. (Since handling the class installation conflicts is already described in the previous subsection, let's suppose that no class definitions are included in the package that is being installed.) </p>
+<ol>
+ <li><div> Go to &quot;Setup - Packages&quot; in your administration interface, select the internal repository containing the package you wish to install and click the &quot;Change repository&quot; button. Find the package you wish to install, click on its name and then click the &quot;Install&quot; button. </div></li> <li><div> The system will display a list of items that will be created during the package installation (look at the next screenshot). 
+<div class="object-center linked">            <a href="../../../../../layout/set/full/eZ-Publish/Technical-manual/3.8/Images/Features/Packages/install_copackage_step1.html" target="_self"><img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/features/packages/install_copackage_step1/31720-2-eng-GB/install_copackage_step1_doc.png" alt="" /></a>
+ <p>The content object package installation wizard, step 1.</p>
+
+
+
+
+
+
+
+</div>Read this information carefully click the &quot;Install package&quot; button. Use the &quot;Skip installation&quot; to abort the operation. </div></li> <li><div> If the package contains not only actual content objects but also templates related to these objects, the system will ask which siteaccess these templates should be added to (look at the next screenshot). 
+<div class="object-center linked">            <a href="../../../../../layout/set/full/eZ-Publish/Technical-manual/3.8/Images/Features/Packages/install_copackage_step2.html" target="_self"><img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/features/packages/install_copackage_step2/31723-1-eng-GB/install_copackage_step2_doc.png" alt="" /></a>
+ <p>The content object package installation wizard, step 2.</p>
+
+
+
+
+
+
+
+</div>Make your choice and click the &quot;Next&quot; button. </div></li> <li><div> The next dialog reveals where the installed objects will be located and allow to choose another location if needed. 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/features/packages/install_copackage_step3/31726-1-eng-GB/install_copackage_step3_doc.png" alt="" />
+ <p>The content object package installation wizard, step 3.</p>
+
+
+
+
+
+
+
+</div>Choose the desired location and click the &quot;Continue&quot; button. </div></li> <li><div> If some of the objects being installed already exist (i.e. there is another object with the same <a href="../../Reference/Objects/ezcontentobject.html" target="_self">remote_id</a>), the system will ask how this installation conflict should be handled (see the screenshot below). 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/features/packages/install_copackage_step4/31729-1-eng-GB/install_copackage_step4_doc.png" alt="" />
+ <p>The content object package installation wizard, step 4.</p>
+
+
+
+
+
+
+
+</div>After clicking the &quot;Continue&quot; button, the system will install the package and display a summary. </div></li> 
+</ol>
+   <a name="eztoc31633_3" id="eztoc31633_3"></a><h2>Extension packages</h2> <p>The following example demonstrates how to install an extension package. </p>
+<ol>
+ <li><div> Go to &quot;Setup - Packages&quot; in your administration interface, select the internal repository containing the package you wish to install and click the &quot;Change repository&quot; button. Find the package you wish to install, click on its name and then click the &quot;Install&quot; button. </div></li> <li><div> The system will show a list of items that will be created during the package installation (look at the next screenshot). 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/features/packages/install_epackage_step1/31732-1-eng-GB/install_epackage_step1_doc.png" alt="" />
+ <p>The extension package installation wizard, step 1.</p>
+
+
+
+
+
+
+
+</div>Click the &quot;Install package&quot; button to continue. Use the &quot;Skip installation&quot; button to abort the operation. </div></li> <li><div> If some of the items being installed already exist, the system will ask how this installation conflict should be handled as shown in the screenshot below. 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_8/images/features/packages/install_epackage_step2/31735-1-eng-GB/install_epackage_step2_doc.png" alt="" />
+ <p>The extension package installation wizard, step 2.</p>
+
+
+
+
+
+
+
+</div>After clicking the &quot;Continue&quot; button, the system will install the package and display a summary. </div></li> 
+</ol>
+ 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Features/Packages/Installing-packages by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:15:20 GMT -->
+</html>

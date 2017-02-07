@@ -1,0 +1,126 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.7/from-3.5.2-to-3.7.0 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:35:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>from 3.5.2 to 3.7.0 / Upgrading to 3.7 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>from 3.5.2 to 3.7.0</h1>
+</div>
+
+ <p>This section describes how to upgrade your existing eZ Publish 3.5.2 installation to version 3.7.0. If you are upgrading from a version prior to eZ Publish 3.5.2, you need to first <a href="../Upgrading-to-3.5/from-3.5.x-to-3.5.html" target="_self">upgrade to 3.5.2</a> before you can upgrade to 3.7.0.</p> <p>Make sure that you have a working <a href="../../Upgrading.html#backup" target="_self">backup</a> of the site before you do the actual upgrade. The upgrade procedure consists of the following steps:</p> 
+<ol>
+ <li><div> Upgrading the distribution files to 3.7.0 </div></li> <li><div> Upgrading the database to 3.7.0 </div></li> <li><div> Running the 3.6.0 upgrade scripts </div></li> <li><div> Updating the system configuration </div></li> <li><div> Clearing the caches </div></li> 
+</ol>
+  <a name="eztoc16262_1" id="eztoc16262_1"></a><h2>Step 1: Upgrading the distribution files</h2> <p>The easiest way to upgrade the distribution files is to unpack eZ Publish 3.7.0 to a directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p> 
+<ul>
+ <li><div> design/example </div></li> <li><div> design/example_admin </div></li> <li><div> var </div></li> <li><div> settings/siteaccess </div></li> <li><div> settings/override </div></li> 
+</ul>
+ <p>Replace &quot;example&quot; and &quot;example_admin&quot; with actual names used by your siteaccesses.</p>  <a name="eztoc16262_1_1" id="eztoc16262_1_1"></a><h3>Custom extensions</h3> <p>If you are using custom extensions then the subdirectories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that come with eZ Publish (for example the &quot;PayPal&quot; extension).</p>    <a name="eztoc16262_2" id="eztoc16262_2"></a><h2>Step 2: Upgrading the database</h2> <p>The following text describes how a 3.5.2 database can be upgraded to 3.7.0.</p>  <a name="eztoc16262_2_2" id="eztoc16262_2_2"></a><h3>MySQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.7.0 directory. </div></li> <li><div> Run the first database upgrade script: <pre class="wordwrap"><span class="line">mysql -u &lt;username&gt; -p&lt;password&gt; &lt;database&gt; &lt; update/database/mysql/3.6/dbupdate-3.5.2-to-3.6.0.sql</span>
+</pre>  </div></li> <li><div> Run the second database upgrade script: <pre class="wordwrap"><span class="line">mysql -u &lt;username&gt; -p&lt;password&gt; &lt;database&gt; &lt; update/database/mysql/3.7/dbupdate-3.6.0-to-3.7.0.sql</span>
+</pre>  </div></li> 
+</ol>
+<p>
+Note that the CREATE TABLE statements in the database upgrade scripts do not specify which storage engine to use (no ENGINE or TYPE option), and thus the default storage engine will be used. Normally, it is MyISAM (starting from MySQL v.3.23). If you are using InnoDB, make sure the default storage engine is set to InnoDB before you run the database upgrade script (refer to <a href="http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html" target="_blank">MySQL documentation</a> for information about how to set the default engine). If you were not able to change the MySQL configuration on your server, and the upgrade left you with a mix of table types, you can use the &quot;bin/php/ezconvertmysqltabletype.php&quot; script for database conversion. It is also possible to convert the newly created tables to InnoDB using ALTER TABLE statements as shown in the following example:<br /></p><pre class="wordwrap"><span class="line">ALTER TABLE table_name1 TYPE = innodb;</span>
+<span class="line">ALTER TABLE table_name2 TYPE = innodb;</span>
+<span class="line">...</span>
+</pre><p>
+ <br />Replace &quot;table_name1&quot;, &quot;table_name2&quot; with the actual names of the tables that need to be converted.</p>   <a name="eztoc16262_2_3" id="eztoc16262_2_3"></a><h3>PostgreSQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.7.0 directory. </div></li> <li><div> Run the first database upgrade script: <pre class="wordwrap"><span class="line">psql -d &lt;database&gt; -U &lt;dbowner&gt; &lt; update/database/postgresql/3.6/dbupdate-3.5.2-to-3.6.0.sql</span>
+</pre>  </div></li> <li><div> Run the second database upgrade script: <pre class="wordwrap"><span class="line">psql -d &lt;database&gt; -U &lt;dbowner&gt; &lt; update/database/postgresql/3.7/dbupdate-3.6.0-to-3.7.0.sql</span>
+</pre>  </div></li> 
+</ol>
+    <a name="eztoc16262_3" id="eztoc16262_3"></a><h2>Step 3: Running the 3.6.0 upgrade scripts</h2> <p>The 3.6.0 version of eZ Publish introduced a couple of new features that are used in 3.7 version also. In order to make sure that your site is compatible with these features, you'll have to run a couple of upgrade scripts.</p>  <a name="eztoc16262_3_4" id="eztoc16262_3_4"></a><h3>Internal linking</h3> <p>In order to be compatible with the <a href="http://ez.no/download/ez_publish/changelogs/ez_publish_3_6/new_features/changes_in_xml_tags" target="_self">new internal linking feature</a>, you will have to run the &quot;convertxmllinks.php&quot; script. This script should be run for all siteaccesses that use different databases. If you only have a public and an administration siteaccess (which is the most typical/usual case), then you will only need to run the script for one of the siteaccesses.</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.7.0 directory. </div></li> <li><div> 
+Run the script (replace &lt;siteaccess&gt; with the name of your siteaccess(es)):<br /> <pre class="wordwrap"><span class="line">php update/common/scripts/convertxmllinks.php -s &lt;siteaccess&gt;</span>
+</pre>  </div></li> 
+</ol>
+   <a name="eztoc16262_3_5" id="eztoc16262_3_5"></a><h3>Advanced related objects</h3> <p>In order to be compatible with the <a href="http://ez.no/download/ez_publish/changelogs/ez_publish_3_6/new_features/advanced_related_objects" target="_self">new advanced related objects feature</a>, you will have to run the &quot;updaterelatedobjectslinks.php&quot; script. This script should be run for all siteaccesses that use different databases. If you only have a public and an administration siteaccess (which is the most typical/usual case), then you will only need to run the script for one of the siteaccesses.</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.7.0 directory. </div></li> <li><div> 
+Run the script (replace &lt;siteaccess&gt; with the name of your siteaccess(es)):<br /> <pre class="wordwrap"><span class="line">php update/common/scripts/updaterelatedobjectslinks.php -s &lt;siteaccess&gt;</span>
+</pre>  </div></li> 
+</ol>
+    <a name="eztoc16262_4" id="eztoc16262_4"></a><h2>Step 4: Updating the system configuration</h2>  <a name="eztoc16262_4_6" id="eztoc16262_4_6"></a><h3>Administration interface toolbar changes</h3> <p>The right section of the administration interface has been slightly changed in 3.6.0. It now uses the toolbar system and features a couple of new toolbars for developers (clear cache, debug control, etc.). In order to make it work, you will have to add the following settings in &quot;toolbar.ini.append.php&quot; for the siteaccesses that use the admin design:</p> <pre class="wordwrap copytoclipboard"><span class="line">[Toolbar]</span>
+<span class="line">AvailableToolBarArray[]=admin_right</span>
+<span class="line">AvailableToolBarArray[]=admin_developer</span>
+<span class="line">&nbsp;</span>
+<span class="line">[Tool]</span>
+<span class="line">AvailableToolArray[]=admin_current_user</span>
+<span class="line">AvailableToolArray[]=admin_bookmarks</span>
+<span class="line">AvailableToolArray[]=admin_clear_cache</span>
+<span class="line">AvailableToolArray[]=admin_quick_settings</span>
+<span class="line">&nbsp;</span>
+<span class="line">[Toolbar_admin_right]</span>
+<span class="line">Tool[]</span>
+<span class="line">Tool[]=admin_current_user</span>
+<span class="line">Tool[]=admin_bookmarks</span>
+<span class="line">&nbsp;</span>
+<span class="line">[Toolbar_admin_developer]</span>
+<span class="line">Tool[]</span>
+<span class="line">Tool[]=admin_clear_cache</span>
+<span class="line">Tool[]=admin_quick_settings</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[Toolbar]\r\nAvailableToolBarArray[]=admin_right\r\nAvailableToolBarArray[]=admin_developer\r\n\r\n[Tool]\r\nAvailableToolArray[]=admin_current_user\r\nAvailableToolArray[]=admin_bookmarks\r\nAvailableToolArray[]=admin_clear_cache\r\nAvailableToolArray[]=admin_quick_settings\r\n\r\n[Toolbar_admin_right]\r\nTool[]\r\nTool[]=admin_current_user\r\nTool[]=admin_bookmarks\r\n\r\n[Toolbar_admin_developer]\r\nTool[]\r\nTool[]=admin_clear_cache\r\nTool[]=admin_quick_settings' ); return false;" /></p>
+<![endif]-->   <a name="eztoc16262_4_7" id="eztoc16262_4_7"></a><h3>Visibility of hidden nodes</h3> <p>In eZ Publish 3.6.0, the default value of the &quot;<a href="../../Technical-manual/3.8/Reference/Configuration-files/site.ini/SiteAccessSettings/ShowHiddenNodes.html" target="_self">ShowHiddenNodes</a>&quot; configuration directive has become &quot;false&quot;. This means that hidden nodes will not be available on any siteaccess. It is recommended to add the following line to the &quot;[SiteAccessSettings]&quot; section of the &quot;settings/siteaccess/example_admin/site.ini.append.php&quot; configuration file (replace &quot;example_admin&quot; by the actual name of your admin siteaccess): </p><pre class="wordwrap"><span class="line">ShowHiddenNodes=true</span>
+</pre><p>This will instruct the system to show hidden nodes in the administration interface.</p>   <a name="eztoc16262_4_8" id="eztoc16262_4_8"></a><h3>Enabling database transaction support (optional)</h3> <p>eZ Publish 3.6.0 introduced support for database transactions. This feature makes eZ Publish less vulnerable for database errors and inconsistencies due to aborted requests. It is highly recommended to make use of this feature. Transaction support is available for MySQL from version 4.1 and above and for all PostgreSQL and Oracle versions. MySQL users must first convert the database (see below).</p>  <a name="eztoc16262_4_8_1" id="eztoc16262_4_8_1"></a><h4>MySQL table conversion</h4> <p>MySQL users have to perform an extra step when enabling transaction support. Make sure that you have MySQL 4.0 or later before attempting to perform this step. Previous versions of eZ Publish use &quot;MyISAM&quot; type tables. Such tables do not support transactions. The database must be converted so that all tables use the &quot;InnoDB&quot; type instead of &quot;MyISAM&quot;. This can be done using the &quot;ezconvertmysqltabletype.php&quot; script:</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.7.0 directory. </div></li> <li><div> 
+Run the database conversion script; example:<br /> <pre class="wordwrap"><span class="line">bin/php/ezconvertmysqltabletype.php --host=localhost --user=arnold --password=secret --database=ezpublish --newtype=innodb</span>
+</pre>(You will have to provide your own values for the &quot;host&quot;, &quot;user&quot;, &quot;password&quot; and &quot;database&quot; parameters.) </div></li> 
+</ol>
+<p>It is also recommended to set the default storage engine to InnoDB (refer to <a href="http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html" target="_blank">MySQL documentation</a> for information about how this can be done).</p>   <a name="eztoc16262_4_8_2" id="eztoc16262_4_8_2"></a><h4>Enabling transaction support in eZ Publish</h4> <p>Each siteaccess which is configured to communicate with a database that uses &quot;InnoDB&quot; tables can be configured to use transactions. This can be done by adding &quot;Transactions=enabled&quot; within the &quot;[DatabaseSettings]&quot; block in &quot;site.ini.append.php&quot; for the target siteaccess(es). You can also add this line to the &quot;settings/override/site.ini.append.php&quot; file instead of doing it for each of the target siteaccesses (this way is recommended if all your siteaccesses use the same database).</p>     <a name="eztoc16262_5" id="eztoc16262_5"></a><h2>Step 5: Clearing the caches</h2> <p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.7.0 directory. </div></li> <li><div> 
+Run the clear cache script:<br /> <pre class="wordwrap"><span class="line">bin/shell/clearcache.sh --clear-all</span>
+</pre>  </div></li> 
+</ol>
+ <p>Make sure that all caches are cleared. Sometimes the script is unable to clear caches because of restrictive file/directory permission settings. Make sure that all caches have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.7/from-3.5.2-to-3.7.0 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:35:38 GMT -->
+</html>

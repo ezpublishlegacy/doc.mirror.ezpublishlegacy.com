@@ -1,0 +1,187 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.5/Concepts-and-basics/Access-control by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:02:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Access control / Concepts and basics / 4.5 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Access control</h1>
+</div>
+
+<p>This section explains how eZ Publish manages user accounts and access permissions. The system comes with a built-in access control mechanism that can be used to limit access to content or to certain functions. The access control system is based on the following elements:</p>
+<ul>
+<li><div>&nbsp;User </div></li><li><div>&nbsp;User group </div></li><li><div>&nbsp;Policy </div></li><li><div>&nbsp;Role </div></li>
+</ul>
+<p>The following illustration shows the relations between the elements in the list above.</p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/concepts_and_basics/user_group_policy_role/1239-6-eng-GB/user_group_policy_role_doc.png" alt="Users, groups, policies and roles." />
+ <p>Users, groups, policies and roles.</p>
+
+
+
+
+
+
+
+</div><p>A <i>user</i> defines a valid user account on the system. A <i>user group</i> consists of users and other user groups. A <i>policy</i> is a rule that grants access to content or a certain system function. For example, a policy may grant read access to a collection of nodes. A <i>role</i> is a named collection of policies. A role can be assigned to users and user groups. The following text gives a more in-depth explanation of the user/group/policy/role elements.</p><a name="eztoc121922_1" id="eztoc121922_1"></a><h2>User</h2><p>An actual user account is represented by a content object (with at least one node assignment) that contains information about a specific user. The default <a href="../../4.x/Reference/Content-classes/Users/User.html" target="_self">&quot;User&quot;</a> class allows the storage of the following elements: first name, last name, E-mail, username and password. The last three elements (E-mail, username and password) are provided by the <a href="../../4.x/Reference/Datatypes/User-account.html" target="_self">&quot;User account&quot;</a> datatype. This is a special datatype which plugs more deeply into the system. Instances of any content class containing the &quot;User account&quot; datatype will function as valid users on the system. In other words, if there is a need to store additional information about users, it is possible to either modify the default user class or to create a custom class that contains the datatype.</p><a name="eztoc121922_1_1" id="eztoc121922_1_1"></a><h3>Enabled and disabled user accounts</h3><p>The user accounts can be enabled or disabled from within the administration interface. When disabled, an account will continue to exist, but the user will not be able to log in until the account is enabled. Newly created accounts are enabled by default.</p><a name="eztoc121922_1_2" id="eztoc121922_1_2"></a><h3>Locked and unlocked user accounts</h3><p>In addition to being enabled and disabled, user accounts can be locked and unlocked. An account will be automatically locked by the system if the <a href="../../4.x/Reference/Configuration-files/site.ini/UserSettings/MaxNumberOfFailedLogin.html" target="_self">maximum number of failed login attempts</a> is exceeded. A failed login attempt is a combination of a valid user name and an invalid password. Once an account is locked, its owner will not be allowed to log in until the account is either <a href="../../../User-manual/4.4/Daily-tasks/Managing-users.html" target="_self">unlocked</a> by another user with administrator privileges or if the login request is coming from a trusted IP address / range.</p><p>The number of failed log-in attempts are stored in a database table called &quot;ezuservisit&quot;. An account's failed login counter is automatically reset upon a successful log-in. In other words, as long as you log in with a valid username/password combination, the failed log-in attempt counter associated with your account will be zero.</p><a name="eztoc121922_1_3" id="eztoc121922_1_3"></a><h3>E-mail</h3><p>Note that the default configuration does not allow different users to be registered with the exact same E-mail address. This is just a built-in precaution mechanism which can be easily turned off by setting the &quot;RequireUniqueEmail&quot; directive within the [UserSettings] block of a configuration override for &quot;site.ini&quot; to &quot;false&quot;.</p><a name="eztoc121922_1_4" id="eztoc121922_1_4"></a><h3>User ID</h3><p>Every user has a unique identification number which is the same as the ID number of the actual object that represents the user account. Among other things, the user IDs are used by other objects on the system. In particular, an object contains references (by the way of user IDs) to the initial creator and to all users who have created versions within that object. Removing a user account might lead to an inconsistent state where objects have owner/modifier references to non-existing user accounts. Because of this, it is not recommended to remove users from the system, the accounts to be removed should be disabled instead.</p><a name="eztoc121922_2" id="eztoc121922_2"></a><h2>User group</h2><p>A user group is a content object (with at least one node assignment) that contains user accounts and other user groups. In other words, a user group is just a collection of users (similar to a directory containing files and sub-directories on a file system).</p><a name="eztoc121922_3" id="eztoc121922_3"></a><h2>Policy</h2><p>A policy is a rule that grants access to a specific function or all functions of a module. A policy consists of the following elements:</p>
+<ul>
+<li><div>&nbsp;Module name </div></li><li><div>&nbsp;Function name </div></li><li><div>&nbsp;Function limitation </div></li>
+</ul>
+<p>The module name reveals the actual module that the policy grants access to. The function name specifies which function the policy should be limited to. A policy can either be restricted to a single function or grant access to all functions of a module. A module can have none or several functions. The functions are assigned to the module's views and thus the access requirements for a view are controlled by the functions that are assigned to that view. The function-view assignments can not be tampered with from within the administration interface. A policy granting access to a module's function can be further restricted by the way of function limitations. This can only be done if the function itself supports limitations. A function may support none, one or several limitations. The following table shows an overview of the available function limitations.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Limitation</p>
+  </th><th >  <p>Description</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Class</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The &quot;Class&quot; limitation makes it possible to limit a policy to objects of certain types.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Group</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The &quot;Group&quot; limitation makes it possible to limit a policy to objects that are owned by a group.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Language</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The &quot;Language&quot; limitation makes it possible to limit a policy to object versions in specific languages.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Node</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The &quot;Node&quot; limitation makes it possible to limit a policy to a specific node.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Owner</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The &quot;Owner&quot; limitation makes it possible to limit a policy to objects that are owned by the user who is logged in.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Parent class</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The &quot;Parent class&quot; limitation makes it possible to limit a policy based on the type of the object referenced by the parent node.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Section</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The &quot;Section&quot; limitation makes it possible to limit a policy to objects that are assigned to certain sections.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Siteaccess</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The &quot;Siteaccess&quot; limitation makes it possible to limit a policy to a certain siteaccess.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Status</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The &quot;Status&quot; limitation makes it possible to limit a policy to a certain version status (published, archived, etc.).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Subtree</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The &quot;Subtree&quot; limitation makes it possible to limit a policy to a certain part of the content node tree.</p>
+  </td>
+
+</tr>
+
+</table>
+<a name="eztoc121922_4" id="eztoc121922_4"></a><h2>Role</h2><p>A role is a named collection of policies. A role can be assigned to users and user groups. It is possible to assign a role with additional limitations. The role limitation feature is typically useful in a case where multiple users with similar permissions have to manipulate different parts of the content node tree. Instead of creating a role for each user, the site administrator can create a generic role and assign it with different limitations to the different users. The role limitations will override the limitations of the role's policies. The following table shows an overview of the available role limitations.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Limitation</p>
+  </th><th >  <p>Description</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Section</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The &quot;Section&quot; limitation makes it possible to limit a role to objects that are assigned to certain sections.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Subtree</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The &quot;Subtree&quot; limitation makes it possible to limit a role to a certain part of the content node tree.</p>
+  </td>
+
+</tr>
+
+</table>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.5/Concepts-and-basics/Access-control by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:02:21 GMT -->
+</html>

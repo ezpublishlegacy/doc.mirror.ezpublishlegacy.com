@@ -1,0 +1,89 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Concepts-and-basics/Configuration/Site-management by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:38:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Site management / Configuration / Concepts and basics / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Site management</h1>
+</div>
+
+ <p>A single eZ publish installation is capable of hosting multiple sites by making use of something called the <i>siteaccess system</i>. This system makes it possible to use different configuration settings based on a set of rules. The rules control which group of settings that should be used in a particular case. The siteaccess rules must be specified in the global override for the site.ini configuration file (&quot;/settings/override/site.ini.append.php&quot;).</p>  <a name="eztoc63364_1" id="eztoc63364_1"></a><h2>Siteaccess</h2> <p>A collection of configuration settings is called a <i>siteaccess</i>. When a siteaccess is in use, the default configuration settings will be overridden by the settings that are defined for the siteaccess. Among other things, a siteaccess dictates which database, design and var directory that should be used (these are sometime referred to as &quot;resources&quot;). By making use of different siteaccesses, it is possible to combine different content and designs. A typical eZ publish site consists of two siteaccesses: a public interface for visitors and a restricted interface for administrators. Both siteaccesses use the same content (same database and same var directory) but they use different designs. While the administration siteaccess would most likely use the built in administration design, the public siteaccess would use a custom design. The following illustration shows this scenario.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/concepts_and_basics/siteaccess/1257-5-eng-GB/siteaccess_doc.png" alt="Example of a setup with two siteaccesses." />
+ <p>Example of a setup with two siteaccesses.</p>
+
+
+
+
+
+
+
+</div> <p>A siteaccess is nothing more than a set of configuration files that override the default settings when the siteaccess is used. A single eZ publish installation can virtually host an unlimited number of sites by the way of siteaccesses. The configuration settings for a siteaccess are located inside a dedicated subdirectory within the &quot;/settings/siteaccess&quot; directory. The name of the subdirectory is the actual name of the siteaccess. (Please note that siteaccess name should only contain letters, digits and underscores.) The following illustration shows a setup with two siteaccesses: admin and public.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/concepts_and_basics/filesystem_siteaccess_directory_example/1135-4-eng-GB/filesystem_siteaccess_directory_example_doc.png" alt="Siteaccess directory example." />
+ <p>Siteaccess directory example.</p>
+
+
+
+
+
+
+
+</div> <p>When a siteaccess is in use, eZ publish reads the configuration files using the following sequence:</p> 
+<ol>
+ <li><div> Default configuration settings (/settings/*.ini) </div></li> <li><div> Siteaccess settings (/settings/siteaccess/[name_of_siteaccess]/*.ini.append.php) </div></li> <li><div> Global overrides (/settings/override/*.ini.append.php) </div></li> 
+</ol>
+ <p>In other words, eZ publish will first read the default configuration settings. Secondly, it will determine which siteaccess to use based on the rules that are defined in the global override for &quot;site.ini&quot; (&quot;/settings/override/site.ini.append.php&quot;). When it knows which siteaccess to use, it will go into the directory of that siteaccess and read the configuration files that belong to that siteaccess. The settings of the siteaccess will override the default configuration settings. For example, if the siteaccess uses a database called &quot;Amiga&quot;, the system will see this and automatically use the specified database when an incoming request is processed. Finally, eZ publish reads the configuration files in the global override directory. The settings in the global override directory will override all other settings. In other words, if a database called &quot;CD32&quot; is specified in the global override for &quot;site.ini&quot; then eZ publish will attempt to use that database regardless of what is specified in the siteaccess settings. If a setting is not overridden by either the siteaccess or from within a global override then the default setting will be used. The default settings are set by the ini files located in the &quot;/settings&quot; directory. The following figure illustrates how the system reads the configuration files using the &quot;site.ini&quot; file as an example. As already mentioned, settings placed in the override files will be used instead of the default ones.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/concepts_and_basics/ini_override/11103-3-eng-GB/ini_override_doc.png" alt="Configuration override example." />
+ <p>Configuration override example.</p>
+
+
+
+
+
+
+
+</div> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Concepts-and-basics/Configuration/Site-management by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:38:47 GMT -->
+</html>

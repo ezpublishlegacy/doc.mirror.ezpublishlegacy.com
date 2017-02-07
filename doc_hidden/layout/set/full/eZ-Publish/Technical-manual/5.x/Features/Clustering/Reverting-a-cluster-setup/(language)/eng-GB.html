@@ -1,0 +1,82 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Clustering/Reverting-a-cluster-setup/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:52:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Reverting a cluster setup / Clustering / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Reverting a cluster setup</h1>
+</div>
+
+<p>You can always switch from using the <a href="../../../../../4.6/Features/Clustering.html" target="_self">clustering</a> functionality to the standard configuration where images, binary files and content-related caches are stored on a file system. The following instructions explain how this can be done, assuming that your eZ Publish site is currently configured to store images and other files in a MySQL database.</p><a name="eztoc132728_1" id="eztoc132728_1"></a><h2>Reverting to non cluster setup</h2><a name="eztoc132728_1_1" id="eztoc132728_1_1"></a><h3>1. Clear the caches (optional)</h3><p>It is recommended (but not required) to clear all eZ Publish caches before disabling the clustering functionality. This can be done by running the &quot;bin/php/ezcache.php&quot; script as shown below:</p><pre class="wordwrap"><span class="line">$php bin/php/ezcache.php --clear-all --purge</span>
+</pre><p>Note that &quot;$php&quot; should be replaced by the path to your php executable.</p><a name="eztoc132728_1_2" id="eztoc132728_1_2"></a><h3>2. Unclusterize images and other files</h3><p>You need to copy images, binary files and content-related caches from the database to the file system. This can be done by running the &quot;bin/php/clusterize.php&quot; script with the &quot;-u&quot; parameter. Make sure that you have enough disk space on the file system before starting this operation.</p><p>The following example shows how to run the script (replace &quot;ezwebin_site&quot; with the actual name of your siteaccess):</p><pre class="wordwrap"><span class="line">$php bin/php/clusterize.php -u -s ezwebin_site</span>
+</pre><p>Note that &quot;$php&quot; should be replaced by the path to your php executable.</p><p>The script will go through the files stored in the database and copy them into the appropriate subdirectories of the &quot;var&quot; directory.</p><a name="eztoc132728_1_3" id="eztoc132728_1_3"></a><h3>3. Modify the &quot;file.ini&quot; settings</h3><p>Open the &quot;settings/override/file.ini.append.php&quot; configuration file and edit it. Comment all lines located under the [ClusteringSettings] block by adding &quot;#&quot; as shown below:</p><pre class="wordwrap copytoclipboard"><span class="line">[ClusteringSettings]</span>
+<span class="line">#FileHandler=eZDBFileHandler</span>
+<span class="line">#DBBackend=eZDBFileHandlerMysqliBackend</span>
+<span class="line">#DBHost=localhost</span>
+<span class="line">#DBPort=3306</span>
+<span class="line">#DBSocket=</span>
+<span class="line">#DBName=name</span>
+<span class="line">#DBUser=user</span>
+<span class="line">#DBPassword=pass</span>
+<span class="line">#DBChunkSize=65535</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ClusteringSettings]\r\n#FileHandler=eZDBFileHandler\r\n#DBBackend=eZDBFileHandlerMysqliBackend\r\n#DBHost=localhost\r\n#DBPort=3306\r\n#DBSocket=\r\n#DBName=name\r\n#DBUser=user\r\n#DBPassword=pass\r\n#DBChunkSize=65535' ); return false;" /></p>
+<![endif]--><p>If the file does not exist in the &quot;settings/override&quot; directory, update the &quot;settings/siteaccess/ezwebin_site/file.ini.append.php&quot; file instead (where &quot;ezwebin_site&quot; is the name of your siteaccess).</p><p>Note that you can also remove the entire [ClusteringSettings] block instead of commenting the lines one by one.</p><p>By commenting out the entire entry you will revert to the default setting in &quot;settings/file.ini&quot; where the default FileHandler is eZ FS File Handler.</p><p>However if you prefer not to add #'s or delete the entry you can also set the FileHandler setting to eZFSFileHandler for the same result.</p><pre class="wordwrap"><span class="line">[ClusteringSettings]</span>
+<span class="line">&nbsp;</span>
+<span class="line">FileHandler=eZFSFileHandler</span>
+</pre><a name="eztoc132728_1_4" id="eztoc132728_1_4"></a><h3>4. Update the Apache configuration</h3><p>Comment out or remove the following lines in your &quot;.htaccess&quot; file:</p><pre class="wordwrap"><span class="line">RewriteRule ^/var/([^/]+/)?storage/images-versioned/.* &nbsp;/index_cluster.php [L]</span>
+<span class="line">RewriteRule ^/var/([^/]+/)?storage/images/.* &nbsp;/index_cluster.php [L]</span>
+<span class="line">RewriteRule &nbsp;^/var/([^/]+/)?cache/public/(stylesheets|javascript) /index_cluster.php &nbsp;[L]</span>
+</pre><p>If no &quot;.htaccess&quot; file is used, you need to comment out the same lines in the Apache configuration file.</p><p>This will disable HTTP serving of clusterized files through index_cluster.php. You can additionally disable your cluster configuration settings in config.php.</p><a name="eztoc132728_1_5" id="eztoc132728_1_5"></a><h3>5. Restart Apache and test the site</h3><p>Restart the Apache web server. After it has been restarted, your site should be using images, binary files and content-related caches stored in the &quot;var&quot; directory. Verify that the site works correctly, content images are displayed and content binary files are accessible (open the site pages in a web browser, log in to the administration interface, try clicking around and so on).</p><a name="eztoc132728_1_6" id="eztoc132728_1_6"></a><h3>7. Remove the clustering tables from the database</h3><p>If the site works correctly, you can remove the database tables that were previously used for storing images, binary files and content-related caches. This can be done by executing the following SQL queries:</p>
+<ul>
+<li><div>
+&nbsp;With eZDB<br />&nbsp;DROP TABLE ezdbfile;DROP TABLE ezdbfile_data;</div></li><li><div>
+&nbsp;With eZDFS<br />
+&nbsp;DROP TABLE ezdfsfile;<br />&nbsp;Note that the files on the NFS share need to be removed manually.</div></li>
+</ul>
+<a name="eztoc132728_2" id="eztoc132728_2"></a><h2><b>Changing to another Cluster file handler</b></h2><a name="eztoc132728_2_7" id="eztoc132728_2_7"></a><h3><b>1. Revert to non cluster mode</b></h3><p>When changing from one cluster file handler to another it is best to first un-cluster by following the steps described in &quot;<a href="../../../../../4.6/Features/Clustering/Reverting-a-cluster-setup.html#revert" target="_self">Reverting to non cluster setup</a>&quot; before changing to another cluster file handler.</p><a name="eztoc132728_2_8" id="eztoc132728_2_8"></a><h3>2. Setup cluster</h3><p>Follow the steps described in &quot;<a href="../../../../../4.6/Features/Clustering/Setting-it-up-for-an-eZDBFileHandler.html" target="_self">Setting it up for an eZ DB FileHandler</a>&quot; or &quot;<a href="../../../../../4.6/Features/Clustering/Setting-it-up-for-an-eZDFSFileHandler.html" target="_self">Setting it up for an eZ DFS FileHandler</a>&quot; to cluster your installation with the new cluster file handler.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Clustering/Reverting-a-cluster-setup/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:52:25 GMT -->
+</html>

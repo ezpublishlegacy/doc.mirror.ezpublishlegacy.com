@@ -1,0 +1,102 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Modules/content/Fetch-functions/trash_object_list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:36:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>trash_object_list / Fetch functions / content / Modules / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>trash_object_list</h1>
+</div>
+<h3>Summary</h3>
+Fetches the objects that are in the trash.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'content', 'trash_object_list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( [ 'offset', offset, ]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'limit', &nbsp;limit &nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'attribute_filter', &nbsp;&nbsp;attribute_filter &nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'sort_by', &nbsp;&nbsp;sort_by &nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'as_object', &nbsp;&nbsp;as_object &nbsp;&nbsp;] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>offset</td>
+        <td>integer</td>
+        <td>The offset to start at.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>limit</td>
+        <td>integer</td>
+        <td>The number of objects that should be returned.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>attribute_filter</td>
+        <td>mixed</td>
+        <td>A new parameter since eZ Publish 4.1. This enables attribute filtering.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>sort_by</td>
+        <td>mixed</td>
+        <td>A new parameter since eZ Publish 4.1. This enables sorting.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>as_object</td>
+        <td>boolean</td>
+        <td>A new parameter since eZ Publish 4.1. This enables fetching elements as objects.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An array of <a href="../../../Objects/ezcontentobject.html" target="_self">ezcontentobject</a> objects or FALSE.</p><h3>Description</h3>
+ <p>This function fetches all the objects that are in the trash. An object is considered to be in the trash if its status field is set to &quot;archived&quot;. The optional &quot;offset&quot; and &quot;limit&quot; parameters can be used to limit the result. The function returns an array of <a href="../../../Objects/ezcontentobject.html" target="_self">ezcontentobject</a> objects or FALSE if no objects are found.</p> <p>For more information regarding the use of the &quot;attribute_filter&quot; parameter, please visit the following <a href="list.html#Attribute_Filter" target="_self">page</a>. </p><h3>Examples</h3>
+    <a name="eztoc87778_0_0_1" id="eztoc87778_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $trashed_objects=fetch( 'content', 'trash_object_list' ) }</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $trashed_objects as $object}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$object.name|wash} &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $trashed_objects=fetch( \'content\', \'trash_object_list\' ) }\r\n\r\n{foreach $trashed_objects as $object}\r\n    {$object.name|wash} &lt;br /&gt;\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>Outputs the names of the objects that are in the trash.</p>       <a name="eztoc87778_0_0_2" id="eztoc87778_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap"><span class="line">fetch('content', 'trash_object_list', hash('attribute_filter', array(...), 'sort_by', array(), 'as_object', true()))&lt;/pre&gt;</span>
+</pre>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Modules/content/Fetch-functions/trash_object_list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:36:25 GMT -->
+</html>

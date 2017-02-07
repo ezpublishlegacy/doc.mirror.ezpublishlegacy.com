@@ -1,0 +1,63 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/LDAP-Login-Handler/Enhancements/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:05:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Enhancements / LDAP Login Handler / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Enhancements</h1>
+</div>
+
+  <a name="eztoc132497_1" id="eztoc132497_1"></a><h2>The LDAP user manager cronjob</h2> <p>The cronjobs/ldapusermanage.php script synchronizes data from the LDAP server to eZ Publish. But this is no longer needed, as <a href="http://issues.ez.no/15530" target="_self">issue #15530</a> has been fixed and data is now synchronized with every login. The cronjob is only needed if you don't have the fix for #15530 yet, and user data has been changed in LDAP or eZ Publish. The script is likely to be deprecated and removed soon, and therefore it is recommended to avoid using it.</p> <p>An alternative way (though not recommended) of synchronizing user objects is to delete them, since they will be recreated on the next login with synchronized data. Please not that this solution can be destructive - any object relations, object ownership information, and sub nodes of the user node will not be recreated.</p>   <a name="eztoc132497_2" id="eztoc132497_2"></a><h2>LDAP login handler improvements (<a href="http://issues.ez.no/15490" target="_self">Issue #15490</a>)</h2> <p>As mentioned before (see <a href="../../LDAP-Group-Mapping-Type.html#UseGroupAttribute" target="_self">LDAP Group Mapping Type: UseGroupAttribute</a>), it will be possible to set the LDAPUserGroupAttributeType to &quot;dn&quot; in eZ Publish 4.3. When LDAPUserGroupAttributeType is set to &quot;dn&quot;, the LDAPUserGroupAttribute should be set to an LDAP attribute that holds the DN of the group(s) to which the user belongs. If the user belongs to multiple groups, then this attribute should be set multiple times in the LDAP user object - it should not contain multiple DNs (This is how LDAP attributes are normally used). The 'dn' value comes in addition to the existing allowed values 'name' and 'id', which are not changed.</p> <p>
+Also UseGroupAttribute mode can now create groups. Previously when LDAPGroupMappingType was set to &quot;UseGroupAttribute&quot;, no groups would be created. If the indicated group(s) were not found, the user(s) would be placed in the default group. With the addition of the LDAPCreateMissingGroups setting, the creation of groups is now supported. This setting is disabled by default, for backwards compatibility. When it is enabled, missing groups will be created. <br />This enhancement will be implemented in eZ Publish 4.3.0</p>   <a name="eztoc132497_3" id="eztoc132497_3"></a><h2>Bug fixes</h2>  <a name="eztoc132497_3_1" id="eztoc132497_3_1"></a><h3><a href="http://issues.ez.no/15530" target="_self">#15530</a>: Existing ezp users are not synchronized with LDAP users</h3> <p>When using the LDAP login handler, the following problems affect LDAP users that exist in eZ Publish:</p> 
+<ul>
+ <li><div> If the user data is changed on the LDAP server, this change is not reflected in the eZ Publish user object </div></li> <li><div> If the user data of the eZ Publish user object is changed, this change remains after next login. </div></li> 
+</ul>
+ <p>
+In other words, existing eZ Publish users are not synchronized with data from LDAP. This should occur with every login for the user that logs in.<br />Fixed in: 4.3.0, 4.2.1, 4.1.5, 4.0.8</p>   <a name="eztoc132497_3_2" id="eztoc132497_3_2"></a><h3><a href="http://issues.ez.no/15485" target="_self">#15485</a>: Deleted LDAP user nodes are not recreated</h3> <p>
+When a LDAP user has multiple nodes and one of them is removed, it will not be recreated on the next login. On the other hand, when all the nodes are removed (meaning that the object is also gone) then all nodes are correctly recreated.<br />Fixed in: 4.3.0, 4.2.1, 4.1.5, 4.0.8</p>   <a name="eztoc132497_3_3" id="eztoc132497_3_3"></a><h3><a href="http://issues.ez.no/14389" target="_self">#14389</a>: In ezldapuser.php, LDAPLoginAttribute and LDAPGroupNameAttribute ini variables with upper case caracters unread</h3> <p>
+When LDAPLoginAttribute and LDAPGroupNameAttribute contain upper case caracters the login fails.<br />Fixed in: 4.3.0, 4.2.1, 4.1.5, 4.0.8</p>    <a name="eztoc132497_4" id="eztoc132497_4"></a><h2>Troubleshooting</h2> <p>The LDAPDebugTrace setting was added in version 4.1 beta 1. When this is enabled, it will write LDAP login data to notice.log. This can help you figure out a configuration problem.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/LDAP-Login-Handler/Enhancements/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:05:35 GMT -->
+</html>

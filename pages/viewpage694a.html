@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from doc.ez.no/pages/viewpage.action?pageId=12125569&navigatingVersions=true by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:09:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Installing eZ Publish on a Linux/UNIX based system - eZ Publish 5.1 - eZ Documentation</title>
+
+        
+
+                        
+    
+                        
+    
+                        
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE,chrome=IE7">
+<meta charset="UTF-8">
+<meta id="confluence-context-path" name="confluence-context-path" content="">
+<meta id="confluence-base-url" name="confluence-base-url" content="../index.html">
+
+<meta id="atlassian-token" name="atlassian-token" content="494111f00e28ced96046bfb6fbe8f75e18d44b71">
+
+<meta id="confluence-space-key" name="confluence-space-key" content="EZP51">
+<script type="text/javascript">
+        var contextPath = '';
+</script>
+
+    
+
+<!-- include system css resources -->
+
+
+    <link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch934e.css?media=print" media="print">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 8]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/47016f6b93087cd2003bf867318254ee/_/download/contextbatch/css/theme.doc/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.0.22/_/download/batch/confluence.extra.information_information-plugin/confluence.extra.information_information-plugin-adg-s" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins.confluence-highlight-ac" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/5.3.3-m6/_/download/batch/confluence.extra.jira_web-resources-adg/confluence.extra.jira_web-resources-adg.css" media="all">
+<link type="text/css" rel="stylesheet" href="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/16/_/styles/colors556c.css?spaceKey=EZP51" media="all">
+<link type="text/css" rel="stylesheet" href="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/16/_/styles/custom556c.css?spaceKey=EZP51" media="all">
+
+<!-- end system css resources -->
+
+    <meta name="confluence-request-time" content="1413912809578">
+        
+    
+        
+            <meta name="ajs-is-confluence-admin" content="false">
+            <meta name="ajs-connection-timeout" content="10000">
+            <meta name="ajs-use-keyboard-shortcuts" content="true">
+            <meta name="ajs-keyboardshortcut-hash" content="ec556f85a7b4fc86b37ab7a78ce3d8b0">
+            <meta id="team-calendars-has-jira-link" content="true">
+            <meta name="ajs-team-calendars-display-time-format" content="displayTimeFormat12">
+            <meta id="team-calendars-user-timezone" content="UTC">
+            <script type="text/x-template" id="team-calendars-messages" title="team-calendars-messages">
+    <fieldset class="i18n hidden">
+                    <input type="hidden" name="calendar3.month.short.april" value="Apr">
+                    <input type="hidden" name="calendar3.month.short.november" value="Nov">
+                    <input type="hidden" name="calendar3.month.long.november" value="November">
+                    <input type="hidden" name="calendar3.day.short.friday" value="Fri">
+                    <input type="hidden" name="calendar3.month.long.february" value="February">
+                    <input type="hidden" name="calendar3.month.short.february" value="Feb">
+                    <input type="hidden" name="calendar3.day.long.wednesday" value="Wednesday">
+                    <input type="hidden" name="calendar3.month.long.december" value="December">
+                    <input type="hidden" name="calendar3.day.short.sunday" value="Sun">
+                    <input type="hidden" name="calendar3.month.long.april" value="April">
+                    <input type="hidden" name="calendar3.month.long.july" value="July">
+                    <input type="hidden" name="calendar3.month.long.september" value="September">
+                    <input type="hidden" name="calendar3.month.short.august" value="Aug">
+                    <input type="hidden" name="calendar3.month.short.june" value="Jun">
+                    <input type="hidden" name="calendar3.month.short.may" value="May">
+                    <input type="hidden" name="calendar3.day.short.tuesday" value="Tue">
+                    <input type="hidden" name="calendar3.day.short.wednesday" value="Wed">
+                    <input type="hidden" name="calendar3.day.long.thursday" value="Thursday">
+                    <input type="hidden" name="calendar3.month.long.march" value="March">
+                    <input type="hidden" name="calendar3.month.long.october" value="October">
+                    <input type="hidden" name="calendar3.day.short.saturday" value="Sat">
+                    <input type="hidden" name="calendar3.month.short.january" value="Jan">
+                    <input type="hidden" name="calendar3.month.long.may" value="May">
+                    <input type="hidden" name="calendar3.month.long.january" value="January">
+                    <input type="hidden" name="calendar3.month.short.october" value="Oct">
+                    <input type="hidden" name="calendar3.day.short.thursday" value="Thu">
+                    <input type="hidden" name="calendar3.day.long.friday" value="Friday">
+                    <input type="hidden" name="calendar3.day.long.sunday" value="Sunday">
+                    <input type="hidden" name="calendar3.month.long.june" value="June">
+                    <input type="hidden" name="calendar3.month.long.august" value="August">
+                    <input type="hidden" name="calendar3.day.long.tuesday" value="Tuesday">
+                    <input type="hidden" name="calendar3.day.long.saturday" value="Saturday">
+                    <input type="hidden" name="calendar3.month.short.september" value="Sep">
+                    <input type="hidden" name="calendar3.day.long.monday" value="Monday">
+                    <input type="hidden" name="calendar3.month.short.july" value="Jul">
+                    <input type="hidden" name="calendar3.month.short.march" value="Mar">
+                    <input type="hidden" name="calendar3.day.short.monday" value="Mon">
+                    <input type="hidden" name="calendar3.month.short.december" value="Dec">
+            </fieldset>
+</script>
+
+            
+
+    
+            
+    
+    
+            <meta name="ajs-page-id" content="12125569">
+            <meta name="ajs-content-type" content="page">
+            <meta name="ajs-page-title" content="Installing eZ Publish on a Linux/UNIX based system">
+            <meta name="ajs-parent-page-id" content="">
+            <meta name="ajs-space-key" content="EZP51">
+            <meta name="ajs-space-name" content="eZ Publish 5.1">
+            <meta name="ajs-from-page-title" content="">
+            <meta name="ajs-can-remove-page" content="false">
+            <meta name="ajs-editor.loader.comment.resources" content="&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/9f01679814e63f4c0513d02c90477002/_/download/contextbatch/css/comment-editor/batch.html media=&quot;all&quot;&gt;
+">
+            <meta name="ajs-context-path" content="">
+            <meta name="ajs-base-url" content="https://doc.ez.no">
+            <meta name="ajs-version-number" content="5.4.4">
+            <meta name="ajs-build-number" content="4733">
+            <meta name="ajs-remote-user" content="">
+            <meta name="ajs-current-user-fullname" content="">
+            <meta name="ajs-current-user-avatar-url" content="">
+            <meta name="ajs-static-resource-url-prefix" content="/s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_">
+            <meta name="ajs-global-settings-attachment-max-size" content="10485760">
+            <meta name="ajs-user-locale" content="en_GB">
+            <meta name="ajs-enabled-dark-features" content="sync.event">
+            <meta name="ajs-atl-token" content="494111f00e28ced96046bfb6fbe8f75e18d44b71">
+            <meta name="ajs-confluence-flavour" content="VANILLA">
+            <meta name="ajs-editor.loader.resources" content="&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-editor%2c-v/batch.11b.delaye media=&quot;all&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11ca781.delaye?media=%28max-width%3A+1450px%29%22 media=&quot;(max-width: 1450px)&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11d23d0.delaye?media=print%22 media=&quot;print&quot;&gt;
+&lt;!--[if lt IE 9]&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11ed0b5.delaye?conditionalComment=lt+IE+9%22 media=&quot;all&quot;&gt;
+&lt;![endif]--&gt;
+&lt;!--[if IE]&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11fbe23.delaye?ieonly=true%22 media=&quot;all&quot;&gt;
+&lt;![endif]--&gt;
+&lt;script type=&quot;text/javascript&quot; src=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/js/editor%2cmacro-browser%2cfullpage-editor%2c-vi/batch.120.delaye &gt;&lt;/script&gt;
+">
+            <meta name="ajs-date.format" content="MMM dd, yyyy">
+    
+    <link rel="shortcut icon" href="../favicon.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.html">
+
+<link rel="search" type="application/opensearchdescription+xml" href="../opensearch/osd.action" title="eZ Documentation"/>
+
+    <!-- include system javascript resources -->
+    <script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/js/batch.js" ></script>
+<!--[if lte IE 8]>
+<script type="text/javascript" src="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/js/batch.js?conditionalComment=lte+IE+8" ></script>
+<![endif]-->
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/js/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batch.js" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/js/page/batch.js" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/84fc2bb4cbbfc06481d75335376bb250/_/download/contextbatch/js/atl.comments/batch.js" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins-2.confluence-highlight-ac" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.mywork.mywork-confluence-host-plu/com.atlassian.mywork.mywork-confluence-host-plugin_mw-he" ></script>
+
+    
+
+        
+    <!-- end system javascript resources -->
+
+        
+        
+
+    
+                <link rel="canonical" href="../display/EZP51/Installing%2beZ%2bPublish%2bon%2ba%2bLinux-UNIX%2bbased%2bsystem.html">
+        <link rel="shortlink" href="../x/gQW5.html">
+    <meta name="wikilink" content="[null:Installing eZ Publish on a Linux/UNIX based system]">
+    <meta name="page-version" content="2">
+
+</head>
+
+<body             onload="placeFocus()"
+     id="com-atlassian-confluence" class="theme-documentation  aui-theme-default aui-layout">
+
+        
+    <div id="full-height-container">
+    <div id="header-precursor">
+        
+                    </div>
+
+
+
+
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation"><div class="aui-header-inner"><div class="aui-header-before"><a class="aui-dropdown2-trigger app-switcher-trigger" aria-owns="app-switcher" aria-haspopup="true" tabindex="0"><span class="aui-icon aui-icon-small aui-iconfont-appswitcher">Linked Applications</span></a><div id="app-switcher" class="aui-dropdown2 aui-style-default"><div class="app-switcher-loading">Loading&hellip;</div></div><script>
+            (function (NL) {
+                var initialise = function () {
+                    // For some milestones of AUI, the atlassian soy namespace was renamed to aui. Handle that here by ensuring that window.atlassian is defined.
+                    window.atlassian = window.atlassian || window.aui;
+                    new NL.AppSwitcher({
+                        dropdownContents: '#app-switcher'
+                    });
+                };
+                if (NL.AppSwitcher) {
+                    initialise();
+                } else {
+                    NL.onInit = initialise;
+                }
+            }(window.NL = (window.NL || {})));
+            window.NL.isUserAdmin = false</script></div><div class="aui-header-primary"><h1 id="logo" class="aui-header-logo aui-header-logo-custom"><a href="../index.html"><img src="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_/images/logo/atl.site.logo" alt="eZ Documentation" /></a></h1><ul class="aui-nav">
+                            <li>
+            
+        
+        
+<a  id="space-directory-link" href="../spacedirectory/view.html"  class=" aui-nav-imagelink"   title="Spaces">
+            <span>Spaces</span>
+    </a>
+        </li>
+                            <li id="browseMenu" role="menu">
+            
+    
+        <a id="browse-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="browse-menu-link-content" title="Browse">
+        <span class="browse">Browse</span>
+    </a>
+    <nav id="browse-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                <ul  id="browse-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+    
+            
+<a  id="space-pages-link" href="listpages-dirview2fd6.html?key=EZP51" class="    "      title="Browse pages in the eZ Publish 5.1 space" >
+        Pages
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-blogposts-link" href="viewrecentblogposts2fd6.html?key=EZP51" class="    "      title="Browse blogs in the eZ Publish 5.1 space" >
+        Blog
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-labels-link" href="../labels/listlabels-heatmap2fd6.html?key=EZP51" class="    "      title="Browse labels in the eZ Publish 5.1 space" >
+        Labels
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-advanced-link" href="../spaces/viewspacesummary2fd6.html?key=EZP51" class="    "      title="Browse additional space functions in the eZ Publish 5.1 space" >
+        Space Operations
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    
+        </li>
+        </ul>
+</div><div class="aui-header-secondary"><ul class="aui-nav">
+                <li>
+        
+    
+            
+<a  id="doctheme-anchor" href="#"  class=" aui-nav-imagelink"   title="">
+            <span></span>
+    </a>
+    </li>
+        <li>
+<form id="quick-search" class="aui-quicksearch dont-default-focus header-quicksearch" action="https://doc.ez.no/dosearchsite.action" method="get">
+    <fieldset>
+                    <input type='hidden' name='where' value='EZP51'/>
+                            <input type="hidden" name="spaceSearch" value="true"/>
+                <label for="quick-search-query" class="assistive">Quick Search</label>
+        <input id="quick-search-query" class="text app-search search quick-search-query" type="text"
+               accessKey="q" autocomplete="off" name="queryString" title="Quick Search"  placeholder="Search space" />
+        <input id="quick-search-submit" class="quick-search-submit" type="submit" value="Search"/>
+
+        <div class="aui-dd-parent quick-nav-drop-down"></div>
+    </fieldset>
+    <div class="hidden parameters">
+                    <!-- putMetadata failed to add value for key "quick-nav-enabled" so rendering metadata inline - see server debug log for details -->
+        <meta name="ajs-quick-nav-enabled" content="true">
+                </div>
+</form>
+</li>
+    <li>    
+        <a id="help-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="help-menu-link-content" title="Help">
+        <span class="aui-icon aui-icon-small aui-iconfont-help">Help</span>
+    </a>
+    <nav id="help-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                <ul  id="help-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+    
+            
+<a  id="confluence-help-link" href="http://docs.atlassian.com/confluence/docs-54/Getting+Help+And+Support" class="    "      title="Visit the Confluence documentation home"  target="_blank"
+>
+        Online Help
+</a>
+</li>
+                                            <li>
+    
+                
+<a  id="keyboard-shortcuts-link" href="#" class="    "      title="View available keyboard shortcuts" >
+        Keyboard Shortcuts
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="feed-builder-link" href="../dashboard/configurerssfeed.html" class="    "      title="Create your custom RSS feed." >
+        Feed Builder
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="whats-new-menu-link" href="http://docs.atlassian.com/confluence/docs-54/whatsnew/iframe" class="    "      title="" >
+        What’s new
+</a>
+</li>
+                                            <li>
+    
+                
+<a  id="gadget-directory-link" href="#" class="   user-item administration-link "      title="Browse gadgets provided by Confluence" >
+        Available Gadgets
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="confluence-about-link" href="../aboutconfluencepage.html" class="    "      title="Get more information about Confluence" >
+        About Confluence
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    </li>
+    <li>    
+    </li>
+                <li>                                    <li>
+    
+            
+<a  id="login-link" href="../logind3c3.html?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D12125569%26navigatingVersions%3Dtrue" class="   user-item login-link "      title="" >
+        Log in
+</a>
+</li>
+                        </li>
+</ul>
+</div></div><!-- .aui-header-inner--></nav><!-- .aui-header -->
+    <br class="clear">
+</header>
+
+    <div id="splitter">
+    <div id="splitter-sidebar"  class="padding-div" >
+        
+        <p>&nbsp;<br/>
+<strong>Navigation</strong><br/>
+&bull; <a href="https://confluence.ez.no/display/MAIN" class="external-link" rel="nofollow">eZ Documentation Center</a><br/>
+&nbsp;</p>
+    
+
+                    
+    
+
+
+<div class="plugin_pagetree">
+
+        
+        
+    <ul class="plugin_pagetree_children_list plugin_pagetree_children_list_noleftspace">
+        <div class="plugin_pagetree_children">
+        </div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input type="hidden" name="treeId" value="">
+        <input type="hidden" name="treeRequestId" value="/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=false&amp;sort=position&amp;reverse=false&amp;disableLinks=false&amp;expandCurrent=false">
+        <input type="hidden" name="treePageId" value="12125569">
+
+        <input type="hidden" name="noRoot" value="false">
+        <input type="hidden" name="rootPageId" value="12125259">
+
+        <input type="hidden" name="rootPage" value="">
+        <input type="hidden" name="startDepth" value="0">
+        <input type="hidden" name="spaceKey" value="EZP51" >
+
+        <input type="hidden" name="i18n-pagetree.loading" value="Loading...">
+        <input type="hidden" name="i18n-pagetree.error.permission" value="Unable to load page tree. It seems that you do not have permission to view the root page.">
+        <input type="hidden" name="i18n-pagetree.eeror.general" value="There was a problem retrieving the page tree. Please check the server log file for more information.">
+        <input type="hidden" name="loginUrl" value="/login.action?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D12125569%26navigatingVersions%3Dtrue">
+        <input type="hidden" name="mobile" value="false">
+
+                <fieldset class="hidden">
+                            <input type="hidden" name="ancestorId" value="12125259">
+                    </fieldset>
+    </fieldset>
+</div>
+
+
+
+            </div>
+    <div id="splitter-content">
+
+                    <script type="text/javascript" src="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/5.4.4/_/download/resources/com.atlassian.confluence.plugins.doctheme_resources/doc-theme.js"></script>
+    
+                        
+        <div id="theme-header">
+            <div class="sectionColumnWrapper"><div class="sectionMacro">
+<div class="sectionMacroRow"><div class="columnMacro" style="width:1%;min-width:1%;max-width:1%;"></div>
+<div class="columnMacro"><div class="panel" style="background-color: whitesmoke;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: whitesmoke;">
+<p>This is the documentation for <strong>eZ Publish Platform 5.1</strong>. It is scheduled to be moved into the <a href="../display/EZP/eZ%2bPublish%2bPlatform%2bDocumentation.html">5.x documentation</a>, so please go there for most up-to-date documentation.</p>
+</div></div></div>
+<div class="columnMacro" style="width:1%;min-width:1%;max-width:1%;"></div></div></div></div>
+        </div>
+    
+            
+<div id="main"  class="aui-page-panel" >
+    <div id="main-header">
+        
+        
+    <div id="navigation" class="content-navigation view">
+                    <ul class="ajs-menu-bar">
+                                    
+                    
+        <li class="normal ajs-menu-item">
+        <a id="action-menu-link" class="action ajs-menu-title aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="action-menu" data-container="#navigation"><span><span>Tools</span></span></a>         <div id="action-menu" class="aui-dropdown2 aui-style-default">
+                            <ul  id="action-menu-primary"                     class="section-primary first aui-dropdown2-section">
+                                            <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-view-history-link" href="viewpreviousversions6373.html?pageId=12125569" rel="nofollow"  class="action-view-history"   title="">
+                <span>Page History</span>    </a>
+</li>
+                                </ul>
+                            <ul  id="action-menu-secondary"                     class="section-secondary aui-dropdown2-section">
+                                            <li>
+
+    
+        
+                            
+    
+    
+    <a  id="view-page-info-link" href="viewinfo6373.html?pageId=12125569" rel="nofollow"  class="action-view-info"   title="">
+                <span>Page Information</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="view-in-hierarchy-link" href="../login1d90.html?key=$page.space.key&amp;openId=12125569#selectedPageInHierarchy" rel="nofollow"  class=""   title="">
+                <span>View in Hierarchy</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-view-source-link" href="../plugins/viewsource/viewpagesrc6373.html?pageId=12125569" rel="nofollow"  class="action-view-source popup-link"   title="">
+                <span>View Source</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-export-pdf-link" href="../download/temp/pdfexport-20141021-211014-1809-2353/EZP51-InstallingeZPublishonaLinux-UNIXbasedsystem-211014-1809-2354f1f7.pdf?pageId=12125569" rel="nofollow"  class=""   title="">
+                <span>Export to PDF</span>    </a>
+</li>
+                                </ul>
+                    </div>
+    </li>
+            </ul>
+    </div>
+
+        
+                <div id="title-heading" class="pagetitle with-breadcrumbs">
+        
+                            <div class="space-logo " data-key="EZP51" data-name="eZ Publish 5.1" data-entity-type="confluence.space">
+            <a><img class="logo space custom" src="../download/attachments/12125253/EZP51ccaa?version=2&amp;modificationDate=1370705476000&amp;api=v2" alt=""></a>
+        </div>            
+                            <div id="breadcrumb-section">
+                    
+    
+    
+    <ol id="breadcrumbs">
+                    
+                
+        <li class="first" >
+                
+
+                    <span class=""><a href="../display/EZP51/eZ%2bPublish%2bDocumentation.html">eZ Publish 5.1</a></span>
+                                                <li id="ellipsis" title="Show all breadcrumbs"><span><strong>&#8230;</strong></span></li>
+                                    
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="../display/EZP51/eZ%2bPublish%2bDocumentation.html">eZ Publish Documentation</a></span>
+                                        
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="viewpage2edf.html?pageId=12125266">Installation &amp; Upgrade Guide</a></span>
+                                        
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="../display/EZP51/Installation.html">Installation</a></span>
+                            
+                
+        <li>
+                
+
+                    <span class=""><a href="../display/EZP51/Normal%2binstallation.html">Normal installation</a></span>
+                </ol>
+
+
+                </div>
+            
+            <h1 id="title-text" class="with-breadcrumbs">
+                                        <a href="viewpage6373.html?pageId=12125569">Installing eZ Publish on a Linux/UNIX based system</a>
+                            </h1>
+        </div>
+    </div>
+
+    
+
+    
+    
+    
+    
+    
+
+        
+
+
+
+
+        
+
+
+
+
+    
+
+    
+
+    
+
+
+
+
+
+
+
+    
+    
+        
+    
+    
+                    
+    
+
+    
+
+
+<div id="content" class="page view">
+    
+
+<div id="action-messages">
+                        </div>
+
+
+
+        <script type="text/x-template" title="searchResultsGrid">
+    <table class="aui">
+        <thead>
+            <tr class="header">
+                <th class="search-result-title">Page Title</th>
+                <th class="search-result-space">Space</th>
+                <th class="search-result-date">Updated</th>
+            </tr>
+        </thead>
+    </table>
+</script>
+<script type="text/x-template" title="searchResultsGridCount">
+    <p class="search-result-count">{0}</p>
+</script>
+<script type="text/x-template" title="searchResultsGridRow">
+    <tr class="search-result">
+        <td class="search-result-title"><a href="{1}" class="content-type-{2}"><span>{0}</span></a></td>
+        <td class="search-result-space"><a class="space" href="/display/{4}/" title="{3}">{3}</a></td>
+        <td class="search-result-date"><span class="date" title="{6}">{5}</span></td>
+    </tr>
+</script>
+        
+    
+    
+        <fieldset class="hidden parameters">
+            <input type="hidden" title="parentPageId" value="">
+        </fieldset>
+
+                            
+    
+
+                    
+
+                    
+        
+        <a href="#page-metadata-end" class="assistive">Skip to end of metadata</a>
+<div id="page-metadata-start" class="assistive"></div>
+
+    <div class="page-metadata">
+        <ul>
+                            <li class="page-metadata-item noprint">
+
+    
+            
+                            
+    
+    
+    <a  id="content-metadata-page-restrictions" href="#" rel="nofollow"  class="hidden"   title="Restrictions apply">
+                    <img alt="" src="../download/resources/com.atlassian.confluence.plugins.confluence-page-banner_page-banner-resources/images/red_padlock.png" height="16" width="16" title="">
+                <span></span>    </a>
+</li>
+                        <li class="page-metadata-modification-info">
+                
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'>     <a href="../logine6fa.html"
+                       class="url fn"
+                            >Ricardo Correia</a></span>, last modified by <span class='editor'>     <a href="../loginc848.html"
+                       class="url fn"
+                            >André Rømcke</a></span> on <a class='last-modified' title='May 09, 2013 13:07' href='diffpagesbyversion77fc.html?pageId=12125569&amp;selectedPageVersions=1&amp;selectedPageVersions=2'>May 09, 2013</a>
+                </li>
+        </ul>
+    </div>
+
+
+<a href="#page-metadata-start" class="assistive">Go to start of metadata</a>
+<div id="page-metadata-end" class="assistive"></div>
+
+                            <div id="page-history-warning" class="aui-message warning">
+        <p>
+            <span class="aui-icon icon-warning"></span>
+            <strong>You are viewing an old version of this page. View the <strong><a href="../display/EZP51/Installing%2beZ%2bPublish%2bon%2ba%2bLinux-UNIX%2bbased%2bsystem.html">current version</a>.</strong></strong>
+        </p>
+        <p class="page-history-view">
+            <a href="diffpagesbyversion1bb3.html?pageId=12125276&amp;originalVersion=2&amp;revisedVersion=13">Compare with Current</a>
+                        <a href="viewpreviousversionscbe5.html?pageId=12125276">View Page History</a>
+        </p>
+        <p class="version-navigation-block">
+                            <a class="version-navigation aui-button" href="viewpage5cfb.html?pageId=12125566&amp;navigatingVersions=true">&laquo; Previous</a>
+            
+            <span class="current-version-margin">
+                                    <strong> Version 2</strong>
+                            </span>
+
+                            <a class="version-navigation aui-button" href="viewpage33e0.html?pageId=12781205&amp;navigatingVersions=true">Next &raquo;</a>
+            
+        </p>
+    </div>
+            
+        <fieldset class="hidden parameters">
+                        <input type="hidden" title="browsePageTreeMode" value="view">
+        </fieldset>
+
+        <div class="wiki-content">
+                           
+        <p><div class="panel" style="border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;"><b>eZ Publish Documentation</b></div></div></p><p>The requirements for doing a normal installation must be met, read the &quot;<a href="../display/EZP51/Requirements%2bfor%2bdoing%2ba%2bnormal%2binstallation.html">Requirements for doing a normal installation</a>&quot; section first!</p><p>This section will guide you through the following steps:</p><ul><li><div>Setting up / creating a database</div></li><li><div>Downloading a packaged eZ Publish distribution</div></li><li><div>Unpacking the eZ Publish distribution</div></li><li><div>Prepare the extracted files<ul><li><div>Setup folder permissions</div></li><li><div>Link your assets</div></li></ul></div></li><li><div>(Optional) Configure a <a href="../display/EZP51/Virtual%2bhost%2bsetup.html">VirtualHost</a></div></li><li><div>Initiating and going through the web based setup wizard at <code>http://&lt;your-host-name&gt;/ezsetup</code></div></li><li>(Optional) Set up cronjobs</li></ul><h2 id="InstallingeZPublishonaLinux/UNIXbasedsystem-Settingupadatabase">Setting up a database</h2><p>A database must be created before running the setup wizard. The following text explains how to set up a database using either MySQL or PostgreSQL.</p><p><a name="eztoc131657_1_1" rel="nofollow"></a></p><h3 id="InstallingeZPublishonaLinux/UNIXbasedsystem-MySQL">MySQL</h3><ol><li><div><p>Log in as the root user (or any other MySQL user that has the <code>CREATE</code>, <code>CREATE USER</code> and <code>GRANT OPTION</code> <a href="http://dev.mysql.com/doc/refman/5.1/en/privileges-provided.html" class="external-link" rel="nofollow">privileges</a>):</p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>$ mysql --host=&lt;mysql_host&gt; --port=&lt;port&gt; -u &lt;mysql_user&gt; -p&lt;mysql_password&gt;</pre>
+</div></div>    <div class="aui-message warning shadowed information-macro">
+                            <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                            <p>Note that if MySQL is installed on the same server, the &quot;<code>--host</code>&quot; parameter can be omitted. If the &quot;<code>--port</code>&quot; parameter is omitted, the default port for MySQL traffic will be used (port 3306).</p>
+                    </div>
+    </div>
+<p> </p><p>The MySQL client should display a &quot;mysql&gt;&quot; prompt.</p></div></li><li><div><p>Create a new database:</p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>mysql&gt; CREATE DATABASE &lt;database&gt; CHARACTER SET utf8;</pre>
+</div></div></div></li><li><div><p>Grant access permissions:</p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>mysql&gt; GRANT ALL ON &lt;database&gt;.* TO &lt;user&gt;@&lt;ezp_host&gt; IDENTIFIED BY &#39;&lt;password&gt;&#39;;</pre>
+</div></div>    <div class="aui-message warning shadowed information-macro">
+                            <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                            <p>Note that if the specified user account does not exist, it will be created.</p>
+                    </div>
+    </div>
+<p><br /><br /></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Reference</th><th class="confluenceTh">Description</th></tr><tr><td class="confluenceTd">&lt;mysql_host&gt;</td><td class="confluenceTd">The hostname of the MySQL database server.</td></tr><tr><td class="confluenceTd">&lt;port&gt;</td><td class="confluenceTd">The port number that will be used to connect to the MySQL database server.</td></tr><tr><td class="confluenceTd">&lt;mysql_user&gt;</td><td class="confluenceTd">The MySQL user (if no user is set up, use &quot;<code>root</code>&quot;).</td></tr><tr><td class="confluenceTd">&lt;mysql_password&gt;</td><td class="confluenceTd">The password that belongs to the <code>&lt;mysql_user&gt;</code>.</td></tr><tr><td class="confluenceTd">&lt;database&gt;</td><td class="confluenceTd">The name of the database, for example &quot;<code>my_new_database</code>&quot;.</td></tr><tr><td class="confluenceTd">&lt;user&gt;</td><td class="confluenceTd">The username that will be used to access the database.</td></tr><tr><td class="confluenceTd">&lt;ezp_host&gt;</td><td class="confluenceTd">The hostname of the server on which eZ Publish will be running. (may be &quot;<code>localhost</code>&quot; if MySQL is installed on the same server).</td></tr><tr><td class="confluenceTd">&lt;password&gt;</td><td class="confluenceTd">The password you wish to set in order to limit access to the database.</td></tr></tbody></table></div></div></li></ol><p><a name="eztoc131657_1_2" rel="nofollow"></a></p><h3 id="InstallingeZPublishonaLinux/UNIXbasedsystem-PostgreSQL">PostgreSQL</h3><ol><li><div><p>Log in as the postgres user (or any other PostgreSQL user that has sufficient <a href="http://www.postgresql.org/docs/current/interactive/sql-grant.html" class="external-link" rel="nofollow">privileges</a> to create roles and databases):</p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>$ psql -h &lt;psql_host&gt; -p &lt;port&gt; -U &lt;psql_user&gt; -W</pre>
+</div></div>    <div class="aui-message warning shadowed information-macro">
+                            <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                            <p>Note that if PostgreSQL is installed on the same server, the &quot;<code>-h</code>&quot; parameter can be omitted. If the &quot;<code>-p</code>&quot; parameter is omitted, the default port for PostgreSQL traffic will be used (in most cases, port 5432).</p>
+                    </div>
+    </div>
+<p>The PostgreSQL client will ask you to specify the password that belongs to the <code>&lt;psql_user&gt;</code>. If the password is correct, the client should display a &quot;<code>&lt;psql_user&gt;=#</code>&quot; prompt.</p></div></li><li><div><p>Create a new database:</p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>postgres=# CREATE DATABASE &lt;database&gt; ENCODING=&#39;utf8&#39;;</pre>
+</div></div></div></li><li><div><p>Create a new user:</p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>postgres=# CREATE USER &lt;user&gt; PASSWORD &#39;&lt;password&gt;&#39;;</pre>
+</div></div></div></li><li><div><p>Grant access permissions:</p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>postgres=# GRANT ALL PRIVILEGES ON DATABASE &lt;database&gt; TO &lt;user&gt;;</pre>
+</div></div><p> </p></div><div><p>Import the &quot;<a href="http://www.postgresql.org/docs/8.3/static/pgcrypto.html" class="external-link" rel="nofollow">pgcrypto</a>&quot; module into the new database:</p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>postgres=# \c &lt;database&gt;
+&lt;database&gt;=# \i &#39;&lt;path_to_pgcrypto&gt;&#39;</pre>
+</div></div><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Reference</th><th class="confluenceTh">Description</th></tr><tr><td class="confluenceTd">&lt;psql_host&gt;</td><td class="confluenceTd">The hostname of the PostgreSQL database server.</td></tr><tr><td class="confluenceTd">&lt;port&gt;</td><td class="confluenceTd">The port number that will be used to connect to the PostgreSQL database server.</td></tr><tr><td class="confluenceTd">&lt;psql_user&gt;</td><td class="confluenceTd">The PostgreSQL user (if no user is set up, use &quot;<code>postgresql</code>&quot;).</td></tr><tr><td class="confluenceTd">&lt;database&gt;</td><td class="confluenceTd">The name of the database, for example &quot;<code>my_new_database</code>&quot;.</td></tr><tr><td class="confluenceTd">&lt;user&gt;</td><td class="confluenceTd">The username that will be used to access the database.</td></tr><tr><td class="confluenceTd">&lt;password&gt;</td><td class="confluenceTd">The password you wish to set in order to limit access to the database.</td></tr><tr><td class="confluenceTd">&lt;path_to_pgcrypto&gt;</td><td class="confluenceTd">The path to the &quot;<code>pgcrypto.sql</code>&quot; file, for example &quot;<code>/usr/share/pgsql/contrib/pgcrypto.sql</code>&quot;.</td></tr></tbody></table></div><strong><br />Note for version 9.1+ of PostgreSQL users:</strong>The following changes might be necessary for these users:<div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>postgres=# \c &lt;database&gt;
+&lt;database&gt;=# CREATE EXTENSION pgcrypto;</pre>
+</div></div></div></li></ol><h2 id="InstallingeZPublishonaLinux/UNIXbasedsystem-DownloadingeZPublish">Downloading eZ Publish</h2><p>The latest community version of eZ Publish can be downloaded from <a href="http://share.ez.no/download-develop/downloads" class="external-link" rel="nofollow">http://share.ez.no/download-develop/downloads</a>, while enterprise version is available in your <a href="https://support.ez.no/" class="external-link" rel="nofollow">support portal</a> or via partner portal.</p><p><a name="eztoc131657_3" rel="nofollow"></a></p><h2 id="InstallingeZPublishonaLinux/UNIXbasedsystem-UnpackingeZPublish">Unpacking eZ Publish</h2><p>Use your favorite tool to unpack the downloaded eZ Publish distribution to a web-served directory (a directory that is reachable using a web browser), or in case of virtual host mode it can be any folder. The following example shows how to do this using the tar utility (to unpack a tar.gz file, assuming that the &quot;tar&quot; and the &quot;gzip&quot; utilities are installed on the system):</p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>$ tar zxvf ezpublish-&lt;version_number&gt;-gpl.tar.gz -C &lt;web_served_directory&gt;</pre>
+</div></div><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Reference</th><th class="confluenceTh">Description</th></tr><tr><td class="confluenceTd"><code>&lt;version_number&gt;</code></td><td class="confluenceTd">The version number of eZ Publish that was downloaded.</td></tr><tr><td class="confluenceTd"><code>&lt;web_served_directory&gt;</code></td><td class="confluenceTd">Full path to a directory that is served by the web server. This can be the path to the document root of the web server, or a personal web-directory (usually called &quot;<code>public_html</code>&quot; or &quot;<code>www</code>&quot;, and located inside a user's home directory).</td></tr></tbody></table></div><p> </p><p>The extraction utility will unpack eZ Publish into a sub-directory called &quot;<code>ezpublish-&lt;version_number&gt;</code>&quot;. Feel free to rename this directory to something more meaningful, for example &quot;<code>my_site</code>&quot;.</p><p><a name="eztoc131657_4" rel="nofollow"></a></p><h2 id="InstallingeZPublishonaLinux/UNIXbasedsystem-Settingupfolderpermission">Setting up folder permission</h2><p>Several cache, log and config folders must be writable both by the web server and the command line user, use <em>one</em> of the following two alternatives to do this:</p><ul><li><div><strong>Shell commands<br /></strong><br />These shell commands will give proper permission to the web server and command line users:<p> </p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>cd /&lt;ezp5-root&gt;/
+chmod -R a+rwx ezpublish/{cache,logs,config} \
+    ezpublish_legacy/{design,extension,settings,var}</pre>
+</div></div></div></li></ul><pre class="wordwrap"> </pre><ul><li><div><strong>Recommended shell commands using setfacl<br /><br /></strong>These commands will setup the permission more correctly, but require use of <code>setfacl</code> which is not available on all systems (change &quot;<code>www-data</code>&quot; to your web server user if your system uses something else):<p> </p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>cd /&lt;ezp5-root&gt;/
+sudo setfacl -R -m u:www-data:rwx -m u:www-data:rwx \
+    ezpublish/{cache,logs,config} \
+    ezpublish_legacy/{design,extension,settings,var}
+sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx \
+    ezpublish/{cache,logs,config} \
+    ezpublish_legacy/{design,extension,settings,var}</pre>
+</div></div></div></li></ul><h2 id="InstallingeZPublishonaLinux/UNIXbasedsystem-Linkassets">Link assets</h2><p>To be able to run eZ Publish 5 correctly, assets need to be exposed in the public &quot;<code>web</code>&quot; folder.</p><p>The following commands will first symlink eZ Publish 5 assets in &quot;Bundles&quot; and the second will symlink assets (design files like images, scripts and css, and files in var folder)  from eZ Publish Legacy</p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>cd /&lt;ezp5-root&gt;
+php ezpublish/console assets:install --symlink web
+php ezpublish/console ezpublish:legacy:assets_install --symlink web
+
+# For 5.1 / 2013.4 and higher, also:
+php ezpublish/console assetic:dump --env=prod web</pre>
+</div></div>    <div class="aui-message warning shadowed information-macro">
+                            <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                            <p><em><strong>Note</strong>: In both cases </em>&quot;<code>web</code>&quot;<em> is the default folder and can be skipped from the command. Further information about alternative options is available with <code>-h</code> just like it is with</em> &quot;<code>php ezpublish/console -h</code>&quot;.</p>
+                    </div>
+    </div>
+<h2 id="InstallingeZPublishonaLinux/UNIXbasedsystem-Initiatingthesetupwizard">Initiating the setup wizard</h2><p>The setup wizard can be started using a web browser immediately after the previous steps (described in this section) are completed. It will be automatically run the first time someone tries to access/browse the &quot;<code>/ezsetup</code>&quot; url. Let's assume that we are using a server with the host name &quot;<code>www.example.com</code>&quot; and that after unpacking, the eZ Publish directory was renamed to &quot;<code>my_site</code>&quot;.</p><p><a name="eztoc131657_6_3" rel="nofollow"></a></p><h3 id="InstallingeZPublishonaLinux/UNIXbasedsystem-Documentrootexample">Document root example</h3><p>If eZ Publish was unpacked into a directory called &quot;<code>my_site</code>&quot; under the document root, the setup wizard can be initiated by browsing the following URL: <code><span class="nolink">http://www.example.com/my_site/web/index.php/ezsetup</span></code>.</p><p><a name="eztoc131657_6_4" rel="nofollow"></a></p><h3 id="InstallingeZPublishonaLinux/UNIXbasedsystem-Homedirectoryexample">Home directory example</h3><p>If eZ Publish was unpacked to a web-served directory located inside the home directory of a user with the user name &quot;<code>peter</code>&quot;, (usually called &quot;<code>public_html</code>&quot;, &quot;<code>www</code>&quot;, &quot;<code>http</code>&quot;, &quot;<code>html</code>&quot; or &quot;<code>web</code>&quot;), the setup wizard can be initiated by browsing the following URL: <code><span class="nolink">http://www.example.com/~peter/my_site/web/index.php/ezsetup</span></code>.</p><p><a name="eztoc131657_6_5" rel="nofollow"></a></p><h3 id="InstallingeZPublishonaLinux/UNIXbasedsystem-Virtualhostexample">Virtual host example</h3><p>If you have setup the host name www.example.com to point to the web folder of eZ Publish using <a href="../display/EZP51/Virtual%2bhost%2bsetup.html">rewrite</a> rules, then you should access it at: <code><span class="nolink">http://www.example.com/ezsetup</span></code>.</p><p>Refer to the &quot;<a href="../display/EZP51/The%2bsetup%2bwizard.html">The setup wizard</a>&quot; section for a detailed description of the web based setup wizard.</p>
+
+                
+        
+    
+        </div>
+
+        <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://doc.ez.no/pages/viewpage.action?pageId=12125569"
+    dc:identifier="https://doc.ez.no/pages/viewpage.action?pageId=12125569"
+    dc:title="Installing eZ Publish on a Linux/UNIX based system"
+    trackback:ping="https://doc.ez.no/rpc/trackback/12125569"/>
+</rdf:RDF>
+-->
+
+            
+    
+
+
+
+<div id="labels-section" class="pageSection group">
+    <div class="labels-section-content content-column" entityid="12125569" entitytype="page">
+	<div class="labels-content">
+		
+    <ul class="label-list label-list-right ">
+            <li class="no-labels-message">
+            No labels
+        </li>
+            </ul>
+
+    </div>
+</div></div>
+
+            
+            
+
+
+
+
+            
+    
+
+
+
+
+
+
+
+
+                    
+    
+<div id="comments-section" class="pageSection group">
+    
+    
+    
+    
+            <div class="bottom-comment-panels comment-panels">
+                                    
+    
+
+
+    
+            </div>
+    
+    </div>
+
+
+            
+</div>
+
+
+    
+
+
+
+
+    
+    
+
+    
+    
+    
+
+
+
+
+
+
+
+
+</div>
+  
+        <div id="theme-footer">
+            <div class="sectionColumnWrapper"><div class="sectionMacro">
+<div class="sectionMacroRow"><div class="columnMacro"></div>
+<div class="columnMacro">
+<div class="panel" style="background-color: #ecf0f1;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: #ecf0f1;">
+<p>Where Content Means Business</p>
+</div></div></div>
+<div class="columnMacro"></div></div></div></div>
+        </div>
+    
+    </div>
+</div>
+
+
+        
+            <div id="footer">
+
+    <section class="footer-body">
+
+                                                <p class="license license-opensource">
+                  Powered by a free <b>Atlassian Confluence Open Source Project License</b> granted to eZ Publish. <a href="http://www.atlassian.com/c/conf/11461">Evaluate Confluence today</a>.<br>
+                </p>
+                        
+    
+
+    <ul id="poweredby">
+        <li class="noprint">Powered by <a href="http://www.atlassian.com/software/confluence" class="hover-footer-link">Atlassian Confluence</a> <span id='footer-build-information'>5.4.4</span>, <a href="http://www.atlassian.com/software/confluence/overview/team-collaboration-software?utm_source=confluence-footer" class="hover-footer-link">Team Collaboration Software</a></li>
+        <li class="print-only">Printed by Atlassian Confluence 5.4.4, Team Collaboration Software.</li>
+        <li class="noprint"><a href="http://jira.atlassian.com/secure/BrowseProject.jspa?id=10470" class="hover-footer-link">Report a bug</a></li>
+        <li class="noprint"><a href="http://www.atlassian.com/about/connected.jsp?s_kwcid=Confluence-stayintouch" class="hover-footer-link">Atlassian News</a></li>
+    </ul>
+
+    
+
+            <script>
+AJS.toInit(function(){
+ if(AJS.params.spaceKey &&
+    AJS.params.spaceKey === 'MAIN' ||
+    AJS.params.spaceKey === 'EZMA' ||
+    AJS.params.spaceKey === 'ODC' ||
+    AJS.params.spaceKey === 'EZP50' ||
+    AJS.params.spaceKey === 'EZP51' ||
+    AJS.params.spaceKey === 'EZP52' ||
+    AJS.params.spaceKey === 'EZPCLOUD' ||
+    AJS.params.spaceKey === 'EZP' ||
+    AJS.params.spaceKey === 'EZRECO'
+){
+
+(function()
+{var isSecure=('https:'==document.location.protocol);var ff=document.createElement('script');ff.type='text/javascript';ff.async=true;ff.src=(isSecure?'https':'http')+'://'+(isSecure?'secure.':'lb.')+'liveviewer.ez.no/statjs/sst-120-1304513615/stat.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ff,s);}
+)();
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-303624-13', 'ez.no');
+  ga('send', 'pageview');
+}}
+);
+</script>
+    
+    </section>
+
+</div>
+
+            
+    </div>
+</body>
+
+<!-- Mirrored from doc.ez.no/pages/viewpage.action?pageId=12125569&navigatingVersions=true by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:09:52 GMT -->
+</html>

@@ -1,0 +1,131 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-1.10-upgrade by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:22:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Website interface 1.10 upgrade / Website Interface / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Website interface 1.10 upgrade</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>
+<b>Compatibility notice</b><br />Please be aware that as of eZ Publish 4.7, once that eZ Demo design has been introduced, issues can occur if eZ Webin and eZ Demo are used in the same installation. This is because the two extensions have similarities at the code level, such as class names, which will considered them as duplicated. In resume, we don't recommend or support the usage of both extensions in parallel, in the same eZ Publish installation.</p>
+    </td>
+</tr>
+</table>
+</div><a name="eztoc126945_0_1" id="eztoc126945_0_1"></a><h3>Back-up</h3><p>Before starting the Website Interface upgrading process make sure that you have a working backup of the existing website state including database, extensions, INI settings, etc. During the upgrade process the existing &quot;Website Interface&quot; extension will be removed and replaced with a new version.</p><a name="eztoc126945_0_2" id="eztoc126945_0_2"></a><h3>Packages</h3><p>
+Download following packages from <a href="http://packages.ez.no/ezpublish/4.7/4.7.0/" target="_self">http://packages.ez.no/ezpublish/4.7/4.7.0/</a>:<br />
+&nbsp;&quot;ezwebin_extension.ezpkg&quot;<br />
+&nbsp;&quot;ezstarrating_extension.ezpkg&quot;<br />
+&nbsp;&quot;ezgmaplocation_extension.ezpkg&quot;<br />
+&nbsp;&quot;ezwt_extension.ezpkg&quot;<br />&nbsp;&quot;ezwebin_design_blue.ezpkg&quot;</p><p>Go to the packages management interface in the &quot;Administration Interface&quot;. This can be done via the &quot;Setup-tab&quot;, where you can click on the &quot;Packages&quot;-link in the left menu:</p>
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../var/doc/storage/images/media/images/download-package/121495-1-eng-GB/Download-package_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p><i>The package management screen</i></p><p>
+From the Repository drop-down box choose eZ-system then click “Change repository” button. From the list of available packages remove following packages:<br />
+&nbsp;&quot;ezwebin_extension&quot;<br />
+&nbsp;&quot;ezstarrating_extension&quot;<br />
+&nbsp;&quot;ezgmaplocation_extension&quot;<br />
+&nbsp;&quot;ezwt_extension&quot;<br />&nbsp;&quot;ezwebin_design_blue&quot;</p><p>Next change repository again to the “eZ-systems” and click on “Import new package” button. In the next view select &quot;ezwebin_extension&quot; and click “Import package” button. Once the &quot;ezwebin_extension&quot; is imported click on “Install package”. In the next view choose “Replace extension” option and click “Continue” button. Repeat these steps for rest of new extensions (&quot;ezstarrating_extension&quot;, &quot;ezgmaplocation_extension&quot; and &quot;ezwt_extension&quot;).</p><p>Once all new extensions are imported they need to be activated under the <i>[ExtensionSettings]</i> block in the &quot;settings/site.ini.append.php&quot;:</p><pre class="wordwrap copytoclipboard"><span class="line">[ExtensionSettings]</span>
+<span class="line">[...]</span>
+<span class="line">ActiveExtensions[]=ezjscore</span>
+<span class="line">ActiveExtensions[]=ezstarrating</span>
+<span class="line">ActiveExtensions[]=ezgmaplocation</span>
+<span class="line">ActiveExtensions[]=ezwt</span>
+<span class="line">ActiveExtensions[]=ezwebin</span>
+<span class="line">[…]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ExtensionSettings]\r\n[...]\r\nActiveExtensions[]=ezjscore\r\nActiveExtensions[]=ezstarrating\r\nActiveExtensions[]=ezgmaplocation\r\nActiveExtensions[]=ezwt\r\nActiveExtensions[]=ezwebin\r\n[…]' ); return false;" /></p>
+<![endif]--><a name="eztoc126945_0_3" id="eztoc126945_0_3"></a><h3>Autoload update</h3><p>Next the autoload array needs to be updated for the new extensions. In order to do so, execute following command from eZ Publish root folder:</p><pre class="wordwrap"><span class="line">$ php bin/php/ezpgenerateautoloads.php -e -p</span>
+</pre><a name="eztoc126945_0_4" id="eztoc126945_0_4"></a><h3>Content classes</h3><p>Website Interface 1.10 does not provide any new content classes.</p><a name="eztoc126945_0_5" id="eztoc126945_0_5"></a><h3>Database changes</h3><p><b>Note:</b> The database changes below for eZ Flow, eZ GMAP Location and eZ StarRating are only related to Postgre SQL setups.</p><p><b>For eZ GMAP Location</b><b>&nbsp;(for Postgre SQL only)</b><b>:</b></p><pre class="wordwrap"><span class="line">ALTER INDEX ezgml_latitude_longitude_key RENAME TO latitude_longitude_key;</span>
+</pre><p><b>For eZ StarRating </b><b>(for Postgre SQL only)</b><b>:</b></p><pre class="wordwrap"><span class="line">ALTER INDEX ezsr_data_user_id_session_key RENAME TO user_id_session_key;</span>
+<span class="line">ALTER INDEX ezsr_data_contentobject_id_contentobject_attribute_id</span>
+<span class="line">RENAME TO contentobject_id_contentobject_attribute_id;</span>
+</pre><pre class="wordwrap"><span class="line">UPDATE ezsite_data SET value='4.7.0rc1' WHERE name='ezpublish-version';</span>
+<span class="line">UPDATE ezsite_data SET value='1' WHERE name='ezpublish-release';</span>
+</pre><pre class="wordwrap"><span class="line">ALTER TABLE ONLY ezpending_actions</span>
+<span class="line">&nbsp;&nbsp;&nbsp;ADD CONSTRAINT ezpending_actions_pkey PRIMARY KEY (id);</span>
+</pre><pre class="wordwrap"><span class="line">UPDATE eztrigger SET name = 'pre_updatemainassignment', function_name = 'updatemainassignment'</span>
+<span class="line">&nbsp;&nbsp;&nbsp;WHERE name = 'pre_UpdateMainAssignment' AND function_name = 'UpdateMainAssignment';</span>
+</pre><pre class="wordwrap copytoclipboard"><span class="line">ALTER TABLE ezstarrating RENAME COLUMN rating_average TO rating_average_tmp;</span>
+<span class="line">ALTER TABLE ezstarrating ADD COLUMN rating_average real;</span>
+<span class="line">ALTER TABLE ezstarrating ALTER rating_average SET DEFAULT 0::real ;</span>
+<span class="line">ALTER TABLE ezstarrating ALTER rating_average SET NOT NULL ;</span>
+<span class="line">UPDATE ezstarrating SET rating_average=rating_average_tmp;</span>
+<span class="line">ALTER TABLE ezstarrating DROP COLUMN rating_average_tmp;</span>
+<span class="line">&nbsp;</span>
+<span class="line">ALTER TABLE ezstarrating_data RENAME COLUMN rating TO rating_tmp;</span>
+<span class="line">ALTER TABLE ezstarrating_data ADD COLUMN rating real;</span>
+<span class="line">ALTER TABLE ezstarrating_data ALTER rating SET DEFAULT 0::real ;</span>
+<span class="line">ALTER TABLE ezstarrating_data ALTER rating SET NOT NULL ;</span>
+<span class="line">UPDATE ezstarrating_data SET rating=rating_tmp;</span>
+<span class="line">ALTER TABLE ezstarrating_data DROP COLUMN rating_tmp;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'ALTER TABLE ezstarrating RENAME COLUMN rating_average TO rating_average_tmp;\r\nALTER TABLE ezstarrating ADD COLUMN rating_average real;\r\nALTER TABLE ezstarrating ALTER rating_average SET DEFAULT 0::real ;\r\nALTER TABLE ezstarrating ALTER rating_average SET NOT NULL ;\r\nUPDATE ezstarrating SET rating_average=rating_average_tmp;\r\nALTER TABLE ezstarrating DROP COLUMN rating_average_tmp;\r\n\r\nALTER TABLE ezstarrating_data RENAME COLUMN rating TO rating_tmp;\r\nALTER TABLE ezstarrating_data ADD COLUMN rating real;\r\nALTER TABLE ezstarrating_data ALTER rating SET DEFAULT 0::real ;\r\nALTER TABLE ezstarrating_data ALTER rating SET NOT NULL ;\r\nUPDATE ezstarrating_data SET rating=rating_tmp;\r\nALTER TABLE ezstarrating_data DROP COLUMN rating_tmp;' ); return false;" /></p>
+<![endif]--><p><i><b>Note:</b> If you have already upgraded eZ StarRating packages while upgrading eZ Webwin, you may have run these queries already. If you run them again, some errors will rise.</i></p><a name="eztoc126945_0_6" id="eztoc126945_0_6"></a><h3>INI settings</h3><p>Update&quot; settings/siteaccess/(public_site_name)/design.ini.append.php&quot; and replace old settings with new ones:</p><pre class="wordwrap copytoclipboard"><span class="line">[StylesheetSettings]</span>
+<span class="line">SiteCSS=var/storage/packages/eZ-systems/ezwebin_design_blue/files/default/file/site-colors.css</span>
+<span class="line">ClassesCSS=var/storage/packages/eZ-systems/ezwebin_design_blue/files/default/file/classes-colors.css</span>
+<span class="line">CSSFileList[]</span>
+<span class="line">&nbsp;</span>
+<span class="line">[JavaScriptSettings]</span>
+<span class="line">JavaScriptList[]=insertmedia.js</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[StylesheetSettings]\r\nSiteCSS=var/storage/packages/eZ-systems/ezwebin_design_blue/files/default/file/site-colors.css\r\nClassesCSS=var/storage/packages/eZ-systems/ezwebin_design_blue/files/default/file/classes-colors.css\r\nCSSFileList[]\r\n\r\n[JavaScriptSettings]\r\nJavaScriptList[]=insertmedia.js' ); return false;" /></p>
+<![endif]--><p><b>Note:</b> The settings above have not changed from 4.5, so unless you upgrade from 4.4, you don't need to change these settings. Check them, however. Better safe than sorry!</p><a name="eztoc126945_0_7" id="eztoc126945_0_7"></a><h3>Clear Cache</h3><p>Once the upgrade script is done, you need to clear the cache by executing following command from eZ Publish root folder:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-1.10-upgrade by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:22:12 GMT -->
+</html>

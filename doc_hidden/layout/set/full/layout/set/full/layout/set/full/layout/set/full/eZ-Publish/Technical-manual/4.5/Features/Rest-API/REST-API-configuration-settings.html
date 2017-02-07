@@ -1,0 +1,117 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.5/Features/Rest-API/REST-API-configuration-settings by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:07:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>REST API configuration settings / Rest API / Features / 4.5 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>REST API configuration settings</h1>
+</div>
+
+<p>Please read on below to find an overview of the INI settings currently existing in the REST API layer:</p><a name="eztoc123150_0_1" id="eztoc123150_0_1"></a><h3>System settings</h3><pre class="wordwrap"><span class="line">[System]</span>
+<span class="line">PrefixFilterClass=ezpRestDefaultRegexpPrefixFilter</span>
+<span class="line">ApiPrefix=/api</span>
+</pre><a name="eztoc123150_0_2" id="eztoc123150_0_2"></a><h3>API provider</h3><pre class="wordwrap"><span class="line">[ApiProvider]</span>
+<span class="line">ProviderClass[]</span>
+</pre><a name="eztoc123150_0_3" id="eztoc123150_0_3"></a><h3>Debug settings</h3><pre class="wordwrap"><span class="line">[DebugSettings]</span>
+<span class="line">Debug=disabled</span>
+</pre><a name="eztoc123150_0_4" id="eztoc123150_0_4"></a><h3>Output settings</h3><pre class="wordwrap copytoclipboard"><span class="line">[OutputSettings]</span>
+<span class="line">RendererClass[xhtml]=ezpContentXHTMLRenderer</span>
+<span class="line">&nbsp;</span>
+<span class="line">[ezpRestContentController_viewContent_OutputSettings]</span>
+<span class="line">Template=rest_pagelayout.tpl</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[OutputSettings]\r\nRendererClass[xhtml]=ezpContentXHTMLRenderer\r\n\r\n[ezpRestContentController_viewContent_OutputSettings]\r\nTemplate=rest_pagelayout.tpl' ); return false;" /></p>
+<![endif]--><a name="eztoc123150_0_5" id="eztoc123150_0_5"></a><h3>Cache settings</h3><pre class="wordwrap copytoclipboard"><span class="line">[CacheSettings]</span>
+<span class="line"># Global switch to enable/disable REST application cache</span>
+<span class="line">ApplicationCache=enabled</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[CacheSettings]\r\n# Global switch to enable/disable REST application cache\r\nApplicationCache=enabled\r\n' ); return false;" /></p>
+<![endif]--><p>The ApplicationCache is set to &quot;Enabled&quot; as the default value if no specific value has been defined for your controller/action. If the Application cache is set to enabled the result of each service call will be cached. You can refine this with setting specific to your controller/action. The system will look for a [&lt;controllerClass&gt;_&lt;action&gt;_CacheSettings] block to check if cache can be used, and if so, which TTL to use. If this block cannot be found, the system will search at the controller level, and so look for a [&lt;controllerClass&gt;_CacheSettings] block.</p><p>See example block below for more information</p><pre class="wordwrap copytoclipboard"><span class="line"># Basically this setting allows you to activate the cache to your controllers/actions individually</span>
+<span class="line">ApplicationCacheDefault=enabled</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Set default TTL to 10min, in seconds</span>
+<span class="line">DefaultCacheTTL=600</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Example for action &quot;viewContent&quot;, in &quot;ezpRestContentController&quot; controller class</span>
+<span class="line">#[ezpRestContentController_viewContent_CacheSettings]</span>
+<span class="line">#ApplicationCache=enabled</span>
+<span class="line">#CacheTTL=3600</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Below an example for every action contained in &quot;ezpRestContentController&quot; controller class</span>
+<span class="line">#[ezpRestContentController_CacheSettings]</span>
+<span class="line">#ApplicationCache=enabled</span>
+<span class="line">#CacheTTL=1200</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Switch to enable/disable Routes cache with APC</span>
+<span class="line">RouteApcCache=enabled</span>
+<span class="line"># TTL for Route APC cache, in seconds</span>
+<span class="line">RouteApcCacheTTL=3600</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '# Basically this setting allows you to activate the cache to your controllers/actions individually\r\nApplicationCacheDefault=enabled\r\n\r\n# Set default TTL to 10min, in seconds\r\nDefaultCacheTTL=600\r\n\r\n# Example for action &quot;viewContent&quot;, in &quot;ezpRestContentController&quot; controller class\r\n#[ezpRestContentController_viewContent_CacheSettings]\r\n#ApplicationCache=enabled\r\n#CacheTTL=3600\r\n\r\n# Below an example for every action contained in &quot;ezpRestContentController&quot; controller class\r\n#[ezpRestContentController_CacheSettings]\r\n#ApplicationCache=enabled\r\n#CacheTTL=1200\r\n\r\n# Switch to enable/disable Routes cache with APC\r\nRouteApcCache=enabled\r\n# TTL for Route APC cache, in seconds\r\nRouteApcCacheTTL=3600' ); return false;" /></p>
+<![endif]--><a name="eztoc123150_0_6" id="eztoc123150_0_6"></a><h3>Authentication</h3><pre class="wordwrap copytoclipboard"><span class="line">[Authentication]</span>
+<span class="line">RequireAuthentication=enabled</span>
+<span class="line">AuthenticationStyle=ezpRestOauthAuthenticationStyle</span>
+<span class="line">#AuthenticationStyle=ezpRestBasicAuthStyle</span>
+<span class="line">RequireHTTPS=disabled</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[Authentication]\r\nRequireAuthentication=enabled\r\nAuthenticationStyle=ezpRestOauthAuthenticationStyle\r\n#AuthenticationStyle=ezpRestBasicAuthStyle\r\nRequireHTTPS=disabled\r\n' ); return false;" /></p>
+<![endif]--><a name="eztoc123150_0_7" id="eztoc123150_0_7"></a><h3>Route settings</h3><pre class="wordwrap copytoclipboard"><span class="line">[RouteSettings]</span>
+<span class="line">RouteSettingImpl=ezpRestIniRouteFilter</span>
+<span class="line"># Pattern for the skip filter</span>
+<span class="line"># SkipFilter[]=controller_action;version</span>
+<span class="line"># If the version component is not listed version &quot;1&quot; is assumed.</span>
+<span class="line">SkipFilter[]</span>
+<span class="line">SkipFilter[]=ezpRestErrorController_show</span>
+<span class="line">SkipFilter[]=ezpRestAuthController_basicAuth</span>
+<span class="line">SkipFilter[]=ezpRestAuthController_oauthRequired</span>
+<span class="line">SkipFilter[]=ezpRestOauthTokenController_handleRequest</span>
+<span class="line"># Skip (auth) filter for every action in 'myController' which is of API version 2</span>
+<span class="line">SkipFilter[]=myController_*;2</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[RouteSettings]\r\nRouteSettingImpl=ezpRestIniRouteFilter\r\n# Pattern for the skip filter\r\n# SkipFilter[]=controller_action;version\r\n# If the version component is not listed version &quot;1&quot; is assumed.\r\nSkipFilter[]\r\nSkipFilter[]=ezpRestErrorController_show\r\nSkipFilter[]=ezpRestAuthController_basicAuth\r\nSkipFilter[]=ezpRestAuthController_oauthRequired\r\nSkipFilter[]=ezpRestOauthTokenController_handleRequest\r\n# Skip (auth) filter for every action in \'myController\' which is of API version 2\r\nSkipFilter[]=myController_*;2' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.5/Features/Rest-API/REST-API-configuration-settings by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:07:12 GMT -->
+</html>

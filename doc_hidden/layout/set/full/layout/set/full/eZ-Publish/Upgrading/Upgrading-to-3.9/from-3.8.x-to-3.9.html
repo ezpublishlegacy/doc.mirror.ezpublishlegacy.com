@@ -1,0 +1,150 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.9/from-3.8.x-to-3.9.0 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:23:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>from 3.8.x to 3.9.0 / Upgrading to 3.9 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>from 3.8.x to 3.9.0</h1>
+</div>
+
+ <p>This section describes how to upgrade your existing eZ Publish 3.8.x installation to version 3.9.0. If you are upgrading from a version prior to eZ Publish 3.8.0, you need to first <a href="../Upgrading-to-3.8/from-3.6.x-or-3.7.x-to-3.8.html" target="_self">upgrade to 3.8.0</a> before you can upgrade to 3.9.0.</p>    <a name="eztoc33959_0_0_1" id="eztoc33959_0_0_1"></a><h4>Important note</h4> <p>Before continuing, note that it is recommended to upgrade directly to the latest stable release in the 3.9 branch. (Refer to &quot;<a href="../Upgrading-from-3.a.b-to-3.x.html" target="_self">Upgrading from 3.a.b to 3.x.y</a>&quot; and &quot;<a href="from-3.9.x-to-3.9.html" target="_self">Upgrading from 3.9.x to 3.9.y</a>&quot; to learn how this can be done.) Mainly, there are two reasons for this:</p>
+<ul>
+ <li><div> The &quot;correctxmltext.php&quot; upgrade script in eZ Publish 3.9.0 contains a bug. It makes the script crash. This issue was fixed in 3.9.1. Refer to <a href="http://issues.ez.no/9952" target="_blank">http://issues.ez.no/9952</a> for more information. </div></li> <li><div> There is a significant problem with eZ Publish 3.9.0-3.9.2. More precisely, the discount functionality of the shop module contains a security vulnerability. The issue has been fixed in version 3.9.3. Refer to the <a href="http://ez.no/community/news/ez_publish_security_fixes_3_9_3_and_3_8_9" target="_blank">announcement</a> and the upgrade instructions for details. </div></li> 
+</ul>
+     <a name="eztoc33959_1" id="eztoc33959_1"></a><h2>Overview</h2> <p>Make sure that you have a working <a href="../../Upgrading.html#backup" target="_self">backup</a> of the site before you do the actual upgrade. The upgrade procedure consists of the following steps:</p> 
+<ol>
+ <li><div> Upgrading the distribution files to 3.9.0 </div></li> <li><div> Upgrading the database to 3.9.0 </div></li> <li><div> Running the 3.9.0 upgrade scripts </div></li> <li><div> Updating the system configuration </div></li> <li><div> Clearing the caches </div></li> 
+</ol>
+   <a name="eztoc33959_2" id="eztoc33959_2"></a><h2>Step 1: Upgrading the distribution files</h2> <p>The easiest way to upgrade the distribution files is to unpack eZ Publish 3.9.0 to a directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p> 
+<ul>
+ <li><div> design/example </div></li> <li><div> design/example_admin </div></li> <li><div> var </div></li> <li><div> settings/siteaccess </div></li> <li><div> settings/override </div></li> 
+</ul>
+ <p>Replace &quot;example&quot; and &quot;example_admin&quot; with actual names used by your siteaccesses.</p>  <a name="eztoc33959_2_1" id="eztoc33959_2_1"></a><h3>Custom extensions</h3> <p>If you are using custom extensions, the subdirectories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that come with eZ Publish (for example the &quot;PayPal&quot; extension).</p>    <a name="eztoc33959_3" id="eztoc33959_3"></a><h2>Step 2: Upgrading the database</h2> <p>The following text describes how a 3.8.0 database can be upgraded to 3.9.0. Before reading on, note that some of the database changes from eZ Publish 3.8.0 to 3.9.0 have been included in eZ Publish versions 3.8.1 and 3.8.5 as well. If you are upgrading from a version later than 3.8.0, it is recommended to skip some parts of the database upgrade scripts (the sections that should be skipped are marked with &quot;from 3.8.1&quot; or &quot;from 3.8.5&quot; comments in the &quot;.sql&quot; file).</p>  <a name="eztoc33959_3_2" id="eztoc33959_3_2"></a><h3>MySQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.9.0 directory. </div></li> <li><div> Run the database upgrade script: <pre class="wordwrap"><span class="line">mysql -u &lt;username&gt; -p&lt;password&gt; &lt;database&gt; &lt; update/database/mysql/3.9/dbupdate-3.8.0-to-3.9.0.sql</span>
+</pre>  </div></li> 
+</ol>
+ <p>Note that the CREATE TABLE statements in the database upgrade script do not specify which storage engine to use (no ENGINE or TYPE option), and thus the default storage engine will be used. Normally, it is MyISAM (starting from MySQL v.3.23). If you are using InnoDB, make sure the default storage engine is set to InnoDB before you run the database upgrade script (refer to <a href="http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html" target="_blank">MySQL documentation</a> for information about how to set the default engine). If you were not able to change the MySQL configuration on your server, and the upgrade left you with a mix of table types, you can convert the newly created tables to InnoDB using the following SQL queries:</p> <pre class="wordwrap copytoclipboard"><span class="line">ALTER TABLE ezcontentobject_trash TYPE = innodb;</span>
+<span class="line">ALTER TABLE ezcontentclass_name TYPE = innodb;</span>
+<span class="line">ALTER TABLE ezsearch_search_phrase TYPE = innodb;</span>
+<span class="line">ALTER TABLE ezsearch_return_count TYPE = innodb;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'ALTER TABLE ezcontentobject_trash TYPE = innodb;\r\nALTER TABLE ezcontentclass_name TYPE = innodb;\r\nALTER TABLE ezsearch_search_phrase TYPE = innodb;\r\nALTER TABLE ezsearch_return_count TYPE = innodb;' ); return false;" /></p>
+<![endif]--><p>It is also possible to use the &quot;bin/php/ezconvertmysqltabletype.php&quot; script for database conversion.</p>   <a name="eztoc33959_3_3" id="eztoc33959_3_3"></a><h3>PostgreSQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.9.0 directory. </div></li> <li><div> Run the database upgrade script: <pre class="wordwrap"><span class="line">psql -d &lt;database&gt; -U &lt;dbowner&gt; &lt; update/database/postgresql/3.9/dbupdate-3.8.0-to-3.9.0.sql</span>
+</pre>  </div></li> 
+</ol>
+    <a name="eztoc33959_4" id="eztoc33959_4"></a><h2>Step 3: Running the 3.9.0 upgrade scripts</h2> <p>The 3.9.0 version of eZ Publish introduces a couple of new features. In order to make sure that your site is compatible with these features, you'll have to run a couple of upgrade scripts.</p> <p> <a name="updateclasstranslations"></a>
+ </p>  <a name="eztoc33959_4_4" id="eztoc33959_4_4"></a><h3>Translating names of classes and class attributes</h3> <p>In eZ Publish 3.9, a new feature has been added to the multi-language functionality that makes it possible to translate names of the eZ Publish content classes / class attributes (see <a href="http://issues.ez.no/7890" target="_blank">this page</a> for more information). In order to make sure that your site is compatible with this new functionality, you will have to run the &quot;updateclasstranslations.php&quot; script. This step must be done even though your site has only one language.</p> <p>The &quot;updateclasstranslations.php&quot; script should be run for all siteaccesses that use different databases. It is strongly recommended that you only run the script once per database, otherwise your class and attribute names may be corrupted. If you only have a public and an administration siteaccess (which is the most typical/usual case), you will only need to run the script for one of the siteaccesses.</p> <p>The &quot;language&quot; parameter tells the script which language your class / class attribute names currently exist in. Note that only one language can be specified using this parameter. If your classes are in different languages, it is recommended to specify the language that is used for most of them (for example, if 10 default class names are in English and 2 names of newly created custom classes are in Norwegian, you should use English as a parameter for the script and then edit the two custom classes manually). The following example shows how to run the script.</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.9.0 directory. </div></li> <li><div> Run the script (replace &quot;example&quot; with the actual name of your siteaccess, specify the original language instead of &quot;eng-GB&quot;): <pre class="wordwrap"><span class="line">php update/common/scripts/3.9/updateclasstranslations.php -s example --language=eng-GB</span>
+</pre>  </div></li> 
+</ol>
+<p>The script will check your content classes and content class attributes and re-initialize their names for missing translations. </p> <p> <a name="correctxmltext"></a>
+ </p>   <a name="eztoc33959_4_5" id="eztoc33959_4_5"></a><h3>Custom attributes for XML tags</h3> <p>eZ Publish 3.9.0 supports using custom attributes in all XML tags (see <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/features/3.9/xml_custom_attributes.txt" target="_blank">this page</a> for more information). The names of the custom attributes must be added to the global (or siteaccess) &quot;content.ini.append.php&quot; configuration file. For example, if you wish to use a specific summary field in your tables, you can add a custom attribute called &quot;summary&quot; to the &quot;table&quot; XML tag by adding the following lines to the [table] section of your &quot;content.ini.append.php&quot; file: </p><pre class="wordwrap"><span class="line">CustomAttributes[]</span>
+<span class="line">CustomAttributes[]=summary</span>
+</pre> <p>In order to be compatible with this new feature, you will have to run the &quot;correctxmltext.php&quot; script. The following example shows how this can be done.</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.9.0 directory. </div></li> <li><div> If all your siteaccesses are using the same database, run the script with the &quot;--global&quot; option so that it will only update the &quot;settings/override/content.ini.append.php&quot; file: <pre class="wordwrap"><span class="line">php update/common/scripts/3.9/correctxmltext.php --global</span>
+</pre>Otherwise, run the script for each of your siteaccesses (replace &quot;example&quot; with the actual name of your siteaccess): <pre class="wordwrap"><span class="line">php update/common/scripts/3.9/correctxmltext.php -s example</span>
+</pre>  </div></li> 
+</ol>
+ <p>Use &quot;--help&quot; to view the additional options supported by this script. </p> <p>Note that this script is faulty. Refer to <a href="http://issues.ez.no/9952" target="_blank">http://issues.ez.no/9952</a> for more information about the problem and the solution.</p> <p>The script will go through the XML block attributes stored in the database and do the following:</p>
+<ul>
+ <li><div> Find all occurrences of the &quot;object&quot; tags (if any) and convert these to &quot;embed&quot; tags. (The &quot;object&quot; tag is deprecated and no longer used.) </div></li> <li><div> Check which custom classes are used within your XML tags and add missing &quot;AvailableClasses[]&quot; settings to your configuration file. (From 3.8.1, the names of all custom classes that are used within XML tags must be specified from within an override of the &quot;content.ini&quot; configuration file.) </div></li> <li><div> Check which custom attributes are used in your XML tags and add missing &quot;CustomAttributes[]&quot; settings (if any) to your configuration file. </div></li> 
+</ul>
+<p>Note that you can skip some of these tasks by using one of the options listed below:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Option</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>--skip-objects</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Skip searching for deprecated &quot;object&quot; tags and converting them.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>--skip-classes</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Skip checking custom classes and modifying the &quot;AvailableClasses[]&quot; settings.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>--skip-custom</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Skip checking custom attributes and updating the &quot;CustomAttributes[]&quot; settings.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+<p>If you do not wish to update your configuration file automatically, run the script like this:</p> <pre class="wordwrap"><span class="line">php update/common/scripts/3.9/correctxmltext.php --classes-dump-only --custom-dump-only</span>
+</pre> <p>The &quot;--classes-dump-only&quot; option allows you to view the list of missing classes instead of having your &quot;AvailableClasses[]&quot; settings automatically updated. The &quot;--custom-dump-only&quot; option allows to view the list of missing custom attributes without modifying the &quot;CustomAttributes[]&quot; settings.</p> <p> <a name="updatetypedrelation"></a>
+ </p>   <a name="eztoc33959_4_6" id="eztoc33959_4_6"></a><h3>Enhanced object relations</h3> <p>In eZ Publish 3.9.0, the object relations functionality has been improved (see <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/features/3.9/xml_related_objects.txt" target="_blank">this page</a> for more information). The system will now use four types of object relations called &quot;common&quot;, &quot;XML linked&quot;, &quot;XML embedded&quot; and &quot;by attribute&quot;. The first three types are <a href="#object" target="_self">relations at the object level</a> while the last one is <a href="#attribute" target="_self">at the attribute level</a>. The &quot;XML embedded&quot; type has been added in order to distinguish object relations created by inserting an embedded object in the XML block attribute from relations created by adding an object to the list of related objects (this type of relations is now called &quot;common&quot;). The &quot;XML linked&quot; type is used for new relations that are automatically created by the system when an internal link is inserted in an attribute of the XML block datatype. Note that &quot;XML linked&quot; relations are automatically removed when corresponding internal links are deleted. Same goes for &quot;XML embedded&quot; relations and their &quot;embed&quot; tags. </p> <p>In order to be compatible with this new feature, you will have to run the &quot;updatetypedrelation.php&quot; script. This script should be run for all siteaccesses that use different databases. If you only have a public and an administration siteaccess (which is the most typical/usual case), you will only need to run the script for one of the siteaccesses. If the siteaccess is not specified, the <a href="../../Technical-manual/3.9/Reference/Configuration-files/site.ini/SiteSettings/DefaultAccess.html" target="_self">default siteaccess</a> will be used.</p> <p>The following text shows how this can be done.</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.9.0 directory. </div></li> <li><div> Run the script (replace &quot;example&quot; with the actual name of your siteaccess): <pre class="wordwrap"><span class="line">php update/common/scripts/3.9/updatetypedrelation.php -s example</span>
+</pre>  </div></li> 
+</ol>
+<p>The script will go through the XML block attributes stored in the database and create object relations of the &quot;XML linked&quot; and &quot;XML embedded&quot; types if needed. </p>    <a name="eztoc33959_5" id="eztoc33959_5"></a><h2>Step 4: Updating the system configuration</h2>  <a name="eztoc33959_5_7" id="eztoc33959_5_7"></a><h3>Updating INI settings for object relations</h3> <p>After running the upgrade scripts listed above you will need to configure how the object relations of the &quot;XML linked&quot; type will be handled on your site. From 3.9.0, inserting an internal link in the XML block attribute will lead to adding an &quot;XML linked&quot; relation. This behavior is controlled by the &quot;ObjectRelationTyped&quot; setting located in the &quot;[BackwardCompatibilitySettings]&quot; section of the &quot;site.ini&quot; configuration file. If you do not wish to use the &quot;XML linked&quot; type of relationships, make sure this setting is disabled.</p>   <a name="eztoc33959_5_8" id="eztoc33959_5_8"></a><h3>Updating custom templates (optional)</h3> <p>In eZ Publish versions prior to 3.9, the &quot;$node&quot; variable might be present in the pagelayout when view caching is disabled. From 3.9, the &quot;$node&quot; variable is only available in <a href="../../Technical-manual/3.9/Templates/Template-basics/Node-templates.html" target="_self">node templates</a>. This means that you will not be able to use this variable in the pagelayout (and other templates that are not related to the &quot;view&quot; view of the &quot;content&quot; module) even if <a href="../../Technical-manual/3.9/Features/View-caching.html" target="_self">view caching</a> is disabled.</p>   <a name="eztoc33959_5_9" id="eztoc33959_5_9"></a><h3>Enabling the Open Document Format extension (optional)</h3> <p>eZ Publish 3.9 includes the <a href="../../../Extensions/eZ-Publish-extensions/ODF-Import-Export.html" target="_self">Open Document Format extension</a> (previously known as &quot;oo&quot; and the &quot;OpenOffice extension&quot;). In order to use this extension, make sure your &quot;settings/override/site.ini.append.php&quot; file contains the following lines: </p><pre class="wordwrap"><span class="line">[ExtensionSettings]</span>
+<span class="line">ActiveExtensions[]=ezodf</span>
+</pre><p>Note that it is also possible to enable this extension using the &quot;Setup - Extensions&quot; part of the administration interface as described <a href="../../Technical-manual/3.9/Installation/Extensions/Activating-the-extension.html" target="_self">here</a>.</p>   <a name="eztoc33959_5_10" id="eztoc33959_5_10"></a><h3>Updating INI settings for cronjobs (optional) </h3> <p>In eZ Publish 3.9.0, the <a href="../../Technical-manual/3.9/Features/Cronjobs/Configuring-cronjobs.html#default" target="_self">default configuration of cronjobs</a> has changed. The main set of cronjobs only contains tasks that should be run once a day. The tasks that should be executed frequently (workflow.php and notification.php) are now included in an additional set of cronjobs called &quot;frequent&quot;. One more additional group of cronjobs called &quot;infrequent&quot; contains tasks that can be run once a week (linkcheck.php and basket_cleanup.php). The &quot;ezpublish.cron&quot; file is also updated. It is recommended to review your cronjob settings after upgrading. </p>    <a name="eztoc33959_6" id="eztoc33959_6"></a><h2>Step 5: Clearing the caches</h2> <p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.9.0 directory. </div></li> <li><div> 
+Run the clear cache script:<br /> <pre class="wordwrap"><span class="line">bin/shell/clearcache.sh --clear-all</span>
+</pre>  </div></li> 
+</ol>
+ <p>Make sure that all caches are cleared. Sometimes the script is unable to clear caches because of restrictive file/directory permission settings. Make sure that all caches have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.9/from-3.8.x-to-3.9.0 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:23:57 GMT -->
+</html>

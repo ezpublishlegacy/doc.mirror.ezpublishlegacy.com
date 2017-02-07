@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Demo/eZ-Demo-5.0-upgrade by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>eZ Demo 5.0 upgrade / eZ Demo / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>eZ Demo 5.0 upgrade</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>
+<b>Compatibility notice</b><br />Please be aware that issues can occur if eZ Webin and eZ Demo are used in the same installation. This is because the two extensions have similarities at the code level, such as class names, which will considered them as duplicated. In resume, we don't recommend or support the usage of both extensions in parallel, in the same eZ Publish installation.</p>
+    </td>
+</tr>
+</table>
+</div><a name="eztoc130243_0_1" id="eztoc130243_0_1"></a><h3>1. Back-up</h3><p>Before starting the eZ Publish Demo Site upgrading process, make sure that you have a working backup of the existing website state including database, extensions, INI settings, etc. During the upgrade process the existing &quot;ezdemo&quot; extension and its dependencies will be removed and replaced with a new version.</p><a name="eztoc130243_0_2" id="eztoc130243_0_2"></a><h3>2. Packages</h3><p>Download the following packages from&nbsp;<a href="http://packages.ez.no/ezpublish/5.0/" target="_self">http://packages.ez.no/ezpublish/5.0/</a> (latest version):</p><p>
+&quot;ezdemo_extension.ezpkg&quot; <br />
+&quot;ezstarrating_extension.ezpkg&quot; <br />
+&quot;ezgmaplocation_extension.ezpkg&quot; <br />
+&quot;ezwt_extension.ezpkg&quot;<br />
+&quot;ezflow_extension.ezpkg&quot;<br />&quot;ezcomments_extension.ezpkg&quot;</p><p>Go to the packages management interface in the &quot;Administration Interface&quot;. This can be done via the &quot;Setup&quot; tab, where you can click on the &quot;Packages&quot; link in the left menu:</p>
+<div class="object-center doc">        <img src="../../../../../../../var/doc/storage/images/media/images/download-package/121495-1-eng-GB/Download-package_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p><i>The package management screen</i></p><p>From the Repository drop-down box choose &quot;eZ-systems&quot; and then click on the “Change repository” button. From the list of available packages, remove the following ones:</p><p>
+&quot;ezdemo_extension&quot; <br />
+&quot;ezstarrating_extension&quot; <br />
+&quot;ezgmaplocation_extension&quot; <br />
+&quot;ezwt_extension&quot; <br />
+&quot;ezflow_extension&quot;<br />&quot;ezcomments_extension&quot;</p><p>Be sure that the repository chosen is “eZ-systems” and click on the “Import new package” button. In the next view select &quot;ezdemo_extension&quot; and click on the “Import package” button. Once the &quot;ezdemo_extension&quot; is imported click on “Install package”. In the next view choose the “Replace extension” option and click on the “Continue” button. Repeat these steps for the rest of new extensions (&quot;ezstarrating_extension&quot;, &quot;ezgmaplocation_extension&quot;, &quot;ezwt_extension&quot;, “ezflow_extension” and “ezcomments_extension”).</p><a name="eztoc130243_0_3" id="eztoc130243_0_3"></a><h3>3. Autoload update</h3><p>The autoload array needs to be updated for the new extensions. In order to do so, execute the following command from the eZ Publish Legacy root folder:</p><pre class="wordwrap"><span class="line">$ cd /&lt;ezpublish5-root-dir&gt;/ezpublish_legacy/</span>
+<span class="line">$ php bin/php/ezpgenerateautoloads.php -e -p</span>
+</pre><a name="eztoc130243_0_4" id="eztoc130243_0_4"></a><h3>4. Content classes</h3><p>eZ Publish Demo Site 5.0 comes with two new content classes: “<b>Call To Action</b>” and “<b>Call To Action Feedback</b>”. Using the eZ Publish package manager from the Administration Interface, import these classes by following the package import wizard steps (like shown above). The new content classes can be found in the “ezdemo” extension folder under “<i>/packages/5.0</i>”:</p>
+<ul>
+<li><div>call_to_action_feedback-1.0-1.ezpkg</div></li><li><div>call_to_action-1.0-1.ezpkg</div></li>
+</ul>
+<a name="eztoc130243_0_5" id="eztoc130243_0_5"></a><h3>5. Database changes</h3><p>eZ Publish Demo Site 5.0 's ezcomment requires a database update, which is available in the following path:</p><pre class="wordwrap"><span class="line">/&lt;ezpublish5-root-dir&gt;/ezpublish_legacy/extension/ezcomments/update/database/&lt;database&gt;/5.0/dbupdate-1.4.0-to-5.0.0.sql</span>
+</pre><a name="eztoc130243_0_6" id="eztoc130243_0_6"></a><h3>6. INI settings</h3><p>Remove the following template override rules to all your public siteaccesses, in <i>settings/siteaccess/(site_name)/override.ini.append.php</i> files</p><pre class="wordwrap copytoclipboard"><span class="line">[block_banner_url]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/banner_url.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=Banner</span>
+<span class="line">Match[view]=banner_url</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[block_banner_url]\r\nSource=block/view/view.tpl\r\nMatchFile=block/banner_url.tpl\r\nSubdir=templates\r\nMatch[type]=Banner\r\nMatch[view]=banner_url' ); return false;" /></p>
+<![endif]--><pre class="wordwrap copytoclipboard"><span class="line">[dynamic_banner_code]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/banner_code.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=Banner</span>
+<span class="line">Match[view]=banner_code</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[dynamic_banner_code]\r\nSource=block/view/view.tpl\r\nMatchFile=block/banner_code.tpl\r\nSubdir=templates\r\nMatch[type]=Banner\r\nMatch[view]=banner_code' ); return false;" /></p>
+<![endif]--><p>Add the following template override rules to all your public siteaccesses, in <i>settings/siteaccess/(site_name)/override.ini.append.php</i> files, for the new content classes:</p><pre class="wordwrap copytoclipboard"><span class="line">[call_to_action_mail]</span>
+<span class="line">Source=content/collectedinfomail/form.tpl</span>
+<span class="line">MatchFile=collectedinfomail/call_to_action.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=call_to_action</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[call_to_action_mail]\r\nSource=content/collectedinfomail/form.tpl\r\nMatchFile=collectedinfomail/call_to_action.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=call_to_action' ); return false;" /></p>
+<![endif]--><pre class="wordwrap copytoclipboard"><span class="line">[full_call_to_action]</span>
+<span class="line">Source=node/view/full.tpl</span>
+<span class="line">MatchFile=full/call_to_action.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=call_to_action</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[full_call_to_action]\r\nSource=node/view/full.tpl\r\nMatchFile=full/call_to_action.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=call_to_action' ); return false;" /></p>
+<![endif]--><pre class="wordwrap copytoclipboard"><span class="line">[full_call_to_action_feedback]</span>
+<span class="line">Source=node/view/full.tpl</span>
+<span class="line">MatchFile=full/call_to_action_feedback.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=call_to_action_feedback</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[full_call_to_action_feedback]\r\nSource=node/view/full.tpl\r\nMatchFile=full/call_to_action_feedback.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=call_to_action_feedback' ); return false;" /></p>
+<![endif]--><pre class="wordwrap copytoclipboard"><span class="line">[block_banner_internal]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/banner_internal.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=Banner</span>
+<span class="line">Match[view]=default</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[block_banner_internal]\r\nSource=block/view/view.tpl\r\nMatchFile=block/banner_internal.tpl\r\nSubdir=templates\r\nMatch[type]=Banner\r\nMatch[view]=default' ); return false;" /></p>
+<![endif]--><pre class="wordwrap copytoclipboard"><span class="line">[block_banner_external]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/banner_external.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=Banner</span>
+<span class="line">Match[view]=external</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[block_banner_external]\r\nSource=block/view/view.tpl\r\nMatchFile=block/banner_external.tpl\r\nSubdir=templates\r\nMatch[type]=Banner\r\nMatch[view]=external' ); return false;" /></p>
+<![endif]--><pre class="wordwrap copytoclipboard"><span class="line">[block_banner_code]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/banner_code.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=Banner</span>
+<span class="line">Match[view]=code</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[block_banner_code]\r\nSource=block/view/view.tpl\r\nMatchFile=block/banner_code.tpl\r\nSubdir=templates\r\nMatch[type]=Banner\r\nMatch[view]=code' ); return false;" /></p>
+<![endif]--><pre class="wordwrap copytoclipboard"><span class="line">[gallery_item_video]</span>
+<span class="line">Source=node/view/gallery_item.tpl</span>
+<span class="line">MatchFile=gallery_item/video.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=video</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[gallery_item_video]\r\nSource=node/view/gallery_item.tpl\r\nMatchFile=gallery_item/video.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=video' ); return false;" /></p>
+<![endif]--><pre class="wordwrap copytoclipboard"><span class="line">[gallery_viewer_video]</span>
+<span class="line">Source=node/view/gallery_viewer.tpl</span>
+<span class="line">MatchFile=gallery_viewer/video.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=video</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[gallery_viewer_video]\r\nSource=node/view/gallery_viewer.tpl\r\nMatchFile=gallery_viewer/video.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=video' ); return false;" /></p>
+<![endif]--><a name="eztoc130243_0_7" id="eztoc130243_0_7"></a><h3>7. Clear Cache</h3><p>Once the upgrade script is done, you need to clear the cache by executing the following command from the eZ Publish Legacy root folder:</p><pre class="wordwrap"><span class="line">$ cd /&lt;ezpublish5-root-dir&gt;/ezpublish_legacy/</span>
+<span class="line">$ php bin/php/ezcache.php --clear-all --purge</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Demo/eZ-Demo-5.0-upgrade by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:47 GMT -->
+</html>

@@ -1,0 +1,136 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Modules/content/Fetch-functions/country_list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>country_list / Fetch functions / content / Modules / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>country_list</h1>
+</div>
+<h3>Summary</h3>
+ Fetches the list of countries specified in the &quot;country.ini&quot; configuration file.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'content', 'country_list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( [ 'filter', filter, ]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'value', value &nbsp;&nbsp;&nbsp;] &nbsp;) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>filter</td>
+        <td>string</td>
+        <td>The type of filtering.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>value</td>
+        <td>string</td>
+        <td>The value of the filter.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An array of hashes (see below) or FALSE.</p><h3>Description</h3>
+ <p>This function returns a structure that contains information about countries which are mentioned in the &quot;country.ini&quot; configuration file. The optional &quot;filter&quot; parameter sets the type of filtering that will be used when the countries are fetched. It can be set to &quot;Name&quot;, &quot;Alpha2&quot;, &quot;Alpha3&quot; or &quot;IDC&quot;. The &quot;value&quot; parameter can be used to set the filter's value. For example, it could be set to &quot;Norway&quot;.</p> <p>Note that the names of the countries are fetched according to the current locale settings.</p> <p>The function returns an array of hashes. The hashes consist of the following elements:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Key</p> 
+  </th> <th >   <p>Type</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Name</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the country (for example “Norway”).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Alpha2</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_self">ISO 3166-1 alpha-2 code</a> of the country (for example “NO”).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Alpha3</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3" target="_self">ISO 3166-1 alpha-3 code</a> of the country (for example “NOR”).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>IDC</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>string</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The <a href="http://en.wikipedia.org/wiki/List_of_country_calling_codes" target="_self">international dialing code</a> of the country (for example “47”).</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+<h3>Examples</h3>
+    <a name="eztoc87939_0_0_1" id="eztoc87939_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $all_countries=fetch( 'content', 'country_list' )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $all_countries as $country}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$country.Name} &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $all_countries=fetch( \'content\', \'country_list\' )}\r\n\r\n{foreach $all_countries as $country}\r\n    {$country.Name} &lt;br /&gt;\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>Outputs the names of all countries specified in the &quot;country.ini&quot; configuration file or its override.</p>       <a name="eztoc87939_0_0_2" id="eztoc87939_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap"><span class="line">{def $country=fetch( 'content', 'country_list', hash( 'filter', 'Name', 'value', 'Norway' ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{$country.Name} : {$country.IDC}</span>
+</pre> <p>Outputs the country name and international dialing code for Norway.</p>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Modules/content/Fetch-functions/country_list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:52 GMT -->
+</html>

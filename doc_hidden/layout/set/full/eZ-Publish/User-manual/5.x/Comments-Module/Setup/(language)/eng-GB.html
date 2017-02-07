@@ -1,0 +1,65 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Comments-Module/Setup/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:28:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Setup / Comments Module / 5.x / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Setup</h1>
+</div>
+
+<a name="eztoc134341_0_0_1" id="eztoc134341_0_0_1"></a><h4>Get the packages</h4><p>As of eZ Publish 5.0, if you install the demo design package, setup is already done for you and you can skip to the step concerning cronjobs.</p><p>If you have an eZ Publish Enterprise, you'll be able to download a supported stable version for your eZ Publish Enterprise version from your service portal on <a href="http://support.ez.no/" target="_self">support.ez.no</a>, as for community version it is&nbsp;bundled&nbsp;but also available via <a href="https://github.com/ezsystems/ezcomments/downloads" target="_self">github</a>.</p><a name="eztoc134341_0_0_2" id="eztoc134341_0_0_2"></a><h4>Copy the extension</h4><p>After downloading the source code of the Comments module (folder named <i>ezcomments</i>), you must copy <i>ezcomments</i> into your eZ Publish <i>extension</i> directory.</p><a name="eztoc134341_0_0_3" id="eztoc134341_0_0_3"></a><h4>Install database</h4><p>Because the Comments module uses custom tables, you must create the tables separately. Currently supported databases are &quot;Mysql&quot;, &quot;PostgreSQL&quot; and &quot;Oracle&quot;. You can execute the sql file in</p><pre class="wordwrap"><span class="line">ezcomments/sql/&lt;databasetype&gt;/schema.sql</span>
+</pre><p>The example command line in mysql is</p><pre class="wordwrap"><span class="line">$ mysql --host=&lt;mysql_host&gt; --port=&lt;port&gt; -u &nbsp;&lt;mysql_user&gt; -p&lt;mysql_password&gt; &lt;database&gt; &lt; &nbsp;extension/ezcomments/sql/mysql/schema.sql</span>
+</pre><p><i><b>Important note:</b> If your site uses a MySQL database, then the following SQL script has to be executed:</i></p><pre class="wordwrap"><span class="line">extension/ezcomments/update/database/mysql/1.4/dbupdate-1.3.0-to-1.4.0.sql</span>
+</pre><a name="eztoc134341_0_0_4" id="eztoc134341_0_0_4"></a><h4>Activate Comments</h4><p>The module can be activated both from the Administrator Interface and the setting file. Using the first way, you must log in to the Administrator Interface, click the <b>Setup</b> tab, then open the <b>Extensions</b> link in the left hand menu. A list will appear with all the <b>Available extensions</b>, where you must check the <b>ezcomments</b> box to select the feature. The click the button <b>Apply Changes</b> to activate it.</p><p>If you prefer to use the second way, open <i>settings/override/site.ini.append.php</i> and add the activation configuration under the &quot;ExtensionSettings&quot; section like this:</p><pre class="wordwrap"><span class="line">[ExtensionSettings]</span>
+<span class="line">ActiveExtensions[]=ezcomments</span>
+</pre><p><b>Note:</b> ezcomments should be before ezwebin in site.ini.</p><a name="eztoc134341_0_0_5" id="eztoc134341_0_0_5"></a><h4>Regenerate autoload arrays</h4><p>After activating the module, it is necessary to regenerate the autoload arrays. This can be done from the Administrator Interface after you have activated the extension as described in the previous step. When you have applied the changes simply click on the <b>Regenerate autoload arrays for extensions</b>.</p><p>You can also generate the autoload arrays by running the following script from your eZ Publish directory:</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php -e</span>
+</pre><a name="eztoc134341_0_0_6" id="eztoc134341_0_0_6"></a><h4>Clear cache</h4><p>Don't forget to clear the cache. You can clear INI and template caches from the <b>Setup</b> tab in the Administrator Interface or by running the following command from your eZ Publish directory:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --ini --template</span>
+</pre><a name="eztoc134341_0_0_7" id="eztoc134341_0_0_7"></a><h4>Setup cronjob</h4><p>
+The Comments module uses a cronjob to send notifications. If the cronjob is not running, the notification system will not work but the notifications will remain in queue until cronjob is running.<br />&nbsp;If you do wish to configure and run a cronjob for eZ Publish, you can do this by following the steps in the chapter <a href="../../../../../Technical-manual/4.x/Features/Cronjobs.html" target="_self">Cronjobs</a></p><p>A simple setting for the Comments module is to add this line into ezpublish.cron:</p><pre class="wordwrap"><span class="line">*/5 * * * * cd $EZPUBLISHROOT &amp;&amp; $PHP runcronjobs.php -q &nbsp;ezcomments 2&gt;&amp;1</span>
+</pre><p>which will send notification every 5 minutes. There is an advanced setting, which can be found in next chapter <a href="../../../../../../Extensions/eZ-Publish-extensions/eZ-Comments/Setup-and-user-guide-1.0/Configuration.html" target="_self">Configuration/Configure Notification email settings</a>.</p><p><b>Note:</b> if you want to send notification in other language instead of default language, you can specify different site access. For instance, configuration</p><pre class="wordwrap"><span class="line">*/5 * * * * cd $EZPUBLISHROOT &amp;&amp; $PHP runcronjobs.php -s ger -q &nbsp;ezcomments 2&gt;&amp;1</span>
+</pre><p>will send notification based on locale in site access <i>ger</i> where German might be the main language.</p><a name="eztoc134341_0_0_8" id="eztoc134341_0_0_8"></a><h4>Default permission Setup</h4><p>There is an example in user manual describing how to set permission. Please see <a href="../../../../../../Extensions/eZ-Publish-extensions/eZ-Comments/Setup-and-user-guide-1.0/Using-eZ-Comments/Adminstrator-options/Setting-access-and-restriction-policies.html" target="_self">Setting access and restriction policies</a> in user manual for detail.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Comments-Module/Setup/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:28:51 GMT -->
+</html>

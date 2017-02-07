@@ -1,0 +1,85 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-control-structures/Conditional-control/if by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:02:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>if / Conditional control / Template control structures / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>if</h1>
+</div>
+<h3>Summary</h3>
+Allows conditional control by the way of an IF-THEN-ELSE mechanism.<h3>Usage</h3>
+<pre>{if &lt;condition&gt;}
+...
+[ {elseif &lt;condition&gt;} ]
+...
+[ {else} ]
+...
+{/if}</pre><h3>Description</h3>
+ <p>This construct allows for conditional execution of code fragments. It is one of the most important features of many programming languages. The eZ Publish implementation makes it possible to do conditional branching by the way of the following elements: IF, ELSE and ELSEIF. The ELSE and ELSEIF elements are optional.</p><h3>Examples</h3>
+    <a name="eztoc91974_0_0_1" id="eztoc91974_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{if eq( $var, 128 )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Hello world &lt;br /&gt;</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{if eq( $var, 128 )}\r\n    Hello world &lt;br /&gt;\r\n{/if}\r\n' ); return false;" /></p>
+<![endif]--> <p>If $var equals 128, the following output will be produced: &quot;Hello world&quot;. If it does not equal 128, no output will be produced.</p>   <a name="eztoc91974_0_0_2" id="eztoc91974_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap copytoclipboard"><span class="line">{if eq( $var, 128 )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Hello world &lt;br /&gt;</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;No world here, move along. &lt;br /&gt;</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{if eq( $var, 128 )}\r\n    Hello world &lt;br /&gt;\r\n{else}\r\n    No world here, move along. &lt;br /&gt;\r\n{/if}\r\n' ); return false;" /></p>
+<![endif]--> <p>If $var equals 128, the following output will be produced: &quot;Hello world&quot;. If it does not equal 128, the output will be &quot;No world here, move along.&quot;.</p>   <a name="eztoc91974_0_0_3" id="eztoc91974_0_0_3"></a><h4>Example 3</h4> <pre class="wordwrap copytoclipboard"><span class="line">{if eq( $fruit, 'apples' )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Apple tree &lt;br /&gt;</span>
+<span class="line">{elseif eq( $fruit, 'oranges' )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Orange juice &lt;br /&gt;</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;Banana split &lt;br /&gt;</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{if eq( $fruit, \'apples\' )}\r\n    Apple tree &lt;br /&gt;\r\n{elseif eq( $fruit, \'oranges\' )}\r\n    Orange juice &lt;br /&gt;\r\n{else}\r\n    Banana split &lt;br /&gt;\r\n{/if}\r\n' ); return false;" /></p>
+<![endif]--> <p>If $fruit equals &quot;apples&quot;, the output will be &quot;Apple tree&quot;, if it equals &quot;oranges&quot; then the output will be &quot;Orange juice&quot; - otherwise the output will be &quot;Banana split&quot;.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-control-structures/Conditional-control/if by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:02:45 GMT -->
+</html>

@@ -1,0 +1,109 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Teamroom/Setup-and-User-Guide/Installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Installation / Setup and User Guide / eZ Teamroom / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installation</h1>
+</div>
+
+ 
+<ol>
+ <li><div> Install eZ Publish 4.2 or higher. </div></li> <li><div> Install eZ Teamroom by <a href="http://ez.no/download" target="_blank">downloading </a>the package. </div></li> <li><div> Unpack the file in the extension directory of your eZ Publish installation. The extension directory should now at a minimum contain ezteamroom, ezlightbox, ezxmlinstaller, ezjscore and ezevent. It is optional to add <a href="../../eZ-Multiupload.html" target="_blank">eZ Multiupload</a>, but this must be installed separately. </div></li> <li><div> Before installing eZ Teamroom, know that eZ Teamroom might modify some content classes in the existing eZ Publish installation. By default these are the following classes: 
+<ul>
+ <li><div> image </div></li> <li><div> quicktime </div></li> <li><div> real_video </div></li> <li><div> window_media </div></li> <li><div> <p>user</p> <p>If these classes do not already exist, they will be created automatically. Depending on your eZ Publish installation you can do one of the following things: </p>
+<ul>
+ <li><div>  <b>When using eZ Teamroom as an addition to the eZ Website Interface extension</b>: </div></li> 
+</ul>
+ <p>By default a separate set of eZ Teamroom classes will be created. But if you prefer to use the existing Website Interface classes you should modify the following template:</p> <p>&nbsp;</p><pre class="wordwrap"><span class="line">extension/ezteamroom/design/standard/templates/teamroom/installezteamroom.tpl</span>
+</pre><p>
+The definition of the content classes that will be created or modified by the eZ Teamroom installation should be adjusted in this template by removing the &quot;teamroom_&quot;-prefix. For example:<br /></p><pre class="wordwrap"><span class="line">&lt;ContentClass isContainer=&quot;false&quot; identifier=&quot;teamroom_image&quot;</span>
+</pre><p>
+should be changed to<br /></p><pre class="wordwrap"><span class="line">&lt;ContentClass isContainer=&quot;false&quot; identifier=&quot;image&quot;</span>
+</pre><p>
+In a similar way, you should modify the ClassIdentifiersMap[] setting in <i> </i> <i>extension/ezteamroom/settings/teamroom.ini.append.php.</i> For example:<br /></p><pre class="wordwrap"><span class="line">ClassIdentifiersMap[image]=teamroom_image</span>
+</pre><p>
+should be changed to<br /></p><pre class="wordwrap"><span class="line">ClassIdentifiersMap[image]=image</span>
+</pre><p>&nbsp;</p>
+<ul>
+ <li><div>  <b>When using eZ Teamroom as an addition to an existing custom installation:</b>  </div></li> 
+</ul>
+ <p>It is possible to install eZ Teamroom on an existing eZ Publish installation, because the extension creates its own set of content classes by default. However, if you would like eZ Teamroom to use existing content classes available in your installation, follow the steps described above for the eZ Webin Interface.</p> </div></li> 
+</ul>
+  </div></li> <li><div> <p>Next enable the eZ Teamroom extension in your eZ Publish installation. In <i>settings/override/site.</i> <i>ini </i>add the following parameters to the [ExtensionSettings] section:</p> <pre class="wordwrap copytoclipboard"><span class="line">ActiveExtensions[]=ezevent</span>
+<span class="line">ActiveExtensions[]=ezteamroom</span>
+<span class="line">ActiveExtensions[]=ezlightbox</span>
+<span class="line">ActiveExtensions[]=ezxmlinstaller</span>
+<span class="line">ActiveExtensions[]=ezmultiupload</span>
+<span class="line">ActiveExtensions[]=ezjscore</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'ActiveExtensions[]=ezevent\r\nActiveExtensions[]=ezteamroom\r\nActiveExtensions[]=ezlightbox\r\nActiveExtensions[]=ezxmlinstaller\r\nActiveExtensions[]=ezmultiupload\r\nActiveExtensions[]=ezjscore' ); return false;" /></p>
+<![endif]--> <p>When using the eZ Website Interface be sure to add the eZ Teamroom extensions before ezwebin in this setting, in order to use the correct templates for all extensions.</p> </div></li> <li><div> <p>
+In order to have the top menu in the eZ Teamroom extension displayed, merge the &quot;TopIdentifierList&quot; settings in the following file:<br /></p><pre class="wordwrap"><span class="line">extension/ezteamroom/settings/siteaccess/ezteamroom/menu.ini.append.php</span>
+</pre><p>with the ones here:</p> <pre class="wordwrap"><span class="line">extension/ezwebin/settings/menu.ini.append.php</span>
+</pre> </div></li> <li><div> 
+Regenerate autoloads by running the script:<br /> <pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php -e</span>
+</pre>It is also possible to update the autoloads from the Admin Interface. In the <b>Setup </b>tab, click on the <b>Extensions </b>link in the menu on the left. In the list displayed check the added extensions (ezteamroom, ezevent, ezlightbox, ezxmlinstaller, ezjscore) and press the <b>Regenerate </b> <b>autoload</b> <b> arrays for extensions</b> button. </div></li> <li><div> Make sure you do not already have a siteaccess with the name 'ezteamroom'. </div></li> <li><div> 
+You will also need to import the ezlightbox and the ezevent database tables. You will find them in:<br /> <pre class="wordwrap"><span class="line">extension/ezlightbox/sql/&lt;DATABASE_HANDLER&gt;/schema.sql</span>
+<span class="line">extension/ezevent/sql/&lt;DATABASE_HANDLER&gt;/schema.sql</span>
+</pre>
+You can add the tables by running the following command from the root of your eZ Publish directory:<br /> <pre class="wordwrap"><span class="line">mysql -u &lt;user&gt; -p &lt;database_name&gt; &lt; extension/ezlightbox/sql/&lt;database&gt;/schema.sql</span>
+</pre>
+Do the same for the eZ Event database table<br />
+ <b>Note</b>: Replace the placeholders &lt;USERNAME&gt;, &lt;HOSTNAME&gt; and &lt;DATABASENAME&gt; with the username of your database, the hostname which the MySQL database is running on and the name of the database used by eZ Publish.<br />For more information please visit the <a href="Requirements/eZ-Event.html" target="_self">eZ Event</a> and <a href="Requirements/eZ-Lightbox/Installation.html" target="_self">eZ Lightbox</a> documentation. </div></li> <li><div> <p>Finally, clear the template override cache with the following command:</p> <pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-id=template-override</span>
+</pre><p>Or if you prefer, this can be done from the administrator interface. In the <b>Setup </b>tab, click on the <b>Cache Management</b> link in the menu on the right.</p> </div></li> <li><div> <p>
+To finish the eZ Teamroom installation simply run this command in your eZ publish root directory:<br /></p><pre class="wordwrap"><span class="line">php extension/ezxmlinstaller/bin/php/xmlinstaller.php --template=teamroom/installezteamroom --siteaccess=&lt;SITEACCESS_NAME&gt;</span>
+</pre><p>
+ <b>Note</b>: Replace the placeholder &lt;SITEACCESS_NAME&gt; with the name of the existing siteaccess that should be used for the installation of eZ Teamroom (this is not called &quot;ezteamroom&quot;).<br />Also make sure that the <i>site.</i> <i>ini</i> that is active for the selected siteaccess, has correct [DatabaseSettings] settings.</p> <p> <b>IMPORTANT Note</b>: Some translations (for example the name of eZ Publish roles) depend on the language and locale settings that are configured in the selected siteaccess. This means if the siteaccess chosen for the installation of eZ Teamroom has English as the primary language, those elements of eZ Teamroom will also be created in this language.If you want to know in detail what will be done when running this script, please read this file </p> <pre class="wordwrap"><span class="line">extension/ezteamroom/design/standard/templates/teamroom/installezteamroom.tpl</span>
+</pre> </div></li> 
+</ol>
+   <a name="eztoc107508_0_1" id="eztoc107508_0_1"></a><h3>Note regarding Teamroom roles:</h3> <p>Installing eZ Teamroom will also add the following 18 new roles:</p> 
+<ul>
+ <li><div> Teamroom Member </div></li> <li><div> Teamroom Moderator </div></li> <li><div> Teamroom Read Blog </div></li> <li><div> Teamroom Read Calendar </div></li> <li><div> Teamroom Read Documents </div></li> <li><div> Teamroom Read Forum </div></li> <li><div> Teamroom Read Milestones </div></li> <li><div> Teamroom Read Tasks </div></li> <li><div> Teamroom Read Wiki </div></li> <li><div> Teamroom Use Blog </div></li> <li><div> Teamroom Use Calendar </div></li> <li><div> Teamroom Use Documents </div></li> <li><div> Teamroom Use Forum </div></li> <li><div> Teamroom Use Milestones </div></li> <li><div> Teamroom Use Tasks </div></li> <li><div> Teamroom Use Wiki </div></li> <li><div> Use Lightbox </div></li> <li><div> Use Teamroom </div></li> 
+</ul>
+ <p>For more information about the policies assigned to these roles, please visit your Administrator Interface and from the <b>User accounts</b> or <b>Setup </b>tab click the <b>Roles and policies</b> link in the menu on the left. Here you can view all your roles and add ones when needed.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Teamroom/Setup-and-User-Guide/Installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:57 GMT -->
+</html>

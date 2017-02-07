@@ -1,0 +1,98 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.6/Features/Clustering by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:56:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Clustering / Features / 4.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Clustering</h1>
+</div>
+
+<p>The clustering feature makes it possible to run an eZ Publish site on several web servers. A site that is running on a cluster of servers will have better performance and will be able to handle more traffic.</p><p>Before eZ Publish clustering was implemented, the only way to support multiple servers was to store all cache files and images locally on separate file systems (one for each web server) and use &quot;rsync&quot; or NFS to synchronize caches &amp; binary files. This was far from perfect, and induced many limitations. Instead, you can configure the system to store all content related caches, images and binary files in the database. This ensures that all the cluster nodes use the same cache files and have access to the same images and binary files. In other words, when content is updated, changes are automatically and instantly made available for every web servers in the cluster.</p><a name="eztoc126123_1" id="eztoc126123_1"></a><h2>Supported database types</h2><p>The clustering code is optimized for MySQL databases and requires the InnoDB storage engine. This storage engine will be used when creating the database tables needed for clustering. Contact your database administrator if you are unsure about whether InnoDB is available on your server.</p><p>Version 1.8 of the <a href="../../../../Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database.html" target="_self">eZ Publish Extension for Oracle® Database</a> makes it possible to use Oracle as a database for eZ Publish version 4.0 and later and also includes support for the clustering functionality. Note that the clustering functionality provided by this extension may differ slightly from the generic implementation included in a standard eZ Publish distribution.</p><p>For now, eZ Publish does not support clustering for PostgreSQL databases. Also it is important to keep in mind that the supported databases depend on the cluster file handler that is used. For instance, MySQL is always supported, whereas Oracle is only supported for eZ DB File Handler. As the eZ Publish development moves forward more database handlers will of course be made available.</p><a name="eztoc126123_2" id="eztoc126123_2"></a><h2>How it works</h2><p>Data that must be synchronized between the different servers is stored using the database. However custom templates and design items will not be stored on the database. The following overview will give an overview of which data is saved where:</p><p>Data stored using the database includes:</p>
+<ul>
+<li><div>&nbsp;Binary files </div></li><li><div>&nbsp;Image and image alias files </div></li><li><div>
+&nbsp;Caches related to content:<br />&nbsp;
+<ul>
+<li><div>&nbsp;Content view cache </div></li>
+</ul>
+
+<ul>
+<li><div>&nbsp;Template block cache </div></li><li><div>&nbsp;Expiry cache </div></li>
+</ul>
+
+<ul>
+<li><div>&nbsp;URL alias cache </div></li><li><div>&nbsp;RSS cache </div></li><li><div>&nbsp;User info cache </div></li><li><div>&nbsp;Class identifier cache </div></li><li><div>&nbsp;Sort key cache </div></li>
+</ul>
+</div></li>
+</ul>
+<p>Other files are stored using the file system, including (but not limited to):</p>
+<ul>
+<li><div>&nbsp;INI files </div></li><li><div>&nbsp;Template files </div></li><li><div>&nbsp;Compiled templates </div></li><li><div>&nbsp;PHP files </div></li><li><div>&nbsp;Log files </div></li><li><div>
+&nbsp;Caches that are not related to content:<br />&nbsp;
+<ul>
+<li><div>&nbsp;Global INI cache </div></li><li><div>&nbsp;INI cache </div></li><li><div>&nbsp;Codepage cache </div></li><li><div>&nbsp;Character transformation cache </div></li><li><div>&nbsp;Template cache </div></li><li><div>&nbsp;Template override cache </div></li>
+</ul>
+</div></li>
+</ul>
+<a name="eztoc126123_2_1" id="eztoc126123_2_1"></a><h3>Content view cache</h3><p>When eZ Publish is displaying a page (a content node), it executes the &quot;view&quot; view of the &quot;content&quot; module and include the output in the page layout. If the output is <a href="View-caching.html" target="_self">cached</a>, the cache file(s) will be read and served. If not, the system will fetch the content stored in the <a href="../Concepts-and-basics/Content-management/The-content-object.html" target="_self">eZ Publish object database</a>, render the necessary templates, generate a web page and store the resulting XHTML on the file system before serving it. As previously mentioned, these files can be stored in the database and thus the files (along with changes) are easily and immediately available to all servers in the cluster.</p><a name="eztoc126123_2_2" id="eztoc126123_2_2"></a><h3>Images and image aliases</h3><p>The approach described above is also used when it comes to images and image aliases (<a href="../../4.x/Reference/Datatypes/Image.html#variation" target="_self">image variations</a>). However, the solution is a bit more complicated because images are usually served directly by the web server (for instance Apache). Since the web server isn't able to communicate with the database, the images need to be served using a PHP script called &quot;index_image.php&quot;. This is true for all content images, but not for images that are related to design.</p><p>Note that you'll need to add new rewrite rules in order to instruct Apache to use &quot;index_image.php&quot; when serving images. This is explained in the chapters <a href="Clustering/Setting-it-up-for-an-eZDBFileHandler.html" target="_self">setting it up for an eZ DB FileHandler</a> and <a href="Clustering/Setting-it-up-for-an-eZDFSFileHandler.html" target="_self">Setting it up for an eZ DFS FileHandler</a>.</p><a name="eztoc126123_3" id="eztoc126123_3"></a><h2>Notes about clearing the caches</h2><p>Since eZ Publish 3.10 clearing the caches does not lead to the physical removal of cache files when using DB based handlers anymore (since this operation can be quite time consuming). The system will mark the cache files invalid instead of removing them physically from the database or file system. This can be done by either marking each particular cache file expired or setting the global expiry (the latter typically happens when a significant amount of changes is needed, e.g. when clearing all the caches of a specific type). The global expiry is a time-stamp that is used as an expiry value for all the caches in the system. If the global expiry is set to a certain date, all cache files that are older than this date will not be used. Note that the system will re-write old/expired cache file entries when re-creating the caches.</p><p>In order to physically remove the cache files from the database, the &quot;<a href="../../4.x/Reference/Scripts/Generic/ezcache.html" target="_self">ezcache.php</a>&quot; script needs to be run with the &quot;--purge&quot; option. The following example shows how to remove the content caches that are more than two days old:</p><pre class="wordwrap"><span class="line">$php bin/php/ezcache.php --clear-id=content --purge --expiry='-2 days'</span>
+</pre><p>Note that &quot;$php&quot; should be replaced by the path to your php executable.</p><a name="eztoc126123_3_3" id="eztoc126123_3_3"></a><h3>Extra connections in MySQL</h3><p>The new clustering code available since eZ Publish 3.10 performs an extra connection when writing content to the database. (This connection checks whether the file has been modified since the write lock was acquired; if it has been modified, there is thus no longer a need to write.) Because of this, the maximum number of database connections in MySQL must be increased by 30-50%. If persistent connections are enabled, the cluster code will no longer share connections with normal database calls, so the maximum number of connections previously used will have to be doubled.</p><a name="eztoc126123_3_4" id="eztoc126123_3_4"></a><h3>Oracle-specific differences</h3><p>If you use the clustering functionality provided by the <a href="../../../../Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database.html" target="_self">eZ Publish Extension for Oracle® Database</a>, note that the system may behave differently from what is described above. If all content related caches are stored in an Oracle database, clearing the caches will always lead to their physical removal; the &quot;ezcache.php&quot; script will also physically remove the cache entries from the database, even when executed without the &quot;--purge&quot; option.</p><a name="eztoc126123_4" id="eztoc126123_4"></a><h2>Cluster file handlers</h2><p>The cluster file handler mechanism makes it possible to store, retrieve, rename, delete, etc. files using the database. The following file handlers are known to the system by default (click on the links for more information):</p>
+<ol>
+<li><div><a href="Clustering/Cluster-File-Handlers.html#fs" target="_self">eZFS</a> (located in the &quot;kernel/classes/clusterfilehandlers/ezfsfilehandler.php&quot; directory of the eZ Publish installation) </div></li><li><div><a href="Clustering/Cluster-File-Handlers.html#fs2" target="_self">eZFS2</a> (located in the &quot;kernel/private/classes/clusterfilehandlers/ezfs2filehandler.php&quot; directory of the eZ Publish installation) </div></li><li><div><a href="Clustering/Cluster-File-Handlers.html#db" target="_self">eZDB</a> (located in the &quot;kernel/classes/clusterfilehandlers/ezdbfilehandler.php&quot; directory of the eZ Publish installation) </div></li><li><div><a href="Clustering/Cluster-File-Handlers.html#dfs" target="_self">eZDFS </a>(located in the &quot;kernel/private/classes/clusterfilehandlers/ezdfsfilehandler.php&quot; directory of the eZ Publish installation) </div></li>
+</ol>
+<p>Note that eZFS and eZFS2 file handlers do not allow actual eZ Publish clustering by using multiple servers. Use eZDB and eZDFS for cluster file handling.</p><a name="eztoc126123_5" id="eztoc126123_5"></a><h2>Additional HTTP header</h2><p>Since eZ Publish 3.9 an additional HTTP header called &quot;Served-by&quot; is supported. This feature was added for the purpose of testing and debugging. It is typically useful when you need to check, from the client side, which server handled the request. The following example shows a part of a server response that contains this header:</p><pre class="wordwrap copytoclipboard"><span class="line">...</span>
+<span class="line">Last-Modified: Fri, 29 Jun 2007 09:35:54 GMT</span>
+<span class="line">Served-by: 62.70.12.230</span>
+<span class="line">Content-Language: en-GB</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '...\r\nLast-Modified: Fri, 29 Jun 2007 09:35:54 GMT\r\nServed-by: 62.70.12.230\r\nContent-Language: en-GB\r\n...' ); return false;" /></p>
+<![endif]--><a name="eztoc126123_6" id="eztoc126123_6"></a><h2>Limitation on some file systems when storing large number of content files</h2><p>eZ Publish stores all disc related content (eg Images, PDF's etc) in var/storage like the structure from content tree, creating one folder for each object. In most file systems used under Linux (especially ext2 + ext3) there exists a hard LIMIT TO 32000 directories per folder. So it is not possible to store more as 31999 objects under one folder.</p><p>
+To get around this limitation without changing the file system, you can split your content tree so that you don't have more than 32k content files (example: images) in the same folder.<br />Examples of file systems that supports more file/folder entries per folder.</p>
+<ul>
+<li><div>ReiserFS: roughly 1.2 million per directory</div></li><li><div>ZFS: 2^48 (a really big number: 281474976710656)!</div></li>
+</ul>
+<p>Please refer to the <a href="../Installation/Requirements-4.html" target="_self">requirements page</a> regarding supported setups.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.6/Features/Clustering by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:56:43 GMT -->
+</html>

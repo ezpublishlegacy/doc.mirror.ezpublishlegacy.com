@@ -1,0 +1,85 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/User-manual/5.x/JavaScript-and-CSS-framework/Installation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:13:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Installation / JavaScript and CSS framework / 5.x / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installation</h1>
+</div>
+
+<a name="eztoc134578_1" id="eztoc134578_1"></a><h2>Installation</h2><p>If you have installed eZ Flow or eZ Website Interface,&nbsp;eZ JS Core LS 5.0.0 should be already installed.</p>
+<ol>
+<li><div>&nbsp;You can find eZ JS Core in your eZ Publish 5.0 sources under&nbsp;<i>ezpublish_legacy/extension/ezjscore/</i>.</div></li><li><div>&nbsp;Activate the extension (if not active yet) by adding the following parameters to <i>ezpublish_legacy/</i><i>settings/override/site.</i><i>ini</i> by to the [ExtensionSettings] section:<pre class="wordwrap"><span class="line">ActiveExtensions[]=ezjscore</span>
+</pre></div></li><li><div><p>Regenerate autoload array by running this script:</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php -e</span>
+</pre><p>Or if you prefer to update the autoloads from the Admin Interface go to the <b>Setup </b>tab and click on the <b>Extensions </b>link in the menu on the left. In the list displayed check the eZ JS Core extension and click the <b>Regenerate autoload arrays for extensions</b> button.</p></div></li><li><div>&nbsp;Clear the INI and template caches. To do this from the administration interface, select the Setup tab and click on the Cache Management link in the menu on the left. Next you are able to select the needed clear cache buttons. </div></li><li><div>
+&nbsp;Some rewrite rules are necessary for eZ JS Core<br />&nbsp;
+<ul>
+<li><div>
+&nbsp;<b>Rewrite Rules for lib folder</b> <br />&nbsp;eZ JSCore extension require correct Rewrite Rules in order to load the necessary yui (yahoo user interface) files from the file system. This is only required when this INI setting in ezjscore.ini is disabled.<pre class="wordwrap"><span class="line">[eZJSCore]LoadFromCDN=disabled</span>
+</pre>If this is the case add the following line to your Virtual-Host setup<pre class="wordwrap"><span class="line">RewriteRule ^/extension/[^/]+/design/[^/]+/(stylesheets|flash|images|lib|javascripts?)/.* - [L]</span>
+</pre></div></li><li><div>
+&nbsp;<b>Rewrite Rules for script/css packing</b> <br />&nbsp;eZ JSCore packs JavaScript/CSS files together in order to decrease server requests and file size for faster download. These changes are already considered in the <a href="https://confluence.ez.no/display/EZP/Virtual+host+setup" target="_self">Virtual Host setup</a>&nbsp;documentation for eZ Publish 5.x.
+<ul>
+<li><div><p>
+<b>&nbsp;<i>.htaccess</i> </b> <br />&nbsp;add:</p><pre class="wordwrap"><span class="line">RewriteRule ^var/([^/]+/)?storage/images(-versioned)?/.* - [L]</span>
+<span class="line">RewriteRule ^var/([^/]+/)?cache/(texttoimage|public)/.* - [L]</span>
+</pre><p>For more details please check the <a href="https://confluence.ez.no/display/EZP/htaccess+example" target="_self">.htaccess configuration example for eZ Publish 5.x</a>.</p></div></li><li><div><p>
+&nbsp;<b>&nbsp;<i>Virtual Host mode</i> </b> <br />&nbsp;add:</p><pre class="wordwrap"><span class="line">RewriteRule ^/var/([^/]+/)?storage/images(-versioned)?/.* - [L]</span>
+<span class="line">RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* - [L]</span>
+</pre><p>For more details please check the <a href="https://confluence.ez.no/display/EZP/Virtual+host+example" target="_self">Virtual Host configuration example for eZ Publish 5.x</a>.</p></div></li><li><div><p>If you don't manage to get these changes working, you can disable this feature setting ezjscore.ini</p><pre class="wordwrap"><span class="line">[eZJSCore]</span>
+<span class="line">Packer=disabled</span>
+</pre></div></li>
+</ul>
+</div></li><li><div>
+&nbsp;<b>Rewrite Rules for clustered enviroment</b> <br />&nbsp;In order to make eZ JS Core work in a cluster environment the following Rewrite Rules are required:<pre class="wordwrap"><span class="line">RewriteRule ^/var/([^/]+/)?storage/images(-versioned)?/.* /index_cluster.php [L]</span>
+<span class="line">RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* /index_cluster.php [L]</span>
+</pre></div></li>
+</ul>
+</div></li>
+</ol>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/User-manual/5.x/JavaScript-and-CSS-framework/Installation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:13:24 GMT -->
+</html>

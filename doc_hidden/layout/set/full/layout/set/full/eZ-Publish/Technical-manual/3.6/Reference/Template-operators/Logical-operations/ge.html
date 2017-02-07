@@ -1,0 +1,134 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Template-operators/Logical-operations/ge by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:50:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>ge / Logical operations / Template operators / Reference / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ge</h1>
+</div>
+<h3>Summary</h3>
+Returns TRUE if a parameter is greater than or equal to another parameter.<h3>Usage</h3>
+<pre>input|ge( value1 [, value2 ] )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>value1</td>
+        <td>any</td>
+        <td>A variable/value that should be compared.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>value2</td>
+        <td>any</td>
+        <td>Another variable/value that should be compared.</td>
+        <td>Only if the input parameter is omitted.</td>
+    </tr></table><h3>Returns</h3>
+TRUE or FALSE (see below).<h3>Description</h3>
+ <p>This operator compares two parameters. It returns TRUE if the first parameter is greater than or equal to the second parameter; otherwise FALSE will be returned. If the input parameter is provided, the operator will compare it with the first parameter; otherwise it is the first and the second parameter that will be compared. The following table shows how the different types are treated.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Type</p> 
+  </th> <th >   <p>Value</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Number</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The value of the number is used.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>String</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The number of characters is used.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Boolean</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>FALSE means 0 and TRUE means 1.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Array</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The number of elements is used.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Object</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The number of object attributes is used.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Other</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Always 0.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+<h3>Examples</h3>
+    <a name="eztoc4004_0_0_1" id="eztoc4004_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap"><span class="line">{256|ge( 128 )}</span>
+</pre> <p>or</p><pre class="wordwrap"><span class="line">{ge( 256, 128 )}</span>
+</pre> <p>Returns TRUE.</p>   <a name="eztoc4004_0_0_2" id="eztoc4004_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap"><span class="line">{128|ge( 256 )}</span>
+</pre> <p>or</p><pre class="wordwrap"><span class="line">{ge( 128, 256 )}</span>
+</pre> <p>Returns FALSE.</p>   <a name="eztoc4004_0_0_3" id="eztoc4004_0_0_3"></a><h4>Example 3</h4> <pre class="wordwrap"><span class="line">{256|ge( 256 )}</span>
+</pre> <p>or</p><pre class="wordwrap"><span class="line">{ge( 256, 256 )}</span>
+</pre> <p>Returns TRUE.</p>   <a name="eztoc4004_0_0_4" id="eztoc4004_0_0_4"></a><h4>Example 4</h4> <pre class="wordwrap"><span class="line">{128|ge( 256, 64 )}</span>
+</pre> <p>Returns FALSE.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Template-operators/Logical-operations/ge by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:50:16 GMT -->
+</html>

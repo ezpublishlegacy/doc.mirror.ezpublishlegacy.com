@@ -1,0 +1,60 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/View-caching by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:20:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>View caching / Features / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>View caching</h1>
+</div>
+
+ <p>Caching is a widely used technique supposing that frequently used information is retained in a temporary storage area for rapid access. It is extremely effective when the original data is expensive (usually in terms of access time) to fetch or compute/generate relative to reading the cache. Once the data is stored in the cache, future use can be made by accessing the cached copy rather than re-fetching or re-computing the original data, so that the average access time is lower.</p> <p>eZ Publish includes a powerful caching mechanism that allows to improve system performance. This chapter describes a fundamental part of the cache systems in eZ Publish, called <i>content view caching</i> (&quot;view caching&quot; for short). This mechanism only works for &quot;<a href="../Reference/Modules/content/Views/view.html" target="_self">view</a>&quot; and &quot;<a href="../Reference/Modules/content/Views/pdf.html" target="_self">pdf</a>&quot; views of the &quot;<a href="../Reference/Modules/content.html" target="_self">content</a>&quot; module.</p>  <a name="eztoc62986_1" id="eztoc62986_1"></a><h2>Node view cache</h2> <p>This subsection describes how the view caches are generated when the nodes are accessed.</p> <p>Whenever eZ Publish is requested to output information about a node (either by a system URL or a virtual URL), it executes the program code that is associated with the &quot;view&quot; view of the &quot;content&quot; module. Upon completion, the view returns a result to the module, which in turn returns it to the rest of the system. eZ Publish automatically generates an array called &quot;module_result&quot; containing information about which module that was run, which view that was called, the output that was produced and so on. The actual output of the view (i.e. the XHTML code generated using one of the <a href="../Templates/Template-basics/Node-templates.html" target="_self">node templates</a>) is put to &quot;$module_result.content&quot; and is included in the <a href="../Templates/The-pagelayout.html" target="_self">pagelayout</a> by accessing this template variable: </p><pre class="wordwrap"><span class="line">{$module_result.content}</span>
+</pre><p>When the pagelayout is rendered, the {$module_result.content} part will be replaced with the actual output. If view caching is enabled, the entire result of the module will be cached. This means that the contents of the &quot;module_result&quot; variable will be put into a cache file located in the &quot;var/example/cache/content&quot; directory (where &quot;example&quot; is usually the name of the siteaccess that is being used - it is set by the &quot;VarDir&quot; directive in &quot;site.ini&quot; or an override).</p> <p>Please note that eZ Publish creates multiple view caches for the nodes based on roles and user preferences. This means that for example different users (who are logged in, with different permissions/preferences) will be served different caches while anonymous users and users with the same type of permissions/preferences will be served the same file. In other words, when view caching is on, the &quot;view&quot; view of the &quot;content&quot; module will only be run if the system is unable to locate a view-cached version of the result - otherwise a cached version will be inserted in the pagelayout. Please note that the pagelayout itself is not cached by default.</p> <p>Another thing worth noticing is that the view caches are also depending on some other parameters. For example:</p> 
+<ul>
+ <li><div> View mode </div></li> <li><div> Language </div></li> <li><div> View parameters in the URL </div></li> <li><div> Layout (for example print will be in different cache files) </div></li> <li><div> etc. </div></li> 
+</ul>
+  <a name="eztoc62986_1_1" id="eztoc62986_1_1"></a><h3>Example</h3> <p>Let's say that node 46 is the company about page and the custom template &quot;aboutpage.tpl&quot; overrides the default &quot;node/view/full.tpl&quot; template for this particular node.</p> <p>Both the virtual URL &quot;http://www.mysite.com/company/about&quot; and the system URL &quot;http://www.mysite.com/content/view/full/46&quot; point to this page. When one of these URLs is requested, the system will execute the &quot;view&quot; view of the &quot;content&quot; module using &quot;46&quot; as the ID number of the node and &quot;full&quot; as the <a href="../Templates/Template-basics/Node-templates.html" target="_self">view mode</a>. The resulting XHTML code containing the company about information will be generated using the &quot;aboutpage.tpl&quot; template. The output will be put to &quot;$module_result.content&quot; and then will be included in the pagelayout. </p> <p>If view caching is enabled for the &quot;full&quot; view mode, the entire result of the module will be cached in a file. The cache files get long names like for example &quot;46-122bc591bf62e87a4e9ddcb5ba352bc4.cache&quot;. Next time the company about page is being accessed, the system will not go through the burden of executing the &quot;view&quot; view of the &quot;content&quot; module (generating the result, etc.) but load the cache file instead.</p>   <a name="eztoc62986_1_2" id="eztoc62986_1_2"></a><h3>The $node variable</h3> <p>In eZ Publish versions prior to 3.9, the &quot;<a href="../Templates/Template-basics/Node-templates.html#node_variable" target="_self">$node</a>&quot; variable might be present in the pagelayout when view caching is disabled. From 3.9, this variable is not available in the pagelayout, regardless of whether view caching is enabled or not. It is recommended to use <a href="../Templates/The-pagelayout/Variables-in-pagelayout.html#module_result" target="_self">$module_result</a> for fetching the necessary information (for example, &quot;$module_result.node_id&quot; outputs the ID number of the node that is being viewed).</p>    <a name="eztoc62986_2" id="eztoc62986_2"></a><h2>PDF cache</h2> <p>The following text explains how the view cache is generated when a PDF version of a site page (a content node) is being accessed.</p> <p>Whenever eZ Publish is requested to generate a PDF version of a node, it executes the program code that is associated with the &quot;pdf&quot; view of the &quot;content&quot; module. Instead of inserting the output into the pagelayout via $module_result.content, the system will fetch the actual page content (i.e. the attributes of the object that is encapsulated by the specified node) using the &quot;pdf.tpl&quot; template and generate a PDF file using &quot;execute_pdf.tpl&quot;. These default templates are located in the &quot;templates/node/view&quot; directory of the standard design.</p> <p>If view caching is enabled for the &quot;pdf&quot; view, the resulting PDF file will be cached. This means that the system will save a copy of the actual PDF document into a cache file located in the &quot;var/example/cache/content&quot; directory (where &quot;example&quot; is usually the name of the siteaccess that is being accessed - it is controlled by the &quot;VarDir&quot; directive in &quot;site.ini&quot; or an override).</p>  <a name="eztoc62986_2_3" id="eztoc62986_2_3"></a><h3>Example</h3> <p>If node 46 is the company about page, then accessing the URL &quot;http://www.mysite.com/content/pdf/46&quot; will lead to executing the &quot;pdf&quot; view of the &quot;content&quot; module. The system will generate a PDF version of the company about page and display it to the user.</p> <p>If view caching is enabled for the &quot;pdf&quot; view, the resulting PDF document will be cached in a file, for example called &quot;46-3579d18de31e99fc84d2d9a5f113c3be.cache&quot;. Please note that this file can be opened using a PDF reader (in some cases it would have to be renamed to .pdf).</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/View-caching by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:20:40 GMT -->
+</html>

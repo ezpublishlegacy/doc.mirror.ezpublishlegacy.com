@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/View-caching/Smart-view-cache-cleaning by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:56:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Smart view cache cleaning / View caching / Features / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Smart view cache cleaning</h1>
+</div>
+
+ <p>The <i>smart viewcache cleaning system</i> (referred to as &quot;svcs&quot; on this page) makes it possible to set up custom rules that control which nodes the view cache should be cleared for when a published object is changed. This feature is turned off by default and thus the system will only clear the view cache for the following nodes when a new version of an object (also the first version) is published:</p>
+<ul>
+ <li><div> All published nodes of the object </div></li> <li><div> The parent nodes </div></li> <li><div> Nodes of other objects that have the same keyword as the object (if the &quot;<a href="../../Reference/Datatypes/Keywords.html" target="_self">Keywords</a>&quot; datatype is used by at least one of the attributes). </div></li> 
+</ul>
+<p>In addition, the view caches of the following nodes will also be cleared:</p>
+<ul>
+ <li><div> Nodes of related and reverse related objects that have relations of the &quot;common&quot; type </div></li> <li><div> Nodes of reverse related objects that have relations of the &quot;XML embedded&quot; type </div></li> 
+</ul>
+<p>This is controlled by the &quot;<a href="../../Reference/Configuration-files/viewcache.ini/ViewCacheSettings/ClearRelationTypes.html" target="_self">ClearRelationTypes</a>&quot; configuration setting.</p> <p>If you want to use the smart viewcache cleaning feature, make sure the &quot;viewcache.ini.append.php&quot; file located in the &quot;settings/siteaccess/example_admin&quot; directory (replace &quot;example_admin&quot; by the name of the siteaccess that is used for adding and editing content) contains the following lines: </p><pre class="wordwrap"><span class="line">[ViewCacheSettings]</span>
+<span class="line">SmartCacheClear=enabled</span>
+</pre><p>
+ <br />These lines will instruct the system to follow the rules specified in this configuration file in addition to the default behavior. The configuration file usually includes a single, common settings section called &quot;[ViewCacheSettings]&quot; and multiple specific sections that describe the rules determining which <i>additional nodes</i> the view cache should be cleared for. Note that the view cache of those additional nodes will also be cleared in accordance with the svcs rules (see example 5). These sections are named after the class identifiers.</p> <p>When a published object is changed, svcs gets its identifier as an input parameter. It checks which class this object belongs to and looks for a section named after that class identifier in the &quot;viewcache.ini&quot; configuration file (and its overrides). The rules specified in this section will be applied to the parent nodes that are listed in the <a href="../../Reference/Objects/ezcontentobjecttreenode.html" target="_self">path_string</a> attribute of the initially changed node. If the published object has several nodes/locations, svcs will sequentially handle their path strings. The following list reveals how svcs will handle each node of the published object:</p>
+<ol>
+ <li><div> Scan the parent nodes listed in the node's &quot;path_string&quot; attribute (the maximal quantity of nodes that will be scanned is controlled by the &quot;MaxParents&quot; setting). </div></li> <li><div> Perform the following actions for each of the parent nodes:
+<ul>
+ <li><div> Check which class the object encapsulated by that node belongs to. </div></li> <li><div> If the identifier of that class is listed in the &quot;DependentClassIdentifier[]&quot; array, add the matching parent node to the list of additional nodes. </div></li> 
+</ul>
+  </div></li> <li><div> If the &quot;ObjectFilter[]&quot; setting is empty, clear the view caches for additional nodes. Otherwise, check the identifiers of the objects encapsulated by additional nodes and only clear caches for those that have their object identifiers listed in the &quot;ObjectFilter[]&quot; array. In both cases, the caches are cleared using the method(s) specified in the &quot;ClearCacheMethod[]&quot; setting. </div></li> 
+</ol>
+<p>From 3.9, it is also possible to clear the caches for a set of arbitrary objects when objects of specific types are changed. If the &quot;AdditionalObjectIDs[]&quot; setting contains a list of object identifiers, the system will clear the view cache for all the locations (nodes) of these objects, regardless of whether they are listed in &quot;path_string&quot; or not.</p> <p>The following table gives detailed description for the configuration settings mentioned above.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Name</p> 
+  </th> <th >   <p>Type</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>DependentClassIdentifier</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>An array of class identifiers (not ID numbers)</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Specifies which content classes that will be considered as &quot;dependent classes&quot;. If a node encapsulating an object of such a class is listed in &quot;path_string&quot;, svcs will add it to the list of additional nodes. The view cache for additional nodes will be cleared using the method(s) specified in the next setting.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>ClearCacheMethod</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>An array of strings</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Sets which method(s) to use when clearing the view caches for additional nodes. This setting is an array of strings where only six pre-defined values can be used (see the next table).</p> <table class="renderedtable nested" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Name</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>object</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Clear the view cache for all the locations (nodes) of the object.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>parent</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Clear the view cache for the parent node(s) of the object.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>relating</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Clear the view cache for related and reverse related objects that have relations of the &quot;common&quot; type and reverse related objects that have relations of the &quot;XML embedded&quot; type (according to the &quot;<a href="../../Reference/Configuration-files/viewcache.ini/ViewCacheSettings/ClearRelationTypes.html" target="_self">ClearRelationTypes</a>&quot; configuration setting).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>keyword</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Clear the view cache for the objects that have the same keyword as this object.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>siblings</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Clear the view cache for all the siblings of this node/object.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>all</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Clear the view cache for all the listed above.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>ObjectFilter</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>An array of object ID numbers</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>If specified, the view caches will only be cleared for those additional nodes that encapsulate the objects with these identifiers. If not specified, all additional nodes will have their view cache cleared.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>MaxParents</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Integer</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Sets how many parents in &quot;path_string&quot; will be checked . If not specified, svcs will scan all the parents listed in &quot;path_string&quot;.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>AdditionalObjectIDs</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>An array of object ID numbers</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Makes it possible to clear the caches for a set of arbitrary objects regardless of whether their locations are listed in the node's &quot;path_string&quot; attribute or not.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+  <a name="eztoc62995_1" id="eztoc62995_1"></a><h2>Example 1</h2> <p>Let's say that both view caching and svcs are enabled with the following part of a content structure: </p>
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/features/view_caching/part_of_content_tree/70851-5-eng-GB/part_of_content_tree_doc.png" alt="a part of the site content structure" />
+ <p>A part of the site content structure.</p>
+
+
+
+
+
+
+
+</div><p>
+ <br />If you do not specify any rules for svcs, changing an article will lead to clearing the view caches for all its published nodes, their parent nodes, nodes of objects containing the same keywords, nodes of related and reverse related objects that have relations of the &quot;common&quot; type and nodes of reverse related objects that have relations of the &quot;XML embedded&quot; type (this is the default behavior of svcs).</p> <p>If the &quot;article2&quot; object has only one location, does not contain any keywords and is not related to any other objects, changing it will lead to clearing the view cache of the article itself and the &quot;News&quot; folder. The view cache of the &quot;About&quot; and &quot;Company&quot; nodes will not be cleared.</p> <p>However, you can extend this default behavior by adding the following configuration group to the &quot;viewcache.ini.append.php&quot; configuration file of your (admin) siteaccess:</p> <pre class="wordwrap copytoclipboard"><span class="line">[article]</span>
+<span class="line">DependentClassIdentifier[]</span>
+<span class="line">DependentClassIdentifier[]=folder</span>
+<span class="line">ClearCacheMethod[]</span>
+<span class="line">ClearCacheMethod[]=object</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[article]\r\nDependentClassIdentifier[]\r\nDependentClassIdentifier[]=folder\r\nClearCacheMethod[]\r\nClearCacheMethod[]=object' ); return false;" /></p>
+<![endif]--><p>Now, if an article is changed, the system will fetch all the parent nodes of this article sequentially according to its &quot;path_string&quot; attribute (the path string for &quot;article2&quot; ends with &quot;/77/78/80/82/&quot;), check which of them are folder nodes and clear the view cache for those folders. This means that changing &quot;article2&quot; will lead to clearing the view cache of &quot;article2&quot;, &quot;News&quot;, &quot;About&quot;, &quot;Company&quot; and all the parent folder nodes that are located above the &quot;Company&quot; node.</p>   <a name="eztoc62995_2" id="eztoc62995_2"></a><h2>Example 2</h2> <p>
+It is possible to limit the depth of fetching node IDs from the &quot;path_string&quot; attribute like this:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[article]</span>
+<span class="line">DependentClassIdentifier[]</span>
+<span class="line">DependentClassIdentifier[]=folder</span>
+<span class="line">ClearCacheMethod[]</span>
+<span class="line">ClearCacheMethod[]=object</span>
+<span class="line">MaxParents=2</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[article]\r\nDependentClassIdentifier[]\r\nDependentClassIdentifier[]=folder\r\nClearCacheMethod[]\r\nClearCacheMethod[]=object\r\nMaxParents=2' ); return false;" /></p>
+<![endif]--><p>This will tell the system to take into account only two penultimate items from the node's path string (i.e. parent and grandparent of the node). This means that changing &quot;article2&quot; will only lead to clearing the view caches of &quot;article2&quot;, &quot;News&quot; and &quot;About&quot;. The view cache of the &quot;Company&quot; node and its parent folders will not be cleared.</p>   <a name="eztoc62995_3" id="eztoc62995_3"></a><h2>Example 3</h2> <p>
+You can use the &quot;ObjectFilter[]&quot; configuration array so that a folder node listed in &quot;path_string&quot; will not be included in the list of additional nodes unless the object encapsulated by this node is explicitly specified in the following way:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">ObjectFilter[]</span>
+<span class="line">ObjectFilter[]=&lt;object_id1&gt;</span>
+<span class="line">ObjectFilter[]=&lt;object_id2&gt;</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'ObjectFilter[]\r\nObjectFilter[]=&lt;object_id1&gt;\r\nObjectFilter[]=&lt;object_id2&gt;\r\n...' ); return false;" /></p>
+<![endif]--><p>Assuming that the &quot;Company&quot; folder object in example 1 has ID number 74 (while its node ID is 77), you can specify the following settings in the &quot;viewcache.ini.append.php&quot; of your (admin) siteaccess: </p><pre class="wordwrap copytoclipboard"><span class="line">[article]</span>
+<span class="line">DependentClassIdentifier[]</span>
+<span class="line">DependentClassIdentifier[]=folder</span>
+<span class="line">ClearCacheMethod[]</span>
+<span class="line">ClearCacheMethod[]=object</span>
+<span class="line">ObjectFilter[]</span>
+<span class="line">ObjectFilter[]=74</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[article]\r\nDependentClassIdentifier[]\r\nDependentClassIdentifier[]=folder\r\nClearCacheMethod[]\r\nClearCacheMethod[]=object\r\nObjectFilter[]\r\nObjectFilter[]=74' ); return false;" /></p>
+<![endif]--><p>If &quot;article2&quot; is changed, svcs will check which of the folder nodes listed in the given path string (nodes 80, 78, 77, ...) have their object ID numbers matching one of the values in the &quot;ObjectFilter[]&quot; array and thus only the &quot;Company&quot; page will be included in the list of additional nodes. The system will only clear view caches of &quot;article2&quot;, &quot;News&quot; and &quot;Company&quot; (according to the default behavior and the given svcs rules). The view cache of the &quot;About&quot; page will not be cleared because the ID number of that object is not 74.</p>   <a name="eztoc62995_4" id="eztoc62995_4"></a><h2>Example 4</h2> <p>
+If you wish to clear the caches for a set of arbitrary objects when objects of specific types are changed, you will have to specify a list of object ID numbers using the &quot;AdditionalObjectIDs[]&quot; configuration array. Assuming that the object ID numbers of the &quot;Archive&quot; folder and the &quot;CD&quot; product are 64 and 69 accordingly, you can specify the following settings in the &quot;viewcache.ini.append.php&quot; of your (admin) siteaccess:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[article]</span>
+<span class="line">AdditionalObjectIDs[]</span>
+<span class="line">AdditionalObjectIDs[]=64</span>
+<span class="line">AdditionalObjectIDs[]=69</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[article]\r\nAdditionalObjectIDs[]\r\nAdditionalObjectIDs[]=64\r\nAdditionalObjectIDs[]=69' ); return false;" /></p>
+<![endif]--><p>
+ <br />This will tell the system to always clear the view cache of the &quot;Archive&quot; folder and the &quot;CD&quot; product when an article (any article) is changed. This means that changing &quot;article2&quot; will lead to clearing the view caches of &quot;article2&quot;, &quot;News&quot;, &quot;Archive&quot; and &quot;CD&quot;.</p>   <a name="eztoc62995_5" id="eztoc62995_5"></a><h2>Example 5</h2> <p>
+Let's say that you have specified the following settings in the &quot;viewcache.ini.append.php&quot; of your (admin) siteaccess:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[article]</span>
+<span class="line">AdditionalObjectIDs[]</span>
+<span class="line">AdditionalObjectIDs[]=69</span>
+<span class="line">&nbsp;</span>
+<span class="line">[product]</span>
+<span class="line">AdditionalObjectIDs[]</span>
+<span class="line">AdditionalObjectIDs[]=64</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[article]\r\nAdditionalObjectIDs[]\r\nAdditionalObjectIDs[]=69\r\n\r\n[product]\r\nAdditionalObjectIDs[]\r\nAdditionalObjectIDs[]=64' ); return false;" /></p>
+<![endif]--><p>
+ <br />The settings located in the &quot;[article]&quot; configuration block will tell the system to always clear the view cache of the &quot;CD&quot; product when an article is changed. This means that changing &quot;article2&quot; will lead to clearing the view caches of &quot;article2&quot;, &quot;News&quot; and &quot;CD&quot;. When clearing the cache of the &quot;CD&quot; product, svcs will apply the rules specified in the &quot;[product]&quot; section, and thus the view cache of the &quot;Archive&quot; folder will also be cleared.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/View-caching/Smart-view-cache-cleaning by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:56:51 GMT -->
+</html>

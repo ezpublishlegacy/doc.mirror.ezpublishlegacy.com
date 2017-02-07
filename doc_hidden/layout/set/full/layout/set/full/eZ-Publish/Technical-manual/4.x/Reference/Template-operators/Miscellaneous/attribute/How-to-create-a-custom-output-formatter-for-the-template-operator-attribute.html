@@ -1,0 +1,120 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-operators/Miscellaneous/attribute/How-to-create-a-custom-output-formatter-for-the-template-operator-attribute by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>How to create a custom output formatter for the template operator attribute / attribute / Miscellaneous / Template operators / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>How to create a custom output formatter for the template operator attribute</h1>
+</div>
+
+<p>eZ Publish 4.6 allows to create a custom output formatter for the attribute() template operator. This document explains process how to create a custom output formatter.</p><a name="eztoc124294_0_0_1" id="eztoc124294_0_0_1"></a><h4>Create a custom extension folder</h4><p>
+First we need to create a custom extension folder where we will place our code and configuration settings. Create a &quot;<i>ezattributeformatter</i>&quot; folder under extension folder inside eZ Publish root folder. You should have a following directory structure:<br />
+extension<br />
+├── ezattributeformatter<br />
+│&nbsp;&nbsp; │<br />
+│&nbsp;&nbsp; ├── classes<br />&nbsp; &nbsp;&nbsp; └── settings</p><a name="eztoc124294_0_0_2" id="eztoc124294_0_0_2"></a><h4>Create php file</h4><p>Next inside settings folder create a &quot;<i>template.ini.append.php</i>&quot; file with the following settings:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /*</span>
+<span class="line">&nbsp;</span>
+<span class="line">[AttributeOperator]</span>
+<span class="line">OutputFormatter[custom]=ezpAttributeOperatorCustomFormatter</span>
+<span class="line">&nbsp;</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /*\r\n\r\n[AttributeOperator]\r\nOutputFormatter[custom]=ezpAttributeOperatorCustomFormatter\r\n\r\n*/ ?&gt;' ); return false;" /></p>
+<![endif]--><p>Key 'custom' for &quot;<i>OutputFormatter</i>&quot; is our custom attribute() template operator identifier. Value is a PHP class which has to implement &quot;<i>ezpAttributeOperatorFormatterInterface</i>&quot;.</p><a name="eztoc124294_0_0_3" id="eztoc124294_0_0_3"></a><h4>Implement PHP class</h4><p>Once we have prepared our configuration we need to implement our custom formatter PHP class. In this example we will extend the base &quot;<i>ezpAttributeOperatorFormatter</i>&quot; class which provides for your convenient two useful methods which returns type and value of object, array, etc. Note that your class has to implement at least &quot;<i>ezpAttributeOperatorFormatterInterface</i>&quot;.</p><pre class="wordwrap copytoclipboard"><span class="line">class ezpAttributeOperatorBKMLFormatter extends ezpAttributeOperatorFormatter implements ezpAttributeOperatorFormatterInterface</span>
+<span class="line">{</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;* Formats header for the 'attribute' template operator output</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;*</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;* @param string $value</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;* @param bool $showValues</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;* @return string</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;public function header( $value, $showValues )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$headers = &quot;Attribute [Type]&quot;;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( $showValues )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;$headers &nbsp;.= &quot;: Value&quot;;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return &quot;&lt;h1&gt;{$headers}&lt;/h1&gt;{$value}&quot;;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;* Formats single line for the 'attribute' template operator output</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;*</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;* @param string $key</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;* @param mixed $item</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;* @param bool $showValues</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;* @param int $level</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;* @return string</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;public function line( $key, $item, $showValues, $level )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$type = $this-&gt;getType( $item );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$value = $this-&gt;getValue( $item );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$spacing = str_repeat( &quot;&amp;gt;&quot;, $level );</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( $showValues )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$output &nbsp;= &quot;&lt;div&gt;&lt;strong&gt;{$spacing}{$key}&lt;/strong&gt; [ {$type} ] &nbsp;: {$value}&lt;/div&gt;&quot;;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$output &nbsp;= &quot;&lt;div&gt;&lt;strong&gt;{$spacing}{$key}&lt;/strong&gt; [ {$type} ] &nbsp;: {$value}&lt;/div&gt;&quot;;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $output;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'class ezpAttributeOperatorBKMLFormatter extends ezpAttributeOperatorFormatter implements ezpAttributeOperatorFormatterInterface\r\n{\r\n\r\n   /**\r\n    * Formats header for the \'attribute\' template operator output\r\n    *\r\n    * @param string $value\r\n    * @param bool $showValues\r\n    * @return string\r\n    */\r\n   public function header( $value, $showValues )\r\n   {\r\n       $headers = &quot;Attribute [Type]&quot;;\r\n       if ( $showValues )\r\n           ;$headers  .= &quot;: Value&quot;;\r\n\r\n       return &quot;&lt;h1&gt;{$headers}&lt;/h1&gt;{$value}&quot;;\r\n   }\r\n\r\n   /**\r\n    * Formats single line for the \'attribute\' template operator output\r\n    *\r\n    * @param string $key\r\n    * @param mixed $item\r\n    * @param bool $showValues\r\n    * @param int $level\r\n    * @return string\r\n    */\r\n   public function line( $key, $item, $showValues, $level )\r\n   {\r\n       $type = $this-&gt;getType( $item );\r\n       $value = $this-&gt;getValue( $item );\r\n       $spacing = str_repeat( &quot;&amp;gt;&quot;, $level );\r\n\r\n       if ( $showValues )\r\n           $output  = &quot;&lt;div&gt;&lt;strong&gt;{$spacing}{$key}&lt;/strong&gt; [ {$type} ]  : {$value}&lt;/div&gt;&quot;;\r\n       else\r\n           $output  = &quot;&lt;div&gt;&lt;strong&gt;{$spacing}{$key}&lt;/strong&gt; [ {$type} ]  : {$value}&lt;/div&gt;&quot;;\r\n\r\n       return $output;\r\n   }\r\n}' ); return false;" /></p>
+<![endif]--><p>The &quot;<i>ezpAttributeOperatorFormatterInterface::header()</i>&quot; method allows you to customize a header style and format while the &quot;<i>ezpAttributeOperatorFormatterInterface::line()</i>&quot; method allows you to customize a single line/row of the attribute() template operator output.</p><a name="eztoc124294_0_0_4" id="eztoc124294_0_0_4"></a><h4>Activate extension &nbsp;&nbsp;</h4><p>Next we need to activate our extension. Add following line in to the settings/override/site.ini.append.php:</p><pre class="wordwrap copytoclipboard"><span class="line">[ExtensionSettings]</span>
+<span class="line">ActiveExtensions[]</span>
+<span class="line">[...]</span>
+<span class="line">ActiveExtensions[]=ezattributeformatter</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ExtensionSettings]\r\nActiveExtensions[]\r\n[...]\r\nActiveExtensions[]=ezattributeformatter' ); return false;" /></p>
+<![endif]--><a name="eztoc124294_0_0_5" id="eztoc124294_0_0_5"></a><h4>Update autoload array</h4><p>Once our extension is activated we need to update the PHP autoload array. In order to do so, execute following command from eZ Publish root folder:</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php -e -p</span>
+</pre><a name="eztoc124294_0_0_6" id="eztoc124294_0_0_6"></a><h4>Use the new output formatter</h4><p>Now you we can use a new output formatter for attribute() template operator as follows:</p><pre class="wordwrap"><span class="line">{$node|attribute('show', 2, 'custom')}</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-operators/Miscellaneous/attribute/How-to-create-a-custom-output-formatter-for-the-template-operator-attribute by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:11 GMT -->
+</html>

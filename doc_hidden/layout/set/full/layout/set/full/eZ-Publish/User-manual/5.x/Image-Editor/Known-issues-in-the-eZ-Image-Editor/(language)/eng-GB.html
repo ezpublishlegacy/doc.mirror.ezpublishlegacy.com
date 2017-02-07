@@ -1,0 +1,63 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/User-manual/5.x/Image-Editor/Known-issues-in-the-eZ-Image-Editor/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:12:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Known issues in the eZ Image Editor / Image Editor / 5.x / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Known issues in the eZ Image Editor</h1>
+</div>
+
+   <a name="eztoc134718_0_1" id="eztoc134718_0_1"></a><h3>Black &amp; White filter applied to a region</h3> <p>
+The black &amp; white filter won't apply to a specific region but to the whole document. The reason hasn't been found in the ezie code itself, and might require investigation in the conversion ezcomponent.<br />
+This only occurs with JPG files. It works fine with PNG and GIF.<br />
+The bug has been narrowed down to the ImageMagick command line. The following line will convert the whole image even though the region parameter is correct:<br /></p><pre class="wordwrap"><span class="line">/usr/local/bin/myconvert 'test.jpg' -region '341x379+291+178' &nbsp;-colorspace 'Gray' -colors '255' 'JPG:test-out.jpg'</span>
+</pre><p>&nbsp;</p> <p> <b>Extra info:</b> </p> 
+<ul>
+ <li><div> this does work when the output is a PNG file. So it's not an input, but output problem. </div></li> <li><div> this happens on ImageMagick 6.3.7 on Ubuntu, and other platforms as well </div></li> 
+</ul>
+ <p>Because the generated command line is okay and it works with other file formats and color spaces, this issue is most likely an ImageMagick bug.</p>     <a name="eztoc134718_0_2" id="eztoc134718_0_2"></a><h3>Default eZ Publish image.ini settings will make ezcImageConverter fail</h3> <p>The default eZ Publish &quot;image.ini&quot; contains &quot;[ImageMagick] Executable=convert&quot; and &quot;[ImageMagick] ExecutablePath=''. This is an issue with the current code, as we use this configuration for the component, and end up with a binary named &quot;convert&quot;. If a custom binary setting is sent to the component, it won't show in the path, and will therefore throw an exception since it won't find a file by that name in the current directory.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/User-manual/5.x/Image-Editor/Known-issues-in-the-eZ-Image-Editor/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:12:02 GMT -->
+</html>

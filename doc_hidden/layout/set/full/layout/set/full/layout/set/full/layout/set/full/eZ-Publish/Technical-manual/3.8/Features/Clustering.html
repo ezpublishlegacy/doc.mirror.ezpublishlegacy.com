@@ -1,0 +1,79 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Features/Clustering by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:10:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Clustering / Features / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Clustering</h1>
+</div>
+
+ <p>The clustering feature makes it possible to run an eZ publish site on several web servers. A site that is running on a cluster of servers will have better performance and will be able to handle more traffic. Please note that this feature was significantly improved in 3.8.</p> <p>Versions prior to eZ publish 3.8 could be run in a <a href="http://ez.no/community/articles/clustering_ez_publish" target="_self">clustered environment</a>, but these configurations were subject to occasional <a href="http://en.wikipedia.org/wiki/Race_conditions" target="_self">race conditions</a> when files were updated or removed. Since all cache files and images were stored locally on separate filesystems (one for each web server), the files had to be synchronized using &quot;rsync&quot; or similar tools.</p> <p>From 3.8, it is possible to store all content related caches, images and binary files in the database. A technique called <a href="http://en.wikipedia.org/wiki/Database_transaction" target="_self">database transaction</a> is used to ensure that all the cluster nodes use the same cache files and have access to the same image and binary files. In other words, when content is updated, changes will automatically become available for all the web servers in the cluster. This solves the caching and synchronization issues related to earlier versions running in a clustered environment. In addition, it makes it easier to do backups and migrate the solution to other platforms.</p> <p>Please note that when clustering is used, it is recommended to run the site in a Virtual Host environment on the different servers.</p>  <a name="eztoc32525_1" id="eztoc32525_1"></a><h2>How it works</h2> <p>Data that must be synchronized between the different servers is stored using the database:</p> 
+<ul>
+ <li><div> Binary files </div></li> <li><div> Image and image alias files </div></li> <li><div> Caches related to content:
+<ul>
+ <li><div> Content view cache </div></li> <li><div> Template block cache </div></li> <li><div> Expiry cache </div></li> <li><div> URL alias cache </div></li> <li><div> RSS cache </div></li> <li><div> User info cache </div></li> <li><div> Class identifier cache </div></li> <li><div> Sort key cache </div></li> 
+</ul>
+  </div></li> 
+</ul>
+ <p>Other files are stored using the filesystem, including (but not limited to):</p> 
+<ul>
+ <li><div> INI files </div></li> <li><div> Template files </div></li> <li><div> Compiled templates </div></li> <li><div> PHP files </div></li> <li><div> Log files </div></li> <li><div> Caches that are not related to content:
+<ul>
+ <li><div> Global INI cache </div></li> <li><div> INI cache </div></li> <li><div> Codepage cache </div></li> <li><div> Character transformation cache </div></li> <li><div> Template cache </div></li> <li><div> Template override cache </div></li> 
+</ul>
+  </div></li> 
+</ul>
+  <a name="eztoc32525_1_1" id="eztoc32525_1_1"></a><h3>Content view cache</h3> <p>When eZ publish is displaying a page (a content node), it will execute the &quot;view&quot; view of the &quot;content&quot; module and include the output in the pagelayout. If the output is <a href="View-caching.html" target="_self">cached</a>, the cache file(s) will be read and served. If not, the system will fetch the content stored in the <a href="../Concepts-and-basics/Content-management/The-content-object.html" target="_self">eZ publish object database</a>, render the necessary templates, generate a web page and store the resulting XHTML on the filesystem before serving it. As previously mentioned, these files can now (from 3.8) be stored in the database and thus the files (along with changes) are easily and immediately available to all servers in the cluster.</p>   <a name="eztoc32525_1_2" id="eztoc32525_1_2"></a><h3>Images and image aliases</h3> <p>The approach described above is also used when it comes to images and image aliases (<a href="../Reference/Datatypes/Image.html#variation" target="_self">image variations</a>). However, the solution is a bit more complicated because until now (3.8), images have been served directly by Apache. Since the web server isn't able to communicate with the database, the images need to be served using a PHP script called &quot;index_image.php&quot;. This is true for all content images, but not for images that are related to design. Please note that you'll need to add new rewrite rules in order to instruct Apache to use &quot;index_image.php&quot; when serving images.</p>    <a name="eztoc32525_2" id="eztoc32525_2"></a><h2>Cluster file handlers</h2> <p>A new cluster file handler mechanism was added in 3.8. It makes it possible to store, retrieve, rename, delete, etc. files using the database. The cluster file handlers are located in the &quot;kernel/classes/clusterfilehandlers&quot; directory of the eZ publish installation. The following cluster file handlers are known to the system by default:</p> 
+<ul>
+ <li><div> ezfs (eZFSFileHandler) </div></li> <li><div> ezdb (eZDBFileHandler) </div></li> 
+</ul>
+  <a name="eztoc32525_2_3" id="eztoc32525_2_3"></a><h3>eZFSFileHandler</h3> <p>This handler makes it possible to use the filesystem when dealing with files.</p> <p> <a name="ezdb"></a>
+ </p>   <a name="eztoc32525_2_4" id="eztoc32525_2_4"></a><h3>eZDBFileHandler</h3> <p>This handler makes it possible to use the database when dealing with files (in a cluster environment, this would typically be images, uploaded binary files and content-related caches, etc.). It is split into different back-ends that are compatible with the supported database engines (MySQL, PostgreSQL, Oracle, etc).</p>   <a name="eztoc32525_2_5" id="eztoc32525_2_5"></a><h3>Custom handlers</h3> <p>It is possible to extend the system by implementing your own handlers and/or back-ends. This should be done using the extension system (and not by modifying the original eZ publish kernel files).</p> <p>The &quot;ExtensionDirectories[]&quot; array located under the &quot;[ClusteringSettings]&quot; block of the &quot;file.ini&quot; configuration file specifies the extension directories where eZ publish should search for additional cluster file handlers. By default, eZ publish will search in the &quot;clusterfilehandlers&quot; subdirectory inside your extension.</p>  <a name="eztoc32525_2_5_1" id="eztoc32525_2_5_1"></a><h4>Example</h4> <p>
+If you have an extension &quot;myExtension&quot; that includes a cluster file handler &quot;cfh&quot;, you should add the following lines under the &quot;[ClusteringSettings]&quot; block in your &quot;file.ini.append.php&quot; file:<br /></p><pre class="wordwrap"><span class="line">FileHandler=cfh</span>
+<span class="line">ExtensionDirectories[]=myExtension</span>
+</pre><p>&nbsp;</p> <p>These settings will instruct eZ publish to use your custom cluster file handler located in &quot;extension/myExtension/clusterfilehandlers/cfhfilehandler.php&quot;.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Features/Clustering by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:10:37 GMT -->
+</html>

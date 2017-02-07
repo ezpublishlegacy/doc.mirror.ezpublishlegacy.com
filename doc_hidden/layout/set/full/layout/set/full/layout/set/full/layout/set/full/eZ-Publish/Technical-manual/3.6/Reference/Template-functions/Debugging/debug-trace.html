@@ -1,0 +1,77 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Template-functions/Debugging/debug-trace by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:57:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>debug-trace / Debugging / Template functions / Reference / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>debug-trace</h1>
+</div>
+<h3>Summary</h3>
+Generates an XDebug dump which can be traced/analyzed.<h3>Usage</h3>
+<pre>{debug-trace [ id=id ]}
+...
+{/debug}</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>id</td>
+        <td>string</td>
+        <td>The name of the debug file.</td>
+        <td>No.</td>
+    </tr></table><h3>Description</h3>
+ <p>This mechanism makes it possible to trace a block of code using &quot;XDebug&quot;. The result will be a trace file made by XDebug which can be analyzed. If XDebug is not installed and enabled, this mechanism will not do anything. The &quot;id&quot; parameter can be used to name the trace file. The file extension will be &quot;.xt&quot;. The default ID/name is &quot;template-debug&quot;. Please note that the trace file will be reset every time a debug-trace is encountered; it is a good idea to have one unique ID per entry.</p><h3>Examples</h3>
+    <a name="eztoc7658_0_0_1" id="eztoc7658_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{debug-trace id='fetch-trace'}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{def $nodes=fetch( 'content', 'tree', hash( 'parent_node_id', 2 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach( $nodes as $node )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$node.name|wash()}</span>
+<span class="line">{/foreach}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/debug-trace}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{debug-trace id=\'fetch-trace\'}\r\n\r\n{def $nodes=fetch( \'content\', \'tree\', hash( \'parent_node_id\', 2 ) )}\r\n\r\n{foreach( $nodes as $node )}\r\n    {$node.name|wash()}\r\n{/foreach}\r\n\r\n{/debug-trace}' ); return false;" /></p>
+<![endif]--> <p>This will generate an XDebug trace file called &quot;fetch-trace.xt&quot;.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Template-functions/Debugging/debug-trace by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:57:25 GMT -->
+</html>

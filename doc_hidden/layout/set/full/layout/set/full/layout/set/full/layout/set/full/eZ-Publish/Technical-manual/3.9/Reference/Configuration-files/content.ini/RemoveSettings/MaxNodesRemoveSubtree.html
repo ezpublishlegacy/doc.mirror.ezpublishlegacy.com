@@ -1,0 +1,60 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Configuration-files/content.ini/RemoveSettings/MaxNodesRemoveSubtree by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>MaxNodesRemoveSubtree / [RemoveSettings] / content.ini / Configuration files / Reference / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>MaxNodesRemoveSubtree</h1>
+</div>
+<h3>Summary</h3>
+Sets the maximum number of nodes that subtrees subject to removal can contain.<h3>Usage</h3>
+<pre class="pfix"> <p>MaxNodesRemoveSubtree= <i>number</i> </p></pre><h3>Description</h3>
+ <p>This directive makes it possible to disallow the removal of big subtrees (for all users). When using the administration interface and trying to remove subtrees containing more nodes than &quot;MaxNodesRemoveSubtree&quot; allows, a warning will be shown while the subtrees will be displayed in red. In such cases, the user will be suggested to use the &quot;ezsubtreeremove.php&quot; script located in the &quot;bin/php/&quot; directory. Subtrees containing more nodes than the value of &quot;MaxNodesRemoveSubtree&quot; can and will not be removed through HTTP (using a web browser to access a siteaccess).</p> <p>If several subtrees are selected for removal, only the ones containing less nodes than allowed will be removed when the &quot;OK&quot; button is clicked within the removal dialog of the administration interface. The default value of this setting is 100, which means that subtrees containing more than 100 nodes can't be removed through HTTP, not even by users with administrator privileges.</p> <p>This setting has been introduced in order to avoid cases which might lead to corrupt databases. The time it takes to remove a subtree is proportional with the number of nodes that it contains. If the required processing time exceeds the maximum execution time for PHP scripts, the connection will be lost and thus the database will most likely be left in an inconsistent state.</p><h3>Examples</h3>
+    <a name="eztoc72876_0_0_1" id="eztoc72876_0_0_1"></a><h4>Example 1</h4> <p>&nbsp;</p><pre class="wordwrap"><span class="line">MaxNodesRemoveSubtree=50</span>
+</pre><p>
+ <br />This configuration will not allow the removal of subtrees that contain more than 50 nodes over HTTP. Subtrees containing more than 50 nodes will have to be removed manually using the &quot;ezsubtreeremove.php&quot; script.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Configuration-files/content.ini/RemoveSettings/MaxNodesRemoveSubtree by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:19 GMT -->
+</html>

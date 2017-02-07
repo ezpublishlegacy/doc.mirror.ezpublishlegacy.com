@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/Cronjobs/The-cronjob-scripts by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:56:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>The cronjob scripts / Cronjobs / Features / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>The cronjob scripts</h1>
+</div>
+
+ <p>The &quot;cronjobs&quot; directory contains miscellaneous <i>cronjob scripts</i> used for automated periodic and scheduled maintenance. These are described below.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Name</p> 
+  </th> <th >   <p>Description</p> 
+  </th> <th >   <p>Frequency</p> 
+  </th> <th >   <p>Default status</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#basket_cleanup" target="_self">basket_cleanup.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Cleans up shopping baskets for removed user sessions.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Once a week.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Enabled</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#hide" target="_self">hide.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Hides nodes when a specified date and time is reached.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Not less than once a day.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Enabled</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#indexcontent" target="_self">indexcontent.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Performs delayed search indexing of newly added content objects.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Not less than once a day.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Enabled</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#old_drafts_cleanup" target="_self">old_drafts_cleanup.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Removes old/unused drafts.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Once a month.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Disabled</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#internal_drafts_cleanup" target="_self">internal_drafts_cleanup.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Removes unused internal drafts.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Once a day.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Enabled</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#ldapusermanage" target="_self">ldapusermanage.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Synchronizes user account information with an LDAP server.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Not less than once a day.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Disabled</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#linkcheck" target="_self">linkcheck.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Validates published URLs.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Once a week.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Enabled</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#notification" target="_self">notification.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Sends notifications to subscribed users.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Every 15-30 minutes.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Enabled</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#rssimport" target="_self">rssimport.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Imports RSS feeds.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Not less than once a day.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Enabled</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#subtreeexpirycleanup" target="_self">subtreeexpirycleanup.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Removes expired cache blocks with the &quot;subtree_expiry&quot; parameter.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Not less than once a day.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Enabled</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#unpublish" target="_self">unpublish.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Removes content objects when a specified date and time is reached.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Not less than once a day.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Enabled</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#updateviewcount" target="_self">updateviewcount.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Updates the page view statistics by parsing the Apache log files.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Not less than once a day.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Disabled</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p><a href="#workflow" target="_self">workflow.php</a> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Processes the workflows.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Every 15-30 minutes.</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Enabled</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p> <a name="basket_cleanup"></a>
+ </p>  <a name="eztoc63010_1" id="eztoc63010_1"></a><h2>Cleaning up expired data for webshop</h2> <p>The eZ Publish <a href="../../Concepts-and-basics/Webshop.html" target="_self">webshop</a> functionality allows your customers to put products into their shopping baskets. The items in the basket can then be purchased by initiating the checkout process. The system stores information about a user's shopping basket in a database table called &quot;ezbasket&quot;. Information about sessions is stored in the &quot;ezsession&quot; table.</p> <p>If a user adds products to his basket and then stops shopping (for example closes the browser window) without initiating the checkout process, the session of that user will expire after a while. Expired sessions can be removed either automatically by eZ Publish or manually by the site administrator. When a user's session is removed from the database, the system will not take care of the shopping basket that was created during this session. In other words, the system will remove an entry from the &quot;ezsession&quot; table, but the corresponding entry in the &quot;ezbasket&quot; table (if any) will remain untouched. This behavior is controlled by the &quot;<a href="../../Reference/Configuration-files/site.ini/Session/BasketCleanup.html" target="_self">BasketCleanup</a>&quot; setting located in the &quot;[Session]&quot; section of the &quot;site.ini&quot; configuration file (or its override). If it is set to &quot;cronjob&quot; (default), you will have to remove unused baskets periodically by running the &quot;basket_cleanup.php&quot; cronjob script.</p> <p>Please note that removing unused baskets usually takes a lot of time on sites with many visitors. It is recommended to run the basket cleanup cronjob once a week. If you wish to run it together with other (more frequent) cronjobs, use the &quot;<a href="../../Reference/Configuration-files/site.ini/Session/BasketCleanupAverageFrequency.html" target="_self">BasketCleanupAverageFrequency</a>&quot; setting located at the same place to specify how often the baskets will actually be cleaned up when the &quot;basket_cleanup.php&quot; cronjob is executed. If you wish to run &quot;basket_cleanup.php&quot; separately from other cronjobs, add the following line to the &quot;[Session]&quot; section of your &quot;cronjob.ini.append.php&quot; file:</p> <pre class="wordwrap"><span class="line">BasketCleanupAverageFrequency=1</span>
+</pre> <p>Please note that there is no need to run this cronjob if your site does not use the webshop functionality (or if it does but the &quot;BasketCleanup&quot; setting is set to &quot;pageload&quot;). </p> <p> <a name="hide"></a>
+ </p>   <a name="eztoc63010_2" id="eztoc63010_2"></a><h2>Hiding nodes at specific times</h2> <p>The system can automatically hide a node when a specified date is reached. For example, you may wish that an article published on your site should become invisible within a couple of days/weeks/months. However, you are not interested in removing the article, you just want to hide it. In this case, you will have to add a new attribute using the &quot;<a href="../../Reference/Datatypes/Date-and-time.html" target="_self">Date and time</a>&quot; datatype to your article class and configure the hide cronjob. The following text describes how this can be done.</p>  <a name="eztoc63010_2_1" id="eztoc63010_2_1"></a><h3>Adding an attribute to the &quot;Article&quot; class</h3> <p>Go to &quot;Setup - Classes&quot; in the administration interface and select the &quot;Content&quot; class group to view the list of classes assigned to this group. Find the article class and click it's corresponding edit icon/button. You will be taken to the class edit interface. Select the &quot;Date and time&quot; datatype from the drop-down list located in the bottom, click the &quot;Add attribute&quot; button and edit the newly added attribute as shown in the following screenshot.</p> 
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/features/cronjobs/date_and_time/34550-1-eng-GB/date_and_time_doc.png" alt="Class attribute edit interface for the &quot;Date and time&quot; datatype." />
+ <p>Class attribute edit interface for the &quot;Date and time&quot; datatype. </p>
+
+
+
+
+
+
+
+</div> <p>Note that both the name and the identifier can be set to anything (you specify what to use in the ini file - see further below) and click &quot;OK&quot;. The system will add a new field called &quot;Hide date&quot; (the name of the newly added attribute in the example above) to the class and thus it will appear in the edit interface for the objects (in this case articles). When the articles are edited, this field can be used to specify when the cronjob should hide the nodes. If the attribute is left blank, the article will not be affected by the hide cronjob. Please note that the &quot;hide.php&quot; cronjob must be run periodically for this to work.</p>   <a name="eztoc63010_2_2" id="eztoc63010_2_2"></a><h3>Configuring the &quot;hide&quot; cronjob</h3> <p>Add the following lines to your &quot;content.ini.append.php&quot; configuration file:</p> <pre class="wordwrap"><span class="line">[HideSettings]</span>
+<span class="line">RootNodeList[]=2</span>
+<span class="line">HideDateAttributeList[article]=hide_date</span>
+</pre> <p>You should specify the identifier of the newly added attribute in the &quot;<a href="../../Reference/Configuration-files/content.ini/HideSettings/HideDateAttributeList.html" target="_self">HideDateAttributeList</a>&quot; configuration array using the class identifier as a key. In addition, you need to specify the ID number of the parent node for the articles using the &quot;<a href="../../Reference/Configuration-files/content.ini/HideSettings/RootNodeList.html" target="_self">RootNodeList</a>&quot; configuration directive.</p> <p> <a name="indexcontent"></a>
+ </p>    <a name="eztoc63010_3" id="eztoc63010_3"></a><h2>Delayed search indexing</h2> <p>If the <a href="../../Reference/Configuration-files/site.ini/SearchSettings/DelayedIndexing.html" target="_self">delayed indexing</a> feature is enabled, newly and re-published objects will not be indexed immediately. In other words, eZ Publish will not index the content during the publishing process. Instead, the indexing cronjob will take care of this in the background and thus publishing will go a bit faster (since you don't have to wait for the content to be indexed). In order for this to work, the &quot;indexcontent.php&quot; cronjob must be executed periodically in the background (otherwise the content will be published but not indexed).</p> <p>Please note that you do not need to run this script unless you have &quot;DelayedIndexing=enabled&quot; in the &quot;[SearchSettings]&quot; section of the &quot;site.ini&quot; configuration file (or an override).</p> <p> <a name="old_drafts_cleanup"></a>
+ </p>   <a name="eztoc63010_4" id="eztoc63010_4"></a><h2>Cleaning up old/unneeded drafts</h2>  <a name="eztoc63010_4_3" id="eztoc63010_4_3"></a><h3>Regular drafts (status &quot;0&quot;)</h3> <p>The purpose of the &quot;old_drafts_cleanup.php&quot; cronjob script is to remove old drafts from the database. If enabled, this script will remove drafts that have been in the system for over 90 days. To set the number of days, hours, minutes and seconds before a draft is considered old and can be removed, specify the desired values in the &quot;DraftsDuration[]&quot; configuration array located in the &quot;[VersionManagement]&quot; block of an override for &quot;content.ini&quot;. The maximal number of drafts to remove at one call of the script (100 by default) is controlled by the &quot;DraftsCleanUpLimit&quot; setting located at the same place.</p> <p> <a name="internal_drafts_cleanup"></a>
+ </p>   <a name="eztoc63010_4_4" id="eztoc63010_4_4"></a><h3>Internal/untouched drafts (status &quot;5&quot;)</h3> <p>The purpose of the &quot;internal_drafts_cleanup.php&quot; cronjob script is to remove drafts that probably will never be published. If a version of a content object is created but not modified (for example, if someone clicked an &quot;Add comments&quot; button but didn't actually post anything), the status of the version will be &quot;5&quot;. The &quot;internal_drafts_cleanup.php&quot; script will remove status &quot;5&quot; drafts that have been in the system for over 24 hours (1 day). To set the number of days, hours, minutes and seconds before an internal draft is considered old and can be removed, specify the desired values in the &quot;InternalDraftsDuration[]&quot; configuration array located in the &quot;[VersionManagement]&quot; block of an override for &quot;content.ini&quot;. The maximal number of internal drafts to remove at one call of the script (100 by default) is controlled by the &quot;InternalDraftsCleanUpLimit&quot; setting located at the same place.</p> <p> <a name="ldapusermanage"></a>
+ </p>    <a name="eztoc63010_5" id="eztoc63010_5"></a><h2>Synchronizing user data with LDAP server</h2> <p>If the users are authenticated through an <a href="http://en.wikipedia.org/wiki/LDAP" target="_self">LDAP</a> server, eZ Publish will fetch user account information from the external source and store it in the database. What happens is that it creates local accounts when the users are logging in.</p> <p>The &quot;ldapusermanage.php&quot; cronjob script can be used to synchronize local user account information with the external source in the background. It is recommended to run this script periodically when the site is connected to an LDAP server. The script will take care of typical maintenance tasks. For example, if a user is deleted from the LDAP directory, it will disable (but not remove) the local account. </p> <p>Please note that the script will only update the eZ Publish database. Modification of external data (stored on an LDAP server) is not supported.</p> <p> <a name="linkcheck"></a>
+ </p>   <a name="eztoc63010_6" id="eztoc63010_6"></a><h2>Checking URLs</h2> <p>In eZ Publish, every address that is input as a link into an attribute using the <a href="../../Reference/Datatypes/XML-block.html" target="_self">&quot;XML block&quot;</a> or the <a href="../../Reference/Datatypes/URL.html" target="_self">&quot;URL&quot;</a> datatype is stored in the <a href="../../Concepts-and-basics/Content-management/URL-storage.html" target="_self">URL table</a> and thus the published URLs can be inspected and edited without having to interact with the content objects. This means that you don't have to edit and re-publish your content if you just want to change/update a link.</p> <p>The URL table contains all the necessary information about each address including its status (valid or invalid) and the time it was last checked (when the system attempted to validate the URL). By default, all URLs are valid. The &quot;linkcheck.php&quot; cronjob script is intended to check all the addresses stored in the URL table by accessing the links one by one. If a broken link is found, its status will be set to &quot;invalid&quot;. The last checked field will always be updated.</p> <p>You will have to specify your site URLs using the &quot;<a href="../../Reference/Configuration-files/cronjob.ini/linkCheckSettings/SiteURL.html" target="_self">SiteURL</a>&quot; configuration directive located in the &quot;[linkCheckSettings]&quot; section of the &quot;crobjob.ini.append.php&quot; file. This will make sure that the &quot;linkcheck.php&quot; cronjob handles relative URLs (internal links) properly.</p> <p>Please note that the link check script must be able to contact the outside world through port 80. In other words, the firewall must be opened for outgoing HTTP traffic from the web server that is running eZ Publish. From 3.9, it is possible to fetch data using a HTTP proxy specified in the &quot;<a href="../../Reference/Configuration-files/site.ini/ProxySettings.html" target="_self">[ProxySettings]</a>&quot; section of &quot;site.ini&quot; (requires <a href="http://php.net/curl" target="_self">CURL</a> support in PHP).</p> <p> <a name="notification"></a>
+ </p>   <a name="eztoc63010_7" id="eztoc63010_7"></a><h2>Sending notifications</h2> <p>eZ Publish has a built-in <a href="../Notifications.html" target="_self">notification system</a> that allows users to receive information about miscellaneous happenings. It is possible to be notified by email when objects are updated or published, when workflows are executed and so on. If you are going to use notifications on your site, you will have to run the &quot;notification.php&quot; cronjob script periodically. It will take care of sending notifications to subscribed users (this is done by launching the main notification processing script &quot;kernel/classes/notification/eznotificationeventfilter.php&quot;). </p> <p>If you are using the notification system, it is recommended to run this cronjob script every 15-30 minutes.</p> <p> <a name="rssimport"></a>
+ </p>   <a name="eztoc63010_8" id="eztoc63010_8"></a><h2>RSS import</h2> <p>The RSS import functionality makes it possible to receive feeds from various sites, for example, the latest community news from <a href="http://www.ez.no/" target="_self">www.ez.no</a> ( <a href="http://ez.no/rss/feed/communitynews" target="_self">http://ez.no/rss/feed/communitynews</a> ). You will have to configure this using the &quot;Setup - RSS&quot; part of the administration interface and run the &quot;rssimport.php&quot; cronjob periodically. This script will get new items for all your active RSS imports and publish them on your site (if an item already exists, it will be skipped). </p> <p>Please note that the RSS import script must be able to contact the outside world through port 80. In other words, the firewall must be opened for outgoing HTTP traffic from the web server that is running eZ Publish. From 3.9, it is possible to fetch data using a HTTP proxy specified in the &quot;<a href="../../Reference/Configuration-files/site.ini/ProxySettings.html" target="_self">[ProxySettings]</a>&quot; section of &quot;site.ini&quot; (requires <a href="http://php.net/curl" target="_self">CURL</a> support in PHP).</p> <p> <a name="subtreeexpirycleanup"></a>
+ </p>   <a name="eztoc63010_9" id="eztoc63010_9"></a><h2>Clearing expired template block caches</h2> <p>If you are using the &quot;<a href="../../Reference/Template-functions/Miscellaneous/cache-block.html" target="_self">cache-block</a>&quot; template function with the &quot;subtree_expiry&quot; parameter to cache the contents of a template block, this cache block will only expire if an object is published below the given subtree (instead of the entire content node tree). The &quot;<a href="../../Reference/Configuration-files/site.ini/TemplateSettings/DelayedCacheBlockCleanup.html" target="_self">DelayedCacheBlockCleanup</a>&quot; setting located in the &quot;[TemplateSettings]&quot; section of the &quot;site.ini&quot; configuration file controls whether expired cache blocks with the &quot;subtree_expiry&quot; parameter will be removed immediately or not. If this setting is enabled, the expired cache blocks must be removed manually or using the &quot;subtreeexpirycleanup.php&quot; cronjob script. (Note that due to known limitations in eZ Publish 3.9 and earlier versions, this setting must be disabled for sites that use the <a href="../Clustering.html" target="_self">clustering</a> functionality.)</p> <p> <a name="unpublish"></a>
+ </p>   <a name="eztoc63010_10" id="eztoc63010_10"></a><h2>Removing objects at specific times</h2> <p>The &quot;unpublish.php&quot; script makes it possible to remove content objects when a specified date is reached. For example, you may wish to delete some articles (move them to the trash) within a couple of days/weeks/months. The following list reveals how this can be done.</p> 
+<ol>
+ <li><div> Add a new attribute of the &quot;<a href="../../Reference/Datatypes/Date-and-time.html" target="_self">Date and time</a>&quot; datatype to your article class using the &quot;Setup - Classes&quot; part of the administration interface. Specify &quot;unpublish_date&quot; as the attribute's identifier; a new field will become available when the objects (in this case articles) are edited. This field can be used to specify when the cronjob should remove the object. If the attribute is left blank, the object will not be affected by the unpublish cronjob. </div></li> <li><div> Configure the &quot;unpublish.php&quot; cronjob by adding the following lines to your &quot;content.ini.append.php&quot; configuration file: <pre class="wordwrap"><span class="line">[UnpublishSettings]</span>
+<span class="line">RootNodeList[]=2</span>
+<span class="line">ClassList[]=2</span>
+</pre>You should specify the ID number of your article class in the &quot;<a href="../../Reference/Configuration-files/content.ini/UnpublishSettings/ClassList.html" target="_self">ClassList</a>&quot; configuration array and put the ID number of the parent node for your articles to the &quot;<a href="../../Reference/Configuration-files/content.ini/UnpublishSettings/RootNodeList.html" target="_self">RootNodeList</a>&quot; setting. </div></li> 
+</ol>
+ <p> <a name="updateviewcount"></a>
+ </p>   <a name="eztoc63010_11" id="eztoc63010_11"></a><h2>Analyzing the Apache log files</h2> <p>It is possible to have the view statistics for your site pages stored in the eZ Publish database. To do this, you will have to run the &quot;updateviewcount.php&quot; cronjob script periodically. The script will update the view counters of the nodes by analyzing the Apache log file (the view counters are stored in a database table called &quot;ezview_counter&quot;). When executed, the script will update a log file called &quot;updateview.log&quot; located in the &quot;var/example/log/&quot; directory (where &quot;example&quot; is usually the name of the siteaccess that is being used - it is set by the &quot;VarDir&quot; directive in &quot;site.ini&quot; or an override). This file contains information about which line in the Apache log file the script should start from the next time it is run.</p> <p>You will also have to create an override for the &quot;logfile.ini&quot; configuration file and add the following lines there:</p> <pre class="wordwrap copytoclipboard"><span class="line">[AccessLogFileSettings]</span>
+<span class="line">StorageDir=/var/log/httpd/</span>
+<span class="line">LogFileName=access_log</span>
+<span class="line">SitePrefix[]=example</span>
+<span class="line">SitePrefix[]=example_admin</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[AccessLogFileSettings]\r\nStorageDir=/var/log/httpd/\r\nLogFileName=access_log\r\nSitePrefix[]=example\r\nSitePrefix[]=example_admin' ); return false;" /></p>
+<![endif]--> <p>Replace &quot;/var/log/httpd&quot; with the full path of the directory where the Apache log file is stored, specify the actual name of this file instead of &quot;access_log&quot;, replace &quot;example&quot; and &quot;example_admin&quot; with the names of your siteaccesses (if you have more than two siteaccesses, list all of them).</p> <p>Once the correct settings are specified and the &quot;updateviewcount.php&quot; cronjob script is run periodically, you will be able to fetch the most popular (most viewed) nodes using the &quot;<a href="../../Reference/Modules/content/Fetch-functions/view_top_list.html" target="_self">view_top_list</a>&quot; template fetch function and/or check how many times a node has been viewed (as described in <a href="../../Reference/Modules/content/Fetch-functions/node.html#example3" target="_self">this example</a>).</p> <p> <a name="workflow"></a>
+ </p>   <a name="eztoc63010_12" id="eztoc63010_12"></a><h2>Processing workflows</h2> <p>In order to use <a href="../../Concepts-and-basics/Workflows.html" target="_self">workflows</a>, you will have to run the &quot;workflow.php&quot; cronjob script periodically. The script will take care of processing the workflows. For example, let's say you are using the collaboration system and all the changes made in the <a href="../../Concepts-and-basics/Content-management/Sections.html" target="_self">&quot;Standard&quot; section</a> can not be published without your approval. (This can be done by creating a new <a href="../../Reference/Workflow-events/Approve.html" target="_self">&quot;Approve&quot; event</a> within a new workflow initiated by the &quot;content-publish-before&quot; trigger function.) If somebody (except the administrator) changes article &quot;A&quot;, the system will generate a new collaboration message &quot;article A awaits your approval&quot; for you and another collaboration message &quot;article A awaits approval by editor&quot; for the user who changed it. (Run &quot;notification.php&quot; periodically in order to make it possible for users to be notified by E-mail about new collaboration messages.) You will be able to view your collaboration messages and review/approve/reject the changes using the &quot;My Account - Collaboration&quot; part of the administration interface. However, the changes will not be applied to article A immediately after getting your approval. This will be done next time the &quot;workflow.php&quot; cronjob script is executed.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/Cronjobs/The-cronjob-scripts by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:56:51 GMT -->
+</html>

@@ -1,0 +1,405 @@
+Message-ID: <1516024253.1450.1413895967042.JavaMail.confluence@ip-10-127-227-192>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_1449_352233055.1413895967042"
+
+------=_Part_1449_352233055.1413895967042
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>How-to trigger a workflow using the Public API</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+#main {
+    padding-bottom: 1em !important; /* The default padding of 6em is too mu=
+ch for printouts */
+}
+
+body {
+    font-family: Arial, Helvetica, FreeSans, sans-serif;
+    font-size: 10pt;
+    line-height: 1.2;
+}
+
+body, #full-height-container, #main, #page, #content, .has-personal-sidebar=
+ #content {
+    background: #fff    !important;
+    color: #000         !important;
+    border: 0           !important;
+    width: 100%         !important;
+    height: auto        !important;
+    min-height: auto    !important;
+    margin: 0           !important;
+    padding: 0          !important;
+    display: block      !important;
+}
+
+a, a:link, a:visited, a:focus, a:hover, a:active {
+    color: #000;
+}
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6 {
+    font-family: Arial, Helvetica, FreeSans, sans-serif;
+    page-break-after: avoid;
+}
+pre {
+    font-family: Monaco, "Courier New", monospace;
+}
+
+#header,
+.aui-header-inner,
+#navigation,
+#sidebar,
+.sidebar,
+#personal-info-sidebar,
+.ia-fixed-sidebar,
+.page-actions,
+.navmenu,
+.ajs-menu-bar,
+.noprint,
+.inline-control-link,
+.inline-control-link a,
+a.show-labels-editor,
+.global-comment-actions,
+.comment-actions,
+.quick-comment-container,
+#addcomment {
+    display: none !important;
+}
+
+.comment .date::before {
+    content: none !important; /* remove middot for print view */
+}
+
+h1.pagetitle img {
+    height: auto;
+    width: auto;
+}
+
+.print-only {
+    display: block;
+}
+#footer {
+    position: relative !important; /* CONF-17506 Place the footer at end of=
+ the content */
+    margin: 0;
+    padding: 0;
+    background: none;
+    clear: both;
+}
+
+#poweredby {
+    border-top: none;
+    background: none;
+}
+
+#poweredby li.print-only {
+    display: list-item;
+    font-style: italic;
+}
+
+#poweredby li.noprint {
+    display:none;
+}
+
+
+/* no width controls in print */
+.wiki-content .table-wrap,
+.wiki-content p,
+.panel .codeContent,
+.panel .codeContent pre,
+.image-wrap {
+    overflow: visible !important;
+}
+
+/* TODO - should this work? */
+#children-section,
+#comments-section .comment,
+#comments-section .comment .comment-body,
+#comments-section .comment .comment-content,
+#comments-section .comment p {
+    page-break-inside: avoid;
+}
+
+#page-children a {
+    text-decoration: none;
+}
+
+/**
+ hide twixies
+
+ the specificity here is a hack because print styles
+ are getting loaded before the base styles. */
+#comments-section.pageSection .section-header,
+#comments-section.pageSection .section-title,
+#children-section.pageSection .section-header,
+#children-section.pageSection .section-title,
+.children-show-hide {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.children-show-hide.icon {
+    display: none;
+}
+
+/* personal sidebar */
+.has-personal-sidebar #content {
+    margin-right: 0px;
+}
+
+.has-personal-sidebar #content .pageSection {
+    margin-right: 0px;
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>How-to trigger a workflow using the Public API</h1>
+    <div class=3D"Section1">
+        <p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>The ContentService implemented in eZ Publish 5.1 has no knowledge of the=
+ Legacy workflow engine. This means that all features in the 4.x series tha=
+t used workflows need a workaround. One of the most common use-cases is pre=
+-publishing approval, for instance of user generated content.</p>
+<h2 id=3D"How-totriggeraworkflowusingthePublicAPI-Legacykernelcallbacks">Le=
+gacy kernel callbacks</h2>
+<p>Fortunately, there is a quite simple way to trigger workflows from eZ Pu=
+blish 5 code: by using a Legacy Kernel Callback. The overall process is des=
+cribed in the&nbsp;<a href=3D"/display/EZP51/Legacy+code+and+features">Lega=
+cy code and features</a>&nbsp;documentation chapter.</p>
+<h1 id=3D"How-totriggeraworkflowusingthePublicAPI-CreatewiththePublicAPI,pu=
+blishwiththeLegacyKernel">Create with the Public API, publish with the Lega=
+cy Kernel</h1>
+<p>Thanks to this, it is possible to create a draft using native eZ Publish=
+ 5 code, and get this draft pre-approved using the legacy workflow &amp; co=
+llaboration systems, including email notifications.</p>
+<h3 id=3D"How-totriggeraworkflowusingthePublicAPI-Legacyworkflowconfigurati=
+on">Legacy workflow configuration</h3>
+<p>Let's take an approval workflow as an example. It needs to be configured=
+ the old way, using the backoffice. Create a workflow, add an&nbsp;<a href=
+=3D"http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Workflow-eve=
+nts/Approve" class=3D"external-link" rel=3D"nofollow">Approve event</a> to =
+it, and connect it to the content/publish/before trigger.</p>
+<h3 id=3D"How-totriggeraworkflowusingthePublicAPI-Createadraftusingthepubli=
+cAPI">Create a draft using the public API</h3>
+<p>This is done the usual way, as extensively covered in the&nbsp;<a href=
+=3D"/display/EZP51/3.+Managing+Content">Public API Cookbook</a>. The main d=
+ifferent is that we will NOT call&nbsp;<code>ContentService::publishVersion=
+()</code>.</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>Create content using the Public API</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"theme: Eclipse; brush: php; gutter: false" style=3D"font-size=
+:12px;">$contentType =3D $contentTypeService-&gt;loadContentTypeByIdentifie=
+r( $contentTypeIdentifier );
+
+$contentCreateStruct =3D $contentService-&gt;newContentCreateStruct( $conte=
+ntType, 'eng-GB' );
+$contentCreateStruct-&gt;setField( 'title', $title );
+$contentCreateStruct-&gt;setField( 'intro', $intro );
+$contentCreateStruct-&gt;setField( 'body', $body );
+
+$locationCreateStruct =3D $locationService-&gt;newLocationCreateStruct( $pa=
+rentLocationId );
+
+
+// create a draft using the content and location create struct and publish =
+it
+$draft =3D $contentService-&gt;createContent( $contentCreateStruct, array( =
+$locationCreateStruct ) );
+
+</pre>=20
+</div>
+</div>
+<h2 id=3D"How-totriggeraworkflowusingthePublicAPI-PublishaPublicAPIdraftusi=
+ngtheLegacyKernel">Publish a Public API draft using the Legacy Kernel</h2>
+<p>&nbsp;</p>
+<p>You need to use the object to run a Legacy Kernel Callback (e.g. code fr=
+agment). This legacy code will execute the publish operation with the given=
+ content id and version number. It will then check the operation result, an=
+d return true or false, depending if the operation went all the way through=
+, or if it was interrupted (approval workflow event, for instance). This ha=
+ndling could and should&nbsp;<em>of course</em> be enhanced, with error han=
+dling to begin with, but it doesn't change the core principle.</p>
+<p>This example will work in any controller that extends&nbsp;<code>eZ\Publ=
+ish\EzPublishCoreBundle\Controller</code>:</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"theme: Eclipse; brush: php; gutter: false" style=3D"font-size=
+:12px;">/**
+ * @param $contentId
+ * @param $versionId
+ * @return bool true if the operation was completed, false if it was interr=
+upted
+ */
+protected function runLegacyPublish( $contentId, $versionId, $runAsUserId =
+=3D null )
+{
+    $legacyKernel =3D $this-&gt;getLegacyKernel();
+    return $legacyKernel-&gt;runCallback(
+        function () use ( $contentId, $versionId, $runAsUserId )
+        {
+
+            $db =3D \eZDB::instance();
+            $transactionCounter =3D $db-&gt;transactionCounter();
+            if ( $runAsUserId )
+            {
+                \eZUser::setCurrentlyLoggedInUser( \eZUser::fetch( $runAsUs=
+erId ), $runAsUserId );
+            }
+            $operationResult =3D \eZOperationHandler::execute(
+                'content', 'publish', array( 'object_id' =3D&gt; $contentId=
+, 'version' =3D&gt; $versionId )
+            );
+            if ( ( array_key_exists( 'status', $operationResult ) &amp;&amp=
+; $operationResult['status'] !=3D \eZModuleOperationInfo::STATUS_CONTINUE )=
+ )
+            {
+                // Required by https://jira.ez.no/browse/EZP-20558
+                for ( $i =3D 0, $counter =3D ( $db-&gt;transactionCounter()=
+ - $transactionCounter ); $i &lt; $counter; ++$i )
+                {
+                    $db-&gt;commit();
+                }
+                return false;
+            }
+            return true;
+        }
+    );
+}</pre>=20
+</div>
+</div>=20
+<div class=3D"aui-message hint shadowed information-macro">=20
+<p class=3D"title">eZ Script context</p>=20
+<span class=3D"aui-icon icon-hint">Icon</span>=20
+<div class=3D"message-content">=20
+<p>If you are running the callback in a command line script, you need to ad=
+d these calls before executing any legacy code:</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"theme: Eclipse; brush: php; gutter: false" style=3D"font-size=
+:12px;">$script =3D \eZScript::instance( array( 'use-modules' =3D&gt; true =
+) );
+$script-&gt;initialize();</pre>=20
+</div>
+</div>=20
+</div>=20
+</div>=20
+<p>&nbsp;</p>
+<p>Any Legacy code can be executed this way. While it is a&nbsp;<em>backwar=
+d compatibility</em> feature, it is considered good practice to work around=
+ missing features. It is however not recommended to rely heavily on Legacy =
+features for performances reasons.</p>=20
+<div class=3D"aui-message warning shadowed information-macro">=20
+<p class=3D"title">Pay attention to the user</p>=20
+<span class=3D"aui-icon icon-warning">Icon</span>=20
+<div class=3D"message-content">=20
+<p>Public API code is always executed as a user, by default anonymous. Sinc=
+e workflows are often user dependent (Approval is), it is important that th=
+is code is executed as an editor, or as a user who will trigger the workflo=
+w.</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>Logging in a user on the Public API repository</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"theme: Eclipse; brush: php; gutter: false" style=3D"font-size=
+:12px;">$repository-&gt;setCurrentUser( $repository-&gt;getUserService()-&g=
+t;loadUser( $userId ) );</pre>=20
+</div>
+</div>
+<p>Of course, this isn't required when using Public API code in controllers=
+, since those will use the currently-logged in user.</p>
+<p><strong>Legacy code</strong><strong> also requires a user</strong></p>
+<p>By default, code in <code>LegacyKernel::runCallback()</code> calls is ex=
+ecuted as anonymous. You'll have to log the executing user manually <em>on =
+legacy as well</em>.</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>Logging in a user with the Legacy Kernel</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"theme: Eclipse; brush: php; gutter: false" style=3D"font-size=
+:12px;">\eZUser::setCurrentlyLoggedInUser( \eZUser::fetch( $runAsUserId ), =
+$runAsUserId );</pre>=20
+</div>
+</div>=20
+</div>=20
+</div>=20
+<p>&nbsp;</p>
+<h1 id=3D"How-totriggeraworkflowusingthePublicAPI-Datacompatibilityandworkf=
+lowcollaboration">Data compatibility and workflow collaboration</h1>
+<p>Content created using the Public API does appear as expected in the dash=
+board, and the draft can be checked from here. Collaboration options from t=
+he backoffice are available, and the object's lifecycle can be managed the =
+way it used to with eZ Publish 4.x.</p>
+<h1 id=3D"How-totriggeraworkflowusingthePublicAPI-Testscript">Test script</=
+h1>
+<p>The code below is a working Command script example that demonstrates the=
+ workaround. Just drop it in a bundle and update the namespace:&nbsp;<a hre=
+f=3D"https://gist.github.com/bdunogier/e05ed564770fa6a51e51" class=3D"exter=
+nal-link" rel=3D"nofollow">https://gist.github.com/bdunogier/e05ed564770fa6=
+a51e51</a></p>
+<p>&nbsp;</p>
+    </div>
+</body>
+</html>
+------=_Part_1449_352233055.1413895967042--

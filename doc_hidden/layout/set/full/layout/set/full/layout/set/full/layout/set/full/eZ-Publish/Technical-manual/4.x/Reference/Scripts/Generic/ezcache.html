@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/ezcache.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:47:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>ezcache.php / Generic / Scripts / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ezcache.php</h1>
+</div>
+
+<h3>Summary</h3>
+Clears the eZ Publish caches.
+
+<h3>Location</h3>    ./bin/php/ezcache.php<h3>Parameters</h3><p>
+<a href=#allow-root-user>allow-root-user</a><br/>
+
+<a href=#clear-all>clear-all</a><br/>
+
+<a href=#clear-id>clear-id</a><br/>
+
+<a href=#clear-tag>clear-tag</a><br/>
+
+<a href=#colors>colors</a><br/>
+
+<a href=#debug>debug</a><br/>
+
+<a href=#expiry>expiry</a><br/>
+
+<a href=#help>help</a><br/>
+
+<a href=#iteration-max>iteration-max</a><br/>
+
+<a href=#iteration-sleep>iteration-sleep</a><br/>
+
+<a href=#list-ids>list-ids</a><br/>
+
+<a href=#list-tags>list-tags</a><br/>
+
+<a href=#logfiles>logfiles</a><br/>
+
+<a href=#no-colors>no-colors</a><br/>
+
+<a href=#no-logfiles>no-logfiles</a><br/>
+
+<a href=#purge>purge</a><br/>
+
+<a href=#quiet>quiet</a><br/>
+
+<a href=#siteaccess>siteaccess</a><br/>
+
+<a href=#verbose>verbose</a><br/>
+</p>
+
+    <a name="allow-root-user"></a>
+    <h4>-r,--allow-root-user</h3>
+    <div style="margin-left:35px;">
+        
+<p>Allows your root user to run the ezcache.php script. The usage of this parameter is only recommended for advanced users. With great power comes great responsibility.</p>    </div>
+
+    <a name="clear-all"></a>
+    <h4>--clear-all</h3>
+    <div style="margin-left:35px;">
+        
+<p>Clears all caches. This parameter can be useful if you want to clean all caches instead of deleting a particular cache tag or identifier.</p>    </div>
+
+    <a name="clear-id"></a>
+    <h4>--clear-id=&lt;cache_id&gt;[,&lt;cache_id2&gt;…]</h3>
+    <div style="margin-left:35px;">
+        
+<p>Expire all caches of a particular type specified by &quot;cache_id&quot;. Multiple identifiers can be provided as a comma separated list. When combined with the &quot;--purge&quot; parameter, the script will clear the caches instead of expiring them.</p><p>Note that there are dependencies between caches, and that clearing only one ID will most likely require that other caches are cleared as well. Example: clearing the ezjscore-packer cache will require that templte-cache is cleared as well, since ezjscore is used within cache blocks.</p>    </div>
+
+    <a name="clear-tag"></a>
+    <h4>--clear-tag=&lt;cache_tag&gt;[,&lt;cache_tag2&gt;...]</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Expire all caches related to the specified cache tag. Multiple tags can be provided as a comma separated list. When combined with the &quot;--purge&quot; parameter, the script will clear the caches instead of expiring them.</p>    </div>
+
+    <a name="colors"></a>
+    <h4>-c, --colors</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Use ANSI colors when generating debug output (default).</p>    </div>
+
+    <a name="debug"></a>
+    <h4>-d[&lt;option&gt;[,&lt;option2&gt;...]], --debug[=&lt;option&gt;[,&lt;option2&gt;...]]</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output debug information. The following options can be used to control what the debug output should include: &quot;all&quot; (everything), &quot;accumulator&quot; (accumulators), &quot;include&quot; (included files), &quot;timing&quot; (timing points), &quot;error&quot; (errors), &quot;warning&quot; (warnings), &quot;notice&quot; (notices).</p>    </div>
+
+    <a name="expiry"></a>
+    <h4>--expiry=&lt;textual_date_format&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Expire caches that are older than the specified date. The date must be provided according to the <a href="http://www.gnu.org/software/tar/manual/html_node/tar_113.html" target="_blank">GNU Date Input Formats</a> syntax. When combined with the &quot;--purge&quot; parameter, the script will clear the caches instead of expiring them.</p>    </div>
+
+    <a name="help"></a>
+    <h4>-h, --help</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output information about the script and supported parameters.</p>    </div>
+
+    <a name="iteration-max"></a>
+    <h4>--iteration-max=&lt;number_of_items&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The maximum number of items to remove during one iteration of cache purging.</p>    </div>
+
+    <a name="iteration-sleep"></a>
+    <h4>--iteration-sleep=&lt;number_of_seconds&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The number of seconds to wait between cache purge iterations.</p>    </div>
+
+    <a name="list-ids"></a>
+    <h4>--list-ids</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output a list of cache type identifiers that are supported by the &quot;--clear-id&quot; parameter. When used together with the &quot;--verbose&quot; parameter, the script will output additional information about the cache types and their identifiers.</p>    </div>
+
+    <a name="list-tags"></a>
+    <h4>--list-tags</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output a list of cache tags that are supported by the &quot;--clear-tag&quot; parameter. When used together with the &quot;--verbose&quot; parameter, the script will output additional information about the cache tags.</p>    </div>
+
+    <a name="logfiles"></a>
+    <h4>--logfiles</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Generate log files. This parameter must be used together with the debug parameter (&quot;-d&quot; or &quot;--debug&quot;). The log files (for example &quot;warning.log&quot;) will be stored in the &quot;var/log&quot; directory of the eZ Publish installation.</p>    </div>
+
+    <a name="no-colors"></a>
+    <h4>--no-colors</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Do not use ANSI colors when generating debug output.</p>    </div>
+
+    <a name="no-logfiles"></a>
+    <h4>--no-logfiles</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Do not generate log files (default).</p>    </div>
+
+    <a name="purge"></a>
+    <h4>--purge</h3>
+    <div style="margin-left:35px;">
+        
+<p>Enforces purging of cache items, DELETING the entries from the database and the cache files from file system, which ensures that specified entries are physically removed (Useful for saving disk space).&nbsp;This parameter must be used together with &quot;--clear-all&quot;, &quot;--clear-id&quot;, &quot;--clear-tag&quot; or &quot;--expiry&quot;.</p>    </div>
+
+    <a name="quiet"></a>
+    <h4>-q, --quiet</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Run the script in &quot;quiet&quot; mode. No output will be generated.</p>    </div>
+
+    <a name="siteaccess"></a>
+    <h4>-s &lt;siteaccess&gt;, --siteaccess=&lt;siteaccess&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The siteaccess to run the script for. If omitted, the <a href="../../Configuration-files/site.ini/SiteSettings/DefaultAccess.html" target="_self">default siteaccess</a> will be used.</p>    </div>
+
+    <a name="verbose"></a>
+    <h4> -v, --verbose</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output verbose / additional information.</p>    </div>
+
+<h3>Description</h3>
+<p>This script makes it possible to clear various eZ Publish caches - that is, either expire the specified caches (default) or physically remove the cache files (requires the &quot;<a href="#purge" target="_self">--purge</a>&quot; parameter).</p><p>To run the script, navigate into the root directory of your eZ Publish installation and use the following shell command:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php [&lt;parameters&gt;]</span>
+</pre><p>Replace &quot;[&lt;parameters&gt;]&quot; with one or more of the script parameters described above. Note that you need to have <a href="http://php.net/manual/en/features.commandline.php" target="_blank">PHP CLI</a> installed in order to run the script from within a system shell.</p><p>Sometimes the script is unable to clear the caches because of restrictive file/directory permission settings. You can check whether the caches have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory (typically &quot;var/cache/&quot; and &quot;var/&lt;name_of_siteaccess&gt;/cache/&quot; directories).</p><a name="eztoc96940_0_0_1" id="eztoc96940_0_0_1"></a><h4>Selective cache cleanup</h4><p>eZ Publish generates different types of caches. <a name="identifiers_and_tags"></a>
+ While the &quot;<a href="#clear-all" target="_self">--clear-all</a>&quot; parameter gets rid of everything, the &quot;<a href="#clear-id" target="_self">--clear-id</a>&quot; parameter makes it possible to remove only certain types of caches (configuration settings, compiled templates, URL aliases, image variations, etc.). The identifiers of the caches to be removed must be specified as a comma separated list.</p><p>A &quot;cache tag&quot; is assigned to every cache type. The cache tag reveals which group a particular cache belongs to (ini, image, template, content and so on). The &quot;<a href="#clear-tag" target="_self">--clear-tag</a>&quot; parameter makes it possible to clear all caches that belong to a specified group. Note that a cache type (for example, the &quot;Template block cache&quot;) can be assigned to several groups.</p><p>The following table shows the different caches, the corresponding identifiers and cache tags (the group they belong to).</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Name</p>
+  </th><th >  <p>Identifier</p>
+  </th><th >  <p>Cache tags</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Active extensions cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>active_extensions</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ini</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>INI cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ini</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ini</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Global INI cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>global_ini</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ini</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>SSL Zones cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>sslzones</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ini</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Image alias cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>imagealias</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>image</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Template cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>template</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>template</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Template override cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>template-override</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>template</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Text to image cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>texttoimage</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>template</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Design base cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>design_base</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>template</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>eZJSCore Public Packer cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>ezjscore-packer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>template</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Template block cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>template-block</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>template, content</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Content view cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>URL alias cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>urlalias</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>RSS cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>rss_cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Class identifier cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>classid</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Sort key cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>sortkey</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Content tree menu (browser cache)</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content_tree_menu</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>State limitations cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>state_limitations</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>content</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>User info cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>user_info_cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>user</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Codepage cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>codepage</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>codepage</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Character transformation cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>chartrans</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>i18n</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>TS Translation cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>translation</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>i18n</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>REST Application cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>rest</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>rest</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>REST Routes memory cache</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>rest-routes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>rest</p>
+  </td>
+
+</tr>
+
+</table>
+<p><a name="clustering"></a>
+</p><a name="eztoc96940_0_0_2" id="eztoc96940_0_0_2"></a><h4>Clustering compatibility</h4><p>The script also works if the caches are stored in the database (typically happens when running eZ Publish in a <a href="../../../Features/Clustering.html" target="_self">cluster environment</a>). When the &quot;<a href="#purge" target="_self">--purge</a>&quot; parameter is specified, the cache entries are DELETED from the tables. When it is not specified, the system will only mark the entries as expired either using UPDATE queries or using the expiry values in &quot;expiry.php&quot;.</p><p>Please note that in a cluster environment the <i>ezcache.php</i> script will need to be executed on each cluster node in order to remove the local cache on each one. For this task the usage the of the parameters&nbsp;and&nbsp;<a href="#purge" target="_self">--purge</a>&nbsp;is advised, used together with the clear-* options you desire.</p>
+<h3>Examples</h3>
+<a name="eztoc96941_0_0_1" id="eztoc96941_0_0_1"></a><h4>Example 1</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all</span>
+</pre><p>Expire all caches.</p><a name="eztoc96941_0_0_2" id="eztoc96941_0_0_2"></a><h4>Example 2</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre><p>Clear all caches (either physically remove all cache files or delete all cache entries from the database).</p><a name="eztoc96941_0_0_3" id="eztoc96941_0_0_3"></a><h4>Example 3</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge -dwarning</span>
+</pre><p>Clear all caches and output warnings that occur during execution. For example, if the system is not able to locate one of the enabled extensions, the console output could look like this:</p><pre class="wordwrap copytoclipboard"><span class="line">Purging : Content view cache, Global INI cache, INI cache, Codepage cache, Class identifier cache, Sort key cache, URL alias cache, Character transformation cache, Image alias, Template cache, Template block cache, Template override cache, RSS cache, User info cache, Content tree menu (browser cache)</span>
+<span class="line">&nbsp;</span>
+<span class="line">################### DEBUG ###################</span>
+<span class="line">Warning: ()</span>
+<span class="line">Extension 'ezdhtml' does not exist, looked for directory 'extension/ezdhtml'</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'Purging : Content view cache, Global INI cache, INI cache, Codepage cache, Class identifier cache, Sort key cache, URL alias cache, Character transformation cache, Image alias, Template cache, Template block cache, Template override cache, RSS cache, User info cache, Content tree menu (browser cache)\r\n\r\n################### DEBUG ###################\r\nWarning: ()\r\nExtension \'ezdhtml\' does not exist, looked for directory \'extension/ezdhtml\'' ); return false;" /></p>
+<![endif]--><a name="eztoc96941_0_0_4" id="eztoc96941_0_0_4"></a><h4>Example 4</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-id=user_info_cache</span>
+</pre><p>Expire all user info caches.</p><a name="eztoc96941_0_0_5" id="eztoc96941_0_0_5"></a><h4>Example 5</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-tag=ini --purge</span>
+</pre><p>Clear both INI cache and global INI cache.</p><a name="eztoc96941_0_0_6" id="eztoc96941_0_0_6"></a><h4>Example 6</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --iteration-sleep='5.5'</span>
+<span class="line">--iteration-max=100 --purge</span>
+</pre><p>Clear all caches. The purging will be done with the interval between the iterations equal to 5.5 seconds. During one iteration, a maximum number of 100 items will be removed.</p><a name="eztoc96941_0_0_7" id="eztoc96941_0_0_7"></a><h4>Example 7</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --expiry='-2 days'</span>
+</pre><p>Expire all caches that are older than two days.</p><a name="eztoc96941_0_0_8" id="eztoc96941_0_0_8"></a><h4>Example 8</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --expiry='last monday' --purge</span>
+</pre><p>Clear all caches generated before last Monday.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/ezcache.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:47:11 GMT -->
+</html>

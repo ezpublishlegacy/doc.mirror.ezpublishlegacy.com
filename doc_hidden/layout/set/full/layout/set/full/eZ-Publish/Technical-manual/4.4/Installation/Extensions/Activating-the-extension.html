@@ -1,0 +1,72 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.4/Installation/Extensions/Activating-the-extension by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:35:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Activating the extension / Extensions / Installation / 4.4 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Activating the extension</h1>
+</div>
+
+<p>Each extension needs to be activated, which means that it is being registered for eZ Publish to be available from within the eZ Publish framework. Every extension can either be activated in the eZ Publish administration interface or in a configuration file. Furthermore, the activation can be done either for the whole eZ Publish installation or for only certain site accesses.</p><p><b>Note:</b> As of the 4.4 release of eZ Publish we have implemented a feature for automatic loading of extensions in the required sequence. Please go to <a href="Extension-load-ordering.html" target="_self">Extension load ordering</a> for more information on how to do this. If you are running on releases prior to 4.4, please continue reading below.</p><a name="eztoc115241_1" id="eztoc115241_1"></a><h2>Administration interface</h2><p>Log in to your eZ Publish administration interface, click on the &quot;Setup&quot; tab, and then click &quot;Extensions&quot; on the left. You will see the list of available extensions with check-boxes. Simply select the ones you need as shown in the screenshot below and click the &quot;Apply changes&quot; button.</p>
+<div class="object-center">        <img src="../../../../../../../../../../../../var/doc/storage/images/media/images/activating_extensions/119235-1-eng-GB/activating_extensions_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>This will activate the extension for all siteaccesses of your eZ Publish installation.</p><a name="eztoc115241_2" id="eztoc115241_2"></a><h2>Configuration file</h2><p>Alternatively, an extension can be enabled manually in the <a href="../../../4.x/Reference/Configuration-files/site.html" target="_self">site.ini</a> configuration file.</p><a name="eztoc115241_2_1" id="eztoc115241_2_1"></a><h3>Activating for the whole installation</h3><p>To enable the sample extension for all of your site accesses, edit the &quot;site.ini.append.php&quot; file located in the &quot;settings/override&quot; directory of your eZ Publish installation. Add the following line under the &quot;[ExtensionSettings]&quot; <a href="../../Concepts-and-basics/Configuration.html" target="_self">configuration block</a>:</p><pre class="wordwrap"><span class="line">ActiveExtensions[]=ezfoo</span>
+</pre><p>Multiple extensions can be present within the &quot;[ExtensionSettings]&quot; block. You'll have to manually create the file and/or the section if they do not exist.</p><a name="eztoc115241_2_2" id="eztoc115241_2_2"></a><h3>Activating for certain siteaccesses</h3><p>To enable the sample extension for only a single site access called &quot;example&quot;, edit the &quot;site.ini.append.php&quot; file located in the &quot;settings/siteaccess/example&quot; directory of your eZ Publish installation. Add the following line under the &quot;[ExtensionSettings]&quot; configuration block:</p><pre class="wordwrap"><span class="line">ActiveAccessExtensions[]=ezfoo</span>
+</pre><p>Note that the line registering the extension is not called &quot;ActiveExtensions&quot;, but &quot;ActiveAccessExtensions&quot;. You'll have to manually create the file and/or the section if they do not exist.</p><a name="eztoc115241_2_3" id="eztoc115241_2_3"></a><h3>Updating the autoload arrays</h3><p>After updating the configuration file(s), you need to run the &quot;ezpgenerateautoloads.php&quot; script, in order to add the information about all PHP class definitions of this extension to the &quot;autoload/ezp_extension.php&quot; file, otherwise eZ Publish might not be able to execute the PHP code of the newly added extension. The following example shows how to run the script.</p>
+<ol>
+<li><div>&nbsp;Navigate into the eZ Publish directory. </div></li><li><div>&nbsp;Run the script using the following shell command:<pre class="wordwrap"><span class="line">bin/php/ezpgenerateautoloads.php --extension</span>
+</pre></div></li>
+</ol>
+<p>The script will look for class definitions in the &quot;extensions&quot; directory and update the &quot;autoload/ezp_extension.php&quot; file accordingly.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.4/Installation/Extensions/Activating-the-extension by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:35:43 GMT -->
+</html>

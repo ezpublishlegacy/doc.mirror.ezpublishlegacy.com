@@ -1,0 +1,149 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-currency/Removing-a-currency/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Removing a currency / Multi-currency / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Removing a currency</h1>
+</div>
+
+ <p>It is possible (but not recommended) to remove currencies from the webshop system. If you need to hide some currency from your customers, you should set its status to &quot;inactive&quot; instead of removing it from the system.</p> <p>Please note that removing a currency will result in removing prices in this currency for all products. This may cause problems if some of your products have a base price in this currency.</p>  <a name="eztoc132461_1" id="eztoc132461_1"></a><h2>Example</h2> <p>Let's say that some of your products have base prices in USD as shown in the following table. </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >  &nbsp;
+  </th> <th  colspan="2">   <p>Product 1</p> 
+  </th> <th  colspan="2">   <p>Product 2</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p> <b>USD</b> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>50.00</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Base custom price</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>50.00</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Base custom price</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p> <b>NOK</b> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>338.50</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Auto price</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>600.00</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Non-base custom price</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p> <b>EUR</b> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>42.00</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Auto price</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>42.00</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Auto price</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>These base prices will be deleted if you remove the USD currency (see the next table). </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >  &nbsp;
+  </th> <th  colspan="2">   <p>Product 1</p> 
+  </th> <th  colspan="2">   <p>Product 2</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p> <b>NOK</b> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.00</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Auto price</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>600.00</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Base custom price</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p> <b>EUR</b> </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.00</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Auto price</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>74.45</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Auto price</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>As you can see from the table above, removing the base price may result in unwanted behavior like setting all the product prices to zero. That is why removing currencies is not recommended.</p> <p>The following text reveals how you can remove one or more currencies from the webshop system. </p> 
+<ol>
+ <li><div> Open the list of currencies by clicking the &quot;Webshop&quot; tab in the administration interface and selecting the &quot;Currencies&quot; link on the left. </div></li> <li><div> Use the check-boxes to select the currencies that you wish to remove. </div></li> <li><div> Click the &quot;Remove selected&quot; button. </div></li> 
+</ol>
+ 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-currency/Removing-a-currency/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:13 GMT -->
+</html>

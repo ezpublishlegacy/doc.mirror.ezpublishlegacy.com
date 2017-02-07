@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.5/Installation/Virtual-host-setup by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:41:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Virtual host setup / Installation / 4.5 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Virtual host setup</h1>
+</div>
+
+<p>This section describes how to set up a virtual host for eZ Publish using the Apache web-server. A virtual host setup is only needed if eZ Publish has been configured to use the host access method, which is the most secure method.</p><p>By making use of virtual hosts, it is possible to have several sites running on the same server. The sites are usually differentiated by the name they are accessed. Apache will look for a specified set of domains and use different configuration settings based on the domain that is accessed.</p><a name="eztoc121754_1" id="eztoc121754_1"></a><h2>Generic virtual host setup</h2><p>Virtual hosts are usually defined at the end of &quot;httpd.conf&quot;, which is the main configuration file for Apache. Adding a virtual host for eZ Publish can be done by copying the following lines and replacing the text encapsulated by the square brackets with actual values. Please refer to the next section for a real life example of using virtual hosts.</p><pre class="wordwrap copytoclipboard"><span class="line">NameVirtualHost [IP_ADDRESS]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;VirtualHost [IP_ADDRESS]:[PORT]&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory [PATH_TO_EZPUBLISH]&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Options FollowSymLinks</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AllowOverride None</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Directory&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;IfModule mod_php5.c&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_admin_flag safe_mode Off</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_admin_value register_globals 0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_value magic_quotes_gpc 0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_value magic_quotes_runtime 0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_value allow_call_time_pass_reference 0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/IfModule&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;DirectoryIndex index.php</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;IfModule mod_rewrite.c&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteEngine On</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/api/ /index_rest\.php [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/([^/]+/)?content/treemenu.* /index_treemenu\.php [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/var/([^/]+/)?storage/images(-versioned)?/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/design/[^/]+/(stylesheets|images|javascript)/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/share/icons/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/extension/[^/]+/design/[^/]+/(stylesheets|flash|images|lib|javascripts?)/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/packages/styles/.+/(stylesheets|images|javascript)/[^/]+/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/packages/styles/.+/thumbnail/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/var/storage/packages/.* - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# &nbsp;Makes it possible to place your favicon at the root of your</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# &nbsp;eZ Publish instance. It will then be served directly.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/favicon\.ico - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Uncomment the line below if you want you favicon be served</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# from the standard design. You can customize the path to</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# favicon.ico by changing /design/standard/images/favicon\.ico</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#RewriteRule ^/favicon\.ico /design/standard/images/favicon\.ico [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/design/standard/images/favicon\.ico - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Give direct access to robots.txt for use by crawlers (Google,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Bing, Spammers..)</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/robots\.txt - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Platform for Privacy Preferences Project ( P3P ) related files</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# for Internet Explorer</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# More info here : http://en.wikipedia.org/wiki/P3p</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/w3c/p3p\.xml - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Uncomment the following lines when using popup style debug</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# RewriteRule ^/var/cache/debug\.html.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# RewriteRule ^/var/[^/]+/cache/debug\.html.* - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule .* /index\.php</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/IfModule&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;DocumentRoot [PATH_TO_EZPUBLISH]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;ServerName [SERVER_NAME]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;ServerAlias [SERVER_ALIAS]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;/VirtualHost&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'NameVirtualHost [IP_ADDRESS]\r\n\r\n&lt;VirtualHost [IP_ADDRESS]:[PORT]&gt;\r\n    &lt;Directory [PATH_TO_EZPUBLISH]&gt;\r\n        Options FollowSymLinks\r\n        AllowOverride None\r\n    &lt;/Directory&gt;\r\n\r\n    &lt;IfModule mod_php5.c&gt;\r\n        php_admin_flag safe_mode Off\r\n        php_admin_value register_globals 0\r\n        php_value magic_quotes_gpc 0\r\n        php_value magic_quotes_runtime 0\r\n        php_value allow_call_time_pass_reference 0\r\n    &lt;/IfModule&gt;\r\n\r\n    DirectoryIndex index.php \r\n\r\n    &lt;IfModule mod_rewrite.c&gt;\r\n        RewriteEngine On\r\n        RewriteRule ^/api/ /index_rest\.php [L]\r\n        RewriteRule ^/([^/]+/)?content/treemenu.* /index_treemenu\.php [L]\r\n        RewriteRule ^/var/([^/]+/)?storage/images(-versioned)?/.* - [L]\r\n        RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* - [L]\r\n        RewriteRule ^/design/[^/]+/(stylesheets|images|javascript)/.* - [L]\r\n        RewriteRule ^/share/icons/.* - [L]\r\n        RewriteRule ^/extension/[^/]+/design/[^/]+/(stylesheets|flash|images|lib|javascripts?)/.* - [L]\r\n        RewriteRule ^/packages/styles/.+/(stylesheets|images|javascript)/[^/]+/.* - [L]\r\n        RewriteRule ^/packages/styles/.+/thumbnail/.* - [L]\r\n        RewriteRule ^/var/storage/packages/.* - [L]\r\n\r\n        #  Makes it possible to place your favicon at the root of your\r\n        #  eZ Publish instance. It will then be served directly.\r\n        RewriteRule ^/favicon\.ico - [L]\r\n        # Uncomment the line below if you want you favicon be served\r\n        # from the standard design. You can customize the path to \r\n        # favicon.ico by changing /design/standard/images/favicon\.ico\r\n        #RewriteRule ^/favicon\.ico /design/standard/images/favicon\.ico [L]\r\n        RewriteRule ^/design/standard/images/favicon\.ico - [L]\r\n\r\n        # Give direct access to robots.txt for use by crawlers (Google, \r\n        # Bing, Spammers..)\r\n        RewriteRule ^/robots\.txt - [L]\r\n\r\n        # Platform for Privacy Preferences Project ( P3P ) related files\r\n        # for Internet Explorer\r\n        # More info here : http://en.wikipedia.org/wiki/P3p\r\n        RewriteRule ^/w3c/p3p\.xml - [L]\r\n\r\n        # Uncomment the following lines when using popup style debug\r\n        # RewriteRule ^/var/cache/debug\.html.* - [L]\r\n        # RewriteRule ^/var/[^/]+/cache/debug\.html.* - [L]\r\n\r\n        RewriteRule .* /index\.php\r\n    &lt;/IfModule&gt;\r\n\r\n    DocumentRoot [PATH_TO_EZPUBLISH]\r\n    ServerName [SERVER_NAME]\r\n    ServerAlias [SERVER_ALIAS]\r\n\r\n&lt;/VirtualHost&gt;' ); return false;" /></p>
+<![endif]--><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>[IP_ADDRESS]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The IP address of the virtual host, for example &quot;128.39.140.28&quot;. Apache allows the usage of a wildcards here (&quot;*&quot;).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>[PORT]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The port on which the webserver listens for incoming requests. This is an optional setting, the default port is 80. The combination of an IP address and a port is often referred to as a socket. Apache allows the usage of a wildcards here (&quot;*&quot;).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>[PATH_TO_EZPUBLISH]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Path to the directory that contains eZ Publish. This must be the full path, for example &quot;/var/www/ezpublish-3.6.0&quot;.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>[SERVER_NAME]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The host or the IP address that Apache should look for. If a match is found, the virtual host settings will be used.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>[SERVER_ALIAS]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Additional hosts/IP addresses that Apache should look for. If a match is found, the virtual host settings will be used.</p>
+  </td>
+
+</tr>
+
+</table>
+<p>Please note that the &quot;mod_rewrite&quot; module must be enabled in &quot;httpd.conf&quot; in order to use the Rewrite Rules.</p><a name="eztoc121754_2" id="eztoc121754_2"></a><h2>NameVirtualHost</h2><p>The &quot;NameVirtualHost&quot; setting might already exist in the default configuration. Defining a new one will result in a conflict. If Apache reports errors such as &quot;NameVirtualHost [IP_ADDRESS] has no VirtualHosts&quot; or &quot;Mixing * ports and non-* ports with a NameVirtualHost address is not supported&quot;, try skipping the NameVirtualHost line. For more info about the NameVirtualHost directive, see <a href="http://httpd.apache.org/docs/1.3/mod/core.html#namevirtualhost" target="_blank">http://httpd.apache.org/docs/1.3/mod/core.html#namevirtualhost</a>.</p><a name="eztoc121754_3" id="eztoc121754_3"></a><h2>SOAP and WebDAV</h2><p>If you would like to use the SOAP and/or the WebDAV features of eZ Publish, you'll have to add the following lines in the virtual host configuration:</p><pre class="wordwrap copytoclipboard"><span class="line">RewriteCond %{HTTP_HOST} ^webdav\..*</span>
+<span class="line">RewriteRule ^(.*) /webdav.php [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">RewriteCond %{HTTP_HOST} ^soap\..*</span>
+<span class="line">RewriteRule ^(.*) /soap.php [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">ServerAlias soap.example.com</span>
+<span class="line">ServerAlias webdav.example.com</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'RewriteCond %{HTTP_HOST} ^webdav\..*\r\nRewriteRule ^(.*) /webdav.php [L]\r\n\r\nRewriteCond %{HTTP_HOST} ^soap\..*\r\nRewriteRule ^(.*) /soap.php [L]\r\n\r\nServerAlias soap.example.com\r\nServerAlias webdav.example.com' ); return false;" /></p>
+<![endif]--><a name="eztoc121754_4" id="eztoc121754_4"></a><h2>Optional re-write rules to improve performance</h2><pre class="wordwrap copytoclipboard"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;# Everything below is optional to improve performance by forcing</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;# clients to cache image and design files, change the expires time</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;# to suite project needs.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;IfModule mod_expires.c&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LocationMatch &quot;^/var/[^/]+/storage/images/.*&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# eZ Publish appends the version number to image URL (ezimage</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# datatype) so when an image is updated, its URL changes to</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpiresActive on</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpiresDefault &quot;now plus 10 years&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LocationMatch&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LocationMatch &quot;^/extension/[^/]+/design/[^/]+/(stylesheets|images|javascripts?|flash)/.*&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# A good optimization if you don't change your design often</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpiresActive on</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpiresDefault &quot;now plus 5 days&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LocationMatch&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LocationMatch &quot;^/extension/[^/]+/design/[^/]+/lib/.*&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Libraries get a new url (version number) on updates</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpiresActive on</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpiresDefault &quot;now plus 90 days&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LocationMatch&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LocationMatch &quot;^/design/[^/]+/(stylesheets|images|javascripts?|lib|flash)/.*&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Same as above for bundled eZ Publish designs</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpiresActive on</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpiresDefault &quot;now plus 7 days&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LocationMatch&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LocationMatch &quot;^/share/icons/.*&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Icons as used by admin interface, barly change</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpiresActive on</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExpiresDefault &quot;now plus 7 days&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/LocationMatch&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# When ezjscore.ini/[Packer]/AppendLastModifiedTime=enabled</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# so that file names change when source files are modified</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&lt;LocationMatch &quot;^/var/[^/]+/cache/public/.*&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Force ezjscore packer js/css files to be cached 30 days</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# at client side</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#ExpiresActive on</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#ExpiresDefault &quot;now plus 30 days&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&lt;/LocationMatch&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/IfModule&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '    # Everything below is optional to improve performance by forcing \r\n    # clients to cache image and design files, change the expires time\r\n    # to suite project needs.\r\n    &lt;IfModule mod_expires.c&gt;\r\n        &lt;LocationMatch &quot;^/var/[^/]+/storage/images/.*&quot;&gt;\r\n        # eZ Publish appends the version number to image URL (ezimage\r\n        # datatype) so when an image is updated, its URL changes to\r\n            ExpiresActive on\r\n            ExpiresDefault &quot;now plus 10 years&quot;\r\n        &lt;/LocationMatch&gt;\r\n\r\n        &lt;LocationMatch &quot;^/extension/[^/]+/design/[^/]+/(stylesheets|images|javascripts?|flash)/.*&quot;&gt;\r\n        # A good optimization if you don\'t change your design often\r\n            ExpiresActive on\r\n            ExpiresDefault &quot;now plus 5 days&quot;\r\n        &lt;/LocationMatch&gt;\r\n\r\n        &lt;LocationMatch &quot;^/extension/[^/]+/design/[^/]+/lib/.*&quot;&gt;\r\n        # Libraries get a new url (version number) on updates\r\n            ExpiresActive on\r\n            ExpiresDefault &quot;now plus 90 days&quot;\r\n        &lt;/LocationMatch&gt;\r\n\r\n        &lt;LocationMatch &quot;^/design/[^/]+/(stylesheets|images|javascripts?|lib|flash)/.*&quot;&gt;\r\n        # Same as above for bundled eZ Publish designs\r\n            ExpiresActive on\r\n            ExpiresDefault &quot;now plus 7 days&quot;\r\n        &lt;/LocationMatch&gt;\r\n\r\n        &lt;LocationMatch &quot;^/share/icons/.*&quot;&gt;\r\n        # Icons as used by admin interface, barly change\r\n            ExpiresActive on\r\n            ExpiresDefault &quot;now plus 7 days&quot;\r\n        &lt;/LocationMatch&gt;\r\n\r\n        # When ezjscore.ini/[Packer]/AppendLastModifiedTime=enabled\r\n        # so that file names change when source files are modified\r\n        #&lt;LocationMatch &quot;^/var/[^/]+/cache/public/.*&quot;&gt;\r\n        # Force ezjscore packer js/css files to be cached 30 days\r\n        # at client side\r\n            #ExpiresActive on\r\n            #ExpiresDefault &quot;now plus 30 days&quot;\r\n        #&lt;/LocationMatch&gt;\r\n        &lt;/IfModule&gt;' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.5/Installation/Virtual-host-setup by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:41:51 GMT -->
+</html>

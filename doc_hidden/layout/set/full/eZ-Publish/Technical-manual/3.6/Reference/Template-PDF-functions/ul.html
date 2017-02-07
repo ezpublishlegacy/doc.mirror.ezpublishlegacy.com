@@ -1,0 +1,103 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Template-PDF-functions/ul by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:14:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>ul / Template PDF functions / Reference / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ul</h1>
+</div>
+<h3>Summary</h3>
+Inserts a bullet list.<h3>Usage</h3>
+<pre>pdf( ul, text, hash( [ rgb,        rgb_color,    ]
+                     [ cmyk,       cmyk_color,   ]
+                     [ radius,     dot_radius,   ]
+                     [ indent,     text_indent,  ]
+                     [ pre_indent, bullet_indent ] ) )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>text</td>
+        <td>string</td>
+        <td>Bullet text.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>rgb</td>
+        <td>array</td>
+        <td>Array of RGB colors.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>cmyk</td>
+        <td>array</td>
+        <td>Array of CMYK colors.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>radius</td>
+        <td>float</td>
+        <td>The radius of the dot.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>indent</td>
+        <td>float</td>
+        <td>Text indentation after the dot.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>pre_indent</td>
+        <td>float</td>
+        <td>Indentation before the bullet.</td>
+        <td>No.</td>
+    </tr></table><h3>Description</h3>
+ <p>This function inserts a bullet list into the PDF document.</p> <p>The colors of the bullet can be specified using the &quot;rgb&quot; or the &quot;cmyk&quot; parameter. The &quot;rgb&quot; parameter must be an array consisting of three integers between 0 and 255. The &quot;cmyk&quot; parameter must be array of four decimal numbers between 0.0 and 1.0.</p> <p>The size of the bullet can be controlled using the &quot;radius&quot; parameter. The indentation (in dots) before and after the dot can be specified using the &quot;pre_indent&quot; and &quot;indent&quot; parameters.</p><h3>Examples</h3>
+    <a name="eztoc9198_0_0_1" id="eztoc9198_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{pdf( 'text', &quot;Most popular internet browsers in 2004:&quot; |wash( 'pdf' )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{pdf( 'ul', 'Internet Explorer (88,9%)'|wash( 'pdf' ) )}</span>
+<span class="line">{pdf( 'ul', 'Version 6 (80.95%)'|wash( 'pdf' ), hash( 'pre_indent', 15 ) )}</span>
+<span class="line">{pdf( 'ul', 'Version 5.5 (4.18%)'|wash( 'pdf' ), hash( 'pre_indent', 15 ) )}</span>
+<span class="line">{pdf( 'ul', 'Version 5.0 (3.66%)'|wash( 'pdf' ), hash( 'pre_indent', 15 ) )}</span>
+<span class="line">{pdf( 'ul', 'Mozilla-based browsers (7.35%)'|wash( 'pdf' ) )}</span>
+<span class="line">{pdf( 'ul', 'Rest (3.75%)'|wash( 'pdf' ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{pdf( \'text\', &quot;Most popular internet browsers in 2004:&quot; |wash( \'pdf\' )}\r\n\r\n{pdf( \'ul\', \'Internet Explorer (88,9%)\'|wash( \'pdf\' ) )}\r\n{pdf( \'ul\', \'Version 6 (80.95%)\'|wash( \'pdf\' ), hash( \'pre_indent\', 15 ) )}\r\n{pdf( \'ul\', \'Version 5.5 (4.18%)\'|wash( \'pdf\' ), hash( \'pre_indent\', 15 ) )}\r\n{pdf( \'ul\', \'Version 5.0 (3.66%)\'|wash( \'pdf\' ), hash( \'pre_indent\', 15 ) )}\r\n{pdf( \'ul\', \'Mozilla-based browsers (7.35%)\'|wash( \'pdf\' ) )}\r\n{pdf( \'ul\', \'Rest (3.75%)\'|wash( \'pdf\' ) )}\r\n' ); return false;" /></p>
+<![endif]--> <p>This example generates a bullet list where some of the bullets are indented.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Template-PDF-functions/ul by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:14:01 GMT -->
+</html>

@@ -1,0 +1,102 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Modules/content/Fetch-functions/list_count by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:50:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>list_count / Fetch functions / content / Modules / Reference / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>list_count</h1>
+</div>
+<h3>Summary</h3>
+Fetches the number of children of a node.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'content', 'list_count',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent_node_id,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'class_filter_type', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class_filter_type, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'class_filter_array', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class_filter_array, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'attribute_filter', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attribute_filter, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'extended_attribute_filter', extended_attribute_filter, ]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'main_node_only', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;main_node_only, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>parent_node_id</td>
+        <td>integer</td>
+        <td>The ID number of the parent node.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>class_filter_type</td>
+        <td>string</td>
+        <td>The type of class filtering (include/exclude).</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>class_filter_array</td>
+        <td>array</td>
+        <td>The classes that should be filtered.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>attribute_filter</td>
+        <td>mixed</td>
+        <td>Filter logic for attribute level filtering.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>extended_attribute_filter</td>
+        <td>mixed</td>
+        <td>The extended attribute level filter logic.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>main_node_only</td>
+        <td>integer</td>
+        <td>Type of nodes that should be fetched (all or main nodes only).</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An integer (the number of nodes).</p><h3>Description</h3>
+ <p>This function operates in almost the same way as the &quot;list&quot; fetch function. The difference is that instead of returning the actual nodes, it returns the count (the number of nodes that were found). The &quot;list_count&quot; function takes the same parameters as the &quot;list&quot; function with some exceptions (sorting, grouping, limit/offset, etc. is not supported). Please refer to the documentation of the <a href="list.html" target="_self">&quot;list&quot;</a> function for a detailed description of the parameters.</p><h3>Examples</h3>
+    <a name="eztoc64281_0_0_1" id="eztoc64281_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap"><span class="line">{def $count=fetch( 'content', 'list_count', hash( 'parent_node_id', 42 ) )}</span>
+<span class="line">Node number 42 has {$count} number of children.</span>
+</pre> <p>Outputs the number of nodes that are below node number 42.</p>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Modules/content/Fetch-functions/list_count by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:50:35 GMT -->
+</html>

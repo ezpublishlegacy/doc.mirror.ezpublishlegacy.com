@@ -1,0 +1,86 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.6/Concepts-and-basics/Configuration/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:52:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Configuration / Concepts and basics / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Configuration</h1>
+</div>
+
+ <p>This section explains the configuration model of eZ publish. The default configuration files end with a &quot;.ini&quot; extension and are located in the &quot;/settings&quot; directory. Each file controls the behavior of a specific part of the system. For example, the &quot;content.ini&quot; file controls the behavior of the content engine, the &quot;webdav.ini&quot; file controls the behavior of the WebDAV subsystem, and so on. The main and most important configuration file is called &quot;site.ini&quot;. Among other things, it tells eZ publish which database, design, etc. that should be used. The default configuration files contain all the possible directives (with default settings) along with brief explanations. These files files should only be used for reference. In other words, they should never be modified. The <a href="../../../Reference/Configuration-files.html" target="_self">&quot;Configuration files&quot;</a> section of the reference chapter contains a comprehensive explanation of the different configuration files and their settings.</p>  <a name="eztoc1138_1" id="eztoc1138_1"></a><h2>File structure</h2> <p>An eZ publish configuration file is divided into blocks, each block contains a collection of settings. The following example shows a part of the main (site.ini) configuration file.</p> <pre class="wordwrap copytoclipboard"><span class="line">...</span>
+<span class="line"># This line contains a comment.</span>
+<span class="line">[DatabaseSettings]</span>
+<span class="line">Server=localhost</span>
+<span class="line">User=allman</span>
+<span class="line">Password=qwerty</span>
+<span class="line">Socket=disabled</span>
+<span class="line">SQLOutput=enabled</span>
+<span class="line">&nbsp;</span>
+<span class="line"># This line contains another comment.</span>
+<span class="line">[ExtensionSettings]</span>
+<span class="line">ActiveExtensions[]=ezdhtml</span>
+<span class="line">ActiveExtensions[]=ezpaypal</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n...\r\n# This line contains a comment.\r\n[DatabaseSettings]\r\nServer=localhost\r\nUser=allman\r\nPassword=qwerty\r\nSocket=disabled\r\nSQLOutput=enabled\r\n\r\n# This line contains another comment.\r\n[ExtensionSettings]\r\nActiveExtensions[]=ezdhtml\r\nActiveExtensions[]=ezpaypal\r\n...\r\n' ); return false;" /></p>
+<![endif]--> <p>The example above shows two blocks: &quot;DatabaseSettings&quot; and &quot;ExtensionSettings&quot;. Each block has several settings which control the behavior of the system. A setting can usually be set to enabled/disabled, a string of text or an array of strings. If the name of a setting ends with a pair of square brackets, it means that the setting accepts an array of values. In the example above, the &quot;ActiveExtensions&quot; setting tells eZ publish to use two different extensions: &quot;ezdhtml&quot; and &quot;paypal&quot;. Lines starting with a hash are treated as comments.</p>   <a name="eztoc1138_2" id="eztoc1138_2"></a><h2>Configuration overrides</h2> <p>As pointed out earlier, the default configuration files should never be modified because they will most likely be overwritten by a new set of files during an upgrade. Making a backup will still not be sufficient because the configuration settings change over time. For example, a previous version of the files will not contain settings that were recently added. Because of these issues, custom configuration settings must be placed elsewhere. Global configuration overrides can be placed in the &quot;/settings/override&quot; directory . The settings of the configuration files located in this directory will override the default settings. The name of the configuration files in the override directory must end with one of the following extensions:</p> 
+<ul>
+ <li><div> .ini.append </div></li> <li><div> .ini.append.php </div></li> 
+</ul>
+ <p>If an override configuration file exist with both &quot;.ini.append&quot; and &quot;.ini.append.php&quot; extensions, eZ publish will process the one which ends with &quot;.php&quot;. Because of possible security issues, the latter (.ini.append.php) should be used; specially if eZ publish is running in a non virtual host environment. The &quot;.php&quot; extension will trick the web server into handling the configuration file as a PHP script. If someone attempts to read it using a browser, the server will not display the contents. Instead, it will attempt to process it as PHP, which again will not produce any output since the configuration settings are commented out (see below). This method makes it more difficult for a hacker to get access to the configuration settings (for example the database password) by attempting to access one of the configuration files from outside. In order for this to work, the contents of the configuration file must be encapsulated by a pair of PHP comment markers: /* and */. The following example shows how an override (for example &quot;test.ini.append.php&quot;) should be set up:</p> <pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /* #?ini charset=&quot;iso-8859-1&quot;?</span>
+<span class="line">&nbsp;</span>
+<span class="line"># These are my example settings</span>
+<span class="line">[ExampleSettings]</span>
+<span class="line">ExampleSettingOne=enabled</span>
+<span class="line">ExampleSettingTwo=disabled</span>
+<span class="line">...</span>
+<span class="line">&nbsp;</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n&lt;?php /* #?ini charset=&quot;iso-8859-1&quot;?\r\n\r\n# These are my example settings\r\n[ExampleSettings]\r\nExampleSettingOne=enabled\r\nExampleSettingTwo=disabled\r\n...\r\n\r\n*/ ?&gt;\r\n' ); return false;" /></p>
+<![endif]--> <p>The &quot;charset&quot; directive reveals the character set that was used to construct the ini file (usually ISO-8859-1).</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.6/Concepts-and-basics/Configuration/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:52:07 GMT -->
+</html>

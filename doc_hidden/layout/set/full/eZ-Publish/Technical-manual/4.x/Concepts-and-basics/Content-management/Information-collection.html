@@ -1,0 +1,124 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Concepts-and-basics/Content-management/Information-collection by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Information collection / Content management / Concepts and basics / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Information collection</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><p>The information collection feature makes it possible to gather user input when a node referencing an information collector object is viewed. It is typically useful when it comes to the creation of feedback forms, polls, etc.</p><p>An object can collect information if at least one of the class attributes is marked as an information collector. When the object is viewed, each collector attribute will be displayed using the chosen datatype's data collector template. Instead of just outputting the attributes' contents, the collector templates provide interfaces for data input. The generated input interface depends on the datatype that represents the attribute. The following table reveals the datatypes that are capable of collecting information.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Datatype</p>
+  </th><th >  <p>Input interface</p>
+  </th><th >  <p>Input validation</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="../../Reference/Datatypes/Checkbox.html" target="_self">Checkbox</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Checkbox.</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>No.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="../../Reference/Datatypes/E-mail.html" target="_self">E-Mail</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Single line of text.</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Yes.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="../../Reference/Datatypes/Option.html" target="_self">Option</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Radio buttons or a drop-down menu.</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>No.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="../../Reference/Datatypes/Text-block.html" target="_self">Text block</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Multiple lines of unformatted text.</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>No.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p><a href="../../Reference/Datatypes/Text-line.html" target="_self">Text line</a></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Single line of unformatted text.</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>No.</p>
+  </td>
+
+</tr>
+
+</table>
+<p>The input interfaces must be encapsulated by an HTML form that posts the data using a submit button named &quot;ActionCollectInformation&quot; to &quot;/content/action&quot; (the <a href="../../Reference/Modules/content/Views/action.html" target="_self">&quot;action&quot;</a> view of the <a href="../../Reference/Modules/content.html" target="_self">&quot;content&quot;</a> module). The submitted data will be stored in a dedicated part of the database, separated from but related to the object itself. In addition, whenever the object collects any data, the information can be sent to a specified E-mail address. The &quot;Collected information&quot; section within the &quot;Setup&quot; part of the administration interface can be used to view and delete information that was collected through content objects.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Concepts-and-basics/Content-management/Information-collection by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:05 GMT -->
+</html>

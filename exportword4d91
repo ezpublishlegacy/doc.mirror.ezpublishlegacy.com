@@ -1,0 +1,289 @@
+Message-ID: <878659594.1128.1413886196996.JavaMail.confluence@ip-10-127-227-192>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_1127_171651645.1413886196995"
+
+------=_Part_1127_171651645.1413886196995
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Implementing the Tweet\Value class</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+#main {
+    padding-bottom: 1em !important; /* The default padding of 6em is too mu=
+ch for printouts */
+}
+
+body {
+    font-family: Arial, Helvetica, FreeSans, sans-serif;
+    font-size: 10pt;
+    line-height: 1.2;
+}
+
+body, #full-height-container, #main, #page, #content, .has-personal-sidebar=
+ #content {
+    background: #fff    !important;
+    color: #000         !important;
+    border: 0           !important;
+    width: 100%         !important;
+    height: auto        !important;
+    min-height: auto    !important;
+    margin: 0           !important;
+    padding: 0          !important;
+    display: block      !important;
+}
+
+a, a:link, a:visited, a:focus, a:hover, a:active {
+    color: #000;
+}
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6 {
+    font-family: Arial, Helvetica, FreeSans, sans-serif;
+    page-break-after: avoid;
+}
+pre {
+    font-family: Monaco, "Courier New", monospace;
+}
+
+#header,
+.aui-header-inner,
+#navigation,
+#sidebar,
+.sidebar,
+#personal-info-sidebar,
+.ia-fixed-sidebar,
+.page-actions,
+.navmenu,
+.ajs-menu-bar,
+.noprint,
+.inline-control-link,
+.inline-control-link a,
+a.show-labels-editor,
+.global-comment-actions,
+.comment-actions,
+.quick-comment-container,
+#addcomment {
+    display: none !important;
+}
+
+.comment .date::before {
+    content: none !important; /* remove middot for print view */
+}
+
+h1.pagetitle img {
+    height: auto;
+    width: auto;
+}
+
+.print-only {
+    display: block;
+}
+#footer {
+    position: relative !important; /* CONF-17506 Place the footer at end of=
+ the content */
+    margin: 0;
+    padding: 0;
+    background: none;
+    clear: both;
+}
+
+#poweredby {
+    border-top: none;
+    background: none;
+}
+
+#poweredby li.print-only {
+    display: list-item;
+    font-style: italic;
+}
+
+#poweredby li.noprint {
+    display:none;
+}
+
+
+/* no width controls in print */
+.wiki-content .table-wrap,
+.wiki-content p,
+.panel .codeContent,
+.panel .codeContent pre,
+.image-wrap {
+    overflow: visible !important;
+}
+
+/* TODO - should this work? */
+#children-section,
+#comments-section .comment,
+#comments-section .comment .comment-body,
+#comments-section .comment .comment-content,
+#comments-section .comment p {
+    page-break-inside: avoid;
+}
+
+#page-children a {
+    text-decoration: none;
+}
+
+/**
+ hide twixies
+
+ the specificity here is a hack because print styles
+ are getting loaded before the base styles. */
+#comments-section.pageSection .section-header,
+#comments-section.pageSection .section-title,
+#children-section.pageSection .section-header,
+#children-section.pageSection .section-title,
+.children-show-hide {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.children-show-hide.icon {
+    display: none;
+}
+
+/* personal sidebar */
+.has-personal-sidebar #content {
+    margin-right: 0px;
+}
+
+.has-personal-sidebar #content .pageSection {
+    margin-right: 0px;
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Implementing the Tweet\Value class</h1>
+    <div class=3D"Section1">
+        <p><span style=3D"color: rgb(0,0,0);">The Value class of a FieldTyp=
+e is by design very simple. It is meant to be stateless, and as lightweight=
+ as possible. Therefore, this class must contain as little logic as possibl=
+e, as this is the Type class responsibility.</span></p>
+<p><span style=3D"color: rgb(0,0,0);">The Value will at least contain:</spa=
+n></p>
+<ul>
+<li><p><span>public properties, used to store the actual data&nbsp;</span><=
+/p></li>
+<li><p><span>an implementation of the <code>__toString()</code> method (req=
+uired by the Value interface we inherit from)</span></p></li>
+</ul>
+<p><span style=3D"color: rgb(0,0,0);">By default, the constructor from </sp=
+an><span style=3D"color: rgb(0,0,0);">FieldType\Value</span><span style=3D"=
+color: rgb(0,0,0);"> will be used, and allows you to pass a hash of propert=
+y / value pairs. In our example, we can see that we can override it as well=
+ if we want.</span></p>
+<p><span style=3D"color: rgb(0,0,0);">The Tweet FieldType is going to store=
+ three things:</span></p>
+<ul>
+<li><p><span>The tweet=E2=80=99s URL</span></p></li>
+<li><p><span>The tweet=E2=80=99s author URL</span></p></li>
+<li><p><span>The body, as an HTML string</span><span style=3D"color: rgb(0,=
+0,0);">&nbsp;</span></p></li>
+</ul>
+<p><span style=3D"color: rgb(0,0,0);">At this point, we don=E2=80=99t care =
+where those are stored. All we care about is what we want our FieldType to =
+expose as an API. We end up with the following properties:</span></p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>eZ/FieldType/Tweet/Value.php</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"theme: Eclipse; brush: php; gutter: false" style=3D"font-size=
+:12px;">/**
+* Tweet URL on twitter.com (http://twitter.com/UserName/status/id).
+* @var string
+*/
+public $url;
+
+=20
+/**
+* Author's tweet URL (http://twitter.com/UserName)
+* @var string
+*/
+public $authorUrl;
+
+=20
+/**
+* The tweet's embed HTML
+* @var string
+*/
+public $contents;</pre>=20
+</div>
+</div>
+<p><span style=3D"color: rgb(0,0,0);">The only thing left to honor the </sp=
+an><code><span style=3D"color: rgb(0,0,0);">FieldType\Value</span></code><s=
+pan style=3D"color: rgb(0,0,0);"> interface is the </span><code><span style=
+=3D"color: rgb(0,0,0);">__toString()</span></code><span style=3D"color: rgb=
+(0,0,0);"> method. Let=E2=80=99s say that ours will return the tweet=E2=80=
+=99s URL:</span></p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>eZ/FieldType/Tweet/Value.php</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"theme: Eclipse; brush: php; gutter: false" style=3D"font-size=
+:12px;">public function __toString()
+{
+   return $this-&gt;url;
+}</pre>=20
+</div>
+</div>
+    </div>
+</body>
+</html>
+------=_Part_1127_171651645.1413886196995--

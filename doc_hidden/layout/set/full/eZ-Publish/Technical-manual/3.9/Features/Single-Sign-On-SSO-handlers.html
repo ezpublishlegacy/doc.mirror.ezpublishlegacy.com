@@ -1,0 +1,78 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/Single-Sign-On-SSO-handlers by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:20:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Single Sign On (SSO) handlers / Features / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Single Sign On (SSO) handlers</h1>
+</div>
+
+<p>eZ Publish supports Single Sign on Handlers.</p><p>Written in PHP, those handlers will be executed every time a new session is instantiated. They will let you check if the user is already logged in with another third party system, and automatically log the user in to eZ Publish, without the need for any user interaction.</p><p>To add a new SSO handler, you need to create a custom PHP class and the handler itself. It must begin with 'eZ', and implement an <i>handleSSOLogin</i> method. This method doesn't take any argument, and returns either an <i>eZUser</i> (the user that gets logged in), or <i>false</i> if no user must be logged in.</p><p>
+This class name <b>without the <i>eZ</i> prefix</b> and <b>without the <i>SSOHandler</i> suffix</b> must then be added to <i>site.ini</i>, in the <i>SingleSignOnHandlerArray</i> variable in the <i>UserSettings</i> block.<br />Example: For the class name <i>eZ&lt;custom_name&gt;SSOHandler</i> the value of your SingleSignOnHandlerArray setting should be the name used as <i>&lt;custom_name&gt;</i> in the class name.<i>&nbsp;</i></p><p>Also, the name of your php class should start with <b>ez</b> and end with <b>ssohandler</b>.</p><p>Ideally, this would be done in an extension (that needs to be enabled):</p><p><i>extension/mysso/settings/site.ini.append.php</i>:</p><pre class="wordwrap"><span class="line">[UserSettings]</span>
+<span class="line">SingleSignOnHandlerArray[]=My</span>
+</pre><p><i>extension/mysso/sso/<b>ez</b>my<b>ssohandler</b>.php</i>:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">/**</span>
+<span class="line">* An SSO handler that automatically logs the admin user if his IP address matches a known one</span>
+<span class="line">*/</span>
+<span class="line">class eZMySSOHandler</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;* My custom SSO handler</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;* @return eZUser|false The user we want to log in, or false</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;function handleSSOLogin()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( $_SERVER['REMOTE_ADDR'] === '192.168.1.10' )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return eZUser::fetch( 14 );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\n/**\r\n* An SSO handler that automatically logs the admin user if his IP address matches a known one\r\n*/\r\nclass eZMySSOHandler\r\n{\r\n    /**\r\n    * My custom SSO handler\r\n    * @return eZUser|false The user we want to log in, or false\r\n    */\r\n    function handleSSOLogin()\r\n    {\r\n        if ( $_SERVER[\'REMOTE_ADDR\'] === \'192.168.1.10\' )\r\n            return eZUser::fetch( 14 );\r\n        else\r\n            return false;\r\n    }\r\n}' ); return false;" /></p>
+<![endif]--><p>Note that the handler will be executed for every request. Only enable it for siteaccesses it makes sense for, and make sure it doesn't use too much resources.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/Single-Sign-On-SSO-handlers by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:20:32 GMT -->
+</html>

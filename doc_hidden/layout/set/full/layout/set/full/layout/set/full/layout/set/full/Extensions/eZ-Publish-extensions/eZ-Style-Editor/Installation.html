@@ -1,0 +1,100 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Style-Editor/Installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:25:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Installation / eZ Style Editor / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installation</h1>
+</div>
+
+<p>This section covers the eZ Publish Style Editor installation instructions. In order to install eZ Publish Style Editor properly follow these steps:</p>
+<ol>
+<li><div>
+Extract the ezstyleeditor-1.<i>X</i>.0.tar.gz.tgz archive in the eZ Publish extension folder.<br /><b>Note:</b> The X in the version represents part of the version number, since the installation steps below are suitable for all eZ Style Editor versions of this branch. </div></li><li><div><p>Enable the ez style editor extension. This can be done either in the administration interface, via the &quot;Extensions&quot;-link, which can be accessed in the left menu under the &quot;Setup&quot;-tab, or manually in the settings/override/site.ini.append.php by adding ezstyleeditor to the Active Extensions as shown below:</p><pre class="wordwrap copytoclipboard"><span class="line">[ExtensionSettings]</span>
+<span class="line">[...]</span>
+<span class="line">ActiveExtensions[]=ezstyleeditor</span>
+<span class="line">ActiveExtensions[]=ezwebin</span>
+<span class="line">[...]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ExtensionSettings]\r\n[...]\r\nActiveExtensions[]=ezstyleeditor\r\nActiveExtensions[]=ezwebin\r\n[...]' ); return false;" /></p>
+<![endif]--></div></li><li><div><p>Update PHP autoload array by executing the following script from the eZ Publish root folder:</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php -e -p</span>
+</pre></div></li><li><div><p>Import SQL script with a schema relevant for your database. Currently supported are MySQL, PostgreSQL and Oracle. Following MySQL example shows how to import DB schema:</p><pre class="wordwrap"><span class="line">$ mysql --host=&lt;mysql_host&gt; --port=&lt;port&gt; -u &lt;mysql_user&gt; -p&lt;mysql_password&gt; &lt;database&gt; &lt; extension/ezstyleeditor/sql/mysql/mysql.sql</span>
+</pre></div></li><li><div><p>Place the following code in the &lt;head&gt; section of the pagelayout.tpl template(s):</p><pre class="wordwrap"><span class="line">{if is_set( $display_styleeditor_visualtoolbar )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{include uri=&quot;design:styleeditor/visual.tpl&quot;}</span>
+<span class="line">{/if}</span>
+</pre></div></li><li><div><p>Configure an image repository INI setting in extension/ezstyleeditor/settings/ezstyleeditor.ini:</p><pre class="wordwrap"><span class="line">[StyleEditor]</span>
+<span class="line">ImageRepository</span>
+</pre></div></li><li><div><p>Add to your public site access following configuration setting for image aliases in image.ini.append.php</p><pre class="wordwrap copytoclipboard"><span class="line">[AliasSettings]</span>
+<span class="line">AliasList[]=styleeditor</span>
+<span class="line">&nbsp;</span>
+<span class="line">[styleeditor]</span>
+<span class="line">Reference=</span>
+<span class="line">Filters[]</span>
+<span class="line">Filters[]=geometry/scaledownonly=100;75</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[AliasSettings]\r\nAliasList[]=styleeditor\r\n\r\n[styleeditor]\r\nReference=\r\nFilters[]\r\nFilters[]=geometry/scaledownonly=100;75\r\n' ); return false;" /></p>
+<![endif]--></div></li><li><div><p>Add the following settings to your ezjscore.ini.append.php:</p><pre class="wordwrap copytoclipboard"><span class="line">[ezjscServer]</span>
+<span class="line">FunctionList[]=styleeditor</span>
+<span class="line">&nbsp;</span>
+<span class="line">[ezjscServer_ezcsse]</span>
+<span class="line">Class=ezcsseServerCallFunctions</span>
+<span class="line">File=extension/ezstyleeditor/classes/ezcsseservercallfunctions.php</span>
+<span class="line">Functions[]=styleeditor</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ezjscServer]\r\nFunctionList[]=styleeditor\r\n\r\n[ezjscServer_ezcsse]\r\nClass=ezcsseServerCallFunctions\r\nFile=extension/ezstyleeditor/classes/ezcsseservercallfunctions.php\r\nFunctions[]=styleeditor' ); return false;" /></p>
+<![endif]--></div></li><li><div><p>Add the following settings to your websitetoolbar.ini.append.php settings file:</p><pre class="wordwrap copytoclipboard"><span class="line">[CustomTemplateSettings]</span>
+<span class="line">CustomTemplateList[]=styleeditor</span>
+<span class="line">&nbsp;</span>
+<span class="line">IncludeInView[]</span>
+<span class="line">IncludeInView[styleeditor]=full</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[CustomTemplateSettings]\r\nCustomTemplateList[]=styleeditor\r\n\r\nIncludeInView[]\r\nIncludeInView[styleeditor]=full' ); return false;" /></p>
+<![endif]--></div></li><li><div>Then go to <a href="../../../eZ-Publish/User-manual/4.3/The-administration-interface/The-User-accounts-tab.html" title="The &quot;User accounts&quot; tab" target="_blank">Roles and policies</a> (On the Users tab) and give your users (e.g. Editors) permission to access the <b>ezjscore / call / FunctionList( styleeditor )</b>&nbsp;function, for your users to have access to the <i>styleeditor</i> functionalities.</div></li><li><div><p>Clear the cache by executing following command from eZ Publish root folder:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre></div></li>
+</ol>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Style-Editor/Installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:25:50 GMT -->
+</html>

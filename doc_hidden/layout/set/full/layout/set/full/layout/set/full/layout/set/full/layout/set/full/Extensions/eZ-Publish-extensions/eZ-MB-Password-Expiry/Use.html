@@ -1,0 +1,97 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-MB-Password-Expiry/Use by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:05:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Use / eZ MB Password Expiry / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Use</h1>
+</div>
+
+ <p>After you have installed the eZ MB Password Expiry Extension, the new datatype &quot;Password Expiration&quot; will be available to be added as an attribute in the User and User Group classes. In order for the extension to function correctly this attribute must be added to your User and User Group classes.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/paex_attribute/104143-1-eng-GB/paex_attribute_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div> <p>Once added in the class the &quot;Password Expiration&quot; attribute looks like this:</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/added_paex_attribute/104146-1-eng-GB/added_paex_attribute_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div> <p>The attribute will add the following field to the Edit User page:</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/paex_new_user/104149-1-eng-GB/paex_new_user_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div> <p>The values set in the site.ini file are used as the default values when a &quot;Password Expiration&quot; attribute is added. But a script has been provided to prevent all existing users to be forced to change their passwords. This script resets the Password Last Update value of all the users to current time and can be run with the following command: </p><pre class="wordwrap"><span class="line">$ php extension/ezmbpaex/install/scripts/setpasswordlastupdated.php</span>
+</pre><p>
+ <br />When you customize the values in a user group itself, a checkbox will help you to update children nodes with the values of the current group. This allows you to easily customize the password lifetime and validation expiration per group. (See point &quot;Update Children Features&quot;)</p> <p>A function is added to control if a user can edit the password expiry data. If you want to allow anyone other than the administrator to be able to update the password expiry data, a new policy with this function should be added to the users role. Through the &quot;Roles and Policies&quot;-link in your Administration Interface (which can be accessed both in the left menu under the &quot;Setup&quot;-tab, as wall as in the left menu &quot;Access control&quot; under the &quot;User Accounts&quot;-tab) you can grant full or limited access to one or all functions (&quot;editpaex&quot; and &quot;password&quot;) of the module Userpaex. When a user or usergroup is created, they will automatically inherit the password expiry permissions of their parent, except if they have &quot;editpaex&quot; permissions set in their own roles. If a user has &quot;editpaex&quot; permission, he will be able to set his own password expiration values, but if these fields are left empty the parent values will be used. When someone changes the password of another user, the Password Last Update Time of this password is set to 0 to force the user to change his password the next time he tries to log in. But in order to be able to force a user to change his password, the password lifetime must be defined. If the Password Life Time is set to 0 the user will never be forced to change his password because the password will never expire.</p> <p>After the password for a user has expired, the user cannot log in. He will only be permitted to access the change password view from the Userpaex module in order to change his password. When a user changes his password, the system prevents him from submitting the same password as the one currently set. This is done to ensure that the new password always differs from the former one.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/different_password/104152-1-eng-GB/different_password_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-MB-Password-Expiry/Use by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:05:53 GMT -->
+</html>

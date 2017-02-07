@@ -1,0 +1,80 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.2/from-3.1-1-to-3.2-1 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:49:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>from 3.1-1 to 3.2-1 / Upgrading to 3.2 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>from 3.1-1 to 3.2-1</h1>
+</div>
+
+ <p>This section describes how to upgrade your existing eZ Publish 3.1-1 installation to version 3.2-1. If you are upgrading from a version prior to eZ Publish 3.1-1, you need to first <a href="../Upgrading-to-3.1/from-3.1-x-to-3.html" target="_self">upgrade to 3.1-1</a> before you can upgrade to 3.2-1.</p> <p>Please make sure that you have a working <a href="../../Upgrading.html#backup" target="_self">backup</a> of the site before you do the actual upgrade. The upgrade procedure consists of the following steps:</p> 
+<ol>
+ <li><div> Upgrading the distribution files to 3.2-1 </div></li> <li><div> Upgrading the database to 3.2-1 </div></li> <li><div> Running the system upgrade scripts </div></li> <li><div> Updating the system configuration </div></li> <li><div> Clearing the caches </div></li> 
+</ol>
+  <a name="eztoc33172_1" id="eztoc33172_1"></a><h2>Step 1: Upgrading the distribution files</h2> <p>The easiest way to upgrade the distribution files is to unpack eZ Publish 3.2-1 to a directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p> 
+<ul>
+ <li><div> design/example </div></li> <li><div> design/example_admin </div></li> <li><div> var </div></li> <li><div> settings/siteaccess </div></li> <li><div> settings/override </div></li> 
+</ul>
+ <p>Replace &quot;example&quot; and &quot;example_admin&quot; with actual names used by your siteaccesses.</p>  <a name="eztoc33172_1_1" id="eztoc33172_1_1"></a><h3>Custom extensions</h3> <p>If you are using custom extensions then the subdirectories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that come with eZ Publish (for example the &quot;PayPal&quot; extension).</p>    <a name="eztoc33172_2" id="eztoc33172_2"></a><h2>Step 2: Upgrading the database</h2> <p>The following text describes how a 3.1-1 database can be upgraded to 3.2-1.</p>  <a name="eztoc33172_2_2" id="eztoc33172_2_2"></a><h3>MySQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.2-1 directory. </div></li> <li><div> Run the database upgrade script: <pre class="wordwrap"><span class="line">mysql -u&lt;username&gt; -p&lt;password&gt; &lt;database&gt; &lt; update/database/mysql/3.2/dbupdate-3.1-1-to-3.2-1.sql</span>
+</pre>  </div></li> 
+</ol>
+ <a name="eztoc33172_2_3" id="eztoc33172_2_3"></a><h3>PostgreSQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.2-1 directory. </div></li> <li><div> Run the database upgrade script:<pre class="wordwrap"><span class="line">psql -d &lt;database&gt; -U &lt;dbowner&gt; &lt; update/database/postgresql/3.2/dbupdate-3.1-1-to-3.2-1.sql</span>
+</pre>  </div></li> 
+</ol>
+    <a name="eztoc33172_3" id="eztoc33172_3"></a><h2>Step 3: Running the system upgrade scripts</h2> <p>eZ Publish 3.2-1 supports sorting and filtering on attribute level. It is possible to sort and/or filter a list of content objects based on the values of a specific attribute (see the <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/changelogs/3.2/CHANGELOG-3.2-1" target="_self">3.2-1 changelog</a> for more information). The &quot;<a href="../../Technical-manual/3.8/Reference/Modules/content/Fetch-functions/list.html" target="_self">list</a>&quot; and &quot;<a href="../../Technical-manual/3.8/Reference/Modules/content/Fetch-functions/tree.html" target="_self">tree</a>&quot; fetch functions support this functionality. In order to be compatible with this new feature, you need to run the &quot;updateattributefilter.php&quot; script when upgrading: </p><pre class="wordwrap"><span class="line">php update/common/scripts/updateattributefilter.php</span>
+</pre> <p>In addition, if you haven't run the &quot;generateoverridesettings.php&quot; script before (when upgrading to 3.1.0 rel1 or later), then it needs to be run for each of your siteaccesses when upgrading to 3.2-1 (replace &quot;example&quot; with the actual name of your siteaccess): </p><pre class="wordwrap"><span class="line">php update/common/scripts/generateoverridesettings.php -s example</span>
+</pre> <p>The script will output a suggestion for the siteaccess &quot;override.ini.append.php&quot; file that needs to be created for the specified siteaccess. You should create a new file called &quot;override.ini.append.php&quot; in the &quot;settings/siteaccess/example&quot; directory (replace &quot;example&quot; by the actual name of your siteaccess) and copy the output provided by the script to this file.</p> <a name="eztoc33172_4" id="eztoc33172_4"></a><h2>Step 4: Updating the system configuration</h2> <p>You are not required to do any configuration changes when upgrading from 3.1-1 to 3.2-1.</p> <a name="eztoc33172_5" id="eztoc33172_5"></a><h2>Step 5: Clearing the caches</h2> <p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.2-1 directory. </div></li> <li><div> Run the clear cache script:<pre class="wordwrap"><span class="line">bin/shell/clearcache.sh --clear-all</span>
+</pre>  </div></li> 
+</ol>
+ <p>Please make sure that all caches are cleared. Sometimes the script is unable to clear caches because of restrictive file/directory permission settings. Make sure that all caches have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.2/from-3.1-1-to-3.2-1 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:49:29 GMT -->
+</html>

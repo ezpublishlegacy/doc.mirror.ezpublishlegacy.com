@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Features/Packages/package.xml-format by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:42:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>package.xml format / Packages / Features / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>package.xml format</h1>
+</div>
+
+ <p>This section describes important XML tags that are used by the packages system. These tags are used in a &quot;package.xml&quot; file that is located in a package directory. <a name="install_items"></a>
+ </p>  <a name="eztoc74619_1" id="eztoc74619_1"></a><h2>Items to be installed</h2> <p>The package installation process is determined by the list of items to install. This list is always specified between the &lt;install&gt; and &lt;/install&gt; XML tags. (Please note that using two &lt;install&gt; tags inside one &quot;package.xml&quot; file is not allowed.)</p> <p>An item to install is specified using the &lt;item&gt; XML tag. The following table reveals the list of the tag's attributes. </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Attribute</p> 
+  </th> <th >   <p>Value</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>type</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The type of the item (&quot;ezcontentclass&quot;, &quot;ezcontentobject&quot;, &quot;ezextension&quot;, &quot;ezinstallscript&quot;, etc.)</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>filename</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the &quot;.xml&quot; file that contains information about the item (without the file extension).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>sub-directory</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the subdirectory which contains the item's &quot;.xml&quot; file.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+  <a name="eztoc74619_1_1" id="eztoc74619_1_1"></a><h3>Example</h3> <p>Let's say that a content class package contains three content classes called &quot;myarticle&quot;, &quot;myfolder&quot; and &quot;myproduct&quot;. These classes are described in the files called &quot;class-myarticle.xml&quot;, &quot;class-myfolder.xml&quot; and &quot;class-myproduct.xml&quot; that are located in the &quot;myclassdir&quot; subdirectory under the package directory. In this case, the &quot;package.xml&quot; file located in the package directory may contain the following lines: </p><pre class="wordwrap copytoclipboard"><span class="line">&lt;install&gt;</span>
+<span class="line">&lt;item type=&quot;ezcontentclass&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename=&quot;class-myarticle&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub-directory=&quot;myclassdir&quot; /&gt;</span>
+<span class="line">&lt;item type=&quot;ezcontentclass&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename=&quot;class-myfolder&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub-directory=&quot;myclassdir&quot; /&gt;</span>
+<span class="line">&lt;item type=&quot;ezcontentclass&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename=&quot;class-myproduct&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub-directory=&quot;myclassdir&quot; /&gt;</span>
+<span class="line">&lt;/install&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;install&gt;\r\n&lt;item type=&quot;ezcontentclass&quot; \r\n            filename=&quot;class-myarticle&quot;\r\n            sub-directory=&quot;myclassdir&quot; /&gt;\r\n&lt;item type=&quot;ezcontentclass&quot;\r\n            filename=&quot;class-myfolder&quot; \r\n            sub-directory=&quot;myclassdir&quot; /&gt;\r\n&lt;item type=&quot;ezcontentclass&quot; \r\n            filename=&quot;class-myproduct&quot; \r\n            sub-directory=&quot;myclassdir&quot; /&gt;\r\n&lt;/install&gt;' ); return false;" /></p>
+<![endif]--> <p>This will instruct the system to install three items of the &quot;ezcontentclass&quot; type in the following order: </p> 
+<ul>
+ <li><div> myarticle </div></li> <li><div> myfolder </div></li> <li><div> myproduct </div></li> 
+</ul>
+    <a name="eztoc74619_2" id="eztoc74619_2"></a><h2>Items to be uninstalled</h2> <p>The package uninstallation process is determined by the list of items to uninstall. This list is always specified between the &lt;uninstall&gt; and &lt;/uninstall&gt; XML tags. (Please note that using two &lt;uninstall&gt; tags inside one &quot;package.xml&quot; file is not allowed.)</p> <p>
+An item to uninstall is specified using the &lt;item&gt; XML tag (as described above).<br /> <a name="dependencies"></a>
+ </p>   <a name="eztoc74619_3" id="eztoc74619_3"></a><h2>Dependent packages that are required</h2> <p>A <a href="Package-types.html#site_packages" target="_self">site package</a> usually contains dependencies to other packages. Choosing a site package in the setup wizard will result in downloading, importing and installing its dependent packages. The list of dependent packages that the site package requires is always specified between the &lt;requires&gt; and &lt;/requires&gt; XML tags located within the &lt;dependencies&gt; and &lt;/dependencies&gt; pair.</p> <p>Dependent packages are specified using the &lt;require&gt; XML tag. The following table reveals the list of the tag's attributes.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Attribute</p> 
+  </th> <th >   <p>Value</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>type</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The type of the package (usually &quot;ezpackage&quot;).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>name</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The internal name of the package.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>min-version</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The minimal version of the package that can be used.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+  <a name="eztoc74619_3_2" id="eztoc74619_3_2"></a><h3>Example</h3> <p>
+The &quot;package.xml&quot; file of the &quot;News&quot; site package may contain the following lines:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">&lt;dependencies&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;provides /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;requires&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;require type=&quot;ezpackage&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name=&quot;news&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min-version=&quot;1.0&quot; /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;require type=&quot;ezpackage&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name=&quot;media&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min-version=&quot;1.0-3&quot; /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;require type=&quot;ezpackage&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name=&quot;t01&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min-version=&quot;1.0&quot; /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/requires&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;obsoletes /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;conflicts /&gt;</span>
+<span class="line">&nbsp;&nbsp;&lt;/dependencies&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;dependencies&gt;\r\n    &lt;provides /&gt;\r\n    &lt;requires&gt;\r\n      &lt;require type=&quot;ezpackage&quot;\r\n               name=&quot;news&quot;\r\n               min-version=&quot;1.0&quot; /&gt;\r\n      &lt;require type=&quot;ezpackage&quot;\r\n               name=&quot;media&quot;\r\n               min-version=&quot;1.0-3&quot; /&gt;\r\n      &lt;require type=&quot;ezpackage&quot;\r\n               name=&quot;t01&quot;\r\n               min-version=&quot;1.0&quot; /&gt;\r\n    &lt;/requires&gt;\r\n    &lt;obsoletes /&gt;\r\n    &lt;conflicts /&gt;\r\n  &lt;/dependencies&gt;' ); return false;" /></p>
+<![endif]--><p>
+ <br />This means that the &quot;News&quot; site package requires the following three dependent packages:</p>
+<ul>
+ <li><div> news (version 1.0 or higher) </div></li> <li><div> media (version 1.0-3 or higher) </div></li> <li><div> t01 (version 1.0 or higher) </div></li> 
+</ul>
+<p>Choosing the &quot;News&quot; site package in the setup wizard will result in downloading the site package itself and all its dependent packages. All dependent packages except from the site style package will be automatically installed.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Features/Packages/package.xml-format by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:42:38 GMT -->
+</html>

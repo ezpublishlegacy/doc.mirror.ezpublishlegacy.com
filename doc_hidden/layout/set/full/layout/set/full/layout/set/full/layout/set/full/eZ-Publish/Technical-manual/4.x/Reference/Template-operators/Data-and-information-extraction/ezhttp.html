@@ -1,0 +1,83 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-operators/Data-and-information-extraction/ezhttp by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:39:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>ezhttp / Data and information extraction / Template operators / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ezhttp</h1>
+</div>
+<h3>Summary</h3>
+Returns GET, POST, session and cookie variables.<h3>Usage</h3>
+<pre>ezhttp( name [, type [, check_existence ] ] )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>name</td>
+        <td>string</td>
+        <td>The HTTP variable that should be fetched.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>type</td>
+        <td>string</td>
+        <td>Source of variable. Default is is HTTP POST.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>check_existence</td>
+        <td>mixed</td>
+        <td>If the specified directive should be checked for existence.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+Variable value<h3>Description</h3>
+ <p>This operator makes it possible to inspect the contents of HTTP variables (POST, GET, session and cookie variables). The &quot;type&quot; parameter can be used to specify which type of variable that should be extracted. The following options are available:</p> 
+<ul>
+ <li><div> post (POST variable) </div></li> <li><div> get (GET variable) </div></li> <li><div> session (session variable) </div></li> <li><div> cookie (cookie variable) </div></li> 
+</ul>
+ <p>The &quot;check_existence&quot; parameter can be set to TRUE or the string &quot;hasVariable&quot; in order to check if a directive is actually set. In this case, the operator will return either TRUE or FALSE. Note that using the <a href="ezhttp_hasvariable.html" target="_self">&quot;ezhttp_hasvariable&quot; operator is a better option.</a> </p><h3>Examples</h3>
+    <a name="eztoc92384_0_0_1" id="eztoc92384_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap"><span class="line">{ezhttp( 'search' )}</span>
+</pre> <p>Returns the &quot;search&quot; POST variable.</p>       <a name="eztoc92384_0_0_2" id="eztoc92384_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap"><span class="line">{ezhttp( 'image', 'get' )}</span>
+</pre> <p>Returns the &quot;image&quot; GET variable.</p>       <a name="eztoc92384_0_0_3" id="eztoc92384_0_0_3"></a><h4>Example 3</h4> <pre class="wordwrap"><span class="line">{ezhttp( 'user_id', 'session' )}</span>
+</pre> <p>Returns the &quot;user_id&quot; session variable.</p> <p>Example 4</p> <pre class="wordwrap"><span class="line">ezhttp( 'is_logged_in', 'cookie' )</span>
+</pre> <p>Returns the 'is_logged_in' cookie variable.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-operators/Data-and-information-extraction/ezhttp by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:39:24 GMT -->
+</html>

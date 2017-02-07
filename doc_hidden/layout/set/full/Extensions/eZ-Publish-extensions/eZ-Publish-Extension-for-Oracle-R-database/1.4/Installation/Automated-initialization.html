@@ -1,0 +1,108 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/1.4/Installation/Automated-initialization by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Automated initialization / Installation / 1.4 / eZ Publish Extension for Oracle® database / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Automated initialization</h1>
+</div>
+
+ <p>This section describes how you can create a clean eZ Publish database on your Oracle server using the &quot;ora-initialize.sh&quot; script. The script is intended to help those UNIX/Linux users who wish to create a new eZ Publish site running on an Oracle database (It is also possible to re-initialize an Oracle database that contains eZ Publish related information left after previous eZ Publish installations).</p> <p>The &quot;ora-initialize.sh&quot; script is located in the &quot;extension/ezoracle/scripts&quot; directory and can be executed using the <a href="http://en.wikipedia.org/wiki/Bash" target="_blank">Bourne Again Shell (bash)</a>. </p> <p>Please note that if you are using the <a href="http://www.oracle.com/technology/tech/oci/instantclient/index.html" target="_blank">Oracle Instant Client</a>, the &quot;ora-initialize.sh&quot; script might not work correctly because the &quot;ORACLE_HOME&quot; environment variable is probably not in use and the script will not find the &quot;$ORACLE_HOME/network/admin/tnsnames.ora&quot; file. In this case, you can manually set this environment variable and copy the &quot;tnsnames.ora&quot; file to the &quot;$ORACLE_HOME/network/admin/&quot; directory before running the script. The following example demonstrates how this can be done.</p>
+<ol>
+ <li><div> Make sure that the &quot;ORACLE_HOME&quot; environment variable is not set: <pre class="wordwrap"><span class="line">echo $ORACLE_HOME</span>
+</pre>  </div></li> <li><div> Locate the &quot;tnsnames.ora&quot; file (in most cases it can be found in &quot;/etc/tnsnames.ora&quot; or &quot;~/.tnsnames.ora&quot;). </div></li> <li><div> Create the &quot;~/network/admin/&quot; directory and copy the &quot;tnsnames.ora&quot; file there. (If there is a dot in the beginning of a filename, remove it.) </div></li> <li><div> Set the &quot;ORACLE_HOME&quot; environment variable: <pre class="wordwrap"><span class="line">export ORACLE_HOME=path_to_your_home_directory</span>
+</pre>  </div></li> 
+</ol>
+ <p>The following example shows how to run the &quot;ora-initialize.sh&quot; script.</p>
+<ol>
+ <li><div> Navigate into the eZ Publish installation directory. </div></li> <li><div> 
+Run the script using the following command:<br /> <pre class="wordwrap"><span class="line">./extension/ezoracle/scripts/ora-initialize.sh</span>
+</pre>  </div></li> 
+</ol>
+ <p>The script will perform several steps (described below). Please note that when the script needs to perform any actions on an Oracle server, it will create a temporary (hidden) file called &quot;.ezoracle_test.php&quot;, execute it and then remove it (the temporary file is a script that makes use of the PHP Oracle functions). This is done on every step except the 4-th one. In other words, the script must have write/create privileges in the directory.</p>  <a name="eztoc35100_1" id="eztoc35100_1"></a><h2>Step 1. Checking requirements</h2> <p>The script will check if the following requirements are met:</p>
+<ul>
+ <li><div> PHP CLI is available </div></li> <li><div> The environment variable $ORACLE_HOME, which points to the Oracle installation directory, is set and the &quot;tnsnames.ora&quot; file is present it the &quot;network/admin&quot; subdirectory </div></li> <li><div> PHP has support for Oracle compiled in </div></li> <li><div> The eZ Publish installation contains the &quot;ezoracle&quot; extension </div></li> <li><div> Both database schema and database data files (&quot;share/db_schema.dba&quot; and &quot;share/db_data.dba&quot;) are present in the eZ Publish directory. </div></li> 
+</ul>
+   <a name="eztoc35100_2" id="eztoc35100_2"></a><h2>Step 2. Testing connection to an Oracle server (optional)</h2> <p>The script will ask you if this step should be performed or not (skipping is not recommended). If yes, you will have to provide the following information:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Information</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Username</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The Oracle username that belongs to the Oracle user.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Password</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The password that belongs to the Oracle user.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Instance</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the Oracle instance. In most cases, these names (connect strings) are specified in the &quot;tnsnames.ora&quot; file.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+   <a name="eztoc35100_3" id="eztoc35100_3"></a><h2>Step 3. Creating an Oracle user with sufficient privileges (optional)</h2> <p>The script will ask if you wish to create a new Oracle user account. If you already have a user with <a href="../Requirements.html#privileges" target="_self">sufficient privileges</a>, you can skip this step. To create a new user, you will have to provide the following:</p> 
+<ul>
+ <li><div> The username and password for the database administrator (or any other Oracle user that has the &quot;CREATE USER&quot; system privilege). </div></li> <li><div> The username and password for the user that is being created. </div></li> <li><div> The name of the Oracle instance. </div></li> 
+</ul>
+ <p>The script will display the SQL query for creating a new user, ask for confirmation and finally add the user.</p>   <a name="eztoc35100_4" id="eztoc35100_4"></a><h2>Step 4. Connecting to an Oracle server</h2> <p>If you did not create a new user account during step 3, the script will ask you to provide the username/password (not the DB administrator, but the one which the eZ Publish database belongs to) and the name of the Oracle instance. The user must have the <a href="../Requirements.html#privileges" target="_self">required privileges</a>, so that the script can connect to the specified Oracle database and perform the next steps.</p> <p>Please note that this step will be skipped if you created a new user during step 3.</p>   <a name="eztoc35100_5" id="eztoc35100_5"></a><h2>Step 5. Testing user info with Oracle</h2> <p>The script will now attempt to connect to the specified Oracle database using the Oracle account that was specified/created during step 3 or 4.</p>   <a name="eztoc35100_6" id="eztoc35100_6"></a><h2>Step 6. Creating the &quot;md5_digest&quot; function</h2> <p>The database extension requires a custom function called &quot;md5_digest&quot; to be stored in the database. This function returns an MD5 hash (checksum) generated for the provided string input. The script will create this function if the Oracle account that is being used has &quot;CREATE PROCEDURE&quot; privilege.</p>   <a name="eztoc35100_7" id="eztoc35100_7"></a><h2>Step 7. Cleaning up the database</h2> <p>The script will search for existing eZ Publish data in the database and get rid of it (if any).</p>   <a name="eztoc35100_8" id="eztoc35100_8"></a><h2>Step 8. Initializing the database structure</h2> <p>The script will initialize the necessary database structure for eZ Publish (create all the necessary tables, sequences and triggers in the Oracle database) according to the instructions specified in the &quot;share/db_schema.dba&quot; file.</p>   <a name="eztoc35100_9" id="eztoc35100_9"></a><h2>Step 9. Importing pre-defined data to the database</h2> <p>The script will import the pre-defined data from the &quot;share/db_data.dba&quot; file to the database, so that the clean eZ Publish database will be ready to use.</p> <p>Once the automated initialization has successfully finished, you may continue the installation process by following the <a href="../Installation.html#configure_ezp" target="_self">remaining steps</a>.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/1.4/Installation/Automated-initialization by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:51 GMT -->
+</html>

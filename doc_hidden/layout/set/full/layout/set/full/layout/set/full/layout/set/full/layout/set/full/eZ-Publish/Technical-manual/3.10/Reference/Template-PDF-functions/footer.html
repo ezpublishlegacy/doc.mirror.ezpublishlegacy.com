@@ -1,0 +1,152 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Template-PDF-functions/footer by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:55:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>footer / Template PDF functions / Reference / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>footer</h1>
+</div>
+<h3>Summary</h3>
+Sets the footer.<h3>Usage</h3>
+<pre>pdf(footer, hash( [ text,       text,                                     ]
+                  [ align,      text_alignment,                           ]
+                  [ font,       font_name,                                ]
+                  [ size,       font_size,                                ]
+                  [ page,       page_interval,                            ]
+                  [ pageOffset, page_offset,                              ]
+      
+                  [ margin,     hash( [ bottom, bottom_margin, ]
+                                      [ left,   left_margin,   ]
+                                      [ right,  right_margin,  ] ),       ]
+									  
+                  [ line,       hash( [ leftMargin,  left_margin,    ]
+                                      [ rightMargin, right_margin,   ]
+                                      [ thickness,   line_thickness, ] ), ]
+           
+                  [ newline, boolean                                      ] ) )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>text</td>
+        <td>string</td>
+        <td>Text used in the footer.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>align</td>
+        <td>string</td>
+        <td>Alignment of the text.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>page</td>
+        <td>string</td>
+        <td>Page occurence is all, even or odd.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>pageOffset</td>
+        <td>integer</td>
+        <td>Page number where the footer starts.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>size</td>
+        <td>integer</td>
+        <td>Size of the font.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>font</td>
+        <td>string</td>
+        <td>Type of the font.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>margin</td>
+        <td>hash</td>
+        <td>The definition of the margins.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>left</td>
+        <td>integer/float</td>
+        <td>Left footer margin.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>right</td>
+        <td>integer/float</td>
+        <td>Right footer margin.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>bottom</td>
+        <td>integer/float</td>
+        <td>Bottom footer margin.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>line</td>
+        <td>hash</td>
+        <td>The definition of a line.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>leftMargin</td>
+        <td>integer/float</td>
+        <td>Left line margin.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>rightMargin</td>
+        <td>integer/float</td>
+        <td>Right line margin.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>thickness</td>
+        <td>integer/float</td>
+        <td>The thickness of the line.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>newline</td>
+        <td>boolean</td>
+        <td>Adds a new line to the footer. Force footer entry to new line</td>
+        <td>No.</td>
+    </tr></table><h3>Description</h3>
+ <p>This function makes it possible to create a footer for a collection of pages. Please note that it does not work correctly. The page number from where the footer starts can be specified using the &quot;pageOffset&quot; parameter. The &quot;page&quot; parameters can be used to specify whether the footer should occur on &quot;all&quot;, &quot;even&quot; or &quot;odd&quot; pages.</p> <p>If the &quot;text&quot; parameter is used, the parameters &quot;align&quot;, &quot;type&quot;, and &quot;size&quot; can be used to change the default alignment, font type and size. Please refer to the <a href="text.html" target="_self">&quot;text&quot;</a> function for more information about these parameters.</p> <p>There are two keywords reserved in the text string (parameter):</p>
+<ul>
+ <li><div> #page: will be replaced by the current page number. </div></li> <li><div> #total: will be replaces by the total number of pages. </div></li> 
+</ul>
+ <p>The footer should only be included once in the PDF document.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Template-PDF-functions/footer by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:55:27 GMT -->
+</html>

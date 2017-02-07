@@ -1,0 +1,73 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.0.0/Advanced-Configuration/Archiving/Archiving/Setting-it-up/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:04:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Setting it up / Archiving / Archiving / Advanced Configuration / eZ Find LS 5.0.0 / eZ Find / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Setting it up</h1>
+</div>
+
+<p>In order to activate the archiving function go to the following location:</p><pre class="wordwrap"><span class="line">(root of your eZ Publish &nbsp;installation)/ezpublish_legacy/extension/ezfind/settings/ezfind.ini</span>
+</pre><p>&nbsp;In your ezfind.ini enable Solr attribute storage like this:</p><pre class="wordwrap"><span class="line">[IndexOptions]</span>
+<span class="line">EnableSolrAttributeStorage=true</span>
+</pre><p>Next re-index the installation with this command, from your <i>ezpublish_legacy</i> folder:</p><pre class="wordwrap"><span class="line">$php extension/ezfind/bin/php/updatesearchindexsolr.php -s &lt;admin &nbsp;site access&gt;</span>
+</pre><p>Keep in mind that you must change &lt;admin site access&gt; with your admin site access.</p><p>Then go to your solr.ini, which is located here:</p><pre class="wordwrap"><span class="line">(root &nbsp;of your eZ Publish installation)/ezpublish_legacy/extension/ezfind/settings/solr.ini</span>
+</pre><p>&nbsp;Edit this file by adding a new shard definition, like this:</p><pre class="wordwrap"><span class="line">Shards[]</span>
+<span class="line">Shards[archive]=&lt;location Solr archive&gt;</span>
+</pre><p>The default setting is Shards[archive]=http://localhost:8984/solr/admin</p><a name="eztoc135005_1" id="eztoc135005_1"></a><h2>Example setup</h2><p>An easy example of how to do this is to copy the java sub-directory like described here:</p>
+<ol>
+<li><div>&nbsp;Copy .../ezpublish_legacy/extension/ezfind/java to .../ezpublish_legacy/extension/ezfind/archive:<pre class="wordwrap"><span class="line">$ &nbsp;cp -r ezpublish_legacy/extension/ezfind/java ezpublish_legacy/extension/ezfind/archive</span>
+</pre></div></li><li><div>&nbsp;Run the following command in <i>ezpublish_legacy/extension/ezfind/java/</i>:<pre class="wordwrap"><span class="line">$ cd ezpublish_legacy/extension/ezfind/java</span>
+<span class="line">$ java -jar start.jar</span>
+</pre></div></li><li><div>&nbsp;Then activate this second Solr instance in extension/ezfind/archive on a dedicated port:<pre class="wordwrap"><span class="line">$ cd ezpublish_legacy/extension/ezfind/archive</span>
+<span class="line">$ java -jar -Djetty.port=8984 start.jar</span>
+</pre></div></li><li><div>&nbsp;And then as described above assign this URI to the archive shard: <pre class="wordwrap"><span class="line">Shards[]</span>
+<span class="line">Shards[archive]=http://localhost:8984/solr/admin</span>
+</pre></div></li>
+</ol>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.0.0/Advanced-Configuration/Archiving/Archiving/Setting-it-up/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:04:12 GMT -->
+</html>

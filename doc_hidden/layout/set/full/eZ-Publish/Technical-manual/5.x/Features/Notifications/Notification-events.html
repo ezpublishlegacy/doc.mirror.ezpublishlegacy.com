@@ -1,0 +1,81 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Notifications/Notification-events by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:16:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Notification events / Notifications / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Notification events</h1>
+</div>
+
+<p>The following three notification events are supported by default:</p>
+<ul>
+<li><div> Publish </div></li><li><div> Collaboration </div></li><li><div> Current time </div></li>
+</ul>
+<a name="eztoc132392_1" id="eztoc132392_1"></a><h2>Publish</h2><p>Every time an object is published, a new &quot;ezpublish&quot; event is created.</p><a name="eztoc132392_2" id="eztoc132392_2"></a><h2>Collaboration</h2><p>Every time a collaboration message is generated, a new &quot;ezcollaboration&quot; event is created.</p><a name="eztoc132392_3" id="eztoc132392_3"></a><h2>Current time</h2><p>Every time the &quot; <a href="../../../4.x/Features/Notifications.html#runcronjobs" target="_self">runcronjobs.php</a>&quot; script is executed, a new &quot;ezcurrenttime&quot; event is created. This behavior is specified in the &quot;cronjobs/notification.php&quot; file. The system uses &quot;ezcurrenttime&quot; events for generating digest notifications.</p><p>If you need to generate this event manually, add the &quot;notification/runfilter&quot; notation to the URL of your site administration interface and then click the &quot;Spawn time event&quot; button. Please note that the &quot;runfilter&quot; view of the <a href="../../../4.x/Reference/Modules/notification.html" target="_self">&quot;notification&quot; module</a> should be used only for testing and debugging.</p><p>The built-in notification event types are stored in the &quot;kernel/classes/notification/event/&quot; directory. It is possible to extend the system by creating custom notification events for special needs.</p><a name="eztoc132392_4" id="eztoc132392_4"></a><h2>Creation and storage</h2><p>Let's say that you have an article on your site, and a user has subscribed for <a href="../Notifications.html#subtree" target="_self">subtree notifications</a> about this article. Every time a new comment is posted or an updated version of the article is published, the system will generate a new &quot;ezpublish&quot; event and store it in the database. This event can be processed by zero, one, or more <a href="Notification-handlers.html" target="_self">notification handlers</a>.</p><a name="eztoc132392_5" id="eztoc132392_5"></a><h2>Settings</h2><p>The available notification event types are specified in the &quot;[NotificationEventTypeSettings]&quot; section of the &quot; <a href="../../../4.x/Reference/Configuration-files/notification.html" target="_self">notification.ini</a>&quot; configuration file located in the &quot;settings&quot; directory. The following settings can be used under this section:</p><p>The &quot;RepositoryDirectories[]&quot; array specifies the directories where eZ Publish will search for built in notification event types. The exact location of the event in the directory is specified using the &quot;AvailableNotificationEventTypes&quot; setting.</p><p>The &quot;ExtensionDirectories[]&quot; array specifies the extension directories where eZ Publish will search for additional notification event types. By default eZ Publish will search in the &quot;notificationtypes&quot; subdirectory inside your extension. The exact location of the event in this subdirectory is specified with the &quot;AvailableNotificationEventTypes&quot; setting.</p><p>The &quot;AvailableNotificationEventTypes[]&quot; array contains a list of event types.</p><a name="eztoc132392_5_1" id="eztoc132392_5_1"></a><h3>Example 1</h3><p>The following lines can be specified in the &quot; <a href="../../../4.x/Reference/Configuration-files/notification.html" target="_self">notification.ini</a>&quot; configuration file:</p><pre class="wordwrap copytoclipboard"><span class="line">[NotificationEventTypeSettings]</span>
+<span class="line">RepositoryDirectories[]=kernel/classes/notification/event/</span>
+<span class="line">ExtensionDirectories[]</span>
+<span class="line">AvailableNotificationEventTypes[]=ezpublish</span>
+<span class="line">AvailableNotificationEventTypes[]=ezcurrenttime</span>
+<span class="line">AvailableNotificationEventTypes[]=ezcollaboration</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[NotificationEventTypeSettings]\r\nRepositoryDirectories[]=kernel/classes/notification/event/\r\nExtensionDirectories[]\r\nAvailableNotificationEventTypes[]=ezpublish\r\nAvailableNotificationEventTypes[]=ezcurrenttime\r\nAvailableNotificationEventTypes[]=ezcollaboration' ); return false;" /></p>
+<![endif]--><p>These settings will make eZ Publish search for the following files for built in notification events:</p>
+<ul>
+<li><div> kernel/classes/notification/event/ezpublish/ezpublishtype.php </div></li><li><div> kernel/classes/notification/event/ezcurrenttime/ezcurrenttimetype.php </div></li><li><div> kernel/classes/notification/event/ezcollaboration/ezcollaborationtype.php </div></li>
+</ul>
+<a name="eztoc132392_5_2" id="eztoc132392_5_2"></a><h3>Example 2</h3><p>You can extend the system by creating custom notification events. For example, if you have an extension &quot;nExt&quot; that includes a notification event &quot;nev&quot;, put the following lines into an override for &quot; <a href="../../../4.x/Reference/Configuration-files/notification.html" target="_self">notification.ini</a>&quot; configuration file:</p><pre class="wordwrap copytoclipboard"><span class="line">[NotificationEventTypeSettings]</span>
+<span class="line">ExtensionDirectories[]=nExt</span>
+<span class="line">AvailableNotificationEventTypes[]=nev</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[NotificationEventTypeSettings]\r\nExtensionDirectories[]=nExt\r\nAvailableNotificationEventTypes[]=nev' ); return false;" /></p>
+<![endif]--><p>or</p><pre class="wordwrap copytoclipboard"><span class="line">[NotificationEventTypeSettings]</span>
+<span class="line">RepositoryDirectories[]=extension/nExt/notificationtypes/</span>
+<span class="line">AvailableNotificationEventTypes[]=nev</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[NotificationEventTypeSettings]\r\nRepositoryDirectories[]=extension/nExt/notificationtypes/\r\nAvailableNotificationEventTypes[]=nev' ); return false;" /></p>
+<![endif]--><p>These settings will make eZ Publish expect the additional notification event to be located at &quot;extension/nExt/notificationtypes/nev/nevtype.php&quot;</p><p>Please note that you must always clear at least the ini cache in order to make the system re-read the changed configuration files.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Notifications/Notification-events by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:16:44 GMT -->
+</html>

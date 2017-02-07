@@ -1,0 +1,61 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.6/Features/Clustering/Cluster-File-Handlers by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Cluster File Handlers / Clustering / Features / 4.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Cluster File Handlers</h1>
+</div>
+
+<p>The cluster file handler mechanism makes it possible to store, retrieve, rename, delete, etc. files using the database. The following file handlers are known to the system by default:</p>
+<ol>
+<li><div> eZFS (located in the &quot;kernel/classes/clusterfilehandlers/ezfsfilehandler.php&quot; directory of the eZ Publish installation) </div></li><li><div> eZFS2 (located in the &quot;kernel/private/classes/clusterfilehandlers/ezfs2filehandler.php&quot; directory of the eZ Publish installation) </div></li><li><div> eZDB (located in the &quot;kernel/classes/clusterfilehandlers/ezdbfilehandler.php&quot; directory of the eZ Publish installation) </div></li><li><div> eZDFS (located in the &quot;kernel/private/classes/clusterfilehandlers/ezdfsfilehandler.php&quot; directory of the eZ Publish installation) </div></li>
+</ol>
+<p>Note that eZFS and eZFS2 file handlers do not allow actual eZ publish clustering by using multiple servers. Use eZDB and eZDFS for cluster file handling.</p><a name="eztoc126129_1" id="eztoc126129_1"></a><h2><b> eZ FS File Handler</b></h2><p>This is the default file handler which makes it possible to use the file system when dealing with files.</p><a name="eztoc126129_2" id="eztoc126129_2"></a><h2><b> eZ FS2 File Handler</b></h2><p>This is the enhanced standard file handler, with better concurrency handling. It requires linux or PHP 5.3 on windows, and is still considered experimental.</p><a name="eztoc126129_3" id="eztoc126129_3"></a><h2><b> eZ DB File Handler</b></h2><p>This is the database file handler. It makes it possible to use the database when dealing with files (in a cluster environment, this would typically be images, uploaded binary files and content-related caches, etc.). It is split into different back-ends that are compatible with the supported database engines. The default back-ends are located in the &quot;kernel/classes/clusterfilehandlers/dbbackends&quot; directory (currently only the back-end for MySQL).</p><p>Cache files are copied locally when used by a front-end. When using eZ DB File Handler both the metadata and the binary data will be stored using the database, but the metadata will be stored in the ezdbfile table and the binary data is split in chunks and will be stored in ezdbfile_data table.</p><a name="eztoc126129_3_1" id="eztoc126129_3_1"></a><h3>Supported database</h3><p>Currently supported databases for this file handler are MySQL and Oracle (when using the eZOracle extension).</p><a name="eztoc126129_4" id="eztoc126129_4"></a><h2><b> eZ DFS File Handler</b></h2><p>This is the Distributed File System handler with a DB overlay. This handler is required for NFS-based architectures. It clusters by storing the cluster files mainly on NFS (the distributed file system), while the file metadata (size, mtime, expiry status) are maintained in a database table similar to the one used by eZ DB file handler. NFS is used to read and write the reference copy of clustered files. Cache files are copied locally when used by a front-end, whereas images and binary files (when accessed directly via the browser) will be streamed directly from NFS.</p><a name="eztoc126129_4_1_1" id="eztoc126129_4_1_1"></a><h4>Note: reverse proxies</h4><p>High traffic on the binary files will not be handled well by the cluster database. In case of high traffic it is recommended to use Varnish or Squid.</p><a name="eztoc126129_4_2" id="eztoc126129_4_2"></a><h3>Supported database</h3><p>Currently only MySQL is supported as database for this file handler.</p><a name="eztoc126129_4_3" id="eztoc126129_4_3"></a><h3>Specific eZ DFS global architecture configuration</h3><p>The two most important aspects of the eZ DFS architecture are the cluster database and the NFS mount point. The first aspect implies that the database structure must be created manually. The definition of this table can be found in the eZ DFS MySQL driver class file located in the root of your eZ Publish installation here:</p><pre class="wordwrap"><span class="line">kernel/private/classes/clusterfilehandlers/dfsbackends/mysql.php</span>
+</pre><p>Since eZ DFS is based on NFS, each eZ Publish installation sharing the same relational database must use the same cluster database and each should have a local mount point to the same NFS export. The NFS server has to be available and writeable by the web-server's user on each eZ Publish server. Also it recommended that each eZ Publish server is configured in the exact same way. Refer to your system and server manual on how to configure this for your system. It is required that each eZ Publish installations sets the NFS mount point in the global override of their settings/file.ini configuration file to the same location. This must be done in the configuration group &quot;[eZDFSClusteringSettings]&quot; setting &quot;MountPointPath=&quot;. The NFS mount point is a local folder on each eZ Publish server that links to the network file system where the handler stores the files.</p><p>
+It is important to know that var directories should never be shared amongst instances, since they will then automatically be synchronized. This is valid for both eZ DB and eZ DFS, because it is the cluster handler that takes care of synchronizing data from and to the centralized repository.<br /> For more information visit the chapter &quot;<a href="Setting-it-up-for-an-eZDFSFileHandler.html" target="_self">setting it up for a eZDFS file handler</a>&quot;.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.6/Features/Clustering/Cluster-File-Handlers by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:51 GMT -->
+</html>

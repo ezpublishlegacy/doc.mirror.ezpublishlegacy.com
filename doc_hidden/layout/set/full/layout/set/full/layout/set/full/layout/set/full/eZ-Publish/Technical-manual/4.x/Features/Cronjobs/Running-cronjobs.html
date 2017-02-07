@@ -1,0 +1,144 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/Cronjobs/Running-cronjobs by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:47:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Running cronjobs / Cronjobs / Features / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Running cronjobs</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../../../../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><p>The &quot;runcronjobs.php&quot; script located in the root of the eZ Publish directory takes care of processing your cronjobs in the background. This script should be executed periodically. The most common practice is to instruct the operating system (or some application) to automatically run the script at regular intervals. On UNIX/Linux systems, this can be done by making use of &quot;cron&quot;. On Windows, the script can be run by the &quot;Scheduled Tasks&quot; service. The following text describe how this script can be executed.</p><a name="eztoc86298_1" id="eztoc86298_1"></a><h2>Running cronjobs from the shell</h2><p>It is possible to execute the &quot;runcronjobs.php&quot; script manually from within a system shell:</p>
+<ol>
+<li><div>&nbsp;Navigate into the eZ Publish directory. </div></li><li><div><p>&nbsp;Run the script (replace &quot;example&quot; with the actual name of the siteaccess):</p><pre class="wordwrap"><span class="line">php runcronjobs.php -s example group_of_tasks</span>
+</pre></div></li>
+</ol>
+<p>
+<a name="group_of_tasks"></a>
+ <br />&nbsp;The &quot;group_of_tasks&quot; option indicates that only scripts listed in the &quot;[CronjobPart-group_of_tasks]&quot; section of the &quot;cronjob.ini&quot; configuration file (or its override) will be executed. This parameter is optional. If omitted, the list of scripts will be taken from the &quot;[CronjobSettings]&quot; section of the &quot;cronjob.ini&quot; configuration file. (Please refer to the &quot;<a href="Configuring-cronjobs.html" target="_self">Configuring cronjobs</a>&quot; section for more information.)</p><p>The &quot;-s example&quot; indicates which siteaccess configuration the script should use. If you do not specify a siteaccess when running the script, then the <a href="../../Reference/Configuration-files/site.ini/SiteSettings/DefaultAccess.html" target="_self">default siteaccess</a> will be used.</p><a name="eztoc86298_1_1" id="eztoc86298_1_1"></a><h3>Debugging</h3><p>It is also possible to use the &quot;-d&quot; parameter that instructs the script to display the debug output at the end of execution, e.g.:</p><pre class="wordwrap"><span class="line">php runcronjobs.php -d -s example group_of_tasks</span>
+</pre><p>You can use this parameter with the &quot;all&quot; option to get more detailed information:</p><pre class="wordwrap"><span class="line">php runcronjobs.php -dall -s example group_of_tasks</span>
+</pre><p>The following options are also available: &quot;accumulator&quot;, &quot;debug&quot;, &quot;error&quot;, &quot;include&quot;, &quot;notice&quot;, &quot;timing&quot;, &quot;warning&quot;. Please note when provided, they must be separated using commas. The instructions given in the following example will tell the script to display debug notices and produce a list of includes:</p><pre class="wordwrap"><span class="line">php runcronjobs.php -dinclude,notice -s example group_of_tasks</span>
+</pre><p>The script will not make any changes to log files by default (the ones located in the &quot;var/log&quot; directory of your eZ Publish installation). If you need this functionality, you'll have to run the script using both &quot;-d&quot; and &quot;--logfiles&quot; parameters:</p><pre class="wordwrap"><span class="line">php runcronjobs.php -d -s example --logfiles group_of_tasks</span>
+</pre><p>It can also be displayed debug output including the SQL queries executed, by using the &quot;--sql&quot; parameter as shown in the following example:</p><pre class="wordwrap"><span class="line">php runcronjobs.php -d --sql -s example group_of_tasks</span>
+</pre><p>Please note that the &quot;--sql&quot; parameter still depends on &quot;-d&quot; and both need to be used simultaneously in order to have SQL debug output. Without the use of the &quot;-d&quot; parameter no output will be displayed at all.</p><a name="eztoc86298_2" id="eztoc86298_2"></a><h2>Cronjobs on UNIX/Linux</h2><p>&quot;Cron&quot; is the name of a utility that allows the automatic execution of tasks in the background. It is typically used for periodic system administration and maintenance tasks (for example, creating a weekly backup). A program often referred to as the &quot;cron daemon&quot; is running silently in the background, spending its time waiting and executing cronjobs. A &quot;cronjob&quot; is a script or a command that is run at specified intervals by the daemon. The cronjobs must be set up in a <a href="http://en.wikipedia.org/wiki/Crontab" target="_self">crontab</a>. A crontab is a text file that contains information about the intervals and the tasks that should be executed. The crontab files are not intended to be edited directly. The following table reveals which shell commands that can be used for maintaining crontabs:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Shell command</p>
+  </th><th >  <p>Description</p>
+  </th>
+</tr>
+
+<tr>
+<td width="60%" valign="top" style="vertical-align: top">  <pre class="wordwrap"><span class="line">crontab /var/www/ezpublish/ezpublish.cron</span>
+</pre>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Install a new crontab from the &quot;ezpublish.cron&quot; file (replace &quot;/var/www/ezpublish&quot; by the actual path to your eZ Publish directory).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="60%" valign="top" style="vertical-align: top">  <pre class="wordwrap"><span class="line">crontab -l</span>
+</pre>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Display the current crontab.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="60%" valign="top" style="vertical-align: top">  <pre class="wordwrap"><span class="line">crontab -e</span>
+</pre>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Edit the current crontab. The modified crontab will be installed automatically.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="60%" valign="top" style="vertical-align: top">  <pre class="wordwrap"><span class="line">crontab -r</span>
+</pre>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Remove the current crontab.</p>
+  </td>
+
+</tr>
+
+</table>
+<p>The following example shows how a cronjob for eZ Publish can be set up in the crontab. It assumes that eZ Publish is located in &quot;/var/www/ezpublish/&quot;, that the PHP command line interface program is located at &quot;/usr/local/bin/php&quot; and that the name of the target siteaccess is &quot;example&quot;.</p><pre class="wordwrap copytoclipboard"><span class="line"># The path to the eZ Publish directory.</span>
+<span class="line">EZPUBLISH=/var/www/ezpublish</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Location of the PHP command line interface binary.</span>
+<span class="line">PHPCLI=/usr/local/bin/php</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Instruct cron to run the main set of cronjobs</span>
+<span class="line"># at 6:35am every day</span>
+<span class="line">35 6 * * * cd $EZPUBLISH &amp;&amp; $PHPCLI runcronjobs.php -q -s example 2&gt;&amp;1</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Instruct cron to run the &quot;infrequent&quot; set of cronjobs</span>
+<span class="line"># at 5:20am every Monday</span>
+<span class="line">20 5 * * 1 cd $EZPUBLISH &amp;&amp; $PHPCLI runcronjobs.php infrequent -q -s example 2&gt;&amp;1</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Instruct cron to run the &quot;frequent&quot; set of cronjobs</span>
+<span class="line"># every 15 minutes</span>
+<span class="line">0,15,30,45 * * * * cd $EZPUBLISH &amp;&amp; $PHPCLI runcronjobs.php frequent -q -s example 2&gt;&amp;1</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Instruct cron to run the &quot;monthly&quot; set of cronjobs</span>
+<span class="line"># at 4:10am the first day of every month</span>
+<span class="line">10 4 1 * * cd $EZPUBLISH &amp;&amp; $PHPCLI runcronjobs.php monthly -q -s example 2&gt;&amp;1</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '# The path to the eZ Publish directory.\r\nEZPUBLISH=/var/www/ezpublish\r\n\r\n# Location of the PHP command line interface binary.\r\nPHPCLI=/usr/local/bin/php\r\n\r\n# Instruct cron to run the main set of cronjobs\r\n# at 6:35am every day\r\n35 6 * * * cd $EZPUBLISH &amp;&amp; $PHPCLI runcronjobs.php -q -s example 2&gt;&amp;1\r\n\r\n# Instruct cron to run the &quot;infrequent&quot; set of cronjobs\r\n# at 5:20am every Monday\r\n20 5 * * 1 cd $EZPUBLISH &amp;&amp; $PHPCLI runcronjobs.php infrequent -q -s example 2&gt;&amp;1\r\n\r\n# Instruct cron to run the &quot;frequent&quot; set of cronjobs\r\n# every 15 minutes\r\n0,15,30,45 * * * * cd $EZPUBLISH &amp;&amp; $PHPCLI runcronjobs.php frequent -q -s example 2&gt;&amp;1\r\n\r\n# Instruct cron to run the &quot;monthly&quot; set of cronjobs\r\n# at 4:10am the first day of every month\r\n10 4 1 * * cd $EZPUBLISH &amp;&amp; $PHPCLI runcronjobs.php monthly -q -s example 2&gt;&amp;1' ); return false;" /></p>
+<![endif]--><p>When added to the crontab, the cron daemon will run the &quot;runcronjobs.php&quot; script using the PHP command line interface binary at the specified time. With this configuration, the main set of cronjobs will be run at 6:35am every day. This means that all the scripts listed in the &quot;[CronjobSettings]&quot; section of the &quot;cronjob.ini&quot; configuration file (or its override) will be executed once a day.</p><p>The &quot;infrequent&quot; set of cronjobs will be run at 5:20am every Monday, i.e. the scripts listed in the &quot;[CronjobPart-infrequent]&quot; section of &quot;cronjob.ini&quot; (or its override) will be executed once a week.</p><p>The &quot;frequent&quot; set of cronjobs will be run every 15 minutes. Only the scripts that are listed in the &quot;[CronjobPart-frequent]&quot; section of &quot;cronjob.ini&quot; (or its override) will be executed.</p><p>The &quot;monthly&quot; set of cronjobs will be run at 4:10am the first day of every month, i.e. the script(s) listed in the &quot;[CronjobPart-monthly]&quot; section of &quot;cronjob.ini&quot; (or its override) will be executed once a week.</p><p>The &quot;-q&quot; parameter instructs the script to run in quiet/silent mode (suppressing unnecessary output). The &quot;-s example&quot; indicates which siteaccess configuration the script should use. The &quot;2&gt;&amp;1&quot; notation instructs the system to combine standard output and error messages into one stream.</p><a name="eztoc86298_3" id="eztoc86298_3"></a><h2>Scheduled tasks on Windows</h2><p>Unlike UNIX/Linux systems, Windows does not provide access to cron. Instead, Windows has its own solution called &quot;Scheduled Tasks&quot;. A scheduled task can be set up by selecting &quot;Scheduled Tasks&quot; from the Control Panel. This will bring up a wizard that asks what should be executed, when and so on. It should be configured to run a batch (.bat) file at regular intervals. The batch file should navigate into the eZ Publish directory and run the &quot;runcronjobs.php&quot; script.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/Cronjobs/Running-cronjobs by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:47:21 GMT -->
+</html>

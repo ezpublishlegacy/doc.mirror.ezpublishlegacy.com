@@ -1,0 +1,128 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.1.0/Advanced-Configuration/Archiving/Archiving/How-to-use-the-archiving-function/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:25:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>How to use the archiving function / Archiving / Archiving / Advanced Configuration / eZ Find LS 5.1.0 / eZ Find / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>How to use the archiving function</h1>
+</div>
+
+<p>From the command line archiving can be done by running the following command from the &quot;ezpublish_legacy&quot; folder of your eZ Publish installation:</p><pre class="wordwrap"><span class="line">php extension/ezfind/bin/php/solrarchive.php -s &lt;admin site &nbsp;access&gt; --from=default --to=archive --mode=copy &nbsp;--criteria='meta_name_t:[* TO *]'</span>
+</pre><p>Keep in mind that you must change &lt;admin site access&gt; with your admin site access. The criteria can be adapted to any Solr filter query, the example above will copy all indexed objects to the archive.</p><a name="eztoc135769_1" id="eztoc135769_1"></a><h2>Parameters for the Solr archiving script</h2><p>The following options to pass can be used:</p><a name="eztoc135769_1_1" id="eztoc135769_1_1"></a><h3><b>s</b></h3><p>sets the correct admin site access to use</p><a name="eztoc135769_1_1_0_1" id="eztoc135769_1_1_0_1"></a><h5>use</h5><pre class="wordwrap"><span class="line">-s</span>
+</pre><a name="eztoc135769_1_2" id="eztoc135769_1_2"></a><h3><b>&nbsp;<b>from</b> </b></h3><p>Use this option to specify the origin of the Solr index.</p><a name="eztoc135769_1_2_0_2" id="eztoc135769_1_2_0_2"></a><h5>use</h5><pre class="wordwrap"><span class="line">--from=VALUE</span>
+</pre><p>The value to use is the origin of the Solr index. If it is the main instance specify &quot;default&quot;, meaning that the SearchServerURI definition from solr.ini is used.</p><a name="eztoc135769_1_3" id="eztoc135769_1_3"></a><h3>to</h3><p>Use this option to specify the destination Solr index. In other words, where you want to move or copy the index to.</p><a name="eztoc135769_1_3_0_3" id="eztoc135769_1_3_0_3"></a><h5>use</h5><pre class="wordwrap"><span class="line">--to=VALUE</span>
+</pre><p>The value to use is the selected destination for storing the archiving objects.</p><a name="eztoc135769_1_4" id="eztoc135769_1_4"></a><h3>mode</h3><p>This option allows you to specify whether you want to copy or move the original Solr index. When moving, the Solr index will be copied to the new location and deleted in the previous location. When copying, the Solr index will exist in both the new and original location.</p><a name="eztoc135769_1_4_0_4" id="eztoc135769_1_4_0_4"></a><h5>use</h5><pre class="wordwrap"><span class="line">--mode=VALUE</span>
+</pre><p>The value to use can either be &quot;copy&quot; or &quot;move&quot;.</p><a name="eztoc135769_1_5" id="eztoc135769_1_5"></a><h3>criteria</h3><p>This option allows you to select the Solr documents to archive.</p><a name="eztoc135769_1_5_0_5" id="eztoc135769_1_5_0_5"></a><h5>use</h5><pre class="wordwrap"><span class="line">--criteria=VALUE</span>
+</pre><p>Use a raw Solr filter expression as value. This Solr boolean query will be used to select specific Solr objects to archive.</p><a name="eztoc135769_2" id="eztoc135769_2"></a><h2>Distributed search</h2><p>Distributed search allows search results from multiple site to be provided. It is possible to split a Solr index into multiple shards, if an index is to large for a single system or when queries take to long to execute. By splitting the index, Solr can query and merge results across those shards.</p><p>If the shards contain objects that are not present in the eZ Publish database, like for example in archived indexes, the parameter AsObjects has to be set to false.</p><a name="eztoc135769_2_6" id="eztoc135769_2_6"></a><h3>Parameters for fetch function templates</h3><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th  width="25%">  <p><b>Name </b></p>
+  </th><th  width="25%">  <p><b>Type </b></p>
+  </th><th  width="25%">  <p><b>Description </b></p>
+  </th><th  width="25%">  <p><b>Required </b></p>
+  </th>
+</tr>
+
+<tr>
+<td width="25%" valign="top" style="vertical-align: top">  <p>shards</p>
+  </td>
+<td width="25%" valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td width="25%" valign="top" style="vertical-align: top">  <p>lists the shards or individual &quot;partitions&quot; of the search engine to use.</p>
+  </td>
+<td width="25%" valign="top" style="vertical-align: top">  <p>yes</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="25%" valign="top" style="vertical-align: top">  <p>searchfields</p>
+  </td>
+<td width="25%" valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td width="25%" valign="top" style="vertical-align: top">  <p>lists search field names to search for</p>
+  </td>
+<td width="25%" valign="top" style="vertical-align: top">  <p>no</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="25%" valign="top" style="vertical-align: top">  <p>returnfields</p>
+  </td>
+<td width="25%" valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td width="25%" valign="top" style="vertical-align: top">  <p>lists which fields to return</p>
+  </td>
+<td width="25%" valign="top" style="vertical-align: top">  <p>no</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="25%" valign="top" style="vertical-align: top">  <p>rawfilterlist</p>
+  </td>
+<td width="25%" valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td width="25%" valign="top" style="vertical-align: top">  <p>lists the filters to use</p>
+  </td>
+<td width="25%" valign="top" style="vertical-align: top">  <p>no</p>
+  </td>
+
+</tr>
+
+</table>
+<a name="eztoc135769_2_6_0_6" id="eztoc135769_2_6_0_6"></a><h5><b>example</b></h5><p>This is an easy example of how to copy the index as alternative to the multi-core setup.</p><pre class="wordwrap copytoclipboard"><span class="line">'DistributedSearch' =&gt; array ( 'shards', array('shard1', 'shard2' , &nbsp;...),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'searchfields', array ('myfield1', 'myfield2', ... ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'returnfields', &nbsp;array ('myfield1', 'myfield2', ... ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rawfilterlist', array &nbsp;('foreignfield:a', '(foreignfield:b AND otherfield:c)', ... )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</span>
+<span class="line">);</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\'DistributedSearch\' =&gt; array ( \'shards\', array(\'shard1\', \'shard2\' ,  ...),\r\n              \'searchfields\', array (\'myfield1\', \'myfield2\', ... ),\r\n              \'returnfields\',  array (\'myfield1\', \'myfield2\', ... ),\r\n              \'rawfilterlist\', array  (\'foreignfield:a\', \'(foreignfield:b AND otherfield:c)\', ... )\r\n                             )\r\n);\r\n' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.1.0/Advanced-Configuration/Archiving/Archiving/How-to-use-the-archiving-function/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:25:10 GMT -->
+</html>

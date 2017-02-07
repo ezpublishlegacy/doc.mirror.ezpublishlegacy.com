@@ -1,0 +1,130 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/Multi-currency/Custom-prices-and-auto-prices by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Custom prices and auto prices / Multi-currency / Features / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Custom prices and auto prices</h1>
+</div>
+
+ <p>The <a href="../../Reference/Datatypes/Multi-price.html" target="_self">multi-price datatype</a> allows you to set prices in multiple currencies for each product. If you use for example five currencies then a product will always have five prices. However, you don't have to enter all these prices manually although it is possible. It is required that you specify at least one price per product which is called <i>base custom price</i> ( <i>base price</i> for short). The system will automatically convert it using the appropriate <a href="Currency-rates.html" target="_self">rates</a> in order to calculate prices in other currencies (the rest four prices in our example). These are called <i>auto prices</i>. In contrast to these, prices that are specified manually are called <i>custom prices</i>.</p> <p>Custom prices are fully independent of the <a href="Currency-rates.html" target="_self">currency rates</a>. By saying &quot;base custom price&quot; we mean a special custom price that is used for calculating the auto prices. All other custom prices will be called <i>non-base</i>. Please note that non-base custom prices are independent of the base price. If you change the base price, the system will automatically update all the auto prices for this product but not the custom prices. If you change a non-base custom price, no automatic updates will be done.</p> <p>The auto prices are usually marked as &quot;(Auto)&quot; in the object edit interface while the custom prices aren't. There is no special mark for a base custom price because this value usually comes right after the auto prices and right before the non-base custom prices (if there are any).</p> <p>If you are not satisfied with the auto price value in some particular currency, you can set a non-base custom price instead. This value will be independent of the base price.</p> <p>If you remove a non-base custom price, the system will create an auto price in this currency.</p> <p>If you remove the base price, the system will do the following: </p>
+<ul>
+ <li><div> Set the earliest non-base custom price as a new base price. </div></li> <li><div> Remove the old base price and create a new auto price instead. </div></li> <li><div> Update all the auto prices in accordance with the new base price. </div></li> 
+</ul>
+ <p>It is recommended that each product has at least one custom price. If you remove all the custom prices for a product, the system will use zero auto prices in all currencies for this product.</p>  <a name="eztoc62815_1" id="eztoc62815_1"></a><h2>Example</h2> <p>Let's say that you use three currencies with the rates indicated in the following table. </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Currency code</p> 
+  </th> <th >   <p>Currency rate</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>NOK</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1.32015</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>EUR</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.16380</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>USD</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.19500</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>If you specify for example $50 as the base price, the system will automatically calculate two auto prices for this product (look at the next screenshot). </p>
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/features/multi_currency/base_price_example/30547-1-eng-GB/base_price_example_doc.png" alt="The base price in USD and two auto prices." />
+ <p>The base price in USD and two auto prices.</p>
+
+
+
+
+
+
+
+</div><p>These auto prices are calculated by converting $50 to Euro and Norwegian krone: </p>
+<ul>
+ <li><div> EUR/USD cross rate = 0.16380 / 0.19500 = 0.84000 </div></li> <li><div> price in EUR = 50*0.84=42.00 </div></li> <li><div> NOK/USD cross rate = 1.32015 / 0.19500 = 6.77000 </div></li> <li><div> price in NOK = 50*6.77=338.50 </div></li> 
+</ul>
+ <p>If you think that this product costs much more in some particular countries, for example in Norway, you can set the desired price by creating a custom price in NOK. The result is shown in the following screenshot. </p>
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/features/multi_currency/nonbase_price_example/30550-1-eng-GB/nonbase_price_example_doc.png" alt="The base price in USD, non-base custom price in NOK and auto price in EUR." />
+ <p>The base price in USD, non-base custom price in NOK and auto price in EUR.</p>
+
+
+
+
+
+
+
+</div><p>As you can see from the screenshot above, there are two custom prices (base $50 and non-base 600nok) and one auto price (€42). Please note that you can always remove non-base custom prices, so that the system will automatically set auto prices instead.</p> <p>If you remove the base price ($50), the non-base custom price (600 nok) will become new base price so the system will automatically update the auto prices as shown in the screenshot below. </p>
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/features/multi_currency/remove_base_price/30553-1-eng-GB/remove_base_price_doc.png" alt="The results of removing the base custom price." />
+ <p>The results of removing the base custom price.</p>
+
+
+
+
+
+
+
+</div><p>These auto prices are calculated by converting 600 nok to Euro and US Dollars: </p>
+<ul>
+ <li><div> EUR/NOK cross rate = 0.16380 / 1.32015 = 0.12408 </div></li> <li><div> price in EUR = 600*0.12408 = 74.45 </div></li> <li><div> USD/NOK cross rate = 0.19500 /1.32015 = 0.15 </div></li> <li><div> price in NOK = 600*0.15 = 88.63 </div></li> 
+</ul>
+ 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/Multi-currency/Custom-prices-and-auto-prices by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:37 GMT -->
+</html>

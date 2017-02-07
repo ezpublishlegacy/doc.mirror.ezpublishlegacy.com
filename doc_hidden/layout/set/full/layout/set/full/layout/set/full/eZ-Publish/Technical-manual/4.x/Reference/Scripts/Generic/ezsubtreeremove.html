@@ -1,0 +1,146 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/ezsubtreeremove.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:10:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>ezsubtreeremove.php / Generic / Scripts / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ezsubtreeremove.php</h1>
+</div>
+
+<h3>Summary</h3>
+Safely removes large subtrees.
+
+<h3>Location</h3>    ./bin/php/ezsubtreeremove.php<h3>Parameters</h3><p>
+<a href=#colors>colors</a><br/>
+
+<a href=#debug>debug</a><br/>
+
+<a href=#help>help</a><br/>
+
+<a href=#ignore-trash>ignore-trash</a><br/>
+
+<a href=#logfiles>logfiles</a><br/>
+
+<a href=#no-colors>no-colors</a><br/>
+
+<a href=#no-logfiles>no-logfiles</a><br/>
+
+<a href=#nodes-id>nodes-id</a><br/>
+
+<a href=#quiet>quiet</a><br/>
+
+<a href=#siteaccess>siteaccess</a><br/>
+</p>
+
+    <a name="colors"></a>
+    <h4>-c, --colors</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Use ANSI colors when generating debug output (default).</p>    </div>
+
+    <a name="debug"></a>
+    <h4>-d[&lt;option&gt;[,&lt;option2&gt;...]], --debug[=&lt;option&gt;[,&lt;option2&gt;...]]</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output debug information. The following options can be used to control what the debug output should include: &quot;all&quot; (everything), &quot;accumulator&quot; (accumulators), &quot;include&quot; (included files), &quot;timing&quot; (timing points), &quot;error&quot; (errors), &quot;warning&quot; (warnings), &quot;notice&quot; (notices).</p>    </div>
+
+    <a name="help"></a>
+    <h4>-h, --help</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output information about the script and supported parameters.</p>    </div>
+
+    <a name="ignore-trash"></a>
+    <h4>--ignore-trash</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Permanently delete the specified subtrees. Without this parameter, the content will be moved to the trash (note that the tree structure will be lost forever).</p>    </div>
+
+    <a name="logfiles"></a>
+    <h4>--logfiles</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Generate log files. This parameter must be used together with the debug parameter (&quot;-d&quot; or &quot;--debug&quot;). The log files (for example &quot;warning.log&quot;) will be stored in the &quot;var/log&quot; directory of the eZ Publish installation.</p>    </div>
+
+    <a name="no-colors"></a>
+    <h4>--no-colors</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Do not use ANSI colors when generating debug output.</p>    </div>
+
+    <a name="no-logfiles"></a>
+    <h4>--no-logfiles</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Do not generate log files (default).</p>    </div>
+
+    <a name="nodes-id"></a>
+    <h4>--nodes-id=&lt;node_id&gt;[,&lt;node_id2&gt;…]</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The node ID of the subtree or subtrees that should be removed. In case multiple subtrees are to be removed, their node IDs must be provided as a comma separated list. Both the specified nodes and their sub items will be removed. This parameter is required.</p>    </div>
+
+    <a name="quiet"></a>
+    <h4>-q, --quiet</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Run the script in &quot;quiet&quot; mode. No output will be generated.</p>    </div>
+
+    <a name="siteaccess"></a>
+    <h4>-s &lt;siteaccess&gt;, --siteaccess=&lt;siteaccess&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The siteaccess to run the script for. If omitted, the <a href="../../Configuration-files/site.ini/SiteSettings/DefaultAccess.html" target="_self">default siteaccess</a> will be used.</p>    </div>
+
+<h3>Description</h3>
+ <p>This script makes it possible to remove subtrees. Typically, it is used to remove subtrees containing more nodes than the &quot;<a href="../../Configuration-files/content.ini/RemoveSettings/MaxNodesRemoveSubtree.html" target="_self">MaxNodesRemoveSubtree</a>&quot; setting allows (these cannot be removed from within the administration interface).</p> <p>By default, the script will remove content in the same way as it is done from within the administration interface when the &quot;Move to trash&quot; checkbox is selected. In other words, the removed objects will end up in the <a href="../../../../../User-manual/4.x/Daily-tasks/Removing-content.html#trash" target="_self">trash</a> while the tree structure itself (the nodes) will be lost forever. The &quot;--ignore-trash&quot; parameter allows objects to be removed without being put in the trash first.</p> <p>An object processed by this script will only be put in the trash (or removed when the &quot;--ignore-trash&quot; parameter is used) if it doesn't have other/additional locations than the ones that were specified using the &quot;--nodes-id&quot; parameter.</p> <p>Note that the script will access the node tree as a certain user. This is controlled by the &quot;<a href="../../Configuration-files/site.ini/UserSettings/UserCreatorID.html" target="_self">UserCreatorID</a>&quot; setting. If the specified user is not allowed to remove a particular subtree, the script will output an error message.</p>
+<h3>Examples</h3>
+    <a name="eztoc96970_0_0_1" id="eztoc96970_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap"><span class="line">php bin/php/ezsubtreeremove.php --nodes-id=65</span>
+</pre> <p>Remove node 65 and all its sub items. If the object encapsulated by node 65 does not have other locations, it will be moved to the trash.</p>       <a name="eztoc96970_0_0_2" id="eztoc96970_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap"><span class="line">php bin/php/ezsubtreeremove.php --nodes-id=65 --ignore-trash</span>
+</pre> <p>Remove node 65 and all its sub items. If the object encapsulated by node 65 does not have other locations, it will be permanently removed.</p>       <a name="eztoc96970_0_0_3" id="eztoc96970_0_0_3"></a><h4>Example 3</h4> <pre class="wordwrap"><span class="line">php bin/php/ezsubtreeremove.php --nodes-id=60,65,78</span>
+</pre> <p>Nodes 60, 65, 78 and all their sub items will be removed.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/ezsubtreeremove.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:10:03 GMT -->
+</html>

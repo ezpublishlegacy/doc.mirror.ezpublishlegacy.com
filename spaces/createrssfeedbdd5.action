@@ -1,0 +1,1512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <title>eZ Publish Platform 5.x Recent Changes</title>
+  <link rel="alternate" href="https://doc.ez.no" />
+  <subtitle>Confluence Syndication Feed</subtitle>
+  <id>https://doc.ez.no</id>
+  <entry>
+    <title>Session configuration</title>
+    <link rel="alternate" href="https://doc.ez.no/display/EZP/Session+configuration" />
+    <author>
+      <name>Jérôme Vieilledent</name>
+    </author>
+    <id>tag:doc.ez.no,2009:page-19891597-9</id>
+    <updated>2014-10-21T08:47:16Z</updated>
+    <published>2014-10-21T08:47:16Z</published>
+    <summary type="html">&lt;div class="feed"&gt;    &lt;p&gt;
+        Page
+            &lt;b&gt;edited&lt;/b&gt; by
+                    &lt;a href="    https://doc.ez.no/display/~jerome.vieilledent@ez.no
+"&gt;Jérôme Vieilledent&lt;/a&gt;
+            &lt;/p&gt;
+        &lt;div style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 10px;"&gt;
+        &lt;p&gt;Symfony offers the possibility to change many session options at application level (i.e. in Symfony &lt;a href="http://symfony.com/doc/master/reference/configuration/framework.html" class="external-link" rel="nofollow"&gt;&lt;code&gt;framework &lt;/code&gt;configuration&lt;/a&gt;), such as:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;code&gt;cookie_domain&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;code&gt;cookie_path&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;code&gt;cookie_lifetime&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;code&gt;cookie_secure&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;code&gt;cookie_httponly&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;However as eZ Publish can be used for setting up several web sites within on Symfony application, session configuration is also possible to define per SiteAccess and SiteGroup level.&lt;/p&gt;&lt;h2 id="Sessionconfiguration-SessionoptionsperSiteAccess"&gt;&lt;span style="color: rgb(0,98,147);"&gt;Session options per SiteAccess&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;As of eZ Publish 5.3 / 2014.03, all site related session configuration is possible to define per SiteAccess and SiteGroup:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;ezpublish.yml&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: bash; gutter: false" style="font-size:12px;"&gt;ezpublish:
+    system:
+        my_siteaccess:
+            session:
+                # By default Session name is eZSESSID{siteaccess_hash}
+                # with setting below you&amp;#39;ll get eZSESSID{name},
+                # allowing you to share sessions across SiteAccess
+                name: my_session_name
+                # These are optional. 
+                # If not defined they will fallback to Symfony framework configuration, 
+                # which itself fallback to default php.ini settings
+                cookie_domain: mydomain.com
+                cookie_path: /foo
+                cookie_lifetime: 86400
+                cookie_secure: false
+                cookie_httponly: true&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h2 id="Sessionconfiguration-SessionnameperSiteAccess"&gt;Session name per SiteAccess&lt;/h2&gt;&lt;p&gt;In 5.x versions prior to 5.3 / 2014.03 the following SiteAccess aware session setting where available:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;ezpublish.yml&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: bash; gutter: false" style="font-size:12px;"&gt;ezpublish:
+    system:
+        my_siteaccess:
+            # By default Session name is eZSESSID{siteaccess_hash}
+            # with setting below you&amp;#39;ll get eZSESSID{name},
+            # allowing you to share sessions across SiteAccess
+            # This setting is deprecated as of 5.3
+            session_name: my_session_name&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+        &lt;div style="padding: 10px 0;"&gt;
+       &lt;a href="https://doc.ez.no/display/EZP/Session+configuration"&gt;View Online&lt;/a&gt;
+              &amp;middot;
+       &lt;a href="https://doc.ez.no/pages/diffpagesbyversion.action?pageId=19891597&amp;revisedVersion=9&amp;originalVersion=8"&gt;View Changes Online&lt;/a&gt;       
+                  &lt;/div&gt;
+&lt;/div&gt;</summary>
+    <dc:creator>Jérôme Vieilledent</dc:creator>
+    <dc:date>2014-10-21T08:47:16Z</dc:date>
+  </entry>
+  <entry>
+    <title>Session</title>
+    <link rel="alternate" href="https://doc.ez.no/display/EZP/Session" />
+    <author>
+      <name>André Rømcke</name>
+    </author>
+    <id>tag:doc.ez.no,2009:page-8323282-13</id>
+    <updated>2014-10-20T21:24:32Z</updated>
+    <published>2014-10-20T21:24:32Z</published>
+    <summary type="html">&lt;div class="feed"&gt;    &lt;p&gt;
+        Page
+            &lt;b&gt;edited&lt;/b&gt; by
+                    &lt;a href="    https://doc.ez.no/display/~andre.romcke@ez.no
+"&gt;André Rømcke&lt;/a&gt;
+            &lt;/p&gt;
+        &lt;div style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 10px;"&gt;
+        &lt;p&gt;Sessions are handled by the Symfony2 framework, specifically API and underlying session handlers provided by HTTP Fundation component[1][2], this is further enhanced in eZ Publish with support for siteaccess aware &lt;a href="https://doc.ez.no/display/EZP/Session+configuration"&gt;session cookie settings&lt;/a&gt;.&lt;/p&gt;&lt;h1 id="Session-Sessionhandlers"&gt;Session handlers&lt;/h1&gt;&lt;p&gt;In Symfony, session handler is configured using &lt;code&gt;framework.session.handler_id.&lt;/code&gt; By default Symfony's &lt;em style="line-height: 1.4285715;"&gt;NativeFileSessionHandler&lt;/em&gt;[3] is configured in eZ Publish, but Symfony can also be configured to use &lt;span style="line-height: 1.4285715;"&gt;custom handlers[2]&lt;/span&gt;, or just fallback to what is configured in PHP by setting it to null (&lt;code&gt;~&lt;/code&gt;).&lt;/p&gt;&lt;h3 id="Session-Singleserversetup"&gt;Single server setup&lt;/h3&gt;&lt;p&gt;For single server, default settings should be preferred. As implied above they setup PHP's builtin &amp;quot;files&amp;quot; session save handler, and specifically configures it to use &lt;code&gt;session.save_path&lt;/code&gt; set to &lt;code&gt;ezpublish/sessions&lt;/code&gt; by default &lt;code&gt;(ezpublish/cache/&amp;lt;env&amp;gt;&lt;/code&gt; before 5.3).&lt;/p&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                    &lt;p class="title"&gt;Session Garbage collection on Debian &amp;amp; Ubuntu&lt;/p&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;Debian based distros &lt;a href="https://bugs.launchpad.net/ubuntu/+source/php5/+bug/316441" class="external-link" rel="nofollow"&gt;disables&lt;/a&gt; &lt;a href="http://php.net/manual/en/session.configuration.php#ini.session.gc-probability" class="external-link" rel="nofollow"&gt;&lt;span&gt;session.&lt;/span&gt;&lt;span&gt;gc_probability&lt;/span&gt;&lt;/a&gt;&lt;span&gt; by default an uses cronjob instead to clear sessions files. As we use custom save_path for sessions that would normally be a problem, however default Symfony settings makes sure to re enable this in &lt;/span&gt;&lt;code&gt;framework.session.gc_probability&lt;/code&gt; so it should work by garbage collecting sessions for each 100th request out of the box.&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;h3 id="Session-Clustersetup"&gt;Cluster setup&lt;/h3&gt;&lt;p&gt;For Cluster setup we need to configure Sessions to use a backend that is shared between web servers, and supports locking. Only options out of the box supporting this is PHP memcached session save handler provided by php-memcache&lt;u&gt;d&lt;/u&gt; extension, and Symfony session handler for PDO (database).&lt;/p&gt;&lt;h4 id="Session-StoringsessionsinMemcachedusingphp-memcached"&gt;Storing sessions in Memcached using php-memcached&lt;/h4&gt;&lt;p&gt;For setting up eZ Publish using this memcached you'll need to configure the session save handler settings in php.ini as documented &lt;a href="http://php.net/manual/en/memcached.sessions.php" class="external-link" rel="nofollow"&gt;here&lt;/a&gt;, optionally tweak &lt;a href="http://fr2.php.net/manual/en/memcached.configuration.php" class="external-link" rel="nofollow"&gt;php-memcached session settings&lt;/a&gt;, and lastly disable Symfony session handler like:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: powershell; gutter: false" style="font-size:12px;"&gt;framework:
+    session:
+        # handler_id set to null like here will use default session handler from php.ini
+        handler_id: ~&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p&gt; &lt;/p&gt;&lt;h4 id="Session-AlternativestoringsessionsindatabaseusingPDO"&gt;Alternative storing sessions in database using PDO&lt;/h4&gt;&lt;p&gt;While not currently our recommendation from performance perspective, for setups where where Database is preferred for storing Sessions, you may use Symfony's PdoSessionHandler.&lt;br /&gt;Below is an configuration example for eZ Publish, but please refer to &lt;a href="http://symfony.com/doc/current/cookbook/configuration/pdo_session_storage.html" class="external-link" rel="nofollow"&gt;documented in Symfony Cookbook documentation&lt;/a&gt; for full documentation.&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: powershell; gutter: false" style="font-size:12px;"&gt;framework:
+    session:
+        # ...
+        handler_id: session.handler.pdo
+
+parameters:
+    pdo.db_options:
+        db_table:    session
+        db_id_col:   session_id
+        db_data_col: session_value
+        db_time_col: session_time
+
+services:
+    pdo:
+        class: PDO
+        arguments:
+            dsn:      &amp;quot;mysql:dbname=&amp;lt;mysql_database&amp;gt;&amp;quot;
+            user:     &amp;lt;mysql_user&amp;gt;
+            password: &amp;lt;mysql_password&amp;gt;
+
+    session.handler.pdo:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        arguments: [&amp;quot;@pdo&amp;quot;, &amp;quot;%pdo.db_options%&amp;quot;]&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h2 id="Session-References"&gt;References&lt;/h2&gt;&lt;ol&gt;&lt;li&gt;&lt;a href="http://symfony.com/doc/current/cookbook/session/index.html" class="external-link" rel="nofollow"&gt;Cookbook Session recipes (symfony.com)&lt;/a&gt;&lt;/li&gt;&lt;li&gt; &lt;a href="http://symfony.com/doc/current/components/http_foundation/index.html" class="external-link" rel="nofollow"&gt;HTTP Fundation Component documentation (symfony.com)&lt;/a&gt;&lt;/li&gt;&lt;li&gt;Source code of &lt;a href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Storage/Handler/NativeFileSessionHandler.php" class="external-link" rel="nofollow"&gt;NativeFileSessionHandler (github.com)&lt;/a&gt;, aka &lt;code&gt;session.handler.native_file&lt;/code&gt; service&lt;/li&gt;&lt;li&gt;&lt;a href="http://symfony.com/doc/current/cookbook/configuration/pdo_session_storage.html" class="external-link" rel="nofollow"&gt;Cookbook Configuration recipe for setting-up PdoSessionHandler (symfony.com)&lt;/a&gt;, aka &lt;code&gt;session.handler.pdo&lt;/code&gt; service&lt;/li&gt;&lt;/ol&gt;&lt;p&gt; &lt;/p&gt;&lt;p&gt; &lt;/p&gt;&lt;p&gt; &lt;/p&gt;&lt;p&gt; &lt;/p&gt;
+    &lt;/div&gt;
+        &lt;div style="padding: 10px 0;"&gt;
+       &lt;a href="https://doc.ez.no/display/EZP/Session"&gt;View Online&lt;/a&gt;
+              &amp;middot;
+       &lt;a href="https://doc.ez.no/pages/diffpagesbyversion.action?pageId=8323282&amp;revisedVersion=13&amp;originalVersion=12"&gt;View Changes Online&lt;/a&gt;       
+                  &lt;/div&gt;
+&lt;/div&gt;</summary>
+    <dc:creator>André Rømcke</dc:creator>
+    <dc:date>2014-10-20T21:24:32Z</dc:date>
+  </entry>
+  <entry>
+    <title>Upgrading from 5.1 to 5.3</title>
+    <link rel="alternate" href="https://doc.ez.no/display/EZP/Upgrading+from+5.1+to+5.3" />
+    <author>
+      <name>André Rømcke</name>
+    </author>
+    <id>tag:doc.ez.no,2009:page-21299688-10</id>
+    <updated>2014-10-20T19:38:18Z</updated>
+    <published>2014-10-20T19:38:18Z</published>
+    <summary type="html">&lt;div class="feed"&gt;    &lt;p&gt;
+        Page
+            &lt;b&gt;edited&lt;/b&gt; by
+                    &lt;a href="    https://doc.ez.no/display/~andre.romcke@ez.no
+"&gt;André Rømcke&lt;/a&gt;
+            &lt;/p&gt;
+        &lt;div style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 10px;"&gt;
+        &lt;div class="attribute-heading"&gt;&lt;p&gt;&lt;span style="color: rgb(51,51,51);font-size: 14.0px;line-height: 1.4285715;"&gt;&lt;style type='text/css'&gt;/*&lt;![CDATA[*/
+div.rbtoc1413882057035 {padding: 0px;}
+div.rbtoc1413882057035 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1413882057035 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]&gt;*/&lt;/style&gt;&lt;div class='toc-macro rbtoc1413882057035'&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-NoteonPaths'&gt;Note on Paths&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Checkforrequirements'&gt;Check for requirements&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Upgradesteps'&gt;Upgrade steps&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Step1:Upgradethedistributionfiles'&gt;Step 1: Upgrade the distribution files&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Step2:upgradecustomextensions'&gt;Step 2: upgrade custom extensions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Step3:upgradethedatabase'&gt;Step 3: upgrade the database&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-DefineaDoctrineconnection'&gt;Define a Doctrine connection&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Defineoneorseveralrepositories'&gt;Define one or several repositories&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-(Optional)MakeyourSiteAccessconfigpointtotherightrepository'&gt;(Optional) Make your SiteAccess config point to the right repository&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Step4:Apply5.2&amp;amp;5.3configurationchanges'&gt;Step 4: Apply 5.2 &amp;amp; 5.3 configuration changes&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-YAMLfiles'&gt;YAML files&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Sessionname'&gt;Session name&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Routing'&gt;Routing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-SecurityInezpublish/config/security.yml,addthefollowing:'&gt; Security In ezpublish/config/security.yml, add the following:&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Templates'&gt;Templates&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-ezpublish/EzPublishKernel.php'&gt;ezpublish/EzPublishKernel.php&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-composer.json'&gt;composer.json&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Varnish(ifapplicable)'&gt;Varnish (if applicable)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Step5:Updateclusterdata(ifapplicable)'&gt;Step 5: Update cluster data (if applicable)&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Option1:unclusterize,cleardata,andreclusterize'&gt;Option 1: unclusterize, clear data, and reclusterize&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Option2:performabackgroundcleanupofthestoragetable'&gt;Option 2: perform a background cleanup of the storage table&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Step6:Regeneratetheautoloadarrayforextensions'&gt;Step 6: Regenerate the autoload array for extensions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Step7:Linkassets'&gt;Step 7: Link assets&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Step8:Updaterewriterules'&gt;Step 8: Update rewrite rules&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Step9:Clearthecaches'&gt;Step 9: Clear the caches&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Upgradingfrom5.1to5.3-Step10:UpgradeExtensions(sitepackage)'&gt;Step 10: Upgrade Extensions (site package)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(51,51,51);font-size: 14.0px;line-height: 1.4285715;"&gt;This section describes how to upgrade your existing eZ Publish 5.1 installation to version 5.3. Make sure that you have a working backup of the site before you do the actual upgrade, and make sure that the installation you are performing the upgrade on is offline.&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;&lt;h2 id="Upgradingfrom5.1to5.3-NoteonPaths"&gt;Note on Paths&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;em&gt;/&amp;lt;ezp5-root&amp;gt;/&lt;/em&gt;: The root directory where eZ Publish 5 is installed in, examples: &amp;quot;&lt;em&gt;/home/myuser/www&lt;/em&gt;/&amp;quot; or &amp;quot;&lt;em&gt;/var/sites/ezpublish/&lt;/em&gt;&amp;quot;&lt;/li&gt;&lt;li&gt;&lt;em&gt;/&amp;lt;ezp5-root&amp;gt;/ezpublish_legacy&lt;/em&gt;:  Root directory of &amp;quot;Legacy&amp;quot; (aka &amp;quot;Legacy Stack&amp;quot;, refers to the eZ Publish 4.x installation which is bundled with eZ Publish 5) normally inside &amp;quot;&lt;em&gt;ezpublish_legacy&lt;/em&gt;/&amp;quot;, example: &amp;quot;&lt;em&gt;/home/myuser/www/ezpublish_legacy/&lt;/em&gt;&amp;quot;&lt;/li&gt;&lt;/ul&gt;&lt;h2 id="Upgradingfrom5.1to5.3-Checkforrequirements"&gt;Check for requirements&lt;/h2&gt;&lt;p&gt;PHP 5.3.3 and higher is needed. Further information regarding System Requirements can be found on &lt;a href="https://confluence.ez.no/display/EZP/Requirements" class="external-link" rel="nofollow"&gt;Requirements Documentation Page&lt;/a&gt;.&lt;a name="eztoc126882_2" rel="nofollow"&gt;&lt;/a&gt;&lt;/p&gt;&lt;h2 id="Upgradingfrom5.1to5.3-Upgradesteps"&gt;Upgrade steps&lt;a name="eztoc126882_1" rel="nofollow"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3 id="Upgradingfrom5.1to5.3-Step1:Upgradethedistributionfiles"&gt;Step 1: Upgrade the distribution files&lt;/h3&gt;&lt;p&gt;The easiest way to upgrade the distribution files is to unpack eZ Publish 5.3 to a separate directory and then copy the directories that contain site-specific files from the existing 5.1 installation into &amp;quot;&lt;em&gt;/&amp;lt;ezp5-root&amp;gt;/&lt;/em&gt;&amp;quot;. Make sure you copy the following directories:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;code&gt;ezpublish_legacy/design/&amp;lt;your designs&amp;gt;&lt;/code&gt; (do NOT include built-in designs: admin, base, standard or admin2)&lt;/li&gt;&lt;li&gt;&lt;code&gt;ezpublish_legacy/var/&amp;lt;your_var_dir&amp;gt;/storage&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;code&gt;ezpublish_legacy/var/storage/packages&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;code&gt;ezpublish_legacy/settings/siteaccess/&amp;lt;your_siteaccesses&amp;gt;&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;code&gt;ezpublish_legacy/settings/override/*&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;code&gt;ezpublish_legacy/extension/*&lt;/code&gt; (not including the built-in / standalone ones: ezflow, ezjscore, ezoe, ezodf, ezie, ezmultiupload, ezmbpaex, ez_network, ezprestapiprovider, ezscriptmonitor, ezsi, ezfind)&lt;/li&gt;&lt;li&gt;src/&lt;/li&gt;&lt;li&gt;&lt;code&gt;config.php&lt;/code&gt; &amp;amp; &lt;code&gt;config.cluster.php&lt;/code&gt;, if applicable&lt;/li&gt;&lt;li&gt;&lt;code&gt;ezpublish/config/*&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;NB:&lt;/strong&gt; Since writable directories and files have been replaced / copied, their permissions might have changed. You may have to reconfigure webserver user permissions on specific folders as explained in the file &lt;a href="https://confluence.ez.no/pages/viewpage.action?pageId=7438581#InstallingeZPublishonaLinux%2FUNIXbasedsystem-Settingupfolderpermission" class="external-link" rel="nofollow"&gt;permissions chapter of the installation process&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                    &lt;p class="title"&gt;opcode cache&lt;/p&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;If you use APC, or an op-code cache solution, make sure to clear the cache. The easiest way is to restart your web server.&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;h3 id="Upgradingfrom5.1to5.3-Step2:upgradecustomextensions"&gt;Step 2: upgrade custom extensions&lt;/h3&gt;&lt;p&gt;If you are using custom extensions, the sub-directories inside the &amp;quot;extension&amp;quot; directory will also have to be copied from the existing 5.1 installation into &amp;quot;&lt;em&gt;/&amp;lt;ezp5-root&amp;gt;/ezpublish_legacy/extension/&lt;/em&gt;&amp;quot;. However, make sure that you do not overwrite any extensions that are included in eZ Publish distribution, which currently are (&lt;em&gt;&lt;strong&gt;Note:&lt;/strong&gt; As of eZ Publish 5.2, these extensions have the same version number as eZ Publish&lt;/em&gt;):&lt;/p&gt;&lt;p&gt;Note that upgrading the distribution files will overwrite the autoload arrays for extensions. You will need to re-generate the autoload arrays for active extensions later.&lt;/p&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Important: &lt;/strong&gt;If you plan to upgrade your eZ Website Interface, eZ Flow or eZ Demo site package as well, then additional extensions will be updated and the step for re-generate the autoload arrays can be skipped until that is done (links to documentation for upgrading these site packages can be found in the last step of this page).&lt;/em&gt;&lt;a name="eztoc126882_4" rel="nofollow"&gt;&lt;/a&gt;&lt;/p&gt;&lt;h3 id="Upgradingfrom5.1to5.3-Step3:upgradethedatabase"&gt;Step 3: upgrade the database&lt;/h3&gt;&lt;p&gt;For upgrading the database, you have to jump from 5.1 to 5.2 and then from 5.2 to 5.3.&lt;/p&gt;&lt;p&gt;Import to your database the changes provided in :&lt;/p&gt;&lt;pre class="wordwrap"&gt;&lt;span class="line"&gt;/&amp;lt;ezp5-root&amp;gt;/ezpublish_legacy/update/database/&amp;lt;mysql|postgresql&amp;gt;/5.2/dbupdate-5.1.0-to-5.2.0.sql&lt;/span&gt;&lt;/pre&gt;&lt;pre class="wordwrap"&gt;&lt;span class="line"&gt;/&amp;lt;ezp5-root&amp;gt;/ezpublish_legacy/update/database/&amp;lt;mysql|postgresql&amp;gt;/5.3/dbupdate-5.2.0-to-5.3.0.sql&lt;/span&gt;&lt;/pre&gt;&lt;ul&gt;&lt;li&gt;&lt;h4 id="Upgradingfrom5.1to5.3-DefineaDoctrineconnection"&gt;Define a Doctrine connection&lt;/h4&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;MySQL settings : ezpublish.yml or config.yml&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: bash; gutter: false" style="font-size:12px;"&gt;doctrine:
+    dbal:
+        connections:
+            my_connection:
+                driver:   pdo_mysql
+                host:     localhost
+                port:     3306
+                dbname:   my_database
+                user:     my_user
+                password: my_password
+                charset:  UTF8&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;
+ &lt;div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;"&gt;
+  &lt;b class=" code-title"&gt;PostGreSQL : ezpublish.yml or config.yml &lt;/b&gt;
+  &lt;span class="collapse-source expand-control"&gt;&lt;span class="expand-control-icon icon"&gt;&amp;nbsp;&lt;/span&gt;&lt;span class="expand-control-text"&gt;Expand source&lt;/span&gt;&lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div class="codeContent panelContent pdl hide-toolbar"&gt; 
+  &lt;pre class="theme: Eclipse; brush: bash; collapse: true; gutter: false" style="font-size:12px;"&gt;doctrine:
+    dbal:
+        connections:
+            my_connection:
+                driver:   pdo_pgsql
+                host:     localhost
+                port:     5432
+                dbname:   my_database
+                user:     my_user
+                password: my_password
+                charset:  UTF8&lt;/pre&gt; 
+ &lt;/div&gt;
+&lt;/div&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                    &lt;p class="title"&gt;Pro Tip&lt;/p&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            Set your base DB params in your &lt;code&gt;parameters.yml&lt;/code&gt;/&lt;code&gt;parameters.yml.dist&lt;/code&gt; and refer them here.
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;parameters.yml&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;parameters:
+   database_driver: pdo_mysql
+   database_host: localhost
+   database_port: 3306
+   database_name: ezdemo
+   database_user: my_user
+   database_password: my_password
+   database_charset: UTF8&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;ezpublish.yml / config.yml&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;doctrine:
+   dbal:
+       connections:
+           my_connection:
+               driver:   %database_driver%
+               host:     %database_host%
+               port:     %database_port%
+               dbname:   %database_name%
+               user:     %database_user%
+               password: %database_password%
+               charset:  %database_charset%&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;&lt;li&gt;&lt;h4 id="Upgradingfrom5.1to5.3-Defineoneorseveralrepositories"&gt;Define one or several repositories&lt;/h4&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;ezpublish.yml&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;ezpublish:
+  repositories:
+      main: { engine: legacy, connection: my_connection }&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;&lt;li&gt;&lt;h4 id="Upgradingfrom5.1to5.3-(Optional)MakeyourSiteAccessconfigpointtotherightrepository"&gt;(Optional) Make your SiteAccess config point to the right repository&lt;/h4&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;
+ &lt;div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;"&gt;
+  &lt;b class=" code-title"&gt;ezpublish.yml&lt;/b&gt;
+  &lt;span class="collapse-source expand-control"&gt;&lt;span class="expand-control-icon icon"&gt;&amp;nbsp;&lt;/span&gt;&lt;span class="expand-control-text"&gt;Expand source&lt;/span&gt;&lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div class="codeContent panelContent pdl hide-toolbar"&gt; 
+  &lt;pre class="theme: Eclipse; brush: php; collapse: true; gutter: false" style="font-size:12px;"&gt;ezpublish:
+  system:
+      my_siteaccess_group:
+          repository: main&lt;/pre&gt; 
+ &lt;/div&gt;
+&lt;/div&gt;&lt;p&gt; &lt;/p&gt;&lt;div class="highlight highlight-yaml"&gt;&lt;p&gt; &lt;/p&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                    &lt;p class="title"&gt;Remove the old connection information&lt;/p&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;Note : to benefit from the new configuration, don't forget to remove the old configuration&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;Old database access to remove&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;ezpublish:
+    system:
+        my_siteaccess_group:
+            database:
+                type: mysql
+                user: my_user
+                password: my_password
+                server: localhost
+                database_name: ezdemo
+&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3 id="Upgradingfrom5.1to5.3-Step4:Apply5.2&amp;amp;5.3configurationchanges"&gt;Step 4: Apply 5.2 &amp;amp; 5.3 configuration changes&lt;/h3&gt;&lt;h4 id="Upgradingfrom5.1to5.3-YAMLfiles"&gt;YAML files&lt;/h4&gt;&lt;p&gt;Since default configuration files have been overwritten during step one, the few additions to those files that were made in 5.3 need to be applied manually to the configuration files. All of those changes are &lt;strong&gt;additions&lt;/strong&gt;, none of them replaces what you already have. For most of them, at least one, if not all hierarchy elements (monolog, handler, framework, router...) will already be there. All you have to do is add the missing bits in the existing configuration blocks.&lt;/p&gt;&lt;p&gt;In &lt;strong&gt;ezpublish/config/config_dev.yml&lt;/strong&gt;, add the configuration for the chromephp log handler:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;monolog:
+    handlers:
+        chromephp:
+            type: chromephp
+            level: info&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;pre class="wordwrap copytoclipboard"&gt;&lt;span style="font-family: Arial , sans-serif;font-size: 14.0px;line-height: 1.4285715;"&gt;In &lt;/span&gt;&lt;strong style="font-family: Arial , sans-serif;font-size: 14.0px;line-height: 1.4285715;"&gt;ezpublish/config/config.yml&lt;/strong&gt;&lt;span style="font-family: Arial , sans-serif;font-size: 14.0px;line-height: 1.4285715;"&gt;, you need to add a few default values for the framework&lt;/span&gt;&lt;/pre&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;framework:
+    router:
+        resource: &amp;quot;%kernel.root_dir%/config/routing.yml&amp;quot;
+        strict_requirements: %kernel.debug%
+    trusted_proxies: ~    
+    http_method_override: true
+ 
+twig:    
+    debug: %kernel.debug%
+    strict_variables: %kernel.debug%&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h5 id="Upgradingfrom5.1to5.3-Sessionname"&gt;Session name&lt;/h5&gt;&lt;p&gt;&lt;code&gt;ezpublish.system.&amp;lt;siteAccessName&amp;gt;.session_name&lt;/code&gt; has been deprecated for defining session name. You now need to use &lt;code&gt;ezpublish.system.&amp;lt;siteAccessName&amp;gt;.session.name&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;&lt;em&gt;Before&lt;/em&gt;:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;ezpublish:
+    system:
+        my_siteaccess:
+            session_name: SomeSessionName&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;After&lt;/em&gt;:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;ezpublish:
+    system:
+        my_siteaccess:
+            session:
+                name: SomeSessionName&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h5 id="Upgradingfrom5.1to5.3-Routing"&gt;Routing&lt;/h5&gt;&lt;p&gt;In &lt;strong style="font-size: 14.0px;line-height: 1.4285715;"&gt;routing_dev.yml&lt;/strong&gt;, add the resource import for the SensioDistributionBundle webconfigurator routes:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;_configurator:
+    resource: &amp;quot;@SensioDistributionBundle/Resources/config/routing/webconfigurator.xml&amp;quot;
+    prefix: /_configurator&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;pre class="wordwrap"&gt;&lt;span style="font-family: Arial , sans-serif;font-size: 14.0px;line-height: 1.4285715;"&gt; &lt;/span&gt;&lt;/pre&gt;&lt;p&gt;In &lt;strong&gt;routing.yml&lt;/strong&gt;, add &lt;strong&gt;new login routes&lt;/strong&gt; and the &lt;code&gt;_ezpublishRestOptionsRoutes&lt;/code&gt; route loader:&lt;/p&gt;&lt;pre class="wordwrap"&gt;&lt;span style="font-family: Arial , sans-serif;font-size: 14.0px;line-height: 1.4285715;"&gt; &lt;/span&gt;&lt;/pre&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;_ezpublishRestOptionsRoutes:
+    resource: &amp;quot;@EzPublishRestBundle/Resources/config/routing.yml&amp;quot;
+    prefix: %ezpublish_rest.path_prefix%
+    type: rest_options
+ 
+login:
+    path:   /login
+    defaults:  { _controller: ezpublish.security.controller:loginAction }
+login_check:
+    path:   /login_check
+logout:
+    path:   /logout&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h5 class="wordwrap" id="Upgradingfrom5.1to5.3-SecurityInezpublish/config/security.yml,addthefollowing:"&gt;&lt;span style="font-family: Arial , sans-serif;font-size: 14.0px;line-height: 1.4285715;"&gt;&lt;span&gt; &lt;/span&gt;Security&lt;br /&gt;In &lt;/span&gt;&lt;strong style="font-family: Arial , sans-serif;font-size: 14.0px;line-height: 1.4285715;"&gt;ezpublish/config/security.yml&lt;/strong&gt;&lt;span style="font-family: Arial , sans-serif;font-size: 14.0px;line-height: 1.4285715;"&gt;, add the following:&lt;/span&gt;&lt;/h5&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;access_control:    
+    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p class="wordwrap"&gt;&lt;span style="font-family: Arial , sans-serif;font-size: 14.0px;line-height: 1.4285715;"&gt;&lt;span&gt;And again in&lt;/span&gt;&lt;strong&gt; ezpublish/config/security.yml&lt;/strong&gt;&lt;span&gt;, under &lt;code&gt;ezpublish_front&lt;/code&gt; firewall, update to fit the following (&lt;strong&gt;be sure to remove &lt;code&gt;ezpublish: true&lt;/code&gt;&lt;/strong&gt;):&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;security:
+    firewalls:
+        ezpublish_front:
+            pattern: ^/
+            anonymous: ~
+            form_login:
+                require_previous_session: false
+            logout: ~&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p class="wordwrap"&gt;&lt;span style="font-family: Arial , sans-serif;font-size: 14.0px;line-height: 1.4285715;"&gt; &lt;/span&gt;&lt;/p&gt;&lt;p class="wordwrap"&gt;&lt;span&gt;If you have added anything to &lt;code&gt;parameters.yml&lt;/code&gt;, we suggest that you add your custom settings to &lt;code&gt;parameters.yml.dist&lt;/code&gt;, so that the composer post-update script handles those, and generates their values correctly.&lt;/span&gt;&lt;/p&gt;&lt;h4 class="wordwrap" id="Upgradingfrom5.1to5.3-Templates"&gt;&lt;span&gt;Templates&lt;/span&gt;&lt;/h4&gt;&lt;p class="wordwrap"&gt;&lt;span&gt;In your templates, change your links pointing to &lt;code&gt;/user/login&lt;/code&gt; and &lt;code&gt;/user/logout&lt;/code&gt; to appropriate &lt;code&gt;login &lt;/code&gt;/ &lt;code&gt;login_check &lt;/code&gt;/ &lt;code&gt;logout&lt;/code&gt; routes:&lt;/span&gt;&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;Before&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: xml; gutter: false" style="font-size:12px;"&gt;&amp;lt;a href=&amp;quot;{{ path( &amp;#39;ez_legacy&amp;#39;, {&amp;#39;module_uri&amp;#39;: &amp;#39;/user/login&amp;#39;} ) }}&amp;quot;&amp;gt;Login&amp;lt;/a&amp;gt;
+&amp;lt;form action=&amp;quot;{{ path( &amp;#39;ez_legacy&amp;#39;, {&amp;#39;module_uri&amp;#39;: &amp;#39;/user/login&amp;#39;} ) }}&amp;quot; method=&amp;quot;post&amp;quot;&amp;gt;
+&amp;lt;a href=&amp;quot;{{ path( &amp;#39;ez_legacy&amp;#39;, {&amp;#39;module_uri&amp;#39;: &amp;#39;/user/logout&amp;#39;} ) }}&amp;quot;&amp;gt;Logout&amp;lt;/a&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;After&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: xml; gutter: false" style="font-size:12px;"&gt;&amp;lt;a href=&amp;quot;{{ path( &amp;#39;login&amp;#39; ) }}&amp;quot;&amp;gt;Login&amp;lt;/a&amp;gt;
+&amp;lt;form action=&amp;quot;{{ path( &amp;#39;login_check&amp;#39; ) }}&amp;quot; method=&amp;quot;post&amp;quot;&amp;gt;
+&amp;lt;a href=&amp;quot;{{ path( &amp;#39;logout&amp;#39; ) }}&amp;quot;&amp;gt;Logout&amp;lt;/a&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h5 id="Upgradingfrom5.1to5.3-ezpublish/EzPublishKernel.php"&gt;ezpublish/EzPublishKernel.php&lt;/h5&gt;&lt;p&gt;It is not possible to just copy your old &lt;code&gt;EzPublishKernel.php&lt;/code&gt; file over from the previous installation, since quite a few changes were made to this file in this release. We suggest that you simply reflect in the new kernel file any changes you made in the previous version.&lt;/p&gt;&lt;h5 id="Upgradingfrom5.1to5.3-composer.json"&gt;composer.json&lt;/h5&gt;&lt;p&gt;If you had modified &lt;code&gt;composer.json&lt;/code&gt; to add your own requirements, you must re-apply those changes to the new version, and run &lt;code&gt;&lt;strong&gt;composer update&lt;/strong&gt;&lt;/code&gt;.&lt;/p&gt;&lt;h4 id="Upgradingfrom5.1to5.3-Varnish(ifapplicable)"&gt;Varnish (if applicable)&lt;/h4&gt;&lt;p&gt;Anonymous state of a user is not checked through presence of &lt;code&gt;is_logged_in&lt;/code&gt; cookie any more. Therefore, when using Varnish, you must change the following in your VCL file:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;Before&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;# ez_user_hash sub-routine
+if (req.http.Cookie !~ &amp;quot;is_logged_in=&amp;quot; ) {
+    # User don&amp;#39;t have &amp;quot;is_logged_in&amp;quot; cookie =&amp;gt; Set a hardcoded anonymous hash
+    set req.http.X-User-Hash = &amp;quot;38015b703d82206ebc01d17a39c727e5&amp;quot;;
+}&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;After&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;# ez_user_hash sub-routine
+if (req.http.Cookie !~ &amp;quot;eZSESSID&amp;quot; ) {
+    # User don&amp;#39;t have session cookie =&amp;gt; Set a hardcoded anonymous hash
+    set req.http.X-User-Hash = &amp;quot;38015b703d82206ebc01d17a39c727e5&amp;quot;;
+}&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h3 id="Upgradingfrom5.1to5.3-Step5:Updateclusterdata(ifapplicable)"&gt;Step 5: Update cluster data (if applicable)&lt;/h3&gt;&lt;p&gt;If your installation uses the DFS cluster, you are affected by the &lt;a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/features/5.2/dfs_split_tables.md" class="external-link" rel="nofollow"&gt;split DFS tables feature&lt;/a&gt; that was added in 5.2. You can also check the &lt;a href="https://doc.ez.no/doc_hidden/eZ-Publish/Technical-manual/5.x/Features/Clustering/Setting-it-up-for-an-eZDFSFileHandler" rel="nofollow"&gt;DFS setup documentation&lt;/a&gt; document on steps 3 and 4 for additional details and usage examples about the newly introduced configurations.&lt;/p&gt;&lt;p&gt;To use the feature, you need to update your DFS database structure. It won't affect existing data, and doesn't require particular measures. Import the following file into your&lt;em&gt;cluster&lt;/em&gt; database (it should be different from your eZ Publish database):&lt;/p&gt;&lt;pre class="wordwrap"&gt;&lt;span class="line"&gt;/&amp;lt;ezp5-root&amp;gt;/ezpublish_legacy/update/database/mysql/5.2/dbupdate-cluster-5.1.0-to-5.2.0.sql&lt;/span&gt;&lt;/pre&gt;&lt;p&gt;The split table feature stores cache and storage into two different tables. For now, your ezdfsfile table contains both cache and storage. Starting from now, eZ Publish will use the newly created table, ezdfsfile_cache, to store cache. Since the table  is empty, it will react as if there was no cache, and work without any changes.&lt;/p&gt;&lt;p&gt;However, we recommend that you remove entries related to cache from your ezdfsfile table. There are several options.&lt;/p&gt;&lt;h6 id="Upgradingfrom5.1to5.3-Option1:unclusterize,cleardata,andreclusterize"&gt;Option 1: unclusterize, clear data, and reclusterize&lt;/h6&gt;&lt;p&gt;&lt;em&gt;This method requires that you shutdown the website completely&lt;/em&gt; for a little while. It mainly applies to small/medium websites (up to a couple thousand content objects).&lt;/p&gt;    &lt;div class="aui-message problem shadowed information-macro"&gt;
+                    &lt;p class="title"&gt;May require a lot of disk space&lt;/p&gt;
+                            &lt;span class="aui-icon icon-problem"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;Since this method will create a local copy of every storage file (not including cache) from your NFS to the local server, this method may require a large amount of disk space. You can get an estimate of the required space by running the following query on your cluster database:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: sql; gutter: false" style="font-size:12px;"&gt;SELECT SUM(size) from ezdfsfile WHERE name LIKE &amp;#39;var/ezdemo\_site/storage/%&amp;#39;;&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p&gt;It will give you the total size of storage items, in bytes. Remember to escape _ in your vardir.&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;p&gt;Use the following commands from your &lt;em&gt;/&amp;lt;ezp5-root&amp;gt;/ezpublish_legacy/&lt;/em&gt; folder:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;cd ezpublish_legacy
+bin/php/clusterize.php -u&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p class="wordwrap"&gt;&lt;span style="font-family: Arial , sans-serif;font-size: 14.0px;line-height: 1.4285715;"&gt;Next, truncate the ezdfsfile table from your database:&lt;/span&gt;&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;TRUNCATE TABLE ezdfsfile&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p&gt;And finally, re-create cluster data based on local data:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;cd ezpublish_legacy
+bin/php/clusterize.php&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h6 id="Upgradingfrom5.1to5.3-Option2:performabackgroundcleanupofthestoragetable"&gt;Option 2: perform a background cleanup of the storage table&lt;/h6&gt;&lt;p&gt;An upgrade script is provided that will let you cleanup  the ezdfsfile table on a live website, even with a large cluster. It will delete a configurable (by default 1000) batch of cache rows from ezdfsfile, and sleep (by default for 100 ms) between batches. Run the following from the legacy root:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;cd ezpublish_legacy
+php update/common/scripts/5.2/cleanupdfscache.php -h&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p class="wordwrap"&gt;&lt;span style="font-family: Arial , sans-serif;font-size: 14.0px;line-height: 1.4285715;"&gt;The script can be interrupted and restarted anytime without risks for the system. We strongly suggest, if you execute it on a live website, that you monitor your database server's performances, and increase the sleep delay and/or decrease the limit if the SQL server's load is too high.&lt;/span&gt;&lt;/p&gt;&lt;h3 id="Upgradingfrom5.1to5.3-Step6:Regeneratetheautoloadarrayforextensions"&gt;Step 6: Regenerate the autoload array for extensions&lt;/h3&gt;&lt;p&gt;To regenerate the autoload array, execute the following script from the root of your eZ Publish Legacy directory:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;cd ezpublish_legacy
+php bin/php/ezpgenerateautoloads.php --extension&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h3 id="Upgradingfrom5.1to5.3-Step7:Linkassets"&gt;Step 7: Link assets&lt;/h3&gt;&lt;p&gt;Assets from the various bundles need to be made available for the webserver through the web/ document root.&lt;/p&gt;&lt;p&gt;The following commands will first symlink eZ Publish 5 assets in &amp;quot;Bundles&amp;quot; and the second will symlink assets (design files like images, scripts and css, and files in var folder)  from eZ Publish Legacy:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;php ezpublish/console assets:install --symlink
+php ezpublish/console ezpublish:legacy:assets_install --symlink
+php ezpublish/console assetic:dump --env=prod&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h3 id="Upgradingfrom5.1to5.3-Step8:Updaterewriterules"&gt;Step 8: Update rewrite rules&lt;/h3&gt;&lt;p&gt;There are two ways eZ Publish 5 can be installed, either the full install with both the new Symfony stack and the legacy stack, or legacy only. In latter case you only need to point your '4.7 like' rewrite rules to &lt;em&gt;/&amp;lt;ezp5-root&amp;gt;/ezpublish_legacy/&lt;/em&gt; and that's it. Otherwise, update your virtual host according to &lt;a href="https://confluence.ez.no/display/EZP/Virtual+host+setup" class="external-link" rel="nofollow"&gt;the eZ Publish 5.2 rewrite rules on confluence&lt;/a&gt; and point your host configuration to &lt;em&gt;/&amp;lt;ezp5-root&amp;gt;/web/&lt;/em&gt;.&lt;/p&gt;&lt;h3 id="Upgradingfrom5.1to5.3-Step9:Clearthecaches"&gt;Step 9: Clear the caches&lt;/h3&gt;&lt;p&gt;Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:&lt;br /&gt;Navigate into the new eZ Publish directory.Run the script using the following shell command:cd /&amp;lt;ezp5-root&amp;gt;/ezpublish_legacy/php bin/php/ezcache.php --clear-all --purgePurging ensures that the caches are physically removed. When the &amp;quot;--purge&amp;quot; parameter is not specified, the caches will be expired but not removed.&lt;br /&gt;Note: Sometimes the script is unable to clear all cache files because of restrictive file/directory permission settings. Make sure that all cache files have been cleared by inspecting the contents of the various cache sub-directories within the &amp;quot;var&amp;quot; directory (typically the &amp;quot;var/cache/&amp;quot; and &amp;quot;var/&amp;lt;name_of_siteaccess&amp;gt;/cache/&amp;quot; directories). If there are any cache files left, you need to remove them manually.&lt;/p&gt;&lt;h3 id="Upgradingfrom5.1to5.3-Step10:UpgradeExtensions(sitepackage)"&gt;Step 10: Upgrade Extensions (site package)&lt;/h3&gt;&lt;p&gt;Next, depending on if you originally installed eZ Flow, eZ Webin or eZ Demo site, follow the steps mentioned in the &lt;a href="https://doc.ez.no/doc_hidden/Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-5.3-upgrade" rel="nofollow"&gt;eZ Webin&lt;/a&gt;, &lt;a href="https://doc.ez.no/doc_hidden/Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-5.3-upgrade" rel="nofollow"&gt;eZ Flow&lt;/a&gt; or &lt;a href="https://doc.ez.no/doc_hidden/Extensions/eZ-Publish-extensions/eZ-Demo/eZ-Demo-5.3-upgrade" rel="nofollow"&gt;eZ Demo&lt;/a&gt; upgrade documentation.&lt;/p&gt;
+    &lt;/div&gt;
+        &lt;div style="padding: 10px 0;"&gt;
+       &lt;a href="https://doc.ez.no/display/EZP/Upgrading+from+5.1+to+5.3"&gt;View Online&lt;/a&gt;
+              &amp;middot;
+       &lt;a href="https://doc.ez.no/pages/diffpagesbyversion.action?pageId=21299688&amp;revisedVersion=10&amp;originalVersion=9"&gt;View Changes Online&lt;/a&gt;       
+                  &lt;/div&gt;
+&lt;/div&gt;</summary>
+    <dc:creator>André Rømcke</dc:creator>
+    <dc:date>2014-10-20T19:38:18Z</dc:date>
+  </entry>
+  <entry>
+    <title>Content view</title>
+    <link rel="alternate" href="https://doc.ez.no/display/EZP/Content+view" />
+    <category term="view" />
+    <category term="viewcontroller" />
+    <category term="template" />
+    <author>
+      <name>André Rømcke</name>
+    </author>
+    <id>tag:doc.ez.no,2009:page-8323263-46</id>
+    <updated>2014-10-19T23:06:30Z</updated>
+    <published>2014-10-19T23:06:30Z</published>
+    <summary type="html">&lt;div class="feed"&gt;    &lt;p&gt;
+        Page
+            &lt;b&gt;edited&lt;/b&gt; by
+                    &lt;a href="    https://doc.ez.no/display/~andre.romcke@ez.no
+"&gt;André Rømcke&lt;/a&gt;
+            &lt;/p&gt;
+        &lt;div style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 10px;"&gt;
+        &lt;p&gt;&lt;style type='text/css'&gt;/*&lt;![CDATA[*/
+div.rbtoc1413882057214 {padding: 0px;}
+div.rbtoc1413882057214 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1413882057214 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]&gt;*/&lt;/style&gt;&lt;div class='toc-macro rbtoc1413882057214'&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Contentview-TheViewController'&gt;The ViewController&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Contentview-Viewselection'&gt;View selection&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Contentview-Locationviewtemplate'&gt;Location view template&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Contentview-Availablevariables'&gt;Available variables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Contentview-Templateinheritance'&gt;Template inheritance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Contentview-Renderingcontent&amp;#39;sfields'&gt;Rendering content&amp;#39;s fields&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Contentview-GettingrawFieldvalue'&gt;Getting raw Field value&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Contentview-UsingtheFieldType&amp;#39;stemplateblock'&gt;Using the FieldType&amp;#39;s template block&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Contentview-RenderingContentname'&gt;Rendering Content name&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Contentview-NamepropertyinContentInfo'&gt;Name property in ContentInfo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Contentview-Translatedname'&gt;Translated name&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Contentview-Exposingadditionalvariables'&gt;Exposing additional variables&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Contentview-Makinglinkstootherlocations'&gt;Making links to other locations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Contentview-Renderembeddedcontentobjects'&gt;Render embedded content objects&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Contentview-Usingez_contentcontroller'&gt;Using ez_content controller&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Contentview-Availablearguments'&gt;Available arguments&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Contentview-ESI'&gt;ESI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#Contentview-Asynchronousrendering'&gt; Asynchronous rendering&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#Contentview-Displayadefaulttext'&gt;Display a default text&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/p&gt;&lt;h2 id="Contentview-TheViewController"&gt;The ViewController&lt;/h2&gt;&lt;p&gt;eZ Publish comes with a native controller to display your content, known as the &lt;strong&gt;&lt;code&gt;ViewController&lt;/code&gt;&lt;/strong&gt;. It is called each time you try to reach a content from its &lt;strong&gt;Url Alias&lt;/strong&gt; (&lt;em&gt;human readable, &lt;/em&gt;&lt;em&gt;translatable&lt;/em&gt; URI generated for any content based on URL patterns defined per Content Type) and is able to render any content previously edited in the admin interface or via the &lt;a href="https://doc.ez.no/display/EZP/eZ+Publish+Public+API"&gt;eZ Publish Public API&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;It can also be called directly by its direct URI : &lt;code&gt;/content/location/&amp;lt;locationId&amp;gt;&lt;/code&gt;&lt;/p&gt;&lt;p&gt;A content can also have different &lt;strong&gt;view types&lt;/strong&gt; (full page, abstract in a list, block in a landing page...). By default the view type is &lt;strong&gt;full&lt;/strong&gt; (for full page), but it can be anything (&lt;em&gt;line&lt;/em&gt;, &lt;em&gt;block&lt;/em&gt;...).&lt;/p&gt;    &lt;div class="aui-message problem shadowed information-macro"&gt;
+                    &lt;p class="title"&gt;Important note regarding visibility&lt;/p&gt;
+                            &lt;span class="aui-icon icon-problem"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;Location visibility flag, which you can change with hide/unhide in admin, is not permission based and thus acts as a simple potential filter. &lt;strong&gt;It is not meant to restrict access to content&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;If you need to restrict access to a given content, use &lt;strong&gt;Sections or Object states&lt;/strong&gt;, which are permission based.&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;p&gt; &lt;/p&gt;&lt;h2 id="Contentview-Viewselection"&gt;View selection&lt;/h2&gt;&lt;p&gt;To display a content, the ViewController uses a view manager which selects the appropriate template depending on matching rules.&lt;/p&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            For more information about the &lt;strong&gt;view provider configuration&lt;/strong&gt;, please &lt;a href="https://doc.ez.no/display/EZP/View+provider+configuration"&gt;refer to the dedicated page&lt;/a&gt;.
+                    &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="aui-message success shadowed information-macro"&gt;
+                            &lt;span class="aui-icon icon-success"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;You can also &lt;a href="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location"&gt;use your own custom controller to render a content/location&lt;/a&gt;.&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;h2 id="Contentview-Locationviewtemplate"&gt;Location view template&lt;/h2&gt;&lt;p&gt;A content view template is like any other template, with several specific aspects.&lt;/p&gt;&lt;h3 id="Contentview-Availablevariables"&gt;Available variables&lt;/h3&gt;&lt;div class="table-wrap"&gt;&lt;table class="confluenceTable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;th class="confluenceTh"&gt;Variable name&lt;/th&gt;&lt;th class="confluenceTh"&gt;Type&lt;/th&gt;&lt;th class="confluenceTh"&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="confluenceTd"&gt;&lt;strong&gt;&lt;code&gt;location&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;&lt;td class="confluenceTd"&gt;&lt;a href="https://github.com/ezsystems/ezp-next/blob/master/eZ/Publish/Core/Repository/Values/Content/Location.php" class="external-link" rel="nofollow"&gt;eZ\Publish\Core\Repository\Values\Content\Location&lt;/a&gt;&lt;a href="https://github.com/ezsystems/ezp-next/blob/master/eZ/Publish/Core/Repository/Values/Content/Content.php" class="external-link" rel="nofollow"&gt;&lt;/a&gt;&lt;/td&gt;&lt;td class="confluenceTd"&gt;The location object. Contains meta information on the content (&lt;a href="https://github.com/ezsystems/ezp-next/blob/master/eZ/Publish/Core/Repository/Values/Content/ContentInfo.php" class="external-link" rel="nofollow"&gt;ContentInfo&lt;/a&gt;)&lt;br /&gt;(only when accessing a location) &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;code&gt;&lt;strong&gt;content&lt;/strong&gt;&lt;/code&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;a href="https://github.com/ezsystems/ezp-next/blob/master/eZ/Publish/Core/Repository/Values/Content/Content.php" class="external-link" rel="nofollow"&gt;eZ\Publish\Core\Repository\Values\Content\Content&lt;/a&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;The content object, containing all fields and version information (&lt;a href="https://github.com/ezsystems/ezp-next/blob/master/eZ/Publish/Core/Repository/Values/Content/VersionInfo.php" class="external-link" rel="nofollow"&gt;VersionInfo&lt;/a&gt;)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;code&gt;&lt;strong&gt;noLayout&lt;/strong&gt;&lt;/code&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;Boolean&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;If true, indicates if the content/location is to be displayed without any pagelayout (i.e. AJAX, sub-requests...).&lt;br /&gt;It's generally &lt;code&gt;false&lt;/code&gt; when displaying a content in view type &lt;strong&gt;full&lt;/strong&gt;. &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;code&gt;&lt;strong&gt;viewBaseLayout&lt;/strong&gt;&lt;/code&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;String&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;The base layout template to use when the view is requested to be generated outside of the pagelayout (when &lt;code&gt;noLayout&lt;/code&gt; is true).&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;h3 id="Contentview-Templateinheritance"&gt;Template inheritance&lt;/h3&gt;&lt;p&gt;Like any template, a content view template can use &lt;a href="http://symfony.com/doc/current/book/templating.html#template-inheritance-and-layouts" class="external-link" rel="nofollow"&gt;template inheritance&lt;/a&gt;. However keep in mind that your content can be also requested via &lt;a href="http://symfony.com/doc/current/book/templating.html#embedding-controllers" class="external-link" rel="nofollow"&gt;sub-requests&lt;/a&gt; (see below how to render embedded content objects). In this case your template should probably not extend your main layout.&lt;/p&gt;&lt;p&gt;In this regard, it is recommended to use inheritance this way:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;{% extends noLayout ? viewbaseLayout : &amp;quot;AcmeDemoBundle::pagelayout.html.twig&amp;quot; %}
+
+{% block content %}
+...
+{% endblock %}&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h3 id="Contentview-Renderingcontent&amp;#39;sfields"&gt;Rendering content's fields&lt;/h3&gt;&lt;p&gt;As stated above, a view template receives the requested Content object, holding all fields.&lt;/p&gt;&lt;p&gt;In order to display the fields' value the way you want, you can either manipulate the Field Value object itself or use a template.&lt;/p&gt;&lt;h4 id="Contentview-GettingrawFieldvalue"&gt;Getting raw Field value&lt;/h4&gt;&lt;p&gt;Having access to the Content object in the template, you can use &lt;a href="https://github.com/ezsystems/ezpublish-kernel/blob/master/eZ/Publish/Core/Repository/Values/Content/Content.php" class="external-link" rel="nofollow"&gt;its public methods&lt;/a&gt; to access to all the information you need. You can also use &lt;a href="https://doc.ez.no/display/EZP/ez_field_value"&gt;ez_field_value&lt;/a&gt; helper to get the Field value in the current language if translation is available.&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;{# With the following, myFieldValue will be in the content&amp;#39;s main language, regardless the current language #}
+{% set myFieldValue = content.getFieldValue( &amp;#39;some_field_identifier&amp;#39; ) %}
+ 
+{# Here myTranslatedFieldValue will be in the current language if a translation is available. If not, the content&amp;#39;s main language will be used #}
+{% set myTranslatedFieldValue = ez_field_value( content, &amp;#39;some_field_identifier&amp;#39; ) %}&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h4 id="Contentview-UsingtheFieldType&amp;#39;stemplateblock"&gt;Using the FieldType's template block&lt;/h4&gt;&lt;p&gt;All built-in FieldTypes come with &lt;a href="https://github.com/ezsystems/ezpublish-kernel/blob/master/eZ/Bundle/EzPublishCoreBundle/Resources/views/content_fields.html.twig" class="external-link" rel="nofollow"&gt;a piece of Twig template code&lt;/a&gt; you can take advantage of by calling &lt;code&gt;ez_render_field()&lt;/code&gt; helper.&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;{{ ez_render_field( content, &amp;#39;some_field_identifier&amp;#39; ) }}&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p&gt;Refer to &lt;a href="https://doc.ez.no/display/EZP/ez_render_field"&gt;&lt;code&gt;ez_render_field()&lt;/code&gt; reference page&lt;/a&gt; for further information.&lt;/p&gt;    &lt;div class="aui-message success shadowed information-macro"&gt;
+                            &lt;span class="aui-icon icon-success"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;As this makes use of reusable templates, &lt;strong&gt;using &lt;code&gt;ez_render_field()&lt;/code&gt; is the recommended way and is to be considered as a best practice&lt;/strong&gt;.&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;h3 id="Contentview-RenderingContentname"&gt;Rendering Content name&lt;/h3&gt;&lt;p&gt;The &lt;strong&gt;name&lt;/strong&gt; of a content is its generic &amp;quot;title&amp;quot;, generated by the repository considering several rules in the FieldDefinition. It usually consists in the normalized value of the first field.&lt;/p&gt;&lt;p&gt;There are 2 different ways to access to this special property:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Through the name property of ContentInfo (not translated).&lt;/li&gt;&lt;li&gt;Through VersionInfo with the TranslationHelper (translated).&lt;/li&gt;&lt;/ul&gt;&lt;h4 id="Contentview-NamepropertyinContentInfo"&gt;Name property in ContentInfo&lt;/h4&gt;&lt;p&gt;This property is the actual content name, but &lt;strong&gt;in main language only&lt;/strong&gt; (so it is not translated).&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: html/xml; gutter: false" style="font-size:12px;"&gt;&amp;lt;h2&amp;gt;Content name: {{ content.contentInfo.name }}&amp;lt;/h2&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;$contentName = $content-&amp;gt;contentInfo-&amp;gt;name;&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h4 id="Contentview-Translatedname"&gt;Translated name&lt;/h4&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;The TranslationHelper service is available as of version 5.2 / 2013.09&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;p&gt;&lt;span style="font-size: 10.0pt;line-height: 13.0pt;"&gt;The &lt;em&gt;translated name&lt;/em&gt; is held in &lt;code&gt;VersionInfo&lt;/code&gt; object, in the names property which consists of hash indexed by locale. You can easily retrieve it in the right language via the &lt;code&gt;TranslationHelper&lt;/code&gt; service.&lt;/span&gt;&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: html/xml; gutter: false" style="font-size:12px;"&gt;&amp;lt;h2&amp;gt;Translated content name: {{ ez_content_name( content ) }}&amp;lt;/h2&amp;gt;
+&amp;lt;h3&amp;gt;Also works from ContentInfo : {{ ez_content_name( content.contentInfo ) }}&amp;lt;/h3&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p&gt;You can refer to &lt;a href="https://doc.ez.no/display/EZP/ez_content_name"&gt;ez_content_name() reference page&lt;/a&gt; for further information.&lt;/p&gt;&lt;p&gt; &lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;// Assuming we&amp;#39;re in a controller action
+$translationHelper = $this-&amp;gt;get( &amp;#39;ezpublish.translation_helper&amp;#39; );
+ 
+// From Content
+$translatedContentName = $translationHelper-&amp;gt;getTranslatedContentName( $content );
+// From ContentInfo
+$translatedContentName = $translationHelper-&amp;gt;getTranslatedContentNameByContentInfo( $contentInfo );&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;The helper will respect the prioritized languages. &lt;/p&gt;&lt;p&gt;If there is no translation for your prioritized languages, the helper will always return the name in the main language.&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;p&gt;&lt;span style="font-size: 10.0pt;line-height: 13.0pt;"&gt;You can also &lt;strong&gt;force a locale&lt;/strong&gt; in a 2nd argument:&lt;/span&gt;&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: html/xml; gutter: false" style="font-size:12px;"&gt;{# Force fre-FR locale. #}
+&amp;lt;h2&amp;gt;{{ ez_content_name( content, &amp;#39;fre-FR&amp;#39; ) }}&amp;lt;/h2&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;// Assuming we&amp;#39;re in a controller action
+$translatedContentName = $this-&amp;gt;get( &amp;#39;ezpublish.translation_helper&amp;#39; )-&amp;gt;getTranslatedName( $content, &amp;#39;fre-FR&amp;#39; );&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h3 id="Contentview-Exposingadditionalvariables"&gt;Exposing additional variables&lt;/h3&gt;&lt;p&gt;It is possible to expose additional variables in a content view template. See &lt;a href="https://doc.ez.no/display/EZP/Parameters+injection+in+content+views"&gt;parameters injection in content views&lt;/a&gt; or &lt;a href="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location"&gt;use your own custom controller to render a content/location&lt;/a&gt;.&lt;/p&gt;&lt;h2 id="Contentview-Makinglinkstootherlocations"&gt;Making links to other locations&lt;/h2&gt;&lt;p&gt;Linking to other locations is fairly easy and is done with &lt;a href="http://symfony.com/doc/2.3/book/templating.html#linking-to-pages" class="external-link" rel="nofollow"&gt;native &lt;code&gt;path()&lt;/code&gt; Twig helper&lt;/a&gt; (or &lt;code&gt;url()&lt;/code&gt; if you want to generate absolute URLs). You just have to pass it the Location object and &lt;code&gt;path()&lt;/code&gt; will generate the URLAlias for you.&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: xml; gutter: false" style="font-size:12px;"&gt;{# Assuming &amp;quot;location&amp;quot; variable is a valid eZ\Publish\API\Repository\Values\Content\Location object #}
+&amp;lt;a href=&amp;quot;{{ path( location ) }}&amp;quot;&amp;gt;Some link to a location&amp;lt;/a&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p&gt;If you don't have the Location object, but only its ID, you can generate the URLAlias the following way:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: xml; gutter: false" style="font-size:12px;"&gt;&amp;lt;a href=&amp;quot;{{ path( &amp;quot;ez_urlalias&amp;quot;, {&amp;quot;locationId&amp;quot;: 123} ) }}&amp;quot;&amp;gt;Some link to a location, with its Id only&amp;lt;/a&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                    &lt;p class="title"&gt;Under the hood&lt;/p&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;In the backend, &lt;code&gt;path()&lt;/code&gt; uses the Router to generate links.&lt;/p&gt;&lt;p&gt;This makes also easy to generate links from PHP, via the &lt;code&gt;router&lt;/code&gt; service.&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;p&gt;See also : &lt;a href="https://doc.ez.no/display/EZP/Cross+SiteAccess+links"&gt;Cross SiteAccess links&lt;/a&gt;&lt;/p&gt;&lt;h2 id="Contentview-Renderembeddedcontentobjects"&gt;Render embedded content objects&lt;/h2&gt;&lt;p&gt;Rendering an embedded content from a Twig template is pretty straight forward as you just need to &lt;strong&gt;do a subrequest with &lt;code&gt;ez_content&lt;/code&gt; controller&lt;/strong&gt;.&lt;/p&gt;&lt;h3 id="Contentview-Usingez_contentcontroller"&gt;Using &lt;code&gt;ez_content&lt;/code&gt; controller&lt;/h3&gt;&lt;p&gt;This controller is exactly the same as &lt;a href="#Contentview-TheViewController"&gt;the ViewController presented above&lt;/a&gt; and has 2 main actions:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;&lt;code&gt;viewLocation&lt;/code&gt;&lt;/strong&gt; to render a location (same as when accessing a content through an URLAlias)&lt;/li&gt;&lt;li&gt;&lt;strong&gt;&lt;code&gt;viewContent&lt;/code&gt;&lt;/strong&gt; to render a content&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;You can use this controller from templates with the following syntax:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;eZ Publish 5.1+ / Symfony 2.2+&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;{{ render( controller( &amp;quot;ez_content:viewLocation&amp;quot;, {&amp;quot;locationId&amp;quot;: 123, &amp;quot;viewType&amp;quot;: &amp;quot;line&amp;quot;} ) ) }}&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p&gt; &lt;/p&gt;&lt;p&gt;&lt;span style="font-size: 10.0pt;line-height: 13.0pt;"&gt;The example above allows you to render a Location which ID is &lt;/span&gt;&lt;strong style="font-size: 10.0pt;line-height: 13.0pt;"&gt;123&lt;/strong&gt;&lt;span style="font-size: 10.0pt;line-height: 13.0pt;"&gt;, with the view type &lt;/span&gt;&lt;strong style="font-size: 10.0pt;line-height: 13.0pt;"&gt;line&lt;/strong&gt;&lt;span style="font-size: 10.0pt;line-height: 13.0pt;"&gt;.&lt;/span&gt;&lt;/p&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;Reference of &lt;code&gt;ez_content&lt;/code&gt; controller follow the syntax of &lt;em&gt;controllers as a service&lt;/em&gt;, &lt;a href="http://symfony.com/doc/current/cookbook/controller/service.html" class="external-link" rel="nofollow"&gt;as explained in Symfony documentation&lt;/a&gt;.&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;h4 id="Contentview-Availablearguments"&gt;Available arguments&lt;/h4&gt;&lt;p&gt;As any controller, you can pass arguments to &lt;code&gt;ez_content:viewLocation&lt;/code&gt; or &lt;code&gt;ez_content:viewContent&lt;/code&gt; to fit your needs.&lt;/p&gt;&lt;div class="table-wrap"&gt;&lt;table class="confluenceTable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;th class="confluenceTh"&gt;Name&lt;/th&gt;&lt;th class="confluenceTh"&gt;Description&lt;/th&gt;&lt;th class="confluenceTh"&gt;Type&lt;/th&gt;&lt;th colspan="1" class="confluenceTh"&gt;Default value&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="confluenceTd"&gt;&lt;code&gt;locationId&lt;/code&gt;&lt;/td&gt;&lt;td class="confluenceTd"&gt;Id of the location you want to render.&lt;br /&gt;&lt;strong&gt;Only for &lt;code&gt;ez_content:viewLocation&lt;/code&gt;&lt;/strong&gt; &lt;/td&gt;&lt;td class="confluenceTd"&gt;integer&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;N/A&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;code&gt;contentId&lt;/code&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;p&gt;Id of the content you want to render.&lt;br /&gt;&lt;strong&gt;Only for &lt;code&gt;ez_content:viewContent&lt;/code&gt;&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;integer&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;N/A&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;code&gt;viewType&lt;/code&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;p&gt;The view type you want to render your content/location in.&lt;br /&gt;Will be used by the ViewManager to select corresponding template, according to defined rules. &lt;/p&gt;&lt;p&gt;Example: full, line, my_custom_view, ...&lt;/p&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;string&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;full&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;code&gt;layout&lt;/code&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;p&gt;Indicates if the sub-view needs to use the main layout (see &lt;a href="#Contentview-Availablevariables"&gt;available variables in a view template&lt;/a&gt;)&lt;/p&gt;&lt;p&gt; &lt;/p&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;boolean&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;code&gt;params&lt;/code&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;p&gt;Hash of variables you want to inject to sub-template, key being the exposed variable name.&lt;/p&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;Available as of eZ Publish 5.1&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;{{ render(
+      controller( 
+          &amp;quot;ez_content:viewLocation&amp;quot;, 
+          {
+              &amp;quot;locationId&amp;quot;: 123,
+              &amp;quot;viewType&amp;quot;: &amp;quot;line&amp;quot;,
+              &amp;quot;params&amp;quot;: { &amp;quot;some_variable&amp;quot;: &amp;quot;some_value&amp;quot; }
+          }
+      )
+) }}&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;hash&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;empty hash&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;p&gt; &lt;/p&gt;&lt;h2 id="Contentview-ESI"&gt;&lt;span style="color: rgb(0,0,0);font-size: 1.4em;font-weight: bold;line-height: normal;"&gt;ESI&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;Just as for regular Symfony controllers, you can take advantage of ESI and use different cache levels:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;Using ESI (eZ Publish 5.1+ / Symfony 2.2+)&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;{{ render_esi( controller( &amp;quot;ez_content:viewLocation&amp;quot;, {&amp;quot;locationId&amp;quot;: 123, &amp;quot;viewMode&amp;quot;: &amp;quot;line&amp;quot;} ) ) }}&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;Only scalable variables can be sent via render_esi (not object)&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;p&gt; &lt;/p&gt;&lt;h2 id="Contentview-Asynchronousrendering"&gt; &lt;span style="color: rgb(0,0,0);font-size: 1.4em;font-weight: bold;line-height: normal;"&gt;Asynchronous rendering&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;Symfony also supports asynchronous content rendering with the help of &lt;a href="http://mnot.github.com/hinclude/" class="external-link" rel="nofollow"&gt;hinclude.js&lt;/a&gt; library.&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;Asynchronous rendering (eZ Publish 5.1+ / Symfony 2.2+)&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;{{ render_hinclude( controller( &amp;quot;ez_content:viewLocation&amp;quot;, {&amp;quot;locationId&amp;quot;: 123, &amp;quot;viewMode&amp;quot;: &amp;quot;line&amp;quot;} ) ) }}&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;Only scalable variables can be sent via render_hinclude (not object)&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;h3 id="Contentview-Displayadefaulttext"&gt;Display a default text&lt;/h3&gt;&lt;p&gt;If you want to display a default text while a controller is loaded asynchronously, you have to pass a second parameters to your render_hinclude twig function.&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;Display a default text while asynchronous loading of a controller&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: php; gutter: false" style="font-size:12px;"&gt;{{ render_hinclude( controller( &amp;#39;EzCorporateDesignBundle:Header:userLinks&amp;#39; ), { &amp;#39;default&amp;#39;: &amp;quot;&amp;lt;div style=&amp;#39;color:red&amp;#39;&amp;gt;loading&amp;lt;/div&amp;gt;&amp;quot; }) }}&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;p&gt;&lt;a href="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location"&gt;See also :&amp;nbsp; How to use a custom controller to display a content or location&lt;/a&gt;&lt;/p&gt;&lt;p&gt; &lt;/p&gt;&lt;p&gt; &lt;/p&gt;    &lt;div class="aui-message hint shadowed information-macro"&gt;
+                            &lt;span class="aui-icon icon-hint"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            &lt;p&gt;&lt;a href="http://mnot.github.com/hinclude/" class="external-link" rel="nofollow"&gt;hinclude.js&lt;/a&gt; needs to be properly included in your layout to work.&lt;/p&gt;&lt;p&gt;Please &lt;a href="http://symfony.com/doc/current/book/templating.html#asynchronous-content-with-hinclude-js" class="external-link" rel="nofollow"&gt;refer to Symfony documentation&lt;/a&gt; for all available options.&lt;/p&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+        &lt;div style="padding: 10px 0;"&gt;
+       &lt;a href="https://doc.ez.no/display/EZP/Content+view"&gt;View Online&lt;/a&gt;
+              &amp;middot;
+       &lt;a href="https://doc.ez.no/pages/diffpagesbyversion.action?pageId=8323263&amp;revisedVersion=46&amp;originalVersion=45"&gt;View Changes Online&lt;/a&gt;       
+                  &lt;/div&gt;
+&lt;/div&gt;</summary>
+    <dc:creator>André Rømcke</dc:creator>
+    <dc:date>2014-10-19T23:06:30Z</dc:date>
+  </entry>
+  <entry>
+    <title>5.3.3 Release Notes</title>
+    <link rel="alternate" href="https://doc.ez.no/display/EZP/5.3.3+Release+Notes" />
+    <category term="release-notes" />
+    <author>
+      <name>André Rømcke</name>
+    </author>
+    <id>tag:doc.ez.no,2009:page-23528625-18</id>
+    <updated>2014-10-17T14:07:23Z</updated>
+    <published>2014-10-17T14:07:23Z</published>
+    <summary type="html">&lt;div class="feed"&gt;    &lt;p&gt;
+        Page
+            &lt;b&gt;edited&lt;/b&gt; by
+                    &lt;a href="    https://doc.ez.no/display/~andre.romcke@ez.no
+"&gt;André Rømcke&lt;/a&gt;
+            &lt;/p&gt;
+        &lt;div style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 10px;"&gt;
+        &lt;h6 id="id-5.3.3ReleaseNotes-17thOctober2014"&gt;17th October 2014&lt;/h6&gt;&lt;p&gt;eZ announces the availability of 5.3.3, a maintenance release available for all users of eZ Publish Platform 5.3 containing a notable few &lt;a href="#id-5.3.3ReleaseNotes-updates"&gt;updates and fixes&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;em&gt;Worth mentioning in this release are some improvements/fixes to: Repository API performance, IO performance, formtoken exceptions, preview functionality, asynchronous publishing, content staging, image &amp;amp; image alias handling, lazy sessions, and some ESI/hinclude request failing because the way SiteAccess info was serialized.&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;&lt;style type='text/css'&gt;/*&lt;![CDATA[*/
+div.rbtoc1413882057412 {padding: 0px;}
+div.rbtoc1413882057412 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1413882057412 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]&gt;*/&lt;/style&gt;&lt;div class='toc-macro rbtoc1413882057412'&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#id-5.3.3ReleaseNotes-UpdatingfromapreviousversionofeZPublishPlatform5.3'&gt;Updating from a previous version of eZ Publish Platform 5.3&lt;/a&gt;
+&lt;ul class='toc-indentation'&gt;
+&lt;li&gt;&lt;a href='#id-5.3.3ReleaseNotes-1.Patchyourcomposer.jsonfile'&gt;1. Patch your composer.json file&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#id-5.3.3ReleaseNotes-2.UpdatingNginxconfiguration'&gt;2. Updating Nginx configuration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#id-5.3.3ReleaseNotes-3.UpdatingComposerPackagesselectively'&gt;3. Updating Composer Packages selectively&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#id-5.3.3ReleaseNotes-4.Updatethedatabase'&gt;4. Update the database&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href='#id-5.3.3ReleaseNotes-packagesPackageupdates'&gt;Package updates&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href='#id-5.3.3ReleaseNotes-updatesUpdatesandfixesinthisrelease'&gt;Updates and fixes in this release&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;br /&gt;&lt;/em&gt;&lt;/p&gt;&lt;h2 id="id-5.3.3ReleaseNotes-UpdatingfromapreviousversionofeZPublishPlatform5.3"&gt;Updating from a previous version of eZ Publish Platform 5.3&lt;/h2&gt;&lt;p&gt;These instructions take advantage of the new &lt;a href="https://getcomposer.org/" class="external-link" rel="nofollow"&gt;Composer&lt;/a&gt; powered update systems in 5.3 for maintenance updates, so &lt;span&gt;make sure you familiarize yourself with the &lt;/span&gt;&lt;a href="https://doc.ez.no/display/EZP/Using+Composer"&gt;Using Composer&lt;/a&gt;&lt;span&gt; page.&lt;/span&gt;&lt;br /&gt;For Upgrading from versions prior to 5.3 look at our &lt;a href="https://doc.ez.no/display/EZP/Upgrading+from+5.1+to+5.3"&gt;Upgrading from 5.1 to 5.3&lt;/a&gt; or &lt;a href="https://doc.ez.no/display/EZP/Upgrading+from+5.2+to+5.3"&gt;Upgrading from 5.2 to 5.3&lt;/a&gt; page.&lt;/p&gt;&lt;h3 id="id-5.3.3ReleaseNotes-1.Patchyourcomposer.jsonfile"&gt;1. Patch your composer.json file&lt;/h3&gt;&lt;p&gt;Issues with Zeta Components and Composer have been fixed so you should edit &lt;code&gt;composer.json&lt;/code&gt; and remove any line with &amp;quot;zetacomponents/&amp;quot; like illustrated in &lt;em&gt;diff&lt;/em&gt; below:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"&gt;&lt;b&gt;/composer.json diff&lt;/b&gt;&lt;/div&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: diff; gutter: false" style="font-size:12px;"&gt;diff --git a/composer.json b/composer.json
+index 3c4fd1e..ffe18af 100644
+--- a/composer.json
++++ b/composer.json
+@@ -37,25 +37,6 @@
+         &amp;quot;egulias/listeners-debug-command-bundle&amp;quot;: &amp;quot;~1.9&amp;quot;,
+         &amp;quot;white-october/pagerfanta-bundle&amp;quot;: &amp;quot;1.0.*&amp;quot;,
+         &amp;quot;nelmio/cors-bundle&amp;quot;: &amp;quot;~1.3&amp;quot;,
+-        &amp;quot;zetacomponents/archive&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/authentication&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/authentication-database-tiein&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/base&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/cache&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/configuration&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/console-tools&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/database&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/debug&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/event-log&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/feed&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/image-conversion&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/mail&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/mvc-tools&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/mvc-authentication-tiein&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/persistent-object&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/php-generator&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/signal-slot&amp;quot;: &amp;quot;@dev&amp;quot;,
+-        &amp;quot;zetacomponents/system-information&amp;quot;: &amp;quot;@dev&amp;quot;,
+         &amp;quot;hautelook/templated-uri-bundle&amp;quot;: &amp;quot;~1.0&amp;quot;,
+         &amp;quot;doctrine/doctrine-bundle&amp;quot;: &amp;quot;1.2.*&amp;quot;
+     },&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;h3 id="id-5.3.3ReleaseNotes-2.UpdatingNginxconfiguration"&gt;2. Updating Nginx configuration&lt;/h3&gt;&lt;p&gt;If you're using Nginx as your webserver instead of Apache, then make sure to update &lt;a href="https://doc.ez.no/display/EZP/Nginx" rel="nofollow"&gt;Nginx vhost configuration&lt;/a&gt;, changes since 5.3.0: &lt;a href="https://github.com/ezsystems/ezpublish-community/commit/d157a4ecb3ddf7a382519fbb43ce311335cd8185" class="external-link" rel="nofollow"&gt;5.3.1&lt;/a&gt;, &lt;a href="https://github.com/ezsystems/ezpublish-community/commit/db5e0d4af62112e423cac6930f0549364438f756" class="external-link" rel="nofollow"&gt;5.3.3 &lt;/a&gt;&lt;/p&gt;&lt;h3 id="id-5.3.3ReleaseNotes-3.UpdatingComposerPackagesselectively"&gt;3. Updating Composer Packages selectively&lt;/h3&gt;&lt;p&gt;With this command you'll only update packages from eZ (and Symfony) that have received updates since 5.3.0:&lt;/p&gt;&lt;div class="code panel pdl" style="border-width: 1px;"&gt;&lt;div class="codeContent panelContent pdl"&gt;
+&lt;pre class="theme: Eclipse; brush: bash; gutter: false" style="font-size:12px;"&gt;php -d memory_limit=-1 composer.phar update --no-dev --prefer-dist ezsystems/ezpublish-kernel ezsystems/ezflow-ls-extension ezsystems/demobundle ezsystems/comments-bundle ezsystems/ngsymfonytools-bundle ezsystems/ezpublish-legacy symfony/symfony&lt;/pre&gt;
+&lt;/div&gt;&lt;/div&gt;    &lt;div class="aui-message success shadowed information-macro"&gt;
+                            &lt;span class="aui-icon icon-success"&gt;Icon&lt;/span&gt;
+                &lt;div class="message-content"&gt;
+                            Note: Add &amp;quot;ezsystems/ezfind-ls&amp;quot;, &amp;quot;ezsystems/ezcontentstaging-ls&lt;span style="line-height: 1.4285715;"&gt;&amp;quot; and/or &amp;quot;ezsystems/ezsurvey-ls&amp;quot; to the &lt;/span&gt;parameters&lt;span style="line-height: 1.4285715;"&gt; to get latest version if you also use these extensions.&lt;/span&gt;
+                    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;h3 id="id-5.3.3ReleaseNotes-4.Updatethedatabase"&gt;4. Update the database&lt;/h3&gt;&lt;p&gt;Import to your database the changes provided in:&lt;/p&gt;&lt;pre class="wordwrap"&gt;&lt;span class="line"&gt;/&amp;lt;ezp5-root&amp;gt;/ezpublish_legacy/update/database/&amp;lt;mysql|postgresql&amp;gt;/5.3/dbupdate-5.3.2-to-5.3.3.sql&lt;/span&gt;&lt;/pre&gt;&lt;p&gt;And if you use Cluster (DFS) the following:&lt;/p&gt;&lt;pre class="wordwrap"&gt;/&amp;lt;ezp5-root&amp;gt;/ezpublish_legacy/update/database/mysql/5.3/dbupdate-cluster-5.3.2-to-5.3.3.sql&lt;/pre&gt;&lt;p class="wordwrap"&gt;&lt;span style="color: rgb(0,98,147);"&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;&lt;h2 class="wordwrap" id="id-5.3.3ReleaseNotes-packagesPackageupdates"&gt;&lt;span class="confluence-anchor-link" id="id-5.3.3ReleaseNotes-packages"&gt;&lt;/span&gt;&lt;span style="color: rgb(0,98,147);"&gt;Package &lt;/span&gt;&lt;span style="color: rgb(0,98,147);"&gt;update&lt;/span&gt;&lt;span style="color: rgb(0,98,147);"&gt;s&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;Here are the packages that have received an update as part of this releases:&lt;/p&gt;&lt;div class="table-wrap"&gt;&lt;table class="confluenceTable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;th class="confluenceTh"&gt;package&lt;/th&gt;&lt;th class="confluenceTh"&gt;version&lt;/th&gt;&lt;th colspan="1" class="confluenceTh"&gt;prior version&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="confluenceTd"&gt;ezsystems/ezpublish-kernel&lt;/td&gt;&lt;td class="confluenceTd"&gt;5.3.3&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;5.3.2[.3]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="confluenceTd"&gt;ezsystems/ezpublish-legacy&lt;/td&gt;&lt;td class="confluenceTd"&gt;5.3.3&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;5.3.2[.1]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;ezsystems/ezcontentstaging-ls&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;5.3.3&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;5.3.2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;ezsystems/ezflow-ls-extension&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;5.3.3&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;5.3.2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;ezsystems/ezfind-ls&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;5.3.3&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;5.3.2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;ezsystems/ezsurvey-ls&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;5.3.3&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;5.3.1&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;p&gt;Other packages that have received update since 5.3.0:&lt;/p&gt;&lt;div class="table-wrap"&gt;&lt;table class="confluenceTable"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;th class="confluenceTh"&gt;package&lt;/th&gt;&lt;th class="confluenceTh"&gt;version&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;ezsystems/comments-bundle&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;5.3.2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;ezsystems/demobundle&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;5.3.2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;span&gt;ezsystems/ngsymfonytools-bundle&lt;/span&gt;&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;span&gt;1.0.5&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="1" class="confluenceTd"&gt;symfony/symfony&lt;/td&gt;&lt;td colspan="1" class="confluenceTd"&gt;&lt;a class="external-link" href="http://symfony.com/blog/category/releases" rel="nofollow"&gt;&amp;gt;=2.3.19&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;p&gt; &lt;/p&gt;&lt;h2 id="id-5.3.3ReleaseNotes-updatesUpdatesandfixesinthisrelease"&gt;&lt;span class="confluence-anchor-link" id="id-5.3.3ReleaseNotes-updates"&gt;&lt;/span&gt;Updates and fixes in this release&lt;/h2&gt;&lt;p&gt;
+
+
+
+
+
+&lt;div id="refresh-module-1163910451"&gt;
+    &lt;p&gt;
+        
+                    
+            
+                    
+        &lt;div id="jira-issues-1163910451" style="width: 100%;  overflow: auto;"&gt;
+            &lt;table class="aui" &gt;
+                &lt;tbody&gt;
+                &lt;tr&gt;&lt;/tr&gt;                 &lt;tr&gt;
+                                            &lt;th style="text-align: left; text-transform: capitalize;  class="jira-macro-table-underline-pdfexport" "&gt;Key&lt;/th&gt;
+                                            &lt;th style="text-align: left; text-transform: capitalize;  class="jira-macro-table-underline-pdfexport" "&gt;Summary&lt;/th&gt;
+                                            &lt;th style="text-align: left; text-transform: capitalize;  class="jira-macro-table-underline-pdfexport" "&gt;Component/s&lt;/th&gt;
+                                    &lt;/tr&gt;
+                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-22191"&gt;EZP-22191&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-22191"&gt;As a User I expect API&amp;#39;s with language filters to respect Always available flag&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Language, Legacy Storage engine, Symfony stack
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23116"&gt;EZP-23116&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23116"&gt;Change SPI Content Search Handler to return ContentInfo&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Repository &amp;amp; Services (Public API impl), Search
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-22995"&gt;EZP-22995&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-22995"&gt;Disable ezformtoken for lowlevel legacy fallbacks&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Extensions/eZ Form Token, Symfony stack
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23263"&gt;EZP-23263&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23263"&gt;Allow setting section and state during creation of new object&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23296"&gt;EZP-23296&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23296"&gt;Template Block Cache has cache key collisions&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Caching
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23333"&gt;EZP-23333&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23333"&gt;Improve Content object build speed using SPI Cache&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Repository &amp;amp; Services (Public API impl)
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23355"&gt;EZP-23355&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23355"&gt;Add a getter for wrappedUser property in UserWrapper&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-21825"&gt;EZP-21825&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-21825"&gt;Temporary files not always deleted when copying from DFS to FS&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Clustering
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-22974"&gt;EZP-22974&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-22974"&gt;When I create a new Image I get Error: eZDir::recursiveDelete&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Caching, Misc
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23019"&gt;EZP-23019&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23019"&gt;Date and Time attribute displays 1st january 1970 when no date is set&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface, Legacy Storage engine
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23066"&gt;EZP-23066&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23066"&gt;Errors when/after trashing content with empty image&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Legacy Storage engine
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23080"&gt;EZP-23080&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23080"&gt;Updating an image through API fails when using DFS&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Repository &amp;amp; Services (Public API impl)
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23086"&gt;EZP-23086&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23086"&gt;Image thumbnail not shown on backend if alias contains quotes &lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23121"&gt;EZP-23121&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23121"&gt;5.2 Role Service API allows duplicate assignments with subtree limitations to user group&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Public API interfaces
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23124"&gt;EZP-23124&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23124"&gt;eZ Flow block items in v1 of content aren&amp;#39;t synced correctly&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Extensions/eZ Content Staging, Extensions/eZ Flow
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23142"&gt;EZP-23142&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23142"&gt;API Signals are not transaction safe&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Extensions/eZ Find, Legacy IO, Repository &amp;amp; Services (Public API impl), Solr search handler
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23146"&gt;EZP-23146&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23146"&gt;When I step through the setup wizard I get Error: eZDir::recursiveDelete&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Caching, Misc
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23152"&gt;EZP-23152&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23152"&gt;deleteVersion removes images from published version&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Public API interfaces
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23168"&gt;EZP-23168&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23168"&gt;ESI or Hinclude request URLs can exceed acceptable size of 8KB&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Symfony stack
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23170"&gt;EZP-23170&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23170"&gt;&amp;quot;swap node&amp;quot; function can swap container and non-container nodes (invalid state)&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface, Misc
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23176"&gt;EZP-23176&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23176"&gt;Lazy sessions are not honored in 5.3&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Symfony stack, Users and Access control
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23182"&gt;EZP-23182&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23182"&gt;eZOE: Image preview not shown in popup/browse if alias contains quotes&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Extensions/eZ JSCore, Extensions/eZ Online Editor
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23184"&gt;EZP-23184&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23184"&gt;LegacyHelper doesn&amp;#39;t call parent constructor&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Symfony stack
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23185"&gt;EZP-23185&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23185"&gt;Image not displayed in editor if alias contains quotes&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Extensions/eZ Online Editor
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23186"&gt;EZP-23186&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23186"&gt;eZFind: Elevation error on synchronize &lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Extensions/eZ Find/Administration
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23189"&gt;EZP-23189&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23189"&gt;Composer install/update fails on zetacomponents/base requirements&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Composer
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23192"&gt;EZP-23192&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23192"&gt;Cannot define array settings in default scope&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Symfony stack
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23195"&gt;EZP-23195&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23195"&gt;An empty line at the beginning of a Text block will be lost&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface, Misc, PlatformUI
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23206"&gt;EZP-23206&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23206"&gt;Multiple versions with status &amp;#39;Published&amp;#39; when using asynchronous publishing&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Legacy Storage engine, Misc
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23207"&gt;EZP-23207&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23207"&gt;Alternative text field of an image attribute is not updated unless the file field is updated.&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Content (images, XML, PDF, RSS, etc.)
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23208"&gt;EZP-23208&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23208"&gt;async publishing: the polling javascript can get mixed-up and give bad results&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23210"&gt;EZP-23210&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23210"&gt;Exception thrown when using alternative user provider/login handler&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Symfony stack, Users and Access control
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23211"&gt;EZP-23211&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23211"&gt;Impossible to align multiple cells&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Extensions/eZ Online Editor/Online Editor
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23218"&gt;EZP-23218&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23218"&gt;password in not stored when a user draft is saved&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23221"&gt;EZP-23221&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23221"&gt;ez_route() operator in preview causes PHP Fatal error&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23222"&gt;EZP-23222&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23222"&gt;LanguageSwitcher does not work in content preview&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface, Symfony stack
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23228"&gt;EZP-23228&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23228"&gt;Wrong translation code for cze&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Language, Symfony stack
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23234"&gt;EZP-23234&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23234"&gt;Language Switcher using sub-requests throws an exception in preview&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Symfony stack
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23249"&gt;EZP-23249&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23249"&gt;Switching siteaccess does not update prioritized languages&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Language
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23251"&gt;EZP-23251&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23251"&gt;Javascript error trying to paste an iframe html in a literal html tag&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Extensions/eZ Online Editor
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23253"&gt;EZP-23253&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23253"&gt;XmlText Fieldtype doesn&amp;#39;t respect literal tag with class html&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Field types
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23254"&gt;EZP-23254&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23254"&gt;DFS - tmp files left if the file size is not identical to the original one&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Clustering
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23257"&gt;EZP-23257&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23257"&gt;ezsurvey: fatal error when instantiating a &amp;quot;related object&amp;quot; survey question from cli / rest context&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23264"&gt;EZP-23264&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23264"&gt;hasParameter() of LegacyConfigResolver causes an error, if the requested parameter does not exist.&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Symfony stack
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23277"&gt;EZP-23277&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23277"&gt;[Content Staging] Not possible to sync if content language differs from parent node&amp;#39;s language&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Extensions/eZ Content Staging
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23282"&gt;EZP-23282&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23282"&gt;Solr returns wrong results after object language deletion&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Extensions/eZ Find
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23283"&gt;EZP-23283&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23283"&gt;New stack: urlalias_iri problem with multi-byte URL&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Misc
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23295"&gt;EZP-23295&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23295"&gt;Formtoken exception when copying subtree&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Misc
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23299"&gt;EZP-23299&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23299"&gt;ezpm: adding a subtree with nodeId misses children&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Packages
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23310"&gt;EZP-23310&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23310"&gt;Preview causes content cache to be purged and deadlocks&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface, Database related
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23312"&gt;EZP-23312&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23312"&gt;Async pub: old processes are filling up the database   &lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Cronjobs, Database related
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23313"&gt;EZP-23313&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23313"&gt;Yaml ParseException&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Composer, Symfony stack
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23314"&gt;EZP-23314&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23314"&gt;Undefined variable $matcher + matcher should be mandatory in config?&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Symfony stack
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23316"&gt;EZP-23316&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23316"&gt;AdvancedObjectRelationList: content not saved&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23322"&gt;EZP-23322&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23322"&gt;required object relation list attribute not being validated&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface, Legacy Storage engine
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23332"&gt;EZP-23332&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23332"&gt;Templating Legacy Engine throws warning if TemplateReference is passed as param to supports method&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Template language
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23335"&gt;EZP-23335&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23335"&gt;Admin preview doesn&amp;#39;t use the right pagelayout&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23337"&gt;EZP-23337&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23337"&gt;New stack does not generate 301 redirects for wrongly cased URLs&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Symfony stack
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23338"&gt;EZP-23338&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23338"&gt;Publishing from preview with asynchronous publisher does not redirect to &amp;quot;content is being published&amp;quot;&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23341"&gt;EZP-23341&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23341"&gt;Incorrect role/policy subtree limitation handling in section/assign&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Administration Interface, Permissions
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23344"&gt;EZP-23344&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23344"&gt;render_hinclude not working with nginx&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Documentation
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23345"&gt;EZP-23345&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23345"&gt;Headings inside tables are rendered with incorrect level&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Content (images, XML, PDF, RSS, etc.)
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23348"&gt;EZP-23348&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23348"&gt;Misleading error message on deleted embed objects&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Misc
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23350"&gt;EZP-23350&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23350"&gt;button_bg.png not found when using admin design&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Extensions/eZ Flow
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23353"&gt;EZP-23353&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23353"&gt;eZ Find: MySQLi errors in cluster DB when using multiple processes (conc &amp;gt; 1)&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Clustering, Database related, Extensions/eZ Find
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23363"&gt;EZP-23363&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23363"&gt;When using alternate tree_root all requests are handled by legacycontroller&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23364"&gt;EZP-23364&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23364"&gt;EZP-23337 breaks tree_root&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23381"&gt;EZP-23381&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23381"&gt;UserService::loadUserGroupsOfUser() checks wrong permissions&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Repository &amp;amp; Services (Public API impl), Users and Access control
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23384"&gt;EZP-23384&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23384"&gt;Fix ZetaComponents dependencies&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Composer
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowAlternate"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23390"&gt;EZP-23390&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23390"&gt;IOService loads whole file to get mime type with FS cluster handler&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Clustering, Legacy IO
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                                                                                            &lt;tr class="rowNormal"&gt;
+                                                                                                                                &lt;td nowrap="true" class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23408"&gt;EZP-23408&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            &lt;a href="https://jira.ez.no/browse/EZP-23408"&gt;clusterpurge.php not clearing expired images with scope &amp;quot;images&amp;quot;&lt;/a&gt;
+                                                                    &lt;/td&gt;
+                                                                    &lt;td  class="jira-macro-table-underline-pdfexport" &gt;
+                                                                            Clustering
+                                                                    &lt;/td&gt;
+                                                            &lt;/tr&gt;
+                                                                                
+                                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+                &lt;div class="refresh-issues-bottom"&gt;
+            &lt;span id="total-issues-count-1163910451"&gt;
+                                                        &lt;a rel="nofollow" title="View all matching issues in JIRA." href="https://jira.ez.no/secure/IssueNavigator.jspa?reset=true&amp;amp;jqlQuery=project%3DEZP+AND+fixVersion+in+%28+%225.3.3%22+%29+AND+type+in+%28+Bug%2C+Story%2C+Improvement%29+ORDER+BY+issuetype+DESC%2C+key+ASC+++"&gt;
+                                                    71 issues
+                                            &lt;/a&gt;
+                            &lt;/span&gt;
+                    &lt;/div&gt;
+        
+            &lt;/p&gt;
+&lt;/div&gt;
+&lt;/p&gt;&lt;p&gt; &lt;/p&gt;&lt;p&gt; &lt;/p&gt;
+    &lt;/div&gt;
+        &lt;div style="padding: 10px 0;"&gt;
+       &lt;a href="https://doc.ez.no/display/EZP/5.3.3+Release+Notes"&gt;View Online&lt;/a&gt;
+              &amp;middot;
+       &lt;a href="https://doc.ez.no/pages/diffpagesbyversion.action?pageId=23528625&amp;revisedVersion=18&amp;originalVersion=17"&gt;View Changes Online&lt;/a&gt;       
+                  &lt;/div&gt;
+&lt;/div&gt;</summary>
+    <dc:creator>André Rømcke</dc:creator>
+    <dc:date>2014-10-17T14:07:23Z</dc:date>
+  </entry>
+</feed>
+

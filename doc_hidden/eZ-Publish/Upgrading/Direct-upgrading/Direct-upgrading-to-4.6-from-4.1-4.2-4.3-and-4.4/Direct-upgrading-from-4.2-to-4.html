@@ -1,0 +1,954 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/eZ-Publish/Upgrading/Direct-upgrading/Direct-upgrading-to-4.6-from-4.1-4.2-4.3-and-4.4/Direct-upgrading-from-4.2-to-4.6 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 11:09:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/core.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/header-footer.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/header-footer-lookfeel.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/pagelayout.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/buttons.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/960.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/superfish.css" /><script type="text/javascript" src="https://ez.no/extension/ez_ezno/design/ezno_2011/javascript/jquery-1.6.3.min.js" charset="utf-8"></script><script type="text/javascript" src="https://ez.no/extension/ez_ezno/design/ezno_2011/javascript/superfish.js" charset="utf-8"></script><script type="text/javascript" src="https://ez.no/extension/ez_ezno/design/ezno_2011/javascript/jquery.popmenu.min.js" charset="utf-8"></script>
+<style type="text/css">
+    @import url(../../../../../extension/ezdoc/design/doc/stylesheets/core.css);
+    @import url(../../../../../extension/ezdoc/design/doc/stylesheets/classes.css);
+    @import url(../../../../../extension/ezdoc/design/doc/stylesheets/doc.css);
+    @import url(../../../../../extension/ezdoc/design/doc/stylesheets/print.css) print;</style>
+
+<link type="text/css" rel="stylesheet" href="../../../../../extension/ezdoc/design/doc/stylesheets/print.css" media="print" />
+
+<!-- IE conditional comments; for bug fixes for different IE versions -->
+<!--[if IE 5]>     <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie5.css);    </style>     <![endif]-->
+<!--[if lte IE 6]> <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie6lte.css); </style>     <![endif]-->
+<!--[if lte IE 6]> <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie6lte-doc.css); </style> <![endif]-->
+<!--[if IE 6]>     <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie6.css);    </style>     <![endif]-->
+
+<!-- Load special stylesheet (if necessary) for newer Netscape decendants, Mozilla and Firefox, using the Gecko renderer -->
+<script type="text/javascript"><!-- if ((navigator.userAgent.indexOf("Gecko") != -1)&&(navigator.userAgent.indexOf("KHTML") == -1)) document.write("<style type=\"text/css\">@import url(/extension/ezdoc/design/doc/stylesheets/gecko.css);</style>"); --></script>
+
+<script type="text/javascript" src="../../../../../extension/ezdoc/design/doc/javascripts/mainmenu-hover.js"></script>
+<script type="text/javascript" src="../../../../../extension/ezdoc/design/doc/javascripts/dropdownmenu.js"></script>
+<script type="text/javascript" src="../../../../../extension/ezdoc/design/doc/javascripts/ezno-searchbox.js"></script>
+                                              
+    <title>Direct upgrading from 4.2 to 4.6 / Direct upgrading to 4.6 from 4.1, 4.2, 4.3 and 4.4 / Direct upgrading / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../doc_hidden.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+<body onload="initDocSearch();menuInit();">
+
+<!-- Complete page area: START -->
+<div id="page">
+
+
+	<div id="header-bg">
+			<div id="header" class="container_12">
+				<div class="grid_12">
+					<div class="searchboxes" id="searchbox">
+	  <form action="https://ez.no/headerandfooteraccess/content/search">
+	    <label for="searchtext" class="hide">Search text:</label>
+	    	    <div class="ezautocomplete">
+	        <button value="Search" title="Search" type="submit"><span class="w"><span class="l"></span><span class="c">Search</span><span class="r"></span></span></button>
+	        <div class="searchtext-wrap"><input class="searchtext" id="searchtext" name="SearchText" type="text" value="Search" size="12" onblur="if(this.value=='') this.value='Search';" onfocus="if(this.value=='Search') this.value='';" /></div>
+	        <div class="ezautocompletecontainer"></div>
+	    </div>
+	    
+	    	  </form>
+	</div>
+
+                <div id="header-social-connect">
+    <a href="http://www.youtube.com/user/ezpublish/" class="youtube" target="_blank">youtube</a>
+    <a href="https://google.com/+ezsystems" class="googleplus" target="_blank">google plus</a>
+    <a href="http://www.linkedin.com/groups?gid=2759&amp;trk=myg_ugrp_ovr" class="linkedin" target="_blank">linkedin</a>
+    <a href="https://www.facebook.com/eZPublishEnterprise" class="facebook" target="_blank">facebook</a>
+    <a href="http://twitter.com/#!/ezsystems" class="twitter" target="_blank">twitter</a>
+</div>
+				<div id="links">
+		
+							
+					<ul class="clearfix">
+																					<li class="nid-2384 first ">
+						<a href="https://ez.no/headerandfooteraccess/Partner-Portal">Partner Portal<span></span></a></li>
+																										<li class="nid-1859 ">
+						<a href="https://ez.no/headerandfooteraccess/Customer-Log-In">Customer Log In<span></span></a></li>
+																										<li class="nid-1831 ">
+						<a href="https://ez.no/headerandfooteraccess/Community">Community<span></span></a></li>
+																										<li class="nid-1944 last ">
+						<a href="https://ez.no/headerandfooteraccess/Blog">Blog<span></span></a></li>
+												</ul>
+		
+		</div>                <div id="languages" class="popmenu">	<div class="eng"><a href="#">English&nbsp;<span></span></a></div></div>
+
+				<p class="hide"><a href="#main">Skip to main content</a></p>
+				</div>
+			</div>
+
+			
+	</div>
+
+    <div class="topmenu-anchor"></div>
+    <div id="topmenu-bg">
+	    <div id="logo" class="container_12">
+
+    <div class="grid_3">
+        <a href="https://ez.no/headerandfooteraccess" title="eZ Publish Platform, CXM &amp; CMS">
+            <img src="https://ez.no/extension/ez_ezno/design/ezno_2011/images/ez-logo.png"
+                 alt="eZ Publish®"/>
+        </a>
+    </div>
+
+    <div class="grid_9">
+                <div class="topmenu-design">
+	<!-- Top menu content: START -->
+	<div id="topmenu-firstlevel-position">
+	<ul id="topmenu-firstlevel" class="sf-menu sf-js-enabled sf-shadow">
+		
+																																																														
+																																										
+
+                                	                																					                                    <li id="node_id_1795" class="li-first-level firstli">
+                    	<a href="https://ez.no/headerandfooteraccess/Products/The-eZ-Publish-Platform" class="menu-item-link">
+                    		<span>Products</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_21578" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/The-eZ-Publish-Platform" class="a-second-level">The eZ Publish Platform</a>
+																			</li>
+																	<li id="node_id_19870" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Content-Management" class="a-second-level">Content Management </a>
+																			</li>
+																	<li id="node_id_15645" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Digital-Marketing" class="a-second-level has-more">Digital Marketing</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_15685" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Digital-Marketing/Marketing-Automation" class="a-third-level">
+															Marketing Automation
+														</a>
+													</li>
+																									<li id="node_id_15686" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Digital-Marketing/Smart-Analytics" class="a-third-level">
+															Smart Analytics
+														</a>
+													</li>
+																									<li id="node_id_15689" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Digital-Marketing/Personalization-Recommendation" class="a-third-level">
+															Personalization &amp; Recommendation
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_19872" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/e-Commerce" class="a-second-level">e-Commerce</a>
+																			</li>
+																	<li id="node_id_14954" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Compare-Versions" class="a-second-level">Compare Versions</a>
+																			</li>
+																	<li id="node_id_1800" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Demos-Videos" class="a-second-level">Demos &amp; Videos</a>
+																			</li>
+																	<li id="node_id_20778" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base" class="a-second-level has-more">Knowledge Base</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_19570" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base/eZ-Publish-Platform-5.3" class="a-third-level">
+															eZ Publish Platform 5.3
+														</a>
+													</li>
+																									<li id="node_id_11694" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base/eZ-Live-Viewer" class="a-third-level">
+															eZ Live Viewer
+														</a>
+													</li>
+																									<li id="node_id_11693" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base/eZ-Recommendation-Service" class="a-third-level">
+															eZ Recommendation Service
+														</a>
+													</li>
+																									<li id="node_id_13246" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base/eZ-Marketing-Automation" class="a-third-level">
+															eZ Marketing Automation
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_1846" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/eZ-Market" class="a-second-level has-more">eZ Market</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_1848" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/eZ-Market/Explore-the-eZ-Market" class="a-third-level">
+															Explore the eZ Market
+														</a>
+													</li>
+																									<li id="node_id_1851" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/eZ-Market/How-to-Sell-on-eZ-Market" class="a-third-level">
+															How to Sell on eZ Market
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_20872" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software" class="a-second-level has-more">About our Software</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_20875" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/Documentation" class="a-third-level">
+															Documentation
+														</a>
+													</li>
+																									<li id="node_id_20876" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/Requirements" class="a-third-level">
+															Requirements
+														</a>
+													</li>
+																									<li id="node_id_20877" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/Roadmap-and-lifecycle" class="a-third-level">
+															Roadmap and lifecycle
+														</a>
+													</li>
+																									<li id="node_id_20878" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/Licenses" class="a-third-level">
+															Licenses
+														</a>
+													</li>
+																									<li id="node_id_20874" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/SLA" class="a-third-level">
+															sla
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                            																									
+
+                                	                																					                                    <li id="node_id_2264" class="li-first-level ">
+                    	<a href="https://ez.no/headerandfooteraccess/Services/Overview" class="menu-item-link">
+                    		<span>Services</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_1816" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Services/Overview" class="a-second-level">Overview</a>
+																			</li>
+																	<li id="node_id_2570" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Services/Support-Maintenance" class="a-second-level">Support &amp; Maintenance</a>
+																			</li>
+																	<li id="node_id_1819" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Services/Consulting" class="a-second-level">Consulting</a>
+																			</li>
+																	<li id="node_id_15863" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Services/Trainings" class="a-second-level has-more">Trainings</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_15864" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Training-Calendar" class="a-third-level">
+															Training Calendar
+														</a>
+													</li>
+																									<li id="node_id_15870" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Courses" class="a-third-level">
+															Courses
+														</a>
+													</li>
+																									<li id="node_id_15875" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Certification" class="a-third-level">
+															Certification
+														</a>
+													</li>
+																									<li id="node_id_16248" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Developer-Knowledge-Path" class="a-third-level">
+															Developer Knowledge Path
+														</a>
+													</li>
+																									<li id="node_id_16252" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Onsite-Trainings" class="a-third-level">
+															Onsite Trainings
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                            																									
+
+                                	                																					                                    <li id="node_id_1824" class="li-first-level ">
+                    	<a href="https://ez.no/headerandfooteraccess/Customers/Success-Stories" class="menu-item-link">
+                    		<span>Customers</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_1863" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies" class="a-second-level has-more">Case Studies</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_20669" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Sound-Harley-Davidson-Hitting-the-Road-with-the-eZ-Publish-Platform" class="a-third-level">
+															Sound Harley-Davidson - Hitting the Road with the eZ Publish Platform
+														</a>
+													</li>
+																									<li id="node_id_18787" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/49th-Shelf-Canada-s-Online-Resource-Center-for-Books" class="a-third-level">
+															49th Shelf - Canada's Online Resource Center for Books
+														</a>
+													</li>
+																									<li id="node_id_17303" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/CASDEN-Groupe-Banque-Populaire" class="a-third-level">
+															CASDEN, Groupe Banque Populaire
+														</a>
+													</li>
+																									<li id="node_id_16193" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Orange-UA-Jeux-and-Transmedia" class="a-third-level">
+															Orange - UA Jeux and Transmédia
+														</a>
+													</li>
+																									<li id="node_id_15317" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/CSMonitor-Digital-First-Strategy-with-eZ-Publish" class="a-third-level">
+															CSMonitor - Digital-First Strategy with eZ Publish
+														</a>
+													</li>
+																									<li id="node_id_15216" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Bauknecht-KitchenAid-and-Whirlpool-Web-Sites" class="a-third-level">
+															Bauknecht, KitchenAid and Whirlpool Web Sites
+														</a>
+													</li>
+																									<li id="node_id_13911" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/CEVA" class="a-third-level">
+															CEVA
+														</a>
+													</li>
+																									<li id="node_id_12027" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Grazia.fr" class="a-third-level">
+															Grazia.fr
+														</a>
+													</li>
+																									<li id="node_id_8661" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Sparda-Bank-West" class="a-third-level">
+															Sparda-Bank West
+														</a>
+													</li>
+																									<li id="node_id_8141" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Christian-Science-Monitor-recreates-itself-for-digital-era" class="a-third-level">
+															Christian Science Monitor recreates itself for digital era  
+														</a>
+													</li>
+																									<li id="node_id_8108" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Rechtsportal-powered-by-Deubner-a-WEKA-Group-company" class="a-third-level">
+															Rechtsportal, powered by Deubner, a WEKA Group company
+														</a>
+													</li>
+																									<li id="node_id_7948" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/tagesschau.sf.tv" class="a-third-level">
+															tagesschau.sf.tv
+														</a>
+													</li>
+																									<li id="node_id_7641" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Nouvelle-Republique-Centre-Ouest" class="a-third-level">
+															Nouvelle République Centre-Ouest
+														</a>
+													</li>
+																									<li id="node_id_7638" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/EMI-France" class="a-third-level">
+															EMI France
+														</a>
+													</li>
+																									<li id="node_id_6930" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Discover21-online-bookstore-in-Japan-uses-eZ-Publish" class="a-third-level">
+															Discover21 online bookstore in Japan uses eZ Publish
+														</a>
+													</li>
+																									<li id="node_id_6824" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/William-Reed-Business-Media" class="a-third-level">
+															William Reed Business Media
+														</a>
+													</li>
+																									<li id="node_id_6546" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Phantasialand-relaunch-rich-media-multilingual-highly-available-and-search-engine-optimized" class="a-third-level">
+															Phantasialand relaunch – rich media, multilingual, highly available and search engine optimized
+														</a>
+													</li>
+																									<li id="node_id_6543" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/New-online-customer-area-for-Tyczka-Totalgaz" class="a-third-level">
+															New online customer area for Tyczka Totalgaz
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_2271" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Customers/Success-Stories" class="a-second-level">Success Stories</a>
+																			</li>
+																	<li id="node_id_1825" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry" class="a-second-level has-more">By Industry</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_19860" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/All-Industries" class="a-third-level">
+															All Industries
+														</a>
+													</li>
+																									<li id="node_id_10207" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Retail-and-Consumer" class="a-third-level">
+															Retail and Consumer
+														</a>
+													</li>
+																									<li id="node_id_2501" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Telecommunications" class="a-third-level">
+															Telecommunications
+														</a>
+													</li>
+																									<li id="node_id_2500" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Governmental-Non-Profit-Education" class="a-third-level">
+															Governmental, Non-Profit &amp; Education
+														</a>
+													</li>
+																									<li id="node_id_2499" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Finance" class="a-third-level">
+															Finance
+														</a>
+													</li>
+																									<li id="node_id_2498" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Service-Industry" class="a-third-level">
+															Service Industry
+														</a>
+													</li>
+																									<li id="node_id_2497" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Media-Entertainment" class="a-third-level">
+															Media &amp; Entertainment
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                            																									
+
+                                	                																					                                    <li id="node_id_1832" class="li-first-level ">
+                    	<a href="https://ez.no/headerandfooteraccess/Partners/Success-with-eZ" class="menu-item-link">
+                    		<span>Partners</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_2272" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Partners/Success-with-eZ" class="a-second-level">Success with eZ </a>
+																			</li>
+																	<li id="node_id_1833" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Partners/Become-a-Partner" class="a-second-level">Become a Partner</a>
+																			</li>
+																	<li id="node_id_2035" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Partners/Find-a-Partner" class="a-second-level">Find a Partner</a>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                            																																		
+
+                                	                																					                                    <li id="node_id_1836" class="li-first-level lastli">
+                    	<a href="https://ez.no/headerandfooteraccess/About-eZ/Company-Overview" class="menu-item-link">
+                    		<span>About eZ</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_2273" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/Company-Overview" class="a-second-level">Company Overview </a>
+																			</li>
+																	<li id="node_id_20956" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers" class="a-second-level has-more">Careers</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_21234" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Financial-Accountant-Norway" class="a-third-level">
+															Financial Accountant - Norway
+														</a>
+													</li>
+																									<li id="node_id_21134" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Professional-Services-Consultant-Norway" class="a-third-level">
+															Professional Services Consultant - Norway
+														</a>
+													</li>
+																									<li id="node_id_21133" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Professional-Services-Consultant-France" class="a-third-level">
+															Professional Services Consultant - France
+														</a>
+													</li>
+																									<li id="node_id_20998" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Junior-Marketing-Manager-Cologne" class="a-third-level">
+															Junior Marketing Manager - Cologne
+														</a>
+													</li>
+																									<li id="node_id_20957" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Graphic-Designer" class="a-third-level">
+															Graphic Designer
+														</a>
+													</li>
+																									<li id="node_id_20958" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/User-Interface-Designer" class="a-third-level">
+															User Interface Designer 
+														</a>
+													</li>
+																									<li id="node_id_20960" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Product-Manager-Dev-Ex" class="a-third-level">
+															Product Manager Dev Ex
+														</a>
+													</li>
+																									<li id="node_id_20959" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Product-Manager-Web-UX" class="a-third-level">
+															Product Manager Web  UX
+														</a>
+													</li>
+																									<li id="node_id_20961" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Junior-UI-Developer-Poland" class="a-third-level">
+															Junior UI Developer - Poland
+														</a>
+													</li>
+																									<li id="node_id_20962" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Senior-UI-Developer-Poland" class="a-third-level">
+															Senior UI Developer - Poland
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_1839" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/Events-News" class="a-second-level has-more">Events &amp; News</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_1841" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Events-News/News" class="a-third-level">
+															News
+														</a>
+													</li>
+																									<li id="node_id_1844" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Events-News/Events" class="a-third-level">
+															Events
+														</a>
+													</li>
+																									<li id="node_id_1845" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Events-News/Upcoming-Webinars" class="a-third-level">
+															Upcoming Webinars
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_1838" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/eZ-Management" class="a-second-level">eZ Management</a>
+																			</li>
+																	<li id="node_id_1840" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" class="a-second-level">Contact Us</a>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                                            </ul>
+    </div>
+        <!-- Top menu content: END -->
+</div>        </div>
+</div>    </div>
+
+
+<div id="page-content-position"><div id="page-content-position-inner"><div id="page-content">
+
+<!-- Path area: START -->
+<div id="path">
+
+<div id="page-width4">
+<h2 class="hide">Path</h2>
+
+<!-- Path content: START -->
+<p> <a href="http://ez.no/">ez.no</a> /
+                        <a href="../../../../../doc_hidden.html">documentation</a>
+        
+                        /
+                            <a href="../../../../eZ-Publish.html">ez publish</a>
+        
+                        /
+                            <a href="../../../Upgrading.html">upgrading</a>
+        
+                        /
+                            <a href="../../Direct-upgrading.html">direct upgrading</a>
+        
+                        /
+                            <a href="../Direct-upgrading-to-4.6-from-4.1-4.2-4.3-and-4.html">direct upgrading to 4.6 fro...</a>
+        
+                        /
+                            direct upgrading from 4.2 t...
+        
+            </p>
+<!-- Path content: END -->
+
+</div>
+
+</div>
+<!-- Path area: END -->
+
+<hr class="hide" />
+
+<!-- Main area: START -->
+<div id="ezp5disclaimer">
+<p><strong style="color: red">Caution:</strong> This documentation is for <strong>eZ Publish</strong> <em>legacy</em>, from version 3.x to 5.x.<br/>
+For 5.x documentation covering <em>Platform</em> see <a href="../../../../../display/MAIN/eZ%2bDocumentation%2bCenter.html">eZ Documentation Center</a>, for difference between <em>legacy</em> and <em>Platform</em> see <a href="../../../../../pages/viewpage0139.html?pageId=11403666">5.x Architecture overview</a>.</p>
+</div>
+
+<div id="page-width5">
+<div id="main" class="float-break">
+
+
+<div class="template-design area-docmenu-normal">
+<div class="template-module">
+<div class="template-object">
+<div id="contentmenu">
+                        <div class="attribute-heading"><h2 class="bullet"><a href="../../Direct-upgrading.html">Table of contents</a></h2></div>
+<div class="boxcontent">
+
+<map id="contentstructure">
+
+    
+
+    
+</map>
+
+</div>            
+</div>
+</div>
+</div>
+</div>
+<div class="area-docmain-normal">
+<div class="template-design">
+<div class="template-module content-view-full">
+<div class="template-object">
+
+<div class="attribute-heading">
+<h1>Direct upgrading from 4.2 to 4.6</h1>
+</div>
+
+<p>This section describes how to upgrade your existing eZ Publish 4.2 installation&nbsp;directly&nbsp;to version 4.6. Make sure that you have a working backup of the site before you do the actual upgrade, and make sure the installation you are performing&nbsp;the upgrade on is offline.</p><a name="eztoc126372_0_1" id="eztoc126372_0_1"></a><h3>Important upgrade notes:</h3><p>The procedure for upgrading directly from version 4.2 to 4.6 consists of the following steps:</p>
+<ul>
+<li><div>Upgrade the distribution files to 4.6</div></li><li><div>Upgrade custom extensions
+<ul>
+<li><div>4.2 to 4.3</div></li><li><div>4.3.to 4.4</div></li><li><div>4.4 to 4.5</div></li><li><div>4.5 to 4.6</div></li>
+</ul>
+</div></li><li><div>Upgrade the database to 4.6 
+<ul>
+<li><div>4.2 to 4.3</div></li><li><div>4.3 to 4.4</div></li><li><div>4.4 to 4.5</div></li><li><div>4.5 to 4.6</div></li>
+</ul>
+</div></li><li><div>Regenerate the autoload array for extensions</div></li><li><div>Run the system upgrade scripts for 4.6 
+<ul>
+<li><div>4.2 to 4.3</div></li><li><div>4.3 to 4.4</div></li><li><div>4.4 to 4.5</div></li><li><div>4.5 to 4.6</div></li>
+</ul>
+</div></li><li><div>Additional upgrade step</div></li><li><div>Enable ezjscore</div></li><li><div>Enable admin2-design for back-end</div></li><li><div>Clear the caches</div></li><li><div>Upgrade extensions</div></li>
+</ul>
+<a name="eztoc126372_1" id="eztoc126372_1"></a><h2>Check for requirements</h2><a name="eztoc126372_1_2" id="eztoc126372_1_2"></a><h3>The eZ Components and PHP requirements</h3><p>The minimum version required of eZ Components with eZ Publish 4.6 is &quot;ezcomponents-ezp46&quot;, containing a fix to the package. This version is bundled in eZ Publish 4.6 Enterprise. eZ Publish 4.6 is compatible with PHP version 5.2.1 and above, but certified on RHEL 6 and Debian 6, PHP 5.3.x distros. See&nbsp;<a href="../../../../../eZ-Publish/Technical-manual/5.x/Installation/Requirements.html" target="_self">http://ez.no/ezpublish/requirements</a>&nbsp;for more info.</p><a name="eztoc126372_2" id="eztoc126372_2"></a><h2>Step 1: Upgrade the distribution files</h2><p>The easiest way to upgrade the distribution files is to unpack eZ Publish 4.6 to a separate directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p>
+<ul>
+<li><div>design/example</div></li><li><div>design/example_admin</div></li><li><div>var</div></li><li><div>settings/siteaccess</div></li><li><div>settings/override</div></li><li><div>(index_cluster.php)</div></li>
+</ul>
+<p><b>Cluster note:</b> If you are using cluster mode its necessary to copy index_cluster.php from the old version.</p><p>Replace &quot;example&quot; and &quot;example_admin&quot; with the actual names of your site accesses.</p><p><b>Important note: </b>Because the new directory has replaced the original directory, the directory permissions need to be fixed. Use the following commands to do this.</p><p>(You have the choice between Shell commands or Alternative shell commands):</p>
+<ul>
+<li><div><b>Shell commands</b></div></li>
+</ul>
+<p>These shell commands will give proper permission to the web server:</p><pre class="wordwrap"><span class="line">cd &lt;/path/to/your/eZ/Publish/directory&gt;</span>
+<span class="line">chmod -R a+rwx design extension settings var</span>
+</pre>
+<ul>
+<li><div><b>Alternative shell commands</b></div></li>
+</ul>
+<p>&nbsp;These commands will setup the permission more correctly, but require knowledge about the running web server (change 'nouser' to http server user).</p><pre class="wordwrap"><span class="line">cd &lt;/path/to/your/eZ/Publish/directory&gt;</span>
+<span class="line">chmod -R og+rwx design extension settings var</span>
+<span class="line">chown -R nouser:nouser design extension settings var</span>
+</pre><a name="eztoc126372_3" id="eztoc126372_3"></a><h2>Step 2: Custom extensions</h2><p>If you are using custom extensions, the sub-directories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that are included in eZ Publish, which currently are eZ Flow (2.x), eZ Online Editor (5.x), eZ OpenOffice Document format (2.x), eZ JSCore (1.x), eZ Image Editor (1.x), eZ Comments (1.x), eZ Multiupload (1.x), eZ MB Password Expiry (1.x), eZ Network (1.x), eZ REST API Provider (1.x), eZ Script Monitor (1.x), eZ SI, eZ Find (2.x). Note that upgrading the distribution files will overwrite the autoload arrays for extensions. You will need to re-generate the autoload arrays for active extensions later.</p><p>See the dedicated upgrade instructions for eZ Flow and Website Interface below.</p><p>The updated versions of eZ Flow and Website Interface will also install the following extensions:</p>
+<ul>
+<li><div>eZ Website Toolbar</div></li><li><div>eZ Star Rating</div></li><li><div>eZ Google Maps Location</div></li>
+</ul>
+<p><b>Note:</b> For eZ Online Editor 5.x and eZ JS Core you will need to replace the following rewrite rules when using Virtual Hosts:</p><pre class="wordwrap"><span class="line">RewriteRule ^/var/cache/texttoimage/.* - [L]</span>
+<span class="line">RewriteRule ^/var/[^/]+/cache/(texttoimage|public)/.* - [L]</span>
+</pre><p>with:</p><pre class="wordwrap"><span class="line">RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* - [L]</span>
+</pre><p>For more detailed instructions, see the dedicated <a href="http://ez.no/doc/extensions/online_editor/4.x/installation" target="_self">eZ OE</a> and <a href="../../../../Extensions/eZ-Publish-extensions/eZ-Teamroom/Setup-and-User-Guide/Requirements/eZ-JS-Core/Installation.html" target="_self">eZ JS Core</a> doc pages.</p><a name="eztoc126372_4" id="eztoc126372_4"></a><h2>Step 3: updateimagesystem.php</h2><p>If the installation is a new installation or based on any eZ Publish version since 3.3 then you can skip running the &quot;updateimagesystem.php&quot; script. If not, then execute it using:&nbsp;</p><pre class="wordwrap"><span class="line">php update/common/scripts/4.1/updateimagesystem.php -s $SITE_ACCESS</span>
+</pre><a name="eztoc126372_5" id="eztoc126372_5"></a><h2>Step 4: Upgrade the database</h2><p>The update script for the database is located in the following locations, skip the ones that don't apply to the version your upgrading from:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;eZ Publish root&gt;/update/database/&lt;mysql|postgresql&gt;/4.3/dbupdate-4.2.0-to-4.3.0.sql</span>
+<span class="line">&lt;eZ Publish root&gt;/update/database/&lt;mysql|postgresql&gt;/4.4/dbupdate-4.3.0-to-4.4.0.sql</span>
+<span class="line">&lt;eZ Publish root&gt;/update/database/&lt;mysql|postgresql&gt;/4.5/dbupdate-4.4.0-to-4.5.0.sql</span>
+<span class="line">&lt;eZ Publish root&gt;/update/database/&lt;mysql|postgresql&gt;/4.6/dbupdate-4.4.0-to-4.5.0.sql</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;eZ Publish root&gt;/update/database/&lt;mysql|postgresql&gt;/4.3/dbupdate-4.2.0-to-4.3.0.sql\r\n&lt;eZ Publish root&gt;/update/database/&lt;mysql|postgresql&gt;/4.4/dbupdate-4.3.0-to-4.4.0.sql\r\n&lt;eZ Publish root&gt;/update/database/&lt;mysql|postgresql&gt;/4.5/dbupdate-4.4.0-to-4.5.0.sql\r\n&lt;eZ Publish root&gt;/update/database/&lt;mysql|postgresql&gt;/4.6/dbupdate-4.4.0-to-4.5.0.sql' ); return false;" /></p>
+<![endif]--><p>You can run these with the appropriate sql command line tool or application.</p><a name="eztoc126372_5_2_1" id="eztoc126372_5_2_1"></a><h4>Clustering:</h4><p>If your upgrading from 4.1 or 4.2 using db or dfs cluster, make sure you apply the following sql updates (but for dfs make sure you change table name from <i>&quot;ezdbfile&quot;</i> to &quot;<i>ezdfsfile&quot;</i>):</p><pre class="wordwrap"><span class="line">&lt;eZ Publish root&gt;/update/database/mysql/4.3/dbupdate-cluster-4.2.0-to-4.3.0.sql</span>
+</pre><a name="eztoc126372_5_2_1_1" id="eztoc126372_5_2_1_1"></a><h5>Schema changes</h5><p><b>Note:</b> The schema changes are only necessary if you have eZ Flow installed and if you are making an upgrade from 4.2 -&gt; 4.6. If so you must run this sql on the mysql client</p><pre class="wordwrap"><span class="line">ALTER TABLE ezm_pool ADD INDEX ezm_pool__block_id__ts_hidden ( block_id, ts_hidden );</span>
+</pre><a name="eztoc126372_5_2_2" id="eztoc126372_5_2_2"></a><h4>MySQL</h4><p>The &quot;ezmysql&quot; database driver has been deprecated in 4.5 and it is recommended to use the &quot;ezmysqli&quot; driver instead. This requires that the &quot;mysqli&quot; extension in PHP is enabled and can be archived by changing the driver in your override or siteaccesses &quot;site.ini.append.php&quot; settings to:</p><pre class="wordwrap"><span class="line">[DatabaseSettings]</span>
+<span class="line">DatabaseImplementation=ezmysqli</span>
+</pre><a name="eztoc126372_5_2_2_1_1" id="eztoc126372_5_2_2_1_1"></a><h6>Cluster</h6><p>The &quot;Mysql DB/DFS Cluster&quot; database back-end has not yet been deprecated, but it is recommended to use the same driver as the main database driver, so change your &quot;file.ini.append.php&quot; settings in override or siteaccesses to use&quot; eZDFSFileHandlerMySQLiBackend&quot; for DFS Cluster or &quot;eZDBFileHandlerMysqliBackend&quot; for DB Cluster.</p><p>Note: The &quot;index_cluster.php&quot; file should be updated to</p><pre class="wordwrap"><span class="line">define( 'STORAGE_BACKEND', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'dfsmysqli' &nbsp;&nbsp;&nbsp;)</span>
+</pre><p>If you use DB cluster, remove &quot;dfs&quot; from the string.</p><a name="eztoc126372_6" id="eztoc126372_6"></a><h2>Step 5: Regenerate the autoload array for extensions</h2><p>The autoload system also has some changes, for example the autoload array for extensions is now placed in var/autoload of your eZ Publish installation (along the class changes in extensions itself).</p><p>To regenerate the autoload array, execute the following script from the root of your eZ Publish directory:&nbsp;</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php --extension</span>
+</pre><a name="eztoc126372_7" id="eztoc126372_7"></a><h2>Step 6: Run the system upgrade scripts</h2><a name="eztoc126372_7_2_3" id="eztoc126372_7_2_3"></a><h4>4.2 to 4.3</h4><p>This version includes a script to fix #15478: Node assignment is not removed when removing node from child list:</p><pre class="wordwrap"><span class="line">php update/common/scripts/4.3/updatenodeassignment.php -s $SITE_ACCESS</span>
+</pre><a name="eztoc126372_7_2_4" id="eztoc126372_7_2_4"></a><h4>4.3 to 4.4</h4><p>Update script for this version contained a bug and is repeated in 4.4 to 4.5 below, thus is not needed in this instruction.</p><a name="eztoc126372_7_2_5" id="eztoc126372_7_2_5"></a><h4>4.4 to 4.5</h4><p>For eZ Publish 4.4 which was upgraded from 4.3, run the following command from the root of your eZ Publish directory:</p><pre class="wordwrap"><span class="line">php update/common/scripts/4.5/updatesectionidentifier.php -s $SITE_ACCESS</span>
+</pre><p><b>Note:</b> Skip this step if this your 4.4 installation is not an upgrade from 4.3. If you are uncertain, please run the script.</p><a name="eztoc126372_7_2_6" id="eztoc126372_7_2_6"></a><h4>4.5 to 4.6</h4><p>There are two system upgrade scripts that can be run for the eZ Publish 4.6 upgrade, &quot;<i>removetrashedimages.php</i>&quot; and &quot;<i>updateordernumber.php</i>&quot;.</p><p><b>Script 1:</b> If you want to ensure no trashed images remains on your setup because of image aliases not being restored when restoring object from trash (issue #017781), you do the following:</p>
+<ol>
+<li><div>make sure that no items remains in trash for any users (images from objects in trash would be impossible to restore not doing so)</div></li><li><div>run the following cleanup script by executing this command:</div></li>
+</ol>
+<pre class="wordwrap"><span class="line">$ php update/common/scripts/4.6/removetrashedimages.php</span>
+</pre><p><b>Note:</b> It is safe to skip this test, this is only to free extra space.</p><p><b>Script 2:</b> You need to run an upgrade script to update webshop order numbers issue (#018233) by running:</p><pre class="wordwrap"><span class="line">$ php update/common/scripts/4.6/updateordernumber.php</span>
+</pre><p><b>Note:</b> If you don’t have webshop or you don’t have orders (table &quot;<i>ezorder</i>&quot;) in your eZ Publish, you don’t have to run this script.</p><a name="eztoc126372_8" id="eztoc126372_8"></a><h2>Step 7: Additional upgrade steps</h2><p><b>Update &quot;override.ini.append.php&quot;</b></p><p>Content panes are not visible on the &quot;User accounts&quot; tab in the back-end. To fix it on an already-installed eZPublish, remove the following rules from your &quot;override.ini.append.php&quot; for your admin siteaccess:</p><pre class="wordwrap copytoclipboard"><span class="line">[window_controls]</span>
+<span class="line">Source=window_controls.tpl</span>
+<span class="line">MatchFile=window_controls_user.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[navigation_part_identifier]=ezusernavigationpart</span>
+<span class="line">&nbsp;</span>
+<span class="line">[windows]</span>
+<span class="line">Source=windows.tpl</span>
+<span class="line">MatchFile=windows_user.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[navigation_part_identifier]=ezusernavigationpart</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[window_controls]\r\nSource=window_controls.tpl\r\nMatchFile=window_controls_user.tpl\r\nSubdir=templates\r\nMatch[navigation_part_identifier]=ezusernavigationpart\r\n\r\n[windows]\r\nSource=windows.tpl\r\nMatchFile=windows_user.tpl\r\nSubdir=templates\r\nMatch[navigation_part_identifier]=ezusernavigationpart' ); return false;" /></p>
+<![endif]--><p>... and clear the cache after removing. See separate step below.</p><a name="eztoc126372_9" id="eztoc126372_9"></a><h2>Step 8: Enable ezjscore</h2><p>Both the &quot;admin2&quot; design, &quot;ezoe&quot;, &quot;ezwebin&quot;, &quot;ezflow&quot; and several other extensions requires the ezjscore extension to be enabled, this is archived by editing your &quot;settings/override/site.ini.append.php&quot; settings file to make sure it looks like this:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;pre&gt;</span>
+<span class="line">&nbsp;[ExtensionSettings]</span>
+<span class="line">&nbsp;ActiveExtensions[]</span>
+<span class="line">&nbsp;ActiveExtensions[]=ezjscore</span>
+<span class="line">&nbsp;&lt;/pre&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;pre&gt;\r\n [ExtensionSettings]\r\n ActiveExtensions[]\r\n ActiveExtensions[]=ezjscore\r\n &lt;/pre&gt;' ); return false;" /></p>
+<![endif]--><a name="eztoc126372_10" id="eztoc126372_10"></a><h2>Step 9: Enable admin2 design for back-end</h2><p>To enable admin2 open &quot;site.ini&quot; for your admin site access. For an eZ Flow site this would for instance be:</p><pre class="wordwrap"><span class="line">settings/siteaccess/ezflow_site_admin/site.ini.append.php</span>
+</pre><p>In this file include &quot;AdditionalSiteDesignList[]=admin2&quot; to your [DesignSettings]. It is important that you add the <i>admin2</i> design before the <i>admin</i> design, in order to let extensions that have admin templates to continue to work. On an eZ Flow site, it would mean changing the settings from:</p><pre class="wordwrap copytoclipboard"><span class="line">[DesignSettings]</span>
+<span class="line">SiteDesign=ezflow_site_admin</span>
+<span class="line">AdditionalSiteDesignList[]=admin</span>
+<span class="line">AdditionalSiteDesignList[]=ezflow</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[DesignSettings]\r\nSiteDesign=ezflow_site_admin\r\nAdditionalSiteDesignList[]=admin\r\nAdditionalSiteDesignList[]=ezflow' ); return false;" /></p>
+<![endif]--><p>to</p><pre class="wordwrap copytoclipboard"><span class="line">[DesignSettings]</span>
+<span class="line">SiteDesign=ezflow_site_admin</span>
+<span class="line">AdditionalSiteDesignList[]=admin2</span>
+<span class="line">AdditionalSiteDesignList[]=admin</span>
+<span class="line">AdditionalSiteDesignList[]=ezflow</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[DesignSettings]\r\nSiteDesign=ezflow_site_admin\r\nAdditionalSiteDesignList[]=admin2\r\nAdditionalSiteDesignList[]=admin\r\nAdditionalSiteDesignList[]=ezflow' ); return false;" /></p>
+<![endif]--><p>When using a plain or eZ Webin install you should make the same changes. In this case you will of course have a different SiteDesign setting and no AdditionalSiteDesignList[]=ezflow line.</p><p>To enable users to change their Administration Interface preferences (Location and Re-Edit editing preferences), add the following line to the [Toolbar_admin_right] block in settings/siteaccess/&lt;siteaccess_name&gt;/toolbar.ini.append.php:</p><pre class="wordwrap"><span class="line">Tool[]=admin_preferences</span>
+</pre><p>So the block will then look like like this:</p><pre class="wordwrap copytoclipboard"><span class="line">[Toolbar_admin_right]</span>
+<span class="line">Tool[]</span>
+<span class="line">Tool[]=admin_current_user</span>
+<span class="line">Tool[]=admin_bookmarks</span>
+<span class="line">Tool[]=admin_preferences</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[Toolbar_admin_right]\r\nTool[]\r\nTool[]=admin_current_user\r\nTool[]=admin_bookmarks\r\nTool[]=admin_preferences' ); return false;" /></p>
+<![endif]--><a name="eztoc126372_11" id="eztoc126372_11"></a><h2>Step 10: Clear the caches</h2><p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. <b>Note:</b> You should not be a root user when you start the caching process (refer to <a href="http://issues.ez.no/15823" target="_self">http://issues.ez.no/15823</a>). The caching should be done from within a system shell:</p>
+<ol>
+<li><div>Navigate into the eZ Publish 4.5 directory.</div></li><li><div>Run the script using the following shell command:</div></li>
+</ol>
+<pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre><p>Purging ensures that the caches are physically removed. When the &quot;--purge&quot; parameter is not specified, the caches will be expired but not removed.</p><p>Sometimes the script is unable to clear all cache files because of restrictive file/directory permission settings. Make sure that all cache files have been cleared by inspecting the contents of the various cache sub-directories within the &quot;var&quot; directory (typically the &quot;var/cache/&quot; and &quot;var/&lt;name_of_siteaccess&gt;/cache/&quot; directories). If there are any cache files left, you need to remove them manually.</p><a name="eztoc126372_12" id="eztoc126372_12"></a><h2>Step 11: Upgrade extensions</h2><p>When using eZ Webin and eZ Flow, these extension will also need to be updated.</p><p>The first thing to do is to change the extensions permissions. An example on how this is done:</p><pre class="wordwrap"><span class="line">$chmod -R a+rwx extension</span>
+</pre><a name="eztoc126372_12_2_7" id="eztoc126372_12_2_7"></a><h4>4.2 to 4.3:</h4><p>
+<a href="../../../../Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-4.html" id="vmvc" title="http://ez.no/doc/extensions/website_interface/website_interface_1_7_upgrade" target="_self">eZ Webin</a>&nbsp;1.5 to 1.6<br />
+or<br /><a href="../../../../Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-10.html" id="qorj" title="http://ez.no/doc/extensions/ez_flow/ez_flow_2_2_upgrade" target="_self">eZ Flow</a>&nbsp;2.0 to 2.1</p><a name="eztoc126372_12_2_8" id="eztoc126372_12_2_8"></a><h4>4.3 to 4.4:</h4><p>
+<a href="../../../../Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-3.html" id="vmvc" title="http://ez.no/doc/extensions/website_interface/website_interface_1_7_upgrade" target="_self">eZ Webin</a>&nbsp;1.6 to 1.7<br />
+or<br /><a href="../../../../Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-9.html" id="qorj" title="http://ez.no/doc/extensions/ez_flow/ez_flow_2_2_upgrade" target="_self">eZ Flow</a>&nbsp;2.1 to 2.2</p><a name="eztoc126372_12_2_9" id="eztoc126372_12_2_9"></a><h4>4.4 to 4.5:</h4><p>
+<a href="../../../../Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-2.html" id="vmvc" title="http://ez.no/doc/extensions/website_interface/website_interface_1_7_upgrade" target="_self">eZ Webin</a>&nbsp;1.7 to 1.8<br />
+or<br /><a href="../../../../Extensions/eZ-Publish-extensions/eZ-Flow/Upgrading-eZ-Flow/eZ-Flow-4.html" id="qorj" title="http://ez.no/doc/extensions/ez_flow/ez_flow_2_2_upgrade" target="_self">eZ Flow</a>&nbsp;2.2 to 2.3</p><a name="eztoc126372_12_2_10" id="eztoc126372_12_2_10"></a><h4>4.5 to 4.6:</h4><p>
+<a href="../../../../Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-1.html" id="vmvc" title="http://ez.no/doc/extensions/website_interface/website_interface_1_7_upgrade" target="_self">eZ Webin</a>&nbsp;1.8 to 1.9<br />
+or<br /><a href="../../../../Extensions/eZ-Publish-extensions/eZ-Flow/eZ-Flow-4.html" id="qorj" title="http://ez.no/doc/extensions/ez_flow/ez_flow_2_2_upgrade" target="_self">eZ Flow</a>&nbsp;2.3 to 2.4</p>
+
+<div class="break"></div><div class="pageinfo float-break">
+<div class="created">
+
+
+<p><label>Written by:</label>Geir Arne Waaler&nbsp;(21/09/2011 11:52 am)</p>
+</div>
+<div class="modified">
+<p><label>Last updated by:</label>Geir Arne Waaler&nbsp;(17/04/2012 1:35 pm)</p>
+</div></div>
+<hr class="hide" />
+
+</div>
+</div>
+</div>
+
+<div id="comments" class="class-comment">
+<div class="content-view-children">
+
+<h1>Comments</h1>
+<p>There are no comments.</p>
+<div class="toolbar">
+
+<form method="post" action="https://doc.ez.no/doc_hidden/content/action">
+<input class="button" type="submit" name="NewButton" value="New comment" />
+<input type="hidden" name="NodeID" value="26291" />
+<input type="hidden" name="RedirectURIAfterPublish" value="eZ-Publish/Upgrading/Direct-upgrading/Direct-upgrading-to-4.6-from-4.1-4.2-4.3-and-4.4/Direct-upgrading-from-4.2-to-4.6" />
+<input type="hidden" name="ClassID" value="17" />
+</form>
+</div>
+
+</div>
+</div>
+
+</div>
+<!-- Main area content: END -->
+
+</div>
+</div>
+<!-- Main area: END -->
+<hr class="hide" />
+
+</div></div></div>
+
+        <div id="footer-bg">
+        <div id="footer" class="container_12">
+
+            <div class="grid_3">
+                <img src="https://ez.no/extension/ez_ezno/design/ezno_2011/images/ez-logo-white.png" alt="ez-publish" />
+                <div id="footer-copyright" class="grid_3 alpha omega">
+                    
+<p>eZ Systems has been providing Web Content Management Solutions since 1999. With a global presence in Europe, Asia and the Americas, we are the power platform driving more than 250,000 sites in over 170 countries.</p>                </div>
+            </div>
+
+            <div class="grid_6 middle">
+                <div class="grid_6 alpha omega">
+                    <div class="grid_3 alpha"><div>
+<a name="eztoc411316_0_0_0_1" id="eztoc411316_0_0_0_1"></a><h5>PRODUCTS</h5>
+<ul>
+
+<li><a href="https://ez.no/headerandfooteraccess" target="_self">eZ Publish 5&nbsp;Platform</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Products/Compare-Versions" target="_self">Compare Versions</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Products/Demos-Videos" target="_self">Demos &amp; Videos</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Products/eZ-Market" target="_self">eZ Market</a></li>
+
+</ul>
+<a name="eztoc411316_0_0_0_2" id="eztoc411316_0_0_0_2"></a><h5>eZ DELIVERS RESULTS</h5>
+<ul>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-Delivers-Results/Monetize-Your-Content" target="_self">Monetize Your Content</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-Delivers-Results/Digitize-Your-Business" target="_self">Digitalize Your Business</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-Delivers-Results/Deliver-a-Better-Brand-Experience" target="_self">Deliver a Better Brand Experience</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-Delivers-Results/Engage-With-Customers" target="_self">Engage With Customer</a></li>
+
+</ul>
+</div></div>
+                    <div class="grid_3 omega"><div>
+<a name="eztoc411317_0_0_0_1" id="eztoc411317_0_0_0_1"></a><h5>eZ FOR YOU</h5>
+<ul>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-For-You/For-Executives" target="_self">For Executives</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-For-You/For-Online-Digital-Strategists" target="_self">For Online Digital Strategists</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-For-You/For-Marketing-Professionals" target="_self">For Marketing Professionals</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-For-You/For-Business-Systems-Managers" target="_self">For Business Systems Managers</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess" title="eZ Publish Documentation" target="_self">For Developers</a></li>
+
+</ul>
+<a name="eztoc411317_0_0_0_2" id="eztoc411317_0_0_0_2"></a><h5>GET STARTED NOW</h5>
+<ul>
+
+<li><a href="https://ez.no/headerandfooteraccess/Products/Demos-Videos" target="_self">See a Demo</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Forms/HTML-forms/Contact-eZ" target="_self">Ask a Question</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Forms/HTML-forms/Contact-Support" target="_self">Contact Support</a></li>
+
+</ul>
+</div></div>
+                </div>
+            </div>
+
+            <div class="grid_3 right">
+                <div class="contact-ez">
+                        <a id="cta-contact" href="https://ez.no/headerandfooteraccess/Forms/HTML-forms/Contact-eZ/(origin)/footer" title="Contact eZ!" class="btn-green btn--small">Contact eZ!</a>
+                </div>
+
+                <div class="adress">
+<a name="eztoc411321_0_0_0_1" id="eztoc411321_0_0_0_1"></a><h5>LOCATIONS:</h5><p><a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" target="_self">Cologne, London </a></p><p><a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" id="__mce_tmp" target="_self">Lyon, New York</a></p><p><a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" id="__mce_tmp" target="_self">Oslo, Paris</a></p><p><a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" id="__mce_tmp" target="_self">Skien, Tokyo</a></p></div>
+            </div>
+
+        </div>
+    </div>
+<div id="footer-connect-bg">
+    <div id="footer" class="container_12">
+        <div id="footer-connect-copyright" class="grid_8 alpha omega">
+            Copyright © 2013 eZ Systems AS (except where otherwise noted). All rights reserved.
+            
+
+<div class="">    <a href="https://ez.no/headerandfooteraccess/Privacy-policy">Privacy policy</a></div><br/><br/>
+            Powered by <a href="http://ez.no/ezpublish" title="eZ Publish Platform">the eZ Publish Platform</a>.<br />
+        </div>
+
+        <div id="footer-connect-social" class="grid_4 right">
+            <a href="http://www.youtube.com/user/ezpublish/" class="youtube" target="_blank">youtube</a>
+            <a href="https://google.com/+ezsystems" class="googleplus" target="_blank">google plus</a>
+            <a href="http://www.linkedin.com/groups?gid=2759&amp;trk=myg_ugrp_ovr" class="linkedin" target="_blank">linkedin</a>
+            <a href="https://www.facebook.com/eZPublishEnterprise" class="facebook" target="_blank">facebook</a>
+            <a href="http://twitter.com/#!/ezsystems" class="twitter" target="_blank">twitter</a>
+        </div>
+
+
+    </div>
+</div>
+
+
+</div>
+<!-- Complete page area: END -->
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-303624-13', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+<script type="text/javascript">
+(function()
+{var ff=document.createElement('script');ff.type='text/javascript';ff.async=true;ff.src='https://secure.liveviewer.ez.no/statjs/sst-120-1304513615/stat.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ff,s);}
+)();
+</script>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/eZ-Publish/Upgrading/Direct-upgrading/Direct-upgrading-to-4.6-from-4.1-4.2-4.3-and-4.4/Direct-upgrading-from-4.2-to-4.6 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 11:09:32 GMT -->
+</html>
+
+<!-- th[eZ] 20050804 -->

@@ -1,0 +1,96 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Reference/Modules/section/Fetch-functions/object_list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:10:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>object_list / Fetch functions / section / Modules / Reference / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>object_list</h1>
+</div>
+<h3>Summary</h3>
+Fetches objects that belong to certain section.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'section', 'object_list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'section_id', section_id,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'offset', &nbsp;&nbsp;&nbsp;&nbsp;offset, &nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'limit', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit, &nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'sort_order', sort_order ] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>section_id</td>
+        <td>integer</td>
+        <td>The ID number of the target section.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>offset</td>
+        <td>integer</td>
+        <td>The offset to start at.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>limit</td>
+        <td>integer</td>
+        <td>The number of objects that should be fetched.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>sort_order</td>
+        <td>array</td>
+        <td>The desired sorting order.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An array of <a href="../../../Objects/ezcontentobject.html" target="_self">ezcontentobject</a> objects or FALSE.</p><h3>Description</h3>
+ <p>This function fetches a set of objects that belong to a certain section. The section must be specified by its ID number using the &quot;section_id&quot; parameter. The &quot;offset&quot;, &quot;limit&quot; and &quot;sort_order&quot; parameters work in the same way as in the <a href="../../content/Fetch-functions/list.html" target="_self">list</a> fetch function of the &quot;content&quot; module. The function returns an array of <a href="../../../Objects/ezcontentobject.html" target="_self">ezcontentobject</a> objects. If no objects can be found, or if the provided section ID number is invalid, FALSE will be returned.</p><h3>Examples</h3>
+    <a name="eztoc25342_0_0_1" id="eztoc25342_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $objects=fetch( 'section', 'object_list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'section_id', 13 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $objects as $object}</span>
+<span class="line">{$object.name} &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $objects=fetch( \'section\', \'object_list\',\r\n                     hash( \'section_id\', 13 ) )}\r\n                    \r\n{foreach $objects as $object}\r\n{$object.name} &lt;br /&gt;\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>Outputs the names of the objects that belong to section number 13.</p>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Reference/Modules/section/Fetch-functions/object_list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:10:51 GMT -->
+</html>

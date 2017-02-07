@@ -1,0 +1,66 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/User-manual/3.9/Daily-tasks/Removing-content by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:48:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Removing content / Daily tasks / 3.9 / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Removing content</h1>
+</div>
+
+ <p>You can remove nodes from the system using several approaches. This operation works in a similar way as when you remove files and directories from a filesystem. If you remove a node which has underlying nodes, all the nodes will be removed. For example, if you remove a folder that contains several articles, both the folder itself and the articles in it will be removed.</p> <p>If the node that is being removed has underlying nodes, the administration interface will warn about this. In most cases, the system will ask for confirmation and if you want to keep the removed objects in the <a href="#trash" target="_self">trash</a>. (This default behavior is controlled by the configuration settings located in the <a href="../../../Technical-manual/3.9/Reference/Configuration-files/content.ini/RemoveSettings.html" target="_self">[RemoveSettings]</a> section of &quot;content.ini&quot;.) The following image shows the removal confirmation dialog.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/user_manual/3_9/images/daily_tasks/removal_confirmation_dialog/14623-5-eng-GB/removal_confirmation_dialog_doc.png" alt="Removal confirmation dialog." />
+ <p>Removal confirmation dialog.</p>
+
+
+
+
+
+
+
+</div> <p>In the example above, the user is trying to remove a node which contains 4 other nodes (sub items). If the &quot;Move to trash&quot; checkbox is checked, the objects will be moved to the <a href="#trash" target="_self">trash</a> instead of being permanently deleted. </p> <p>Note that it is not recommended to remove large subtrees using the administration interface. The browser might time out in the middle of the operation and thus the database would be left in an inconsistent state. To solve this issue you can either increase the timeout or use the &quot;ezsubtreeremove.php&quot; script located in the &quot;bin/php/&quot; directory (you'll need to have PHP CLI installed and access to the command line).</p> <p>The following text explains different approaches that can be used in order to remove a single or multiple nodes from the system.</p>   <a name="eztoc71764_0_1" id="eztoc71764_0_1"></a><h3>Removing the node which is currently being viewed</h3> <p>You can remove the node that is being viewed by simply clicking the &quot;Remove&quot; button in the preview window.</p>     <a name="eztoc71764_0_2" id="eztoc71764_0_2"></a><h3>Removing a single node using the context menu</h3> <p>Another way of removing a single node is by making use of the context menu. Simply click on a node's icon either in the tree menu or in the &quot;Sub items&quot; window and select &quot;Remove&quot;.</p>     <a name="eztoc71764_0_3" id="eztoc71764_0_3"></a><h3>Removing multiple nodes</h3> <p>The &quot;Sub items&quot; window makes it possible to remove several nodes within the same operation. Use the checkboxes to select the nodes that you wish to remove and click the &quot;Remove selected&quot; button.</p> <p> <a name="trash"></a>
+ </p>    <a name="eztoc71764_1" id="eztoc71764_1"></a><h2>The trash</h2> <p>It is important to understand that the trash in eZ Publish is a flat structure. This is different from what people are used to from modern operating systems. When a node is deleted and the &quot;Move to trash&quot; checkbox is checked, it is only the object itself that will be moved to the trash. From version 3.8, the system also remembers the object's last location in the tree and thus objects in the trash can be recovered to their original locations. However, this is only possible if their original parent nodes have not been deleted. Otherwise, the user must specify new/alternate locations for the objects during recovery. Note that specifying an alternate/new location can be done regardless if the system is able to restore a deleted object at its original location or not.</p> <p>Furthermore, if a folder containing some news articles is deleted, both the folder and the articles will appear on the same level within the trash. Recovering the folder itself will not bring back the articles since the links between the folder and the articles got lost when the nodes were deleted. In this case, the folder needs to be recovered first. After that, each article has to be recovered and manually given a location.</p>   <a name="note_about_permissions" /><a name="eztoc71764_2" id="eztoc71764_2"></a><h2>A note about permissions</h2> <p>In eZ Publish prior to 3.9, objects that were moved to the trash were available to all users regardless of their access rights. From 3.9, objects in the trash are only available to users with sufficient privileges. Users that are granted access to both &quot;restore&quot; and &quot;read&quot; functions of the &quot;content&quot; module without any limitations will be able to access all objects in the trash. In case the user is only granted limited access to the &quot;read&quot; function of the &quot;content&quot; module, the system will select which objects to show based on the user's access rights. For example, let's say that a folder called &quot;Company&quot; contains two folders called &quot;News&quot; and &quot;About&quot;, each with a set of articles inside, and you delete one of the articles from the &quot;News&quot; folder so that it ends up in the trash. If the user's access to the &quot;read&quot; function of the &quot;content&quot; module is limited to the &quot;Company&quot; folder and its sub items (subtree limitation), the user will be allowed to access the removed article. However, if the user's access to the &quot;read&quot; function of the &quot;content&quot; module is limited to the &quot;About&quot; folder and its sub items (subtree limitation), the removed article will not be available for that user.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/User-manual/3.9/Daily-tasks/Removing-content by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:48:55 GMT -->
+</html>

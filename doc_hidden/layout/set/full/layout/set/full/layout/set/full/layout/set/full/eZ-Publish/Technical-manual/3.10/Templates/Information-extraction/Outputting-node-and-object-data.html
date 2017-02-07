@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Templates/Information-extraction/Outputting-node-and-object-data by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Outputting node and object data / Information extraction / Templates / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Outputting node and object data</h1>
+</div>
+
+ <p>Once an <a href="../../Reference/Objects/ezcontentobjecttreenode.html" target="_self">&quot;ezcontentobjecttreenode&quot;</a> object representing a node is available in a template variable, it can be used to output information about the node and the contents of the object that the node encapsulates. The following text demonstrates the extraction of the most common elements.</p>  <a name="eztoc75318_1" id="eztoc75318_1"></a><h2>General information</h2>  <a name="eztoc75318_1_1" id="eztoc75318_1_1"></a><h3>The name of the object</h3> <pre class="wordwrap"><span class="line">{$node.name|wash}</span>
+</pre> <p>The name of the object is directly available through the node (in other words it is possible to reach it by $node.name instead of $node.object.name). The <a href="../../Reference/Template-operators/Strings/wash.html" target="_self">&quot;wash&quot;</a> operator is used for making sure that the output doesn't contain any bogus characters and/or sequences that may mess up the HTML.</p>   <a name="eztoc75318_1_2" id="eztoc75318_1_2"></a><h3>The date/time when the object was first published</h3> <pre class="wordwrap"><span class="line">{$node.object.published|l10n( 'shortdatetime' )}</span>
+</pre> <p>Since the publishing value is stored as a UNIX timestamp, it must be properly formatted for output. This can be done by using the <a href="../../Reference/Template-operators/Formatting-and-internationalization/l10n.html" target="_self">&quot;l10n&quot;</a> operator, which makes it possible to format different types of values according to the current locale settings.</p>   <a name="eztoc75318_1_3" id="eztoc75318_1_3"></a><h3>The date/time when the object was last modified</h3> <pre class="wordwrap"><span class="line">{$node.object.modified|l10n( 'shortdatetime' )}</span>
+</pre> <p>Since the modification value is stored as a UNIX timestamp, it must be properly formatted for output. This can be done by using the <a href="../../Reference/Template-operators/Formatting-and-internationalization/l10n.html" target="_self">&quot;l10n&quot;</a> operator, which makes it possible to format different types of values according to the current locale settings.</p>   <a name="eztoc75318_1_4" id="eztoc75318_1_4"></a><h3>The name of the user who initially created the object</h3> <pre class="wordwrap"><span class="line">{$node.object.owner.name|wash}</span>
+</pre>   <a name="eztoc75318_1_5" id="eztoc75318_1_5"></a><h3>The name of the user who last modified the object</h3> <pre class="wordwrap"><span class="line">{$node.object.current.creator.name|wash()}</span>
+</pre>   <a name="eztoc75318_1_6" id="eztoc75318_1_6"></a><h3>The name of the class which the object is an instance of</h3> <pre class="wordwrap"><span class="line">{$node.object.class_name|wash()}</span>
+</pre>    <a name="eztoc75318_2" id="eztoc75318_2"></a><h2>Object attributes</h2> <p>The attributes of the object can be reached by the way of the &quot;data_map&quot; method. This method returns an associative array of <a href="../../Reference/Objects/ezcontentobjectattribute.html" target="_self">&quot;ezcontentobjectattribute&quot;</a> objects where each object represents one of the attributes. The keys of the array are the class attribute identifiers. The following example demonstrates how an attribute called &quot;first_name&quot; can be reached using the object's data map.</p> <pre class="wordwrap"><span class="line">{$node.object.data_map.first_name}</span>
+</pre> <p>The example above will not produce any valuable output because the requested data needs to be formatted. There are two ways of outputting the contents of attributes:</p> 
+<ul>
+ <li><div> Raw output (the &quot;.output&quot; extension) </div></li> <li><div> Formatted output (the &quot;attribute_view_gui&quot; function) </div></li> 
+</ul>
+ <p>The main difference between raw and formatted output is that formatted output makes use of a template which in turn outputs the requested data. Raw output simply outputs the data within the same template where the request for output was issued. Output should always be presented through the <a href="../../Reference/Template-functions/Visualization/attribute_view_gui.html" target="_self">&quot;attribute_view_gui&quot;</a> function. The raw output method should only be used when/if necessary (for example when checking the value of an attribute using an IF statement).</p>  <a name="eztoc75318_2_7" id="eztoc75318_2_7"></a><h3>Raw output</h3> <p>Raw output is exactly what the definition indicates: a raw dump of the contents that are stored by the attribute. The actual syntax depends on the datatype that represents the attribute. In most cases, it is possible to generate the output by appending &quot;.output&quot; to the identifier.</p>  <a name="eztoc75318_2_7_1" id="eztoc75318_2_7_1"></a><h4>Generic solution</h4> <p>The following example demonstrates how to output the contents of an attribute called &quot;my_attribute&quot;.</p><pre class="wordwrap"><span class="line">{$node.object.data_map.my_attribute.content}</span>
+</pre>   <a name="eztoc75318_2_7_2" id="eztoc75318_2_7_2"></a><h4>XML block</h4> <p>The following example demonstrates how to output the contents of an XML block called &quot;my_xml&quot;.</p><pre class="wordwrap"><span class="line">{$node.object.data_map.my_xml.content.output.output_text}</span>
+</pre>   <a name="eztoc75318_2_7_3" id="eztoc75318_2_7_3"></a><h4>Image</h4> <p>The following example demonstrates how to output an image stored by an attribute called &quot;my_image&quot;.</p><pre class="wordwrap"><span class="line">&lt;img src=&quot;{$node.object.data_map.my_image.content[image_size].full_path}&quot; ... /&gt;</span>
+</pre>    <a name="eztoc75318_2_8" id="eztoc75318_2_8"></a><h3>Formatted output</h3> <p>Each datatype has a set of templates which are used to display the contents in different contexts. There are at least two templates for each datatype: a view template and an edit template. While the view template is used to display information, the edit template is used when the data is being edited. The default templates for the datatypes are located within the standard design: &quot;/design/standard/templates/content/datatype&quot;.</p> <p>The <a href="../../Reference/Template-functions/Visualization/attribute_view_gui.html" target="_self">&quot;attribute_view_gui&quot;</a> function makes it possible to display the contents of an attribute by inserting the view template of the datatype that the attribute uses. The following example demonstrates how this function can be used.</p> <pre class="wordwrap"><span class="line">{attribute_view_gui attribute=$node.object.data_map.name_of_any_attribute}</span>
+</pre> <p>The example above will generate proper output for any attribute (regardless of the datatype).</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Templates/Information-extraction/Outputting-node-and-object-data by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:12 GMT -->
+</html>

@@ -1,0 +1,68 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/SSLZoneSettings/ModuleViewAccessMode by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>ModuleViewAccessMode / [SSLZoneSettings] / site.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ModuleViewAccessMode</h1>
+</div>
+<h3>Summary</h3>
+View access mode to use for each module.<h3>Usage</h3>
+<pre class="pfix"><pre class="wordwrap"><span class="line">ModuleViewAccessMode[&lt;module&gt;]=&lt;view&gt;</span>
+</pre></pre><h3>Description</h3>
+<p>This setting allows you to define the view access mode to use for each module. It expects a module reference as index, and the desired view as value.</p><p>The default access mode is plain HTTP.&nbsp;Defining a view as &quot;ssl&quot; will force HTTPS access mode for the given view. If a view is defined as &quot;keep&quot; then access mode is unknown for this view, and the previous access mode is kept.</p><p>
+With <a href="https://jira.ez.no/browse/EZP-22204" target="_self">the patch EZP-22204</a>, the &quot;nossl&quot; option is added :<br />Define a view as &quot;nossl&quot; will force HTTP for&nbsp; this module. Further SSL redirections will be ignored.</p><p>For this setting to be considered, the&nbsp;<a href="SSLZones.html" title="SSL Zones" target="_blank">SSLZones</a>&nbsp;setting must be set to&nbsp;<i>enabled</i>.</p><h3>Examples</h3>
+<pre class="wordwrap copytoclipboard"><span class="line">ModuleViewAccessMode[]</span>
+<span class="line">ModuleViewAccessMode[shop/add]=ssl</span>
+<span class="line">ModuleViewAccessMode[shop/basket]=ssl</span>
+<span class="line">ModuleViewAccessMode[content/*]=keep</span>
+<span class="line">ModuleViewAccessMode[layout/*]=keep</span>
+<span class="line">ModuleViewAccessMode[help]=nossl</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'ModuleViewAccessMode[]\r\nModuleViewAccessMode[shop/add]=ssl\r\nModuleViewAccessMode[shop/basket]=ssl\r\nModuleViewAccessMode[content/*]=keep\r\nModuleViewAccessMode[layout/*]=keep\r\nModuleViewAccessMode[help]=nossl' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/SSLZoneSettings/ModuleViewAccessMode by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:35:07 GMT -->
+</html>

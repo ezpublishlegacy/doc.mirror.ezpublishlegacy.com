@@ -1,0 +1,55 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/VAT-charging-system/Displaying-VATs-on-the-actual-site/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:13:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Displaying VATs on the actual site / VAT charging system / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Displaying VATs on the actual site</h1>
+</div>
+
+ <p>The next subsections explain the way in which the VATs are displayed on the actual site in case of using the &quot;VAT per product&quot; and/or &quot;Country dependent VAT&quot; approach.</p>  <a name="eztoc132530_1" id="eztoc132530_1"></a><h2>VAT per product</h2> <p>Let's say that a fixed rate of VAT is assigned to each product. When a user is viewing a product page, the system displays price including VAT for this product. A user can add products to his shopping basket where the VAT percentage will be displayed for each product. A user should click the &quot;Checkout&quot; button to make an order.</p> <p>After clicking the &quot;Checkout&quot; button a user will be asked to specify his/her name, email, country and other details needed for customer account and this particular order. This information is handled by the shop account handler that is specified under the &quot;[AccountSettings]&quot; section of the &quot;settings/shopaccount.ini&quot; configuration file. Choosing a country is usually required (this behavior does not depend on the &quot;RequireUserCountry&quot; INI setting described in the &quot;<a href="../../VAT-settings.html" target="_self">VAT settings</a>&quot; section).</p> <p>Information about the specified country will be stored in the system together with the customer's order. A customer is determined by his unique email, i.e. orders with different emails will belong to different customers. The customer's account contains information about the country that was specified in the first order made by this customer. Please note that a customer account is a special data structure that is used in the webshop system and is not connected with the actual <a href="../../../../../4.x/Concepts-and-basics/Access-control.html#user" target="_self">user object</a>.</p> <p>If you have added an attribute of the <a href="../../../../../4.x/Reference/Datatypes/Country.html" target="_self">country</a> datatype to your user class then it is possible to assign a country to a user. This can be done automatically when the user makes his first order if the attribute identifier is specified it in the &quot;UserCountryAttribute&quot; INI setting. Please note that this functionality is generally unneeded for &quot;VAT per product&quot; approach and thus it is disabled if no VAT handler is enabled. Moreover, the system will not automatically change the user's country if it is already set (the user's country can be set when filling in the user registration form, editing the user object or choosing a country from the <a href="../../User-country.html#add_toolbar" target="_self">toolbar</a>).</p>   <a name="eztoc132530_2" id="eztoc132530_2"></a><h2>Country dependent VAT</h2> <p>Let's say that you use the &quot;country dependent VAT&quot; approach, your user class contains an attribute of the <a href="../../../../../4.x/Reference/Datatypes/Country.html" target="_self">country</a> datatype and its identifier is specified in the &quot;UserCountryAttribute&quot; INI setting.</p> <p>When a user is viewing a product page, the system will display price including VAT for this product. A user can add products to his shopping basket where the VAT percentage will be displayed for each product. After clicking the &quot;Checkout&quot; button a user will be asked to specify his/her name, email, country and other details needed for customer account and this particular order. The system will automatically re-calculate VAT's using the best matching VAT rules for the specified country and include these VAT's into the final product prices that are displayed on the &quot;Confirm order&quot; page.</p> <p>If a country is assigned to a user, the system will calculate the amount of VAT for a product being viewed using the best matching VAT rule for user country and product category. If a user selects another country after clicking the &quot;Checkout&quot; button (not the country assigned to this user), this country will not be assigned to the user but will be used only for this particular order.</p> <p>If no country is assigned to a user then the amount of VAT for a product being viewed will be calculated using the <a href="../../Three-approaches-to-VAT-charging.html#default_rule" target="_self">default VAT rule</a>. The country specified by user after clicking the &quot;Checkout&quot; button will be automatically assigned to this user.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/VAT-charging-system/Displaying-VATs-on-the-actual-site/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:13:23 GMT -->
+</html>

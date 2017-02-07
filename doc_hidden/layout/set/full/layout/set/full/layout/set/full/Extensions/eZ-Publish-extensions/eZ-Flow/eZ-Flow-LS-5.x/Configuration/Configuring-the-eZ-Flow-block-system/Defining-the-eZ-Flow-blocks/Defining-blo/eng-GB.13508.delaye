@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Flow/eZ-Flow-LS-5.x/Configuration/Configuring-the-eZ-Flow-block-system/Defining-the-eZ-Flow-blocks/Defining-block-types/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:43:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Defining block types / Defining the eZ Flow blocks / Configuring the eZ Flow block system / Configuration / eZ Flow LS 5.x / eZ Flow / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Defining block types</h1>
+</div>
+
+<p>A “block” is a section within a zone that contains a particular type of content. The content in blocks may be manually specified by a site editor (a “manual block”), may be automatically selected from a specific area in the eZ Publish content tree (a “dynamic block”) or may contain special content such as a tag cloud or banner ads (a “special block”).</p><p>The configuration file for managing blocks is called <i>block.ini</i>. The default configuration file is located in the eZ Flow extension ( <i>extension/ezflow/settings</i>). When creating custom blocks, you should make an appropriate override, either globally or for a specific siteaccess. (Refer to the <a href="../../../../../../../../eZ-Publish/Technical-manual/4.7/Templates/The-template-override-system.html" target="_self">eZ Publish documentation</a> for information about overrides.)</p><a name="eztoc136376_0_1" id="eztoc136376_0_1"></a><h3>Creating manual blocks</h3><p>To create a manual block, enter information about the block in a new section in the <i>block.ini</i> file. The definition of a manual block consists of the following elements.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th  width="40%">  <p>Setting Name</p>
+  </th><th  width="32%">  <p>Description</p>
+  </th><th  width="29%">  <p>Valid values</p>
+  </th>
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>Name</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The name of the block.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>String</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>NumberOfValidItems</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The number of items that the block can display.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Integer</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>NumberOfArchivedItems</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The number of archived items to display.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Integer</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>ManualAddingOfItems</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>Enable manually adding items.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>enabled or disabled</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>ViewList[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>Defines the block views used by the template override system.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Block view</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>ViewName[view_id]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The list of view names displayed in the eZ Flow interface.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>ViewList[] name mapped to human-readable name</p>
+  </td>
+
+</tr>
+
+</table>
+<p>Below is a configuration example for a three-column news block.</p><pre class="wordwrap copytoclipboard"><span class="line">[Manual3Items]</span>
+<span class="line">Name=3 Column News</span>
+<span class="line">NumberOfValidItems=3</span>
+<span class="line">NumberOfArchivedItems=5</span>
+<span class="line">ManualAddingOfItems=enabled</span>
+<span class="line">ViewList[]=3_items1</span>
+<span class="line">ViewName[3_items1]=3 articles in one column</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[Manual3Items]\r\nName=3 Column News\r\nNumberOfValidItems=3\r\nNumberOfArchivedItems=5\r\nManualAddingOfItems=enabled\r\nViewList[]=3_items1\r\nViewName[3_items1]=3 articles in one column' ); return false;" /></p>
+<![endif]--><p>After the block is defined, it is displayed to editors in the <b>Block type</b> drop-down list in the eZ Flow interface.</p><a name="eztoc136376_0_2" id="eztoc136376_0_2"></a><h3>Template for manual blocks</h3><p>To create a new block, you must also create an override template. If no override exists, the default template is used:</p><pre class="wordwrap"><span class="line">templates/block/view/view.tpl</span>
+</pre><p>The templates for manual blocks are located here:</p><pre class="wordwrap"><span class="line">design/&lt;custom_design&gt;/override/templates/block</span>
+</pre><p>Every block override can use two override keys:</p><pre class="wordwrap"><span class="line">Match[type]=</span>
+<span class="line">&nbsp;</span>
+<span class="line">Match[view]=</span>
+</pre><p>Match[type]= takes the unique block identifier defined in the <i>block.ini</i> file as a parameter. Match[type]= takes the view’s unique identifier defined in the block definition in <i>block.ini</i> as a parameter.</p><a name="eztoc136376_0_2_0_1" id="eztoc136376_0_2_0_1"></a><h5>An example</h5><pre class="wordwrap copytoclipboard"><span class="line">[block_3_items1]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/3_items1.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=Manual3Items</span>
+<span class="line">Match[view]=3_items1</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[block_3_items1]\r\nSource=block/view/view.tpl\r\nMatchFile=block/3_items1.tpl\r\nSubdir=templates\r\nMatch[type]=Manual3Items\r\nMatch[view]=3_items1' ); return false;" /></p>
+<![endif]--><p>In every block template a $block variable is available that has following attributes:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th  width="33%">  <p>Attribute</p>
+  </th><th  width="33%">  <p>Type</p>
+  </th><th  width="33%">  <p>Example value</p>
+  </th>
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>id</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>String (32 char)</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>680b73edef7c07d8f3d9de429b4d9b4d</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>name</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>String</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>3 Column News</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>zone_id</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>String (32 char)</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>082188b2a113cc866cbcf6ca6e5ce7d3</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>type</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>String</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>Manual3Items</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>view</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>String</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>3_items1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>overflow_id</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>String (32 car)</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>32 char long string that is the id of another block</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>fetch_params</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>String</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>Serialized fetch parameters used by dynamic block</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>waiting</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>Array</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>Items in the queue</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>valid</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>Array</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>Items currently published</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>valid_nodes</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>Array</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>Items as objects of eZContentObjectTreeNode</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>archived</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>Array</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>List of archived items</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>view_template</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>String</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>View</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="33%" valign="top" style="vertical-align: top">  <p>edit_template</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>String</p>
+  </td>
+<td width="33%" valign="top" style="vertical-align: top">  <p>Edit</p>
+  </td>
+
+</tr>
+
+</table>
+<p>The template code for displaying three items in a column using div-based layout might look like the example below:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;div class=&quot;attribute-header&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;{$block.name}&lt;/h2&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $block.valid_nodes as $valid_node}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{node_view_gui view=line content_node=$valid_node}</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;div class=&quot;attribute-header&quot;&gt;\r\n         &lt;h2&gt;{$block.name}&lt;/h2&gt;\r\n&lt;/div&gt;\r\n\r\n{foreach $block.valid_nodes as $valid_node}\r\n         {node_view_gui view=line content_node=$valid_node}\r\n{/foreach}' ); return false;" /></p>
+<![endif]--><a name="eztoc136376_0_3" id="eztoc136376_0_3"></a><h3>&nbsp;The result of the manual block</h3><p>After the block is defined editors can add items to the block (as explained in the chapter <a href="../../../../../eZ-Flow-2.5/Usage.html" target="_self">Usage</a>). For example, a block with three items might in the eZ Flow interface look like the screenshot below:</p>
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/view_in_ez_flow_interface/107731-1-eng-GB/view_in_ez_flow_interface_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>And the final result on the website might look like this:</p>
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/website_view/107734-1-eng-GB/website_view_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>This block is manual, meaning that the editor selects the items to display. There is no automatic fetching of items.</p><a name="eztoc136376_0_4" id="eztoc136376_0_4"></a><h3>Defining dynamic blocks</h3><p>While the content in manual blocks is specified by an editor, dynamic blocks are a combination of automatic fetching rules (implemented via a plugin system) and editorially controlled parameters.</p><p>The dynamic block settings have more options than the manual block. The following settings need to be configured for each dynamic block.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th  width="40%">  <p>Setting Name</p>
+  </th><th  width="32%">  <p>Description</p>
+  </th><th  width="29%">  <p>Valid values</p>
+  </th>
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>Name</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The descriptive name of the block.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Text string</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>NumberOfValidItems</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The number of items that can be displayed in the list.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Integer</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>NumberOfArchivedItems</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The number of items to have in the visible archive.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Integer</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>ManualAddingOfItems</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>Disable the ability to manually add items in the block.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Enabled or disabled</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>FetchClass</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The class to use for the dynamic fetching rules (PHP class).</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>String</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>FetchFixedParameters[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>A list of fixed parameters to send to the fetching class.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>String value that sets the key and value: FetchFixedParameters[class]=article</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>FetchParameters[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>Definition list of all the fetch parameters.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Holds list of parameters used by FetchClass, which are displayed in eZ Flow interface.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>FetchParametersSelectionType[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>Definition of the selection type to use for the specific fetch parameter. The parameters are added by the editor. This can either be a single or multiple selection of content items.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Single or multiple</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>FetchParametersIsRequired[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>Definition of the fetch parameters that are required. If none are defined all are optional.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>True or false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>ViewList[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>Defines the block views used by the template override system.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Block view</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>ViewName[view_id]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The list of view names displayed in the eZ Flow interface.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>ViewList[] name mapped to human-readable name</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>AllowedClasses[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The list of classes which user can add into the manual block type.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Content class identifiers</p>
+  </td>
+
+</tr>
+
+</table>
+<p>The following example shows a configured dynamic block:</p><pre class="wordwrap copytoclipboard"><span class="line">[Dynamic3Items]</span>
+<span class="line">Name=3 items (dynamic)</span>
+<span class="line">NumberOfValidItems=3</span>
+<span class="line">NumberOfArchivedItems=5</span>
+<span class="line">ManualAddingOfItems=disabled</span>
+<span class="line">FetchClass=ezmLatestObjects</span>
+<span class="line">FetchFixedParameters[]</span>
+<span class="line">FetchFixedParameters[Class]=article</span>
+<span class="line">FetchParameters[]</span>
+<span class="line">FetchParameters[Source]=nodeID</span>
+<span class="line">&nbsp;</span>
+<span class="line"># Single / Multiple</span>
+<span class="line">FetchParametersSelectionType[Source]=single</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;</span>
+<span class="line">FetchParametersIsRequired[]</span>
+<span class="line"># True / False</span>
+<span class="line">FetchParametersIsRequired[Source]=true</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;</span>
+<span class="line">ViewList[]=3d_items</span>
+<span class="line">ViewName[3d_items]=3 dynamically fetched items</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[Dynamic3Items]\r\nName=3 items (dynamic)\r\nNumberOfValidItems=3\r\nNumberOfArchivedItems=5\r\nManualAddingOfItems=disabled\r\nFetchClass=ezmLatestObjects\r\nFetchFixedParameters[]\r\nFetchFixedParameters[Class]=article\r\nFetchParameters[]\r\nFetchParameters[Source]=nodeID\r\n\r\n# Single / Multiple\r\nFetchParametersSelectionType[Source]=single\r\n\r\n\r\nFetchParametersIsRequired[]\r\n# True / False\r\nFetchParametersIsRequired[Source]=true\r\n\r\n\r\nViewList[]=3d_items\r\nViewName[3d_items]=3 dynamically fetched items' ); return false;" /></p>
+<![endif]--><a name="eztoc136376_0_5" id="eztoc136376_0_5"></a><h3>&nbsp;Template for dynamic blocks</h3><p>To create a new block, you must also create an override template. If no override exists, the default template is used:</p><pre class="wordwrap"><span class="line">templates/block/view/view.tpl</span>
+</pre><p>The templates for dynamic blocks are located in</p><pre class="wordwrap"><span class="line">design/&lt;custom_design&gt;/override/templates/block.</span>
+</pre><p>Every block override can use two override keys:</p><pre class="wordwrap"><span class="line">Match[type]=</span>
+<span class="line">&nbsp;</span>
+<span class="line">Match[view]=</span>
+</pre><p>Match[type]= takes the unique block identifier defined in the <i>block.ini</i> file as a parameter. Match[type]= takes the view’s unique identifier defined in the block definition in <i>block.ini</i> as a parameter.</p><a name="eztoc136376_0_5_1" id="eztoc136376_0_5_1"></a><h4>An example</h4><pre class="wordwrap copytoclipboard"><span class="line">[block_3d_items]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/3d_items.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=Dynamic3Items</span>
+<span class="line">Match[view]=3d_items</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[block_3d_items]\r\nSource=block/view/view.tpl\r\nMatchFile=block/3d_items.tpl\r\nSubdir=templates\r\nMatch[type]=Dynamic3Items\r\nMatch[view]=3d_items' ); return false;" /></p>
+<![endif]--><p>The template code for displaying the dynamic block using div-based layout might look like this example:</p><pre class="wordwrap"><span class="line">{foreach $block.valid_nodes as $valid_node}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{node_view_gui view=line content_node=$valid_node}</span>
+<span class="line">{/foreach}</span>
+</pre><a name="eztoc136376_0_6" id="eztoc136376_0_6"></a><h3>&nbsp;The result of the dynamic block</h3><p>The following screenshot shows how an dynamic block appears to an editor working in the eZ Flow interface. Notice that after choosing the source(s), the name(s) are displayed to the right of the <b>&nbsp;Choose source</b> button.</p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/dynamic_block_display/107737-1-eng-GB/dynamic_block_display_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>The display of the dynamic block described above on the website is shown below. From the site visitor’s perspective, is looks the same as a manual block. The difference is that when something new is published in the specified block source it is automatically displayed and does not require an editor to make the content “live”.</p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/automatic_display/107740-1-eng-GB/automatic_display_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><a name="eztoc136376_0_7" id="eztoc136376_0_7"></a><h3>Defining special blocks</h3><p>In addition to manual and dynamic blocks, eZ Flow also allows for special blocks. Special blocks do not have a pre-defined list of content. A special block can be used to publish content entities like tag clouds or banner ads.</p><p>The following settings need to be configured for each special block.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th  width="40%">  <p>Setting Name</p>
+  </th><th  width="32%">  <p>Description</p>
+  </th><th  width="29%">  <p>Valid values</p>
+  </th>
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>Name</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The descriptive name of the block.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Text string</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>ManualAddingOfItems</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>For special blocks disable the ability to manually add items in the block.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Enabled or disabled</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>CustomAttributes[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>List of attributes used by the block. It will show as text input fields where editors can add parameters.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Array</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>CustomAttributeTypes[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The parameter can be used for special blocks, with a limited set of values</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Array</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>UseBrowseMode[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>When set to true, the eZ Flow interface will display a browse button.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>True or false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>ViewList[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>Defines the block views used by the template override system.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Block view</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>ViewName[view_id]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The list of view names displayed in the eZ Flow interface.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>ViewList[] name mapped to human-readable name</p>
+  </td>
+
+</tr>
+
+</table>
+<p>The following example shows the settings for a special block that displays a tag cloud</p><pre class="wordwrap copytoclipboard"><span class="line">[TagCloud]</span>
+<span class="line">Name=Tag cloud</span>
+<span class="line">ManualAddingOfItems=disabled</span>
+<span class="line">CustomAttributes[]=subtree_node_id</span>
+<span class="line">UseBrowseMode[subtree_node_id]=true</span>
+<span class="line">ViewList[]=tag_cloud</span>
+<span class="line">ViewName[tag_cloud]=Tag cloud</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[TagCloud]\r\nName=Tag cloud\r\nManualAddingOfItems=disabled\r\nCustomAttributes[]=subtree_node_id\r\nUseBrowseMode[subtree_node_id]=true\r\nViewList[]=tag_cloud\r\nViewName[tag_cloud]=Tag cloud' ); return false;" /></p>
+<![endif]--><a name="eztoc136376_0_8" id="eztoc136376_0_8"></a><h3>Template for special blocks</h3><p>To create a new block, you must also create an override template. If no override exists, the default template is used:</p><pre class="wordwrap"><span class="line">templates/block/view/view.tpl is used</span>
+</pre><p>The templates for special blocks are located here</p><pre class="wordwrap"><span class="line">design/&lt;custom_design&gt;/override/templates/block.</span>
+</pre><p>Every block override can use two override keys:</p><pre class="wordwrap"><span class="line">Match[type]=</span>
+<span class="line">&nbsp;</span>
+<span class="line">Match[view]=</span>
+</pre><p>Match[type]= takes the unique block identifier defined in the <i>block.ini</i> file as a parameter. Match[type]= takes the view’s unique identifier defined in the block definition in <i>block.ini</i> as a parameter.</p><a name="eztoc136376_0_8_2" id="eztoc136376_0_8_2"></a><h4>An example</h4><pre class="wordwrap copytoclipboard"><span class="line">[block_tag_cloud]</span>
+<span class="line">Source=block/view/view.tpl</span>
+<span class="line">MatchFile=block/tag_cloud.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[type]=TagCloud</span>
+<span class="line">Match[view]=tag_cloud</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[block_tag_cloud]\r\nSource=block/view/view.tpl\r\nMatchFile=block/tag_cloud.tpl\r\nSubdir=templates\r\nMatch[type]=TagCloud\r\nMatch[view]=tag_cloud' ); return false;" /></p>
+<![endif]--><p>The template for a tag cloud is show below:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;div class=&quot;attribute-header&quot;&gt;</span>
+<span class="line">&lt;h2&gt;{$block.name}&lt;/h2&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;div class=”attribute-tags”&gt;</span>
+<span class="line">{eztagcloud( hash( 'parent_node_id', $block.custom_attributes.subtree_node_id ))}</span>
+<span class="line">&lt;/div&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;div class=&quot;attribute-header&quot;&gt;\r\n&lt;h2&gt;{$block.name}&lt;/h2&gt;\r\n&lt;/div&gt;\r\n&lt;div class=”attribute-tags”&gt;\r\n{eztagcloud( hash( \'parent_node_id\', $block.custom_attributes.subtree_node_id ))}\r\n&lt;/div&gt;' ); return false;" /></p>
+<![endif]--><a name="eztoc136376_0_9" id="eztoc136376_0_9"></a><h3>The result of a special block</h3><p>The tag cloud is displayed in the eZ Flow interface like this:</p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/result_of_a_special_block/107743-1-eng-GB/result_of_a_special_block_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><p>A site visitor sees the tag cloud like this:</p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/tag_cloud/107746-1-eng-GB/tag_cloud_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Flow/eZ-Flow-LS-5.x/Configuration/Configuring-the-eZ-Flow-block-system/Defining-the-eZ-Flow-blocks/Defining-block-types/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:43:39 GMT -->
+</html>

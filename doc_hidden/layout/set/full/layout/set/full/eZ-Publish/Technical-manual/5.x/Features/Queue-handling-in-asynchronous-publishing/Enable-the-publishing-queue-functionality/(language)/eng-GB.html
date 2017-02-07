@@ -1,0 +1,75 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Queue-handling-in-asynchronous-publishing/Enable-the-publishing-queue-functionality/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:44:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Enable the publishing queue functionality / Queue handling in asynchronous publishing / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Enable the publishing queue functionality</h1>
+</div>
+
+<p>Asynchronous publishing is disabled by default and needs to be enabled by overriding a setting in content.ini. Please enter the setting as described below:</p><pre class="wordwrap"><span class="line">[PublishingSettings]</span>
+<span class="line">&nbsp;# Enable/Disable the asynchronous publishing feature</span>
+<span class="line">&nbsp;AsynchronousPublishing=enabled</span>
+</pre><a name="eztoc132740_0_1" id="eztoc132740_0_1"></a><h3>Customize the queue size</h3><p>In the PublishingSettings you can also the size of the queue by deciding how many parallel publishing operations should be allowed:</p><pre class="wordwrap copytoclipboard"><span class="line">[PublishingSettings]</span>
+<span class="line">&nbsp;# how many parallel publishing operations should be allowed</span>
+<span class="line">&nbsp;# default: 10</span>
+<span class="line">&nbsp;PublishingProcessSlots=10</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[PublishingSettings]\r\n # how many parallel publishing operations should be allowed\r\n # default: 10\r\n PublishingProcessSlots=10' ); return false;" /></p>
+<![endif]--><a name="eztoc132740_0_2" id="eztoc132740_0_2"></a><h3>Making the feature optional</h3><p>You disable the eZ Asynchronous Publishing feature through the same INI setting in content.ini:</p><pre class="wordwrap"><span class="line">[PublishingSettings]</span>
+<span class="line">&nbsp;# Enable/Disable the asynchronous publishing feature</span>
+<span class="line">&nbsp;AsynchronousPublishing=disabled</span>
+</pre><p>If disabled, the operation won't be deferred to the daemon at all, and publishing will happen in real time. This also allows siteaccess based enabling/disabling of the feature.</p><a name="eztoc132740_0_3" id="eztoc132740_0_3"></a><h3>Automatically cleaning the queue</h3><p>Introduced in <b>5.4</b> and <b>5.3.3</b> (you can also request a patch for <a href="https://jira.ez.no/browse/EZP-23312" target="_self">EZP-23312</a>&nbsp;in previous versions on the customer portal), it allows removing successfully executed processes from the database.</p><p>The queue automatic cleanup can be customized using two settings in content.ini.</p><pre class="wordwrap copytoclipboard"><span class="line"># How frequent the daemon cleans the queue (sleep in seconds)</span>
+<span class="line"># default: 43200 (12 hours)</span>
+<span class="line">AsynchronousCleanupInterval=43200</span>
+<span class="line"># How old processes need to be in order to be cleaned (in seconds)</span>
+<span class="line"># default: 604800 (a week)</span>
+<span class="line">AsynchronousCleanupAgeLimit=604800</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '# How frequent the daemon cleans the queue (sleep in seconds)\r\n# default: 43200 (12 hours) \r\nAsynchronousCleanupInterval=43200\r\n# How old processes need to be in order to be cleaned (in seconds) \r\n# default: 604800 (a week) \r\nAsynchronousCleanupAgeLimit=604800' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Queue-handling-in-asynchronous-publishing/Enable-the-publishing-queue-functionality/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:44:45 GMT -->
+</html>

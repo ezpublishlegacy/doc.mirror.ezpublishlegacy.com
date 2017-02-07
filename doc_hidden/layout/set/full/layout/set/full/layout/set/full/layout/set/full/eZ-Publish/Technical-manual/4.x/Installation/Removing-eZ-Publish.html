@@ -1,0 +1,80 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Installation/Removing-eZ-Publish by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:59:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Removing eZ Publish / Installation / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Removing eZ Publish</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../../../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><p>This section describes how to completely remove an eZ Publish installation from a system.</p><p>Removing eZ Publish is done in four steps:</p>
+<ol>
+<li><div> Deleting the eZ Publish directory </div></li><li><div> Removing the database </div></li><li><div> Reconfiguring Apache (optional) </div></li><li><div> Removing the cronjobs (optional) </div></li>
+</ol>
+<p>WARNING! By following these steps, you will remove both eZ Publish and all the data/content that you have put into the system. Everything will be lost.</p><a name="eztoc86364_1" id="eztoc86364_1"></a><h2>Deleting the eZ Publish directory</h2><p>Remove the eZ Publish directory using your favorite tool.</p><a name="eztoc86364_1_1" id="eztoc86364_1_1"></a><h3>Linux/UNIX</h3><p>On Linux/UNIX systems, the removal would most likely be carried out using the &quot;rm&quot; command:</p><pre class="wordwrap"><span class="line">$ rm -Rf /path/to/ez_publish</span>
+</pre><p>Please note that some file/directory permissions might be messed up. If this is the case, it will prevent a regular user from removing all eZ Publish files. You'll probably have to gain root access to solve this problem.</p><a name="eztoc86364_1_2" id="eztoc86364_1_2"></a><h3>Windows</h3><p>Windows users may simply delete the eZ Publish directory using the &quot;Explorer&quot;.</p><a name="eztoc86364_2" id="eztoc86364_2"></a><h2>Removing the database</h2><a name="eztoc86364_2_3" id="eztoc86364_2_3"></a><h3>MySQL</h3>
+<ol>
+<li><div><p>Start the MySQL client, log in using your username and password:</p><pre class="wordwrap"><span class="line">$ mysql -u &lt;username&gt; -p</span>
+</pre><p>If the username/password is correct, the client will then present a &quot;mysql&gt;&quot; prompt.</p></div></li><li><div> Delete/remove the database using the drop command followed by the name of the database used by eZ Publish:<pre class="wordwrap"><span class="line">mysql&gt; drop database &lt;database-name&gt;;</span>
+</pre></div></li>
+</ol>
+<a name="eztoc86364_2_4" id="eztoc86364_2_4"></a><h3>PostgreSQL</h3>
+<ol>
+<li><div> Remove the database by executing the PostgreSQL dropdb command from shell:<pre class="wordwrap"><span class="line">$ dropdb &lt;database-name&gt;</span>
+</pre></div></li>
+</ol>
+<a name="eztoc86364_2_5" id="eztoc86364_2_5"></a><h3>Reconfiguring Apache (optional)</h3><p>If a virtual host setup was used, it is likely that the Apache configuration file contains eZ Publish specific settings. These settings will not be needed anymore and thus they can be removed. Open the &quot;httpd.conf&quot; file using a text editor, scroll down to the bottom and remove the eZ Publish specific virtual host settings. Remember to restart Apache after altering the configuration file.</p><a name="eztoc86364_2_6" id="eztoc86364_2_6"></a><h3>Removing the cronjobs (optional)</h3><p>Windows users should skip this part. If cron was configured to run eZ Publish specific jobs, then these will have to be removed. You may have to edit a global cron file (under &quot;/etc/cron*&quot;) or use the &quot;crontab&quot; command with the -e (edit) parameter to edit a user's private cron file. Remove the eZ Publish specific entries.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Installation/Removing-eZ-Publish by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:59:18 GMT -->
+</html>

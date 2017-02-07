@@ -1,0 +1,87 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/1.4/Installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:23:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Installation / 1.4 / eZ Publish Extension for Oracle® database / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installation</h1>
+</div>
+
+ <p>This chapter explains how to install version 1.4 of the database extension. The installation typically consists of the following steps:</p> 
+<ol>
+ <li><div> <a href="#backup" target="_self">Make a backup of your current system (optional)</a>  </div></li> <li><div> <a href="#requirements" target="_self">Check the requirements</a>  </div></li> <li><div> <a href="#download" target="_self">Download the database extension</a>  </div></li> <li><div> <a href="#copy" target="_self">Copy the downloaded package</a>  </div></li> <li><div> <a href="#unpack" target="_self">Unpack the downloaded package</a>  </div></li> <li><div> <a href="#enable" target="_self">Enable the extension</a>  </div></li> <li><div> <a href="#test_connection" target="_self">Test connection to an Oracle database server</a>  </div></li> <li><div> <a href="#initialize" target="_self">Create and initialize an Oracle database for eZ Publish</a> 
+<ul>
+ <li><div> <a href="Installation/Automated-initialization.html" target="_self">Automated initialization</a>  </div></li> <li><div> <a href="Installation/Manual-initialization.html" target="_self">Manual initialization</a>  </div></li> 
+</ul>
+  </div></li> <li><div> <a href="#configure_ezp" target="_self">Configure eZ Publish</a>  </div></li> <li><div> <a href="#restart_apache" target="_self">Restart Apache</a>  </div></li> 
+</ol>
+ <p> <a name="backup"></a>
+ </p>  <a name="eztoc35094_1" id="eztoc35094_1"></a><h2>1. Make a backup of your current system (optional)</h2> <p>If you are planning to migrate an existing site that uses MySQL to Oracle, you should make a backup of both the eZ Publish directory itself and the MySQL database. Even though the chances for something going wrong are slim, it is still strongly advised to make a backup. Please refer to the <a href="../../../../eZ-Publish/Upgrading.html#backup" target="_self">&quot;Backup&quot;</a> section of the &quot;Upgrading&quot; manual for more information.</p> <p> <a name="requirements"></a>
+ </p>   <a name="eztoc35094_2" id="eztoc35094_2"></a><h2>2. Check the requirements</h2> <p>Please verify that the <a href="Requirements.html" target="_self">requirements</a> for being able to use the database extension are met. </p> <p> <a name="download"></a>
+ </p>   <a name="eztoc35094_3" id="eztoc35094_3"></a><h2>3. Download the database extension</h2> <p>The eZ Publish Extension for Oracle® Database, which was licensed under the eZ proprietary license before, is now available under <a href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html" target="_self">GPL</a>. You can download the latest version <a href="http://ez.no/download/add_ons/ez_publish_extension_for_oracle_r_database" target="_self">here</a>.</p> <p> <a name="copy"></a>
+ </p>   <a name="eztoc35094_4" id="eztoc35094_4"></a><h2>4. Copy the downloaded package</h2> <p>
+Copy the downloaded &quot;tar.gz&quot; package into the &quot;extension&quot; directory of your eZ Publish installation.<br /> <a name="unpack"></a>
+ </p>   <a name="eztoc35094_5" id="eztoc35094_5"></a><h2>5. Unpack the downloaded package</h2> <p>The package should be unpacked inside the &quot;extension&quot; directory. When done correctly, an &quot;ezoracle&quot; directory will be created inside the &quot;extension&quot; directory.</p> <p>On UNIX/Linux, the package can be unpacked like this:</p> <pre class="wordwrap"><span class="line">$ tar -zxvf ezoracle-extension-1.4.tar.gz</span>
+</pre> <p>On Windows, you can just unzip the files using the built-in zip features. </p> <p>At this point, the unpacked files should be available under &quot;extension/ezoracle&quot;.</p> <p> <a name="enable"></a>
+ </p>   <a name="eztoc35094_6" id="eztoc35094_6"></a><h2>6. Enable the extension</h2> <p>To enable the database extension for all of your <a href="http://ez.no/doc/ez_publish/technical_manual/3_6/concepts_and_basics/configuration/site_management" target="_self">siteaccesses</a>, edit the &quot;site.ini.append.php&quot; file located in the &quot;settings/override&quot; directory. Add the following line under the &quot;[ExtensionSettings]&quot; section:</p> <pre class="wordwrap"><span class="line">ActiveExtensions[]=ezoracle</span>
+</pre> <p>Please note that you'll have to manually create the file and/or the section if they do not exist. </p> <p>To enable the database extension for only a single <a href="http://ez.no/doc/ez_publish/technical_manual/3_6/concepts_and_basics/configuration/site_management" target="_self">siteaccess</a> called &quot;example&quot;, edit the &quot;site.ini.append.php&quot; file located in the &quot;settings/siteaccess/example&quot; directory. Add the following line under the &quot;[ExtensionSettings]&quot; section:</p> <pre class="wordwrap"><span class="line">ActiveAccessExtensions[]=ezoracle</span>
+</pre> <p>Please note that you'll have to manually create the file and/or the section if they do not exist. </p> <p> <a name="test_connection"></a>
+ </p>   <a name="eztoc35094_7" id="eztoc35094_7"></a><h2>7. Test connection to an Oracle database server</h2> <p>Before doing anything else, make sure you can connect to an Oracle database using an Oracle client. This manual assumes that you are using the <a href="http://docs.oracle.com/cd/B19306_01/server.102/b14357/ch7.htm" target="_blank">SQL*Plus</a> command-line utility. Assuming that an Oracle instance called &quot;ORCL&quot; is running on your Oracle server and can be accessed using an Oracle account with username &quot;scott&quot; and password &quot;tiger&quot;, the shell command for creating a test connection will look like this:</p> <pre class="wordwrap"><span class="line">sqlplus scott/tiger@ORCL</span>
+</pre> <p>Please note that SQL*Plus will retrieve configuration information from your operating system's environment variables (these are listed in the <a href="http://docs.oracle.com/cd/E11882_01/server.112/e16604/toc.htm#sthref359" target="_blank">SQL*Plus documentation</a>). UNIX/Linux users can set their environment manually or by using the &quot;<a href="http://www.oracleutilities.com/OSUtil/oraenv.html" target="_blank">oraenv</a>&quot; utility. On Windows, the Oracle environment variables are stored in the registry.</p>  <a name="eztoc35094_7_1" id="eztoc35094_7_1"></a><h3>Example</h3> <p>UNIX/Linux users might not be able to connect using SQL*Plus if the path to the Oracle client libraries directory where the &quot;libsqlplus.so&quot; file is located is not listed in $LD_LIBRARY_PATH. The following shell commands can be used to display and set this environment variable:</p> <pre class="wordwrap"><span class="line">echo $LD_LIBRARY_PATH</span>
+<span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib</span>
+</pre> <p> <a name="initialize"></a>
+ </p>    <a name="eztoc35094_8" id="eztoc35094_8"></a><h2>8. Create and initialize an Oracle database for eZ Publish</h2> <p>An eZ Publish database must be created on the Oracle server. This means that you will need to initialize the necessary structure and import pre-defined data to the database. You can either do this using the &quot;ora-initialize.sh&quot; script (which attempts to do everything automatically) or manually. Please note that the script does not work under Windows. Also, you might have problems running the script on UNIX/Linux if you're using the <a href="http://www.oracle.com/technology/tech/oci/instantclient/" target="_blank">Oracle Instant Client</a>. The following text reveals both methods.</p>   <a name="eztoc35094_8_1_1" id="eztoc35094_8_1_1"></a><h4>Automated initialization</h4> <p>Automated initialization is carried out using the &quot;ora-initialize.sh&quot; script. This script is included in the database extension. It is intended to help UNIX/Linux users creating a new eZ Publish site that uses an Oracle database. It is also possible to re-initialize an existing Oracle database that contains eZ Publish related information left after a previous eZ Publish installation. Please refer to the &quot;<a href="Installation/Automated-initialization.html" target="_self">Automated initialization</a>&quot; section for more information about this method.</p>     <a name="eztoc35094_8_1_2" id="eztoc35094_8_1_2"></a><h4>Manual initialization</h4> <p>Manual initialization is a generic method that can be used to either create a new eZ Publish site running on an Oracle database or migrate an existing site from MySQL to Oracle. Both UNIX/Linux and Windows users can perform manual initialization. Please refer to the &quot;<a href="Installation/Manual-initialization.html" target="_self">Manual initialization</a>&quot; section for more information about this method.</p> <p> <a name="configure_ezp"></a>
+ </p>     <a name="eztoc35094_9" id="eztoc35094_9"></a><h2>9. Configure eZ Publish</h2> <p>In order to create a new eZ Publish site that uses an Oracle database, you need to configure file permissions, siteaccesses, Unicode support and languages for your site as described on the &quot;<a href="Installation/Configuring-eZ-Publish.html" target="_self">Configuring eZ Publish</a>&quot; documentation page.</p> <p>If you are migrating an existing site from MySQL to Oracle, the only thing you need to do is changing the database settings for your site. Simply open the &quot;settings/override/site.ini.append.php&quot; configuration file and change the &quot;[DatabaseSettings]&quot; block to something that resembles the example below:</p> <pre class="wordwrap copytoclipboard"><span class="line">[DatabaseSettings]</span>
+<span class="line">DatabaseImplementation=ezoracle</span>
+<span class="line">User=scott</span>
+<span class="line">Password=tiger</span>
+<span class="line">Database=ORCL</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[DatabaseSettings]\r\nDatabaseImplementation=ezoracle\r\nUser=scott\r\nPassword=tiger\r\nDatabase=ORCL' ); return false;" /></p>
+<![endif]--> <p>The example above assumes that you are using an Oracle database called &quot;ORCL&quot; which can be accessed using &quot;scott&quot; as the username and &quot;tiger&quot; as the password.</p> <p> <a name="restart_apache"></a>
+ </p>   <a name="eztoc35094_10" id="eztoc35094_10"></a><h2>10. Restart Apache</h2> <p>A restart of the Apache web server is required in order for the changes outlined in the previous steps to take effect. Once it has been restarted, your eZ Publish installation should be using the Oracle database server (if you log in to the admin interface, access the &quot;Setup&quot; tab and select &quot;System information&quot; from the left menu, you should see &quot;oracle&quot; in the &quot;Database type&quot; section). Please note that the Oracle environment variables must be set before Apache is restarted, otherwise the <a href="http://www.php.net/oci8" target="_blank">PHP Oracle functions</a> will not work.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/1.4/Installation by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:24:00 GMT -->
+</html>

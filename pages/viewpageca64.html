@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from doc.ez.no/pages/viewpage.action?pageId=14123051 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:16:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Persistence cache - eZ Publish 5.1 - eZ Documentation</title>
+
+        
+
+                        
+    
+                        
+    
+                        
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE,chrome=IE7">
+<meta charset="UTF-8">
+<meta id="confluence-context-path" name="confluence-context-path" content="">
+<meta id="confluence-base-url" name="confluence-base-url" content="../index.html">
+
+<meta id="atlassian-token" name="atlassian-token" content="494111f00e28ced96046bfb6fbe8f75e18d44b71">
+
+<meta id="confluence-space-key" name="confluence-space-key" content="EZP51">
+<script type="text/javascript">
+        var contextPath = '';
+</script>
+
+    
+
+<!-- include system css resources -->
+
+
+    <link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch934e.css?media=print" media="print">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 8]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/47016f6b93087cd2003bf867318254ee/_/download/contextbatch/css/theme.doc/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.0.22/_/download/batch/confluence.extra.information_information-plugin/confluence.extra.information_information-plugin-adg-s" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.6.10/_/download/batch/org.randombits.confluence.toc_toc-plugin-styles/org.randombits.confluence.toc_toc-plugin-styles.117.d" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.1.4/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext.newcode-macro-plugin_synt" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.1.4/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext.newcode-macro-plugin_sh-t" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins.confluence-highlight-ac" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/5.3.3-m6/_/download/batch/confluence.extra.jira_web-resources-adg/confluence.extra.jira_web-resources-adg.css" media="all">
+<link type="text/css" rel="stylesheet" href="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/16/_/styles/colors556c.css?spaceKey=EZP51" media="all">
+<link type="text/css" rel="stylesheet" href="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/16/_/styles/custom556c.css?spaceKey=EZP51" media="all">
+
+<!-- end system css resources -->
+
+    <meta name="confluence-request-time" content="1413903494624">
+        
+    
+        
+            <meta name="ajs-is-confluence-admin" content="false">
+            <meta name="ajs-connection-timeout" content="10000">
+            <meta name="ajs-use-keyboard-shortcuts" content="true">
+            <meta name="ajs-keyboardshortcut-hash" content="ec556f85a7b4fc86b37ab7a78ce3d8b0">
+            <meta id="team-calendars-has-jira-link" content="true">
+            <meta name="ajs-team-calendars-display-time-format" content="displayTimeFormat12">
+            <meta id="team-calendars-user-timezone" content="UTC">
+            <script type="text/x-template" id="team-calendars-messages" title="team-calendars-messages">
+    <fieldset class="i18n hidden">
+                    <input type="hidden" name="calendar3.month.short.april" value="Apr">
+                    <input type="hidden" name="calendar3.month.short.november" value="Nov">
+                    <input type="hidden" name="calendar3.month.long.november" value="November">
+                    <input type="hidden" name="calendar3.day.short.friday" value="Fri">
+                    <input type="hidden" name="calendar3.month.long.february" value="February">
+                    <input type="hidden" name="calendar3.month.short.february" value="Feb">
+                    <input type="hidden" name="calendar3.day.long.wednesday" value="Wednesday">
+                    <input type="hidden" name="calendar3.month.long.december" value="December">
+                    <input type="hidden" name="calendar3.day.short.sunday" value="Sun">
+                    <input type="hidden" name="calendar3.month.long.april" value="April">
+                    <input type="hidden" name="calendar3.month.long.july" value="July">
+                    <input type="hidden" name="calendar3.month.long.september" value="September">
+                    <input type="hidden" name="calendar3.month.short.august" value="Aug">
+                    <input type="hidden" name="calendar3.month.short.june" value="Jun">
+                    <input type="hidden" name="calendar3.month.short.may" value="May">
+                    <input type="hidden" name="calendar3.day.short.tuesday" value="Tue">
+                    <input type="hidden" name="calendar3.day.short.wednesday" value="Wed">
+                    <input type="hidden" name="calendar3.day.long.thursday" value="Thursday">
+                    <input type="hidden" name="calendar3.month.long.march" value="March">
+                    <input type="hidden" name="calendar3.month.long.october" value="October">
+                    <input type="hidden" name="calendar3.day.short.saturday" value="Sat">
+                    <input type="hidden" name="calendar3.month.short.january" value="Jan">
+                    <input type="hidden" name="calendar3.month.long.may" value="May">
+                    <input type="hidden" name="calendar3.month.long.january" value="January">
+                    <input type="hidden" name="calendar3.month.short.october" value="Oct">
+                    <input type="hidden" name="calendar3.day.short.thursday" value="Thu">
+                    <input type="hidden" name="calendar3.day.long.friday" value="Friday">
+                    <input type="hidden" name="calendar3.day.long.sunday" value="Sunday">
+                    <input type="hidden" name="calendar3.month.long.june" value="June">
+                    <input type="hidden" name="calendar3.month.long.august" value="August">
+                    <input type="hidden" name="calendar3.day.long.tuesday" value="Tuesday">
+                    <input type="hidden" name="calendar3.day.long.saturday" value="Saturday">
+                    <input type="hidden" name="calendar3.month.short.september" value="Sep">
+                    <input type="hidden" name="calendar3.day.long.monday" value="Monday">
+                    <input type="hidden" name="calendar3.month.short.july" value="Jul">
+                    <input type="hidden" name="calendar3.month.short.march" value="Mar">
+                    <input type="hidden" name="calendar3.day.short.monday" value="Mon">
+                    <input type="hidden" name="calendar3.month.short.december" value="Dec">
+            </fieldset>
+</script>
+
+            
+
+    
+            
+    
+    
+            <meta name="ajs-page-id" content="14123051">
+            <meta name="ajs-content-type" content="page">
+            <meta name="ajs-page-title" content="Persistence cache">
+            <meta name="ajs-parent-page-id" content="">
+            <meta name="ajs-space-key" content="EZP51">
+            <meta name="ajs-space-name" content="eZ Publish 5.1">
+            <meta name="ajs-from-page-title" content="">
+            <meta name="ajs-can-remove-page" content="false">
+            <meta name="ajs-editor.loader.comment.resources" content="&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/9f01679814e63f4c0513d02c90477002/_/download/contextbatch/css/comment-editor/batch.html media=&quot;all&quot;&gt;
+">
+            <meta name="ajs-context-path" content="">
+            <meta name="ajs-base-url" content="https://doc.ez.no">
+            <meta name="ajs-version-number" content="5.4.4">
+            <meta name="ajs-build-number" content="4733">
+            <meta name="ajs-remote-user" content="">
+            <meta name="ajs-current-user-fullname" content="">
+            <meta name="ajs-current-user-avatar-url" content="">
+            <meta name="ajs-static-resource-url-prefix" content="/s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_">
+            <meta name="ajs-global-settings-attachment-max-size" content="10485760">
+            <meta name="ajs-user-locale" content="en_GB">
+            <meta name="ajs-enabled-dark-features" content="sync.event">
+            <meta name="ajs-atl-token" content="494111f00e28ced96046bfb6fbe8f75e18d44b71">
+            <meta name="ajs-confluence-flavour" content="VANILLA">
+            <meta name="ajs-editor.loader.resources" content="&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-editor%2c-v/batch.11b.delaye media=&quot;all&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11ca781.delaye?media=%28max-width%3A+1450px%29%22 media=&quot;(max-width: 1450px)&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11d23d0.delaye?media=print%22 media=&quot;print&quot;&gt;
+&lt;!--[if lt IE 9]&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11ed0b5.delaye?conditionalComment=lt+IE+9%22 media=&quot;all&quot;&gt;
+&lt;![endif]--&gt;
+&lt;!--[if IE]&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11fbe23.delaye?ieonly=true%22 media=&quot;all&quot;&gt;
+&lt;![endif]--&gt;
+&lt;script type=&quot;text/javascript&quot; src=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/js/editor%2cmacro-browser%2cfullpage-editor%2c-vi/batch.120.delaye &gt;&lt;/script&gt;
+">
+            <meta name="ajs-date.format" content="MMM dd, yyyy">
+    
+    <link rel="shortcut icon" href="../favicon.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.html">
+
+<link rel="search" type="application/opensearchdescription+xml" href="../opensearch/osd.action" title="eZ Documentation"/>
+
+    <!-- include system javascript resources -->
+    <script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/js/batch.js" ></script>
+<!--[if lte IE 8]>
+<script type="text/javascript" src="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/js/batch.js?conditionalComment=lte+IE+8" ></script>
+<![endif]-->
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/js/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batch.js" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/js/page/batch.js" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/84fc2bb4cbbfc06481d75335376bb250/_/download/contextbatch/js/atl.comments/batch.js" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.1.4/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext-2.newcode-macro-plugin_synt" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.1.4/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext-3.newcode-macro-plugin_synt" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins-2.confluence-highlight-ac" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.mywork.mywork-confluence-host-plu/com.atlassian.mywork.mywork-confluence-host-plugin_mw-he" ></script>
+
+    
+
+        
+    <!-- end system javascript resources -->
+
+        
+        
+
+    
+                <link rel="canonical" href="../display/EZP51/Persistence%2bcache.html">
+        <link rel="shortlink" href="../x/K4DX.html">
+    <meta name="wikilink" content="[null:Persistence cache]">
+    <meta name="page-version" content="5">
+
+</head>
+
+<body             onload="placeFocus()"
+     id="com-atlassian-confluence" class="theme-documentation  aui-theme-default aui-layout">
+
+        
+    <div id="full-height-container">
+    <div id="header-precursor">
+        
+                    </div>
+
+
+
+
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation"><div class="aui-header-inner"><div class="aui-header-before"><a class="aui-dropdown2-trigger app-switcher-trigger" aria-owns="app-switcher" aria-haspopup="true" tabindex="0"><span class="aui-icon aui-icon-small aui-iconfont-appswitcher">Linked Applications</span></a><div id="app-switcher" class="aui-dropdown2 aui-style-default"><div class="app-switcher-loading">Loading&hellip;</div></div><script>
+            (function (NL) {
+                var initialise = function () {
+                    // For some milestones of AUI, the atlassian soy namespace was renamed to aui. Handle that here by ensuring that window.atlassian is defined.
+                    window.atlassian = window.atlassian || window.aui;
+                    new NL.AppSwitcher({
+                        dropdownContents: '#app-switcher'
+                    });
+                };
+                if (NL.AppSwitcher) {
+                    initialise();
+                } else {
+                    NL.onInit = initialise;
+                }
+            }(window.NL = (window.NL || {})));
+            window.NL.isUserAdmin = false</script></div><div class="aui-header-primary"><h1 id="logo" class="aui-header-logo aui-header-logo-custom"><a href="../index.html"><img src="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_/images/logo/atl.site.logo" alt="eZ Documentation" /></a></h1><ul class="aui-nav">
+                            <li>
+            
+        
+        
+<a  id="space-directory-link" href="../spacedirectory/view.html"  class=" aui-nav-imagelink"   title="Spaces">
+            <span>Spaces</span>
+    </a>
+        </li>
+                            <li id="browseMenu" role="menu">
+            
+    
+        <a id="browse-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="browse-menu-link-content" title="Browse">
+        <span class="browse">Browse</span>
+    </a>
+    <nav id="browse-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                <ul  id="browse-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+    
+            
+<a  id="space-pages-link" href="listpages-dirview2fd6.html?key=EZP51" class="    "      title="Browse pages in the eZ Publish 5.1 space" >
+        Pages
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-blogposts-link" href="viewrecentblogposts2fd6.html?key=EZP51" class="    "      title="Browse blogs in the eZ Publish 5.1 space" >
+        Blog
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-labels-link" href="../labels/listlabels-heatmap2fd6.html?key=EZP51" class="    "      title="Browse labels in the eZ Publish 5.1 space" >
+        Labels
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-advanced-link" href="../spaces/viewspacesummary2fd6.html?key=EZP51" class="    "      title="Browse additional space functions in the eZ Publish 5.1 space" >
+        Space Operations
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    
+        </li>
+        </ul>
+</div><div class="aui-header-secondary"><ul class="aui-nav">
+                <li>
+        
+    
+            
+<a  id="doctheme-anchor" href="#"  class=" aui-nav-imagelink"   title="">
+            <span></span>
+    </a>
+    </li>
+        <li>
+<form id="quick-search" class="aui-quicksearch dont-default-focus header-quicksearch" action="https://doc.ez.no/dosearchsite.action" method="get">
+    <fieldset>
+                    <input type='hidden' name='where' value='EZP51'/>
+                            <input type="hidden" name="spaceSearch" value="true"/>
+                <label for="quick-search-query" class="assistive">Quick Search</label>
+        <input id="quick-search-query" class="text app-search search quick-search-query" type="text"
+               accessKey="q" autocomplete="off" name="queryString" title="Quick Search"  placeholder="Search space" />
+        <input id="quick-search-submit" class="quick-search-submit" type="submit" value="Search"/>
+
+        <div class="aui-dd-parent quick-nav-drop-down"></div>
+    </fieldset>
+    <div class="hidden parameters">
+                    <!-- putMetadata failed to add value for key "quick-nav-enabled" so rendering metadata inline - see server debug log for details -->
+        <meta name="ajs-quick-nav-enabled" content="true">
+                </div>
+</form>
+</li>
+    <li>    
+        <a id="help-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="help-menu-link-content" title="Help">
+        <span class="aui-icon aui-icon-small aui-iconfont-help">Help</span>
+    </a>
+    <nav id="help-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                <ul  id="help-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+    
+            
+<a  id="confluence-help-link" href="http://docs.atlassian.com/confluence/docs-54/Getting+Help+And+Support" class="    "      title="Visit the Confluence documentation home"  target="_blank"
+>
+        Online Help
+</a>
+</li>
+                                            <li>
+    
+                
+<a  id="keyboard-shortcuts-link" href="#" class="    "      title="View available keyboard shortcuts" >
+        Keyboard Shortcuts
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="feed-builder-link" href="../dashboard/configurerssfeed.html" class="    "      title="Create your custom RSS feed." >
+        Feed Builder
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="whats-new-menu-link" href="http://docs.atlassian.com/confluence/docs-54/whatsnew/iframe" class="    "      title="" >
+        What’s new
+</a>
+</li>
+                                            <li>
+    
+                
+<a  id="gadget-directory-link" href="#" class="   user-item administration-link "      title="Browse gadgets provided by Confluence" >
+        Available Gadgets
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="confluence-about-link" href="../aboutconfluencepage.html" class="    "      title="Get more information about Confluence" >
+        About Confluence
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    </li>
+    <li>    
+    </li>
+                <li>                                    <li>
+    
+            
+<a  id="login-link" href="../login85ed.html?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D14123051" class="   user-item login-link "      title="" >
+        Log in
+</a>
+</li>
+                        </li>
+</ul>
+</div></div><!-- .aui-header-inner--></nav><!-- .aui-header -->
+    <br class="clear">
+</header>
+
+    <div id="splitter">
+    <div id="splitter-sidebar"  class="padding-div" >
+        
+        <p>&nbsp;<br/>
+<strong>Navigation</strong><br/>
+&bull; <a href="https://confluence.ez.no/display/MAIN" class="external-link" rel="nofollow">eZ Documentation Center</a><br/>
+&nbsp;</p>
+    
+
+                    
+    
+
+
+<div class="plugin_pagetree">
+
+        
+        
+    <ul class="plugin_pagetree_children_list plugin_pagetree_children_list_noleftspace">
+        <div class="plugin_pagetree_children">
+        </div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input type="hidden" name="treeId" value="">
+        <input type="hidden" name="treeRequestId" value="/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=false&amp;sort=position&amp;reverse=false&amp;disableLinks=false&amp;expandCurrent=false">
+        <input type="hidden" name="treePageId" value="14123051">
+
+        <input type="hidden" name="noRoot" value="false">
+        <input type="hidden" name="rootPageId" value="12125259">
+
+        <input type="hidden" name="rootPage" value="">
+        <input type="hidden" name="startDepth" value="0">
+        <input type="hidden" name="spaceKey" value="EZP51" >
+
+        <input type="hidden" name="i18n-pagetree.loading" value="Loading...">
+        <input type="hidden" name="i18n-pagetree.error.permission" value="Unable to load page tree. It seems that you do not have permission to view the root page.">
+        <input type="hidden" name="i18n-pagetree.eeror.general" value="There was a problem retrieving the page tree. Please check the server log file for more information.">
+        <input type="hidden" name="loginUrl" value="/login.action?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D14123051">
+        <input type="hidden" name="mobile" value="false">
+
+                <fieldset class="hidden">
+                            <input type="hidden" name="ancestorId" value="12125259">
+                    </fieldset>
+    </fieldset>
+</div>
+
+
+
+            </div>
+    <div id="splitter-content">
+
+                    <script type="text/javascript" src="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/5.4.4/_/download/resources/com.atlassian.confluence.plugins.doctheme_resources/doc-theme.js"></script>
+    
+                        
+        <div id="theme-header">
+            <div class="sectionColumnWrapper"><div class="sectionMacro">
+<div class="sectionMacroRow"><div class="columnMacro" style="width:1%;min-width:1%;max-width:1%;"></div>
+<div class="columnMacro"><div class="panel" style="background-color: whitesmoke;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: whitesmoke;">
+<p>This is the documentation for <strong>eZ Publish Platform 5.1</strong>. It is scheduled to be moved into the <a href="../display/EZP/eZ%2bPublish%2bPlatform%2bDocumentation.html">5.x documentation</a>, so please go there for most up-to-date documentation.</p>
+</div></div></div>
+<div class="columnMacro" style="width:1%;min-width:1%;max-width:1%;"></div></div></div></div>
+        </div>
+    
+            
+<div id="main"  class="aui-page-panel" >
+    <div id="main-header">
+        
+        
+    <div id="navigation" class="content-navigation view">
+                    <ul class="ajs-menu-bar">
+                                    
+                    
+        <li class="normal ajs-menu-item">
+        <a id="action-menu-link" class="action ajs-menu-title aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="action-menu" data-container="#navigation"><span><span>Tools</span></span></a>         <div id="action-menu" class="aui-dropdown2 aui-style-default">
+                            <ul  id="action-menu-primary"                     class="section-primary first aui-dropdown2-section">
+                                            <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-view-history-link" href="viewpreviousversionsca64.html?pageId=14123051" rel="nofollow"  class="action-view-history"   title="">
+                <span>Page History</span>    </a>
+</li>
+                                </ul>
+                            <ul  id="action-menu-secondary"                     class="section-secondary aui-dropdown2-section">
+                                            <li>
+
+    
+        
+                            
+    
+    
+    <a  id="view-page-info-link" href="viewinfoca64.html?pageId=14123051" rel="nofollow"  class="action-view-info"   title="">
+                <span>Page Information</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="view-in-hierarchy-link" href="../logindfc1.html?key=$page.space.key&amp;openId=14123051#selectedPageInHierarchy" rel="nofollow"  class=""   title="">
+                <span>View in Hierarchy</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-view-source-link" href="../plugins/viewsource/viewpagesrcca64.html?pageId=14123051" rel="nofollow"  class="action-view-source popup-link"   title="">
+                <span>View Source</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-export-pdf-link" href="../download/temp/pdfexport-20141021-211014-1458-2057/EZP51-Persistencecache-211014-1458-2058f1f7.pdf?pageId=14123051" rel="nofollow"  class=""   title="">
+                <span>Export to PDF</span>    </a>
+</li>
+                                </ul>
+                    </div>
+    </li>
+            </ul>
+    </div>
+
+        
+                <div id="title-heading" class="pagetitle with-breadcrumbs">
+        
+                            <div class="space-logo " data-key="EZP51" data-name="eZ Publish 5.1" data-entity-type="confluence.space">
+            <a><img class="logo space custom" src="../download/attachments/12125253/EZP51ccaa?version=2&amp;modificationDate=1370705476000&amp;api=v2" alt=""></a>
+        </div>            
+                            <div id="breadcrumb-section">
+                    
+    
+    
+    <ol id="breadcrumbs">
+                    
+                
+        <li class="first" >
+                
+
+                    <span class=""><a href="../display/EZP51/eZ%2bPublish%2bDocumentation.html">eZ Publish 5.1</a></span>
+                                                <li id="ellipsis" title="Show all breadcrumbs"><span><strong>&#8230;</strong></span></li>
+                                    
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="../display/EZP51/eZ%2bPublish%2bDocumentation.html">eZ Publish Documentation</a></span>
+                                        
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="../display/EZP51/Developer%2bGuide.html">Developer Guide</a></span>
+                                        
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="../display/EZP51/Developing%2bwith%2beZ%2bPublish%2b5.html">Developing with eZ Publish 5</a></span>
+                                        
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="../display/EZP51/MVC%2band%2bApplication.html">MVC and Application</a></span>
+                            
+                
+        <li>
+                
+
+                    <span class=""><a href="../display/EZP51/Cache.html">Cache</a></span>
+                </ol>
+
+
+                </div>
+            
+            <h1 id="title-text" class="with-breadcrumbs">
+                                        <a href="viewpageca64.html?pageId=14123051">Persistence cache</a>
+                            </h1>
+        </div>
+    </div>
+
+    
+
+    
+    
+    
+    
+    
+
+        
+
+
+
+
+        
+
+
+
+
+    
+
+    
+
+    
+
+
+
+
+
+
+
+    
+    
+        
+    
+    
+                    
+    
+
+    
+
+
+<div id="content" class="page view">
+    
+
+<div id="action-messages">
+                        </div>
+
+
+
+        <script type="text/x-template" title="searchResultsGrid">
+    <table class="aui">
+        <thead>
+            <tr class="header">
+                <th class="search-result-title">Page Title</th>
+                <th class="search-result-space">Space</th>
+                <th class="search-result-date">Updated</th>
+            </tr>
+        </thead>
+    </table>
+</script>
+<script type="text/x-template" title="searchResultsGridCount">
+    <p class="search-result-count">{0}</p>
+</script>
+<script type="text/x-template" title="searchResultsGridRow">
+    <tr class="search-result">
+        <td class="search-result-title"><a href="{1}" class="content-type-{2}"><span>{0}</span></a></td>
+        <td class="search-result-space"><a class="space" href="/display/{4}/" title="{3}">{3}</a></td>
+        <td class="search-result-date"><span class="date" title="{6}">{5}</span></td>
+    </tr>
+</script>
+        
+    
+    
+        <fieldset class="hidden parameters">
+            <input type="hidden" title="parentPageId" value="">
+        </fieldset>
+
+                            
+    
+
+                    
+
+                    
+        
+        <a href="#page-metadata-end" class="assistive">Skip to end of metadata</a>
+<div id="page-metadata-start" class="assistive"></div>
+
+    <div class="page-metadata">
+        <ul>
+                            <li class="page-metadata-item noprint">
+
+    
+            
+                            
+    
+    
+    <a  id="content-metadata-page-restrictions" href="#" rel="nofollow"  class="hidden"   title="Restrictions apply">
+                    <img alt="" src="../download/resources/com.atlassian.confluence.plugins.confluence-page-banner_page-banner-resources/images/red_padlock.png" height="16" width="16" title="">
+                <span></span>    </a>
+</li>
+                        <li class="page-metadata-modification-info">
+                
+        
+    
+        
+    
+        
+        
+            Created and last modified by <span class='author'>     <a href="../logine6fa.html"
+                       class="url fn"
+                            >Ricardo Correia</a></span> on <a class='last-modified' title='May 29, 2013 08:11' href='diffpagesbyversion5f46.html?pageId=14123051&amp;selectedPageVersions=4&amp;selectedPageVersions=5'>May 29, 2013</a>
+                </li>
+        </ul>
+    </div>
+
+
+<a href="#page-metadata-start" class="assistive">Go to start of metadata</a>
+<div id="page-metadata-end" class="assistive"></div>
+
+                            <div id="page-history-warning" class="aui-message warning">
+        <p>
+            <span class="aui-icon icon-warning"></span>
+            <strong>You are viewing an old version of this page. View the <strong><a href="../display/EZP51/Persistence%2bcache.html">current version</a>.</strong></strong>
+        </p>
+        <p class="page-history-view">
+            <a href="diffpagesbyversion06c6.html?pageId=12125301&amp;originalVersion=5&amp;revisedVersion=10">Compare with Current</a>
+                        <a href="viewpreviousversionsffd3.html?pageId=12125301">View Page History</a>
+        </p>
+        <p class="version-navigation-block">
+                            <a class="version-navigation aui-button" href="viewpagec0db.html?pageId=12781720&amp;navigatingVersions=true">&laquo; Previous</a>
+            
+            <span class="current-version-margin">
+                                    <strong> Version 5</strong>
+                            </span>
+
+                            <a class="version-navigation aui-button" href="viewpage13e6.html?pageId=17104919&amp;navigatingVersions=true">Next &raquo;</a>
+            
+        </p>
+    </div>
+            
+        <fieldset class="hidden parameters">
+                        <input type="hidden" title="browsePageTreeMode" value="view">
+        </fieldset>
+
+        <div class="wiki-content">
+                           
+            <div class="aui-message hint shadowed information-macro">
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            Persistence cache is a new feature introduced in 5.1. It does not exists in previous versions.
+                    </div>
+    </div>
+<p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1413903494668 {padding: 0px;}
+div.rbtoc1413903494668 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1413903494668 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1413903494668'>
+<ul class='toc-indentation'>
+<li><a href='#Persistencecache-TechNote'>Tech Note</a></li>
+</ul>
+<li><a href='#Persistencecache-Configuration'>Configuration</a>
+<ul class='toc-indentation'>
+
+<ul class='toc-indentation'>
+<li><a href='#Persistencecache-AfterupgradingeZPublish'>After upgrading eZ Publish</a></li>
+</ul>
+<li><a href='#Persistencecache-Stashhandlersconfiguration'>Stash handlers configuration</a>
+<ul class='toc-indentation'>
+<li><a href='#Persistencecache-Generalsettings'>General settings</a></li>
+<li><a href='#Persistencecache-FileSystem'>FileSystem</a></li>
+<li><a href='#Persistencecache-APC'>APC</a></li>
+<li><a href='#Persistencecache-Memcache'>Memcache</a>
+<ul class='toc-indentation'>
+<li><a href='#Persistencecache-ExamplewithMemcache'>Example with Memcache</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></p><h3 id="Persistencecache-TechNote">Tech Note</h3><p>Current implementation uses a caching library called <a href="http://stash.tedivm.com/" class="external-link" rel="nofollow">Stash</a>, via <a href="https://github.com/tedivm/TedivmStashBundle" class="external-link" rel="nofollow">Stash-bundle</a>. If this changes, then the configuration format will most likely change as well. <span style="font-size: 10.0pt;line-height: 13.0pt;">Stash supports the following cache handlers: </span><strong style="font-size: 10.0pt;line-height: 13.0pt;">FileSystem</strong><span style="font-size: 10.0pt;line-height: 13.0pt;">, </span><strong style="font-size: 10.0pt;line-height: 13.0pt;">Memcache</strong><span style="font-size: 10.0pt;line-height: 13.0pt;">, </span><strong style="font-size: 10.0pt;line-height: 13.0pt;">APC</strong><span style="font-size: 10.0pt;line-height: 13.0pt;">, </span><strong style="font-size: 10.0pt;line-height: 13.0pt;">Sqlite</strong><span style="font-size: 10.0pt;line-height: 13.0pt;">, </span><strong style="font-size: 10.0pt;line-height: 13.0pt;">XCache</strong><span style="font-size: 10.0pt;line-height: 13.0pt;"> and </span><strong style="font-size: 10.0pt;line-height: 13.0pt;">BlackHole</strong><span style="font-size: 10.0pt;line-height: 13.0pt;">.</span></p><h1 id="Persistencecache-Configuration">Configuration</h1><p>During Setup wizard and manually using <code>ezpublish:configure</code> console command a default configuration is generated currently <strong>using FileSystem</strong>, using <code>%kernel.cache_dir%/stash</code> to store cache files. It falls back to <em>BlackHole</em>, a non caching cache handler.</p><p>The configuration is placed in ezpublish/config/ezpublish.yml, and looks like:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Default ezpublish.yml</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[stash:
+    caches:
+        default:
+            handlers:
+                - FileSystem
+            inMemory: false
+            registerDoctrineAdapter: false]]></script>
+</div></div><p>The default settings used during setup wizard as found in <code>ezpublish/config/ezpublish_setup.yml</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>ezpublish_setup.yml</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[stash:
+    caches:
+        default:
+            handlers:
+                - BlackHole
+            inMemory: true
+            registerDoctrineAdapter: false]]></script>
+</div></div><p>This setting works across all installs and just caches objects within the same request thanks to the <code>inMemory: true</code> setting.</p><p>If you want to change to another handler, see below for what kind of settings you have available.</p>    <div class="aui-message warning shadowed information-macro">
+                    <p class="title">Note for multiple sites installation</p>
+                            <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                            <p>As cache configuration is global to the application, it's currently not possible to have different cache configuration by siteaccess. As such, when having multiple websites <strong>using different content repositories</strong>, you must only use the <code>BlackHole</code> handler with <code>inMemory</code> caching:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[stash:
+    caches:
+        default:
+            handlers: [BlackHole]
+            inMemory: true
+            registerDoctrineAdapter: false]]></script>
+</div></div><p>This will result to the same persistence cache strategy as in eZ Publish 4.x.</p>
+                    </div>
+    </div>
+    <div class="aui-message warning shadowed information-macro">
+                    <p class="title">Note for &quot;inMemory&quot; cache with long running scripts</p>
+                            <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                            <p>Use of <code>inMemory</code> caching with BlackHole or any other cache handler should not be used for long running scripts as it will over time return stale data (inMemory cache is not shared across requests/processes, so invalidation does not happen)!</p>
+                    </div>
+    </div>
+<h3 id="Persistencecache-AfterupgradingeZPublish">After upgrading eZ Publish</h3>    <div class="aui-message warning shadowed information-macro">
+                            <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                            <p><strong>Important note:</strong> After performing an upgrade please be aware that the persistence cache won't be set, as this is a new feature introduced in eZ Publish 5.1.</p>
+                    </div>
+    </div>
+<p>To enable persistence cache you should either regenerate your <code>yml</code> configurations or add the cache section into your <code>ezpublish.yml</code> file manually, as exemplified above.</p><p>Also please note that regenerating the <code>yml</code> configurations will remove any customizations done.<br />To avoid configuration loss be sure to use the <code>--backup</code>parameter when running the <span style="font-size: 10.0pt;line-height: 13.0pt;">ezpublish:configure </span><span style="font-size: 10.0pt;line-height: 13.0pt;">console command, as shown in the following example:</span></p><div class="preformatted panel" style="border-width: 1px;"><div class="preformattedContent panelContent">
+<pre>cd /&lt;ezp5-root&gt;
+php ezpublish/console ezpublish:configure --backup --env=prod &lt;group&gt; &lt;admin-siteaccess&gt;</pre>
+</div></div><h2 id="Persistencecache-Stashhandlersconfiguration">Stash handlers configuration</h2><h3 id="Persistencecache-Generalsettings">General settings</h3><p>To check which cache settings are available for your installation, run the following command in your terminal :</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: bash; gutter: false"><![CDATA[php ezpublish/console config:dump-reference stash]]></script>
+</div></div><h3 id="Persistencecache-FileSystem"><span>FileSystem</span></h3><p>This cache handler is using local filesystem, by default the Symfony cache folder, as this is per server, it <strong>does not support multi server (cluster) setups</strong>!</p>    <div class="aui-message warning shadowed information-macro">
+                            <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                            <strong>We strongly discourage you from storing cache files on NFS</strong>, as it defeats the purpose of the cache: speed
+                    </div>
+    </div>
+<p><strong><span style="color: rgb(51,51,51);font-size: 10.0pt;line-height: 13.0pt;"><br /></span></strong></p><p><strong><span style="color: rgb(51,51,51);font-size: 10.0pt;line-height: 13.0pt;">Available settings</span></strong></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><td class="confluenceTd"><code><strong>path</strong></code></td><td class="confluenceTd">The path where the cache is placed, default is <code>%kernel.cache_dir%/stash</code>, effectively <code>ezpublish/cache/&lt;env&gt;/stash</code></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>dirSplit</strong></code></td><td colspan="1" class="confluenceTd">Number of times the cache key should be split up to avoid having to many files in each folder, default is 2.</td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>filePermissions</strong></code></td><td colspan="1" class="confluenceTd">The permissions of the cache file, default is 0660.</td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>dirPermissions</strong></code></td><td colspan="1" class="confluenceTd">The permission of the cache file directories (see dirSplit), default is 0770.</td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>memKeyLimit</strong></code></td><td colspan="1" class="confluenceTd">Limit on how many key to path entries are kept in memory during execution at a time to avoid having to recalculate the path on key lookups, default 200.</td></tr></tbody></table></div><h3 id="Persistencecache-APC">APC</h3><p>This cache handler is using shard memory using APC's user cache feature, as this is per server, it <strong>does not support multi server (cluster) setups</strong>, unless you use PHP-FPM on a dedicated server (this way, user cache can be shared among all the workers in one pool).</p>    <div class="aui-message warning shadowed information-macro">
+                    <p class="title">Limitation</p>
+                            <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                            <p>As APC user cache is not shared between processes, it is not possible to clear the user cache from CLI, even if you set <span style="color: rgb(0,0,0);"><code>apc.enable_cli</code> to On</span>. <br />Hence publishing content from a command line script won't let you properly clear SPI cache.</p>
+                    </div>
+    </div>
+<p>Please also note that the default value for <code>apc.shm_size</code> is 128MB. However, 256MB is recommended for APC to work properly. For more details please refer to the <a href="http://www.php.net/manual/en/apc.configuration.php#ini.apc.shm-size" class="external-link" rel="nofollow">APC configuration manual</a>.</p><p> </p><p><strong>Available settings</strong></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><td class="confluenceTd"><code><strong>ttl</strong></code></td><td class="confluenceTd">The time to live of the cache in seconds, default set to 500 (8.3 minutes)</td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>namespace</strong></code></td><td colspan="1" class="confluenceTd">A namespace to prefix cache keys with to avoid key conflicts with other eZ Publish sites on same eZ Publish installation, default is <code>null</code>.</td></tr></tbody></table></div><h3 id="Persistencecache-Memcache">Memcache</h3><p>This cache handler is using <a href="http://memcached.org/" class="external-link" rel="nofollow">Memcached, a distributed caching solution</a>, <strong>this is the only supported cache solution for multi server (cluster) setups</strong>!</p>    <div class="aui-message hint shadowed information-macro">
+                    <p class="title">Note</p>
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            <p>Stash supports both the php <a href="http://php.net/memcache" class="external-link" rel="nofollow">Memcache</a> and <a href="http://php.net/memcached" class="external-link" rel="nofollow">Memcached</a> extensions. <strong>However <u>Memcached is recommended</u></strong> as it is much more advanced and supports all settings below.</p><p>If you have both extensions installed, <strong>Stash will automatically choose Memcached</strong>.</p>
+                    </div>
+    </div>
+<div class="table-wrap"><table class="confluenceTable"><tbody><tr><td colspan="1" class="confluenceTd"><code><strong>servers</strong></code></td><td colspan="1" class="confluenceTd"><p>Array of Memcached servers, with host/IP, port and weight</p><p><code><strong>server</strong></code>: Host or IP of your Memcached server<br /><code><strong>port</strong></code>: Port where Memcached is listening to (defaults to 11211)<br /><code><strong>weight</strong></code>: Weight of the server, when using several Memcached servers</p></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>prefix_key</strong></code></td><td colspan="1" class="confluenceTd"><span>A namespace to prefix cache keys with to avoid key conflicts with other eZ Publish sites on same eZ Publish installation (default is an empty string). </span><br /><span>Must be the same on all server with the same installation.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-prefix-key" class="external-link" rel="nofollow">See Memcached option</a><span>.</span></span></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>compression</strong></code></td><td colspan="1" class="confluenceTd">default true. <a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-compression" class="external-link" rel="nofollow">See Memcached option</a>.</td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>libketama_compatible</strong></code></td><td colspan="1" class="confluenceTd">default false.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-libketama-compatible" class="external-link" rel="nofollow">See Memcached option</a></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>buffer_writes</strong></code></td><td colspan="1" class="confluenceTd">default false.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-buffer-writes" class="external-link" rel="nofollow">See Memcached option</a><span> </span></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>binary_protocol</strong></code></td><td colspan="1" class="confluenceTd">default false.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-binary-protocol" class="external-link" rel="nofollow">See Memcached option</a><span> </span></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>no_block</strong></code></td><td colspan="1" class="confluenceTd">default false.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-no-block" class="external-link" rel="nofollow">See Memcached option</a><span> </span></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>tcp_nodelay</strong></code></td><td colspan="1" class="confluenceTd">default false.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-tcp-nodelay" class="external-link" rel="nofollow">See Memcached option</a><span> </span></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>connection_timeout</strong></code></td><td colspan="1" class="confluenceTd">default 1000.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-connection-timeout" class="external-link" rel="nofollow">See Memcached option</a><span> </span></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>retry_timeout</strong></code></td><td colspan="1" class="confluenceTd">default 0.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-memcached-timeout" class="external-link" rel="nofollow">See Memcached option</a><span> </span></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>send_timeout</strong></code></td><td colspan="1" class="confluenceTd">default 0.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-send-timeout" class="external-link" rel="nofollow">See Memcached option</a><span> </span></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>recv_timeout</strong></code></td><td colspan="1" class="confluenceTd">default 0.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-recv-timeout" class="external-link" rel="nofollow">See Memcached option</a><span> </span></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>poll_timeout</strong></code></td><td colspan="1" class="confluenceTd">default 1000.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-poll-timeout" class="external-link" rel="nofollow">See Memcached option</a><span> </span></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>cache_lookups</strong></code></td><td colspan="1" class="confluenceTd">default false.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-cache-lookups" class="external-link" rel="nofollow">See Memcached option</a><span> </span></td></tr><tr><td colspan="1" class="confluenceTd"><code><strong>server_failure_limit</strong></code></td><td colspan="1" class="confluenceTd">default 0.<span> </span><a href="http://www.php.net/manual/en/memcached.constants.php#memcached.constants.opt-server-failure-limit" class="external-link" rel="nofollow">See Memcached option</a><span> </span></td></tr></tbody></table></div><p>For in-depth information on the settings, see: <a href="http://php.net/Memcached" class="external-link" rel="nofollow">http://php.net/Memcached</a></p>    <div class="aui-message hint shadowed information-macro">
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            <p>When using Memcache handler, <strong>it's strongly recommended to also use <code>inMemory</code> cache</strong> (see example below). <br />This will help reducing network traffic between your webserver and your Memcached server.</p>
+                    </div>
+    </div>
+<h4 id="Persistencecache-ExamplewithMemcache">Example with Memcache</h4><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[stash:
+    caches:
+        default:
+            handlers: [ Memcache ]
+            inMemory: true
+            registerDoctrineAdapter: false
+            Memcache:
+                prefix_key: ezdemo_
+                retry_timeout: 1
+                servers:
+                    -
+                        server: 127.0.0.1
+                        port: 11211]]></script>
+</div></div>
+
+                
+        
+    
+        </div>
+
+        <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://doc.ez.no/pages/viewpage.action?pageId=14123051"
+    dc:identifier="https://doc.ez.no/pages/viewpage.action?pageId=14123051"
+    dc:title="Persistence cache"
+    trackback:ping="https://doc.ez.no/rpc/trackback/14123051"/>
+</rdf:RDF>
+-->
+
+            
+    
+
+
+
+<div id="labels-section" class="pageSection group">
+    <div class="labels-section-content content-column" entityid="14123051" entitytype="page">
+	<div class="labels-content">
+		
+    <ul class="label-list label-list-right ">
+            <li class="no-labels-message">
+            No labels
+        </li>
+            </ul>
+
+    </div>
+</div></div>
+
+            
+            
+
+
+
+
+            
+    
+
+
+
+
+
+
+
+
+                    
+    
+<div id="comments-section" class="pageSection group">
+    
+    
+    
+    
+            <div class="bottom-comment-panels comment-panels">
+                                    
+    
+
+
+    
+            </div>
+    
+    </div>
+
+
+            
+</div>
+
+
+    
+
+
+
+
+    
+    
+
+    
+    
+    
+
+
+
+
+
+
+
+
+</div>
+  
+        <div id="theme-footer">
+            <div class="sectionColumnWrapper"><div class="sectionMacro">
+<div class="sectionMacroRow"><div class="columnMacro"></div>
+<div class="columnMacro">
+<div class="panel" style="background-color: #ecf0f1;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: #ecf0f1;">
+<p>Where Content Means Business</p>
+</div></div></div>
+<div class="columnMacro"></div></div></div></div>
+        </div>
+    
+    </div>
+</div>
+
+
+        
+            <div id="footer">
+
+    <section class="footer-body">
+
+                                                <p class="license license-opensource">
+                  Powered by a free <b>Atlassian Confluence Open Source Project License</b> granted to eZ Publish. <a href="http://www.atlassian.com/c/conf/11461">Evaluate Confluence today</a>.<br>
+                </p>
+                        
+    
+
+    <ul id="poweredby">
+        <li class="noprint">Powered by <a href="http://www.atlassian.com/software/confluence" class="hover-footer-link">Atlassian Confluence</a> <span id='footer-build-information'>5.4.4</span>, <a href="http://www.atlassian.com/software/confluence/overview/team-collaboration-software?utm_source=confluence-footer" class="hover-footer-link">Team Collaboration Software</a></li>
+        <li class="print-only">Printed by Atlassian Confluence 5.4.4, Team Collaboration Software.</li>
+        <li class="noprint"><a href="http://jira.atlassian.com/secure/BrowseProject.jspa?id=10470" class="hover-footer-link">Report a bug</a></li>
+        <li class="noprint"><a href="http://www.atlassian.com/about/connected.jsp?s_kwcid=Confluence-stayintouch" class="hover-footer-link">Atlassian News</a></li>
+    </ul>
+
+    
+
+            <script>
+AJS.toInit(function(){
+ if(AJS.params.spaceKey &&
+    AJS.params.spaceKey === 'MAIN' ||
+    AJS.params.spaceKey === 'EZMA' ||
+    AJS.params.spaceKey === 'ODC' ||
+    AJS.params.spaceKey === 'EZP50' ||
+    AJS.params.spaceKey === 'EZP51' ||
+    AJS.params.spaceKey === 'EZP52' ||
+    AJS.params.spaceKey === 'EZPCLOUD' ||
+    AJS.params.spaceKey === 'EZP' ||
+    AJS.params.spaceKey === 'EZRECO'
+){
+
+(function()
+{var isSecure=('https:'==document.location.protocol);var ff=document.createElement('script');ff.type='text/javascript';ff.async=true;ff.src=(isSecure?'https':'http')+'://'+(isSecure?'secure.':'lb.')+'liveviewer.ez.no/statjs/sst-120-1304513615/stat.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ff,s);}
+)();
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-303624-13', 'ez.no');
+  ga('send', 'pageview');
+}}
+);
+</script>
+    
+    </section>
+
+</div>
+
+            
+    </div>
+</body>
+
+<!-- Mirrored from doc.ez.no/pages/viewpage.action?pageId=14123051 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:16:45 GMT -->
+</html>

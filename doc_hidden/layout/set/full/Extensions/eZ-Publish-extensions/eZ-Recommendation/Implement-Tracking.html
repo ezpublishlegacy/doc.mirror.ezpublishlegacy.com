@@ -1,0 +1,60 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Recommendation/Implement-Tracking by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Implement Tracking / eZ Recommendation / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Implement Tracking</h1>
+</div>
+
+<a name="eztoc129072_0_1" id="eztoc129072_0_1"></a><h3>Enable ‘Click’-events</h3><p>After installing the ezrecommendation extension, the global pagelayout.tpl is overridden to track events automatically.</p><p>If you have customized your global pagelayout.tpl, you can do these changes manually, following the steps below:</p><p>The first step is to include the following code in your pagelayout.tpl. The code must be included in the body of the pagelayout.tpl but outside of any caching block. You can place it e.g. right before the &lt;/body&gt; tag:</p><pre class="wordwrap"><span class="line">{* enable tracking of click events in pagelayout.tpl *}</span>
+</pre><pre class="wordwrap"><span class="line">{include uri='design:content/ezrecommendation_html.tpl'</span>
+<span class="line">&nbsp;content=$module_result track=true()}</span>
+</pre><p>After this step you will see that ´click´-events will be created for any node that is marked as recommendable through the class definition. In our case all content of the classes ´Article for recommendation´, ´Product for recommendation´ and ´Image for recommendation´.</p><p>´Click´-events are created in the moment you click on the link to a recommendable object.</p><p>You can verify whether an event has been created by checking the ´debug.log´ in the directory ´&lt;eZ publish root directory&gt;/var/log´. You will find entries like the following for each tracking event being sent to the eZ recommender engine depending on the event chosen:</p><pre class="wordwrap"><span class="line">[ Sep 11 2011 14:17:52 ] event.yoochoose.net/news/&lt;strong&gt;&lt;CustomerID&gt;&lt;/strong&gt;/click/</span>
+<span class="line">&nbsp;131574345055084112/2/110?categorypath=%2F2%2F107%2F110</span>
+</pre><p>If you change from track=true() to track=false() in the above include you will obviously disable tracking for any page.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Recommendation/Implement-Tracking by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:04 GMT -->
+</html>

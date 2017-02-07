@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Features/VAT-charging-system/Three-approaches-to-VAT-charging by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:15:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Three approaches to VAT charging / VAT charging system / Features / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Three approaches to VAT charging</h1>
+</div>
+
+ <p>The <a href="../../Concepts-and-basics/Webshop.html" target="_self">webshop system</a> supports the following three approaches to VAT charging: </p>
+<ol>
+ <li><div> VAT per product </div></li> <li><div> Country dependent VAT </div></li> <li><div> Extended VAT </div></li> 
+</ol>
+ <p>The next subsections explain the difference between these approaches. <a name="vat_per_product"></a>
+ </p>  <a name="eztoc30813_1" id="eztoc30813_1"></a><h2>VAT per product</h2> <p>The primitive &quot;VAT per product&quot; approach allows to choose one of the predefined static VAT types when you create a new product or edit an existing one. Thus you can specify a fixed VAT rate for each product. It is also possible to specify the <a href="Assigning-VAT-types-to-products.html#default_vat_type" target="_self">default VAT type</a> for a product class so that this VAT type will be used by default when a new object of this class is created.</p>  <a name="eztoc30813_1_1" id="eztoc30813_1_1"></a><h3>Example</h3> <p>Let's say that you sell various products to Norwegian customers and need to charge the following rates of VAT depending on the type of goods: </p>
+<ul>
+ <li><div> A general rate, 25% for most of the products. </div></li> <li><div> A reduced rate, 11% for food. </div></li> <li><div> A low rate, 7% for personal transport. </div></li> 
+</ul>
+ <p>You will have to create these three VAT types (as described in the &quot;<a href="Managing-VAT-types.html#new_vat_type" target="_self">Creating a VAT type</a>&quot; section) so that you can <a href="Assigning-VAT-types-to-products.html" target="_self">assign</a> an appropriate VAT type to each product.</p> <p>It is also possible to create several product classes and specify different default VAT types for them. The value specified for a product class will be selected by default for a new object of this class.</p> <p>For example, let's say that you have created the following three product classes: </p>
+<ul>
+ <li><div> &quot;Carpet&quot; with default VAT type set to 25% </div></li> <li><div> &quot;Food product&quot; with default VAT type set to 11% </div></li> <li><div> &quot;Motorcycle&quot; with default VAT type set to 7% </div></li> 
+</ul>
+ <p>In this case, the system will assign the 25% fixed VAT type to each newly created carpet, the 11% fixed VAT type to each newly created food product, and the 7% fixed VAT type to each newly created motorcycle. <a name="country_dependent_vat"></a>
+ </p>    <a name="eztoc30813_2" id="eztoc30813_2"></a><h2>Country dependent VAT</h2> <p>In most cases, the amount of the VAT depends on where the customer lives. The &quot;Country dependent VAT&quot; approach allows to charge different VAT percentage depending on the product category (if specified) and the country the customer is from. This can be done by using the dynamic VAT type and the built-in default VAT handler. This handler uses the VAT charging rules to determine the appropriate VAT percentage for a product. <a name="rules"></a>
+ </p>  <a name="eztoc30813_2_2" id="eztoc30813_2_2"></a><h3>VAT charging rules</h3> <p>A VAT charging rule consists of the following components: </p>
+<ul>
+ <li><div> <a href="User-country.html" target="_self">User country</a>  </div></li> <li><div> <a href="Product-category.html" target="_self">Product category</a> (one or more) </div></li> <li><div> VAT type </div></li> 
+</ul>
+ <p>and determines which static VAT type to use in case when the customer is from the specified country and the product belongs to one of specified categories. The administration interface makes it possible to add, remove and modify VAT charging rules as described in the &quot;<a href="Managing-VAT-rules.html" target="_self">Managing VAT rules</a>&quot; section. <a name="default_rule"></a>
+The <i>default VAT rule</i> specified for &quot;Any&quot; country and &quot;Any&quot; category determines which rate of VAT to use in case if all other VAT rules do not match.</p> <p>The more exact match a rule provides for given &quot;country-category&quot; pair, the higher priority it has. In other words, the default VAT handler tries to choose the best matching VAT percentage. To understand how this VAT choosing algorithm works, look at possible match cases and their priorities described in the following table: </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p> <b>Country</b> </p> 
+  </th> <th >   <p> <b>Category</b> </p> 
+  </th> <th >   <p> <b>Example</b> </p> 
+  </th> <th >   <p> <b>Priority</b> </p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>exact match</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>exact match</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Norway-Food</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>4</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>exact match</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>weak match</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Norway-Any</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>3</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>weak match</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>exact match</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Any-Food</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>2</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>weak match</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>weak match</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Any-Any</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>If there is no match on country and/or no match on category then the lowest (zero) priority will be used.</p>   <a name="eztoc30813_2_3" id="eztoc30813_2_3"></a><h3>Setting up country dependent VATs</h3> <p>If you sell for example carpets and need to levy the 16% VAT on purchases made by German customers and 25% on purchases made from Norway then the &quot;<a href="#vat_per_product" target="_self">VAT per product</a>&quot; approach is not applicable. The following text explains how the &quot;country dependent VAT&quot; approach can be used in this particular case. </p>
+<ol>
+ <li><div> Enable the built-in default VAT handler as described in the &quot;<a href="../VAT-charging-system.html#vat_handlers" target="_self">VAT handlers</a>&quot; section. </div></li> <li><div> Create the following two VAT types as described in the &quot;<a href="Managing-VAT-types.html#new_vat_type" target="_self">Creating a VAT type</a>&quot; section: 
+<ul>
+ <li><div> Norway general, 25% </div></li> <li><div> Germany general, 16% </div></li> 
+</ul>
+  </div></li> <li><div> Add an attribute of the <a href="../../Reference/Datatypes/Country.html" target="_self">country</a> datatype to your user class and specify its identifier in the &quot;UserCountryAttribute&quot; INI setting as described in the &quot;<a href="User-country.html#add_country_attribute" target="_self">Adding a country attribute to a user class</a>&quot; section. </div></li> <li><div> <p>Create the following two VAT rules as described in the &quot;<a href="Managing-VAT-rules.html#new_rule" target="_self">Creating a VAT rule</a>&quot; section: </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>User country</p> 
+  </th> <th >   <p>Product category</p> 
+  </th> <th >   <p>VAT type</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Norway</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Any</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Norway general, 25%</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Germany</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Any</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Germany general, 16%</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+
+The system will also ask you to create the default VAT rule that will be applied to customers from all other countries.<br />Since you sell only one type of goods, there is no need to create product categories. The VAT rules specified for &quot;Any&quot; product category will be applied to all your products.</div></li> <li><div> To make your products affected by the VAT charging rules, you should assign the dynamic VAT type to them as described in the &quot;<a href="Assigning-VAT-types-to-products.html" target="_self">Assigning VAT types to products</a>&quot; section. </div></li> 
+</ol>
+   <a name="eztoc30813_2_4" id="eztoc30813_2_4"></a><h3>Setting up country and category dependent VATs</h3> <p>If your webshop sells various types of products with different rates of VAT then the rate of VAT will depend on both user country and product category. This means that you will have to create product categories, assign them to your products and specify VAT rules for these product categories (not for &quot;Any&quot; category as described in the previous section).</p> <p>For example, let's say that you sell various products to Norwegian and German customers and need to charge the following rates of VAT depending on the type of goods: </p>
+<ul>
+ <li><div> Germany 
+<ul>
+ <li><div> A general rate, 16% for most of the products. </div></li> <li><div> A reduced rate, 7% for food. </div></li> 
+</ul>
+  </div></li> <li><div> Norway 
+<ul>
+ <li><div> A general rate, 25% for most of the products. </div></li> <li><div> A reduced rate, 11% for food. </div></li> <li><div> A low rate, 7% for personal transport. </div></li> 
+</ul>
+  </div></li> 
+</ul>
+ <p>The following text explains how the &quot;country dependent VAT&quot; approach can be used in this particular case. </p>
+<ol>
+ <li><div> Enable the built-in default VAT handler as described in the &quot;<a href="../VAT-charging-system.html#vat_handlers" target="_self">VAT handlers</a>&quot; section. </div></li> <li><div> Create the following four VAT types as described in the &quot;<a href="Managing-VAT-types.html#new_vat_type" target="_self">Creating a VAT type</a>&quot; section: 
+<ul>
+ <li><div> Norway general, 25% </div></li> <li><div> Germany general, 16% </div></li> <li><div> Norway reduced, 11% </div></li> <li><div> Norway low, Germany reduced, 7% </div></li> 
+</ul>
+  </div></li> <li><div> Add an attribute of the <a href="../../Reference/Datatypes/Country.html" target="_self">country</a> datatype to your user class and specify its identifier in the &quot;UserCountryAttribute&quot; INI setting as described in the &quot;<a href="User-country.html#add_country_attribute" target="_self">Adding a country attribute to a user class</a>&quot; section. </div></li> <li><div> Add an attribute of the <a href="../../Reference/Datatypes/Product-category.html" target="_self">product category</a> datatype to your product class and specify its identifier in the &quot;ProductCategoryAttribute&quot; INI setting as described in the &quot;<a href="Product-category.html#add_category_attribute" target="_self">Adding a product category attribute to a product class</a>&quot; section. </div></li> <li><div> Create the following two product categories as described in the &quot;<a href="Managing-product-categories.html#new_category" target="_self">Creating a product category</a>&quot; section: 
+<ul>
+ <li><div> Food </div></li> <li><div> Personal transport </div></li> 
+</ul>
+  </div></li> <li><div> <p>Create the following five VAT rules as described in the &quot;<a href="Managing-VAT-rules.html#new_rule" target="_self">Creating a VAT rule</a>&quot; section: </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>User country</p> 
+  </th> <th >   <p>Product category</p> 
+  </th> <th >   <p>VAT type</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Germany</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Food</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Norway low, Germany reduced, 7%</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Germany</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Any</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Germany general, 16%</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Norway</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Personal transport</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Norway low, Germany reduced, 7%</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Norway</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Food</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Norway reduced, 11%</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Norway</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Any</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Norway general, 25%</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+The system will also ask you to create the default VAT rule for any category and any country (this VAT rule will be used in case if none of the other VAT rules is applicable).</div></li> <li><div> Assign the dynamic VAT type to your products (as described in the &quot;<a href="Assigning-VAT-types-to-products.html" target="_self">Assigning VAT types to products</a>&quot; section) and assign the appropriate product category to each of them (as described in the &quot;<a href="Product-category.html#assign_category" target="_self">Assigning a category to a product</a>&quot; section). </div></li> 
+</ol>
+ <p> <a name="extended_vat"></a>
+ </p>    <a name="eztoc30813_3" id="eztoc30813_3"></a><h2>Extended VAT</h2> <p>If you need more complicated VAT charging logic for your webshop, you can extend the system by creating your own VAT handler for special needs. This approach is incompatible with the previous one because using two or more VAT handlers at the same time is not supported. The &quot;Handler&quot; INI setting described in the &quot;<a href="VAT-settings.html" target="_self">VAT settings</a>&quot; section determines the VAT handler to use.</p> <p>The VAT charging logic implemented by your handler will be applied to all products that have the dynamic VAT type assigned. Keep in mind that dynamic VAT type does not work with &quot;Price inc. VAT&quot; configuration.</p> <p>Please refer to the &quot;<a href="Creating-new-VAT-handlers.html" target="_self">Creating new VAT handlers</a>&quot; section for more information.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Features/VAT-charging-system/Three-approaches-to-VAT-charging by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:15:34 GMT -->
+</html>

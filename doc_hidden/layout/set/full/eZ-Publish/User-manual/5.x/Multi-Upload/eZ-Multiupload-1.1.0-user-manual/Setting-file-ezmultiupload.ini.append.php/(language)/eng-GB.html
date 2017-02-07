@@ -1,0 +1,104 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Multi-Upload/eZ-Multiupload-1.1.0-user-manual/Setting-file-ezmultiupload.ini.append.php/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Setting file “ezmultiupload.ini.append.php” / eZ Multiupload 1.1.0 user manual / Multi Upload / 5.x / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Setting file “ezmultiupload.ini.append.php”</h1>
+</div>
+
+ <p>
+In ezmultiupload.ini.append.php, you can set up available file types for uploading per class or/and subtree node.<br />
+The default settings are the following:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /*</span>
+<span class="line">&nbsp;</span>
+<span class="line">[MultiUploadSettings]</span>
+<span class="line">&nbsp;</span>
+<span class="line">AvailableClasses[]</span>
+<span class="line">&nbsp;AvailableClasses[]=folder</span>
+<span class="line">&nbsp;AvailableClasses[]=gallery</span>
+<span class="line">&nbsp;AvailableSubtreeNode[]</span>
+<span class="line">&nbsp;MultiuploadHandlers[]</span>
+<span class="line">&nbsp;</span>
+<span class="line">[FileTypeSettings_folder]</span>
+<span class="line">&nbsp;</span>
+<span class="line">FileType[]</span>
+<span class="line">&nbsp;FileType[]=*.odt</span>
+<span class="line">&nbsp;FileType[]=*.flv</span>
+<span class="line">&nbsp;FileType[]=*.xap</span>
+<span class="line">&nbsp;FileType[]=*.doc</span>
+<span class="line">&nbsp;</span>
+<span class="line">[FileTypeSettings_gallery]</span>
+<span class="line">&nbsp;</span>
+<span class="line">FileType[]</span>
+<span class="line">&nbsp;FileType[]=*.jpg</span>
+<span class="line">&nbsp;FileType[]=*.png</span>
+<span class="line">&nbsp;FileType[]=*.gif</span>
+<span class="line">&nbsp;</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /*\r\n\r\n[MultiUploadSettings]\r\n\r\nAvailableClasses[]\r\n AvailableClasses[]=folder\r\n AvailableClasses[]=gallery\r\n AvailableSubtreeNode[]\r\n MultiuploadHandlers[]\r\n\r\n[FileTypeSettings_folder]\r\n\r\nFileType[]\r\n FileType[]=*.odt\r\n FileType[]=*.flv\r\n FileType[]=*.xap\r\n FileType[]=*.doc\r\n\r\n[FileTypeSettings_gallery]\r\n\r\nFileType[]\r\n FileType[]=*.jpg\r\n FileType[]=*.png\r\n FileType[]=*.gif\r\n\r\n*/ ?&gt;' ); return false;" /></p>
+<![endif]--><p>
+ <br />&quot;AvailableClasses[]=folder&quot; and &quot;[FileTypeSettings_folder]&quot; is a pre-defined set. Therefore, with the default setting, the node created by “Folder Class” can upload only &quot;.odt file&quot;, &quot;.flv file&quot;, &quot;.xap file&quot; and the &quot;.doc file&quot;.</p> <p>
+Here is an example of using AvailableSubtreeNode.<br /></p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /*</span>
+<span class="line">&nbsp;</span>
+<span class="line">[MultiUploadSettings]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;AvailableSubtreeNode[]=69</span>
+<span class="line">&nbsp;</span>
+<span class="line">[FileTypeSettings_69]</span>
+<span class="line">&nbsp;</span>
+<span class="line">FileType[]</span>
+<span class="line">&nbsp;FileType[]=*.jpg</span>
+<span class="line">&nbsp;FileType[]=*.png</span>
+<span class="line">&nbsp;FileType[]=*.gif</span>
+<span class="line">&nbsp;</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /*\r\n\r\n[MultiUploadSettings]\r\n\r\n AvailableSubtreeNode[]=69\r\n\r\n[FileTypeSettings_69]\r\n\r\nFileType[]\r\n FileType[]=*.jpg\r\n FileType[]=*.png\r\n FileType[]=*.gif\r\n\r\n*/ ?&gt;' ); return false;" /></p>
+<![endif]--><p>
+ <br />&quot;AvailableSubtreeNode[]=69&quot; and &quot; [FileTypeSettings_69]&quot; becomes a pre-defined set. Therefore, the node (node_id=69) can now upload &quot; .jpg file &quot;,&quot; .png file &quot; and &quot; .gif file&quot;.</p> <p>The Filetype settings can use the regular expression.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Multi-Upload/eZ-Multiupload-1.1.0-user-manual/Setting-file-ezmultiupload.ini.append.php/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:14 GMT -->
+</html>

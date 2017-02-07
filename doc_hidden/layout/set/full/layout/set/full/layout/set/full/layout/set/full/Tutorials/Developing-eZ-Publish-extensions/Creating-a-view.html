@@ -1,0 +1,119 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/Creating-a-view by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:38:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                  
+    <title>Creating a view / Developing eZ Publish extensions / Tutorials / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Creating a view</h1>
+</div>
+
+<p>Now we extend our example by creating a new view. We want to save the array with the example data in the database, so we create a new database table (using, for example, phpMyAdmin) with the name &quot;jacextension_data&quot; in our ez39_plain database, with the columns id | user_id | created | value ( see listing 11).</p><pre class="wordwrap copytoclipboard"><span class="line">CREATE TABLE jacextension_data (</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;id INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;user_id INT( 11 ) NOT NULL ,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;created INT( 11 ) NOT NULL ,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;value VARCHAR( 50 ) NOT NULL</span>
+<span class="line">) ENGINE = MYISAM ;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'CREATE TABLE jacextension_data ( \r\n    id INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY , \r\n    user_id INT( 11 ) NOT NULL , \r\n    created INT( 11 ) NOT NULL , \r\n    value VARCHAR( 50 ) NOT NULL \r\n) ENGINE = MYISAM ;' ); return false;" /></p>
+<![endif]--><p><i>Listing 11. Run the SQL command on the ezp_plain database to create a new jacextension_data table.</i></p><p>Next we copy list.php to create.php, list.tpl to create.tpl and we extend module.php with a new view and user role function (&quot;create&quot;), which links to the PHP file &quot;create.php&quot;. Then we change the template call in &quot;create.php&quot; to design:modul1/create.tpl and adjust the rights for the view modul1/create. Clear the cache.</p><p>Now the URL http://localhost/ez/index.php/plain_site/modul1/create will work. It is the same view as modul1/list but without view parameters.</p><p>To store data in our MySQL database, we will build an HTML form that sends the data to our new view (with POST and GET variables). We create a new form in the template create.tpl with a text line name. In our example we want to send the data with GET. We also insert a new template variable {$status_message} to show the user a message (see listing 12).</p><pre class="wordwrap copytoclipboard"><span class="line">{* create.tpl – template for Modulview .../modul1/create</span>
+<span class="line">Html form to save the new data *}</span>
+<span class="line">&lt;form action={'modul1/create'|ezurl} method=&quot;get&quot;&gt;</span>
+<span class="line">Name :&lt;br /&gt;</span>
+<span class="line">&lt;input name=&quot;name&quot; type=&quot;text&quot; size=&quot;50&quot; maxlength=&quot;50&quot;&gt;&lt;br /&gt;</span>
+<span class="line">&lt;input type=&quot;submit&quot; name=&quot;DataCreation&quot; value=&quot;Create new data&quot;&gt;</span>
+<span class="line">&lt;input type=&quot;reset&quot; value=&quot;Cancel&quot;&gt;</span>
+<span class="line">&lt;/form&gt;</span>
+<span class="line">&lt;hr&gt;</span>
+<span class="line">Status: {$status_message}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{* create.tpl – template for Modulview .../modul1/create \r\nHtml form to save the new data *} \r\n&lt;form action={\'modul1/create\'|ezurl} method=&quot;get&quot;&gt; \r\nName :&lt;br /&gt; \r\n&lt;input name=&quot;name&quot; type=&quot;text&quot; size=&quot;50&quot; maxlength=&quot;50&quot;&gt;&lt;br /&gt; \r\n&lt;input type=&quot;submit&quot; name=&quot;DataCreation&quot; value=&quot;Create new data&quot;&gt; \r\n&lt;input type=&quot;reset&quot; value=&quot;Cancel&quot;&gt; \r\n&lt;/form&gt; \r\n&lt;hr&gt; \r\nStatus: {$status_message}' ); return false;" /></p>
+<![endif]--><p><i>Listing 12. Template jacextension/design/standard/templates/modul1/create.tpl with a form to save the new data.</i></p><a name="eztoc123565_0_1" id="eztoc123565_0_1"></a><h3>GET / POST</h3><p>At this point we change &quot;list.php&quot; to show the GET name variable, which the HTML form transmits to the script. After that we show it in the status field in the template. To show the variable GET / POST we use the eZ Publish framework with the eZHTTPTool class.</p><p>First we take a reference of the object of eZHTTPTool with $http = eZHTTPTool::instance(); With $http-&gt;hasVariable('name'); we can discover if the variable $_GET['name'] or $_POST['name'] exists and with $http-&gt;variable('name'); we can display it. If only GET or POST variables should be shown, we can use $http-&gt;hasGetVariable('name'); or $http-&gt;hasPostVariable('name');</p><p>
+Information about other functions (for example access to sessions) are described in the API documentation for eZ Publish. For the eZHTTPTool class, see http://pubsvn.ez.no/doxygen/4.4/html/classeZHTTPTool.html.<br />If we want to write our own log file we use eZLog::write(). This is often useful because the default log files contain a lot of information and are not easy to read (see Listing 13).</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">// modul1/create.php – Function file of View create</span>
+<span class="line">$Module = $Params['Module'];</span>
+<span class="line">&nbsp;</span>
+<span class="line">// take copy of global object</span>
+<span class="line">$http = eZHTTPTool::instance ();</span>
+<span class="line">$value = '';</span>
+<span class="line">&nbsp;</span>
+<span class="line">// If the variable 'name' is sent by GET or POST, show variable</span>
+<span class="line">if( $http-&gt;hasVariable('name') )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$value = $http-&gt;variable ('name');</span>
+<span class="line">&nbsp;</span>
+<span class="line">if( $value != '' )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$statusMessage = 'Name: '. $value;</span>
+<span class="line">else</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$statusMessage = 'Please insert data';</span>
+<span class="line">&nbsp;</span>
+<span class="line">// initialize Templateobject</span>
+<span class="line">$tpl = eZTemplate::factory(); // From eZPublish 4.3. For previous versions, use templateInit() function instead</span>
+<span class="line">$tpl-&gt;setVariable( 'status_message', $statusMessage );</span>
+<span class="line">&nbsp;</span>
+<span class="line">// Write variable $statusMessage in the file eZ Debug Output / Log</span>
+<span class="line">// here the 4 different types: Notice, Debug, Warning, Error</span>
+<span class="line">eZDebug::writeNotice( $statusMessage, 'jacextension:modul1/list.php' );</span>
+<span class="line">eZDebug::writeDebug( $statusMessage, 'jacextension:modul1/list.php' );</span>
+<span class="line">eZDebug::writeWarning( $statusMessage, 'jacextension:modul1/list.php' );</span>
+<span class="line">eZDebug::writeError( $statusMessage, 'jacextension:modul1/list.php' );</span>
+<span class="line">&nbsp;</span>
+<span class="line">// $statusMessage write own Log file to ezroot/var/log/jacextension_modul1.log</span>
+<span class="line">eZLog::write ( $statusMessage, 'jacextension_modul1.log' );</span>
+<span class="line">&nbsp;</span>
+<span class="line">$Result = array();</span>
+<span class="line">// search/replace template and save result for $module_result.content</span>
+<span class="line">$Result['content'] = $tpl-&gt;fetch( 'design:modul1/create.tpl' );</span>
+<span class="line">&nbsp;</span>
+<span class="line">// generate route Modul1/create</span>
+<span class="line">$Result['path'] = array(&amp;nbsp; array( 'url'&amp;nbsp; =&gt; 'modul1/list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'text' =&gt; 'Modul1'),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 'url' &nbsp;=&gt; false,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'text' =&gt; 'create' ) );</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\n// modul1/create.php – Function file of View create \r\n$Module = $Params[\'Module\'];\r\n\r\n// take copy of global object \r\n$http = eZHTTPTool::instance (); \r\n$value = \'\';\r\n\r\n// If the variable \'name\' is sent by GET or POST, show variable \r\nif( $http-&gt;hasVariable(\'name\') ) \r\n    $value = $http-&gt;variable (\'name\');\r\n\r\nif( $value != \'\' ) \r\n    $statusMessage = \'Name: \'. $value; \r\nelse \r\n    $statusMessage = \'Please insert data\';\r\n\r\n// initialize Templateobject \r\n$tpl = eZTemplate::factory(); // From eZPublish 4.3. For previous versions, use templateInit() function instead \r\n$tpl-&gt;setVariable( \'status_message\', $statusMessage );\r\n\r\n// Write variable $statusMessage in the file eZ Debug Output / Log \r\n// here the 4 different types: Notice, Debug, Warning, Error \r\neZDebug::writeNotice( $statusMessage, \'jacextension:modul1/list.php\' ); \r\neZDebug::writeDebug( $statusMessage, \'jacextension:modul1/list.php\' ); \r\neZDebug::writeWarning( $statusMessage, \'jacextension:modul1/list.php\' ); \r\neZDebug::writeError( $statusMessage, \'jacextension:modul1/list.php\' );\r\n\r\n// $statusMessage write own Log file to ezroot/var/log/jacextension_modul1.log \r\neZLog::write ( $statusMessage, \'jacextension_modul1.log\' );\r\n\r\n$Result = array(); \r\n// search/replace template and save result for $module_result.content \r\n$Result[\'content\'] = $tpl-&gt;fetch( \'design:modul1/create.tpl\' );\r\n\r\n// generate route Modul1/create \r\n$Result[\'path\'] = array(&amp;nbsp; array( \'url\'&amp;nbsp; =&gt; \'modul1/list\',\r\n                                  \'text\' =&gt; \'Modul1\'), \r\n                           array( \'url\'  =&gt; false,\r\n                                  \'text\' =&gt; \'create\' ) ); \r\n?&gt;\r\n' ); return false;" /></p>
+<![endif]--><p><i>Listing 13. jacextension/module/modul1/create.php with examples to show variables GET/POST and generate Debug messages and Log files</i></p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/Creating-a-view by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:38:47 GMT -->
+</html>

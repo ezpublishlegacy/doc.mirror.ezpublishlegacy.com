@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/Session/BasketCleanup by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>BasketCleanup / [Session] / site.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>BasketCleanup</h1>
+</div>
+<h3>Summary</h3>
+Sets how the shopping baskets for expired and removed sessions are cleaned up.<h3>Usage</h3>
+<pre class="pfix"> <p>BasketCleanup=cronjob|pageload</p></pre><h3>Description</h3>
+ <p>If a user added some products into his basket and then stopped shopping (e.g. closed his browser window) without initiating the checkout process, the user's session will expire after a while. The eZ Publish session handling, which is based on the <a href="http://php.net/session" target="_self">PHP session functionality</a>, takes care about removing expired sessions from the database. It is also possible to remove sessions (either expired or not) using the &quot;Setup - Sessions&quot; part of the admin interface. </p> <p>If the &quot;BasketCleanup&quot; setting is set to &quot;cronjob&quot; (default), removing a user's session from the database will not delete the shopping basket that was created during this session. These unneeded baskets can be cleaned up periodically by running the &quot;basket_cleanup.php&quot; cronjob.</p> <p>If you specify &quot;BasketCleanup=pageload&quot;, removing a user's session from the database (either automatically by session cleanup or manually by the site administrator) will delete the corresponding shopping basket. The &quot;basket_cleanup.php&quot; cronjob will not do anything. Please note that this configuration is not recommended for sites with many visitors because removing baskets on session cleanup will take a lot of time.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/Session/BasketCleanup by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:21 GMT -->
+</html>

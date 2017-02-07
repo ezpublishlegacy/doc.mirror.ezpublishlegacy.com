@@ -1,0 +1,76 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-language-support-for-URL-aliases/URL-transformation-rules by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:29:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>URL transformation rules / Multi-language support for URL aliases / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>URL transformation rules</h1>
+</div>
+
+<p>When a site administrator enters a value for a new virtual URL, the system will perform cleanup of the input by using so-called URL transformation rules. This is done in order to avoid problems with certain characters and to ensure that the alias conforms the standards and the other URLs of the site. If an inputted alias is modified, the user will be notified.</p><p>Note that in eZ Publish 3.10, the transformation of entered/generated aliases has changed.</p><a name="eztoc132677_1" id="eztoc132677_1"></a><h2>Unicode support</h2><p>In versions prior to 3.10, URL transformation rules were more restrictive and only supported some ASCII characters (lowercase Latin letters from &quot;a&quot; to &quot;z&quot;, digits and underscores). This caused problems for many non-western languages that use different alphabets, some of them which are difficult to transliterate.</p><p>From eZ Publish 3.10, it is possible to enable Unicode support for the URLs and thus no transliteration needs to be performed since most characters are allowed. The following characters are not allowed: ampersand, semi-colon, forward slash, colon, equal sign, question mark, square brackets, parenthesis and the plus sign. Note that spaces are only allowed as word separators. These characters are not allowed in order to avoid miscellaneous problems (related to the HTTP protocol).</p><p>The Unicode characters are encoded using the <a href="http://www.ietf.org/rfc/rfc3987.txt" target="_blank">IRI</a> standard. The text is encoded using <a href="http://en.wikipedia.org/wiki/UTF-8" target="_blank">UTF-8</a> before further encoding is performed. The resulting URL will contain characters that are compatible with the HTTP protocol and which will work in all existing browsers/clients. Note that modern browsers will decode the URL and display the characters using Unicode.</p><a name="eztoc132677_2" id="eztoc132677_2"></a><h2>Dash/underscore/space</h2><p>
+In versions prior to 3.10, only underscores were allowed as separators of words. From 3.10, it is possible to choose which word separator that should be used. This can be done by changing the value of the &quot;<a href="../../../4.x/Reference/Configuration-files/site.ini/URLTranslator/WordSeparator.html" target="_self">WordSeparator</a>&quot; configuration directive located in the [URLTranslator] section of an override for &quot;site.ini&quot;. It can be set to either &quot;dash&quot;, &quot;underscore&quot; or &quot;space&quot;. Note that this setting will be ignored when the &quot;urlalias_compat&quot; transformation method is used (since it only supports underscores as separators).<br />&nbsp;</p><a name="eztoc132677_3" id="eztoc132677_3"></a><h2>Case sensitivity</h2><p>When the &quot;urlalias&quot; or &quot;urlalias_iri&quot; transformation method is used, the URLs will consist of mixed cases (uppercase and lowercase characters). This is different from the traditional/old behavior where every letter was converted to lowercase. Instead, the system will preserve the cases and store the URL aliases accordingly. However, the URLs themselves will not be case sensitive. For example, the URL alias for a node called &quot;About Us&quot; will be &quot;About-Us&quot; (assuming that the word separator is a dash). The &quot;About Us&quot; node will be accessible regardless of how the URL is specified when it comes to lowercase and uppercase letters. In other words, the node will be accessible through all of the following URLs: &quot;www.example.com/about-us&quot;, &quot;www.example.com/About-us&quot;, &quot;www.example.com/ABOUT-US&quot;; and so on.</p><p>Note that if there are two nodes with (almost) identical names within the same location (for example &quot;My article&quot; and &quot;My Article&quot; inside a folder called &quot;News&quot;), the system will generate unique URL aliases for newly introduced conflicting nodes by attaching numbers to their URL aliases. For example, if a node called &quot;My article&quot; already exists and &quot;My Article&quot; is created at the same location, the URL alias of the second (&quot;My Article&quot;) node will be &quot;My-Article2&quot;. If a third &quot;MY Article&quot; node is introduced, it's URL alias will be &quot;MY-Article3&quot;; and so on.</p><a name="eztoc132677_4" id="eztoc132677_4"></a><h2>Alias text filtering</h2><p>Support for filtering has been implemented in order to introduce more flexibility when it comes to the generation of the aliases. The filters are performed by the system on the URLs before the result is transformed into a valid alias. The filters can be created as extensions. The following text explains how to create a new filter:</p><p>
+1. Create an extension (i.e.: the 'myfilter' extension by creating the folder extension/myfilter)<br />
+2. Enable this extension by adding its name to the &quot;ActiveExtensions[]&quot; array under [ExtensionSettings] section in settings/override/site.ini.append.php<br />3. In extension/myfilter/settings/site.ini.append.php, add a new filter class to the &quot;FilterClasses[]&quot; array (i.e.: &quot;StripWords&quot;) under the [URLTranslator] section:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /*</span>
+<span class="line">[URLTranslator]</span>
+<span class="line">FilterClasses[]=StripWords</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /*\r\n[URLTranslator]\r\nFilterClasses[]=StripWords\r\n*/ ?&gt;\r\n' ); return false;" /></p>
+<![endif]--><p>4. Create the file containing the StripWords class, i.e. on &quot;extension/myfilter/urlfilters&quot; directory:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">class StripWords extends eZURLAliasFilter</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function process( $text, $languageObject, $caller ) {</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return str_replace( &quot;window&quot;, &quot;&quot;, $text );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">}</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\nclass StripWords extends eZURLAliasFilter\r\n{\r\n      function process( $text, $languageObject, $caller ) {         \r\n             return str_replace( &quot;window&quot;, &quot;&quot;, $text );    \r\n      }\r\n}\r\n?&gt;\r\n' ); return false;" /></p>
+<![endif]--><p>The filter class &quot;StripWords&quot; implements a method called &quot;process&quot; which has three parameters: the text to filter, the language object (eZContentLanguage) and the node (eZContentObjectTreeNode) for which the URL alias is being generated. The method returns a filtered version of the text. In this example, all occurrences of the word &quot;window&quot; are removed (replaced with nothing). In other words, after this filter is introduced, newly created URLs will not contain the word &quot;window&quot;.</p><p>5. Regenerate the autoload array for extensions by using the admin interface in &quot;Setup &gt; Extensions&quot; or by executing the following command:</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php -e</span>
+</pre><p>Refer to the &quot;<a href="../../../4.x/Reference/Configuration-files/site.ini/URLTranslator.html" target="_self">[URLTranslator]</a>&quot; section of the &quot;site.ini&quot; for more information about the &quot;Filters&quot; setting.</p><p>6. Optional: Run the updateniceurls.php script to update the existing URLs:</p><pre class="wordwrap"><span class="line">php bin/php/updateniceurls.php --update-nodes</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-language-support-for-URL-aliases/URL-transformation-rules by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:29:58 GMT -->
+</html>

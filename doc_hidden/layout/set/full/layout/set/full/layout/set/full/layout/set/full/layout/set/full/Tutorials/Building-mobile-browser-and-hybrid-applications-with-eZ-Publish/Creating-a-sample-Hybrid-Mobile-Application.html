@@ -1,0 +1,714 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Tutorials/Building-mobile-browser-and-hybrid-applications-with-eZ-Publish/Creating-a-sample-Hybrid-Mobile-Application by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:39:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                  
+    <title>Creating a sample Hybrid Mobile Application / Building mobile browser and hybrid applications with eZ Publish / Tutorials / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Creating a sample Hybrid Mobile Application</h1>
+</div>
+
+<p>Now that we’ve configured the web server for a mobile-specific sub-domain, and configured eZ Publish to support a mobile siteaccess and mobile design, we can start to build the design, the mobile site as a whole, and subsequently the hybrid mobile application -- one for the iOS / iPhone and one for Android phones -- as a shell for the mobile site!</p><p>Here is a screenshot of the iOS application that will be the result of this tutorial:</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/sample-of-application/126796-1-eng-GB/Sample-of-application_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><a name="eztoc126792_0_1" id="eztoc126792_0_1"></a><h3>Preparation</h3><p>The first thing we will need is a working eZ Publish instance with the Website Interface enabled. We won’t cover the steps for how to install eZ Publish, as this process is well documented in the official documentation. Refer to the &quot;Normal installation&quot; section of the &quot;Installation&quot; chapter for more information. We also assume that you have already created a siteaccess and design extension dedicated to the mobile site, as covered earlier in this article.</p><a name="eztoc126792_0_2" id="eztoc126792_0_2"></a><h3>Adjusting INI settings</h3><p>We will be using the Website Interface design as the foundation for our mobile web channel, so we need to set the “ezwebin” design as a fallback site design in order to use its templates, styles, and so on. Verify that the configuration file settings/siteaccess/mobile/site.ini.append.php has the following settings:</p><pre class="wordwrap copytoclipboard"><span class="line">[DesignSettings]</span>
+<span class="line">SiteDesign=mobile</span>
+<span class="line">AdditionalSiteDesignList[]</span>
+<span class="line">AdditionalSiteDesignList[]=ezwebin</span>
+<span class="line">AdditionalSiteDesignList[]=base</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[DesignSettings]\r\nSiteDesign=mobile\r\nAdditionalSiteDesignList[]\r\nAdditionalSiteDesignList[]=ezwebin\r\nAdditionalSiteDesignList[]=base' ); return false;" /></p>
+<![endif]--><p>A bit later in this article, we will add a &quot;<i>pagelayout-mobile.css</i>&quot; file, which contains CSS styles for the main template &quot;<i>pagelayout.tpl</i>&quot;. In preparation for that, we will add a reference to that file in&nbsp;<b><i>extension/mobile/settings/design.ini.append.php</i></b>:</p><pre class="wordwrap"><span class="line">[StylesheetSettings]</span>
+<span class="line">FrontendCSSFileList[]=pagelayout-mobile.css</span>
+</pre><p>To complete our work with INI settings, we also need to copy over the Website Interface image size settings, as well as template override rules so that our mobile site can make use of much of the Website Interface foundation. Copy the following files from <i><b>settings/siteaccess/ezwebin_site/</b></i> to <i><b>settings/siteaccess/mobile/</b></i></p><p>
+1. &quot;<i>override.ini.append.php</i>&quot;<br />2. &quot;<i>image.ini.append.php</i>&quot;</p><a name="eztoc126792_0_3" id="eztoc126792_0_3"></a><h3>Preparing templates</h3><p>Next, copy the following templates from the <i><b>extension/ezwebin/design/ezwebin/</b></i> folder to <i><b>extension/mobile/design/mobile/</b></i>. We will be modifying these templates instead of simply using them as fallback templates.</p><p>
+1.&quot; templates/pagelayout.tpl&quot;<br />
+2. &quot;templates/page_header.tpl&quot;<br />
+3. &quot;templates/page_header_logo.tpl&quot;<br />
+4. &quot;templates/page_head.tpl&quot;<br />
+5. &quot;templates/content/search.tpl&quot;<br />
+6. override/templates/full/article.tpl&quot;<br />
+7. override/templates/full/folder.tpl&quot;<br />8. override/templates/full/frontpage.tpl&quot;</p><p>Once you are done copying the files, your mobile extension’s design folder structure should look like this:</p><p>
+mobile<br />
+│<br />
+├── design<br />
+│ └── mobile<br />
+│ ├── images<br />
+│ ├── javascript<br />
+│ ├── override<br />
+│ │ └── templates<br />
+│ │ └── full<br />
+│ │ ├── article.tpl<br />
+│ │ ├── folder.tpl<br />
+│ │ └── frontpage.tpl<br />
+│ ├── stylesheets<br />
+│ └── templates<br />
+│ ├── content<br />
+│ │ └── search.tpl<br />
+│ ├── page_head.tpl<br />
+│ ├── page_header.tpl<br />
+│ ├── page_header_logo.tpl<br />
+│ └── pagelayout.tpl<br />└── settings</p><p>Here are the changes to make to the newly copied templates:</p><a name="eztoc126792_0_3_1" id="eztoc126792_0_3_1"></a><h4>pagelayout.tpl</h4><p>Make the following changes to <i><b>extension/mobile/design/mobile/templates/pagelayout.tpl</b></i>:</p><p>The following code change will scroll up to the device’s viewport and hide the browser navigation toolbar. Change line 29 from :</p><pre class="wordwrap"><span class="line">&lt;!--[if (gt IE 8)|!(IE)]&gt;&lt;!--&gt;&lt;body&gt;&lt;!--&lt;![endif]--&gt;</span>
+</pre><p>to</p><pre class="wordwrap"><span class="line">&lt;!--[if (gt IE 8)|!(IE)]&gt;&lt;!--&gt;&lt;body onload=&quot;{literal}setTimeout(function()</span>
+<span class="line">{ window.scrollTo(0, 1) }, 100);{/literal}&quot;&gt;&lt;!--&lt;![endif]--&gt;&quot;</span>
+</pre><p>Line 33 should already read:</p><pre class="wordwrap"><span class="line">&lt;div id=&quot;page&quot; class=&quot;{$pagestyle}&quot;&gt;</span>
+</pre><p>Add to the following line ( line 34 ), which is a “div” element to which we will add a background image style later:</p><pre class="wordwrap"><span class="line">&lt;div id=&quot;page-wrapper&quot;&gt;</span>
+</pre><p>Line 100 should already read:</p><pre class="wordwrap"><span class="line">{include uri='design:page_footer.tpl'}</span>
+</pre><p>Add to the following line ( line 101 ) to close the element added above:</p><pre class="wordwrap"><span class="line">&lt;/div&gt;</span>
+</pre><a name="eztoc126792_0_3_2" id="eztoc126792_0_3_2"></a><h4>page_header.tpl</h4><p>Make the following changes to <i><b>extension/mobile/design/mobile/templates/page_header.tpl</b></i>:</p><p>Replace line 9 with the following code, for styling purposes and to add a link on all sub-pages, pointing back to the home page:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;div class=&quot;grid&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;unit-1-4&quot;&gt;</span>
+<span class="line">{def $current_node = fetch( 'content', 'node', hash( node_id, $current_node_id ))}</span>
+<span class="line">{if and( ne( $current_node_id, ezini( 'NodeSettings', 'RootNode', 'content.ini'</span>
+<span class="line">) ), $current_node)}</span>
+<span class="line">&lt;div id=&quot;backbutton&quot;&gt;</span>
+<span class="line">&lt;a href=&quot;{$current_node.parent.url_alias|ezurl( 'no' ))}&quot;&gt;&lt;img</span>
+<span class="line">src=&quot;{'back.png'|ezimage( 'no' )}&quot; /&gt;&lt;/a&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">{/if}</span>
+<span class="line">{undef $current_node}</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;div class=&quot;unit-3-4&quot;&gt;</span>
+<span class="line">{include uri='design:page_header_logo.tpl'}</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;div class=&quot;grid&quot;&gt;\r\n&lt;div class=&quot;unit-1-4&quot;&gt;\r\n{def $current_node = fetch( \'content\', \'node\', hash( node_id, $current_node_id ))}\r\n{if and( ne( $current_node_id, ezini( \'NodeSettings\', \'RootNode\', \'content.ini\'\r\n) ), $current_node)}\r\n&lt;div id=&quot;backbutton&quot;&gt;\r\n&lt;a href=&quot;{$current_node.parent.url_alias|ezurl( \'no\' ))}&quot;&gt;&lt;img\r\nsrc=&quot;{\'back.png\'|ezimage( \'no\' )}&quot; /&gt;&lt;/a&gt;\r\n&lt;/div&gt;\r\n{/if}\r\n{undef $current_node}\r\n&lt;/div&gt;\r\n&lt;div class=&quot;unit-3-4&quot;&gt;\r\n{include uri=\'design:page_header_logo.tpl\'}\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_3_3" id="eztoc126792_0_3_3"></a><h4>page_header_logo.tpl</h4><p>Make the following changes to extension/mobile/design/mobile/templates/page_header_logo.tpl: Replace the contents of the entire file with the following, to simplify the code displaying the logo:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;div id=&quot;logo&quot;&gt;</span>
+<span class="line">&lt;a href={&quot;/&quot;|ezurl} title=&quot;{ezini('SiteSettings','SiteName')|wash}&quot;&gt;&lt;img</span>
+<span class="line">src=&quot;{'logo.png'|ezimage( 'no' )}&quot; alt=&quot;{ezini('SiteSettings','SiteName')|wash}&quot; /&gt;&lt;/a&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;div id=&quot;logo&quot;&gt;\r\n&lt;a href={&quot;/&quot;|ezurl} title=&quot;{ezini(\'SiteSettings\',\'SiteName\')|wash}&quot;&gt;&lt;img\r\nsrc=&quot;{\'logo.png\'|ezimage( \'no\' )}&quot; alt=&quot;{ezini(\'SiteSettings\',\'SiteName\')|wash}&quot; /&gt;&lt;/a&gt;\r\n&lt;/div&gt;' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_3_4" id="eztoc126792_0_3_4"></a><h4>page_head.tpl</h4><p>Make the following changes to extension/mobile/design/mobile/templates/page_head.tpl: Add the following to line 52, in order to force the webpage into the device’s visible area:</p><pre class="wordwrap"><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width; initial-scale=1.0; maximumscale=</span>
+<span class="line">1.0; minimum-scale=1.0; user-scalable=yes&quot; /&gt;</span>
+</pre><a name="eztoc126792_0_3_5" id="eztoc126792_0_3_5"></a><h4>search.tpl</h4><p>Make the following changes to extension/mobile/design/mobile/templates/content/search.tpl: Remove the following code from lines 34 - 37 (referencing the advanced search functionality, which we won’t use for the mobile site):</p><pre class="wordwrap copytoclipboard"><span class="line">{let adv_url=concat('/content/advancedsearch/',$search_text|count_chars()|gt(0)|</span>
+<span class="line">choose('',concat('?SearchText=',$search_text|urlencode)))|ezurl}</span>
+<span class="line">&lt;label&gt;{&quot;For more options try the %1Advanced search%2&quot;|</span>
+<span class="line">i18n(&quot;design/ezwebin/content/search&quot;,&quot;The &nbsp;parameters are link start and end tags.&quot;,array(concat(&quot;&lt;a &nbsp;href=&quot;,$adv_url,&quot;&gt;&quot;),&quot;&lt;/a&gt;&quot;))}&lt;/label&gt;</span>
+<span class="line">{/let}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{let adv_url=concat(\'/content/advancedsearch/\',$search_text|count_chars()|gt(0)|\r\nchoose(\'\',concat(\'?SearchText=\',$search_text|urlencode)))|ezurl}\r\n&lt;label&gt;{&quot;For more options try the %1Advanced search%2&quot;|\r\ni18n(&quot;design/ezwebin/content/search&quot;,&quot;The  parameters are link start and end tags.&quot;,array(concat(&quot;&lt;a  href=&quot;,$adv_url,&quot;&gt;&quot;),&quot;&lt;/a&gt;&quot;))}&lt;/label&gt;\r\n{/let}' ); return false;" /></p>
+<![endif]--><p>Wrap the code on lines 47 - 49 with the following “if” statement, which suppresses a simple message if the user hasn’t yet searched for anything:</p><pre class="wordwrap copytoclipboard"><span class="line">{if ne( $search_text, '')}</span>
+<span class="line">&lt;div class=&quot;warning&quot;&gt;</span>
+<span class="line">&lt;h2&gt;{'No results were found when searching for &quot;%1&quot;.'|</span>
+<span class="line">i18n(&quot;design/ezwebin/content/search&quot;,,array($search_text|wash))}&lt;/h2&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{if ne( $search_text, \'\')}\r\n&lt;div class=&quot;warning&quot;&gt;\r\n&lt;h2&gt;{\'No results were found when searching for &quot;%1&quot;.\'|\r\ni18n(&quot;design/ezwebin/content/search&quot;,,array($search_text|wash))}&lt;/h2&gt;\r\n&lt;/div&gt;\r\n{/if}' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_3_6" id="eztoc126792_0_3_6"></a><h4>article.tpl</h4><p>
+Make the following changes to extension/mobile/design/mobile/override/templates/full/article.tpl:<br />Add the following code to line 3, to disable extra navigational and design elements from appearing in the pagelayout:</p><pre class="wordwrap copytoclipboard"><span class="line">{set scope=global persistent_variable=hash('left_menu', false(),</span>
+<span class="line">'extra_menu', false(),</span>
+<span class="line">'show_path', false(),</span>
+<span class="line">'top_menu', false())}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{set scope=global persistent_variable=hash(\'left_menu\', false(),\r\n\'extra_menu\', false(),\r\n\'show_path\', false(),\r\n\'top_menu\', false())}' ); return false;" /></p>
+<![endif]--><p>To have article images display in a more mobile-friendly size, change line 32 from:</p><pre class="wordwrap"><span class="line">{attribute_view_gui attribute=$node.data_map.image image_class=medium}</span>
+</pre><p>to</p><pre class="wordwrap"><span class="line">{attribute_view_gui attribute=$node.data_map.image image_class=articleimage}</span>
+</pre><p>Related to the reason above, change line 35 from:</p><pre class="wordwrap"><span class="line">&lt;div class=&quot;caption&quot; style=&quot;width: {$node.data_map.image.content.medium.width}px&quot;&gt;</span>
+</pre><p>to</p><pre class="wordwrap"><span class="line">&lt;div class=&quot;caption&quot; style=&quot;width:</span>
+<span class="line">{$node.data_map.image.content.articleimage.width}px&quot;&gt;</span>
+</pre><a name="eztoc126792_0_3_7" id="eztoc126792_0_3_7"></a><h4>folder.tpl</h4><p>Make the following changes to extension/mobile/design/mobile/override/templates/full/folder.tpl: Add the following code to line 3, to disable extra navigational and design elements from appearing in the pagelayout:</p><pre class="wordwrap copytoclipboard"><span class="line">{set scope=global persistent_variable=hash('left_menu', false(),</span>
+<span class="line">'extra_menu', false(),</span>
+<span class="line">'show_path', false(),</span>
+<span class="line">'top_menu', false())}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{set scope=global persistent_variable=hash(\'left_menu\', false(),\r\n\'extra_menu\', false(),\r\n\'show_path\', false(),\r\n\'top_menu\', false())}' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_3_8" id="eztoc126792_0_3_8"></a><h4>frontpage.tpl</h4><p>Make the following changes to extension/mobile/design/mobile/override/templates/full/frontpage.tpl: Replace the entire content of the file with the following, which disables extra navigational and design elements from appearing in the pagelayout, and sets up the basic design for the home page:</p><pre class="wordwrap copytoclipboard"><span class="line">{set scope=global persistent_variable=hash('left_menu', false(),</span>
+<span class="line">'extra_menu', false(),</span>
+<span class="line">'show_path', false(),</span>
+<span class="line">'top_menu', false())}</span>
+<span class="line">&lt;div class=&quot;grid&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;unit-1-2&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;category&quot;&gt;</span>
+<span class="line">&lt;a href=&quot;{'/Recipes'|ezurl( 'no' )}&quot;&gt;&lt;img src=&quot;{'recipes.png'|ezimage( 'no'</span>
+<span class="line">)}&quot; /&gt;&lt;/a&gt;</span>
+<span class="line">&lt;h2&gt;{'Recipes'|i18n('design/mobile/frontpage')}&lt;/h2&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;div class=&quot;unit-1-2&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;category&quot;&gt;</span>
+<span class="line">&lt;a href=&quot;{'/Food-reviews'|ezurl( 'no' )}&quot;&gt;&lt;img src=&quot;{'food-reviews.png'|</span>
+<span class="line">ezimage( 'no' )}&quot; /&gt;&lt;/a&gt;</span>
+<span class="line">&lt;h2&gt;{'Food reviews'|i18n('design/mobile/frontpage')}&lt;/h2&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;div class=&quot;grid&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;unit-1-2&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;category&quot;&gt;</span>
+<span class="line">&lt;a href=&quot;{'/Menus'|ezurl( 'no' )}&quot;&gt;&lt;img src=&quot;{'menus.png'|ezimage( 'no' )}&quot;</span>
+<span class="line">/&gt;&lt;/a&gt;</span>
+<span class="line">&lt;h2&gt;{'Menus'|i18n('design/mobile/frontpage')}&lt;/h2&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;div class=&quot;unit-1-2&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;category&quot;&gt;</span>
+<span class="line">&lt;a href=&quot;{'/content/search'|ezurl( 'no' )}&quot;&gt;&lt;img src=&quot;{'search.png'|</span>
+<span class="line">ezimage( 'no' )}&quot; /&gt;&lt;/a&gt;</span>
+<span class="line">&lt;h2&gt;{'Search'|i18n('design/mobile/frontpage')}&lt;/h2&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{set scope=global persistent_variable=hash(\'left_menu\', false(),\r\n\'extra_menu\', false(),\r\n\'show_path\', false(),\r\n\'top_menu\', false())}\r\n&lt;div class=&quot;grid&quot;&gt;\r\n&lt;div class=&quot;unit-1-2&quot;&gt;\r\n&lt;div class=&quot;category&quot;&gt;\r\n&lt;a href=&quot;{\'/Recipes\'|ezurl( \'no\' )}&quot;&gt;&lt;img src=&quot;{\'recipes.png\'|ezimage( \'no\'\r\n)}&quot; /&gt;&lt;/a&gt;\r\n&lt;h2&gt;{\'Recipes\'|i18n(\'design/mobile/frontpage\')}&lt;/h2&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;div class=&quot;unit-1-2&quot;&gt;\r\n&lt;div class=&quot;category&quot;&gt;\r\n&lt;a href=&quot;{\'/Food-reviews\'|ezurl( \'no\' )}&quot;&gt;&lt;img src=&quot;{\'food-reviews.png\'|\r\nezimage( \'no\' )}&quot; /&gt;&lt;/a&gt;\r\n&lt;h2&gt;{\'Food reviews\'|i18n(\'design/mobile/frontpage\')}&lt;/h2&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;div class=&quot;grid&quot;&gt;\r\n&lt;div class=&quot;unit-1-2&quot;&gt;\r\n&lt;div class=&quot;category&quot;&gt;\r\n&lt;a href=&quot;{\'/Menus\'|ezurl( \'no\' )}&quot;&gt;&lt;img src=&quot;{\'menus.png\'|ezimage( \'no\' )}&quot;\r\n/&gt;&lt;/a&gt;\r\n&lt;h2&gt;{\'Menus\'|i18n(\'design/mobile/frontpage\')}&lt;/h2&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;div class=&quot;unit-1-2&quot;&gt;\r\n&lt;div class=&quot;category&quot;&gt;\r\n&lt;a href=&quot;{\'/content/search\'|ezurl( \'no\' )}&quot;&gt;&lt;img src=&quot;{\'search.png\'|\r\nezimage( \'no\' )}&quot; /&gt;&lt;/a&gt;\r\n&lt;h2&gt;{\'Search\'|i18n(\'design/mobile/frontpage\')}&lt;/h2&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_4" id="eztoc126792_0_4"></a><h3>Images</h3><p>
+We have already prepared images for our mobile website, which you can download here [https://github.com/ezsystems/ezmobile/tree/master/ezpublish/extension/mobile]. Copy the following files into the <i><b>extension/mobile/design/mobile/images</b></i> folder:<br />
+1. back.png<br />
+2. bg.png<br />
+3. food-review.png<br />
+4. footer-bg.png<br />
+5. header-bg.png<br />
+6. logo.png<br />
+7. menus.png<br />
+8. recipes.png<br />9. search.png</p><a name="eztoc126792_0_5" id="eztoc126792_0_5"></a><h3>Stylesheets</h3><p>In the previous steps, we have made the necessary template modifications and added images used in the mobile site design. Next, we are going to create two CSS files, one that is responsible for styling the pagelayout template and another that is responsible for styling actual content templates. Create these CSS files in extension/mobile/design/mobile/stylesheets/ as follows:</p><p>
+mobile<br />
+│<br />
+├── design<br />
+│ └── mobile<br />
+│ ├── images<br />
+│ ├── javascript<br />
+│ ├── override<br />
+│ │ └── templates<br />
+│ │ └── full<br />
+│ ├── stylesheets<br />
+│ │ ├── content.css<br />
+│ │ └── pagelayout-mobile.css<br />
+│ └── templates<br />
+│ ├── content<br />└── settings</p><a name="eztoc126792_0_5_9" id="eztoc126792_0_5_9"></a><h4>pagelayout-mobile.css</h4><p>In extension/mobile/design/mobile/stylesheets/pagelayout-mobile.css, paste the following:</p><pre class="wordwrap copytoclipboard"><span class="line">body {</span>
+<span class="line">background-position: top center;</span>
+<span class="line">background-image: url(../images/bg.png);</span>
+<span class="line">background-repeat: repeat-y;</span>
+<span class="line">color: #003F72;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#page {</span>
+<span class="line">width: 320px;</span>
+<span class="line">background-image: url(../images/header-bg.png);</span>
+<span class="line">background-repeat: no-repeat;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#page-wrapper {</span>
+<span class="line">background-image: url(../images/footer-bg.png);</span>
+<span class="line">background-position: bottom left;</span>
+<span class="line">background-repeat: no-repeat;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#header {</span>
+<span class="line">height: 122px;</span>
+<span class="line">background-color: transparent;</span>
+<span class="line">padding-bottom: 0;</span>
+<span class="line">padding-top: 0;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#logo {</span>
+<span class="line">margin: 0;</span>
+<span class="line">padding-left: 3%;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#backbutton {</span>
+<span class="line">padding-left: 17px;</span>
+<span class="line">padding-top: 21px;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#usermenu,</span>
+<span class="line">div#searchbox,</span>
+<span class="line">div#topmenu-position,</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#path {</span>
+<span class="line">display: none;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#footer {</span>
+<span class="line">height: 80px;</span>
+<span class="line">background-color: transparent;</span>
+<span class="line">background-image: none;</span>
+<span class="line">padding: 0;</span>
+<span class="line">margin: 0;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#footer address {</span>
+<span class="line">padding: 5.25em 5em 0 5em;</span>
+<span class="line">color: #FFF;</span>
+<span class="line">font-size: 90%;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#footer address a {</span>
+<span class="line">color: #FFF;</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'body {\r\nbackground-position: top center;\r\nbackground-image: url(../images/bg.png);\r\nbackground-repeat: repeat-y;\r\ncolor: #003F72;\r\n}\r\n\r\ndiv#page {\r\nwidth: 320px;\r\nbackground-image: url(../images/header-bg.png);\r\nbackground-repeat: no-repeat;\r\n}\r\n\r\ndiv#page-wrapper {\r\nbackground-image: url(../images/footer-bg.png);\r\nbackground-position: bottom left;\r\nbackground-repeat: no-repeat;\r\n}\r\n\r\ndiv#header {\r\nheight: 122px;\r\nbackground-color: transparent;\r\npadding-bottom: 0;\r\npadding-top: 0;\r\n}\r\n\r\ndiv#logo {\r\nmargin: 0;\r\npadding-left: 3%;\r\n}\r\n\r\ndiv#backbutton {\r\npadding-left: 17px;\r\npadding-top: 21px;\r\n}\r\n\r\ndiv#usermenu,\r\ndiv#searchbox,\r\ndiv#topmenu-position,\r\n\r\ndiv#path {\r\ndisplay: none;\r\n}\r\n\r\ndiv#footer {\r\nheight: 80px;\r\nbackground-color: transparent;\r\nbackground-image: none;\r\npadding: 0;\r\nmargin: 0;\r\n}\r\n\r\ndiv#footer address {\r\npadding: 5.25em 5em 0 5em;\r\ncolor: #FFF;\r\nfont-size: 90%;\r\n}\r\n\r\ndiv#footer address a {\r\ncolor: #FFF;\r\n}\r\n' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_5_10" id="eztoc126792_0_5_10"></a><h4>content.css</h4><p>In <i><b>extension/mobile/design/mobile/stylesheets/content.css</b></i>, paste the following:</p><pre class="wordwrap copytoclipboard"><span class="line">div.grid {</span>
+<span class="line">letter-spacing: -0.31em;</span>
+<span class="line">*letter-spacing: normal;</span>
+<span class="line">word-spacing: -0.43em;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.unit-1-2,</span>
+<span class="line">div.unit-1-4,</span>
+<span class="line">div.unit-3-4 {</span>
+<span class="line">display: inline-block;</span>
+<span class="line">zoom: 1; *display: inline;</span>
+<span class="line">letter-spacing: normal;</span>
+<span class="line">word-spacing: normal;</span>
+<span class="line">vertical-align: top;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.unit-1-2 {</span>
+<span class="line">width: 50%;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.unit-1-4 {</span>
+<span class="line">width: 25%;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.unit-3-4 {</span>
+<span class="line">width: 75%;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.category {</span>
+<span class="line">text-align: center;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.category h2 {</span>
+<span class="line">font-weight: normal;</span>
+<span class="line">color: #003F72;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-view-full, div.content-search, div.content-edit {</span>
+<span class="line">padding: 1em 1em 2.5em 1em;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.attribute-header h1 {</span>
+<span class="line">color: #003F72;</span>
+<span class="line">font-size: 1.8em;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-view-line div.class-article {</span>
+<span class="line">border-bottom: 1px dotted #003F72;</span>
+<span class="line">margin-bottom: 0.5em;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-view-line div.class-article h2 a {</span>
+<span class="line">color: #990000;</span>
+<span class="line">font-weight: normal;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-view-line div.attribute-image {</span>
+<span class="line">float: left;</span>
+<span class="line">margin: 0.25em 0.25em 0 0;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-search div.feedback h2 {</span>
+<span class="line">color: #003F72;</span>
+<span class="line">font-weight: normal;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-search div.feedback {</span>
+<span class="line">padding-top: 0.5em;</span>
+<span class="line">border-top: 1px dotted #003F72;</span>
+<span class="line">margin-bottom: 2em;</span>
+<span class="line">margin-top: 1em;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-search input.halfbox {</span>
+<span class="line">border: 1px solid #003F72;</span>
+<span class="line">background-color: #98CDF1;</span>
+<span class="line">width: 65%;</span>
+<span class="line">height: 21px;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">input.box {</span>
+<span class="line">border: 1px solid #003F72;</span>
+<span class="line">background-color: #98CDF1;</span>
+<span class="line">height: 21px;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">textarea.box {</span>
+<span class="line">border: 1px solid #003F72;</span>
+<span class="line">background-color: #98CDF1;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-search input.button {</span>
+<span class="line">font-size: 110%;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-view-full div.content-view-children {</span>
+<span class="line">border-top: 1px dotted #003F72;</span>
+<span class="line">margin-top: 0.5em;</span>
+<span class="line">padding-top: 0.5em;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-view-line div.class-comment h2 {</span>
+<span class="line">font-weight: normal;</span>
+<span class="line">color: #990000;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.attribute-star-rating {</span>
+<span class="line">display: none;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.attribute-byline p.date {</span>
+<span class="line">float: left;</span>
+<span class="line">font-size: 80%;</span>
+<span class="line">color: #006DC6;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.attribute-byline p.author {</span>
+<span class="line">float: right;</span>
+<span class="line">font-size: 80%;</span>
+<span class="line">color: #006DC6;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">input.button, input.defaultbutton {</span>
+<span class="line">color: #FFDDDD;</span>
+<span class="line">border: 1px solid #990000;</span>
+<span class="line">background-color: #990000;</span>
+<span class="line">background-image: url(../images/button-bg.png);</span>
+<span class="line">background-repeat: repeat-x;</span>
+<span class="line">font-size: 85%;</span>
+<span class="line">padding: 0.15em 1em;</span>
+<span class="line">font-weight: normal;</span>
+<span class="line">cursor: pointer;</span>
+<span class="line">margin: 0.5em 0;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-edit label {</span>
+<span class="line">color: #000000;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-edit div.attribute-header h1 {</span>
+<span class="line">color: #990000;</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'div.grid {\r\nletter-spacing: -0.31em;\r\n*letter-spacing: normal;\r\nword-spacing: -0.43em;\r\n}\r\n\r\ndiv.unit-1-2,\r\ndiv.unit-1-4,\r\ndiv.unit-3-4 {\r\ndisplay: inline-block;\r\nzoom: 1; *display: inline;\r\nletter-spacing: normal;\r\nword-spacing: normal;\r\nvertical-align: top;\r\n}\r\n\r\ndiv.unit-1-2 {\r\nwidth: 50%;\r\n}\r\n\r\ndiv.unit-1-4 {\r\nwidth: 25%;\r\n}\r\n\r\ndiv.unit-3-4 {\r\nwidth: 75%;\r\n}\r\n\r\ndiv.category {\r\ntext-align: center;\r\n}\r\n\r\ndiv.category h2 {\r\nfont-weight: normal;\r\ncolor: #003F72;\r\n}\r\n\r\ndiv.content-view-full, div.content-search, div.content-edit {\r\npadding: 1em 1em 2.5em 1em;\r\n}\r\n\r\ndiv.attribute-header h1 {\r\ncolor: #003F72;\r\nfont-size: 1.8em;\r\n}\r\n\r\ndiv.content-view-line div.class-article {\r\nborder-bottom: 1px dotted #003F72;\r\nmargin-bottom: 0.5em;\r\n}\r\n\r\ndiv.content-view-line div.class-article h2 a {\r\ncolor: #990000;\r\nfont-weight: normal;\r\n}\r\n\r\ndiv.content-view-line div.attribute-image {\r\nfloat: left;\r\nmargin: 0.25em 0.25em 0 0;\r\n}\r\n\r\ndiv.content-search div.feedback h2 {\r\ncolor: #003F72;\r\nfont-weight: normal;\r\n}\r\n\r\ndiv.content-search div.feedback {\r\npadding-top: 0.5em;\r\nborder-top: 1px dotted #003F72;\r\nmargin-bottom: 2em;\r\nmargin-top: 1em;\r\n}\r\n\r\ndiv.content-search input.halfbox {\r\nborder: 1px solid #003F72;\r\nbackground-color: #98CDF1;\r\nwidth: 65%;\r\nheight: 21px;\r\n}\r\n\r\ninput.box {\r\nborder: 1px solid #003F72;\r\nbackground-color: #98CDF1;\r\nheight: 21px;\r\n}\r\n\r\ntextarea.box {\r\nborder: 1px solid #003F72;\r\nbackground-color: #98CDF1;\r\n}\r\n\r\ndiv.content-search input.button {\r\nfont-size: 110%;\r\n}\r\n\r\ndiv.content-view-full div.content-view-children {\r\nborder-top: 1px dotted #003F72;\r\nmargin-top: 0.5em;\r\npadding-top: 0.5em;\r\n}\r\n\r\ndiv.content-view-line div.class-comment h2 {\r\nfont-weight: normal;\r\ncolor: #990000;\r\n}\r\n\r\ndiv.attribute-star-rating {\r\ndisplay: none;\r\n}\r\n\r\ndiv.attribute-byline p.date {\r\nfloat: left;\r\nfont-size: 80%;\r\ncolor: #006DC6;\r\n}\r\n\r\ndiv.attribute-byline p.author {\r\nfloat: right;\r\nfont-size: 80%;\r\ncolor: #006DC6;\r\n}\r\n\r\ninput.button, input.defaultbutton {\r\ncolor: #FFDDDD;\r\nborder: 1px solid #990000;\r\nbackground-color: #990000;\r\nbackground-image: url(../images/button-bg.png);\r\nbackground-repeat: repeat-x;\r\nfont-size: 85%;\r\npadding: 0.15em 1em;\r\nfont-weight: normal;\r\ncursor: pointer;\r\nmargin: 0.5em 0;\r\n}\r\n\r\ndiv.content-edit label {\r\ncolor: #000000;\r\n}\r\n\r\ndiv.content-edit div.attribute-header h1 {\r\ncolor: #990000;\r\n}\r\n' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_5_11" id="eztoc126792_0_5_11"></a><h4>Content</h4><p>All that’s left to complete the mobile siteaccess is to populate some content. Log in to the Administration Interface and create three objects of the Folder content class, placing them beneath the root of the site. They should have the following titles: “Recipes”, “Food reviews”, and “Menus”. If you access your mobile siteaccess’ URL in a mobile browser, you should see the following:</p><a name="eztoc126792_0_6" id="eztoc126792_0_6"></a><h3>Mobile applications</h3><p>In this section, we are going to build two simple mobile applications, one for iOS / iPhone and one for the Android platform. These applications will simply be native shells for our mobile web channel. We will not cover the steps for how to set up iOS and Android development environments, as those are well documented in the official guides. Refer to the “iOS Developer Tools” or “Android SDK Installation Guide” for more information. We assume that you already have a development environment for at least one platform.</p><a name="eztoc126792_0_6_12" id="eztoc126792_0_6_12"></a><h4>iOS application</h4><p>Open Xcode, and on the very first screen, select “Create a New Xcode project”. Or, select “New Project...” from the “File” menu.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/xcode/126808-1-eng-GB/xcode_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>A window will appear giving you several application templates to choose from. Create a barebones Cocoa Touch application by selecting the “Window-Based Application” icon.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/windowbased-app/126811-1-eng-GB/windowbased-app_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Click the “Next” button. On the next screen, type “DemoApp” for the product name, and “com.ez” for the company identifier. Select “iPhone” from the “Device Family” drop-down list and unmark the “Include Unit Tests” check-box (as we are not going to write unit tests this time).</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/include-unit-test/126814-1-eng-GB/include-unit-test_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Click the “Next” button and select the location at which you want to save the project. Once the project is created, the project window will appear on your screen. Take a look at the contents of the “Project” table on the left side of the project window. In general, there are two types of files used to create an application: code and resources. Code is written in Objective-C, C, or C++. Resources are things like images and sounds that are used by the application at run-time. The groups in the project window are purely for organizing files. You can rename them to whatever you want. In the next step, we are going to create a new view controller that will be responsible for loading our web view with content served by eZ Publish. Select the “DemoApp” group on the left side and select “New -&gt; New File...” from the “File” menu.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/demoapp/126817-1-eng-GB/demoapp_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Then, select the “UIViewController” subclass from the “Cocoa Touch” group and click the “Next” button.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/cocoatouch/126820-1-eng-GB/cocoatouch_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>On the next screen, verify that the “Subclass of” field contains the “UIViewController” class, and that the checkbox titled “With XIB for user interface” is marked. (XIB stands for XML Interface Builder, which is covered shortly.) Then, click the “Next” button and name the file “MainController”.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/maincontroller/126823-1-eng-GB/maincontroller_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Next, we need to load “MainController”, which at this point does nothing. However we will add a “UIWebView” control later, which is responsible for loading our web content. Select “DemoAppAppDelegate.h” and insert the following code:</p><pre class="wordwrap"><span class="line">#import &quot;MainController.h&quot;</span>
+</pre><p>Next, in “DemoAppAppDelegate.m”, create the main view controller and set it as the “rootViewController” of the window:</p><pre class="wordwrap copytoclipboard"><span class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:</span>
+<span class="line">(NSDictionary *)launchOptions</span>
+<span class="line">{</span>
+<span class="line">&nbsp;</span>
+<span class="line">// Create the mainController</span>
+<span class="line">MainController *mainController = [[MainController alloc] init];</span>
+<span class="line">&nbsp;</span>
+<span class="line">// Set mainController as rootViewController of window</span>
+<span class="line">[self.window setRootViewController:mainController];</span>
+<span class="line">&nbsp;</span>
+<span class="line">// The window retains mainController, we can release our reference</span>
+<span class="line">[mainController release];</span>
+<span class="line">&nbsp;</span>
+<span class="line">// Show the window</span>
+<span class="line">[self.window makeKeyAndVisible];</span>
+<span class="line">return YES;</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:\r\n(NSDictionary *)launchOptions\r\n{\r\n\r\n// Create the mainController\r\nMainController *mainController = [[MainController alloc] init];\r\n\r\n// Set mainController as rootViewController of window\r\n[self.window setRootViewController:mainController];\r\n\r\n// The window retains mainController, we can release our reference\r\n[mainController release];\r\n\r\n// Show the window\r\n[self.window makeKeyAndVisible];\r\nreturn YES;\r\n}' ); return false;" /></p>
+<![endif]--><p>Build and run the application to verify that everything works fine. At this point, you should see only a blank white window. Next, we are going to add the web view responsible for loading the content served by eZ Publish. Because we will need to access that web subview during runtime, “MainController” needs an outlet for that subview. Add the following instance variable to “MainController.h”:</p><pre class="wordwrap"><span class="line">@interface MainController : UIViewController {</span>
+<span class="line">IBOutlet UIWebView *webView;</span>
+<span class="line">}</span>
+</pre><p>The “IBOutlet” reference in front of the instance variable indicates that you are going to use the Interface Builder to lay out the interface for MainController’s view. When we created MainController, an XIB (XML Interface Builder) file of the same name was created and added to the project. Open MainController.xib now.</p><p>In the right pane, find the “UIWebView” control in the “Object” library and drag it into the view.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/uiwebview/126826-1-eng-GB/uiwebview_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Next, make a connection from “File’s Owner” to that object, as shown below:</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/filesowner/126829-1-eng-GB/filesowner_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>After a “UIViewController” loads its view, it is immediately sent the message “viewDidLoad”. Whether that view is loaded from an XIB file or using the method “loadView”, this message gets sent to the view controller.</p><p>We need to do an extra initialization to a “UIViewController” -- which requires its view to already exist -- by overriding “viewDidLoad” in “MainController.m”.</p><pre class="wordwrap copytoclipboard"><span class="line">- (void)viewDidLoad {</span>
+<span class="line">&nbsp;</span>
+<span class="line">//Create a URL object</span>
+<span class="line">NSURL *url = [NSURL URLWithString:@&quot;http://m.example.com&quot;];</span>
+<span class="line">&nbsp;</span>
+<span class="line">//Request the URL</span>
+<span class="line">NSURLRequest *request = [NSURLRequest requestWithURL:url];</span>
+<span class="line">&nbsp;</span>
+<span class="line">[webView loadRequest:request];</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '- (void)viewDidLoad {\r\n\r\n//Create a URL object\r\nNSURL *url = [NSURL URLWithString:@&quot;http://m.example.com&quot;];\r\n\r\n//Request the URL\r\nNSURLRequest *request = [NSURLRequest requestWithURL:url];\r\n\r\n[webView loadRequest:request];\r\n}\r\n' ); return false;" /></p>
+<![endif]--><p>Notice that “NSURL URLWithString” takes a URL, which points to our mobile web channel available at http://m.example.com. When “MainController’s” view gets unloaded, its subviews will still be retained by “MainController”. They need to be released and set to “nil” in “viewDidUnload”. Let’s override this method in “MainController.m”:</p><pre class="wordwrap copytoclipboard"><span class="line">- (void)viewDidUnload {</span>
+<span class="line">[super viewDidUnload];</span>
+<span class="line">&nbsp;</span>
+<span class="line">[webView release];</span>
+<span class="line">webView = nil;</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '- (void)viewDidUnload {\r\n[super viewDidUnload];\r\n\r\n[webView release];\r\nwebView = nil;\r\n}' ); return false;" /></p>
+<![endif]--><p>Finally, we need a “dealloc” method, which frees up the object’s memory and disposes of any resources it holds, including ownership of any object instance variables:</p><pre class="wordwrap copytoclipboard"><span class="line">- (void)dealloc {</span>
+<span class="line">&nbsp;</span>
+<span class="line">[webView release];</span>
+<span class="line">[super dealloc];</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '- (void)dealloc {\r\n\r\n[webView release];\r\n[super dealloc];\r\n}' ); return false;" /></p>
+<![endif]--><p>That’s all! Build and run the application to verify that everything works fine.</p><a name="eztoc126792_0_6_13" id="eztoc126792_0_6_13"></a><h4>Android application</h4><p>Open Eclipse and select “New -&gt; Android Project” from the “File” menu.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/androidproject/126832-1-eng-GB/androidproject_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>You can then enter some details for the new project. Enter “DemoApp” as the project name, select “Android 2.3.3” from the “Build Target” list, enter “DemoApp” as the application name, and enter “com.ez” as the package name. Make sure that the checkbox “Create Activity” is marked (an activity is the application’s presentation layer), enter “DemoApp” in the adjacent field, and enter “10” as the minimum SDK version. Finally, click the “Finish” button.</p><p>Eclipse will then create your project. You can inspect the project structure in the left panel.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/projectstructure/126835-1-eng-GB/projectstructure_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Next, select “Window -&gt; Android SDK and AVD Manager”. In the resulting dialog, select “Virtual Devices” from the left panel and click the “New…” button.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/newvirtualdevice/126838-1-eng-GB/newvirtualdevice_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Enter a name for your device, and choose an SDK target and screen resolution. Set the SD Card size to 12MiB (this is just to specify a card size for the Android emulator).</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/androidemulator/126841-1-eng-GB/androidemulator_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>In this example, we want to present users with our eZ Publish mobile siteaccess. The preferred method for creating the UI for our Android app is to use a layout resource file. Open the “main.xml” layout file in the res/layout project folder. Modify the main layout to include a “WebView” with a “LinearLayout”. It is important to give the “WebView” an ID, so that we can reference it later in our code.</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+<span class="line">android:orientation=&quot;vertical&quot;</span>
+<span class="line">android:layout_width=&quot;fill_parent&quot;</span>
+<span class="line">android:layout_height=&quot;fill_parent&quot;</span>
+<span class="line">&gt;</span>
+<span class="line">&lt;WebView</span>
+<span class="line">android:id=&quot;@+id/webview&quot;</span>
+<span class="line">android:layout_width=&quot;fill_parent&quot;</span>
+<span class="line">android:layout_height=&quot;fill_parent&quot;</span>
+<span class="line">/&gt;</span>
+<span class="line">&lt;/LinearLayout&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;\r\n&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;\r\nandroid:orientation=&quot;vertical&quot;\r\nandroid:layout_width=&quot;fill_parent&quot;\r\nandroid:layout_height=&quot;fill_parent&quot;\r\n&gt;\r\n&lt;WebView\r\nandroid:id=&quot;@+id/webview&quot;\r\nandroid:layout_width=&quot;fill_parent&quot;\r\nandroid:layout_height=&quot;fill_parent&quot;\r\n/&gt;\r\n&lt;/LinearLayout&gt;' ); return false;" /></p>
+<![endif]--><p>With our user interface defined, open the “DemoApp” activity ( “DemoApp.java” ) from the project’s source folder. We will make all changes by overriding the “onCreate” method. Start by inflating your UI using “setContentView”. Then you can reference the “WebView” that was defined earlier by using findViewById().</p><pre class="wordwrap copytoclipboard"><span class="line">package com.ez;</span>
+<span class="line">import android.app.Activity;</span>
+<span class="line">import android.os.Bundle;</span>
+<span class="line">import android.view.KeyEvent;</span>
+<span class="line">import android.webkit.WebView;</span>
+<span class="line">public class DemoApp extends Activity {</span>
+<span class="line">WebView webview;</span>
+<span class="line">/** Called when the activity is first created. */</span>
+<span class="line">@Override</span>
+<span class="line">public void onCreate(Bundle savedInstanceState) {</span>
+<span class="line">super.onCreate(savedInstanceState);</span>
+<span class="line">setContentView(R.layout.main);</span>
+<span class="line">webview = (WebView) findViewById(R.id.webview);</span>
+<span class="line">webview.setWebViewClient(new DemoAppWebViewClient());</span>
+<span class="line">webview.getSettings().setJavaScriptEnabled(true);</span>
+<span class="line">webview.loadUrl(&quot;http://m.example.com&quot;);</span>
+<span class="line">}</span>
+<span class="line">@Override</span>
+<span class="line">public boolean onKeyDown(int keyCode, KeyEvent event) {</span>
+<span class="line">if ((keyCode == KeyEvent.KEYCODE_BACK) &amp;&amp; webview.canGoBack()) {</span>
+<span class="line">webview.goBack();</span>
+<span class="line">return true;</span>
+<span class="line">}</span>
+<span class="line">return super.onKeyDown(keyCode, event);</span>
+<span class="line">}</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'package com.ez;\r\nimport android.app.Activity;\r\nimport android.os.Bundle;\r\nimport android.view.KeyEvent;\r\nimport android.webkit.WebView;\r\npublic class DemoApp extends Activity {\r\nWebView webview;\r\n/** Called when the activity is first created. */\r\n@Override\r\npublic void onCreate(Bundle savedInstanceState) {\r\nsuper.onCreate(savedInstanceState);\r\nsetContentView(R.layout.main);\r\nwebview = (WebView) findViewById(R.id.webview);\r\nwebview.setWebViewClient(new DemoAppWebViewClient());\r\nwebview.getSettings().setJavaScriptEnabled(true);\r\nwebview.loadUrl(&quot;http://m.example.com&quot;);\r\n}\r\n@Override\r\npublic boolean onKeyDown(int keyCode, KeyEvent event) {\r\nif ((keyCode == KeyEvent.KEYCODE_BACK) &amp;&amp; webview.canGoBack()) {\r\nwebview.goBack();\r\nreturn true;\r\n}\r\nreturn super.onKeyDown(keyCode, event);\r\n}\r\n}' ); return false;" /></p>
+<![endif]--><p>Notice that we have loaded the URL “http://m.example.com” into the “WebView”. In addition, we defined a listener “onKeyDown” that will perform the familiar goBack() action when the device’s “Back” button is pressed.</p><p>Next, we need to create a custom class “DemoAppWebViewClient” that extends “WebViewClient” and overrides the method “shouldOverrideUrlLoading()”. Select “New -&gt; Class” from the “File” menu in the “src/com.ez” package. Then, enter “DemoAppWebViewClient” as the name for the class.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/javaclass/126844-1-eng-GB/javaclass_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Next, click the “Browse” button to the right of the “Superclass” field. In the resulting dialog, type “android.webkit.WebViewClient”, then click OK. To complete the new class creation, click the “Finish” button.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/webviewclient2/126850-1-eng-GB/webviewclient_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>The overridden “shouldOverrideUrlLoading()” method should be implemented as follows:</p><pre class="wordwrap copytoclipboard"><span class="line">package com.ez;</span>
+<span class="line">&nbsp;</span>
+<span class="line">import android.webkit.WebView;</span>
+<span class="line">import android.webkit.WebViewClient;</span>
+<span class="line">&nbsp;</span>
+<span class="line">class DemoAppWebViewClient extends WebViewClient {</span>
+<span class="line">@Override</span>
+<span class="line">&nbsp;</span>
+<span class="line">public boolean shouldOverrideUrlLoading(WebView view, String url) {</span>
+<span class="line">view.loadUrl(url);</span>
+<span class="line">return true;</span>
+<span class="line">}</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'package com.ez;\r\n\r\nimport android.webkit.WebView;\r\nimport android.webkit.WebViewClient;\r\n\r\nclass DemoAppWebViewClient extends WebViewClient {\r\n@Override\r\n\r\npublic boolean shouldOverrideUrlLoading(WebView view, String url) {\r\nview.loadUrl(url);\r\nreturn true;\r\n}\r\n}' ); return false;" /></p>
+<![endif]--><p>In the next step, we are going to hide the Android application title bar so that our application can work full screen. In order to do so, add the following attribute into the “DemoApp” activity in “AndroidManifest.xml”:</p><pre class="wordwrap"><span class="line">android:theme=&quot;@android:style/Theme.NoTitleBar&quot;</span>
+</pre><p>This is what the complete “AndroidManifest.xml” file should look like:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="line">&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+<span class="line">package=&quot;com.ez&quot;</span>
+<span class="line">android:versionCode=&quot;1&quot;</span>
+<span class="line">android:versionName=&quot;1.0&quot;&gt;</span>
+<span class="line">&lt;application android:icon=&quot;@drawable/icon&quot; android:label=&quot;@string/app_name&quot;&gt;</span>
+<span class="line">&lt;activity android:name=&quot;.DemoApp&quot;</span>
+<span class="line">android:theme=&quot;@android:style/Theme.NoTitleBar&quot;</span>
+<span class="line">android:label=&quot;@string/app_name&quot;&gt;</span>
+<span class="line">&lt;intent-filter&gt;</span>
+<span class="line">&lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;</span>
+<span class="line">&lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;</span>
+<span class="line">&lt;/intent-filter&gt;</span>
+<span class="line">&lt;/activity&gt;</span>
+<span class="line">&lt;/application&gt;</span>
+<span class="line">&lt;uses-sdk android:minSdkVersion=&quot;9&quot; /&gt;</span>
+<span class="line">&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;</span>
+<span class="line">&lt;/manifest&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;\r\n&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;\r\npackage=&quot;com.ez&quot;\r\nandroid:versionCode=&quot;1&quot;\r\nandroid:versionName=&quot;1.0&quot;&gt;\r\n&lt;application android:icon=&quot;@drawable/icon&quot; android:label=&quot;@string/app_name&quot;&gt;\r\n&lt;activity android:name=&quot;.DemoApp&quot;\r\nandroid:theme=&quot;@android:style/Theme.NoTitleBar&quot;\r\nandroid:label=&quot;@string/app_name&quot;&gt;\r\n&lt;intent-filter&gt;\r\n&lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;\r\n&lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;\r\n&lt;/intent-filter&gt;\r\n&lt;/activity&gt;\r\n&lt;/application&gt;\r\n&lt;uses-sdk android:minSdkVersion=&quot;9&quot; /&gt;\r\n&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;\r\n&lt;/manifest&gt;' ); return false;" /></p>
+<![endif]--><p>Run or debug the application and you should see your mobile web channel in an Android application!</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/result/126853-1-eng-GB/result_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Tutorials/Building-mobile-browser-and-hybrid-applications-with-eZ-Publish/Creating-a-sample-Hybrid-Mobile-Application by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:39:45 GMT -->
+</html>

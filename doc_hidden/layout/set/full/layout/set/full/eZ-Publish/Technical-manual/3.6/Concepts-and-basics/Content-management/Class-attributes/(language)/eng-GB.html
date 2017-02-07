@@ -1,0 +1,63 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Concepts-and-basics/Content-management/Class-attributes/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:11:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Class attributes / Content management / Concepts and basics / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Class attributes</h1>
+</div>
+
+ <p>A content class is made up of one or more attributes where each attribute is represented by a datatype. The characteristics of an attribute are determined by the datatype that is chosen for that specific attribute. An attribute is made up of the following elements:</p> 
+<ul>
+ <li><div> Name </div></li> <li><div> Identifier </div></li> <li><div> Generic controls </div></li> <li><div> Datatype specific controls </div></li> 
+</ul>
+  <a name="eztoc557_1" id="eztoc557_1"></a><h2>Name</h2> <p>The name is for storing a user friendly name for the attribute. For example, if the attribute is supposed to store birthdates, the name of the attribute would most likely be &quot;Date of birth&quot;. This string will appear in various parts of the administration interface, but it will not be used internally by the system. The name of an attribute can consist of letters, digits, spaces and special characters. The maximum length is 255 characters. If a blank name is provided, eZ Publish will automatically generate a unique name for the attribute when the class definition is stored.</p>   <a name="eztoc557_2" id="eztoc557_2"></a><h2>Identifier</h2> <p>The identifier of an attribute is for internal use. In particular, attribute identifiers are used in configuration files, templates and in PHP code. An attribute identifier can only consist of lowercase letters, digits and underscores. The maximum length is 50 characters. For example, if the attribute is supposed to store birthdates, the identifier of the attribute would probably be &quot;date_of_birth&quot;. If a blank identifier is provided, eZ Publish will automatically generate a unique identifier when the class definition is stored.</p>   <a name="eztoc557_3" id="eztoc557_3"></a><h2>Generic controls</h2> <p>Each attribute has a set of generic controls. These controls are the same for each attribute, regardless (but not independent) of the datatype that represents the attribute. The generic controls are a set of switches that can be turned on or off:</p> 
+<ul>
+ <li><div> Required </div></li> <li><div> Searchable </div></li> <li><div> Information collector </div></li> <li><div> Translatable </div></li> 
+</ul>
+  <a name="eztoc557_3_1" id="eztoc557_3_1"></a><h3>Required</h3> <p>The required switch controls the behavior of the storage procedure for content objects (instances of a content class). It can be used regardless of the datatype that represents the attribute. When the required flag of an attribute is set, the system will keep rejecting the inputted data until all required information is provided. If the required flag is unset, eZ Publish will not care whether any actual data was provided or not. When an attribute is added, the required switch is off. Please note that inputted data will be validated according to the chosen datatype's validation rules regardless of the state of the attribute's required switch. Input validation is supported by most (but not all) of the built in datatypes. The following example demonstrates how these features actually work.</p> <p>Let's say that we have created a content class that defines a data structure for storing information about prisoners. The class would typically consist of various attributes for storing different kinds of data: name, identification number, date of birth, cell, block, etc. Having at least the name and the birthdate attributes required will eliminate the possibility of storing convicts without names and/or birthdates. If the birthdate attribute is represented by the built-in &quot;date&quot; datatype, the system will only accept the input if the birthdate is provided using a correct date format.</p>   <a name="eztoc557_3_2" id="eztoc557_3_2"></a><h3>Searchable</h3> <p>The searchable switch can be used to control whether the actual data stored using the attribute should be indexed by the search engine or if it should be left unindexed. Search indexing is supported by the majority of the built-in datatypes. Please refer to the <a href="../../../../Reference/Datatypes.html" target="_self">&quot;Datatypes&quot;</a> section of the reference chapter to see which datatypes that support search indexing.</p>   <a name="eztoc557_3_3" id="eztoc557_3_3"></a><h3>Information collector</h3> <p>The information collector switch can be used to control the attribute's behavior in view mode. The default view mode behavior results in the display of the information that was provided in edit mode. For example, when viewing a news article, the contents of the article are displayed but can not be edited. However, if an attribute is marked as a collector, it will allow information to be input in view mode. At first, this feature might seem a bit odd. However, it is actually quite handy. For example, it can be used to quickly create simple feedback forms. The contents of a form created using this technique will be e-mailed to the site administrator (or to a specified address) once the form is submitted. Information collection is only supported by a small set of the built in datatypes. The following example demonstrates how this feature could be used to create a basic feedback form.</p> <p>Let's say that we have created a content class called &quot;Feedback form&quot; using the following attributes: name, subject and message. The subject and the message attributes would be marked as information collectors. When an instance of this class is viewed, the subject and the message attributes will be displayed as input fields along with a &quot;Send&quot; button.</p>   <a name="eztoc557_3_4" id="eztoc557_3_4"></a><h3>Translatable</h3> <p>The translatable switch controls whether actual data stored using the attribute should exist in only one language (the default language) or if it should be possible to translate it using the additional languages. The translation mechanism is completely independent of the datatype layer. In other words, this switch can be used regardless of the datatype that was chosen to represent the attribute.</p> <p>When an attribute is added, the translation switch is &quot;on&quot;. Turning it off is typically useful when the attribute is supposed to store non-translatable input. For example, translating dates, numerical values, prices, email addresses, etc. doesn't make much sense.</p>    <a name="eztoc557_4" id="eztoc557_4"></a><h2>Datatype specific controls</h2> <p>An attribute can have a set of additional controls that are specific for the datatype that was chosen to represent that attribute. Some datatypes allow fine grained customization, some not. For example, the built-in &quot;Text line&quot; datatype provides two settings: default value and maximum length.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Concepts-and-basics/Content-management/Class-attributes/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:11:23 GMT -->
+</html>

@@ -1,0 +1,75 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/INI-file by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:38:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                  
+    <title>INI file / Developing eZ Publish extensions / Tutorials / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>INI file</h1>
+</div>
+
+<p>Lastly we want to create our own default .ini file extension/jacextension/settings/jacextension.ini. This will store all the values we have set in templates or modules and those that may vary in different eZ Publish installations (for example, for showing special debug messages).</p><p>The default .ini can be overwritten by the &quot;jacextension.ini.append.php&quot; files, such as the override file for a siteaccess. Listing 22 is an example of an .ini file and Listing 23 shows how to access it via PHP, as we have extended list.php.</p><pre class="wordwrap"><span class="line">[JACExtensionSettings]</span>
+<span class="line"># Should Debug enabled / disabled</span>
+<span class="line">JacDebug=enabled</span>
+</pre><p><i>Listing 22. Configuration file of extension jacextension – extension/jacextension/settings/jacextension.ini</i></p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">// ...</span>
+<span class="line">&nbsp;</span>
+<span class="line">// read variable JacDebug of INI block [JACExtensionSettings]</span>
+<span class="line">// of INI file jacextension.ini&amp;nbsp;</span>
+<span class="line">$jacextensionINI = eZINI::instance( 'jacextension.ini' );</span>
+<span class="line">&nbsp;</span>
+<span class="line">$jacDebug = $jacextensionINI-&gt;variable( 'JACExtensionSettings','JacDebug' );</span>
+<span class="line">&nbsp;</span>
+<span class="line">// If Debug is activated do something</span>
+<span class="line">if( $jacDebug === 'enabled' )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;echo 'jacextension.ini: [JACExtensionSetting] JacDebug=enabled';</span>
+<span class="line">&nbsp;</span>
+<span class="line">// ...</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\n// ... \r\n\r\n// read variable JacDebug of INI block [JACExtensionSettings] \r\n// of INI file jacextension.ini&amp;nbsp; \r\n$jacextensionINI = eZINI::instance( \'jacextension.ini\' ); \r\n\r\n$jacDebug = $jacextensionINI-&gt;variable( \'JACExtensionSettings\',\'JacDebug\' ); \r\n\r\n// If Debug is activated do something \r\nif( $jacDebug === \'enabled\' ) \r\n    echo \'jacextension.ini: [JACExtensionSetting] JacDebug=enabled\';\r\n\r\n// ...\r\n?&gt;\r\n' ); return false;" /></p>
+<![endif]--><p><i>Listing 23. PHP access to INI files jacextension.ini – extension/jacextension/modules/modul1/list.php</i></p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/INI-file by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:38:47 GMT -->
+</html>

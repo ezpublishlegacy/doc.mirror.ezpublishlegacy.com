@@ -1,0 +1,119 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/Website-Interface/Website-Interface-1.5-upgrade by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:24:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Website Interface 1.5 upgrade / Website Interface / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Website Interface 1.5 upgrade</h1>
+</div>
+
+  <a name="eztoc104166_1" id="eztoc104166_1"></a><h2>Back-up</h2> <p>Before starting the Website Interface upgrading make sure that you have a working <a href="http://ez.no/doc_hidden/ez_publish/upgrading#backup" target="_self">backup</a> of the existing website state including database, extensions, INI settings, etc.. During the upgrade process your existing eZ Webin extension will be removed and replaced with a new version. Website Interface default content classes will be replaced as well. Upgrade script will also change some of the existing INI settings and add new ones which are required by latest version. </p>   <a name="eztoc104166_2" id="eztoc104166_2"></a><h2>Packages</h2> <p>Download following packages from <a href="http://packages.ez.no/ezpublish/4.2/4.2.0" target="_self">http://packages.ez.no/ezpublish/4.2/4.2.0:</a> </p> <p>
+ezwebin_extension.ezpkg<br />
+ezstarrating_extension.ezpkg<br />
+ezjscore_extension.ezpkg<br />
+ezgmaplocation_extension.ezpkg<br />ezwt_extension.ezpkg</p> <p>Go to the packages management interface in the Administration Interface. This can be done via the Setup-tab, where you can click on the &quot;Packages&quot;-link in the left menu.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../var/doc/storage/images/media/images/view_setup_packages/104170-1-eng-GB/view_setup_packages_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div> <p>From the Repository drop-down box choose “eZ-system” and click the “Change repository” button. From the list of available packages remove following packages: ezwebin_extension</p> <p>Next change repository again to the “eZ-systems” and click on “Import new package” button. In the next view select ezwebin_extension and click “Import package” button. Once the ezwebin_extension is imported click on “Install package”. In the next view choose “Replace extension” option and click “Continue” button. Repeat these steps for rest of new extensions (ezstarrating_extension, ezjscore_extension, ezgmaplocation_extension and ezwt_extension).</p> <p>Once all new extensions are imported they need to be activated in the proper order under the [ExtensionSettings] block in the settings/site.ini.append.php:</p> <pre class="wordwrap copytoclipboard"><span class="line">[ExtensionSettings]</span>
+<span class="line">[...]</span>
+<span class="line">ActiveExtensions[]=ezwt</span>
+<span class="line">ActiveExtensions[]=ezjscore</span>
+<span class="line">ActiveExtensions[]=ezstarrating</span>
+<span class="line">ActiveExtensions[]=ezgmaplocation</span>
+<span class="line">ActiveExtensions[]=ezwebin […]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ExtensionSettings]\r\n[...]\r\nActiveExtensions[]=ezwt\r\nActiveExtensions[]=ezjscore\r\nActiveExtensions[]=ezstarrating\r\nActiveExtensions[]=ezgmaplocation\r\nActiveExtensions[]=ezwebin […]' ); return false;" /></p>
+<![endif]-->  <a name="eztoc104166_2_1" id="eztoc104166_2_1"></a><h3>Autoload update</h3> <p>Next the autoload array needs to be updated for the new extensions. In order to do so, execute following command from eZ Publish root folder:</p> <pre class="wordwrap"><span class="line">$ php bin/php/ezpgenerateautoloads.php -e -p</span>
+</pre>   <a name="eztoc104166_2_2" id="eztoc104166_2_2"></a><h3>Content classes</h3> <p>Website Interface 1.5 provides a new Geo Article content class which uses a eZ GMap Location extension for storing geo located content. You can import Geo Article content class using package manager in the Administration Interface. This can be done via the Setup-tab, where you can click on the &quot;Packages&quot;-link in the left menu.</p> <p>First change repository to “eZ-systems”. Next click “Import new package” button. Geo Article class package is located in eZ Publish root directory in subfolder extension/ezwebin/packages/geo_article-1.5-0.ezpkg.</p>   <a name="eztoc104166_2_3" id="eztoc104166_2_3"></a><h3>eZ Star Rating</h3> <p>
+This extension requires new database tables in order to store ratings.<br />Execute following command to create database tables in MySQL:</p> <pre class="wordwrap"><span class="line">mysql -u[datbase_user] -p[database-password] [databasename] &lt; extension/ezstarrating/sql/mysql/mysql.sql</span>
+</pre> <p>Sql files are also provided for postgressql and oracle - refer to the database documentation on how to execute queries from a command-line clients.</p> <p>For the user roles that are allowed to vote, add in the &quot;roles and policies&quot; page in the administration interface policy on module &quot;ezjscore&quot;, function “call&quot;, with limitation &quot;ezstarrating_rate&quot;.</p> <p>To enable users to rate your content simply add a Star Rating attribute to the content class you want to be rated.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../var/doc/storage/images/media/images/star_rating_attrib/104173-1-eng-GB/star_rating_attrib_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div> <p>For more information about installation please read the eZ Star Rating README file located in in the extension/ezstarrating in the eZ Publish root directory.</p>   <a name="eztoc104166_2_4" id="eztoc104166_2_4"></a><h3>eZ GMap Location</h3> <p>The eZ GMap Location extension requires a Google Maps API key which you can obtain for your domain following instructions mention in <a href="http://www.google.com/apis/maps" target="_self">http://www.google.com/apis/maps</a> </p> <p>Once you have generated your key add it to the settings/override/site.ini.append.php under the [SiteSettings] block like so:</p> <pre class="wordwrap"><span class="line">[SiteSettings]</span>
+<span class="line">GMapsKey=&lt;Google Maps API Key&gt;</span>
+</pre> <p>
+This extension requires new database tables in order to store locations information.<br />Execute following command to create database tables in MySQL:</p> <pre class="wordwrap"><span class="line">mysql -u[datbase_user] -p[database-password] [databasename] &lt; extension/ezgmaplocation/sql/mysql/mysql.sql</span>
+</pre> <p>Sql files are also provided for postgressql and oracle - refer to the database documentation on how to execute queries from a command-line clients.</p> <p>With Geo Article class you can use this feature immediately. However if you want to extend your current content classes with eZ GMap Location attribute simply add new attribute.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../var/doc/storage/images/media/images/gmap_location/104176-1-eng-GB/gmap_location_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div> <p>For more information about installation please read the eZ GMAP Location README file located in the extension/ezgmaplocation in the eZ Publish root directory.</p>   <a name="eztoc104166_2_5" id="eztoc104166_2_5"></a><h3>INI settings</h3> <p>Update settings/siteaccess/(public_site_name)/override.ini.append.php:</p> <pre class="wordwrap copytoclipboard"><span class="line">[full_geo_article]</span>
+<span class="line">Source=node/view/full.tpl</span>
+<span class="line">MatchFile=full/geo_article.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=geo_article</span>
+<span class="line">&nbsp;</span>
+<span class="line">[line_geo_article]</span>
+<span class="line">Source=node/view/line.tpl</span>
+<span class="line">MatchFile=line/geo_article.tpl</span>
+<span class="line">Subdir=templates</span>
+<span class="line">Match[class_identifier]=geo_article</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[full_geo_article]\r\nSource=node/view/full.tpl\r\nMatchFile=full/geo_article.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=geo_article\r\n\r\n[line_geo_article]\r\nSource=node/view/line.tpl\r\nMatchFile=line/geo_article.tpl\r\nSubdir=templates\r\nMatch[class_identifier]=geo_article' ); return false;" /></p>
+<![endif]-->   <a name="eztoc104166_2_6" id="eztoc104166_2_6"></a><h3>Clear Cache</h3> <p>Once the upgrade script is done, you need to clear the cache by executing following command from eZ Publish root folder:</p> <pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/Website-Interface/Website-Interface-1.5-upgrade by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:24:09 GMT -->
+</html>

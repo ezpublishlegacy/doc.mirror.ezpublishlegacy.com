@@ -1,0 +1,1060 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Modules/content/Fetch-functions/list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:55:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>list / Fetch functions / content / Modules / Reference / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>list</h1>
+</div>
+<h3>Summary</h3>
+Fetches the children of a node or a collection of nodes.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'content', 'list',</span>
+<span class="line">&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent_node_id,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'sort_by', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sort_by, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'offset', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offset, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'limit', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'attribute_filter', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attribute_filter, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'extended_attribute_filter', extended_attribute_filter, ]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'class_filter_type', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class_filter_type, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'class_filter_array', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class_filter_array, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'only_translated', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;only_translated, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'language', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'main_node_only', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;main_node_only, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'as_object', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as_object, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'depth', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depth, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'limitation', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitation &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'ignore_visibility', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignore_visibility &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>parent_node_id</td>
+        <td>mixed</td>
+        <td>The ID number(s) of the parent  node(s).</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>sort_by</td>
+        <td>array</td>
+        <td>The sorting mechanism that should be used.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>offset</td>
+        <td>integer</td>
+        <td>The offset to start at.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>limit</td>
+        <td>integer</td>
+        <td>The number of nodes that should be fetched.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>attribute_filter</td>
+        <td>mixed</td>
+        <td>The attribute level filter logic.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>extended_attribute_filter</td>
+        <td>mixed</td>
+        <td>The extended attribute level filter logic.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>class_filter_type</td>
+        <td>string</td>
+        <td>The type of class filtering (include/exclude).</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>class_filter_array</td>
+        <td>array</td>
+        <td>The classes that should be filtered.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>group_by</td>
+        <td>array</td>
+        <td>DEPRECATED</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>only_translated</td>
+        <td>boolean</td>
+        <td>Translation filtering (on/off). DEPRECATED</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>language</td>
+        <td>string</td>
+        <td>The translations that should be fetched.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>main_node_only</td>
+        <td>boolean</td>
+        <td>Type of nodes that should be fetched (all or main nodes only).</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>as_object</td>
+        <td>boolean</td>
+        <td>If TRUE (or omitted), an array of &quot;ezcontentobjecttreenode&quot; objects will be fetched. Otherwise, an array of arrays will be returned.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>depth</td>
+        <td>integer</td>
+        <td>The maximum level of depth that should be explored (1 by default).</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>limitation</td>
+        <td>array</td>
+        <td>Limitation array (emtpy array = access override).</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>ignore_visibility</td>
+        <td>boolean</td>
+        <td>Makes it possible to fetch hidden nodes.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+<p>An array of <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> objects or FALSE.</p><h3>Description</h3>
+<p>This function fetches the children of a single node or a collection of nodes. The parent node(s) must be specified using the &quot;parent_node_id&quot; parameter. This parameter can either be the ID number of a single node or an array containing several node ID numbers. The function will fetch the nodes that are directly under the specified parent node(s). The collection is returned as an array of <a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> objects. If no nodes are found or if an error occurs, the function will return FALSE. The optional &quot;group_by&quot; parameter (grouping on a date/time basis) is deprecated since this functionality is not supported by Oracle and PostgreSQL.</p><a name="eztoc75950_0_0_1" id="eztoc75950_0_0_1"></a><h4>Sorting</h4><p>The &quot;sort_by&quot; parameter makes it possible to sort the result in different ways. This parameter must be provided as an array. The first element of the array must be the desired sorting method. The second element of the array must be the sorting direction, it can be either true() or false() - ascending or descending. The following table shows the sorting methods that can be used.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Sorting method</p>
+  </th><th >  <p>Description</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>attribute</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The nodes are sorted according to the value of a specific attribute.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>class_identifier</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The nodes are sorted by the class identifiers of the objects.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>class_name</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The nodes are sorted by the class names of the objects.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>depth</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The nodes are sorted by their depth in the content tree.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>modified</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The nodes are sorted by the modification time of the objects.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>name</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The nodes are sorted by the names of the objects.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>path</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The nodes are sorted by their node ID path strings (/1/2/43/56).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>path_string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The nodes are sorted by their virtual path strings (/company/about).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>priority</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The nodes are sorted by their priority.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>published</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The nodes are sorted by the creation time of the objects.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>section</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The nodes are sorted by the section IDs of the objects.</p>
+  </td>
+
+</tr>
+
+</table>
+<p>It is possible to combine different sorting methods. For example, it is possible to sort the nodes alphabetically and by their publish date/time at the same time.</p><p>Sorting on the attribute level is supported for the following datatypes:</p><p>Sorting on the attribute level is supported for the following datatypes:</p>
+<ul>
+<li><div> <a href="../../../../../4.x/Reference/Datatypes/Checkbox.html" target="_self">Checkbox</a> </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/Country.html" target="_self">Country</a> </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/Date.html" target="_self">Date</a> </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/Date-and-time.html" target="_self">Date and time</a> </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/E-mail.html" target="_self">E-mail</a> </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/Identifier.html" target="_self">Identifier</a> </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/Integer.html" target="_self">Integer</a> </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/Multi-price.html" target="_self">Multi-price</a> (only supported in sort_by in content/list and content/tree, not for content/search) </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/Object-relation.html" target="_self">Object relation</a> (on related object's ID) </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/Price.html" target="_self">Price</a> </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/Product-category.html" target="_self">Product category</a> (category ID) </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/Selection.html" target="_self">Selection</a> (will not work when used as multiple selector) </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/Text-line.html" target="_self">Text line</a> </div></li><li><div> <a href="../../../../../4.x/Reference/Datatypes/Time.html" target="_self">Time</a> </div></li>
+</ul>
+<p>The syntax for doing attribute level sorting is almost the same as for normal sorting. The only difference is that the ID number or the identifier of the target attribute must be specified. If the identifier is used then both the identifier of the class and the attribute must be specified (separated by a slash, like this: &quot;my_class/my_attribute&quot;). Attribute sorting can only be used if the returned collection contains the same type of nodes.</p><a name="eztoc75950_0_0_2" id="eztoc75950_0_0_2"></a><h4>Fetching subsets</h4><p>By making use of the &quot;offset&quot; and &quot;limit&quot; parameters, it is possible to fetch only a subset of the collection that would have been returned if these parameters were omitted. While the &quot;offset&quot; parameter defines the start of the subset, the &quot;limit&quot; parameter defines the length (number of elements/nodes) of the subset. These parameters are processed at the final stage. In other words, it is possible to do advanced sorting/filtering and grab only a specific chunk of from the sorted/filtered/etc. collection.</p><a name="eztoc75950_0_0_3" id="eztoc75950_0_0_3"></a><h4>Class filtering</h4><p>The class filter mechanism is controlled by the &quot;class_filter_type&quot; and &quot;class_filter_array&quot; parameters. The &quot;class_filter_type&quot; parameter tells eZ Publish to include or exclude specific node types. This parameter must be either &quot;include&quot; or &quot;exclude&quot;. It is not possible to include one set and to exclude another at the same time. The value of the &quot;class_filter_array&quot; parameter specifies the type of nodes that should be included or excluded. This parameter must be an array of class ID numbers or class identifier strings.</p><a name="eztoc75950_0_0_4" id="eztoc75950_0_0_4"></a><h4>Attribute filtering</h4><p>The attribute filter mechanism is controlled by the &quot;attribute_filter&quot; parameter. Attribute filtering makes it possible to fetch a set of nodes where an attribute (or several attributes) contains some specific data. Filtering on the attribute level is supported for the following datatypes:</p>
+<ul>
+<li><div> Checkbox </div></li><li><div> Date </div></li><li><div> Date and time </div></li><li><div> E-mail </div></li><li><div> Integer </div></li><li><div> Object relation </div></li><li><div> Selection (will not work when used as multiple selector) </div></li><li><div> Text line </div></li><li><div> Time </div></li>
+</ul>
+<p>The &quot;attribute_filter&quot; parameter must be an array. The first element may be set to either &quot;and&quot; or &quot;or&quot; - this controls how the matching specified in the upcoming elements should be carried out. If this parameter is omitted, the system will default to &quot;and&quot;. The rest of the elements are arrays, each array specifies a match. The elements in this array are:</p>
+<ol>
+<li><div> Attribute ID </div></li><li><div> Match type </div></li><li><div> Match value </div></li>
+</ol>
+<p>The attribute ID can be specified either as the ID number of the attribute or as a string that contains the identifier of the class and the identifier of the attribute separated by a slash. (Note that it is also possible to specify one of the pre-defined strings in order to do filtering on a non-attribute.) The ID number of the attribute or the identifier of the class and the attribute can be found when viewing/editing content classes.</p><p>The match type tells how eZ Publish should try to match the values. The match value is the data that should be matched. The following match types can be used:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th  class="tight">  <p>Type</p>
+  </th><th >  <p>Description</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>=</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Equal</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>!=</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Not equal</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&lt;</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Less than</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Greater than</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&lt;=</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Less than or equal to</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;=</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Greater than or equal to</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>in</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Matches one of the array values</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>not_in</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Does not match any of the array values</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>between</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Is a part of the range determined by the start and end values</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>not_between</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Is outside the range determined by the start and end values</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>like</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Matches the wildcard string (the wildcard character is '*')</p>
+  </td>
+
+</tr>
+
+</table>
+<p>It is not possible to filter on attributes of different classes, for example it is not possible to filter on both &quot;article/show_comments&quot; and &quot;folder/show_comments&quot; in the same filter.</p><a name="eztoc75950_0_0_5" id="eztoc75950_0_0_5"></a><h4>Filtering on a non-attribute</h4><p>Instead of the class/attribute syntax, you can use &quot;published&quot; and &quot;priority&quot; as &quot;AttributeID&quot;. It is also possible to use &quot;owner&quot; as &quot;AttributeID&quot; which refers to the owner's identifier of the content object. This can for instance be used to find all objects of a given user.</p><p>There are also some other pre-defined strings that can be used as &quot;AttributeID&quot; (refer to the following table). When one of these strings is used as &quot;AttributeID&quot;, filtering is based on <a href="../../../../Templates/The-template-language/Variable-types.html#objects" target="_self">template object</a> attributes (not on <a href="../../../../Concepts-and-basics/Content-management/The-content-object.html" target="_self">content object</a> attributes). This means that if you use for example &quot;priority&quot; as &quot;AttributeID&quot;, the system will check the value of the &quot;priority&quot; attribute of the &quot;<a href="../../../Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a>&quot; objects that represent information about content nodes.</p><p>The following table describes the pre-defined strings and corresponding attributes.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Name</p>
+  </th><th >  <p>Description</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>class_identifier</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The identifier of the class which the object encapsulated by the node is an instance of.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>class_name</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The name of the class which the object encapsulated by the node is an instance of.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>depth</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The depth of the node within the content node tree.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>modified</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>A UNIX timestamp pinpointing the exact date/time when the object encapsulated by the node was last modified (the &quot;modified&quot; attribute of the corresponding &quot;ezcontentobject&quot; object).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>modified_subnode</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>A UNIX timestamp pinpointing the exact time a sub node was changed.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>name</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The name of the object the node encapsulates.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>owner</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The ID number of the object representing the user who initially created the object (the &quot;owner_id&quot; attribute of the corresponding &quot;ezcontentobject&quot; object).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>path</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The node's path string (the &quot;path_string&quot; attribute).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>priority</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The node's priority.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>published</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>A UNIX timestamp pinpointing the exact date/time when the object was published for the first time (the &quot;published&quot; attribute of the corresponding &quot;ezcontentobject&quot; object).</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>section</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>The ID number of the section that the object belongs to (the &quot;section_id&quot; attribute of the corresponding &quot;ezcontentobject&quot; object).</p>
+  </td>
+
+</tr>
+
+</table>
+<a name="eztoc75950_0_0_6" id="eztoc75950_0_0_6"></a><h4>Extended attribute filtering</h4><p>The &quot;extended_attribute_filter&quot; parameter can be used to do advanced attribute filtering. It is for expert/experienced users. This mechanism makes it possible to introduce additional SQL conditions within the fetch. It allows filtering based on values in custom tables and/or special filtering within the &quot;ezcontentobject_attribute&quot; table.</p><p>The mechanism must be configured using a configuration override for &quot;extendedattributefilter.ini&quot;. This file allows the site administrator to set up different custom filters. Each filter must be a named collection of configuration settings. The name of a filter is the name of the configuration block under which the filter's settings are defined. The following text shows an example that demonstrates the setup of a filter called &quot;MyFilter&quot;.</p><pre class="wordwrap copytoclipboard"><span class="line">#The name of the filter.</span>
+<span class="line">[MyFilter]</span>
+<span class="line">&nbsp;</span>
+<span class="line">#The name of the extension where the filtering code is defined.</span>
+<span class="line">ExtensionName=myextension</span>
+<span class="line">&nbsp;</span>
+<span class="line">#The name of the filter class.</span>
+<span class="line">ClassName=eZMyExtendedFilter</span>
+<span class="line">&nbsp;</span>
+<span class="line">#The name of the method which is called to generate the SQL parts.</span>
+<span class="line">MethodName=createSqlParts</span>
+<span class="line">&nbsp;</span>
+<span class="line">#The file which should be included (extension/myextension will automatically be prepended).</span>
+<span class="line">FileName=classes/ezmyextendedfilter.php</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '#The name of the filter.\r\n[MyFilter]\r\n\r\n#The name of the extension where the filtering code is defined.\r\nExtensionName=myextension\r\n\r\n#The name of the filter class.\r\nClassName=eZMyExtendedFilter\r\n\r\n#The name of the method which is called to generate the SQL parts.\r\nMethodName=createSqlParts\r\n\r\n#The file which should be included (extension/myextension will automatically be prepended).\r\nFileName=classes/ezmyextendedfilter.php' ); return false;" /></p>
+<![endif]--><p>The function defined by the &quot;MethodName&quot; setting must return an associative array containing two strings:</p><pre class="wordwrap"><span class="line">array( 'tables' =&gt; '...', 'joins' =&gt; '...' , 'columns' =&gt; '...' );</span>
+</pre><p>The contents of &quot;tables&quot; must start with a comma. The rest of the string should contain a comma separated list of other tables that should be included in the query. The contents of &quot;joins&quot; will be added inside the &quot;WHERE&quot; section of the query. This string must start with a space and contain an &quot;AND&quot; and an additional space at the end.</p><p>The example below shows a solution that filters the content based on values within an additional/custom table. This table is joined with the node table (by object ID and object version). The additional/custom table would most likely be maintained by a special/custom datatype.</p><pre class="wordwrap copytoclipboard"><span class="line">class eZMyExtendedFilter</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/*!</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructor</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;function eZMyExtendedFilter()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Empty...</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;function createSqlParts( $params )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlTables= ', ezmyfiltertable ';</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlJoins = ' ezcontentobject_tree.contentobject_id = ezmyfiltertable.contentobject_id AND ezcontentobject_tree.contentobject_version = ezmyfiltertable.version AND ';</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( isset( $params['value1'] ) )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$value1 = $params['value1'];</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$value1 = &quot;10&quot;;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( isset( $params['value2'] ) )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$value2 = $params['value2'];</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$value2 = &quot;10&quot;;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlCondArray = array();</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlCondArray[] = 'ezmyfiltertable.my_cond1 = ' . $value1;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlCondArray[] = 'ezmyfiltertable.my_cond1 = ' . $value2;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlCond = implode( ' or ', $sqlCondArray );</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlCond = ' ( ' . $sqlCond . ' ) AND ' . $sqlJoins . ' ';</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return array( 'tables' =&gt; $sqlTables, 'joins' =&gt; $sqlCond, 'columns' =&gt; '' );</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'class eZMyExtendedFilter\r\n{\r\n    /*!\r\n     Constructor\r\n    */\r\n    function eZMyExtendedFilter()\r\n    {\r\n        // Empty...\r\n    }\r\n\r\n    function createSqlParts( $params )\r\n    {\r\n        $sqlTables= \', ezmyfiltertable \';\r\n\r\n        $sqlJoins = \' ezcontentobject_tree.contentobject_id = ezmyfiltertable.contentobject_id AND ezcontentobject_tree.contentobject_version = ezmyfiltertable.version AND \';\r\n\r\n        if ( isset( $params[\'value1\'] ) )\r\n        {\r\n             $value1 = $params[\'value1\'];\r\n        }\r\n        else\r\n        {\r\n             $value1 = &quot;10&quot;;\r\n        }\r\n        if ( isset( $params[\'value2\'] ) )\r\n        {\r\n             $value2 = $params[\'value2\'];\r\n        }\r\n        else\r\n        {\r\n             $value2 = &quot;10&quot;;\r\n        }\r\n\r\n        $sqlCondArray = array();\r\n\r\n        $sqlCondArray[] = \'ezmyfiltertable.my_cond1 = \' . $value1;\r\n\r\n        $sqlCondArray[] = \'ezmyfiltertable.my_cond1 = \' . $value2;\r\n\r\n        $sqlCond = implode( \' or \', $sqlCondArray );\r\n\r\n        $sqlCond = \' ( \' . $sqlCond . \' ) AND \' . $sqlJoins . \' \';\r\n\r\n        return array( \'tables\' =&gt; $sqlTables, \'joins\' =&gt; $sqlCond, \'columns\' =&gt; \'\' );\r\n\r\n    }\r\n}' ); return false;" /></p>
+<![endif]--><p>The following template code shows how the extended attribute filter (see the PHP code above) can be used within a fetch.</p><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', 2,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sort_by', array( 'priority', false() ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'limit', 15,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'extended_attribute_filter',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'id', 'MyFilter',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'params', hash( 'value1', 15,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'value2', 30 ) ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'depth', 10,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'main_node_only', true() ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \'list\',\r\n        hash( \'parent_node_id\', 2,\r\n              \'sort_by\', array( \'priority\', false() ),\r\n              \'limit\', 15,\r\n              \'extended_attribute_filter\', \r\n                            hash( \'id\', \'MyFilter\',\r\n                                          \'params\', hash( \'value1\', 15,\r\n                                                        \'value2\', 30 ) ),\r\n              \'depth\', 10,\r\n              \'main_node_only\', true() ) )}' ); return false;" /></p>
+<![endif]--><p>There is an additional example at the bottom of this page: <a href="#example20" target="_self">Example 20</a>.</p><a name="eztoc75950_0_0_7" id="eztoc75950_0_0_7"></a><h4>Fetching main nodes only</h4><p>The &quot;main_node_only&quot; parameter can be used to tell eZ Publish that it should only fetch main nodes (nodes that are main locations for content objects). This parameter is optional and can be set to either true() or false(). When set to true(), the fetch function will only return main nodes. This functionality can be used to avoid duplicates (different nodes but same objects) in the result.</p><a name="eztoc75950_0_0_8" id="eztoc75950_0_0_8"></a><h4>Fetching translated objects only</h4><p><b>Note:</b> This description applies to eZ Publish 3.8 or earlier. The &quot;only_translated&quot; parameter is deprecated in all later versions. In some multi-language scenarios, not all objects are translated into other/all languages. When the &quot;only_translated&quot; parameter is set to &quot;true()&quot; the system will only fetch objects that have been translated into the language used by the siteaccess (the current language). The &quot;language&quot; parameter can be used to control which translations that should be fetched. The value of this parameter must be a valid locale string, for example &quot;ger-DE&quot;.</p><a name="eztoc75950_0_0_9" id="eztoc75950_0_0_9"></a><h4>Access override</h4><p>The &quot;limitation&quot; parameter makes it possible to instruct the system to use an alternate set of access limitations instead of the ones that belong to the current user. This is typically useful when there is a need to fetch nodes that the current user does not have access to. All permission checking can be skipped by providing an empty array. It is also possible to provide arrays that dictate the access limitations of other users and/or virtual sets of limitations. The array follows an internal structure that will be documented in the future.</p><a name="eztoc75950_0_0_10" id="eztoc75950_0_0_10"></a><h4>Visibility override</h4><p>The &quot;ignore_visibility&quot; parameter makes it possible to fetch hidden nodes. It can be set to either &quot;true()&quot; or &quot;false()&quot;. If set to &quot;true()&quot;, the fetch will ignore the visibility flags of nodes and thus it will return all nodes regardless of their visibility status. In other words, this parameter overrides the <a href="../../../Configuration-files/site.ini/SiteAccessSettings/ShowHiddenNodes.html" target="_self">&quot;ShowHiddenNodes&quot;</a> configuration directive for a specific fetch operation in a template.</p><h3>Examples</h3>
+<a name="eztoc75951_0_0_1" id="eztoc75951_0_0_1"></a><h4>Example 1</h4><pre class="wordwrap copytoclipboard"><span class="line">{def $nodes=fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', 42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'depth', 3 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $nodes as $node}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$node.name|wash} &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $nodes=fetch( \'content\', \'list\',\r\n        hash( \'parent_node_id\', 42,\r\n              \'depth\', 3 ) )}\r\n\r\n{foreach $nodes as $node}\r\n    {$node.name|wash} &lt;br /&gt;\r\n{/foreach}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates how to fetch nodes which are until the third level under the parent node number 42. Outputs the names of all these nodes.</p><a name="eztoc75951_0_0_2" id="eztoc75951_0_0_2"></a><h4>Example 2</h4><pre class="wordwrap"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', 42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sort_by', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 'published', false() ) ) )}</span>
+</pre><p>This example demonstrates how to fetch all nodes that are the children of node number 42. The nodes are sorted by the time they were created; the most recently created node will be the first element in the collection.</p><a name="eztoc75951_0_0_3" id="eztoc75951_0_0_3"></a><h4>Example 3</h4><pre class="wordwrap"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', array ( '42', '43', '45' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sort_by', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 'published', false() ) ) )}</span>
+</pre><p>This example demonstrates how to fetch all nodes that are the children of multiple nodes; number 42, 43 and 45. The nodes are sorted by the time they were created; the most recently created node will be the first element in the collection.</p><a name="eztoc75951_0_0_4" id="eztoc75951_0_0_4"></a><h4>Example 4</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', 42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sort_by', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( array( 'name', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false() ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 'published', false() ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \'list\', \r\n        hash( \'parent_node_id\', 42,\r\n              \'sort_by\',        array( array( \'name\',      false() ),\r\n                                      array( \'published\', false() ) ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates how to combine different sorting methods. The fetch function will fetch the child nodes of node number 42. The fetched nodes will be sorted by their name and the time they were created.</p><a name="eztoc75951_0_0_5" id="eztoc75951_0_0_5"></a><h4>Example 5</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', 42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sort_by', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 'attribute',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false(),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;107 ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \'list\', \r\n        hash( \'parent_node_id\', 42,\r\n              \'sort_by\',        array( \'attribute\', \r\n                                      false(), \r\n                                      107 ) ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates attribute sorting by using the ID number of the attribute.</p><a name="eztoc75951_0_0_6" id="eztoc75951_0_0_6"></a><h4>Example 6</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', 42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sort_by', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 'attribute',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false(),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'person/last_name' ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \'list\', \r\n        hash( \'parent_node_id\', 42,\r\n              \'sort_by\',        array( \'attribute\', \r\n                                      false(), \r\n                                      \'person/last_name\' ) ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates attribute sorting by using the string notation to pinpoint the identifier of the class and the attribute.</p><a name="eztoc75951_0_0_7" id="eztoc75951_0_0_7"></a><h4>Example 7</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;&nbsp;&nbsp;42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class_filter_type', &nbsp;'include',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class_filter_array', array( '13' ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \'list\', \r\n        hash( \'parent_node_id\',     42,\r\n              \'class_filter_type\',  \'include\',\r\n              \'class_filter_array\', array( \'13\' ) ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates how to use class filtering to fetch only nodes that reference objects that are instances of class number 13.</p><a name="eztoc75951_0_0_8" id="eztoc75951_0_0_8"></a><h4>Example 8</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;&nbsp;&nbsp;42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class_filter_type', &nbsp;'include',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class_filter_array', array( 'folder' ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \'list\', \r\n        hash( \'parent_node_id\',     42,\r\n              \'class_filter_type\',  \'include\',\r\n              \'class_filter_array\', array( \'folder\' ) ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates how to use class filtering to fetch only nodes that reference folder objects.</p><a name="eztoc75951_0_0_9" id="eztoc75951_0_0_9"></a><h4>Example 9</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;&nbsp;&nbsp;42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class_filter_type', &nbsp;'exclude',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class_filter_array', array( 'article',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'comment' ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \'list\',\r\n        hash( \'parent_node_id\',     42,\r\n              \'class_filter_type\',  \'exclude\',\r\n              \'class_filter_array\', array( \'article\', \r\n                                          \'comment\' ) ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates how to use class filtering to exclude articles and comments from a fetch.</p><a name="eztoc75951_0_0_10" id="eztoc75951_0_0_10"></a><h4>Example 10</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'attribute_filter', array( 'or',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 152, '=', 'abc' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 153, '=', '42' ) ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \'list\', \r\n        hash( \'parent_node_id\',   42,\r\n              \'attribute_filter\', array( \'or\',\r\n                                        array( 152, \'=\', \'abc\' ),\r\n                                        array( 153, \'=\', \'42\' ) ) ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates how to do attribute filtering. Only nodes that have attributes number 152 and 153 set to &quot;abc&quot; and 42 respectively will be included in the result.</p><a name="eztoc75951_0_0_11" id="eztoc75951_0_0_11"></a><h4>Example 11</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'attribute_filter', array( array( 'article/title',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'like',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'*story*' ) ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \r\n        \'list\', \r\n        hash( \'parent_node_id\',   42, \r\n              \'attribute_filter\', array( array( \'article/title\',\r\n                                        \'like\',\r\n                                        \'*story*\' ) ) ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates how to do attribute filtering. Instead of specifying the ID number of the attribute (as in the previous example), the identifier of the class and the attribute is used. Only article nodes that contain the text &quot;story&quot; in their title attribute will be included in the result.</p><a name="eztoc75951_0_0_12" id="eztoc75951_0_0_12"></a><h4>Example 12</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'attribute_filter', array( array( 'article/image',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'=',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;87 ) ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \r\n        \'list\', \r\n        hash( \'parent_node_id\',   42, \r\n              \'attribute_filter\', array( array( \'article/image\',\r\n                                        \'=\',\r\n                                        87 ) ) ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates how to do attribute filtering using an attribute of the &quot;Object relation&quot; datatype. Only article nodes that store relation to the specified content object (object ID = 87) in their &quot;image&quot; attribute will be included in the result.</p><a name="eztoc75951_0_0_13" id="eztoc75951_0_0_13"></a><h4>Example 13</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'attribute_filter', array( array( 'review/rating',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'between',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 0, 2 ) ) ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \r\n        \'list\', \r\n        hash( \'parent_node_id\',   42, \r\n              \'attribute_filter\', array( array( \'review/rating\',\r\n                                        \'between\',\r\n                                        array( 0, 2 ) ) ) ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates how to do attribute filtering using an attribute of the &quot;Selection&quot; datatype. Only review nodes that contain &quot;Very good&quot;, &quot;Good&quot; or &quot;Ok&quot; (options 0, 1 or 2) in their &quot;rating&quot; attribute will be included in the result.</p><a name="eztoc75951_0_0_14" id="eztoc75951_0_0_14"></a><h4>Example 14</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'attribute_filter', array( array( 'bug/priority',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'in',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 1, 4 ) ) ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \r\n        \'list\', \r\n        hash( \'parent_node_id\',   42, \r\n              \'attribute_filter\', array( array( \'bug/priority\',\r\n                                        \'in\',\r\n                                        array( 1, 4 ) ) ) ) )}' ); return false;" /></p>
+<![endif]--><p>Fetches bugs with priority 1 and 4 (i.e. bug nodes that have their priority attribute set to 1 or 4).</p><a name="eztoc75951_0_0_15" id="eztoc75951_0_0_15"></a><h4>Example 15</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'attribute_filter', array( array( 'bug/priority',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'between',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 2, 4 ) ) ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \r\n        \'list\', \r\n        hash( \'parent_node_id\',   42, \r\n              \'attribute_filter\', array( array( \'bug/priority\',\r\n                                        \'between\',\r\n                                        array( 2, 4 ) ) ) ) )}' ); return false;" /></p>
+<![endif]--><p>Fetches bugs with priority 2, 3 and 4 (i.e. bug nodes that have their priority attribute value between 2 and 4).</p><a name="eztoc75951_0_0_16" id="eztoc75951_0_0_16"></a><h4>Example 16</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'attribute_filter', array( 'and',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 'priority', '&gt;', '20' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 'article/title', '=', 'abc' ) ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \'list\', \r\n        hash( \'parent_node_id\',   42, \r\n              \'attribute_filter\', array( \'and\',\r\n                                        array( \'priority\', \'&gt;\', \'20\' ), \r\n                                        array( \'article/title\', \'=\', \'abc\' ) ) ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates how to do filtering on a non-attribute. Instead of specifying the identifier of the class and the attribute, &quot;priority&quot; is used. Only article nodes that have their title attribute set to &quot;abc&quot; and have a priority greater than 20 will be included in the result.</p><a name="eztoc75951_0_0_17" id="eztoc75951_0_0_17"></a><h4>Example 17</h4><pre class="wordwrap copytoclipboard"><span class="line">{def $nodes=fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', 42,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'attribute_filter', array( 'and',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 'owner',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'=',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$current_user.contentobject_id ) ,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 'class_identifier', '=', 'folder' ) ) ,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'depth', 3 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $nodes as $node}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$node.name|wash}&lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{undef $nodes}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $nodes=fetch( \'content\', \'list\', \r\n        hash( \'parent_node_id\', 42, \r\n             \'attribute_filter\', array( \'and\',\r\n                                 array( \'owner\',\r\n                                  \'=\',\r\n                                 $current_user.contentobject_id ) ,\r\n                                 array( \'class_identifier\', \'=\', \'folder\' ) ) ,\r\n             \'depth\', 3 ) )} \r\n\r\n{foreach $nodes as $node}\r\n    {$node.name|wash}&lt;br /&gt;\r\n{/foreach}\r\n\r\n{undef $nodes}' ); return false;" /></p>
+<![endif]--><p>Fetches folder nodes which are until the third level under the parent node number 42 and are created by the current user.</p><a name="eztoc75951_0_0_18" id="eztoc75951_0_0_18"></a><h4>Example 18</h4><pre class="wordwrap"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;2,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'only_translated', true() ) )}</span>
+</pre><p>This example demonstrates how to fetch only nodes that reference objects that have been translated into the current language (the language that the siteaccess is using).</p><a name="eztoc75951_0_0_19" id="eztoc75951_0_0_19"></a><h4>Example 19</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;2,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'limit', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'only_translated', true(),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'language', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'ger-DE' ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \'list\',\r\n        hash( \'parent_node_id\',  2,\r\n              \'limit\',           3,       \r\n              \'only_translated\', true(),\r\n              \'language\',        \'ger-DE\' ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates another way to fetch translated objects. The fetch will return nodes that reference objects which have been translated into the German language.</p><a name="eztoc75951_0_0_20" id="eztoc75951_0_0_20"></a><h4>Example 20</h4><pre class="wordwrap copytoclipboard"><span class="line">{fetch( 'content', 'list',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', 2,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sort_by', array( 'priority', false() ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'limit', 15,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'extended_attribute_filter',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'id', 'MyFilter',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'params', hash( 'value1', 'text1',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'value2', 'text2' ) ) ) )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{fetch( \'content\', \'list\',\r\n        hash( \'parent_node_id\', 2,\r\n              \'sort_by\', array( \'priority\', false() ),\r\n              \'limit\', 15,\r\n              \'extended_attribute_filter\',\r\n                            hash( \'id\', \'MyFilter\',\r\n                            \'params\', hash( \'value1\', \'text1\',\r\n                                          \'value2\', \'text2\' ) ) ) )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates how the extended attribute filter can be used. The template code above will fetch objects that match the following condition: any object using the ezstring datatype containing either &quot;text1&quot; or &quot;text2&quot;. The necessary PHP implementation is shown in the example below.</p><pre class="wordwrap copytoclipboard"><span class="line">class eZMyExtendedFilter</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/*!</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructor</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;function eZMyExtendedFilter()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Empty...</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;function createSqlParts( $params )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlTables= ', ezcontentobject_attribute as myfilter_alias ';</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlJoins = ' ezcontentobject_tree.contentobject_id = myfilter_alias.contentobject_id AND ezcontentobject_tree.contentobject_version = myfilter_alias.version AND myfilter_alias.data_type_string = &quot;ezstring&quot; &nbsp;AND';</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( isset( $params['value1'] ) )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$value1 = $params['value1'];</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$value1 = 'fooo';</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( isset( $params['value2'] ) )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$value2 = $params['value2'];</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$value2 = 'boooo';</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlCondArray = array();</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlCondArray[] = 'myfilter_alias.data_text = &quot;' . $value1 . '&quot;';</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlCondArray[] = 'myfilter_alias.data_text = &quot;' . $value2 . '&quot;';</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlCond = implode( ' or ', $sqlCondArray );</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$sqlCond = ' ( ' . $sqlCond . ' ) AND ' . $sqlJoins . ' ';</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return array( 'tables' =&gt; $sqlTables, 'joins' =&gt; $sqlCond );</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'class eZMyExtendedFilter\r\n{\r\n    /*!\r\n     Constructor\r\n    */\r\n    function eZMyExtendedFilter()\r\n    {\r\n        // Empty...\r\n    }\r\n\r\n    function createSqlParts( $params )\r\n    {\r\n        $sqlTables= \', ezcontentobject_attribute as myfilter_alias \';\r\n\r\n        $sqlJoins = \' ezcontentobject_tree.contentobject_id = myfilter_alias.contentobject_id AND ezcontentobject_tree.contentobject_version = myfilter_alias.version AND myfilter_alias.data_type_string = &quot;ezstring&quot;  AND\';\r\n\r\n        if ( isset( $params[\'value1\'] ) )\r\n        {\r\n             $value1 = $params[\'value1\'];\r\n        }\r\n        else\r\n        {\r\n             $value1 = \'fooo\';\r\n        }\r\n        if ( isset( $params[\'value2\'] ) )\r\n        {\r\n             $value2 = $params[\'value2\'];\r\n        }\r\n        else\r\n        {\r\n             $value2 = \'boooo\';\r\n        }\r\n\r\n        $sqlCondArray = array();\r\n\r\n        $sqlCondArray[] = \'myfilter_alias.data_text = &quot;\' . $value1 . \'&quot;\';\r\n        $sqlCondArray[] = \'myfilter_alias.data_text = &quot;\' . $value2 . \'&quot;\';\r\n\r\n        $sqlCond = implode( \' or \', $sqlCondArray );\r\n\r\n        $sqlCond = \' ( \' . $sqlCond . \' ) AND \' . $sqlJoins . \' \';\r\n\r\n        return array( \'tables\' =&gt; $sqlTables, \'joins\' =&gt; $sqlCond );\r\n\r\n    }\r\n}' ); return false;" /></p>
+<![endif]--><a name="eztoc75951_0_0_21" id="eztoc75951_0_0_21"></a><h4>Example 21</h4><pre class="wordwrap"><span class="line">{fetch( 'content', 'list', hash( 'parent_node_id', 2,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'ignore_visibility', true() ) )}</span>
+</pre><p>This example demonstrates how to fetch nodes regardless of their visibility status. The operation above will return both visible and hidden nodes that are directly below node #2.</p><a name="eztoc75951_0_0_22" id="eztoc75951_0_0_22"></a><h4>Example 22</h4><pre class="wordwrap copytoclipboard"><span class="line">{def $nodes=fetch( 'content', 'list', hash( 'parent_node_id', 2,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'as_object', false() ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">The result is an array of arrays. The first inner array reveals information about the node &quot;{$nodes[0].name|wash}&quot;: &lt;br /&gt; {$nodes[0]|attribute( show, 1 )}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $nodes=fetch( \'content\', \'list\', hash( \'parent_node_id\', 2,\r\n                                \'as_object\', false() ) )}\r\n\r\nThe result is an array of arrays. The first inner array reveals information about the node &quot;{$nodes[0].name|wash}&quot;: &lt;br /&gt; {$nodes[0]|attribute( show, 1 )}' ); return false;" /></p>
+<![endif]--><p>This example demonstrates the behavior when the &quot;as_object&quot; parameter is set to FALSE. The following output will be produced:</p><p>The result is an array of arrays. The first inner array reveals information about the node &quot;Multiprice products&quot;:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Attribute</p>
+  </th><th >  <p>Type</p>
+  </th><th >  <p>Value</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>contentclass_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>current_version</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>61</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>initial_language_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>is_published</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>language_mask</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>3</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>modified</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1161682117</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>name</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'Multiprice products'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>owner_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>14</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>published</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1161682117</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>remote_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'f3f9d3443e61498e01523e3016ca136b'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>section_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>status</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>contentobject_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>61</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>contentobject_is_published</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>contentobject_version</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>depth</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>is_hidden</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>is_invisible</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>main_node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>63</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>modified_subnode</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1161682290</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>63</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>parent_node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>path_identification_string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'multiprice_products'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>path_string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'/1/2/63/'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>priority</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>sort_field</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>sort_order</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>class_name</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'Folder'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>class_identifier</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'folder'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>real_translation</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'eng-GB'</p>
+  </td>
+
+</tr>
+
+</table>
+
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Modules/content/Fetch-functions/list by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:55:06 GMT -->
+</html>

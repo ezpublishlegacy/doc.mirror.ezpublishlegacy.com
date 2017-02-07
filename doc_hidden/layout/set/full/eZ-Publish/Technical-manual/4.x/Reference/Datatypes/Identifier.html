@@ -1,0 +1,83 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Datatypes/Identifier by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Identifier / Datatypes / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Identifier</h1>
+</div>
+
+<h3>Summary</h3>
+Generates a non-editable identification string.
+<h3>Properties</h3>
+<table class="renderedtable" cellspacing="0">
+<tr><th>Name</th><th>Internal name</th><th>Searchable</th><th>Information collector</th></tr>
+<tr>
+    <td>Identifier</td>
+    <td>ezidentifier</td>
+    <td>Yes.</td>
+    <td>No.</td>
+</tr>
+</table>
+
+<h3>Description</h3>
+ <p>This datatype allows the automatic generation of unique identification strings for objects. An instance of a class that makes use of this datatype will have a unique identification string generated whenever the object is published for the very first time. The identification string is system-wide and may consist of the following elements:</p> 
+<ul>
+ <li><div> User configurable start-text </div></li> <li><div> Automatically generated identification number (configurable start value and number of digits) </div></li> <li><div> User configurable end-text </div></li> 
+</ul>
+ <p>The system will increment the actual counter(s) whenever a new object is published. It will not decrement and reorganize the identification strings when an object is removed. The identification strings are generated and maintained by the system and thus they can not be modified using the object edit interface. The identification strings are generated based on the class type and the identification number of the class attribute. In other words, the identifiers do not depend on the objects' locations within the content node tree. In addition, the datatype may be used to represent several attributes within the same class. The following screenshot shows the class attribute edit interface for this datatype.</p> 
+<div class="object-center">        <img src="../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/reference/datatypes/identifier_class_attribute_edit_interface/6625-2-eng-GB/identifier_class_attribute_edit_interface_doc.png" alt="Class attribute edit interface for the &quot;Identifier&quot; datatype." />
+ <p>Class attribute edit interface for the &quot;Identifier&quot; datatype.</p>
+
+
+
+
+
+
+
+</div>    <a name="eztoc87161_0_0_1" id="eztoc87161_0_0_1"></a><h4>Pretext</h4> <p>The &quot;Pretext&quot; parameter can be used to specify a desired start-text (all characters are allowed) that should appear before the automatically generated identification number. In the example above, the text &quot;ABC&quot; is used. This means that the identification strings generated for instances of this class will start with the letters &quot;ABC&quot;.</p>   <a name="eztoc87161_0_0_2" id="eztoc87161_0_0_2"></a><h4>Posttext</h4> <p>The &quot;Posttext&quot; parameter can be used to specify a desired end-text (all characters are allowed) that should appear after the automatically generated identification number. In the example above, the text &quot;XYZ&quot; is used. This means that the identification strings generated for instanced of this class will end with the letters &quot;XYZ&quot;.</p>   <a name="eztoc87161_0_0_3" id="eztoc87161_0_0_3"></a><h4>Digits</h4> <p>The &quot;Digits&quot; parameter makes it possible to insert additional zeros in order to generate equally long identification strings. In the example above, the digits parameter is set to &quot;2&quot;. This means that numbers below 10 will appear with a prepended zero: &quot;01&quot;, &quot;02&quot;, &quot;03&quot;...&quot;09&quot;. If the parameter was set to &quot;3&quot;, the system would generate &quot;001&quot;, &quot;002&quot; and so on. The &quot;Digits&quot; parameter can not be used to set the actual range / stop value. It only makes it possible to prepend the actual number with zeros.</p>   <a name="eztoc87161_0_0_4" id="eztoc87161_0_0_4"></a><h4>Start value</h4> <p>The &quot;Start value&quot; parameter can be used to specify a desired start value for the counter; the default value is zero. In the example above, the value &quot;1&quot; is used. This means that the counter will start at &quot;1&quot;. Given all the parameters above, the identification string generated for the very first object will be &quot;ABC01XYZ&quot;.</p>   <a name="eztoc87161_0_0_5" id="eztoc87161_0_0_5"></a><h4>Raw output</h4> <p>The &quot;.content&quot; of an <a href="../Objects/ezcontentobjectattribute.html" target="_self">ezcontentobjectattribute</a> object using this datatype returns a string containing the actual identification value.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Datatypes/Identifier by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:33 GMT -->
+</html>

@@ -1,0 +1,113 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Packages by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:12:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Packages / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Packages</h1>
+</div>
+
+<p>From 3.8, the standard packages are not included in the eZ Publish distribution itself. They are distributed separately as &quot;.ezpkg&quot; files. The files can be downloaded automatically by the setup wizard from the <a href="Packages.html#remote_repository" target="_self">remote repository</a> or manually from <a href="http://ez.no/download/ez_publish/ez_publish_4_stable_releases/4_4/packages/4_4_0" target="_self">packages download page</a>.</p><p>A <i>package</i> is a collection of items grouped together and stored in the specific format for the purpose of easy installation and removal. The system makes it possible to create packages and export them to &quot;.ezpkg&quot; files. This is the common way of how the packages are distributed. When an &quot;.ezpkg&quot; file is imported, it will become available under the <a href="#system_repository" target="_self">system repository</a> part of the eZ Publish installation. Most of the packages can be installed and uninstalled. The following table reveals the complete list of package operations that can are supported in the administration interface.</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Operation</p>
+  </th><th >  <p>Description</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Create new package</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>It is possible to export your class definitions, content objects, settings, design styles etc. by creating new packages of different types. The newly created packages will be stored under the &quot;Local&quot; system repository.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Import new package</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>To import a new package, you need to select the desired &quot;.ezpkg&quot; file locally. The system will then upload the file, unpack it and place the resulting package under an appropriate internal repository within the installation.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Remove selected</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>You can remove packages from the system repository. Please note that the package itself will not be removed. Only the package files will be removed from the internal repository.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Install</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>It is possible to install packages that are located under internal repositories. When you install a package, the system will create content classes and content objects, apply the settings specified in it and so on. (Please note that installing <a href="Packages/Package-types.html#site_packages" target="_self">site packages</a> and <a href="Packages/Package-types.html#design_packages" target="_self">design packages</a> is not supported.)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Export to file</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>A package located under the system repository can be exported to &quot;.ezpkg&quot; file. The system will ask you where to store the newly created file.</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>Uninstall</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>When you uninstall a package, all the changes made during its installation will be reverted.</p>
+  </td>
+
+</tr>
+
+</table>
+<a name="eztoc132608_1" id="eztoc132608_1"></a><h2>Remote repository</h2><p>Packages from <i>remote repository</i> can be downloaded by the setup wizard during the system installation process. However, the administration interface is unable to download packages from this repository.</p><p>The system will use the <a href="http://packages.ez.no/ezpublish/4.4/" target="_self">eZ Systems packages repository</a> as the default remote repository. If you wish to use another remote repository, you need to specify its corresponding address using the &quot;RemotePackagesIndexURL&quot; configuration setting located in the &quot;[RepositorySettings]&quot; section of the &quot;settings/override/package.ini.append.php&quot; file.</p><a name="eztoc132608_2" id="eztoc132608_2"></a><h2>System / internal repository</h2><p>The default behavior is that all packages are stored in the &quot;var/storage/packages&quot; directory. This directory is the <i>main system repository</i> and its sub-directories are called &quot;system repositories&quot; or &quot;internal repositories&quot;. The name of a sub-directory also functions as the actual name of a repository. The packages are sorted by their vendor. For example, the packages downloaded from <a href="http://ez.no/" target="_self">ez.no</a> will be stored under the &quot;ez_systems&quot; internal repository (var/storage/packages/ez_systems). Packages that have no vendor and packages created locally will reside under the &quot;Local&quot; repository (var/storage/packages/local).</p><p>It is possible to choose another location of the main system repository inside the &quot;var/storage&quot; directory. The following example shows how to change &quot;settings/override/package.ini.append.php&quot; in order to force the system to use &quot;var/storage/importedpackages&quot; as the main system repository:</p><pre class="wordwrap"><span class="line">RepositoryDirectory=importedpackages</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Packages by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:12:13 GMT -->
+</html>

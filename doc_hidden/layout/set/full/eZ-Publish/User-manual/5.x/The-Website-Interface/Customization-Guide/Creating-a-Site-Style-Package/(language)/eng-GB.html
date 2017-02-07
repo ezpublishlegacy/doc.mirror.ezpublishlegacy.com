@@ -1,0 +1,147 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/The-Website-Interface/Customization-Guide/Creating-a-Site-Style-Package/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Creating a Site Style Package / Customization Guide / The Website Interface / 5.x / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Creating a Site Style Package</h1>
+</div>
+
+<a name="eztoc134020_1" id="eztoc134020_1"></a><h2>Creating a Site Style Package</h2><p>This section describes how to make a new site style package to customize the layout and visual elements of an eZ Publish Website Interface site. In most cases, customizing the design includes the following steps:</p>
+<ol>
+<li><div>Create <i>site-colors.css</i> and <i>classes-colors.css</i>.</div></li><li><div>Create a site style package.</div></li><li><div>Import the site style package into the site where it will be used.</div></li>
+</ol>
+<a name="eztoc134020_1_1" id="eztoc134020_1_1"></a><h3>Create the CSS Files</h3><p>Create the two CSS override files that contain the site style customizations.</p><a name="eztoc134020_1_1_1" id="eztoc134020_1_1_1"></a><h4>Accessing and Modifying the CSS Files</h4><p>To modify the CSS files used by a site, you can either:</p>
+<ul>
+<li><div>edit the CSS files on the server (for example, by using SSH for a remote session)</div></li><li><div>download the CSS files to your local machine (via FTP or SCP)</div></li><li><div>use the Firefox browser with Firebug extension (<a href="http://www.getfirebug.com/" target="_self">http://www.getfirebug.com/</a>) to view the CSS on the server and test changes locally</div></li>
+</ul>
+<p>The last method is the easiest, as you do not require login or file transfer access to the server, and you can use the Firebug functionality to analyze the stylesheets and test changes without affecting the live installation. With the Firebug extension, you can modify stylesheets using the following procedure:</p>
+<ol>
+<li><div>Analyze the CSS that is being used on the site. As you move your mouse over components in a page, Firebug displays the CSS classes and files that are being used.</div></li><li><div>Modify the stylesheets. As you make changes to the CSS in Firebug, the display of the site is altered to reflect the changes. However, these changes only affect the current local session – the CSS on the server is not changed.</div></li><li><div>Copy the stylesheets. When you are happy with your changes, you can copy and paste the CSS from Firebug into local versions of <i>site-colors.css</i> and <i>classes-colors.css</i>. These files are then included in the site style package which is created using the Administration Interface, as described below.</div></li>
+</ol>
+<p>When referencing images in CSS files, use the path syntax <i>images/myimage.png</i>.</p><a name="eztoc134020_1_2" id="eztoc134020_1_2"></a><h3>Create the Package</h3><p>An eZ Publish Website Interface site style package contains two CSS files: <i>sitecolors.css</i> and <i>classes-colors.css</i>. The first file overrides the <i>defaultpagelayout.css</i>. The second file overrides the default <i>content.css</i>.</p><p>To create a new site style package, log in to the Administration Interface. (Refer to the User Guide for instructions about accessing the Administration Interface.) Click the Setup button in the horizontal menu bar, then select the Packages link from the left navigation menu. A list of package wizards will be displayed. Select the Site style wizard as show nbelow.</p>
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/selecting-package-type/134024-1-eng-GB/Selecting-Package-Type_reference.png" alt="Selecting Package Type" />
+<p>Selecting Package Type</p>
+
+
+
+
+
+
+
+</div><a name="eztoc134020_1_2_2" id="eztoc134020_1_2_2"></a><h4>Package Thumbnail</h4><p>The wizard will prompt you for a thumbnail to associate with the package. This is a small graphic that indicates the look and feel of your theme, making it easy to choose between multiple themes. The thumbnail graphic should be 120px wide and 103px high. If you do not want to provide a thumbnail, leave the field blank and click Next.</p>
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/package-thumbnail/134032-1-eng-GB/Package-Thumbnail_reference.jpg" alt="Package Thumbnail" />
+<p>Package Thumbnail</p>
+
+
+
+
+
+
+
+</div><a name="eztoc134020_1_2_3" id="eztoc134020_1_2_3"></a><h4>CSS Files</h4><p>In the next screen of the wizard, you will be prompted to provide the CSS files. In the topfield, navigate to the <i>site-colors.css</i>; in the bottom field, navigate to the <i>classescolors.css</i> file.</p>
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/package-css-files/134035-1-eng-GB/Package-CSS-Files_reference.jpg" alt="Package CSS Files" />
+<p>Package CSS Files</p>
+
+
+
+
+
+
+
+</div><a name="eztoc134020_1_2_4" id="eztoc134020_1_2_4"></a><h4>Image Files</h4><p>On the next screen, upload all of the images referenced in the CSS (such as background images, footer images, etc.) Upload as many images files as necessary; these will become part of the site style package.After the site style package is installed, the images will be stored on the server file system beneath the var directory. When you specify the path to images in the CSS files, use the following directory nomenclature: <i>images/myimage.png</i>.</p>
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/adding-images-to-package/134038-1-eng-GB/Adding-Images-to-Package_reference.jpg" alt="Adding Images to Package" />
+<p>Adding Images to Package</p>
+
+
+
+
+
+
+
+</div><a name="eztoc134020_1_2_5" id="eztoc134020_1_2_5"></a><h4>Package information</h4><p>The next screen in the wizard is used to enter general information about the site style package, such as the package name, description, etc.</p>
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/package-information3/134041-1-eng-GB/Package-Information_reference.jpg" alt="Package Information" />
+<p>Package Information</p>
+
+
+
+
+
+
+
+</div><a name="eztoc134020_1_2_6" id="eztoc134020_1_2_6"></a><h4>Package maintainer</h4><p>Use the package maintainer page to enter some information about the person who created the package.</p>
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/package-mantainer/134044-1-eng-GB/Package-Mantainer_reference.jpg" alt="Package Mantainer" />
+<p>Package Mantainer</p>
+
+
+
+
+
+
+
+</div><a name="eztoc134020_1_2_7" id="eztoc134020_1_2_7"></a><h4>Package Changelog</h4><p>The package changelog page is used to record information about each change to the package. This enables you to track different versions of the package and understand the changes that were made in each version.</p>
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/package-changelog/134047-1-eng-GB/Package-Changelog_reference.jpg" alt="Package Changelog" />
+<p>Package Changelog</p>
+
+
+
+
+
+
+
+</div><a name="eztoc134020_1_3" id="eztoc134020_1_3"></a><h3>Summary</h3><p>On the last page, a summary of the package will be displayed. The package can be exported to a file that can be imported into other eZ Publish Website Interface installations.</p>
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/package-summary6/134050-1-eng-GB/Package-Summary_reference.jpg" alt="Package Summary" />
+<p>Package Summary</p>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/The-Website-Interface/Customization-Guide/Creating-a-Site-Style-Package/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:26 GMT -->
+</html>

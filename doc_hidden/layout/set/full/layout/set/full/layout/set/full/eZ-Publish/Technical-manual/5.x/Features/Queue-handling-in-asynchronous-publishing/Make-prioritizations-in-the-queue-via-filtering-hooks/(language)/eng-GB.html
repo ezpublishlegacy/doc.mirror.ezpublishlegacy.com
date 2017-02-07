@@ -1,0 +1,55 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Queue-handling-in-asynchronous-publishing/Make-prioritizations-in-the-queue-via-filtering-hooks/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:26:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Make prioritizations in the queue via filtering hooks / Queue handling in asynchronous publishing / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Make prioritizations in the queue via filtering hooks</h1>
+</div>
+
+<a name="eztoc132755_0_1" id="eztoc132755_0_1"></a><h3>Filtering hooks</h3><p>The asynchronous publishing system comes with filtering hooks that can easily be implemented in order to prevent items from being published asynchronously.</p><p>You can configure as many filters as you want, as PHP classes. Each filter will be called sequentially, and will either accept the object for asynchronous publishing, or reject it. If a filter rejects an object, filters processing will be stopped, and the object will be published synchronously.</p><a name="eztoc132755_0_2" id="eztoc132755_0_2"></a><h3>Priority handling</h3><p>By default, Asynchronous Publishing will handle publishing operations in a very simple FIFO fashion. First item in, first item out. The system will work well in common situations, there are, however, a few cases where you don't want this. For instance, if you have regular imports of massive amount of content, you clearly don't want the publishing queue to be blocked for X minutes by the import, leaving your editors in despair while they wait forever for their content to be published.</p><p>The hook system uses the SignalSlot eZComponent. By reading the documentation for it, you will notice that you can attach multiple calls to any hook by simply calling several times the connect method. Hooks will be called in the order they were registered.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Queue-handling-in-asynchronous-publishing/Make-prioritizations-in-the-queue-via-filtering-hooks/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:26:47 GMT -->
+</html>

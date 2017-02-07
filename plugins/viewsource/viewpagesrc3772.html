@@ -1,0 +1,169 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=19890892 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:31:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage3772.html?pageId=19890892" />
+        <link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch934e.css?media=print" media="print">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 8]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1f2a9c4c7f2593422cc9b02d1a652a22/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/26ac2724af3c6ece1051365650d982fa/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins.confluence-highlight-ac" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/12/_/styles/colors.css" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p>eZ Publish 5 being built on top of Symfony 2, it uses standard HTTP cache headers. By default the Symfony 2 reverse proxy, written in PHP, is used to handle cache, but it can be easily replaced with any other reverse proxy like Varnish.</p><h2>Configure Varnish</h2><table class="wysiwyg-macro" data-macro-name="note" style="background-image: url(../servlet/confluence/placeholder/macro-headingdd57.png?definition=e25vdGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>Provided VCL example is given for Varnish 3.x only</p></td></tr></table><p>The first thing is to configure Varnish to advertise ESI usage and to activate cache invalidation:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="title=ezpublish5.vcl" style="background-image: url(../servlet/confluence/placeholder/macro-headingf744.png?definition=e2NvZGU6dGl0bGU9ZXpwdWJsaXNoNS52Y2x9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre># Varnish 3.x - eZ Publish 5 - Complete VCL
+ 
+# Our Backend - We assume that eZ Publish Web server listen on port 80
+backend ezpublish {
+    .host = "127.0.0.1";
+    .port = "80";
+}
+ 
+# ACL for purgers IP.
+# Provide here IP addresses that are allowed to send PURGE requests.
+# PURGE requests will be sent by the backend.
+acl purgers {
+    "127.0.0.1";
+    "192.168.0.0"/16;
+}
+ 
+# Called at the beginning of a request, after the complete request has been received
+sub vcl_recv {
+ 
+    # Set the backend
+    set req.backend = ezpublish;
+ 
+    # Advertise Symfony for ESI support
+    set req.http.Surrogate-Capability = "abc=ESI/1.0";
+ 
+    # Add a unique header containing the client address
+    if (req.http.x-forwarded-for) {
+        set req.http.X-Forwarded-For = req.http.X-Forwarded-For + ", " + client.ip;
+    } else {
+        set req.http.X-Forwarded-For = client.ip;
+    }
+ 
+    # Handle purge
+    # Only works with "multiple_http" purge method
+    if (req.request == "PURGE") {
+        if (!client.ip ~ purgers) {
+            error 405 "Method not allowed";
+        }
+ 
+        if ( req.http.X-Location-Id == "*" ) {
+            # Purge all locations
+            ban( "obj.http.X-Location-Id ~ ^[0-9]+$" );
+            error 200 "Purge all locations done.";
+        } elseif ( req.http.X-Location-Id ) {
+            # Purge location by its locationId
+            ban( "obj.http.X-Location-Id == " + req.http.X-Location-Id );
+            error 200 "Purge of content connected to the location id(" + req.http.X-Location-Id + ") done.";
+        }
+    }
+ 
+    # Normalize the Accept-Encoding headers
+    if (req.http.Accept-Encoding) {
+        if (req.http.Accept-Encoding ~ "gzip") {
+            set req.http.Accept-Encoding = "gzip";
+        } elsif (req.http.Accept-Encoding ~ "deflate") {
+            set req.http.Accept-Encoding = "deflate";
+        } else {
+            unset req.http.Accept-Encoding;
+        }
+    }
+ 
+    # Don't cache Authenticate &amp; Authorization
+    if (req.http.Authenticate || req.http.Authorization) {
+        return(pass);
+    }
+ 
+    # Don't cache authenticated sessions
+    if (req.http.Cookie &amp;&amp; req.http.Cookie ~ "is_logged_in=" ) {
+        return(pass);
+    }
+ 
+    # If it passes all these tests, do a lookup anyway;
+    return (lookup);
+}
+ 
+# Called when the requested object has been retrieved from the backend
+sub vcl_fetch {
+ 
+    # Optimize to only parse the Response contents from Symfony
+    if (beresp.http.Surrogate-Control ~ "ESI/1.0") {
+        unset beresp.http.Surrogate-Control;
+        set beresp.do_esi = true;
+    }
+ 
+    # Don't cache response with Set-Cookie
+    if ( beresp.http.Set-Cookie ) {
+        set beresp.ttl = 0s;
+        return (hit_for_pass);
+    }
+ 
+    # Respect the Cache-Control=private header from the backend
+    if (beresp.http.Cache-Control ~ "private") {
+        set beresp.ttl = 0s;
+        return (hit_for_pass);
+    }
+ 
+    return (deliver);
+}
+
+</pre></td></tr></table><p>You can of course add additional rules if you need.</p><h2>Configure eZ Publish</h2><h3>Update your front controller</h3><p>By default your front controller (<code>index.php</code>) uses the built-in reverse proxy, <code>EzPublishCache</code>. In order to use Varnish, you need to deactivate it by commenting the line where <code>EzPublishCache</code> is instantiated:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="language=php" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;?php
+// ...
+require_once __DIR__ . '/../ezpublish/EzPublishKernel.php';
+require_once __DIR__ . '/../ezpublish/EzPublishCache.php';
+$kernel = new EzPublishKernel( 'prod', false );
+$kernel->loadClassCache();
+// Comment the following line if you use an external reverse proxy (e.g. Varnish)
+// $kernel = new EzPublishCache( $kernel );
+$request = Request::createFromGlobals();
+// Uncomment the following if your application is behind a reverse proxy you manage and trust.
+// (see http://fabien.potencier.org/article/51/create-your-own-framework-on-top-of-the-symfony2-components-part-2)
+//Request::trustProxyData();
+$response = $kernel->handle( $request );
+$response->send();
+$kernel->terminate( $request, $response );</pre></td></tr></table><p> </p><h3>Update YML configuration</h3><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="title=ezpublish.yml" style="background-image: url(../servlet/confluence/placeholder/macro-heading8bc7.png?definition=e2NvZGU6dGl0bGU9ZXpwdWJsaXNoLnltbH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    http_cache:
+        # Use multiple_http method for purging content
+        purge_type: multiple_http
+ 
+    system:
+        # Assuming that my_siteaccess_group your frontend AND backend siteaccesses
+        my_siteaccess_group:
+            http_cache:
+                # Fill in your Varnish server(s) address(es).
+                purge_servers: [http://my.varnish.server:6081]</pre></td></tr></table><p>Et voilà !</p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=19890892 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:31:10 GMT -->
+</html>

@@ -1,0 +1,119 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Template-operators/Logical-operations/eq by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:20:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>eq / Logical operations / Template operators / Reference / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>eq</h1>
+</div>
+<h3>Summary</h3>
+Returns TRUE if the input equals the first parameter or if all parameters are equal.<h3>Usage</h3>
+<pre>input|eq( value1 [, value2 ] )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>value1</td>
+        <td>any</td>
+        <td>A variable/value that should be compared.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>value2</td>
+        <td>any</td>
+        <td>Another variable/value that should be copmared.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+TRUE or FALSE (see below).<h3>Description</h3>
+ <p>This operator compares the contents of two or more variables and/or values. If the input parameter is used, the operator will compare it with the first parameter. If the provided variables/values match, the operator will return TRUE, otherwise FALSE will be returned. If more than one parameter is provided, the operator will compare all parameters. If all parameters are found to be equal, the operator will return TRUE, otherwise FALSE will be returned. If more than one parameter is provided, the operator will simply ignore the input parameter.</p> <p>Note that &quot;eq&quot; compares the values in the same way as the '==' operator in PHP programming language (for example, 0.1 and 0.10 will be equal). Refer to the <a href="http://www.php.net/manual/en/language.operators.comparison.php" target="_self">PHP reference documentation</a> for more information. It is recommended to use the “<a href="../Strings/compare.html" target="_self">compare</a>” template operator for string comparision.</p><h3>Examples</h3>
+    <a name="eztoc3983_0_0_1" id="eztoc3983_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{if 1|eq( 1 )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The truth is out there.</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The day the earth stood still.</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{if 1|eq( 1 )}\r\n    The truth is out there.\r\n{else}\r\n    The day the earth stood still.\r\n{/if}' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced: &quot;The truth is out there&quot;.</p>       <a name="eztoc3983_0_0_2" id="eztoc3983_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap copytoclipboard"><span class="line">{if 1|eq( 2 )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The truth is out there.</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The day the earth stood still.</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{if 1|eq( 2 )}\r\n    The truth is out there.\r\n{else}\r\n    The day the earth stood still.\r\n{/if}' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced: &quot;The day the earth stood still&quot;.</p>       <a name="eztoc3983_0_0_3" id="eztoc3983_0_0_3"></a><h4>Example 3</h4> <pre class="wordwrap copytoclipboard"><span class="line">{if eq( 1, 1 )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The truth is out there.</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The day the earth stood still.</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{if eq( 1, 1 )}\r\n    The truth is out there.\r\n{else}\r\n    The day the earth stood still.\r\n{/if}' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced: &quot;The truth is out there&quot;.</p>       <a name="eztoc3983_0_0_4" id="eztoc3983_0_0_4"></a><h4>Example 4</h4> <pre class="wordwrap copytoclipboard"><span class="line">{if eq( 1, 2 )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The truth is out there.</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The day the earth stood still.</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{if eq( 1, 2 )}\r\n    The truth is out there.\r\n{else}\r\n    The day the earth stood still.\r\n{/if}' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced: &quot;The day the earth stood still&quot;.</p>       <a name="eztoc3983_0_0_5" id="eztoc3983_0_0_5"></a><h4>Example 5</h4> <pre class="wordwrap copytoclipboard"><span class="line">{if 1|eq( 1, 1 )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The truth is out there.</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The day the earth stood still.</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{if 1|eq( 1, 1 )}\r\n    The truth is out there.\r\n{else}\r\n    The day the earth stood still.\r\n{/if}' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced: &quot;The truth is out there&quot;.</p>       <a name="eztoc3983_0_0_6" id="eztoc3983_0_0_6"></a><h4>Example 6</h4> <pre class="wordwrap copytoclipboard"><span class="line">{if 2|eq( 1, 1 )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The truth is out there.</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The day the earth stood still.</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{if 2|eq( 1, 1 )}\r\n    The truth is out there.\r\n{else}\r\n    The day the earth stood still.\r\n{/if}' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced: &quot;The truth is out there.&quot;.</p>       <a name="eztoc3983_0_0_7" id="eztoc3983_0_0_7"></a><h4>Example 7</h4> <pre class="wordwrap copytoclipboard"><span class="line">{if 1|eq( 1, 2 )}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The truth is out there.</span>
+<span class="line">{else}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The day the earth stood still.</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{if 1|eq( 1, 2 )}\r\n    The truth is out there.\r\n{else}\r\n    The day the earth stood still.\r\n{/if}' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced: &quot;The day the earth stood still&quot;.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Template-operators/Logical-operations/eq by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:20:11 GMT -->
+</html>

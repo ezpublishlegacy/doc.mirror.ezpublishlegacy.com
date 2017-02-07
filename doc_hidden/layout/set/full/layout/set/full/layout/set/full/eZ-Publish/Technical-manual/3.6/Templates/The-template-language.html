@@ -1,0 +1,77 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Templates/The-template-language by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:44:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>The template language / Templates / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>The template language</h1>
+</div>
+
+ <p>The eZ publish template language makes it possible to extract information from the system and to solve common programmatic issues like for example conditional branching, looping, etc. All eZ publish specific code must be placed inside a set of curly brackets, &quot;{&quot; and &quot;}&quot;. A template file is a combination of HTML and eZ publish template code. Everything that is encapsulated by curly brackets will be interpreted by the template parser when the template is processed. Everything outside the curly brackets will be ignored and thus it will be sent to the browser without any changes.</p>  <a name="eztoc1297_1" id="eztoc1297_1"></a><h2>Curly bracket issues</h2> <p>Since curly brackets are reserved for defining blocks of eZ publish template code, these characters can not be used directly in a template. For example, Javascript code can not be inserted directly into a template file because it makes an extensive use of curly brackets. All non template specific code/text that uses curly brackets must be put inside a &quot;literal&quot; section. The contents of a literal section will be ignored by the template parser. The following example demonstrates the usage of the literal tags:</p> <pre class="wordwrap copytoclipboard"><span class="line">...</span>
+<span class="line">{literal}</span>
+<span class="line">&lt;script language=&quot;JavaScript&quot; type=&quot;text/javascript&quot;&gt;</span>
+<span class="line">&lt;!--</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;window.onload=function()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById( 'sectionName' ).select();</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById( 'sectionName' ).focus();</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">--&gt;</span>
+<span class="line">&lt;/script&gt;</span>
+<span class="line">{/literal}</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n...\r\n{literal}\r\n&lt;script language=&quot;JavaScript&quot; type=&quot;text/javascript&quot;&gt;\r\n&lt;!--\r\n    window.onload=function()\r\n    {\r\n        document.getElementById( \'sectionName\' ).select();\r\n        document.getElementById( \'sectionName\' ).focus();\r\n    }\r\n--&gt;\r\n&lt;/script&gt;\r\n{/literal}\r\n...\r\n' ); return false;" /></p>
+<![endif]-->  <a name="eztoc1297_1_1" id="eztoc1297_1_1"></a><h3>Outputting curly brackets</h3> <p>It is possible to output curly brackets using two template functions called <a href="../Reference/Template-functions/Miscellaneous/ldelim.html" target="_self">&quot;ldelim&quot;</a> and <a href="../Reference/Template-functions/Miscellaneous/rdelim.html" target="_self">&quot;rdelim&quot;</a> (short for left delimiter and right delimiter). The following example demonstrates the usage of these functions:</p> <pre class="wordwrap copytoclipboard"><span class="line">...</span>
+<span class="line">This is the left curly bracket: {ldelim} &lt;br /&gt;</span>
+<span class="line">This is the right curly bracket: {rdelim} &lt;br /&gt;</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n...\r\nThis is the left curly bracket: {ldelim} &lt;br /&gt;\r\nThis is the right curly bracket: {rdelim} &lt;br /&gt;\r\n...\r\n' ); return false;" /></p>
+<![endif]--> <p>The following output will be produced:</p><div class="output"> <p>
+This is the left curly bracket: {<br />This is the right curly bracket: }</p> </div>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Templates/The-template-language by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:44:51 GMT -->
+</html>

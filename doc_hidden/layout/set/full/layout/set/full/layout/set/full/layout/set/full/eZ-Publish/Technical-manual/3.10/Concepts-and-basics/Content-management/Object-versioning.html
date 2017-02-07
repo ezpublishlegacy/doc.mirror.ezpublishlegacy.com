@@ -1,0 +1,84 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Concepts-and-basics/Content-management/Object-versioning by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Object versioning / Content management / Concepts and basics / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Object versioning</h1>
+</div>
+
+ <p>eZ publish comes with a built in versioning system which is implemented at the object level. This mechanism makes it possible to have several versions of the contents (attributes) of an object. It basically provides a generic, out-of-the-box version control framework that can be used with any kind of content. The different versions are encapsulated by the object itself. The following illustration shows a more detailed example of the object structure seen from the outside world.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_10/images/concepts_and_basics/object_structure_basic_versions/1182-2-eng-GB/object_structure_basic_versions_doc.png" alt="Example of a content object that consists of two versions." />
+ <p>Example of a content object that consists of two versions.</p>
+
+
+
+
+
+
+
+</div> <p>Every time an object is edited, a new version of the object's contents will be created. It is always the new version that will be edited, the old version(s) remains untouched. This is how eZ publish keeps track of changes made by various users. An accidental or unwanted change can thus be undone by simply reverting an object back to the previous version.</p>  <a name="eztoc74994_1" id="eztoc74994_1"></a><h2>Version limitations</h2> <p>Since every edit procedure results in the creation of a new version (unless the new version is discarded), the database can be quickly filled up by different versions of the same content. In order to prevent this problem, the versioning system can be limited to a certain number of versions per object. It is possible to assign different version limitations for different object types (different classes). The default limitation is 10, which means that every object can have a maximum number of 10 versions of its content. If the maximum count is reached, the oldest version will be automatically deleted and thus a free slot will be available for the new one. This is the default behavior. An alternative setting can be used to disallow the creation of new versions until an existing version is manually deleted by a user.</p>   <a name="eztoc74994_2" id="eztoc74994_2"></a><h2>Version structure</h2> <p>A version consist of the following elements:</p> 
+<ul>
+ <li><div> Version number </div></li> <li><div> Creation time </div></li> <li><div> Modification time </div></li> <li><div> Creator </div></li> <li><div> Status </div></li> <li><div> Translations </div></li> 
+</ul>
+  <a name="eztoc74994_2_1" id="eztoc74994_2_1"></a><h3>Version number</h3> <p>Every version has a unique version number. This number is used by the system to organize and keep track of the different versions of an object. The version number is automatically increased for each version that is created inside an object.</p>   <a name="eztoc74994_2_2" id="eztoc74994_2_2"></a><h3>Creation time</h3> <p>The creation time contains a timestamp pinpointing the exact date and time when the version was initially created. This information is set by the system and will remain the same regardless of what happens to the version.</p>   <a name="eztoc74994_2_3" id="eztoc74994_2_3"></a><h3>Modification time</h3> <p>The modification time contains a timestamp revealing the exact date and time when the version was last modified. This information is set by the system every time the version is stored and when the version is finally published. When a version is published, the modification time of the object itself will be updated (it will simply be set to the same value as modification time of the version that was published).</p>   <a name="eztoc74994_2_4" id="eztoc74994_2_4"></a><h3>Creator</h3> <p>The version's creator contains a reference to the user that created the version. Although a content object can only belong to a single user (revealed by the &quot;Owner&quot; field), each version may belong different users. The creator reference is set by the system when the version is created. It can not be manipulated and will not change even if the user who created the version is removed from the system.</p> <p> <a name="status"></a>
+ </p>   <a name="eztoc74994_2_5" id="eztoc74994_2_5"></a><h3>Status</h3> <p>The state of a version is determined by its status. There are five possibilities:</p> 
+<ul>
+ <li><div> Draft (0) </div></li> <li><div> Published (1) </div></li> <li><div> Pending (2) </div></li> <li><div> Archived (3) </div></li> <li><div> Rejected (4) </div></li> 
+</ul>
+ <p>In eZ Publish versions 3.8 and later, there is an additional possibility: if a version of a content object is created but not modified (for example, if someone clicked an &quot;Add comments&quot; button but didn't actually post anything), the status of the version will be &quot;Internal draft (5)&quot;. In the administration interface, status &quot;5&quot; drafts are called &quot;untouched drafts&quot;. From 3.9, you can set the number of days, hours, minutes and seconds before an internal draft is considered old and removed by the &quot;<a href="../../Features/Cronjobs/The-cronjob-scripts.html#internal_drafts_cleanup" target="_self">internal_drafts_cleanup.php</a>&quot; cronjob script. Another cronjob script called &quot;<a href="../../Features/Cronjobs/The-cronjob-scripts.html#old_drafts_cleanup" target="_self">old_drafts_cleanup.php</a>&quot; can be configured to remove status &quot;0&quot; drafts that have been in the system for a specified period of time.</p> <p>A newly created version is a <i>draft</i>. This status will remain until that version becomes <i>published</i>. Although an object can have many versions, there can only be one published version (the others are usually drafts and archived versions). The published version can be considered as the &quot;current&quot; version and it is the one that is accessed when the object is viewed. A published version can not become a draft. However, it will become <i>archived</i> as soon as another version is published. The following illustration shows how the versioning system actually works.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_10/images/concepts_and_basics/object_states/1224-2-eng-GB/object_states_doc.png" alt="Overview of the object states." />
+ <p>Overview of the object states.</p>
+
+
+
+
+
+
+
+</div> <p>The illustration above shows the most common states of a content object. When a new object is created (step 1), eZ publish will also create a new draft version. Because the object has not been published yet, its status is set to draft and the current version is unknown. Storing the draft (steps 2a and 2b) will not change the state of the object. The only thing that will happen is that the contents of the draft will be stored in version 1. If the draft (which is the only existing version) is discarded, the object is completely removed from the system (step 2c). When the draft is published (step 2), both the draft and the object's states will be set to published. In addition, the current version will be set to 1, which reveals the currently published version of the object. When published, the contents of the object can be viewed by others. A published object can be removed/deleted from the system (step 3a). When removed, the object's state will be set to &quot;Archived&quot; and thus it will be in the trash. The object can be recovered from the trash to its previous state. Among other things, this involves the status field being set to &quot;Published&quot; again. When a published object is edited (step 4), the current version (version 1 in this case) will remain untouched and a completely new version will be created. The contents of the new version (version 2 in this case) will be a copy of the contents of the current version. Again, storing the draft (steps 4b and 4c) will not change the state of the object. If the draft is discarded (step 4a), it will be completely removed from the system and thus the object will be in the exact same state as it was in before it was edited. If the newly created and edited draft is published, it will become the current version of the object and thus the previous version (version 1 in this case) will be set to &quot;Archived&quot;. Step 5a illustrates what would happen if the object (now with two versions) would be removed.</p> <p>The pending and the rejected states are used by the collaboration system. When a version is waiting to be approved by an editor, the status is set to <i>pending</i>. If the version is approved, it will be automatically published and thus the status will be set to <i>published</i>. On the other hand, if a <i>pending</i> version is rejected by the editor, the status will be set to <i>rejected</i>.</p> <p>A version can only be edited if it is a draft and it can only be edited by the same user who initially created it. In addition, rejected versions can also be edited. When a rejected version is edited, it will become a draft. Published and archived versions can not be edited. However, it is possible to make copies of them. When a published or an archived version is copied, the status of the copy is set to draft and thus it becomes editable. When/if the new draft is published, the system automatically sets the status of the previously published version to archived and the new draft will become the published version.</p>   <a name="eztoc74994_2_6" id="eztoc74994_2_6"></a><h3>Translations</h3> <p>The actual contents of a version is stored inside different translations. A translation is a representation of the information in a specific language. In other words, the translation layer allows a version of the object's actual contents to exist in different languages. A version always has at least one translation of the content (which represents the data in the default/standard language).</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Concepts-and-basics/Content-management/Object-versioning by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:15:13 GMT -->
+</html>

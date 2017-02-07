@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/Accessing-the-database by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:39:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                  
+    <title>Accessing the database / Developing eZ Publish extensions / Tutorials / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Accessing the database</h1>
+</div>
+
+<p>Now we return to the database. We want to save the value of the form in our new table jacextension_data. To do this, we use the eZ Publish class eZPersistentObject. It contains functions for creating, changing, deleting or extracting data.</p><p>To use these functions we create a new class JACExtensionData. We save it in the folder &lt;ezroot&gt;/extension/jacextension/classes with the name jacextensiondata.php (see Listing 14).</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">class JACExtensionData extends eZPersistentObject</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Constructor</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param array $row Hash of attributes for new JacExtensionData object</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;public function __construct( array $row )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent::eZPersistentObject( $row );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/*</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Definition of the data object structure /of the structure of the database table</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return array Hash with table definition for this persistent object</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;public static function definition()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return array( 'fields' =&gt; array( 'id' =&gt; array( 'name' =&gt; 'ID',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'datatype' =&gt; 'integer',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'default' =&gt; 0,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'required' =&gt; true ),</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user_id' =&gt; array( 'name' =&gt; 'UserID',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'datatype' =&gt; 'integer',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'default' =&gt; 0,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'required' =&gt; true ),</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'created' =&gt; array( 'name' =&gt; 'Created',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'datatype' =&gt; 'integer',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'default' =&gt; 0,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'required' =&gt; true ),</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'value' =&gt; array( 'name' =&gt; 'Value',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'datatype' =&gt; 'string',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'default' =&gt; '',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'required' =&gt; true )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'keys'=&gt; array( 'id' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'function_attributes' =&gt; array( 'user_object' =&gt; 'getUserObject' &nbsp;), // accessing to attribute &quot;user_object&quot; will trigger getUserObject() method</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'increment_key' =&gt; 'id',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class_name' =&gt; 'JACExtensionData',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name' =&gt; 'jacextension_data'</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Help function will open in attribute function</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param bool $asObject</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;public function getUserObject( $asObject = true )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$userID = $this-&gt;attribute('user_id');</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$user = eZUser::fetch($userID, $asObject);</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $user;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Creates a new object of type JACExtensionData and shows it</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param int $user_id</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param string $value</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return JACExtensionData</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;public static function create( $user_id, $value )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$row = array( 'id' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt; null,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'user_id' =&gt; $user_id,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'value' &nbsp;&nbsp;=&gt; $value,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'created' =&gt; time() );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new self( $row );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Shows the data as JACExtensionData with given id</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param int $id User ID</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param bool $asObject</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return JACExtensionData</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;public static function fetchByID( $id , $asObject = true)</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$result = eZPersistentObject::fetchObject(</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self::definition(),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( 'id' =&gt; $id ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$asObject,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null );</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( $result instanceof JACExtensionData )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $result;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Shows all the objects JACExtensionData as object or array</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param int $asObject</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return array( JACExtensionData )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;public static function fetchList( $asObject = true )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$result = eZPersistentObject::fetchObjectList(</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self::definition(),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,null,null,null,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$asObject,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false,null );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $result;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Shows the amount of data</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return int</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;public static function getListCount()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$db = eZDB::instance();</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$query = 'SELECT COUNT(id) AS count FROM jacextension_data';</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$rows = $db -&gt; arrayQuery( $query );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $rows[0]['count'];</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;// -- member variables--</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;protected $ID;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;protected $UserID;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;protected $Created;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;protected $Value;</span>
+<span class="line">&nbsp;</span>
+<span class="line">}</span>
+<span class="line">?&gt;</span>
+<span class="line">&nbsp;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\nclass JACExtensionData extends eZPersistentObject\r\n{ \r\n    /** \r\n     * Constructor \r\n     *\r\n     * @param array $row Hash of attributes for new JacExtensionData object\r\n     */ \r\n    public function __construct( array $row )\r\n    { \r\n        parent::eZPersistentObject( $row ); \r\n    }\r\n\r\n    /*\r\n     * Definition of the data object structure /of the structure of the database table \r\n     *\r\n     * @return array Hash with table definition for this persistent object\r\n     */ \r\n    public static function definition()\r\n    { \r\n        return array( \'fields\' =&gt; array( \'id\' =&gt; array( \'name\' =&gt; \'ID\', \r\n                                              \'datatype\' =&gt; \'integer\', \r\n                                              \'default\' =&gt; 0, \r\n                                              \'required\' =&gt; true ),\r\n\r\n                             \'user_id\' =&gt; array( \'name\' =&gt; \'UserID\', \r\n                                                \'datatype\' =&gt; \'integer\', \r\n                                                \'default\' =&gt; 0, \r\n                                                \'required\' =&gt; true ),\r\n\r\n                              \'created\' =&gt; array( \'name\' =&gt; \'Created\', \r\n                                                 \'datatype\' =&gt; \'integer\', \r\n                                                 \'default\' =&gt; 0, \r\n                                                 \'required\' =&gt; true ),\r\n\r\n                             \'value\' =&gt; array( \'name\' =&gt; \'Value\', \r\n                                              \'datatype\' =&gt; \'string\', \r\n                                              \'default\' =&gt; \'\', \r\n                                              \'required\' =&gt; true ) \r\n                             ), \r\n           \'keys\'=&gt; array( \'id\' ), \r\n           \'function_attributes\' =&gt; array( \'user_object\' =&gt; \'getUserObject\'  ), // accessing to attribute &quot;user_object&quot; will trigger getUserObject() method\r\n           \'increment_key\' =&gt; \'id\', \r\n           \'class_name\' =&gt; \'JACExtensionData\', \r\n           \'name\' =&gt; \'jacextension_data\'\r\n           ); \r\n    }\r\n\r\n    /** \r\n     * Help function will open in attribute function \r\n     * @param bool $asObject\r\n     */ \r\n    public function getUserObject( $asObject = true )\r\n    { \r\n        $userID = $this-&gt;attribute(\'user_id\'); \r\n        $user = eZUser::fetch($userID, $asObject); \r\n        return $user; \r\n    }\r\n\r\n    /**\r\n     * Creates a new object of type JACExtensionData and shows it\r\n     * @param int $user_id\r\n     * @param string $value\r\n     * @return JACExtensionData\r\n     */\r\n    public static function create( $user_id, $value )\r\n    { \r\n        $row = array( \'id\'      =&gt; null, \r\n                      \'user_id\' =&gt; $user_id, \r\n                      \'value\'   =&gt; $value, \r\n                      \'created\' =&gt; time() ); \r\n        return new self( $row ); \r\n    }\r\n\r\n    /**\r\n     * Shows the data as JACExtensionData with given id\r\n     * @param int $id User ID\r\n     * @param bool $asObject\r\n     * @return JACExtensionData\r\n     */ \r\n    public static function fetchByID( $id , $asObject = true)\r\n    { \r\n        $result = eZPersistentObject::fetchObject( \r\n                                                    self::definition(), \r\n                                                    null, \r\n                                                    array( \'id\' =&gt; $id ), \r\n                                                    $asObject, \r\n                                                    null, \r\n                                                    null ); \r\n\r\n        if ( $result instanceof JACExtensionData ) \r\n            return $result; \r\n        else \r\n            return false; \r\n    }\r\n\r\n    /**\r\n     * Shows all the objects JACExtensionData as object or array\r\n     * @param int $asObject\r\n     * @return array( JACExtensionData )\r\n     */ \r\n    public static function fetchList( $asObject = true )\r\n    { \r\n        $result = eZPersistentObject::fetchObjectList( \r\n                                                        self::definition(), \r\n                                                        null,null,null,null, \r\n                                                        $asObject, \r\n                                                        false,null ); \r\n        return $result; \r\n    }\r\n\r\n    /**\r\n     * Shows the amount of data\r\n     * @return int \r\n     */ \r\n    public static function getListCount() \r\n    { \r\n        $db = eZDB::instance(); \r\n        $query = \'SELECT COUNT(id) AS count FROM jacextension_data\'; \r\n        $rows = $db -&gt; arrayQuery( $query ); \r\n        return $rows[0][\'count\'];\r\n    } \r\n\r\n    // -- member variables-- \r\n    protected $ID;\r\n    protected $UserID; \r\n    protected $Created; \r\n    protected $Value;\r\n\r\n} \r\n?&gt;\r\n\r\n' ); return false;" /></p>
+<![endif]--><p><i>Listing 14. jacextension/classes/jacextensiondata.php example for access to the database with eZ PersistentObject</i></p><p>The most important function is JACExtensionData::definition(). This defines the object structure of JACExtensionData, specifying the table and columns where the data will be stored.</p><p>
+Next we create the static functions create(), fetchByID(), fetchList(), getListCount(). There are three different types in which the data will be shown:<br />
+&nbsp;<i>eZPersistentObject::fetchObject()</i><br />
+<i>&nbsp;eZPersistentObject::fetchObjectList()</i><br /><i>&nbsp;direct SQL command</i></p><p>
+If possible, you should use the functions eZPersistentObject fetch. You should not use special SQL entries for the database, which ensures that the SQL commands will work with all the databases supported by eZ Publish. (See the related API documentation at http://pubsvn.ez.no/doxygen/4.4/html/classeZPersistentObject.html)<br />Before using this new class, we need to regenerate the autoloads array. This operation makes eZ Publish know where to find each PHP class present in the system:</p><p>
+<i>cd /path/to/ezpublish/root</i><br /><i>php bin/php/ezpgenerateautoloads.php -e -p</i></p><p>Now we use the new functions in the script &quot;create.php&quot;. To save new data we create a new object of the type JACExtensionData with the function JACExtensionData::create( $value ) . The function create() creates the transmitted value (value of the form), the current user ID and the current timestamp.</p><p>With the function store() we save the data in our database table jacextension_data. To see this happening we write these to the Debug view &quot;create.php&quot; is shown below.</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">// modul1/create.php – Function file of View create</span>
+<span class="line">// ...</span>
+<span class="line">$value = '';</span>
+<span class="line">&nbsp;</span>
+<span class="line">// If the variable 'name' is sent by GET or POST, show variable</span>
+<span class="line">if( $http-&gt;hasVariable('name') )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$value = $http-&gt;variable('name');</span>
+<span class="line">&nbsp;</span>
+<span class="line">if( $value != '' )</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;// ask for the ID of current user</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$userId = eZUser::currentUserID();</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;// generate new data object</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$JacDataObject = JACExtensionData::create( $userId, $value );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;eZDebug::writeDebug( '1.'.print_r( $JacDataObject, true ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'JacDataObject before saving: ID not set' ) ;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;// save object in database</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$JacDataObject-&gt;store();</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;eZDebug::writeDebug( '2.'.print_r( $JacDataObject, true ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'JacDataObject after saving: ID set' ) ;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;// ask for the ID of the new created object</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$id = $JacDataObject-&gt;attribute( 'id' );</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;// ask for the login of the user who has created the data</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$userObject = $JacDataObject-&gt;attribute( 'user_object' );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$userName = $userObject-&gt;attribute( 'login' );</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;// show again the data</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$dataObject = JACExtensionData::fetchByID( $id );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;eZDebug::writeDebug( '3.'.print_r( $dataObject, true ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'JacDataObject shown with function fetchByID()');</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;// investigate the amount of data existing</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$count = JACExtensionData::getListCount();</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$statusMessage = 'Name: &gt;&gt;'. $value .</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&lt;&lt; of the user &gt;&gt;'. $userName.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&lt;&lt; In database with ID &gt;&gt;'. $id.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&lt;&lt; saved!New ammount = '. $count ;</span>
+<span class="line">}</span>
+<span class="line">else</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;$statusMessage = 'Please enter data';</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">// take data as object and as array and show in Output Debug</span>
+<span class="line">$ObjectArray = JACExtensionData::fetchList( true );</span>
+<span class="line">eZDebug::writeDebug( '4. JacDataObjects: '.print_r( $ObjectArray, true ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'fetchList( $asObject = true )' );</span>
+<span class="line">&nbsp;</span>
+<span class="line">$array = JACExtensionData::fetchList( false );</span>
+<span class="line">eZDebug::writeDebug( '5. JacDataArrays: '.print_r( $array, true ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'fetchList( $asObject = false )' );</span>
+<span class="line">&nbsp;</span>
+<span class="line">// initialize Templateobject</span>
+<span class="line">$tpl = eZTemplate::factory();</span>
+<span class="line">$tpl-&gt;setVariable( 'status_message', $statusMessage );</span>
+<span class="line">&nbsp;</span>
+<span class="line">//...</span>
+<span class="line">&nbsp;</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\n// modul1/create.php – Function file of View create \r\n// ... \r\n$value = \'\';\r\n\r\n// If the variable \'name\' is sent by GET or POST, show variable \r\nif( $http-&gt;hasVariable(\'name\') ) \r\n    $value = $http-&gt;variable(\'name\');\r\n\r\nif( $value != \'\' ) \r\n{\r\n    // ask for the ID of current user \r\n    $userId = eZUser::currentUserID();\r\n\r\n    // generate new data object \r\n    $JacDataObject = JACExtensionData::create( $userId, $value );\r\n    eZDebug::writeDebug( \'1.\'.print_r( $JacDataObject, true ), \r\n                         \'JacDataObject before saving: ID not set\' ) ;\r\n\r\n    // save object in database \r\n    $JacDataObject-&gt;store();\r\n    eZDebug::writeDebug( \'2.\'.print_r( $JacDataObject, true ), \r\n                         \'JacDataObject after saving: ID set\' ) ;\r\n\r\n    // ask for the ID of the new created object \r\n    $id = $JacDataObject-&gt;attribute( \'id\' );\r\n\r\n    // ask for the login of the user who has created the data  \r\n    $userObject = $JacDataObject-&gt;attribute( \'user_object\' ); \r\n    $userName = $userObject-&gt;attribute( \'login\' );\r\n\r\n    // show again the data \r\n    $dataObject = JACExtensionData::fetchByID( $id ); \r\n    eZDebug::writeDebug( \'3.\'.print_r( $dataObject, true ),\r\n                         \'JacDataObject shown with function fetchByID()\');\r\n\r\n    // investigate the amount of data existing \r\n    $count = JACExtensionData::getListCount(); \r\n    $statusMessage = \'Name: &gt;&gt;\'. $value .\r\n                     \'&lt;&lt; of the user &gt;&gt;\'. $userName.\r\n                     \'&lt;&lt; In database with ID &gt;&gt;\'. $id.\r\n                     \'&lt;&lt; saved!New ammount = \'. $count ; \r\n} \r\nelse \r\n{ \r\n    $statusMessage = \'Please enter data\'; \r\n}\r\n\r\n// take data as object and as array and show in Output Debug \r\n$ObjectArray = JACExtensionData::fetchList( true );\r\neZDebug::writeDebug( \'4. JacDataObjects: \'.print_r( $ObjectArray, true ), \r\n                     \'fetchList( $asObject = true )\' );\r\n\r\n$array = JACExtensionData::fetchList( false );\r\neZDebug::writeDebug( \'5. JacDataArrays: \'.print_r( $array, true ), \r\n                     \'fetchList( $asObject = false )\' );\r\n\r\n// initialize Templateobject \r\n$tpl = eZTemplate::factory(); \r\n$tpl-&gt;setVariable( \'status_message\', $statusMessage ); \r\n\r\n//... \r\n\r\n?&gt;\r\n' ); return false;" /></p>
+<![endif]--><p><i>Listing 15. jacextension/modules/modul1/create.php. Creating a new entry in the database and different ways of showing it.</i></p><p>To access objects of the type eZPersistentObject, we use $JacDataObject- &gt;attribute('id'). The function parameter “id” maps to the column id in the table, so we don't have to think much to access the different values. This can be applied to all data that is saved in eZ (for example eZContentObject and eZUser objects).</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Tutorials/Developing-eZ-Publish-extensions/Accessing-the-database by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:39:44 GMT -->
+</html>

@@ -1,0 +1,67 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/VAT-charging-system by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:59:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>VAT charging system / Features / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>VAT charging system</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../../../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><p>Charging the value added taxes in your webshop system is based on the VAT types. A <i>VAT type</i> consists of a name and a fixed rate, for example: &quot;Std, 0%&quot;. The administration interface makes it possible to add, remove and modify VAT types as described in the &quot;<a href="VAT-charging-system/Managing-VAT-types.html" target="_self">Managing VAT types</a>&quot; section. Although the quantity of the VAT types is not limited, there must be at least one VAT type in your webshop system. The only purpose of these VAT types is to store some fixed rates of VAT in percent and thus you can call them &quot;static VAT types&quot; or &quot;fixed VAT types&quot;.</p><p>If you assign a static VAT type to a product then the system will always charge the fixed rate of VAT specified by this VAT type for this product. (This is how the &quot;<a href="VAT-charging-system/Three-approaches-to-VAT-charging.html#vat_per_product" target="_self">VAT per product</a>&quot; approach works.)</p><a name="eztoc86133_1" id="eztoc86133_1"></a><h2>Price inc. VAT / Price ex. VAT</h2><p>There are two ways in which the assigned VAT type can be used. This configuration depends on how the product prices are entered when the objects are created. The &quot;Price inc. VAT&quot; alternative is to be used if the prices that are entered already include the value added tax. The &quot;Price ex. VAT&quot; alternative should be used if the prices that are entered do not contain the value added tax. When the first alternative is used and the product is viewed, the price that was entered will be shown. When the second alternative is used and the product is viewed, the price will be the price that was entered plus the amount of VAT. <a name="dynamic_vat_type"></a>
+</p><a name="eztoc86133_2" id="eztoc86133_2"></a><h2>Dynamic VAT type</h2><p>The dynamic VAT type does not store any fixed rate of VAT and is not configurable from the administration interface. This VAT type is represented by an additional alternative that is displayed in the list of VAT types when you edit your products. This alternative is called &quot;Determined by VAT charging rules&quot; by default. (The name is specified by the &quot;DynamicVatTypeName&quot; INI setting described in the &quot;<a href="VAT-charging-system/VAT-settings.html" target="_self">VAT settings</a>&quot; section). Choosing this alternative (assigning the dynamic VAT type to a product) will tell the system that no fixed VAT percentage is assigned to this product and thus the amount of VAT should be determined dynamically using some complex VAT charging logic. For example, the amount of VAT can be changed dynamically depending on where the customer lives.</p><p>The dynamic VAT type is incompatible with the &quot;Price inc. VAT&quot; configuration. You should set the &quot;Price ex. VAT&quot; configuration for your products and specify prices that do not contain the value added tax. Please note that this VAT type is connected with the VAT handlers mechanism and is disabled if no handler is used. <a name="vat_handlers"></a>
+</p><a name="eztoc86133_3" id="eztoc86133_3"></a><h2>VAT handlers</h2><p>If you wish to use some complex VAT charging logic, it must be implemented in a <i>VAT handler</i> i.e. PHP class providing a mechanism that determines the rate of VAT for a product dynamically in accordance with the implemented logic. You can either use the built-in default VAT handler that supports the &quot;<a href="VAT-charging-system/Three-approaches-to-VAT-charging.html#country_dependent_vat" target="_self">Country dependent VAT</a>&quot; approach or extend the system by creating your own VAT handler (the &quot;<a href="VAT-charging-system/Three-approaches-to-VAT-charging.html#extended_vat" target="_self">Extended VAT</a>&quot; approach). Using two or more VAT handlers at the same time is not supported.</p><p>The VAT handler to use must be specified in the &quot;Handler&quot; INI setting described in the &quot;<a href="VAT-charging-system/VAT-settings.html" target="_self">VAT settings</a>&quot; section. To enable the built-in default VAT handler, you will have to add the following line to the &quot;[VATSettings]&quot; section in an override for the &quot;settings/shop.ini&quot; configuration file:</p><pre class="wordwrap"><span class="line">Handler=ezdefault</span>
+</pre><p>The system will start to use the default VAT handler and add the dynamic VAT type to the list of VAT types that is displayed when you create/edit a product or product class.</p><p>Please note that dynamic VAT type is a kind of virtual structure that comes into being after enabling a VAT handler. If no VAT handler is enabled, the dynamic VAT type is not displayed and can not be used.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/VAT-charging-system by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:59:30 GMT -->
+</html>

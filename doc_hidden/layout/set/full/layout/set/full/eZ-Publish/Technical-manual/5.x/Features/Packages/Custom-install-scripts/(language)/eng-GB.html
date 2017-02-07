@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Packages/Custom-install-scripts/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:04:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Custom install scripts / Packages / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Custom install scripts</h1>
+</div>
+
+<p>Packages that can be installed via the administration interface may include specific custom install and uninstall scripts. A custom script can be called at any stage during the package installation/uninstallation process. These scripts can be interactive and are capable of displaying extra wizard steps. Interactive scripts are based on a &quot;wizard step&quot; mechanism provided by the class &quot;eZPackageInstallationHandler&quot;.</p><p>The following example demonstrates how to implement a custom install script for a package.</p><a name="eztoc132650_1" id="eztoc132650_1"></a><h2>Example</h2><p>Let's say that you need to add some additional post-install step(s) to a content object package called &quot;Products&quot; which is located under the &quot;ez_systems&quot; internal repository (in the &quot;var/storage/packages/ez_systems/products&quot; directory). To implement a post-install interactive script for this package, do the following:</p>
+<ol>
+<li><div>&nbsp;Create the following new sub-directories in the package directory: 
+<ul>
+<li><div>post-install </div></li>
+</ul>
+
+<ul>
+<li><div>post-install/templates </div></li>
+</ul>
+</div></li><li><div>&nbsp;Open the &quot;package.xml&quot; file located in the package directory and edit it. Find the <a href="../../package.html#install_items" target="_self">list of items to install</a> which is specified between the &lt;install&gt; and &lt;/install&gt; XML tags and add the following item in the end of this list:<pre class="wordwrap"><span class="line">&lt;item type=&quot;ezinstallscript&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename=&quot;myinstallscript&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub-directory=&quot;post-install&quot; /&gt;</span>
+</pre></div></li><li><div><p>Create a file called &quot;myinstallscript.xml&quot; in the &quot;post-install&quot; directory (this file must contain a description of your install script) and add the following lines to it:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="line">&lt;install-script filename=&quot;myinstallscript.php&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classname=&quot;myInstallScript&quot;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description=&quot;This is my custom install step&quot; /&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;\r\n&lt;install-script filename=&quot;myinstallscript.php&quot;\r\n                classname=&quot;myInstallScript&quot;\r\n                description=&quot;This is my custom install step&quot; /&gt;' ); return false;" /></p>
+<![endif]--><p>
+This will tell the system that additional install step(s) is implemented in a PHP class called &quot;myInstallScript&quot; located in the &quot;post-install/myinstallscript.php&quot; file. The text description of the install script will be displayed in the beginning of the <a href="../../Installing-packages.html#content_object_package" target="_self">package installation process</a> (as shown in the following screenshot). <br />&nbsp;</p>
+<div class="">        <img src="../../../../../../../../../../../../../../var/doc/storage/images/media/images/installing-custom-package/133985-1-eng-GB/Installing-Custom-Package_reference.jpg" alt="Installing Custom Package" />
+<p>Installing Custom Package</p>
+
+
+
+
+
+
+
+</div></div></li><li><div><p>Create a file called &quot;myownstep.tpl&quot; in the &quot;post-install/templates&quot; directory (this file will contain a template for the additional install step implemented by your install script) and add the following lines to it:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;form method=&quot;post&quot; action={'package/install'|ezurl}&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{include uri=&quot;design:package/install/error.tpl&quot;}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{include uri=&quot;design:package/install_header.tpl&quot;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;This is my custom step&lt;/p&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&gt;You may even click the checkbox if you want&lt;/label&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class=&quot;block&quot;&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input class=&quot;button&quot; type=&quot;checkbox&quot; name=&quot;MyCheckBox&quot; /&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{include uri=&quot;design:package/navigator.tpl&quot;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;/form&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;form method=&quot;post&quot; action={\'package/install\'|ezurl}&gt;\r\n\r\n    {include uri=&quot;design:package/install/error.tpl&quot;}\r\n    {include uri=&quot;design:package/install_header.tpl&quot;}\r\n\r\n    &lt;p&gt;This is my custom step&lt;/p&gt;\r\n\r\n    &lt;label&gt;You may even click the checkbox if you want&lt;/label&gt;\r\n\r\n    &lt;div class=&quot;block&quot;&gt;\r\n      &lt;input class=&quot;button&quot; type=&quot;checkbox&quot; name=&quot;MyCheckBox&quot; /&gt;\r\n    &lt;/div&gt;\r\n\r\n    {include uri=&quot;design:package/navigator.tpl&quot;}\r\n\r\n&lt;/form&gt;' ); return false;" /></p>
+<![endif]--><p>
+The last step of the package installation will be displayed according to this template (look at the next screenshot). <br />&nbsp;</p>
+<div class="">        <img src="../../../../../../../../../../../../../../var/doc/storage/images/media/images/package-custom-step/133988-1-eng-GB/Package-Custom-Step_large.jpg" alt="Package Custom Step" />
+<p>Package Custom Step</p>
+
+
+
+
+
+
+
+</div></div></li><li><div>&nbsp;Create a new file called &quot;myinstallscript.php&quot; in the &quot;post-install&quot; directory. This file must contain a PHP class called &quot;myInstallScript&quot; where all the steps are implemented (according to the description given in the &quot;post-install/myinstallscript.xml&quot; file). Add the following lines to the &quot;myinstallscript.php&quot; file:<pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">class myInstallScript extends eZInstallScriptPackageInstaller</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;function myInstallScript( &amp;$package, $type, $installItem )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eZDebug::writeDebug( $installItem, &quot;Hello from myInstallScript&quot; );</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$steps = array();</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$steps[] = array(</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'id' =&gt; 'my_own_step',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name' =&gt; 'My own step',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'methods' =&gt; array( 'initialize' =&gt; 'initializeMyOwnStep',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'validate' =&gt; 'validateMyOwnStep',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'commit' =&gt; 'commitMyOwnStep' ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'template' =&gt; 'myownstep.tpl' );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;eZPackageInstallationHandler( $package,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$type,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$installItem,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'My own custom step',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$steps );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;// Function that is called before the step is displayed.</span>
+<span class="line">&nbsp;&nbsp;// You can use it to set variables for your template.</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;function initializeMyOwnStep( &amp;$package, &amp;$http, $step, &amp;$persistentData, &amp;$tpl, &amp;$module )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eZDebug::writeDebug( &quot;Hello from initializeMyOwnStep()&quot; );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;// This function is called after user has submitted the form.</span>
+<span class="line">&nbsp;&nbsp;// If this function returns &quot;false&quot;, the step will be</span>
+<span class="line">&nbsp;&nbsp;// displayed again.</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;function validateMyOwnStep( &amp;$package, &amp;$http, $currentStepID, &amp;$stepMap, &amp;$persistentData, &amp;$errorList )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eZDebug::writeDebug( &quot;Hello from validateMyOwnStep()&quot; );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;// This function is called after the form is submitted</span>
+<span class="line">&nbsp;&nbsp;// and validated.</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;function commitMyOwnStep( &amp;$package, &amp;$http, $step, &amp;$persistentData, &amp;$tpl )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eZDebug::writeDebug( &quot;Hello from commitMyOwnStep()&quot; );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">}</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\nclass myInstallScript extends eZInstallScriptPackageInstaller\r\n{\r\n  function myInstallScript( &amp;$package, $type, $installItem )\r\n    {\r\n        eZDebug::writeDebug( $installItem, &quot;Hello from myInstallScript&quot; );\r\n\r\n        $steps = array();\r\n        $steps[] = array(\r\n          \'id\' =&gt; \'my_own_step\',\r\n          \'name\' =&gt; \'My own step\',\r\n          \'methods\' =&gt; array( \'initialize\' =&gt; \'initializeMyOwnStep\',\r\n               \'validate\' =&gt; \'validateMyOwnStep\',\r\n               \'commit\' =&gt; \'commitMyOwnStep\' ),\r\n          \'template\' =&gt; \'myownstep.tpl\' );\r\n        $this-&gt;eZPackageInstallationHandler( $package,\r\n                                             $type,\r\n                                             $installItem,\r\n                                             \'My own custom step\',\r\n                                             $steps );\r\n    }\r\n\r\n  // Function that is called before the step is displayed. \r\n  // You can use it to set variables for your template.\r\n\r\n  function initializeMyOwnStep( &amp;$package, &amp;$http, $step, &amp;$persistentData, &amp;$tpl, &amp;$module )\r\n    {\r\n        eZDebug::writeDebug( &quot;Hello from initializeMyOwnStep()&quot; );\r\n        return true;\r\n    }\r\n\r\n  // This function is called after user has submitted the form. \r\n  // If this function returns &quot;false&quot;, the step will be\r\n  // displayed again.\r\n\r\n  function validateMyOwnStep( &amp;$package, &amp;$http, $currentStepID, &amp;$stepMap, &amp;$persistentData, &amp;$errorList )\r\n    {\r\n        eZDebug::writeDebug( &quot;Hello from validateMyOwnStep()&quot; );\r\n        return true;\r\n    }\r\n\r\n  // This function is called after the form is submitted\r\n  // and validated.\r\n\r\n  function commitMyOwnStep( &amp;$package, &amp;$http, $step, &amp;$persistentData, &amp;$tpl )\r\n    {\r\n        eZDebug::writeDebug( &quot;Hello from commitMyOwnStep()&quot; );\r\n        return true;\r\n    }\r\n}\r\n?&gt;' ); return false;" /></p>
+<![endif]--></div></li>
+</ol>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Packages/Custom-install-scripts/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:04:47 GMT -->
+</html>

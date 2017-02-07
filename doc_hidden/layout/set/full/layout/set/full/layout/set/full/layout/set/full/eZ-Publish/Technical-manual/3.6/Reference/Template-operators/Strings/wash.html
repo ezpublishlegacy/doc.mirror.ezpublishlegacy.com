@@ -1,0 +1,75 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Template-operators/Strings/wash by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:57:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>wash / Strings / Template operators / Reference / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>wash</h1>
+</div>
+<h3>Summary</h3>
+Returns an HTML-safe version of the input string.<h3>Usage</h3>
+<pre>input|wash( [type] )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>type</td>
+        <td>string</td>
+        <td>The type of text that should be washed.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+An HTML-safe version of the input string.<h3>Description</h3>
+ <p>This operator translates the input string into an HTML friendly version. It will take care of converting bogus characters to HTML-friendly replacements. The &quot;type&quot; parameter can be used to specify the washing type, it can be set to either &quot;xhtml&quot; or &quot;email&quot; (the default is &quot;xhtml&quot;). E-mail washing can be controlled using the setting of the [WashSettings] configuration block of &quot;template.ini&quot;. All strings that may break the HTML should always be washed using this operator.</p><h3>Examples</h3>
+    <a name="eztoc4422_0_0_1" id="eztoc4422_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap"><span class="line">{'Bogus &amp; stuff &amp;lt;'|wash()}</span>
+<span class="line">The following output will be produced: &quot;Bogus &amp;amp; stuff &amp;lt;&quot;.</span>
+</pre>       <a name="eztoc4422_0_0_2" id="eztoc4422_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap"><span class="line">{'hello@example.com'|wash( 'email' )}</span>
+</pre> <p>The following output will be produced: </p><div class="output"> <p>hello&lt;span class=&quot;spamfilter&quot;&gt;SPAMFILTER&lt;/span&gt;@example.com</p> </div>       <a name="eztoc4422_0_0_3" id="eztoc4422_0_0_3"></a><h4>Example 3</h4> <pre class="wordwrap"><span class="line">{'hello@example.com'|wash( 'email' )}</span>
+</pre> <p>
+If a configuration override for &quot;template.ini&quot; exists and contains...<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[WashSettings]</span>
+<span class="line">EmailDotText=[dot]</span>
+<span class="line">EmailAtText=[at]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[WashSettings]\r\nEmailDotText=[dot]\r\nEmailAtText=[at]' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>...the following output will be produced: &quot;hello[at]example[dot]com&quot;.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Reference/Template-operators/Strings/wash by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:57:06 GMT -->
+</html>

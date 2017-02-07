@@ -1,0 +1,68 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/LDAP-Login-Handler by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:28:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>LDAP Login Handler / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>LDAP Login Handler</h1>
+</div>
+
+ <p>
+The eZ LDAP login handler enables you to use an LDAP server as a repository for user and group information. Upon login, it will verify the user name and password against the LDAP server. If successful, it will create a copy of the LDAP user object in eZ Publish and depending on settings it may also create groups. The password however is not stored in the local copy, so password verification is always against the LDAP server.<br />It can be used in combination with other login handlers.</p>  <a name="eztoc132482_1" id="eztoc132482_1"></a><h2>The login process</h2> <p>The following is a step by step walk-through of how the LDAP login process works, with information about the settings that are necessary for each step. This guide requires a basic understanding of LDAP terminology and configuration. Please visit the<a href="../../4.x/Reference/Configuration-files/ldap.html" target="_blank"> ldap.ini documentation</a> page for information regarding each setting.</p>  <a name="eztoc132482_1_1" id="eztoc132482_1_1"></a><h3>Log In</h3> <p>As the user submits his username and password in the login form, the user/login module view runs. It checks the site.ini [UserSettings] LoginHandler[]. The 'standard' handler verifies the username and password against the user data stored in eZ Publish. The 'LDAP' handler on the other hand verifies it against an LDAP server.</p> <p>You can use multiple login handlers, which will be executed in sequence until one of them returns a valid login. The 'standard' handler should be set first in site.ini:</p> <pre class="wordwrap copytoclipboard"><span class="line">[UserSettings]</span>
+<span class="line">LoginHandler[]</span>
+<span class="line">LoginHandler[]=standard</span>
+<span class="line">LoginHandler[]=LDAP</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[UserSettings]\r\nLoginHandler[]\r\nLoginHandler[]=standard\r\nLoginHandler[]=LDAP' ); return false;" /></p>
+<![endif]--> <p>
+While the LDAP login handler executes, it checks the settings in ldap.ini. The LDAPEnabled setting must be set to true, otherwise the handler will exit. The brand, version and setup of your LDAP server dictates most of the first settings. These include LDAPFollowReferrals, LDAPServer, LDAPPort and Utf8Encoding, and LDAPVersion which should be 2 or 3.<br />Please visit the ldap.ini documentation page for information regarding each setting.</p> <p>The handler now performs the first of two binds against the server ('bind' is an LDAP term for authenticating against a server). If LDAPDebugTrace is enabled, this step will be shown as step 1/5. If your LDAP server is configured to not accept anonymous binds (binds without username and password) you must set bind credentials in the LDAPBindUser and LDAPBindPassword settings.</p> <p>Note that these credentials have nothing to do with the credentials of the user logging in. Instead, they are the credentials that must be supplied in order to read the LDAP user object we want to authenticate against.</p>   <a name="eztoc132482_1_2" id="eztoc132482_1_2"></a><h3>Search for user object</h3> <p>
+Next, the handler performs a search for the user object given by the login and password provided by the user. If LDAPDebugTrace is enabled, this step will be shown as step 2/5. The starting position for the search is given by the LDAPBaseDn setting. The more specific your base DN is, the less data the handler has to search through.<br />Please note that all DNs and filters in ldap.ini must be entered without the equal sign. (This is due to a limitation in the ini file format.) Instead, you must use the string given in LDAPEqualSign, which defaults to '--'.</p> <p>
+There are three kinds of searches, these are configured by the LDAPSearchScope setting, which can be 'sub', 'one' or 'base'.<br />The default is 'sub', which searches the whole subtree below the base DN. 'one' searches one level only - the level immediately below the base DN. And 'base' searches for only one object - meaning that the base DN must equal the DN of the object you want. (It can only be used in the very special case where there is only one LDAP user, presumably a system user of some kind, and all other users come from other sources.)</p> <p>In case you want to limit the set of data to search through, you can configure a filter in the LDAPSearchFilters setting. You can search for a particular class using e.g. 'objectClass--inetOrgPerson', or a particular attribute using 'myattribute--myvalue' (see note about LDAPEqualSign, above). You can configure multiple filters, they will be combined and used together. One filter is added automatically by the login handler - the filter for the user who is logging in (usually something like 'uid--johndoe'). The user ID attribute is set in the LDAPLoginAttribute setting.</p>   <a name="eztoc132482_1_3" id="eztoc132482_1_3"></a><h3>Authentication</h3> <p>If the search returns a valid user object, the handler performs the second bind, this time using the credentials of the user logging in. If LDAPDebugTrace is enabled, this step will be shown as step 3/5. If this bind succeeds, the user is authenticated.</p>   <a name="eztoc132482_1_4" id="eztoc132482_1_4"></a><h3> <a name="GroupAssignment"></a>
+Group Assignment</h3> <p>Next, the login handler tries to assign the user to one or more groups, based on the groups he belongs to in LDAP. If LDAPDebugTrace is enabled, this step will be shown as step 4/5. The location of groups created by the login handler is set in LDAPGroupRootNodeId. This must be the node ID of the group node that should be the parent of all created groups. By default, if the user has been moved to a different group on the LDAP server or in eZ Publish since the last login, the group assignment will be corrected in eZ Publish on the next login. If you rather want the eZ Publish group assignments to stay the same, set KeepGroupAssignment to enabled. The mapping between users and groups can be done in three different ways, depending on your LDAP server configuration, the setting is LDAPGroupMappingType, and the available modes are '<a href="LDAP-Login-Handler/LDAP-Group-Mapping-Type.html#UseGroupAttribute" target="_self">UseGroupAttribute</a>', '<a href="LDAP-Login-Handler/LDAP-Group-Mapping-Type.html#SimpleMapping" target="_self">SimpleMapping</a>' and '<a href="LDAP-Login-Handler/LDAP-Group-Mapping-Type.html#GetGroupsTree" target="_self">GetGroupsTree</a>'.</p>   <a name="eztoc132482_1_5" id="eztoc132482_1_5"></a><h3>Storing user object</h3> <p>Finally, when the group assignment is complete, the user object is stored in eZ Publish. If LDAPDebugTrace is enabled, this step will be shown as step 5/5.</p> <p>
+You must set LDAPFirstNameAttribute, LDAPLastNameAttribute and LDAPEmailAttribute. They should be set to the attributes holding the LDAP users first name, last name and email, respectively.<br />
+If the first name is not stored directly in LDAP, but can be extracted from the cn (common name), then set LDAPFirstNameAttribute=cn and LDAPFirstNameIsCommonName=true. The first name will then be set to common name minus last name. (This feature was added in version 4.1 beta 1.)<br />If email is not stored directly in LDAP, but can be composed by adding the login name and a static suffix, you can leave LDAPEmailAttribute empty, and set the suffix in LDAPEmailEmptyAttributeSuffix. If you set '@example.com' here, then a user with user ID 'johndoe' will get the email 'johndoe@example.com'. The user ID attribute is set in the LDAPLoginAttribute setting.</p> <p>This concludes the login process.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/LDAP-Login-Handler by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:28:51 GMT -->
+</html>

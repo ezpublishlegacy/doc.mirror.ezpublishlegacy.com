@@ -1,0 +1,69 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/How-to-proceed by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:39:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                  
+    <title>How to proceed / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>How to proceed</h1>
+</div>
+
+<p>This section describes how to upgrade your existing eZ Publish installation to a newer version.</p><p>If you are running one of the <a href="http://ez.no/developer/security#supported_versions" target="blank_">supported versions</a>, it is recommended to upgrade your installation when the next stable release within that branch is out. The instructions for upgrading within the same stable release branch can be found in the upgrade manuals of that branch.</p><p>If you are running a version which is no longer supported, it is highly recommended to switch to a supported one. For example, if you are running eZ Publish 4.1, consider upgrading to version 4.5 or later. In order to benefit from the latest security and bug fixes, choose the latest stable release in the desired branch. You can either upgrade directly or split the upgrade process into several stages (depending on the number of stable release branches between your current version and the desired one).</p><a name="eztoc97879_1" id="eztoc97879_1"></a><h2>Direct upgrade</h2><p>If you want to upgrade directly from version X to version Y, the upgrade procedure consists of the following steps:</p>
+<ol>
+<li><div> Upgrading the distribution files to version Y. </div></li><li><div> Upgrading the database schema to version Y following the <a href="Releases.html#upgrade_path" target="_self">official upgrade path</a>. </div></li><li><div> Running the system upgrade scripts for versions between X and Y. </div></li><li><div> Updating the system configuration for compatibility with all the changes made from version X to Y. </div></li><li><div> Clearing the caches. </div></li>
+</ol>
+<p>This procedure is only applicable when upgrading to the next stable release branch. Skipping a branch is not recommended, since some of the system upgrade scripts might not be present (or not work correctly) in later versions. The only exception is that you can upgrade directly from eZ Publish 3.6 to version 3.8.</p><p>The instructions for direct upgrading from version 3.a.b to 3.x.y can be found <a href="Upgrading-from-3.a.b-to-3.x.html" target="_self">here</a>. In order to upgrade from version 3.10 to 4.0, refer to the <a href="Upgrading-to-11.html" target="_self">eZ Publish 4.0 upgrade manuals</a>.</p><a name="eztoc97879_2" id="eztoc97879_2"></a><h2>Two upgrades</h2><p>If a lot of changes were made between versions X and Y, you can do the following:</p>
+<ol>
+<li><div> Upgrade from version X to some intermediate version Z. </div></li><li><div> Make sure that your site is working correctly. </div></li><li><div> Upgrade from version Z to version Y. </div></li>
+</ol>
+<a name="eztoc97879_2_1" id="eztoc97879_2_1"></a><h3>Example 1</h3><p>If you are running eZ Publish 3.8.x, you cannot upgrade directly to 3.10.y, because the system upgrade scripts needed for eZ Publish 3.9 might not work correctly in 3.10. However, you can upgrade to some intermediate version 3.9.z first and then upgrade to version 3.10.y.</p><a name="eztoc97879_2_2" id="eztoc97879_2_2"></a><h3>Example 2</h3><p>It is not possible to upgrade directly from eZ Publish 3.9 to version 4.0, and the 4.0 distribution does not contain upgrade scripts for this. The solution is to upgrade to 3.10 first, and then upgrade to 4.0.</p><a name="eztoc97879_3" id="eztoc97879_3"></a><h2>Multiple upgrades</h2><p>It is also possible to split the upgrade process into three or more stages. Since each branch introduces a set of new features, you have to do one upgrade for each stable release branch between versions X and Y. For example, if you are running eZ Publish 3.7 and want to run 3.10, you have to upgrade to 3.8 first, then to 3.9 and then finally to 3.10.</p><p>While the last direct upgrade in the chain should be done to the latest stable release in the desired branch, there are two different rules about which versions to choose for preceding upgrades. You can either follow the <a href="Releases.html#upgrade_path" target="_self">official upgrade path</a> for database schema changes or select the latest stable release in each branch. The following text describes the advantages and disadvantages of both approaches.</p><a name="eztoc97879_3_3" id="eztoc97879_3_3"></a><h3>The &quot;database upgrade path&quot; approach</h3><p>This approach makes it possible to minimize the number of database upgrade scripts involved and avoid situations where you need to skip some parts in the &quot;.sql&quot; files when upgrading the database. In the example above, the official upgrade path for database changes looks like this:</p><pre class="wordwrap"><span class="line">3.7 -&gt; 3.8.0 -&gt; 3.9.0 -&gt; 3.10</span>
+</pre><p>This means that you should upgrade to 3.8.0 first, then to 3.9.0 and then finally to 3.10.</p><p>The disadvantage of this approach is that you upgrade to early versions in each branch, which may contain bugs that were fixed in later releases. (Important bugs are mentioned in the upgrade instructions for certain versions of eZ Publish. In addition, changelogs provide information about all issues that were fixed in the latest releases.)</p><p>If an early version contains a bug that may corrupt your data, you can either fix the problem yourself (if possible) or upgrade to a later release where this issue was fixed. For example, when upgrading from 3.8 to 3.9 you need to run the &quot;correctxmltext.php&quot; upgrade script. If you run this script when upgrading to 3.9.0, it will crash due to a bug. To make it work, you need to edit the script file manually as described <a href="http://issues.ez.no/9952" target="_blank">here</a>. Another option is to skip version 3.9.0 and upgrade directly to version 3.9.1 or a later 3.9.x release where the updated version of the script is available.</p><a name="eztoc97879_3_4" id="eztoc97879_3_4"></a><h3>The &quot;latest stable release&quot; approach</h3><p>Upgrading directly to the latest stable release in every branch between X and Y allows you to avoid dealing with possible bugs that might be present in earlier versions. With this approach, the path for upgrading from eZ Publish 3.7 to version 3.10 would look like this:</p><pre class="wordwrap"><span class="line">3.7 -&gt; 3.8.10 -&gt; 3.9.4 -&gt; 3.10</span>
+</pre><p>This means that you should upgrade to 3.8.10 first, then to 3.9.4 (the latest stable release in the 3.9.x branch at the time of writing) and then finally to 3.10.</p><p>Generally, this approach requires running more database upgrade scripts than the previous one (since there is usually one database upgrade script for each stable release). However, you can reduce the number of database upgrade scripts to run by <a href="Notes-about-database-changes.html#skip_db_upgrades" target="_self">skipping all version-focused scripts for intermediary versions</a>.</p><p>The disadvantage of the &quot;latest stable release&quot; approach is that you might have to skip some parts of the database upgrade scripts if the database schema was changed from previous stable releases within the same branch. This is because the upgrade scripts between branches contain all of the necessary schema changes from the first stable release in the older branch to the first stable release in the newer branch. (Refer to &quot;<a href="Notes-about-database-changes.html#db_schema_changes" target="_self">Notes about database changes</a>&quot; for more information about the database schema changes within stable release branches.)</p><p>For example, in eZ Publish 3.8.5, some database schema changes were introduced as a bug fix for <a href="http://issues.ez.no/9091" target="blank_">missing indexes in database tables</a>. The fix was added to both eZ Publish 3.8.5 and 3.9.0 beta1 and included in the following database upgrade scripts:</p>
+<ul>
+<li><div> .../3.8/dbupdate-3.8.4-to-3.8.5.sql </div></li><li><div> .../3.9/unstable/dbupdate-3.9.0alpha1-to-3.9.0beta1.sql </div></li><li><div> .../3.9/dbupdate-3.8.0-to-3.9.0.sql </div></li>
+</ul>
+<p>If you are upgrading to eZ Publish 3.9 from version 3.8.5 or later, running the &quot;dbupdate-3.8.0-to-3.9.0.sql&quot; upgrade script will produce an error, because your 3.8.5 database already contains some of the database schema changes included in this &quot;.sql&quot; file. The solution is to skip the part marked with &quot;from 3.8.5&quot; comments in this file.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/How-to-proceed by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:39:00 GMT -->
+</html>

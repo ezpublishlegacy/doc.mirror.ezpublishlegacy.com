@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.1.0/Advanced-Configuration/Using-multi-core-features/still-not-working/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:03:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>still not working / Using multi-core features / Advanced Configuration / eZ Find LS 5.1.0 / eZ Find / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="content-view-line">
+<div class="class-comment">
+
+<form method="post" action="https://doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/content/action">
+
+<div id="comment28879" class="attribute-heading">
+<h2>still not working</h2>
+</div>
+
+<div class="attribute-byline float-break">
+    <p class="date">Tuesday 10 September 2013 11:48:56 am</p>
+    <p class="author">Francesco</p>
+</div>
+
+<div class="attribute-short">
+Thank you for the updates.<br />
+It still does not work for us (while it works with single solr).<br />
+<br />
+We get this error (with our server is Debian lenny)<br />
+<br />
+<pre class="wordwrap"><span class="line">28-nov-2009 19.39.38 org.apache.solr.request.XSLTResponseWriter init</span>
+<span class="line">INFO: xsltCacheLifetimeSeconds=5</span>
+<span class="line">28-nov-2009 19.39.38 org.apache.solr.core.RequestHandlers initHandlersFromConfig</span>
+<span class="line">INFO: created standard: solr.SearchHandler</span>
+<span class="line">28-nov-2009 19.39.38 org.apache.solr.core.RequestHandlers initHandlersFromConfig</span>
+<span class="line">INFO: created dismax: solr.SearchHandler</span>
+<span class="line">28-nov-2009 19.39.38 org.apache.solr.core.RequestHandlers initHandlersFromConfig</span>
+<span class="line">INFO: created partitioned: solr.SearchHandler</span>
+<span class="line">28-nov-2009 19.39.38 org.apache.solr.core.RequestHandlers initHandlersFromConfig</span>
+<span class="line">INFO: created ezpublish: solr.DisMaxRequestHandler</span>
+<span class="line">28-nov-2009 19.39.38 org.apache.solr.common.SolrException log</span>
+<span class="line">GRAVE: org.apache.solr.common.SolrException: Error loading class 'org.ezsystems.solr.handler.ezfind.eZFindRequestHandler'</span>
+<span class="line">	at org.apache.solr.core.SolrResourceLoader.findClass(SolrResourceLoader.java:310)</span>
+<span class="line">	at org.apache.solr.core.SolrCore.createInstance(SolrCore.java:411)</span>
+<span class="line">	at org.apache.solr.core.SolrCore.createRequestHandler(SolrCore.java:436)</span>
+<span class="line">	at org.apache.solr.core.RequestHandlers.initHandlersFromConfig(RequestHandlers.java:150)</span>
+<span class="line">	at org.apache.solr.core.SolrCore.&lt;init&gt;(SolrCore.java:541)</span>
+<span class="line">	at org.apache.solr.core.CoreContainer.create(CoreContainer.java:425)</span>
+<span class="line">	at org.apache.solr.core.CoreContainer.load(CoreContainer.java:278)</span>
+<span class="line">	at org.apache.solr.core.CoreContainer$Initializer.initialize(CoreContainer.java:117)</span>
+<span class="line">	at org.apache.solr.servlet.SolrDispatchFilter.init(SolrDispatchFilter.java:83)</span>
+<span class="line">	at org.mortbay.jetty.servlet.FilterHolder.doStart(FilterHolder.java:99)</span>
+<span class="line">	at org.mortbay.component.AbstractLifeCycle.start(AbstractLifeCycle.java:40)</span>
+<span class="line">	at org.mortbay.jetty.servlet.ServletHandler.initialize(ServletHandler.java:594)</span>
+<span class="line">	at org.mortbay.jetty.servlet.Context.startContext(Context.java:139)</span>
+<span class="line">	at org.mortbay.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1218)</span>
+<span class="line">	at org.mortbay.jetty.handler.ContextHandler.doStart(ContextHandler.java:500)</span>
+<span class="line">	at org.mortbay.jetty.webapp.WebAppContext.doStart(WebAppContext.java:448)</span>
+<span class="line">	at org.mortbay.component.AbstractLifeCycle.start(AbstractLifeCycle.java:40)</span>
+<span class="line">	at org.mortbay.jetty.handler.HandlerCollection.doStart(HandlerCollection.java:147)</span>
+<span class="line">	at org.mortbay.jetty.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:161)</span>
+<span class="line">	at org.mortbay.component.AbstractLifeCycle.start(AbstractLifeCycle.java:40)</span>
+<span class="line">	at org.mortbay.jetty.handler.HandlerCollection.doStart(HandlerCollection.java:147)</span>
+<span class="line">	at org.mortbay.component.AbstractLifeCycle.start(AbstractLifeCycle.java:40)</span>
+<span class="line">	at org.mortbay.jetty.handler.HandlerWrapper.doStart(HandlerWrapper.java:117)</span>
+<span class="line">	at org.mortbay.jetty.Server.doStart(Server.java:210)</span>
+<span class="line">	at org.mortbay.component.AbstractLifeCycle.start(AbstractLifeCycle.java:40)</span>
+<span class="line">	at org.mortbay.xml.XmlConfiguration.main(XmlConfiguration.java:929)</span>
+<span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span>
+<span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)</span>
+<span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)</span>
+<span class="line">	at java.lang.reflect.Method.invoke(Unknown Source)</span>
+<span class="line">	at org.mortbay.start.Main.invokeMain(Main.java:183)</span>
+<span class="line">	at org.mortbay.start.Main.start(Main.java:497)</span>
+<span class="line">	at org.mortbay.start.Main.main(Main.java:115)</span>
+<span class="line">Caused by: java.lang.ClassNotFoundException: org.ezsystems.solr.handler.ezfind.eZFindRequestHandler</span>
+<span class="line">	at java.net.URLClassLoader$1.run(Unknown Source)</span>
+<span class="line">	at java.security.AccessController.doPrivileged(Native Method)</span>
+<span class="line">	at java.net.URLClassLoader.findClass(Unknown Source)</span>
+<span class="line">	at java.lang.ClassLoader.loadClass(Unknown Source)</span>
+<span class="line">	at java.lang.ClassLoader.loadClass(Unknown Source)</span>
+<span class="line">	at org.mortbay.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:375)</span>
+<span class="line">	at org.mortbay.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:337)</span>
+<span class="line">	at java.lang.ClassLoader.loadClassInternal(Unknown Source)</span>
+<span class="line">	at java.lang.Class.forName0(Native Method)</span>
+<span class="line">	at java.lang.Class.forName(Unknown Source)</span>
+<span class="line">	at org.apache.solr.core.SolrResourceLoader.findClass(SolrResourceLoader.java:294)</span>
+<span class="line">	... 32 more</span>
+<span class="line">&nbsp;</span>
+</pre><br />
+<br />
+while trying to surf in <a href="http://localhost/" title="http://localhost">http://localhost</a>... we get &quot;severe SOLR configuration error&quot;<br />
+<br />
+:(<br />
+<br />
+We do really need to have solr working for several ez websites<br />
+<br />
+Thank you for your help, <br />
+Fra
+</div>
+
+<input class="button" type="submit" name="NewButton" value="Reply" />
+<input type="hidden" name="NodeID" value="28879" />
+<input type="hidden" name="ClassID" value="17" />
+     
+<input type="hidden" name="RedirectURIAfterPublish" value= />
+
+</form>
+
+<ul>    <li class="comment-bglight"><div class="padding">
+    <div class="content-view-line">
+<div class="class-comment">
+
+<form method="post" action="https://doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/content/action">
+
+<div id="comment28880" class="attribute-heading">
+<h2>Re: still not working</h2>
+</div>
+
+<div class="attribute-byline float-break">
+    <p class="date">Tuesday 10 September 2013 11:49:05 am</p>
+    <p class="author">chs</p>
+</div>
+
+<div class="attribute-short">
+I can't say if this is the same problem but I just got the same error (GRAVE: org.apache.solr.common.SolrException: Error loading class 'org.ezsystems.solr.handler.ezfind.eZFindRequestHandler).<br />
+<br />
+The directory extension/ezfind/java/solr/lib/ was missing and, with it, the file ezsystems-ezfind-solr-extension-2.1.jar.<br />
+I kinda messed up using SVN to transfer eZFind from one box to another.<br />
+<br />
+mes deux centimes de franc ...
+</div>
+
+<input class="button" type="submit" name="NewButton" value="Reply" />
+<input type="hidden" name="NodeID" value="28880" />
+<input type="hidden" name="ClassID" value="17" />
+     
+<input type="hidden" name="RedirectURIAfterPublish" value= />
+
+</form>
+
+
+</div>
+</div>    </div></li></ul>
+</div>
+</div>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.1.0/Advanced-Configuration/Using-multi-core-features/still-not-working/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:03:30 GMT -->
+</html>

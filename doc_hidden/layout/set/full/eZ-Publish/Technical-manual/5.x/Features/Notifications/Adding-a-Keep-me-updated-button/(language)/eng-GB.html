@@ -1,0 +1,78 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Notifications/Adding-a-Keep-me-updated-button/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Adding a &quot;Keep me updated&quot; button / Notifications / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Adding a &quot;Keep me updated&quot; button</h1>
+</div>
+
+<p>A user can subscribe for subtree notifications for the page that is being viewed by making use of a &quot;Keep me updated&quot; button. Many of the default templates do not contain this button. The only exception is made for the forum pages where the button code is included into the following templates:</p>
+<ul>
+<li><div> design/your_siteaccess/override/templates/full/forum.tpl </div></li><li><div> design/your_siteaccess/override/templates/full/forum_topic.tpl </div></li>
+</ul>
+<p>Returning to the previous example, if you have a set of articles located under a folder called &quot;Business&quot;, your users will not be able to subscribe for <a href="../../../Notifications.html#subtree" target="_self">subtree notifications</a> for this folder as long as there is no &quot;Keep me updated&quot; button there. Please note that the user must be logged in to make use of this feature.</p><p>You can easily add the &quot;Keep me updated&quot; button by inserting the following code into the override templates. For example, you can add this code to the &quot;design/your_siteaccess/override/templates/full/folder.tpl&quot; template:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;form method=&quot;post&quot; action={'/content/action'|ezurl}&gt;</span>
+<span class="line">&lt;input type=&quot;hidden&quot; name=&quot;ContentNodeID&quot; value=&quot;{$node.node_id}&quot; /&gt;</span>
+<span class="line">&lt;input type=&quot;submit&quot; name=&quot;ActionAddToNotification&quot; value=&quot;Keep me updated&quot; /&gt;</span>
+<span class="line">&lt;/form&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;form method=&quot;post&quot; action={\'/content/action\'|ezurl}&gt;\r\n&lt;input type=&quot;hidden&quot; name=&quot;ContentNodeID&quot; value=&quot;{$node.node_id}&quot; /&gt;\r\n&lt;input type=&quot;submit&quot; name=&quot;ActionAddToNotification&quot; value=&quot;Keep me updated&quot; /&gt;\r\n&lt;/form&gt;' ); return false;" /></p>
+<![endif]--><p>After clearing the caches, the &quot;Keep me updated&quot; button will appear every time a user is viewing a folder. The same changes can be easily done for your articles and other content objects.</p><p>Please note that some of the default templates may already contain a &quot;/content/action&quot; form. In this case, make sure that all the variables listed in the above code fragment are present inside this form in the template. You can also have several forms posting data to&quot;/content/action&quot;.</p><p>If you wish to have the button present in the page layout then you'll have to do it a bit differently. The reason for this is that the $node variable is not present in the page layout.</p><pre class="wordwrap copytoclipboard"><span class="line">{* Check if we have a node... *}</span>
+<span class="line">&nbsp;{if $module_result.node_id}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&lt;form method=&quot;post&quot; action={'/content/action'|ezurl}&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&lt;input type=&quot;hidden&quot; name=&quot;ContentNodeID&quot; value=&quot;{$module_result.node_id}&quot; /&gt;</span>
+<span class="line">&nbsp;&lt;input type=&quot;submit&quot; name=&quot;ActionAddToNotification&quot; value=&quot;Keep me updated&quot; /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&lt;/form&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{* Check if we have a node... *}\r\n {if $module_result.node_id}\r\n\r\n &lt;form method=&quot;post&quot; action={\'/content/action\'|ezurl}&gt;\r\n\r\n &lt;input type=&quot;hidden&quot; name=&quot;ContentNodeID&quot; value=&quot;{$module_result.node_id}&quot; /&gt;\r\n &lt;input type=&quot;submit&quot; name=&quot;ActionAddToNotification&quot; value=&quot;Keep me updated&quot; /&gt;\r\n\r\n &lt;/form&gt;\r\n\r\n {/if}' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Notifications/Adding-a-Keep-me-updated-button/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:26 GMT -->
+</html>

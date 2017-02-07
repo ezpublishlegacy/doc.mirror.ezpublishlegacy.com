@@ -1,0 +1,1638 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from doc.ez.no/Tutorials/Building-mobile-browser-and-hybrid-applications-with-eZ-Publish/Creating-a-sample-Hybrid-Mobile-Application by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 09:10:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/core.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/header-footer.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/header-footer-lookfeel.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/pagelayout.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/buttons.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/960.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/superfish.css" /><script type="text/javascript" src="https://ez.no/extension/ez_ezno/design/ezno_2011/javascript/jquery-1.6.3.min.js" charset="utf-8"></script><script type="text/javascript" src="https://ez.no/extension/ez_ezno/design/ezno_2011/javascript/superfish.js" charset="utf-8"></script><script type="text/javascript" src="https://ez.no/extension/ez_ezno/design/ezno_2011/javascript/jquery.popmenu.min.js" charset="utf-8"></script>
+<style type="text/css">
+    @import url(../../extension/ezdoc/design/doc/stylesheets/core.css);
+    @import url(../../extension/ezdoc/design/doc/stylesheets/classes.css);
+    @import url(../../extension/ezdoc/design/doc/stylesheets/doc.css);
+    @import url(../../extension/ezdoc/design/doc/stylesheets/print.css) print;</style>
+
+<link type="text/css" rel="stylesheet" href="../../extension/ezdoc/design/doc/stylesheets/print.css" media="print" />
+
+<!-- IE conditional comments; for bug fixes for different IE versions -->
+<!--[if IE 5]>     <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie5.css);    </style>     <![endif]-->
+<!--[if lte IE 6]> <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie6lte.css); </style>     <![endif]-->
+<!--[if lte IE 6]> <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie6lte-doc.css); </style> <![endif]-->
+<!--[if IE 6]>     <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie6.css);    </style>     <![endif]-->
+
+<!-- Load special stylesheet (if necessary) for newer Netscape decendants, Mozilla and Firefox, using the Gecko renderer -->
+<script type="text/javascript"><!-- if ((navigator.userAgent.indexOf("Gecko") != -1)&&(navigator.userAgent.indexOf("KHTML") == -1)) document.write("<style type=\"text/css\">@import url(/extension/ezdoc/design/doc/stylesheets/gecko.css);</style>"); --></script>
+
+<script type="text/javascript" src="../../extension/ezdoc/design/doc/javascripts/mainmenu-hover.js"></script>
+<script type="text/javascript" src="../../extension/ezdoc/design/doc/javascripts/dropdownmenu.js"></script>
+<script type="text/javascript" src="../../extension/ezdoc/design/doc/javascripts/ezno-searchbox.js"></script>
+                                  
+    <title>Creating a sample Hybrid Mobile Application / Building mobile browser and hybrid applications with eZ Publish / Tutorials / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../index.html" title="Doc front page" />
+<link rel="Search" href="../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+<body onload="initDocSearch();menuInit();">
+
+<!-- Complete page area: START -->
+<div id="page">
+
+
+	<div id="header-bg">
+			<div id="header" class="container_12">
+				<div class="grid_12">
+					<div class="searchboxes" id="searchbox">
+	  <form action="https://ez.no/headerandfooteraccess/content/search">
+	    <label for="searchtext" class="hide">Search text:</label>
+	    	    <div class="ezautocomplete">
+	        <button value="Search" title="Search" type="submit"><span class="w"><span class="l"></span><span class="c">Search</span><span class="r"></span></span></button>
+	        <div class="searchtext-wrap"><input class="searchtext" id="searchtext" name="SearchText" type="text" value="Search" size="12" onblur="if(this.value=='') this.value='Search';" onfocus="if(this.value=='Search') this.value='';" /></div>
+	        <div class="ezautocompletecontainer"></div>
+	    </div>
+	    
+	    	  </form>
+	</div>
+
+                <div id="header-social-connect">
+    <a href="http://www.youtube.com/user/ezpublish/" class="youtube" target="_blank">youtube</a>
+    <a href="https://google.com/+ezsystems" class="googleplus" target="_blank">google plus</a>
+    <a href="http://www.linkedin.com/groups?gid=2759&amp;trk=myg_ugrp_ovr" class="linkedin" target="_blank">linkedin</a>
+    <a href="https://www.facebook.com/eZPublishEnterprise" class="facebook" target="_blank">facebook</a>
+    <a href="http://twitter.com/#!/ezsystems" class="twitter" target="_blank">twitter</a>
+</div>
+				<div id="links">
+		
+							
+					<ul class="clearfix">
+																					<li class="nid-2384 first ">
+						<a href="https://ez.no/headerandfooteraccess/Partner-Portal">Partner Portal<span></span></a></li>
+																										<li class="nid-1859 ">
+						<a href="https://ez.no/headerandfooteraccess/Customer-Log-In">Customer Log In<span></span></a></li>
+																										<li class="nid-1831 ">
+						<a href="https://ez.no/headerandfooteraccess/Community">Community<span></span></a></li>
+																										<li class="nid-1944 last ">
+						<a href="https://ez.no/headerandfooteraccess/Blog">Blog<span></span></a></li>
+												</ul>
+		
+		</div>                <div id="languages" class="popmenu">	<div class="eng"><a href="#">English&nbsp;<span></span></a></div></div>
+
+				<p class="hide"><a href="#main">Skip to main content</a></p>
+				</div>
+			</div>
+
+			
+	</div>
+
+    <div class="topmenu-anchor"></div>
+    <div id="topmenu-bg">
+	    <div id="logo" class="container_12">
+
+    <div class="grid_3">
+        <a href="https://ez.no/headerandfooteraccess" title="eZ Publish Platform, CXM &amp; CMS">
+            <img src="https://ez.no/extension/ez_ezno/design/ezno_2011/images/ez-logo.png"
+                 alt="eZ Publish®"/>
+        </a>
+    </div>
+
+    <div class="grid_9">
+                <div class="topmenu-design">
+	<!-- Top menu content: START -->
+	<div id="topmenu-firstlevel-position">
+	<ul id="topmenu-firstlevel" class="sf-menu sf-js-enabled sf-shadow">
+		
+																																																														
+																																										
+
+                                	                																					                                    <li id="node_id_1795" class="li-first-level firstli">
+                    	<a href="https://ez.no/headerandfooteraccess/Products/The-eZ-Publish-Platform" class="menu-item-link">
+                    		<span>Products</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_21578" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/The-eZ-Publish-Platform" class="a-second-level">The eZ Publish Platform</a>
+																			</li>
+																	<li id="node_id_19870" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Content-Management" class="a-second-level">Content Management </a>
+																			</li>
+																	<li id="node_id_15645" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Digital-Marketing" class="a-second-level has-more">Digital Marketing</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_15685" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Digital-Marketing/Marketing-Automation" class="a-third-level">
+															Marketing Automation
+														</a>
+													</li>
+																									<li id="node_id_15686" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Digital-Marketing/Smart-Analytics" class="a-third-level">
+															Smart Analytics
+														</a>
+													</li>
+																									<li id="node_id_15689" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Digital-Marketing/Personalization-Recommendation" class="a-third-level">
+															Personalization &amp; Recommendation
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_19872" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/e-Commerce" class="a-second-level">e-Commerce</a>
+																			</li>
+																	<li id="node_id_14954" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Compare-Versions" class="a-second-level">Compare Versions</a>
+																			</li>
+																	<li id="node_id_1800" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Demos-Videos" class="a-second-level">Demos &amp; Videos</a>
+																			</li>
+																	<li id="node_id_20778" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base" class="a-second-level has-more">Knowledge Base</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_19570" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base/eZ-Publish-Platform-5.3" class="a-third-level">
+															eZ Publish Platform 5.3
+														</a>
+													</li>
+																									<li id="node_id_11694" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base/eZ-Live-Viewer" class="a-third-level">
+															eZ Live Viewer
+														</a>
+													</li>
+																									<li id="node_id_11693" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base/eZ-Recommendation-Service" class="a-third-level">
+															eZ Recommendation Service
+														</a>
+													</li>
+																									<li id="node_id_13246" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/Knowledge-Base/eZ-Marketing-Automation" class="a-third-level">
+															eZ Marketing Automation
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_1846" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/eZ-Market" class="a-second-level has-more">eZ Market</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_1848" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/eZ-Market/Explore-the-eZ-Market" class="a-third-level">
+															Explore the eZ Market
+														</a>
+													</li>
+																									<li id="node_id_1851" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/eZ-Market/How-to-Sell-on-eZ-Market" class="a-third-level">
+															How to Sell on eZ Market
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_20872" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software" class="a-second-level has-more">About our Software</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_20875" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/Documentation" class="a-third-level">
+															Documentation
+														</a>
+													</li>
+																									<li id="node_id_20876" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/Requirements" class="a-third-level">
+															Requirements
+														</a>
+													</li>
+																									<li id="node_id_20877" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/Roadmap-and-lifecycle" class="a-third-level">
+															Roadmap and lifecycle
+														</a>
+													</li>
+																									<li id="node_id_20878" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/Licenses" class="a-third-level">
+															Licenses
+														</a>
+													</li>
+																									<li id="node_id_20874" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Products/About-our-Software/SLA" class="a-third-level">
+															sla
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                            																									
+
+                                	                																					                                    <li id="node_id_2264" class="li-first-level ">
+                    	<a href="https://ez.no/headerandfooteraccess/Services/Overview" class="menu-item-link">
+                    		<span>Services</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_1816" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Services/Overview" class="a-second-level">Overview</a>
+																			</li>
+																	<li id="node_id_2570" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Services/Support-Maintenance" class="a-second-level">Support &amp; Maintenance</a>
+																			</li>
+																	<li id="node_id_1819" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Services/Consulting" class="a-second-level">Consulting</a>
+																			</li>
+																	<li id="node_id_15863" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Services/Trainings" class="a-second-level has-more">Trainings</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_15864" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Training-Calendar" class="a-third-level">
+															Training Calendar
+														</a>
+													</li>
+																									<li id="node_id_15870" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Courses" class="a-third-level">
+															Courses
+														</a>
+													</li>
+																									<li id="node_id_15875" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Certification" class="a-third-level">
+															Certification
+														</a>
+													</li>
+																									<li id="node_id_16248" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Developer-Knowledge-Path" class="a-third-level">
+															Developer Knowledge Path
+														</a>
+													</li>
+																									<li id="node_id_16252" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Services/Trainings/Onsite-Trainings" class="a-third-level">
+															Onsite Trainings
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                            																									
+
+                                	                																					                                    <li id="node_id_1824" class="li-first-level ">
+                    	<a href="https://ez.no/headerandfooteraccess/Customers/Success-Stories" class="menu-item-link">
+                    		<span>Customers</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_1863" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies" class="a-second-level has-more">Case Studies</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_20669" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Sound-Harley-Davidson-Hitting-the-Road-with-the-eZ-Publish-Platform" class="a-third-level">
+															Sound Harley-Davidson - Hitting the Road with the eZ Publish Platform
+														</a>
+													</li>
+																									<li id="node_id_18787" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/49th-Shelf-Canada-s-Online-Resource-Center-for-Books" class="a-third-level">
+															49th Shelf - Canada's Online Resource Center for Books
+														</a>
+													</li>
+																									<li id="node_id_17303" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/CASDEN-Groupe-Banque-Populaire" class="a-third-level">
+															CASDEN, Groupe Banque Populaire
+														</a>
+													</li>
+																									<li id="node_id_16193" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Orange-UA-Jeux-and-Transmedia" class="a-third-level">
+															Orange - UA Jeux and Transmédia
+														</a>
+													</li>
+																									<li id="node_id_15317" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/CSMonitor-Digital-First-Strategy-with-eZ-Publish" class="a-third-level">
+															CSMonitor - Digital-First Strategy with eZ Publish
+														</a>
+													</li>
+																									<li id="node_id_15216" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Bauknecht-KitchenAid-and-Whirlpool-Web-Sites" class="a-third-level">
+															Bauknecht, KitchenAid and Whirlpool Web Sites
+														</a>
+													</li>
+																									<li id="node_id_13911" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/CEVA" class="a-third-level">
+															CEVA
+														</a>
+													</li>
+																									<li id="node_id_12027" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Grazia.fr" class="a-third-level">
+															Grazia.fr
+														</a>
+													</li>
+																									<li id="node_id_8661" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Sparda-Bank-West" class="a-third-level">
+															Sparda-Bank West
+														</a>
+													</li>
+																									<li id="node_id_8141" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Christian-Science-Monitor-recreates-itself-for-digital-era" class="a-third-level">
+															Christian Science Monitor recreates itself for digital era  
+														</a>
+													</li>
+																									<li id="node_id_8108" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Rechtsportal-powered-by-Deubner-a-WEKA-Group-company" class="a-third-level">
+															Rechtsportal, powered by Deubner, a WEKA Group company
+														</a>
+													</li>
+																									<li id="node_id_7948" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/tagesschau.sf.tv" class="a-third-level">
+															tagesschau.sf.tv
+														</a>
+													</li>
+																									<li id="node_id_7641" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Nouvelle-Republique-Centre-Ouest" class="a-third-level">
+															Nouvelle République Centre-Ouest
+														</a>
+													</li>
+																									<li id="node_id_7638" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/EMI-France" class="a-third-level">
+															EMI France
+														</a>
+													</li>
+																									<li id="node_id_6930" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Discover21-online-bookstore-in-Japan-uses-eZ-Publish" class="a-third-level">
+															Discover21 online bookstore in Japan uses eZ Publish
+														</a>
+													</li>
+																									<li id="node_id_6824" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/William-Reed-Business-Media" class="a-third-level">
+															William Reed Business Media
+														</a>
+													</li>
+																									<li id="node_id_6546" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/Phantasialand-relaunch-rich-media-multilingual-highly-available-and-search-engine-optimized" class="a-third-level">
+															Phantasialand relaunch – rich media, multilingual, highly available and search engine optimized
+														</a>
+													</li>
+																									<li id="node_id_6543" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/Case-Studies/New-online-customer-area-for-Tyczka-Totalgaz" class="a-third-level">
+															New online customer area for Tyczka Totalgaz
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_2271" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Customers/Success-Stories" class="a-second-level">Success Stories</a>
+																			</li>
+																	<li id="node_id_1825" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry" class="a-second-level has-more">By Industry</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_19860" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/All-Industries" class="a-third-level">
+															All Industries
+														</a>
+													</li>
+																									<li id="node_id_10207" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Retail-and-Consumer" class="a-third-level">
+															Retail and Consumer
+														</a>
+													</li>
+																									<li id="node_id_2501" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Telecommunications" class="a-third-level">
+															Telecommunications
+														</a>
+													</li>
+																									<li id="node_id_2500" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Governmental-Non-Profit-Education" class="a-third-level">
+															Governmental, Non-Profit &amp; Education
+														</a>
+													</li>
+																									<li id="node_id_2499" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Finance" class="a-third-level">
+															Finance
+														</a>
+													</li>
+																									<li id="node_id_2498" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Service-Industry" class="a-third-level">
+															Service Industry
+														</a>
+													</li>
+																									<li id="node_id_2497" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/Customers/By-Industry/Media-Entertainment" class="a-third-level">
+															Media &amp; Entertainment
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                            																									
+
+                                	                																					                                    <li id="node_id_1832" class="li-first-level ">
+                    	<a href="https://ez.no/headerandfooteraccess/Partners/Success-with-eZ" class="menu-item-link">
+                    		<span>Partners</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_2272" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Partners/Success-with-eZ" class="a-second-level">Success with eZ </a>
+																			</li>
+																	<li id="node_id_1833" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Partners/Become-a-Partner" class="a-second-level">Become a Partner</a>
+																			</li>
+																	<li id="node_id_2035" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/Partners/Find-a-Partner" class="a-second-level">Find a Partner</a>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                            																																		
+
+                                	                																					                                    <li id="node_id_1836" class="li-first-level lastli">
+                    	<a href="https://ez.no/headerandfooteraccess/About-eZ/Company-Overview" class="menu-item-link">
+                    		<span>About eZ</span>
+                    	</a>
+													<ul>
+								<li class="dropmenu-ul-top"></li>
+																	<li id="node_id_2273" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/Company-Overview" class="a-second-level">Company Overview </a>
+																			</li>
+																	<li id="node_id_20956" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers" class="a-second-level has-more">Careers</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_21234" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Financial-Accountant-Norway" class="a-third-level">
+															Financial Accountant - Norway
+														</a>
+													</li>
+																									<li id="node_id_21134" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Professional-Services-Consultant-Norway" class="a-third-level">
+															Professional Services Consultant - Norway
+														</a>
+													</li>
+																									<li id="node_id_21133" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Professional-Services-Consultant-France" class="a-third-level">
+															Professional Services Consultant - France
+														</a>
+													</li>
+																									<li id="node_id_20998" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Junior-Marketing-Manager-Cologne" class="a-third-level">
+															Junior Marketing Manager - Cologne
+														</a>
+													</li>
+																									<li id="node_id_20957" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Graphic-Designer" class="a-third-level">
+															Graphic Designer
+														</a>
+													</li>
+																									<li id="node_id_20958" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/User-Interface-Designer" class="a-third-level">
+															User Interface Designer 
+														</a>
+													</li>
+																									<li id="node_id_20960" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Product-Manager-Dev-Ex" class="a-third-level">
+															Product Manager Dev Ex
+														</a>
+													</li>
+																									<li id="node_id_20959" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Product-Manager-Web-UX" class="a-third-level">
+															Product Manager Web  UX
+														</a>
+													</li>
+																									<li id="node_id_20961" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Junior-UI-Developer-Poland" class="a-third-level">
+															Junior UI Developer - Poland
+														</a>
+													</li>
+																									<li id="node_id_20962" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Careers/Senior-UI-Developer-Poland" class="a-third-level">
+															Senior UI Developer - Poland
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_1839" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/Events-News" class="a-second-level has-more">Events &amp; News</a>
+																					<ul>
+												<li class="dropmenu-ul-subarrow"></li>
+												<li class="dropmenu-ul-top"></li>
+																									<li id="node_id_1841" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Events-News/News" class="a-third-level">
+															News
+														</a>
+													</li>
+																									<li id="node_id_1844" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Events-News/Events" class="a-third-level">
+															Events
+														</a>
+													</li>
+																									<li id="node_id_1845" class="li-third-level">
+														<a href="https://ez.no/headerandfooteraccess/About-eZ/Events-News/Upcoming-Webinars" class="a-third-level">
+															Upcoming Webinars
+														</a>
+													</li>
+																								<li class="dropmenu-ul-bottom"></li>
+											</ul>
+																			</li>
+																	<li id="node_id_1838" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/eZ-Management" class="a-second-level">eZ Management</a>
+																			</li>
+																	<li id="node_id_1840" class="li-second-level">
+																																									<a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" class="a-second-level">Contact Us</a>
+																			</li>
+																<li class="dropmenu-ul-bottom"></li>
+							</ul>
+						                   	</li>
+                   	                                                            </ul>
+    </div>
+        <!-- Top menu content: END -->
+</div>        </div>
+</div>    </div>
+
+
+<div id="page-content-position"><div id="page-content-position-inner"><div id="page-content">
+
+<!-- Path area: START -->
+<div id="path">
+
+<div id="page-width4">
+<h2 class="hide">Path</h2>
+
+<!-- Path content: START -->
+<p> <a href="http://ez.no/">ez.no</a> /
+                        <a href="../../index.html">documentation</a>
+        
+                        /
+                            <a href="../../Tutorials.html">tutorials</a>
+        
+                        /
+                            <a href="../Building-mobile-browser-and-hybrid-applications-with-eZ-Publish.html">building mobile browser and...</a>
+        
+                        /
+                            creating a sample hybrid mo...
+        
+            </p>
+<!-- Path content: END -->
+
+</div>
+
+</div>
+<!-- Path area: END -->
+
+<hr class="hide" />
+
+<!-- Main area: START -->
+<div id="ezp5disclaimer">
+<p><strong style="color: red">Caution:</strong> This documentation is for <strong>eZ Publish</strong> <em>legacy</em>, from version 3.x to 5.x.<br/>
+For 5.x documentation covering <em>Platform</em> see <a href="../../display/MAIN/eZ%2bDocumentation%2bCenter.html">eZ Documentation Center</a>, for difference between <em>legacy</em> and <em>Platform</em> see <a href="../../pages/viewpage0139.html?pageId=11403666">5.x Architecture overview</a>.</p>
+</div>
+
+<div id="page-width5">
+<div id="main" class="float-break">
+
+
+<div class="template-design area-docmenu-normal">
+<div class="template-module">
+<div class="template-object">
+<div id="contentmenu">
+                        <div class="attribute-heading"><h2 class="bullet"><a href="Creating-a-sample-Hybrid-Mobile-Application.html">Table of contents</a></h2></div>
+<div class="boxcontent">
+
+<map id="contentstructure">
+
+    
+                                                                        
+            <ul>
+	    
+                                                        
+                                    </li>
+            
+                                
+                                                        
+            <ul>
+	    
+                                                    
+	<li 
+					    		    			    	    >
+	    <div>
+	    
+	    
+
+	    
+	    
+	    
+	    			    	    
+	    
+	    		<a class="nodetext" href="The-goal-of-the-tutorial.html" title="">
+	    	    		                    		    <span class="node-name-normal">The goal of the tutorial</span>
+                    			    	    		</a>
+			           </div>
+        
+                                    </li>
+            
+                                
+                                                    
+	<li 
+					    		    			    	    >
+	    <div>
+	    
+	    
+
+	    
+	    
+	    
+	    			    	    
+	    
+	    		<a class="nodetext" href="Pre-requisites-and-target-audience.html" title="">
+	    	    		                    		    <span class="node-name-normal">Pre-requisites and target audience</span>
+                    			    	    		</a>
+			           </div>
+        
+                                    </li>
+            
+                                
+                                                    
+	<li 
+					    		    			    	    >
+	    <div>
+	    
+	    
+
+	    
+	    
+	    
+	    			    	    
+	    
+	    		<a class="nodetext" href="Configuring-ez-Publish-and-the-server.html" title="">
+	    	    		                    		    <span class="node-name-normal">Configuring ez Publish and the server</span>
+                    			    	    		</a>
+			           </div>
+        
+                                    </li>
+            
+                                
+                                                    
+	<li 
+					    		    			    	    >
+	    <div>
+	    
+	    
+
+	    
+	    
+	    
+	    			    	    
+	    
+	    		<a class="nodetext" href="Setting-up-the-design.html" title="">
+	    	    		                    		    <span class="node-name-normal">Setting up the design</span>
+                    			    	    		</a>
+			           </div>
+        
+                                    </li>
+            
+                                
+                                                    
+	<li 
+					    		    			class="currentnode"
+		    			    	    >
+	    <div>
+	    
+	    
+
+	    
+	    
+	    
+	    			    	    
+	    
+	    		<a class="nodetext" href="Creating-a-sample-Hybrid-Mobile-Application.html" title="">
+	    	    		                    		    <span class="node-name-normal">Creating a sample Hybrid Mobile Application</span>
+                    			    	    		</a>
+			           </div>
+        
+                                    </li>
+            
+                                
+                                                    
+	<li 
+					    		    			    	    >
+	    <div>
+	    
+	    
+
+	    
+	    
+	    
+	    			    	    
+	    
+	    		<a class="nodetext" href="Resources.html" title="">
+	    	    		                    		    <span class="node-name-normal">Resources</span>
+                    			    	    		</a>
+			           </div>
+        
+                                    </li>
+            
+                                
+                                                    
+	<li 
+					    		    			    	    >
+	    <div>
+	    
+	    
+
+	    
+	    
+	    
+	    			    	    
+	    
+	    		<a class="nodetext" href="Author.html" title="">
+	    	    		                    		    <span class="node-name-normal">Author</span>
+                    			    	    		</a>
+			           </div>
+        
+                                    </li>
+            
+                                
+                                                    
+	<li 
+					    			class="last"
+		    		    			    	    >
+	    <div>
+	    
+	    
+
+	    
+	    
+	    
+	    			    	    
+	    
+	    		<a class="nodetext" href="License.html" title="">
+	    	    		                    		    <span class="node-name-normal">License</span>
+                    			    	    		</a>
+			           </div>
+        
+                                    </li>
+            
+                                            </ul>
+                                        </li>
+            
+                                            </ul>
+                        
+            
+</map>
+
+</div>            
+</div>
+</div>
+</div>
+</div>
+<div class="area-docmain-normal">
+<div class="template-design">
+<div class="template-module content-view-full">
+<div class="template-object">
+
+<div class="attribute-heading">
+<h1>Creating a sample Hybrid Mobile Application</h1>
+</div>
+
+<p>Now that we’ve configured the web server for a mobile-specific sub-domain, and configured eZ Publish to support a mobile siteaccess and mobile design, we can start to build the design, the mobile site as a whole, and subsequently the hybrid mobile application -- one for the iOS / iPhone and one for Android phones -- as a shell for the mobile site!</p><p>Here is a screenshot of the iOS application that will be the result of this tutorial:</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/sample-of-application/126796-1-eng-GB/Sample-of-application_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><a name="eztoc126792_0_1" id="eztoc126792_0_1"></a><h3>Preparation</h3><p>The first thing we will need is a working eZ Publish instance with the Website Interface enabled. We won’t cover the steps for how to install eZ Publish, as this process is well documented in the official documentation. Refer to the &quot;Normal installation&quot; section of the &quot;Installation&quot; chapter for more information. We also assume that you have already created a siteaccess and design extension dedicated to the mobile site, as covered earlier in this article.</p><a name="eztoc126792_0_2" id="eztoc126792_0_2"></a><h3>Adjusting INI settings</h3><p>We will be using the Website Interface design as the foundation for our mobile web channel, so we need to set the “ezwebin” design as a fallback site design in order to use its templates, styles, and so on. Verify that the configuration file settings/siteaccess/mobile/site.ini.append.php has the following settings:</p><pre class="wordwrap copytoclipboard"><span class="line">[DesignSettings]</span>
+<span class="line">SiteDesign=mobile</span>
+<span class="line">AdditionalSiteDesignList[]</span>
+<span class="line">AdditionalSiteDesignList[]=ezwebin</span>
+<span class="line">AdditionalSiteDesignList[]=base</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[DesignSettings]\r\nSiteDesign=mobile\r\nAdditionalSiteDesignList[]\r\nAdditionalSiteDesignList[]=ezwebin\r\nAdditionalSiteDesignList[]=base' ); return false;" /></p>
+<![endif]--><p>A bit later in this article, we will add a &quot;<i>pagelayout-mobile.css</i>&quot; file, which contains CSS styles for the main template &quot;<i>pagelayout.tpl</i>&quot;. In preparation for that, we will add a reference to that file in&nbsp;<b><i>extension/mobile/settings/design.ini.append.php</i></b>:</p><pre class="wordwrap"><span class="line">[StylesheetSettings]</span>
+<span class="line">FrontendCSSFileList[]=pagelayout-mobile.css</span>
+</pre><p>To complete our work with INI settings, we also need to copy over the Website Interface image size settings, as well as template override rules so that our mobile site can make use of much of the Website Interface foundation. Copy the following files from <i><b>settings/siteaccess/ezwebin_site/</b></i> to <i><b>settings/siteaccess/mobile/</b></i></p><p>
+1. &quot;<i>override.ini.append.php</i>&quot;<br />2. &quot;<i>image.ini.append.php</i>&quot;</p><a name="eztoc126792_0_3" id="eztoc126792_0_3"></a><h3>Preparing templates</h3><p>Next, copy the following templates from the <i><b>extension/ezwebin/design/ezwebin/</b></i> folder to <i><b>extension/mobile/design/mobile/</b></i>. We will be modifying these templates instead of simply using them as fallback templates.</p><p>
+1.&quot; templates/pagelayout.tpl&quot;<br />
+2. &quot;templates/page_header.tpl&quot;<br />
+3. &quot;templates/page_header_logo.tpl&quot;<br />
+4. &quot;templates/page_head.tpl&quot;<br />
+5. &quot;templates/content/search.tpl&quot;<br />
+6. override/templates/full/article.tpl&quot;<br />
+7. override/templates/full/folder.tpl&quot;<br />8. override/templates/full/frontpage.tpl&quot;</p><p>Once you are done copying the files, your mobile extension’s design folder structure should look like this:</p><p>
+mobile<br />
+│<br />
+├── design<br />
+│ └── mobile<br />
+│ ├── images<br />
+│ ├── javascript<br />
+│ ├── override<br />
+│ │ └── templates<br />
+│ │ └── full<br />
+│ │ ├── article.tpl<br />
+│ │ ├── folder.tpl<br />
+│ │ └── frontpage.tpl<br />
+│ ├── stylesheets<br />
+│ └── templates<br />
+│ ├── content<br />
+│ │ └── search.tpl<br />
+│ ├── page_head.tpl<br />
+│ ├── page_header.tpl<br />
+│ ├── page_header_logo.tpl<br />
+│ └── pagelayout.tpl<br />└── settings</p><p>Here are the changes to make to the newly copied templates:</p><a name="eztoc126792_0_3_1" id="eztoc126792_0_3_1"></a><h4>pagelayout.tpl</h4><p>Make the following changes to <i><b>extension/mobile/design/mobile/templates/pagelayout.tpl</b></i>:</p><p>The following code change will scroll up to the device’s viewport and hide the browser navigation toolbar. Change line 29 from :</p><pre class="wordwrap"><span class="line">&lt;!--[if (gt IE 8)|!(IE)]&gt;&lt;!--&gt;&lt;body&gt;&lt;!--&lt;![endif]--&gt;</span>
+</pre><p>to</p><pre class="wordwrap"><span class="line">&lt;!--[if (gt IE 8)|!(IE)]&gt;&lt;!--&gt;&lt;body onload=&quot;{literal}setTimeout(function()</span>
+<span class="line">{ window.scrollTo(0, 1) }, 100);{/literal}&quot;&gt;&lt;!--&lt;![endif]--&gt;&quot;</span>
+</pre><p>Line 33 should already read:</p><pre class="wordwrap"><span class="line">&lt;div id=&quot;page&quot; class=&quot;{$pagestyle}&quot;&gt;</span>
+</pre><p>Add to the following line ( line 34 ), which is a “div” element to which we will add a background image style later:</p><pre class="wordwrap"><span class="line">&lt;div id=&quot;page-wrapper&quot;&gt;</span>
+</pre><p>Line 100 should already read:</p><pre class="wordwrap"><span class="line">{include uri='design:page_footer.tpl'}</span>
+</pre><p>Add to the following line ( line 101 ) to close the element added above:</p><pre class="wordwrap"><span class="line">&lt;/div&gt;</span>
+</pre><a name="eztoc126792_0_3_2" id="eztoc126792_0_3_2"></a><h4>page_header.tpl</h4><p>Make the following changes to <i><b>extension/mobile/design/mobile/templates/page_header.tpl</b></i>:</p><p>Replace line 9 with the following code, for styling purposes and to add a link on all sub-pages, pointing back to the home page:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;div class=&quot;grid&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;unit-1-4&quot;&gt;</span>
+<span class="line">{def $current_node = fetch( 'content', 'node', hash( node_id, $current_node_id ))}</span>
+<span class="line">{if and( ne( $current_node_id, ezini( 'NodeSettings', 'RootNode', 'content.ini'</span>
+<span class="line">) ), $current_node)}</span>
+<span class="line">&lt;div id=&quot;backbutton&quot;&gt;</span>
+<span class="line">&lt;a href=&quot;{$current_node.parent.url_alias|ezurl( 'no' ))}&quot;&gt;&lt;img</span>
+<span class="line">src=&quot;{'back.png'|ezimage( 'no' )}&quot; /&gt;&lt;/a&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">{/if}</span>
+<span class="line">{undef $current_node}</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;div class=&quot;unit-3-4&quot;&gt;</span>
+<span class="line">{include uri='design:page_header_logo.tpl'}</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;div class=&quot;grid&quot;&gt;\r\n&lt;div class=&quot;unit-1-4&quot;&gt;\r\n{def $current_node = fetch( \'content\', \'node\', hash( node_id, $current_node_id ))}\r\n{if and( ne( $current_node_id, ezini( \'NodeSettings\', \'RootNode\', \'content.ini\'\r\n) ), $current_node)}\r\n&lt;div id=&quot;backbutton&quot;&gt;\r\n&lt;a href=&quot;{$current_node.parent.url_alias|ezurl( \'no\' ))}&quot;&gt;&lt;img\r\nsrc=&quot;{\'back.png\'|ezimage( \'no\' )}&quot; /&gt;&lt;/a&gt;\r\n&lt;/div&gt;\r\n{/if}\r\n{undef $current_node}\r\n&lt;/div&gt;\r\n&lt;div class=&quot;unit-3-4&quot;&gt;\r\n{include uri=\'design:page_header_logo.tpl\'}\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_3_3" id="eztoc126792_0_3_3"></a><h4>page_header_logo.tpl</h4><p>Make the following changes to extension/mobile/design/mobile/templates/page_header_logo.tpl: Replace the contents of the entire file with the following, to simplify the code displaying the logo:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;div id=&quot;logo&quot;&gt;</span>
+<span class="line">&lt;a href={&quot;/&quot;|ezurl} title=&quot;{ezini('SiteSettings','SiteName')|wash}&quot;&gt;&lt;img</span>
+<span class="line">src=&quot;{'logo.png'|ezimage( 'no' )}&quot; alt=&quot;{ezini('SiteSettings','SiteName')|wash}&quot; /&gt;&lt;/a&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;div id=&quot;logo&quot;&gt;\r\n&lt;a href={&quot;/&quot;|ezurl} title=&quot;{ezini(\'SiteSettings\',\'SiteName\')|wash}&quot;&gt;&lt;img\r\nsrc=&quot;{\'logo.png\'|ezimage( \'no\' )}&quot; alt=&quot;{ezini(\'SiteSettings\',\'SiteName\')|wash}&quot; /&gt;&lt;/a&gt;\r\n&lt;/div&gt;' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_3_4" id="eztoc126792_0_3_4"></a><h4>page_head.tpl</h4><p>Make the following changes to extension/mobile/design/mobile/templates/page_head.tpl: Add the following to line 52, in order to force the webpage into the device’s visible area:</p><pre class="wordwrap"><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width; initial-scale=1.0; maximumscale=</span>
+<span class="line">1.0; minimum-scale=1.0; user-scalable=yes&quot; /&gt;</span>
+</pre><a name="eztoc126792_0_3_5" id="eztoc126792_0_3_5"></a><h4>search.tpl</h4><p>Make the following changes to extension/mobile/design/mobile/templates/content/search.tpl: Remove the following code from lines 34 - 37 (referencing the advanced search functionality, which we won’t use for the mobile site):</p><pre class="wordwrap copytoclipboard"><span class="line">{let adv_url=concat('/content/advancedsearch/',$search_text|count_chars()|gt(0)|</span>
+<span class="line">choose('',concat('?SearchText=',$search_text|urlencode)))|ezurl}</span>
+<span class="line">&lt;label&gt;{&quot;For more options try the %1Advanced search%2&quot;|</span>
+<span class="line">i18n(&quot;design/ezwebin/content/search&quot;,&quot;The &nbsp;parameters are link start and end tags.&quot;,array(concat(&quot;&lt;a &nbsp;href=&quot;,$adv_url,&quot;&gt;&quot;),&quot;&lt;/a&gt;&quot;))}&lt;/label&gt;</span>
+<span class="line">{/let}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{let adv_url=concat(\'/content/advancedsearch/\',$search_text|count_chars()|gt(0)|\r\nchoose(\'\',concat(\'?SearchText=\',$search_text|urlencode)))|ezurl}\r\n&lt;label&gt;{&quot;For more options try the %1Advanced search%2&quot;|\r\ni18n(&quot;design/ezwebin/content/search&quot;,&quot;The  parameters are link start and end tags.&quot;,array(concat(&quot;&lt;a  href=&quot;,$adv_url,&quot;&gt;&quot;),&quot;&lt;/a&gt;&quot;))}&lt;/label&gt;\r\n{/let}' ); return false;" /></p>
+<![endif]--><p>Wrap the code on lines 47 - 49 with the following “if” statement, which suppresses a simple message if the user hasn’t yet searched for anything:</p><pre class="wordwrap copytoclipboard"><span class="line">{if ne( $search_text, '')}</span>
+<span class="line">&lt;div class=&quot;warning&quot;&gt;</span>
+<span class="line">&lt;h2&gt;{'No results were found when searching for &quot;%1&quot;.'|</span>
+<span class="line">i18n(&quot;design/ezwebin/content/search&quot;,,array($search_text|wash))}&lt;/h2&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{if ne( $search_text, \'\')}\r\n&lt;div class=&quot;warning&quot;&gt;\r\n&lt;h2&gt;{\'No results were found when searching for &quot;%1&quot;.\'|\r\ni18n(&quot;design/ezwebin/content/search&quot;,,array($search_text|wash))}&lt;/h2&gt;\r\n&lt;/div&gt;\r\n{/if}' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_3_6" id="eztoc126792_0_3_6"></a><h4>article.tpl</h4><p>
+Make the following changes to extension/mobile/design/mobile/override/templates/full/article.tpl:<br />Add the following code to line 3, to disable extra navigational and design elements from appearing in the pagelayout:</p><pre class="wordwrap copytoclipboard"><span class="line">{set scope=global persistent_variable=hash('left_menu', false(),</span>
+<span class="line">'extra_menu', false(),</span>
+<span class="line">'show_path', false(),</span>
+<span class="line">'top_menu', false())}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{set scope=global persistent_variable=hash(\'left_menu\', false(),\r\n\'extra_menu\', false(),\r\n\'show_path\', false(),\r\n\'top_menu\', false())}' ); return false;" /></p>
+<![endif]--><p>To have article images display in a more mobile-friendly size, change line 32 from:</p><pre class="wordwrap"><span class="line">{attribute_view_gui attribute=$node.data_map.image image_class=medium}</span>
+</pre><p>to</p><pre class="wordwrap"><span class="line">{attribute_view_gui attribute=$node.data_map.image image_class=articleimage}</span>
+</pre><p>Related to the reason above, change line 35 from:</p><pre class="wordwrap"><span class="line">&lt;div class=&quot;caption&quot; style=&quot;width: {$node.data_map.image.content.medium.width}px&quot;&gt;</span>
+</pre><p>to</p><pre class="wordwrap"><span class="line">&lt;div class=&quot;caption&quot; style=&quot;width:</span>
+<span class="line">{$node.data_map.image.content.articleimage.width}px&quot;&gt;</span>
+</pre><a name="eztoc126792_0_3_7" id="eztoc126792_0_3_7"></a><h4>folder.tpl</h4><p>Make the following changes to extension/mobile/design/mobile/override/templates/full/folder.tpl: Add the following code to line 3, to disable extra navigational and design elements from appearing in the pagelayout:</p><pre class="wordwrap copytoclipboard"><span class="line">{set scope=global persistent_variable=hash('left_menu', false(),</span>
+<span class="line">'extra_menu', false(),</span>
+<span class="line">'show_path', false(),</span>
+<span class="line">'top_menu', false())}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{set scope=global persistent_variable=hash(\'left_menu\', false(),\r\n\'extra_menu\', false(),\r\n\'show_path\', false(),\r\n\'top_menu\', false())}' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_3_8" id="eztoc126792_0_3_8"></a><h4>frontpage.tpl</h4><p>Make the following changes to extension/mobile/design/mobile/override/templates/full/frontpage.tpl: Replace the entire content of the file with the following, which disables extra navigational and design elements from appearing in the pagelayout, and sets up the basic design for the home page:</p><pre class="wordwrap copytoclipboard"><span class="line">{set scope=global persistent_variable=hash('left_menu', false(),</span>
+<span class="line">'extra_menu', false(),</span>
+<span class="line">'show_path', false(),</span>
+<span class="line">'top_menu', false())}</span>
+<span class="line">&lt;div class=&quot;grid&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;unit-1-2&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;category&quot;&gt;</span>
+<span class="line">&lt;a href=&quot;{'/Recipes'|ezurl( 'no' )}&quot;&gt;&lt;img src=&quot;{'recipes.png'|ezimage( 'no'</span>
+<span class="line">)}&quot; /&gt;&lt;/a&gt;</span>
+<span class="line">&lt;h2&gt;{'Recipes'|i18n('design/mobile/frontpage')}&lt;/h2&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;div class=&quot;unit-1-2&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;category&quot;&gt;</span>
+<span class="line">&lt;a href=&quot;{'/Food-reviews'|ezurl( 'no' )}&quot;&gt;&lt;img src=&quot;{'food-reviews.png'|</span>
+<span class="line">ezimage( 'no' )}&quot; /&gt;&lt;/a&gt;</span>
+<span class="line">&lt;h2&gt;{'Food reviews'|i18n('design/mobile/frontpage')}&lt;/h2&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;div class=&quot;grid&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;unit-1-2&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;category&quot;&gt;</span>
+<span class="line">&lt;a href=&quot;{'/Menus'|ezurl( 'no' )}&quot;&gt;&lt;img src=&quot;{'menus.png'|ezimage( 'no' )}&quot;</span>
+<span class="line">/&gt;&lt;/a&gt;</span>
+<span class="line">&lt;h2&gt;{'Menus'|i18n('design/mobile/frontpage')}&lt;/h2&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;div class=&quot;unit-1-2&quot;&gt;</span>
+<span class="line">&lt;div class=&quot;category&quot;&gt;</span>
+<span class="line">&lt;a href=&quot;{'/content/search'|ezurl( 'no' )}&quot;&gt;&lt;img src=&quot;{'search.png'|</span>
+<span class="line">ezimage( 'no' )}&quot; /&gt;&lt;/a&gt;</span>
+<span class="line">&lt;h2&gt;{'Search'|i18n('design/mobile/frontpage')}&lt;/h2&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+<span class="line">&lt;/div&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{set scope=global persistent_variable=hash(\'left_menu\', false(),\r\n\'extra_menu\', false(),\r\n\'show_path\', false(),\r\n\'top_menu\', false())}\r\n&lt;div class=&quot;grid&quot;&gt;\r\n&lt;div class=&quot;unit-1-2&quot;&gt;\r\n&lt;div class=&quot;category&quot;&gt;\r\n&lt;a href=&quot;{\'/Recipes\'|ezurl( \'no\' )}&quot;&gt;&lt;img src=&quot;{\'recipes.png\'|ezimage( \'no\'\r\n)}&quot; /&gt;&lt;/a&gt;\r\n&lt;h2&gt;{\'Recipes\'|i18n(\'design/mobile/frontpage\')}&lt;/h2&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;div class=&quot;unit-1-2&quot;&gt;\r\n&lt;div class=&quot;category&quot;&gt;\r\n&lt;a href=&quot;{\'/Food-reviews\'|ezurl( \'no\' )}&quot;&gt;&lt;img src=&quot;{\'food-reviews.png\'|\r\nezimage( \'no\' )}&quot; /&gt;&lt;/a&gt;\r\n&lt;h2&gt;{\'Food reviews\'|i18n(\'design/mobile/frontpage\')}&lt;/h2&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;div class=&quot;grid&quot;&gt;\r\n&lt;div class=&quot;unit-1-2&quot;&gt;\r\n&lt;div class=&quot;category&quot;&gt;\r\n&lt;a href=&quot;{\'/Menus\'|ezurl( \'no\' )}&quot;&gt;&lt;img src=&quot;{\'menus.png\'|ezimage( \'no\' )}&quot;\r\n/&gt;&lt;/a&gt;\r\n&lt;h2&gt;{\'Menus\'|i18n(\'design/mobile/frontpage\')}&lt;/h2&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;div class=&quot;unit-1-2&quot;&gt;\r\n&lt;div class=&quot;category&quot;&gt;\r\n&lt;a href=&quot;{\'/content/search\'|ezurl( \'no\' )}&quot;&gt;&lt;img src=&quot;{\'search.png\'|\r\nezimage( \'no\' )}&quot; /&gt;&lt;/a&gt;\r\n&lt;h2&gt;{\'Search\'|i18n(\'design/mobile/frontpage\')}&lt;/h2&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;\r\n&lt;/div&gt;' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_4" id="eztoc126792_0_4"></a><h3>Images</h3><p>
+We have already prepared images for our mobile website, which you can download here [https://github.com/ezsystems/ezmobile/tree/master/ezpublish/extension/mobile]. Copy the following files into the <i><b>extension/mobile/design/mobile/images</b></i> folder:<br />
+1. back.png<br />
+2. bg.png<br />
+3. food-review.png<br />
+4. footer-bg.png<br />
+5. header-bg.png<br />
+6. logo.png<br />
+7. menus.png<br />
+8. recipes.png<br />9. search.png</p><a name="eztoc126792_0_5" id="eztoc126792_0_5"></a><h3>Stylesheets</h3><p>In the previous steps, we have made the necessary template modifications and added images used in the mobile site design. Next, we are going to create two CSS files, one that is responsible for styling the pagelayout template and another that is responsible for styling actual content templates. Create these CSS files in extension/mobile/design/mobile/stylesheets/ as follows:</p><p>
+mobile<br />
+│<br />
+├── design<br />
+│ └── mobile<br />
+│ ├── images<br />
+│ ├── javascript<br />
+│ ├── override<br />
+│ │ └── templates<br />
+│ │ └── full<br />
+│ ├── stylesheets<br />
+│ │ ├── content.css<br />
+│ │ └── pagelayout-mobile.css<br />
+│ └── templates<br />
+│ ├── content<br />└── settings</p><a name="eztoc126792_0_5_9" id="eztoc126792_0_5_9"></a><h4>pagelayout-mobile.css</h4><p>In extension/mobile/design/mobile/stylesheets/pagelayout-mobile.css, paste the following:</p><pre class="wordwrap copytoclipboard"><span class="line">body {</span>
+<span class="line">background-position: top center;</span>
+<span class="line">background-image: url(../images/bg.png);</span>
+<span class="line">background-repeat: repeat-y;</span>
+<span class="line">color: #003F72;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#page {</span>
+<span class="line">width: 320px;</span>
+<span class="line">background-image: url(../images/header-bg.png);</span>
+<span class="line">background-repeat: no-repeat;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#page-wrapper {</span>
+<span class="line">background-image: url(../images/footer-bg.png);</span>
+<span class="line">background-position: bottom left;</span>
+<span class="line">background-repeat: no-repeat;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#header {</span>
+<span class="line">height: 122px;</span>
+<span class="line">background-color: transparent;</span>
+<span class="line">padding-bottom: 0;</span>
+<span class="line">padding-top: 0;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#logo {</span>
+<span class="line">margin: 0;</span>
+<span class="line">padding-left: 3%;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#backbutton {</span>
+<span class="line">padding-left: 17px;</span>
+<span class="line">padding-top: 21px;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#usermenu,</span>
+<span class="line">div#searchbox,</span>
+<span class="line">div#topmenu-position,</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#path {</span>
+<span class="line">display: none;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#footer {</span>
+<span class="line">height: 80px;</span>
+<span class="line">background-color: transparent;</span>
+<span class="line">background-image: none;</span>
+<span class="line">padding: 0;</span>
+<span class="line">margin: 0;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#footer address {</span>
+<span class="line">padding: 5.25em 5em 0 5em;</span>
+<span class="line">color: #FFF;</span>
+<span class="line">font-size: 90%;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div#footer address a {</span>
+<span class="line">color: #FFF;</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'body {\r\nbackground-position: top center;\r\nbackground-image: url(../images/bg.png);\r\nbackground-repeat: repeat-y;\r\ncolor: #003F72;\r\n}\r\n\r\ndiv#page {\r\nwidth: 320px;\r\nbackground-image: url(../images/header-bg.png);\r\nbackground-repeat: no-repeat;\r\n}\r\n\r\ndiv#page-wrapper {\r\nbackground-image: url(../images/footer-bg.png);\r\nbackground-position: bottom left;\r\nbackground-repeat: no-repeat;\r\n}\r\n\r\ndiv#header {\r\nheight: 122px;\r\nbackground-color: transparent;\r\npadding-bottom: 0;\r\npadding-top: 0;\r\n}\r\n\r\ndiv#logo {\r\nmargin: 0;\r\npadding-left: 3%;\r\n}\r\n\r\ndiv#backbutton {\r\npadding-left: 17px;\r\npadding-top: 21px;\r\n}\r\n\r\ndiv#usermenu,\r\ndiv#searchbox,\r\ndiv#topmenu-position,\r\n\r\ndiv#path {\r\ndisplay: none;\r\n}\r\n\r\ndiv#footer {\r\nheight: 80px;\r\nbackground-color: transparent;\r\nbackground-image: none;\r\npadding: 0;\r\nmargin: 0;\r\n}\r\n\r\ndiv#footer address {\r\npadding: 5.25em 5em 0 5em;\r\ncolor: #FFF;\r\nfont-size: 90%;\r\n}\r\n\r\ndiv#footer address a {\r\ncolor: #FFF;\r\n}\r\n' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_5_10" id="eztoc126792_0_5_10"></a><h4>content.css</h4><p>In <i><b>extension/mobile/design/mobile/stylesheets/content.css</b></i>, paste the following:</p><pre class="wordwrap copytoclipboard"><span class="line">div.grid {</span>
+<span class="line">letter-spacing: -0.31em;</span>
+<span class="line">*letter-spacing: normal;</span>
+<span class="line">word-spacing: -0.43em;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.unit-1-2,</span>
+<span class="line">div.unit-1-4,</span>
+<span class="line">div.unit-3-4 {</span>
+<span class="line">display: inline-block;</span>
+<span class="line">zoom: 1; *display: inline;</span>
+<span class="line">letter-spacing: normal;</span>
+<span class="line">word-spacing: normal;</span>
+<span class="line">vertical-align: top;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.unit-1-2 {</span>
+<span class="line">width: 50%;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.unit-1-4 {</span>
+<span class="line">width: 25%;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.unit-3-4 {</span>
+<span class="line">width: 75%;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.category {</span>
+<span class="line">text-align: center;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.category h2 {</span>
+<span class="line">font-weight: normal;</span>
+<span class="line">color: #003F72;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-view-full, div.content-search, div.content-edit {</span>
+<span class="line">padding: 1em 1em 2.5em 1em;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.attribute-header h1 {</span>
+<span class="line">color: #003F72;</span>
+<span class="line">font-size: 1.8em;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-view-line div.class-article {</span>
+<span class="line">border-bottom: 1px dotted #003F72;</span>
+<span class="line">margin-bottom: 0.5em;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-view-line div.class-article h2 a {</span>
+<span class="line">color: #990000;</span>
+<span class="line">font-weight: normal;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-view-line div.attribute-image {</span>
+<span class="line">float: left;</span>
+<span class="line">margin: 0.25em 0.25em 0 0;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-search div.feedback h2 {</span>
+<span class="line">color: #003F72;</span>
+<span class="line">font-weight: normal;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-search div.feedback {</span>
+<span class="line">padding-top: 0.5em;</span>
+<span class="line">border-top: 1px dotted #003F72;</span>
+<span class="line">margin-bottom: 2em;</span>
+<span class="line">margin-top: 1em;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-search input.halfbox {</span>
+<span class="line">border: 1px solid #003F72;</span>
+<span class="line">background-color: #98CDF1;</span>
+<span class="line">width: 65%;</span>
+<span class="line">height: 21px;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">input.box {</span>
+<span class="line">border: 1px solid #003F72;</span>
+<span class="line">background-color: #98CDF1;</span>
+<span class="line">height: 21px;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">textarea.box {</span>
+<span class="line">border: 1px solid #003F72;</span>
+<span class="line">background-color: #98CDF1;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-search input.button {</span>
+<span class="line">font-size: 110%;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-view-full div.content-view-children {</span>
+<span class="line">border-top: 1px dotted #003F72;</span>
+<span class="line">margin-top: 0.5em;</span>
+<span class="line">padding-top: 0.5em;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-view-line div.class-comment h2 {</span>
+<span class="line">font-weight: normal;</span>
+<span class="line">color: #990000;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.attribute-star-rating {</span>
+<span class="line">display: none;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.attribute-byline p.date {</span>
+<span class="line">float: left;</span>
+<span class="line">font-size: 80%;</span>
+<span class="line">color: #006DC6;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.attribute-byline p.author {</span>
+<span class="line">float: right;</span>
+<span class="line">font-size: 80%;</span>
+<span class="line">color: #006DC6;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">input.button, input.defaultbutton {</span>
+<span class="line">color: #FFDDDD;</span>
+<span class="line">border: 1px solid #990000;</span>
+<span class="line">background-color: #990000;</span>
+<span class="line">background-image: url(../images/button-bg.png);</span>
+<span class="line">background-repeat: repeat-x;</span>
+<span class="line">font-size: 85%;</span>
+<span class="line">padding: 0.15em 1em;</span>
+<span class="line">font-weight: normal;</span>
+<span class="line">cursor: pointer;</span>
+<span class="line">margin: 0.5em 0;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-edit label {</span>
+<span class="line">color: #000000;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">div.content-edit div.attribute-header h1 {</span>
+<span class="line">color: #990000;</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'div.grid {\r\nletter-spacing: -0.31em;\r\n*letter-spacing: normal;\r\nword-spacing: -0.43em;\r\n}\r\n\r\ndiv.unit-1-2,\r\ndiv.unit-1-4,\r\ndiv.unit-3-4 {\r\ndisplay: inline-block;\r\nzoom: 1; *display: inline;\r\nletter-spacing: normal;\r\nword-spacing: normal;\r\nvertical-align: top;\r\n}\r\n\r\ndiv.unit-1-2 {\r\nwidth: 50%;\r\n}\r\n\r\ndiv.unit-1-4 {\r\nwidth: 25%;\r\n}\r\n\r\ndiv.unit-3-4 {\r\nwidth: 75%;\r\n}\r\n\r\ndiv.category {\r\ntext-align: center;\r\n}\r\n\r\ndiv.category h2 {\r\nfont-weight: normal;\r\ncolor: #003F72;\r\n}\r\n\r\ndiv.content-view-full, div.content-search, div.content-edit {\r\npadding: 1em 1em 2.5em 1em;\r\n}\r\n\r\ndiv.attribute-header h1 {\r\ncolor: #003F72;\r\nfont-size: 1.8em;\r\n}\r\n\r\ndiv.content-view-line div.class-article {\r\nborder-bottom: 1px dotted #003F72;\r\nmargin-bottom: 0.5em;\r\n}\r\n\r\ndiv.content-view-line div.class-article h2 a {\r\ncolor: #990000;\r\nfont-weight: normal;\r\n}\r\n\r\ndiv.content-view-line div.attribute-image {\r\nfloat: left;\r\nmargin: 0.25em 0.25em 0 0;\r\n}\r\n\r\ndiv.content-search div.feedback h2 {\r\ncolor: #003F72;\r\nfont-weight: normal;\r\n}\r\n\r\ndiv.content-search div.feedback {\r\npadding-top: 0.5em;\r\nborder-top: 1px dotted #003F72;\r\nmargin-bottom: 2em;\r\nmargin-top: 1em;\r\n}\r\n\r\ndiv.content-search input.halfbox {\r\nborder: 1px solid #003F72;\r\nbackground-color: #98CDF1;\r\nwidth: 65%;\r\nheight: 21px;\r\n}\r\n\r\ninput.box {\r\nborder: 1px solid #003F72;\r\nbackground-color: #98CDF1;\r\nheight: 21px;\r\n}\r\n\r\ntextarea.box {\r\nborder: 1px solid #003F72;\r\nbackground-color: #98CDF1;\r\n}\r\n\r\ndiv.content-search input.button {\r\nfont-size: 110%;\r\n}\r\n\r\ndiv.content-view-full div.content-view-children {\r\nborder-top: 1px dotted #003F72;\r\nmargin-top: 0.5em;\r\npadding-top: 0.5em;\r\n}\r\n\r\ndiv.content-view-line div.class-comment h2 {\r\nfont-weight: normal;\r\ncolor: #990000;\r\n}\r\n\r\ndiv.attribute-star-rating {\r\ndisplay: none;\r\n}\r\n\r\ndiv.attribute-byline p.date {\r\nfloat: left;\r\nfont-size: 80%;\r\ncolor: #006DC6;\r\n}\r\n\r\ndiv.attribute-byline p.author {\r\nfloat: right;\r\nfont-size: 80%;\r\ncolor: #006DC6;\r\n}\r\n\r\ninput.button, input.defaultbutton {\r\ncolor: #FFDDDD;\r\nborder: 1px solid #990000;\r\nbackground-color: #990000;\r\nbackground-image: url(../images/button-bg.png);\r\nbackground-repeat: repeat-x;\r\nfont-size: 85%;\r\npadding: 0.15em 1em;\r\nfont-weight: normal;\r\ncursor: pointer;\r\nmargin: 0.5em 0;\r\n}\r\n\r\ndiv.content-edit label {\r\ncolor: #000000;\r\n}\r\n\r\ndiv.content-edit div.attribute-header h1 {\r\ncolor: #990000;\r\n}\r\n' ); return false;" /></p>
+<![endif]--><a name="eztoc126792_0_5_11" id="eztoc126792_0_5_11"></a><h4>Content</h4><p>All that’s left to complete the mobile siteaccess is to populate some content. Log in to the Administration Interface and create three objects of the Folder content class, placing them beneath the root of the site. They should have the following titles: “Recipes”, “Food reviews”, and “Menus”. If you access your mobile siteaccess’ URL in a mobile browser, you should see the following:</p><a name="eztoc126792_0_6" id="eztoc126792_0_6"></a><h3>Mobile applications</h3><p>In this section, we are going to build two simple mobile applications, one for iOS / iPhone and one for the Android platform. These applications will simply be native shells for our mobile web channel. We will not cover the steps for how to set up iOS and Android development environments, as those are well documented in the official guides. Refer to the “iOS Developer Tools” or “Android SDK Installation Guide” for more information. We assume that you already have a development environment for at least one platform.</p><a name="eztoc126792_0_6_12" id="eztoc126792_0_6_12"></a><h4>iOS application</h4><p>Open Xcode, and on the very first screen, select “Create a New Xcode project”. Or, select “New Project...” from the “File” menu.</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/xcode/126808-1-eng-GB/xcode_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>A window will appear giving you several application templates to choose from. Create a barebones Cocoa Touch application by selecting the “Window-Based Application” icon.</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/windowbased-app/126811-1-eng-GB/windowbased-app_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Click the “Next” button. On the next screen, type “DemoApp” for the product name, and “com.ez” for the company identifier. Select “iPhone” from the “Device Family” drop-down list and unmark the “Include Unit Tests” check-box (as we are not going to write unit tests this time).</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/include-unit-test/126814-1-eng-GB/include-unit-test_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Click the “Next” button and select the location at which you want to save the project. Once the project is created, the project window will appear on your screen. Take a look at the contents of the “Project” table on the left side of the project window. In general, there are two types of files used to create an application: code and resources. Code is written in Objective-C, C, or C++. Resources are things like images and sounds that are used by the application at run-time. The groups in the project window are purely for organizing files. You can rename them to whatever you want. In the next step, we are going to create a new view controller that will be responsible for loading our web view with content served by eZ Publish. Select the “DemoApp” group on the left side and select “New -&gt; New File...” from the “File” menu.</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/demoapp/126817-1-eng-GB/demoapp_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Then, select the “UIViewController” subclass from the “Cocoa Touch” group and click the “Next” button.</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/cocoatouch/126820-1-eng-GB/cocoatouch_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>On the next screen, verify that the “Subclass of” field contains the “UIViewController” class, and that the checkbox titled “With XIB for user interface” is marked. (XIB stands for XML Interface Builder, which is covered shortly.) Then, click the “Next” button and name the file “MainController”.</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/maincontroller/126823-1-eng-GB/maincontroller_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Next, we need to load “MainController”, which at this point does nothing. However we will add a “UIWebView” control later, which is responsible for loading our web content. Select “DemoAppAppDelegate.h” and insert the following code:</p><pre class="wordwrap"><span class="line">#import &quot;MainController.h&quot;</span>
+</pre><p>Next, in “DemoAppAppDelegate.m”, create the main view controller and set it as the “rootViewController” of the window:</p><pre class="wordwrap copytoclipboard"><span class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:</span>
+<span class="line">(NSDictionary *)launchOptions</span>
+<span class="line">{</span>
+<span class="line">&nbsp;</span>
+<span class="line">// Create the mainController</span>
+<span class="line">MainController *mainController = [[MainController alloc] init];</span>
+<span class="line">&nbsp;</span>
+<span class="line">// Set mainController as rootViewController of window</span>
+<span class="line">[self.window setRootViewController:mainController];</span>
+<span class="line">&nbsp;</span>
+<span class="line">// The window retains mainController, we can release our reference</span>
+<span class="line">[mainController release];</span>
+<span class="line">&nbsp;</span>
+<span class="line">// Show the window</span>
+<span class="line">[self.window makeKeyAndVisible];</span>
+<span class="line">return YES;</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:\r\n(NSDictionary *)launchOptions\r\n{\r\n\r\n// Create the mainController\r\nMainController *mainController = [[MainController alloc] init];\r\n\r\n// Set mainController as rootViewController of window\r\n[self.window setRootViewController:mainController];\r\n\r\n// The window retains mainController, we can release our reference\r\n[mainController release];\r\n\r\n// Show the window\r\n[self.window makeKeyAndVisible];\r\nreturn YES;\r\n}' ); return false;" /></p>
+<![endif]--><p>Build and run the application to verify that everything works fine. At this point, you should see only a blank white window. Next, we are going to add the web view responsible for loading the content served by eZ Publish. Because we will need to access that web subview during runtime, “MainController” needs an outlet for that subview. Add the following instance variable to “MainController.h”:</p><pre class="wordwrap"><span class="line">@interface MainController : UIViewController {</span>
+<span class="line">IBOutlet UIWebView *webView;</span>
+<span class="line">}</span>
+</pre><p>The “IBOutlet” reference in front of the instance variable indicates that you are going to use the Interface Builder to lay out the interface for MainController’s view. When we created MainController, an XIB (XML Interface Builder) file of the same name was created and added to the project. Open MainController.xib now.</p><p>In the right pane, find the “UIWebView” control in the “Object” library and drag it into the view.</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/uiwebview/126826-1-eng-GB/uiwebview_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Next, make a connection from “File’s Owner” to that object, as shown below:</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/filesowner/126829-1-eng-GB/filesowner_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>After a “UIViewController” loads its view, it is immediately sent the message “viewDidLoad”. Whether that view is loaded from an XIB file or using the method “loadView”, this message gets sent to the view controller.</p><p>We need to do an extra initialization to a “UIViewController” -- which requires its view to already exist -- by overriding “viewDidLoad” in “MainController.m”.</p><pre class="wordwrap copytoclipboard"><span class="line">- (void)viewDidLoad {</span>
+<span class="line">&nbsp;</span>
+<span class="line">//Create a URL object</span>
+<span class="line">NSURL *url = [NSURL URLWithString:@&quot;http://m.example.com&quot;];</span>
+<span class="line">&nbsp;</span>
+<span class="line">//Request the URL</span>
+<span class="line">NSURLRequest *request = [NSURLRequest requestWithURL:url];</span>
+<span class="line">&nbsp;</span>
+<span class="line">[webView loadRequest:request];</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '- (void)viewDidLoad {\r\n\r\n//Create a URL object\r\nNSURL *url = [NSURL URLWithString:@&quot;http://m.example.com&quot;];\r\n\r\n//Request the URL\r\nNSURLRequest *request = [NSURLRequest requestWithURL:url];\r\n\r\n[webView loadRequest:request];\r\n}\r\n' ); return false;" /></p>
+<![endif]--><p>Notice that “NSURL URLWithString” takes a URL, which points to our mobile web channel available at http://m.example.com. When “MainController’s” view gets unloaded, its subviews will still be retained by “MainController”. They need to be released and set to “nil” in “viewDidUnload”. Let’s override this method in “MainController.m”:</p><pre class="wordwrap copytoclipboard"><span class="line">- (void)viewDidUnload {</span>
+<span class="line">[super viewDidUnload];</span>
+<span class="line">&nbsp;</span>
+<span class="line">[webView release];</span>
+<span class="line">webView = nil;</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '- (void)viewDidUnload {\r\n[super viewDidUnload];\r\n\r\n[webView release];\r\nwebView = nil;\r\n}' ); return false;" /></p>
+<![endif]--><p>Finally, we need a “dealloc” method, which frees up the object’s memory and disposes of any resources it holds, including ownership of any object instance variables:</p><pre class="wordwrap copytoclipboard"><span class="line">- (void)dealloc {</span>
+<span class="line">&nbsp;</span>
+<span class="line">[webView release];</span>
+<span class="line">[super dealloc];</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '- (void)dealloc {\r\n\r\n[webView release];\r\n[super dealloc];\r\n}' ); return false;" /></p>
+<![endif]--><p>That’s all! Build and run the application to verify that everything works fine.</p><a name="eztoc126792_0_6_13" id="eztoc126792_0_6_13"></a><h4>Android application</h4><p>Open Eclipse and select “New -&gt; Android Project” from the “File” menu.</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/androidproject/126832-1-eng-GB/androidproject_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>You can then enter some details for the new project. Enter “DemoApp” as the project name, select “Android 2.3.3” from the “Build Target” list, enter “DemoApp” as the application name, and enter “com.ez” as the package name. Make sure that the checkbox “Create Activity” is marked (an activity is the application’s presentation layer), enter “DemoApp” in the adjacent field, and enter “10” as the minimum SDK version. Finally, click the “Finish” button.</p><p>Eclipse will then create your project. You can inspect the project structure in the left panel.</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/projectstructure/126835-1-eng-GB/projectstructure_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Next, select “Window -&gt; Android SDK and AVD Manager”. In the resulting dialog, select “Virtual Devices” from the left panel and click the “New…” button.</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/newvirtualdevice/126838-1-eng-GB/newvirtualdevice_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Enter a name for your device, and choose an SDK target and screen resolution. Set the SD Card size to 12MiB (this is just to specify a card size for the Android emulator).</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/androidemulator/126841-1-eng-GB/androidemulator_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>In this example, we want to present users with our eZ Publish mobile siteaccess. The preferred method for creating the UI for our Android app is to use a layout resource file. Open the “main.xml” layout file in the res/layout project folder. Modify the main layout to include a “WebView” with a “LinearLayout”. It is important to give the “WebView” an ID, so that we can reference it later in our code.</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+<span class="line">android:orientation=&quot;vertical&quot;</span>
+<span class="line">android:layout_width=&quot;fill_parent&quot;</span>
+<span class="line">android:layout_height=&quot;fill_parent&quot;</span>
+<span class="line">&gt;</span>
+<span class="line">&lt;WebView</span>
+<span class="line">android:id=&quot;@+id/webview&quot;</span>
+<span class="line">android:layout_width=&quot;fill_parent&quot;</span>
+<span class="line">android:layout_height=&quot;fill_parent&quot;</span>
+<span class="line">/&gt;</span>
+<span class="line">&lt;/LinearLayout&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;\r\n&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;\r\nandroid:orientation=&quot;vertical&quot;\r\nandroid:layout_width=&quot;fill_parent&quot;\r\nandroid:layout_height=&quot;fill_parent&quot;\r\n&gt;\r\n&lt;WebView\r\nandroid:id=&quot;@+id/webview&quot;\r\nandroid:layout_width=&quot;fill_parent&quot;\r\nandroid:layout_height=&quot;fill_parent&quot;\r\n/&gt;\r\n&lt;/LinearLayout&gt;' ); return false;" /></p>
+<![endif]--><p>With our user interface defined, open the “DemoApp” activity ( “DemoApp.java” ) from the project’s source folder. We will make all changes by overriding the “onCreate” method. Start by inflating your UI using “setContentView”. Then you can reference the “WebView” that was defined earlier by using findViewById().</p><pre class="wordwrap copytoclipboard"><span class="line">package com.ez;</span>
+<span class="line">import android.app.Activity;</span>
+<span class="line">import android.os.Bundle;</span>
+<span class="line">import android.view.KeyEvent;</span>
+<span class="line">import android.webkit.WebView;</span>
+<span class="line">public class DemoApp extends Activity {</span>
+<span class="line">WebView webview;</span>
+<span class="line">/** Called when the activity is first created. */</span>
+<span class="line">@Override</span>
+<span class="line">public void onCreate(Bundle savedInstanceState) {</span>
+<span class="line">super.onCreate(savedInstanceState);</span>
+<span class="line">setContentView(R.layout.main);</span>
+<span class="line">webview = (WebView) findViewById(R.id.webview);</span>
+<span class="line">webview.setWebViewClient(new DemoAppWebViewClient());</span>
+<span class="line">webview.getSettings().setJavaScriptEnabled(true);</span>
+<span class="line">webview.loadUrl(&quot;http://m.example.com&quot;);</span>
+<span class="line">}</span>
+<span class="line">@Override</span>
+<span class="line">public boolean onKeyDown(int keyCode, KeyEvent event) {</span>
+<span class="line">if ((keyCode == KeyEvent.KEYCODE_BACK) &amp;&amp; webview.canGoBack()) {</span>
+<span class="line">webview.goBack();</span>
+<span class="line">return true;</span>
+<span class="line">}</span>
+<span class="line">return super.onKeyDown(keyCode, event);</span>
+<span class="line">}</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'package com.ez;\r\nimport android.app.Activity;\r\nimport android.os.Bundle;\r\nimport android.view.KeyEvent;\r\nimport android.webkit.WebView;\r\npublic class DemoApp extends Activity {\r\nWebView webview;\r\n/** Called when the activity is first created. */\r\n@Override\r\npublic void onCreate(Bundle savedInstanceState) {\r\nsuper.onCreate(savedInstanceState);\r\nsetContentView(R.layout.main);\r\nwebview = (WebView) findViewById(R.id.webview);\r\nwebview.setWebViewClient(new DemoAppWebViewClient());\r\nwebview.getSettings().setJavaScriptEnabled(true);\r\nwebview.loadUrl(&quot;http://m.example.com&quot;);\r\n}\r\n@Override\r\npublic boolean onKeyDown(int keyCode, KeyEvent event) {\r\nif ((keyCode == KeyEvent.KEYCODE_BACK) &amp;&amp; webview.canGoBack()) {\r\nwebview.goBack();\r\nreturn true;\r\n}\r\nreturn super.onKeyDown(keyCode, event);\r\n}\r\n}' ); return false;" /></p>
+<![endif]--><p>Notice that we have loaded the URL “http://m.example.com” into the “WebView”. In addition, we defined a listener “onKeyDown” that will perform the familiar goBack() action when the device’s “Back” button is pressed.</p><p>Next, we need to create a custom class “DemoAppWebViewClient” that extends “WebViewClient” and overrides the method “shouldOverrideUrlLoading()”. Select “New -&gt; Class” from the “File” menu in the “src/com.ez” package. Then, enter “DemoAppWebViewClient” as the name for the class.</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/javaclass/126844-1-eng-GB/javaclass_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>Next, click the “Browse” button to the right of the “Superclass” field. In the resulting dialog, type “android.webkit.WebViewClient”, then click OK. To complete the new class creation, click the “Finish” button.</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/webviewclient2/126850-1-eng-GB/webviewclient_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>The overridden “shouldOverrideUrlLoading()” method should be implemented as follows:</p><pre class="wordwrap copytoclipboard"><span class="line">package com.ez;</span>
+<span class="line">&nbsp;</span>
+<span class="line">import android.webkit.WebView;</span>
+<span class="line">import android.webkit.WebViewClient;</span>
+<span class="line">&nbsp;</span>
+<span class="line">class DemoAppWebViewClient extends WebViewClient {</span>
+<span class="line">@Override</span>
+<span class="line">&nbsp;</span>
+<span class="line">public boolean shouldOverrideUrlLoading(WebView view, String url) {</span>
+<span class="line">view.loadUrl(url);</span>
+<span class="line">return true;</span>
+<span class="line">}</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'package com.ez;\r\n\r\nimport android.webkit.WebView;\r\nimport android.webkit.WebViewClient;\r\n\r\nclass DemoAppWebViewClient extends WebViewClient {\r\n@Override\r\n\r\npublic boolean shouldOverrideUrlLoading(WebView view, String url) {\r\nview.loadUrl(url);\r\nreturn true;\r\n}\r\n}' ); return false;" /></p>
+<![endif]--><p>In the next step, we are going to hide the Android application title bar so that our application can work full screen. In order to do so, add the following attribute into the “DemoApp” activity in “AndroidManifest.xml”:</p><pre class="wordwrap"><span class="line">android:theme=&quot;@android:style/Theme.NoTitleBar&quot;</span>
+</pre><p>This is what the complete “AndroidManifest.xml” file should look like:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="line">&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+<span class="line">package=&quot;com.ez&quot;</span>
+<span class="line">android:versionCode=&quot;1&quot;</span>
+<span class="line">android:versionName=&quot;1.0&quot;&gt;</span>
+<span class="line">&lt;application android:icon=&quot;@drawable/icon&quot; android:label=&quot;@string/app_name&quot;&gt;</span>
+<span class="line">&lt;activity android:name=&quot;.DemoApp&quot;</span>
+<span class="line">android:theme=&quot;@android:style/Theme.NoTitleBar&quot;</span>
+<span class="line">android:label=&quot;@string/app_name&quot;&gt;</span>
+<span class="line">&lt;intent-filter&gt;</span>
+<span class="line">&lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;</span>
+<span class="line">&lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;</span>
+<span class="line">&lt;/intent-filter&gt;</span>
+<span class="line">&lt;/activity&gt;</span>
+<span class="line">&lt;/application&gt;</span>
+<span class="line">&lt;uses-sdk android:minSdkVersion=&quot;9&quot; /&gt;</span>
+<span class="line">&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;</span>
+<span class="line">&lt;/manifest&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;\r\n&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;\r\npackage=&quot;com.ez&quot;\r\nandroid:versionCode=&quot;1&quot;\r\nandroid:versionName=&quot;1.0&quot;&gt;\r\n&lt;application android:icon=&quot;@drawable/icon&quot; android:label=&quot;@string/app_name&quot;&gt;\r\n&lt;activity android:name=&quot;.DemoApp&quot;\r\nandroid:theme=&quot;@android:style/Theme.NoTitleBar&quot;\r\nandroid:label=&quot;@string/app_name&quot;&gt;\r\n&lt;intent-filter&gt;\r\n&lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;\r\n&lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;\r\n&lt;/intent-filter&gt;\r\n&lt;/activity&gt;\r\n&lt;/application&gt;\r\n&lt;uses-sdk android:minSdkVersion=&quot;9&quot; /&gt;\r\n&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;\r\n&lt;/manifest&gt;' ); return false;" /></p>
+<![endif]--><p>Run or debug the application and you should see your mobile web channel in an Android application!</p>
+<div class="">        <img src="../../var/doc/storage/images/media/images/result/126853-1-eng-GB/result_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div>
+
+<div class="break"></div>
+<hr class="hide" />
+
+</div>
+</div>
+</div>
+</div>
+<!-- Main area content: END -->
+
+</div>
+</div>
+<!-- Main area: END -->
+<hr class="hide" />
+
+</div></div></div>
+
+        <div id="footer-bg">
+        <div id="footer" class="container_12">
+
+            <div class="grid_3">
+                <img src="https://ez.no/extension/ez_ezno/design/ezno_2011/images/ez-logo-white.png" alt="ez-publish" />
+                <div id="footer-copyright" class="grid_3 alpha omega">
+                    
+<p>eZ Systems has been providing Web Content Management Solutions since 1999. With a global presence in Europe, Asia and the Americas, we are the power platform driving more than 250,000 sites in over 170 countries.</p>                </div>
+            </div>
+
+            <div class="grid_6 middle">
+                <div class="grid_6 alpha omega">
+                    <div class="grid_3 alpha"><div>
+<a name="eztoc411316_0_0_0_1" id="eztoc411316_0_0_0_1"></a><h5>PRODUCTS</h5>
+<ul>
+
+<li><a href="https://ez.no/headerandfooteraccess" target="_self">eZ Publish 5&nbsp;Platform</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Products/Compare-Versions" target="_self">Compare Versions</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Products/Demos-Videos" target="_self">Demos &amp; Videos</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Products/eZ-Market" target="_self">eZ Market</a></li>
+
+</ul>
+<a name="eztoc411316_0_0_0_2" id="eztoc411316_0_0_0_2"></a><h5>eZ DELIVERS RESULTS</h5>
+<ul>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-Delivers-Results/Monetize-Your-Content" target="_self">Monetize Your Content</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-Delivers-Results/Digitize-Your-Business" target="_self">Digitalize Your Business</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-Delivers-Results/Deliver-a-Better-Brand-Experience" target="_self">Deliver a Better Brand Experience</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-Delivers-Results/Engage-With-Customers" target="_self">Engage With Customer</a></li>
+
+</ul>
+</div></div>
+                    <div class="grid_3 omega"><div>
+<a name="eztoc411317_0_0_0_1" id="eztoc411317_0_0_0_1"></a><h5>eZ FOR YOU</h5>
+<ul>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-For-You/For-Executives" target="_self">For Executives</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-For-You/For-Online-Digital-Strategists" target="_self">For Online Digital Strategists</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-For-You/For-Marketing-Professionals" target="_self">For Marketing Professionals</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Solutions/eZ-For-You/For-Business-Systems-Managers" target="_self">For Business Systems Managers</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess" title="eZ Publish Documentation" target="_self">For Developers</a></li>
+
+</ul>
+<a name="eztoc411317_0_0_0_2" id="eztoc411317_0_0_0_2"></a><h5>GET STARTED NOW</h5>
+<ul>
+
+<li><a href="https://ez.no/headerandfooteraccess/Products/Demos-Videos" target="_self">See a Demo</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Forms/HTML-forms/Contact-eZ" target="_self">Ask a Question</a></li>
+
+<li><a href="https://ez.no/headerandfooteraccess/Forms/HTML-forms/Contact-Support" target="_self">Contact Support</a></li>
+
+</ul>
+</div></div>
+                </div>
+            </div>
+
+            <div class="grid_3 right">
+                <div class="contact-ez">
+                        <a id="cta-contact" href="https://ez.no/headerandfooteraccess/Forms/HTML-forms/Contact-eZ/(origin)/footer" title="Contact eZ!" class="btn-green btn--small">Contact eZ!</a>
+                </div>
+
+                <div class="adress">
+<a name="eztoc411321_0_0_0_1" id="eztoc411321_0_0_0_1"></a><h5>LOCATIONS:</h5><p><a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" target="_self">Cologne, London </a></p><p><a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" id="__mce_tmp" target="_self">Lyon, New York</a></p><p><a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" id="__mce_tmp" target="_self">Oslo, Paris</a></p><p><a href="https://ez.no/headerandfooteraccess/About-eZ/Contact-Us" id="__mce_tmp" target="_self">Skien, Tokyo</a></p></div>
+            </div>
+
+        </div>
+    </div>
+<div id="footer-connect-bg">
+    <div id="footer" class="container_12">
+        <div id="footer-connect-copyright" class="grid_8 alpha omega">
+            Copyright © 2013 eZ Systems AS (except where otherwise noted). All rights reserved.
+            
+
+<div class="">    <a href="https://ez.no/headerandfooteraccess/Privacy-policy">Privacy policy</a></div><br/><br/>
+            Powered by <a href="http://ez.no/ezpublish" title="eZ Publish Platform">the eZ Publish Platform</a>.<br />
+        </div>
+
+        <div id="footer-connect-social" class="grid_4 right">
+            <a href="http://www.youtube.com/user/ezpublish/" class="youtube" target="_blank">youtube</a>
+            <a href="https://google.com/+ezsystems" class="googleplus" target="_blank">google plus</a>
+            <a href="http://www.linkedin.com/groups?gid=2759&amp;trk=myg_ugrp_ovr" class="linkedin" target="_blank">linkedin</a>
+            <a href="https://www.facebook.com/eZPublishEnterprise" class="facebook" target="_blank">facebook</a>
+            <a href="http://twitter.com/#!/ezsystems" class="twitter" target="_blank">twitter</a>
+        </div>
+
+
+    </div>
+</div>
+
+
+</div>
+<!-- Complete page area: END -->
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-303624-13', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+<script type="text/javascript">
+(function()
+{var ff=document.createElement('script');ff.type='text/javascript';ff.async=true;ff.src='https://secure.liveviewer.ez.no/statjs/sst-120-1304513615/stat.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ff,s);}
+)();
+</script>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/Tutorials/Building-mobile-browser-and-hybrid-applications-with-eZ-Publish/Creating-a-sample-Hybrid-Mobile-Application by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 09:10:44 GMT -->
+</html>
+
+<!-- th[eZ] 20050804 -->

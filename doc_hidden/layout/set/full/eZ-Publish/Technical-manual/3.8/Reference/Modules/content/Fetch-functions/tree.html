@@ -1,0 +1,167 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Reference/Modules/content/Fetch-functions/tree by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>tree / Fetch functions / content / Modules / Reference / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>tree</h1>
+</div>
+<h3>Summary</h3>
+Fetches the children of a node recursively.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'content', 'tree',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', &nbsp;&nbsp;&nbsp;&nbsp;parent_node_id,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'sort_by', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sort_by, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'offset', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offset, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'limit', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'attribute_filter', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attribute_filter, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'extended_attribute_filter', &nbsp;extended_attribute_filter, ]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'class_filter_type', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class_filter_type, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'class_filter_array', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class_filter_array, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'only_translated', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;only_translated, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'language', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'main_node_only', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;main_node_only, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'as_object', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as_object, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'depth', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depth, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'depth_operator', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depth_operator &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'limitation', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitation &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'ignore_visibility', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignore_visibility &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>parent_node_id</td>
+        <td>integer</td>
+        <td>The ID number of the parent node.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>sort_by</td>
+        <td>array</td>
+        <td>The sorting mechanism that should be used.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>offset</td>
+        <td>integer</td>
+        <td>The offset to start at.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>limit</td>
+        <td>integer</td>
+        <td>The maximum number of nodes that should be fetched.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>attribute_filter</td>
+        <td>mixed</td>
+        <td>Filter logic for attribute level filtering.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>extended_attribute_filter</td>
+        <td>mixed</td>
+        <td>The extended attribute level filter logic.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>class_filter_type</td>
+        <td>string</td>
+        <td>The type of class filtering (include/exclude).</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>class_filter_array</td>
+        <td>array</td>
+        <td>The type of nodes that should be filtered.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>only_translated</td>
+        <td>boolean</td>
+        <td>Translation filtering (on/off).</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>language</td>
+        <td>string</td>
+        <td>The language that should be filtered.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>main_node_only</td>
+        <td>boolean</td>
+        <td>Type of nodes that should be fetched (all or main nodes only).</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>as_object</td>
+        <td>boolean</td>
+        <td>If TRUE (or omitted), an array of &quot;ezcontentobjecttreenode&quot; objects will be fetched. Otherwise, an array of arrays will be returned.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>depth</td>
+        <td>integer</td>
+        <td>The maximum level of depth that should be explored.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>depth_operator</td>
+        <td>string</td>
+        <td>The logic to use when checking the depth.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>limitation</td>
+        <td>array</td>
+        <td>Limitation array (emtpy array = access override).</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>ignore_visibility</td>
+        <td>boolean</td>
+        <td>Makes it possible to fetch hidden nodes.</td>
+        <td>No.</td>
+    </tr></table><h3>Description</h3>
+ <p>The &quot;tree&quot; function is very similar to the &quot;list&quot; fetch function. The only difference is that the tree function fetches child nodes recursively. The recursion depth can be controlled by the &quot;depth&quot; and &quot;depth_operator&quot; parameters. The rest of the parameters behave exactly in the same way as they do for the &quot;list&quot; function. Please refer to the documentation page of the &quot;<a href="list.html" target="_self">list</a>&quot; function for a complete explanation of the parameters.</p>    <a name="eztoc24693_0_0_1" id="eztoc24693_0_0_1"></a><h4>Depth</h4> <p>The depth parameter can be used to specify the level of depth (within the branch) that the function should explore when it is running. If the depth is set to one, this function will simply act as the list function. If the depth is greater than one, the function will fetch nodes further down in the branch. The default value is unlimited.</p>       <a name="eztoc24693_0_0_2" id="eztoc24693_0_0_2"></a><h4>Depth operator</h4> <p>The depth operator can be set to either &quot;lt&quot;, &quot;eq&quot; or &quot;gt&quot; - meaning &quot;less than&quot;, &quot;equal to&quot; and &quot;greather than&quot;. For example, if it is set to 'eq', only nodes with the depth that was specified using the depth parameter will be fetched.</p>   <h3>Examples</h3>
+    <a name="eztoc24694_0_0_1" id="eztoc24694_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $nodes=fetch( 'content', 'tree',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'parent_node_id', 42 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $nodes as $node}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$node.name|wash} &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $nodes=fetch( \'content\', \'tree\', \r\n                   hash( \'parent_node_id\', 42 ) )}\r\n\r\n{foreach $nodes as $node}\r\n    {$node.name|wash} &lt;br /&gt;\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>This example demonstrates how to fetch all the nodes that are under node number 42 recursively (all children, grand-children, etc. will be fetched). The names of the nodes are displayed.</p>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Reference/Modules/content/Fetch-functions/tree by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:58:16 GMT -->
+</html>

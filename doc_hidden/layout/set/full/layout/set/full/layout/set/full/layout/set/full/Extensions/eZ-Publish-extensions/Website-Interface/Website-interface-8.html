@@ -1,0 +1,87 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-5.0-upgrade by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:25:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Website interface 5.0 upgrade / Website Interface / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Website interface 5.0 upgrade</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>
+<b>Compatibility notice</b><br />Please be aware that as of eZ Publish 4.7, once that eZ Demo design has been introduced, issues can occur if eZ Webin and eZ Demo are used in the same installation. This is because the two extensions have similarities at the code level, such as class names, which will considered them as duplicated. In resume, we don't recommend or support the usage of both extensions in parallel, in the same eZ Publish installation.</p>
+    </td>
+</tr>
+</table>
+</div><a name="eztoc130207_0_1" id="eztoc130207_0_1"></a><h3>1. Back-up</h3><p>Before starting the Website Interface upgrading process make sure that you have a working backup of the existing website state including database, extensions, INI settings, etc. During the upgrade process the existing &quot;Website Interface&quot; extension will be removed and replaced with a new version.</p><a name="eztoc130207_0_2" id="eztoc130207_0_2"></a><h3>2. Packages</h3><p>Download following packages from&nbsp;<a href="http://packages.ez.no/ezpublish/5.0/" target="_self">http://packages.ez.no/ezpublish/5.0/</a> (latest version):</p><p>
+&quot;ezwebin_extension.ezpkg&quot;<br />
+&quot;ezstarrating_extension.ezpkg&quot;<br />
+&quot;ezgmaplocation_extension.ezpkg&quot;<br />
+&quot;ezwt_extension.ezpkg&quot;<br />&quot;ezwebin_design_blue.ezpkg&quot;</p><p>Go to the packages management interface in the &quot;Administration Interface&quot;. This can be done via the &quot;Setup&quot; tab, where you can click on the &quot;Packages&quot; link in the left menu:</p>
+<div class="object-center doc">        <img src="../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/download-package/121495-1-eng-GB/Download-package_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p><i>The package management screen</i></p><p>From the Repository drop-down box choose &quot;eZ-systems&quot; and then click on the “Change repository” button. From the list of available packages remove the following ones:</p><p>
+&nbsp;&quot;ezwebin_extension&quot;<br />
+&nbsp;&quot;ezstarrating_extension&quot;<br />
+&nbsp;&quot;ezgmaplocation_extension&quot;<br />
+&nbsp;&quot;ezwt_extension&quot;<br />&nbsp;&quot;ezwebin_design_blue&quot;</p><p><i><b>Note:</b> Check the boxes shown on the left side of the name of the package (by clicking on them) and then click on the &quot;Remove selected&quot; button, to remove the packages.</i></p><p>Be sure that the repository chosen is “eZ-systems” and click on the “Import new package” button. In the next view select &quot;ezwebin_extension&quot; and click “Import package” button. Once the &quot;ezwebin_extension&quot; is imported click on “Install package”. In the next view choose “Replace extension” option and click “Continue” button. Repeat these steps for rest of new extensions (&quot;ezstarrating_extension&quot;, &quot;ezgmaplocation_extension&quot; and &quot;ezwt_extension&quot;).</p><a name="eztoc130207_0_3" id="eztoc130207_0_3"></a><h3>3. Autoload update</h3><p>The autoload array needs to be updated for the new extensions. In order to do so, execute following command from eZ Publish Legacy root folder:</p><pre class="wordwrap"><span class="line">$ cd /&lt;ezpublish5-root-dir&gt;/ezpublish_legacy/</span>
+<span class="line">$ php bin/php/ezpgenerateautoloads.php -e -p</span>
+</pre><a name="eztoc130207_0_4" id="eztoc130207_0_4"></a><h3>4. Content classes</h3><p>Website Interface 5.0 does not provide any new content classes.</p><a name="eztoc130207_0_5" id="eztoc130207_0_5"></a><h3>5. Database changes</h3><p>Website Interface 5.0 does not require any database changes.</p><a name="eztoc130207_0_6" id="eztoc130207_0_6"></a><h3>6. INI settings</h3><p>Website Interface 5.0 does not require any INI settings changes.</p><a name="eztoc130207_0_7" id="eztoc130207_0_7"></a><h3>7. Clear Cache</h3><p>Once the upgrade script is done, you need to clear the cache by executing following command from eZ Publish Legacy root folder:</p><pre class="wordwrap"><span class="line">$ cd /&lt;ezpublish5-root-dir&gt;/ezpublish_legacy/</span>
+<span class="line">$ php bin/php/ezcache.php --clear-all --purge</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/Website-Interface/Website-interface-5.0-upgrade by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:25:54 GMT -->
+</html>

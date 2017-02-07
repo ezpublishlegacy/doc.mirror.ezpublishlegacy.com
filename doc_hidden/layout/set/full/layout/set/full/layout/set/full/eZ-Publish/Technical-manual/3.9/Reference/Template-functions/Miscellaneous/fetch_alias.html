@@ -1,0 +1,170 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Template-functions/Miscellaneous/fetch_alias by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:13:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>fetch_alias / Miscellaneous / Template functions / Reference / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>fetch_alias</h1>
+</div>
+<h3>Summary</h3>
+Executes a fetch based on configuration settings.<h3>Usage</h3>
+<pre>fetch_alias( alias_name, hash( [ parameter1, value1, ]
+                               [ parameter2, value2  ] ) )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>alias_name</td>
+        <td>string</td>
+        <td>The name of the fetch alias that should be used.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>parameter1</td>
+        <td>string</td>
+        <td>The name of parameter 1.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>value1</td>
+        <td>string</td>
+        <td>The value of parameter 1.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>parameter2</td>
+        <td>string</td>
+        <td>The name of parameter2.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>value2</td>
+        <td>string</td>
+        <td>The value of parameter 2.</td>
+        <td>No.</td>
+    </tr></table><h3>Description</h3>
+ <p>This function can be thought of as a configuration-file based version of the <a href="../../Template-operators/Data-and-information-extraction/fetch.html" target="_self">&quot;fetch&quot;</a> operator. It makes it possible to move data fetching blocks from template code to a configuration file and thus gather all fetches at one place. The advantage of such a scenario is that it allows quick modifications without the need of having to locate and modify different templates. The fetch aliases must be defined in a configuration override for &quot;fetchalias.ini&quot;. Each fetch has to be defined within its own block with a unique name. The following code shows the basic syntax/structure of a fetch block.</p> <pre class="wordwrap copytoclipboard"><span class="line">[fetch_alias_name]</span>
+<span class="line">Module=module_name</span>
+<span class="line">FunctionName=function_name</span>
+<span class="line">Parameter[parameter1]=fetch_alias_name1</span>
+<span class="line">Parameter[parameter2]=fetch_alias_name2</span>
+<span class="line">...</span>
+<span class="line">Constant[parameter3]=&lt;any value&gt;</span>
+<span class="line">Constant[parameter4]=&lt;any value&gt;</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[fetch_alias_name]\r\nModule=module_name\r\nFunctionName=function_name\r\nParameter[parameter1]=fetch_alias_name1\r\nParameter[parameter2]=fetch_alias_name2\r\n...\r\nConstant[parameter3]=&lt;any value&gt;\r\nConstant[parameter4]=&lt;any value&gt;\r\n...\r\n' ); return false;" /></p>
+<![endif]--> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Directive</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Module</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the target module (for example &quot;content&quot;).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>FunctionName</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the target fetch function (for example &quot;list&quot;).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Parameter</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Parameters&quot; array may be used to specify variables that will be set in the template(s). The &quot;parameter_name&quot; maps to the parameter name used in normal fetch functions. The &quot;fetch_alias_name&quot; will be the parameter name used in the template(s).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Constant</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Parameters that are defined as constants within the regular fetch function(s).</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+<h3>Examples</h3>
+    <a name="eztoc69855_0_0_1" id="eztoc69855_0_0_1"></a><h4>Example 1</h4> <p>Configuration block:</p><pre class="wordwrap copytoclipboard"><span class="line">[object]</span>
+<span class="line">Module=content</span>
+<span class="line">FunctionName=object</span>
+<span class="line">Parameter[object_id]=id</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[object]\r\nModule=content\r\nFunctionName=object\r\nParameter[object_id]=id\r\n' ); return false;" /></p>
+<![endif]--> <p>Template code:</p><pre class="wordwrap"><span class="line">{def $object=fetch_alias( 'object', hash( 'id', 1 ) )}</span>
+</pre> <p>This example demonstrates how to fetch an object.</p>   <a name="eztoc69855_0_0_2" id="eztoc69855_0_0_2"></a><h4>Example 2</h4> <p>Configuration block:</p><pre class="wordwrap copytoclipboard"><span class="line">[comments]</span>
+<span class="line">Module=content</span>
+<span class="line">FunctionName=list</span>
+<span class="line">Constant[sort_by]=published;0</span>
+<span class="line">Parameter[parent_node_id]=parent_node_id</span>
+<span class="line">Constant[class_filter_type]=include</span>
+<span class="line">Constant[class_filter_array]=comment</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[comments]\r\nModule=content\r\nFunctionName=list\r\nConstant[sort_by]=published;0\r\nParameter[parent_node_id]=parent_node_id\r\nConstant[class_filter_type]=include\r\nConstant[class_filter_array]=comment\r\n' ); return false;" /></p>
+<![endif]--> <p>Template code:</p><pre class="wordwrap"><span class="line">{def $comments=fetch_alias( 'comments', hash( 'parent_node_id', 42 ) )}</span>
+</pre> <p>This example demonstrates how to fetch comments.</p>   <a name="eztoc69855_0_0_3" id="eztoc69855_0_0_3"></a><h4>Example 3</h4> <p>Configuration block:</p><pre class="wordwrap copytoclipboard"><span class="line">[news_list]</span>
+<span class="line">Module=content</span>
+<span class="line">FunctionName=tree</span>
+<span class="line">Constant[sort_by]=published;0</span>
+<span class="line">Constant[class_id]=2</span>
+<span class="line">Constant[parent_node_id]=2</span>
+<span class="line">Constant[class_filter_type]=include</span>
+<span class="line">Constant[limit]=10</span>
+<span class="line">Constant[class_filter_array]=2</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[news_list]\r\nModule=content\r\nFunctionName=tree\r\nConstant[sort_by]=published;0\r\nConstant[class_id]=2\r\nConstant[parent_node_id]=2\r\nConstant[class_filter_type]=include\r\nConstant[limit]=10\r\nConstant[class_filter_array]=2\r\n' ); return false;" /></p>
+<![endif]--> <p>Template code:</p><pre class="wordwrap copytoclipboard"><span class="line">{foreach fetch_alias( 'news_list' ) as $article}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{node_view_gui node=$article}</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n{foreach fetch_alias( \'news_list\' ) as $article} \r\n    {node_view_gui node=$article}\r\n{/foreach}\r\n' ); return false;" /></p>
+<![endif]--> <p>This example demonstrates how to fetch and display the 10 latest news articles using full view.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Template-functions/Miscellaneous/fetch_alias by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:13:06 GMT -->
+</html>

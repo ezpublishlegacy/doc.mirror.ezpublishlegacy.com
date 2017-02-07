@@ -1,0 +1,138 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/The-Administration-Interface/The-Login-Page/User-registration-with-approval-workflow/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:30:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>User registration with approval workflow / The Login Page / The Administration Interface / 5.x / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>User registration with approval workflow</h1>
+</div>
+
+<p>It is possible to set up an approval workflow for the user registration. This is the registration carried out by the user himself when he logs in to eZ Publish the first time. This functionality is useful in the case when you wish to control who logs on to your system.</p><a name="eztoc131415_0_1" id="eztoc131415_0_1"></a><h3>Configure the workflow</h3><p>The system does not come with an approval workflow functionality enabled. In order to enable the functionality follow the steps below. First create the needed workflows, then connect the workflows to triggers, so that the approval workflow functionality is triggered when a user wants to register on your system.</p><a name="eztoc131415_0_1_1" id="eztoc131415_0_1_1"></a><h4>Create workflow</h4><p>An example of how an administrator creates a workflow as described in the steps below:</p>
+<ul>
+<li><div>Go to &quot;Setup&quot;-&quot;Workflow&quot;</div></li><li><div>Click on the pre-defined workflow called &quot;Standard&quot;</div></li><li><div>Click &quot;New workflow&quot;</div></li><li><div>
+Enter the name of the workflow, in this case &quot;UserRegistration1&quot; as shown in the screen below:<br />
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/creating-new-workflow/133677-1-eng-GB/Creating-New-Workflow_reference.jpg" alt="Creating New Workflow" />
+<p>Creating New Workflow</p>
+
+
+
+
+
+
+
+</div></div></li><li><div>
+Select &quot;Event / Approve&quot; and press &quot;Add event&quot; button. The screen below will appear:<br />
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/workflow-specification/133680-1-eng-GB/Workflow-Specification_reference.jpg" alt="Workflow Specification" />
+<p>Workflow Specification</p>
+
+
+
+
+
+
+
+</div></div></li><li><div>Select &quot;Users&quot; under &quot;Affected Sections&quot; and &quot;Publishing New Object&quot; under &quot;Affected Versions&quot;. </div></li><li><div>Select proper group who can approve the event&nbsp; </div></li><li><div>Press &quot;Add groups&quot; under &quot;Users who approve content&quot; and select the group you wish to give control of approving the new users. </div></li><li><div>Press &quot;OK&quot; to save. </div></li>
+</ul>
+<p>The steps above shows an example for approving content before publish. This workflow can be complex, depending on the case. For more workflow configuration please see the separate <a href="../../../../../../Technical-manual/4.5/Concepts-and-basics/Workflows.html" target="_self">workflow</a> documentation.</p><p>Note that in the case of creating an approval workflow for user registration you will need to create a new workflow: This workflow will end the registration process by sending a confirmation mail to the user that his account has been successfully created.</p><p>Follow the steps below to create the new workflow, in this case &quot;FinishUserRegistration&quot; as shown in the screenshot below:</p>
+<ul>
+<li><div>Go to &quot;Setup&quot;-&quot;Workflow&quot;</div></li><li><div>Click on the pre-defined workflow called &quot;Standard&quot;</div></li><li><div>Click &quot;New workflow&quot;</div></li><li><div>
+Enter the name of the workflow, in this case &quot;FinishUserRegistration&quot; as shown in the screen below:<br />
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/creating-workflow-finish-user-registration/133683-1-eng-GB/Creating-Workflow-Finish-User-Registration_reference.jpg" alt="Creating Workflow Finish User Registration" />
+<p>Workflow Finish User Registration</p>
+
+
+
+
+
+
+
+</div>&nbsp;</div></li><li><div>Select &quot;Event / Finish User Registration&quot; and press &quot;Add event&quot; button. In the screen that appears you:</div></li><li><div>Press &quot;OK&quot; to save the new workflow.</div></li>
+</ul>
+<a name="eztoc131415_0_1_2" id="eztoc131415_0_1_2"></a><h4>Connect workflow to triggers</h4><p>An administrator will do the following to connect the workflow to a trigger so that the user registration workflow will be enabled when a user wishes to register his/her user information.</p>
+<ul>
+<li><div>Go to &quot;Setup&quot;-&quot;Triggers&quot;</div></li><li><div>
+Connect the workflow for user registration to the workflow trigger &quot;Content&quot;-&quot;Publish&quot;-&quot;Before&quot;, in this case, select UserRegistration1 as shown in the screenshot below:<br />&nbsp;
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/connecting-workflow-to-trigger/133686-1-eng-GB/Connecting-Workflow-to-Trigger_reference.jpg" alt="Connecting Workflow to Trigger" />
+<p>Connecting Workflow to Trigger</p>
+
+
+
+
+
+
+
+</div></div></li><li><div>
+Connect the workflow for ending the user registration with a confirmation e-mail to the workflow trigger &quot;Content&quot;-&quot;Publish&quot;-&quot;After&quot;, in this case, select FinishUserRegistration (note again that you need to create the FinishUserRegistration workflow before it appears in the &quot;Workflow triggers&quot; screen), as shown in the screen below:<br />
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/connecting-workflow-to-trigger2/133689-1-eng-GB/Connecting-Workflow-to-Trigger_reference.jpg" alt="Connecting Workflow to Trigger" />
+<p>Connecting Workflow to Trigger</p>
+
+
+
+
+
+
+
+</div></div></li><li><div>Click &quot;Apply changes&quot; in the bottom of the screen</div></li>
+</ul>
+<p>You have now connected the approval workflow to triggers. This means that you have set-up a workflow approval process, and the user is presented with an approval workflow when he/she wants to register the user information in the log-in page.</p><a name="eztoc131415_0_2" id="eztoc131415_0_2"></a><h3>Register user with approval workflow enabled</h3><p>When a user logs in to eZ Publish the first time he/she needs to click &quot;Sign up&quot; in the log-in screen in order to register an account on the eZ Publish installation. In this case there is a workflow approval process connected to the user registration.</p>
+<ul>
+<li><div>The process starts when the user clicks &quot;Register&quot; to register his/her user information</div></li><li><div>A mail is sent to the user to confirm the user account. </div></li><li><div>
+When the user clicks the confirmation mail, he/she is presented with a screen as shown below: <br />
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/user-registered-message/133767-1-eng-GB/User-Registered-Message_large.jpg" alt="User Registered Message" />
+<p>User Registered Message</p>
+
+
+
+
+
+
+
+</div></div></li><li><div>
+An event&nbsp;workflow process is created&nbsp;and a notification is created in the &quot;Collaboration&quot; screen in the &quot;Dashboard&quot; of an administrator or another role with the right policies (the &quot;Approval&quot; Collaboration Notification must be enabled - see &quot;Dashboard&quot;, &quot;My Notification Settings&quot;). In this case the administrator must check the &quot;Collaboration&quot; item in the &quot;Dashboard&quot;. &nbsp;After clicking the notification from the user he as 3 choices: he can either Add comment, Approve or Deny the user registration.<br />When the Administrator clicks &quot;Approve&quot; the user gets a confirmation mail that the user is created and is ready for eZ Publish log-in. &nbsp;</div></li>
+</ul>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/The-Administration-Interface/The-Login-Page/User-registration-with-approval-workflow/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:30:42 GMT -->
+</html>

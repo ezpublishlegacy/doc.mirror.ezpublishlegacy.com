@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Installation/Normal-installation/Installing-eZ-Publish-on-a-Linux-UNIX-based-system by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:24:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Installing eZ Publish on a Linux/UNIX based system / Normal installation / Installation / 3.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installing eZ Publish on a Linux/UNIX based system</h1>
+</div>
+
+ <p>The requirements for doing a normal installation must be met. Please read the previous section if you're not sure about the requirements. Proceed only if you have access to a UNIX based environment with Apache, PHP, MySQL or PostgreSQL already installed and running. (Please note that PHP 4.4, PHP 5 should not be used.) As mentioned earlier, the database server may run on a different computer than the web server. This section will guide you through the following steps:</p> 
+<ul>
+ <li><div> Setting up a database (MySQL or PostgreSQL) </div></li> <li><div> Downloading eZ Publish </div></li> <li><div> Unpacking eZ Publish </div></li> <li><div> Initiating the setup wizard </div></li> 
+</ul>
+  <a name="eztoc340_1" id="eztoc340_1"></a><h2>Setting up a database</h2> <p>A database must be created before the initiation of the setup wizard takes place. The following text explains how to set up a database using either MySQL or PostgreSQL.</p>  <a name="eztoc340_1_1" id="eztoc340_1_1"></a><h3>MySQL</h3> 
+<ol>
+ <li><div> <p>
+Login as root:<br /></p><pre class="wordwrap"><span class="line">$ mysql -u &lt;mysql_username&gt; -p&lt;mysql_password&gt;</span>
+</pre><p>&nbsp;</p> <p>The MySQL client should display a &quot;mysql&gt;&quot; prompt.</p> </div></li> <li><div> 
+Create a new database:<br /> <pre class="wordwrap"><span class="line">mysql&gt; create database &lt;database&gt; character set &lt;character_set&gt;;</span>
+</pre>  </div></li> <li><div> 
+Grant access permissions:<br /> <pre class="wordwrap"><span class="line">mysql&gt; grant all on &lt;database&gt;.* to &lt;username&gt;@&lt;host&gt; identified by '&lt;password&gt;';</span>
+</pre>  </div></li> 
+</ol>
+ <table class="renderedtable indented-table" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>mysql_username</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The MySQL user (if no user is set up, use &quot;root&quot;).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>mysql_password</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The password that belongs to the mysql_username.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>username</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The username that will be used to access the database.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>password</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The password you wish to set in order to limit access to the database.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>database</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the database, for example &quot;my_new_database&quot;.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>host</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The hostname of the server on which eZ Publish will be running. (may be &quot;localhost&quot; if MySQL is installed on the same server).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>character_set</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The character encoding scheme to be used in the database.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+<p> <a name="postgresql"></a>
+ </p>   <a name="eztoc340_1_2" id="eztoc340_1_2"></a><h3>PostgreSQL</h3> 
+<ol>
+ <li><div> 
+Become the PostgreSQL super user (normally called postgres):<br /> <pre class="wordwrap"><span class="line">$ su &lt;postgres_super_user&gt;</span>
+</pre>  </div></li> <li><div> 
+Create a PostgreSQL user:<br /> <pre class="wordwrap"><span class="line">$ createuser &lt;username&gt;</span>
+</pre>  </div></li> <li><div> 
+Create a database:<br /> <pre class="wordwrap"><span class="line">$ createdb -E &lt;encoding&gt; &lt;database&gt;</span>
+</pre>  </div></li> <li><div> 
+Import the &quot;<a href="http://www.postgresql.org/docs/8.3/static/pgcrypto.html" target="_blank">pgcrypto</a>&quot; module into the database:<br /> <pre class="wordwrap"><span class="line">$ psql &lt;database&gt; &lt; /usr/share/pgsql/contrib/pgcrypto.sql</span>
+</pre>  </div></li> 
+</ol>
+ <table class="renderedtable indented-table" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>username</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The username that will be used to access the database.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>database</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the database, for example &quot;my_new_database&quot;.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>encoding</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The character encoding scheme to be used in the database.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+    <a name="eztoc340_2" id="eztoc340_2"></a><h2>Downloading eZ Publish</h2> <p>The latest stable version of eZ Publish can be downloaded from <a href="http://share.ez.no/download-develop/downloads" target="_blank">http://ez.no/download/ez_publish</a>.</p>   <a name="eztoc340_3" id="eztoc340_3"></a><h2>Unpacking eZ Publish</h2> <p>Use your favorite tool to unpack the downloaded eZ Publish distribution to a web-served directory (a directory that is reachable using a web browser). The following example shows how to do this using the tar utility (to unpack a tar.gz file, assuming that the &quot;tar&quot; and the &quot;gzip&quot; utilities are installed on the system):</p> <pre class="wordwrap"><span class="line">$ tar zxvf ezpublish-&lt;version_number&gt;.tar.gz -C &lt;web_served_directory&gt;</span>
+</pre> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>version_number</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The version number of eZ Publish that was downloaded.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>web_served_directory</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Full path to a directory that is served by the web server. This can be the path to the document root of the web server, or a personal web-directory (usually called &quot;public_html&quot; or &quot;www&quot;, and located inside a user's home directory).</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>The extraction utility will unpack eZ Publish into a subdirectory called &quot;ezpublish-3.x.x&quot;. Feel free to rename this directory to something more meaningful, for example &quot;my_site&quot;.</p> <p> <a name="initiating_the_setup_wizard"></a>
+ </p>   <a name="eztoc340_4" id="eztoc340_4"></a><h2>Initiating the setup wizard</h2> <p>The setup wizard can be started using a web browser immediately after the previous steps (described in this section) are completed. It will be automatically run the first time someone tries to access/browse the index.php file located in the eZ Publish directory. Let's assume that we are using a server with the hostname &quot;www.example.com&quot; and that after unpacking, the eZ Publish directory was renamed to &quot;my_site&quot;.</p>  <a name="eztoc340_4_3" id="eztoc340_4_3"></a><h3>Document root example</h3> <p>If eZ Publish was unpacked into a directory called &quot;my_site&quot; under the document root, the setup wizard can be initiated by browsing the following URL: http://www.example.com/my_site/index.php.</p>   <a name="eztoc340_4_4" id="eztoc340_4_4"></a><h3>Home directory example</h3> <p>If eZ Publish was unpacked to a web-served directory located inside the home directory of a user with the username &quot;peter&quot;, (usually called &quot;public_html&quot;, &quot;www&quot;, &quot;http&quot;, &quot;html&quot; or &quot;web&quot;), the setup wizard can be initiated by browsing the following URL: http://www.example.com/~peter/my_site/index.php.</p> <p>Please refer to &quot;<a href="../The-setup-wizard.html" target="_self">The setup wizard</a>&quot; section for a detailed description of the web based setup wizard.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.6/Installation/Normal-installation/Installing-eZ-Publish-on-a-Linux-UNIX-based-system by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:24:04 GMT -->
+</html>

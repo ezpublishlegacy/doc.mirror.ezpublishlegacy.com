@@ -1,0 +1,83 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Multivariate-Testing/Custom-Handler-Class/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Custom Handler Class / Multivariate Testing / 5.x / User manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Custom Handler Class</h1>
+</div>
+
+<p>This section is dedicated to developers who want to create a custom handler for page level testing. It covers PHP interface and eZ Publish INI configuration as well as explains custom handler development process based on a simple example.</p><p>In order to create a custom handler follow the steps below:</p><p>
+1. Create a new eZ Publish extension folder: <i>extension/mycustomhandler</i><br />
+2. Create a “classes” folder under <i>extension/mycustomhandler</i> where <i>PHP handler class</i> will be stored<br />
+3. Once the folder “classes” is available, create a new PHP file <i>“mycustomhandler.php”</i> under <i>extension/mycustomhandler/classes</i><br />4. The <i>custom handler</i> class has to implement the PHP interface <i>“ezpMultivariateTestHandlerInterface”</i> as follows:</p><pre class="wordwrap"><span class="line">class myCustomHandler implements ezpMultivariateTestHandlerInterface</span>
+</pre><pre class="wordwrap"><span class="line">{</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Checks whether multivariate testing is enabled or not</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return bool</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public function isEnabled()</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// TODO: Implement isEnabled() method.</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Executes multivariate test scenarios</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param int $nodeID</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return int</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public function execute($nodeID)</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// TODO: Implement execute() method.</span>
+</pre><pre class="wordwrap"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+</pre><pre class="wordwrap"><span class="line">}</span>
+</pre><p>5. Enable the extension in eZ Publish. Do this by opening the file <i>settings/override/site.ini.append.php</i> and adding the following command to the <i>[ExtensionSettings]</i> block:</p><pre class="wordwrap"><span class="line">ActiveExtensions[]=mycustomhandler</span>
+</pre><p>6. Update the&nbsp;<i>autoloads</i> class by running the script: <i>php bin/php/ezpgenerateautoloads.php -e -p</i></p><p>7. Define your custom handler class on <i>content.ini. [TestingSettings]</i> block:</p><pre class="wordwrap"><span class="line"># A handler class which implements &lt;ezpMultivariateTestHandlerInterface&gt; interface</span>
+</pre><pre class="wordwrap"><span class="line">MultivariateTestingHandlerClass=myCustomHandler</span>
+</pre><p><i><b>Note:</b> The <b>execute()</b> method takes a numeric <b>Node ID</b> as an input parameter and has to return a numeric Node ID too. It is important that the returned Node ID is valid (it has to exist in the system). Inside the execute() method you can implement your own login or algorithm to do probability calculations and return Node ID of the page that will be displayed to the end user. Your custom execute() method will be run automatically by the system.</i></p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/User-manual/5.x/Multivariate-Testing/Custom-Handler-Class/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:25 GMT -->
+</html>

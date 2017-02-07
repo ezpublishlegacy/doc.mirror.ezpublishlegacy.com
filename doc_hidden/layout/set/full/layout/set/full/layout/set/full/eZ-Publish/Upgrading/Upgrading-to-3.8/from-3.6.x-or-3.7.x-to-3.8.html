@@ -1,0 +1,157 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.8/from-3.6.x-or-3.7.x-to-3.8.0 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:49:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>from 3.6.x or 3.7.x to 3.8.0 / Upgrading to 3.8 / Upgrading / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>from 3.6.x or 3.7.x to 3.8.0</h1>
+</div>
+
+ <p>This section describes how to upgrade your existing eZ Publish 3.6.x / 3.7.x installation to version 3.8.0. If you are upgrading from a version prior to eZ Publish 3.6.0, you need to first <a href="../Upgrading-to-3.6/from-3.5.2-to-3.6.html" target="_self">upgrade to 3.6.0</a> before you can upgrade to 3.8.0.</p>    <a name="eztoc23434_0_0_1" id="eztoc23434_0_0_1"></a><h4>Important note</h4> <p>Before continuing, note that it is recommended to upgrade directly to the latest stable release in the 3.8 branch, which is version 3.8.10. Refer to &quot;<a href="../Upgrading-from-3.a.b-to-3.x.html" target="_self">Upgrading from 3.a.b to 3.x.y</a>&quot; and &quot;<a href="from-3.8.x-to-3.8.html" target="_self">Upgrading from 3.8.x to 3.8.y</a>&quot; to learn how this can be done. Note that there is a significant problem with eZ Publish 3.8.0-3.8.8. More precisely, the discount functionality of the shop module contains a security vulnerability. The issue has been fixed in version 3.8.9. Refer to the <a href="http://ez.no/community/news/ez_publish_security_fixes_3_9_3_and_3_8_9" target="_blank">announcement</a> and the upgrade instructions for details. </p> <p>Make sure that you have a working <a href="../../Upgrading.html#backup" target="_self">backup</a> of the site before you do the actual upgrade. The upgrade procedure consists of the following steps:</p> 
+<ol>
+ <li><div> Upgrading the distribution files to 3.8.0 </div></li> <li><div> Upgrading the database to 3.8.0 </div></li> <li><div> Running the system upgrade scripts </div></li> <li><div> Updating the system configuration </div></li> <li><div> Clearing the caches </div></li> 
+</ol>
+     <a name="eztoc23434_1" id="eztoc23434_1"></a><h2>Step 1: Upgrading the distribution files</h2> <p>The easiest way to upgrade the distribution files is to unpack eZ Publish 3.8.0 to a directory and then copy the directories that contain site-specific files from the existing installation. Make sure that you copy the following directories:</p> 
+<ul>
+ <li><div> design/example </div></li> <li><div> design/example_admin </div></li> <li><div> var </div></li> <li><div> settings/siteaccess </div></li> <li><div> settings/override </div></li> 
+</ul>
+ <p>Replace &quot;example&quot; and &quot;example_admin&quot; with actual names used by your siteaccesses.</p>  <a name="eztoc23434_1_1" id="eztoc23434_1_1"></a><h3>Custom extensions</h3> <p>If you are using custom extensions then the subdirectories inside the &quot;extension&quot; directory will also have to be copied. However, make sure that you do not overwrite any extensions that come with eZ Publish (for example the &quot;PayPal&quot; extension).</p>    <a name="eztoc23434_2" id="eztoc23434_2"></a><h2>Step 2: Upgrading the database</h2> <p>The following text describes how a 3.6.0 database can be upgraded to 3.8.0.</p>  <a name="eztoc23434_2_2" id="eztoc23434_2_2"></a><h3>MySQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.8.0 directory. </div></li> <li><div> Run the database upgrade script: <pre class="wordwrap"><span class="line">mysql -u &lt;username&gt; -p&lt;password&gt; &lt;database&gt; &lt; update/database/mysql/3.8/dbupdate-3.6.0-to-3.8.0.sql</span>
+</pre>  </div></li> 
+</ol>
+ <p>Note that the CREATE TABLE statements in the database upgrade script do not specify which storage engine to use (no ENGINE or TYPE option), and thus the default storage engine will be used. Normally, it is MyISAM (starting from MySQL v.3.23). If you are using InnoDB, make sure the default storage engine is set to InnoDB before you run the database upgrade script (refer to <a href="http://dev.mysql.com/doc/refman/5.0/en/storage-engines.html" target="_blank">MySQL documentation</a> for information about how to set the default engine). If you were not able to change the MySQL configuration on your server, and the upgrade left you with a mix of table types, you can use the &quot;bin/php/ezconvertmysqltabletype.php&quot; script for database conversion. It is also possible to convert the newly created tables to InnoDB using ALTER TABLE statements as shown in the following example:</p> <pre class="wordwrap"><span class="line">ALTER TABLE table_name1 TYPE = innodb;</span>
+<span class="line">ALTER TABLE table_name2 TYPE = innodb;</span>
+<span class="line">...</span>
+</pre> <p>Replace &quot;table_name1&quot;, &quot;table_name2&quot; with the actual names of the tables that need to be converted.</p>   <a name="eztoc23434_2_3" id="eztoc23434_2_3"></a><h3>PostgreSQL</h3> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.8.0 directory. </div></li> <li><div> Run the database upgrade script: <pre class="wordwrap"><span class="line">psql -d &lt;database&gt; -U &lt;dbowner&gt; &lt; update/database/postgresql/3.8/dbupdate-3.6.0-to-3.8.0.sql</span>
+</pre>  </div></li> 
+</ol>
+    <a name="eztoc23434_3" id="eztoc23434_3"></a><h2>Step 3: Running the system upgrade scripts</h2> <p>The 3.8.0 version of eZ Publish introduces a couple of new features. In order to make sure that your site is compatible with these features, you'll have to run a couple of upgrade scripts.</p> <p> <a name="updatemultilingual"></a>
+ </p>  <a name="eztoc23434_3_4" id="eztoc23434_3_4"></a><h3>Improved multi-language functionality</h3> <p>The 3.8.0 version of eZ Publish introduces <a href="http://ez.no/download/ez_publish/changelogs/ez_publish_3_8/multi_language_features_for_the_content_model" target="_self">improved multi-language functionality</a>. In order to make sure that your site is compatible with this new feature, you will have to update the configuration settings and run the &quot;updatemultilingual.php&quot; script. This step must be done even though your site has only one language.</p>  <a name="eztoc23434_3_4_2" id="eztoc23434_3_4_2"></a><h4>Configuring languages</h4> <p>Before running the upgrade script you need to <a href="../../Technical-manual/3.8/Features/Multi-language/Configuring-the-site-languages.html" target="_self">configure how the languages must be displayed on your site</a>. </p> <p>
+For the public siteaccess(es) where only specific languages should be shown, add the following lines into the &quot;<a href="../../Technical-manual/3.8/Reference/Configuration-files/site.ini/RegionalSettings.html" target="_self">[RegionalSettings]</a>&quot; section of the &quot;settings/siteaccess/example/site.ini.append.php&quot; file (replace &quot;example&quot; with the actual name of the siteaccess):<br /></p><pre class="wordwrap copytoclipboard"><span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=&lt;my-first-language&gt;</span>
+<span class="line">SiteLanguageList[]=&lt;my-second-language&gt;</span>
+<span class="line">ShowUntranslatedObjects=disabled</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'SiteLanguageList[]\r\nSiteLanguageList[]=&lt;my-first-language&gt;\r\nSiteLanguageList[]=&lt;my-second-language&gt;\r\nShowUntranslatedObjects=disabled' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>
+e.g. for British English and German languages you would do:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=eng-GB</span>
+<span class="line">SiteLanguageList[]=ger-DE</span>
+<span class="line">ShowUntranslatedObjects=disabled</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'SiteLanguageList[]\r\nSiteLanguageList[]=eng-GB\r\nSiteLanguageList[]=ger-DE\r\nShowUntranslatedObjects=disabled' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>This will tell the system that English has the highest priority and German is the second language. Any other languages will not be shown.</p> <p>
+For the siteaccess(es) like administration interface where all languages should be shown, add the following lines into the &quot;[RegionalSettings]&quot; section of the &quot;settings/example_admin/site.ini.append.php&quot; file (replace &quot;example_admin&quot; with the actual name of the siteaccess):<br /></p><pre class="wordwrap copytoclipboard"><span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=&lt;my-first-language&gt;</span>
+<span class="line">SiteLanguageList[]=&lt;my-second-language&gt;</span>
+<span class="line">ShowUntranslatedObjects=enabled</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'SiteLanguageList[]\r\nSiteLanguageList[]=&lt;my-first-language&gt;\r\nSiteLanguageList[]=&lt;my-second-language&gt;\r\nShowUntranslatedObjects=enabled' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>
+e.g. for British English and German languages you would do:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=eng-GB</span>
+<span class="line">SiteLanguageList[]=ger-DE</span>
+<span class="line">ShowUntranslatedObjects=enabled</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'SiteLanguageList[]\r\nSiteLanguageList[]=eng-GB\r\nSiteLanguageList[]=ger-DE\r\nShowUntranslatedObjects=enabled' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>This will tell the system that English has the highest priority and German is the second language. All other languages will still be shown (and editable) but will have less priority. The &quot;ShowUntranslatedObjects&quot; setting controls whether all languages are shown or not.</p>   <a name="eztoc23434_3_4_3" id="eztoc23434_3_4_3"></a><h4>Running the upgrade script</h4> <p>The &quot;updatemultilingual.php&quot; script should be run for all siteaccesses that use different databases. If you only have a public and an administration siteaccess (which is the most typical/usual case), then you will only need to run the script for one of the siteaccesses. If the siteaccess isn't specified, the default siteaccess will be used. Note that you will need to either publish or remove all the unpublished drafts in your system before launching this script.</p> <p>The following example shows how to run the script:</p>
+<ol>
+ <li><div> Navigate into the eZ Publish 3.8.0 directory. </div></li> <li><div> 
+Run the script (replace &quot;example&quot; with the actual name of your siteaccess):<br /> <pre class="wordwrap"><span class="line">php update/common/scripts/updatemultilingual.php -s example</span>
+</pre>  </div></li> 
+</ol>
+ <p>It is strongly recommended to read the information the script provides before continuing. If unsure press Control + C on your keyboard while the shell/console is active.</p> <p> <a name="updaterssimport"></a>
+ </p>    <a name="eztoc23434_3_5" id="eztoc23434_3_5"></a><h3>RSS import enhancements (optional)</h3> <p>The 3.8.0 version of eZ Publish introduces <a href="https://github.com/ezsystems/ezpublish-legacy/blob/master/doc/features/3.8/generic_rss_import.txt" target="_self">more generic RSS import</a> that allows using custom RSS import definitions. If you are using the RSS import functionality on your site, you will have to run the &quot;updaterssimport.php&quot; script. This script should be run for all siteaccesses that use different databases. If you only have a public and an administration siteaccess (which is the most typical/usual case), then you will only need to run the script for one of the siteaccesses. If the siteaccess isn't specified, the <a href="../../Technical-manual/3.9/Reference/Configuration-files/site.ini/SiteSettings/DefaultAccess.html" target="_self">default siteaccess</a> will be used. </p> <p>The following text shows how this can be done.</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.8.0 directory. </div></li> <li><div> 
+Run the script (replace &quot;example&quot; with the actual name of your siteaccess):<br /> <pre class="wordwrap"><span class="line">php update/common/scripts/updaterssimport.php -s example</span>
+</pre>  </div></li> 
+</ol>
+    <a name="eztoc23434_4" id="eztoc23434_4"></a><h2>Step 4: Updating the system configuration</h2>  <a name="eztoc23434_4_6" id="eztoc23434_4_6"></a><h3>Treemenu configuration</h3> <p>In eZ Publish 3.8, the default configuration for the left treemenu in the administration interface has changed i.e. only folder, forum, gallery and user group objects are visible in the menu by default. (In previous versions, objects of any class were shown in the treemenu and this could cause problems when the number of objects in the system increased.)</p> <p>The classes that the visible objects belong to are determined by the &quot;ShowClasses[]&quot; array located under the &quot;[TreeMenu]&quot; section of the &quot;settings/contentstructuremenu.ini&quot; configuration file. The following configuration is used by default: </p><pre class="wordwrap copytoclipboard"><span class="line">[TreeMenu]</span>
+<span class="line">ShowClasses[]</span>
+<span class="line">ShowClasses[]=folder</span>
+<span class="line">ShowClasses[]=forum</span>
+<span class="line">ShowClasses[]=gallery</span>
+<span class="line">ShowClasses[]=user_group</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[TreeMenu]\r\nShowClasses[]\r\nShowClasses[]=folder\r\nShowClasses[]=forum\r\nShowClasses[]=gallery\r\nShowClasses[]=user_group' ); return false;" /></p>
+<![endif]--> <p>If you want to display other objects in the treemenu, e.g. user and article objects, do the following:</p> 
+<ol>
+ <li><div> Open the &quot;contentstructuremenu.ini.append.php&quot; configuration file located in the &quot;settings/override&quot; or &quot;settings/siteaccess/example_admin&quot; directory (replace &quot;example_admin&quot; with the actual name of your admin siteaccess) and edit it. If the file does not exist, create it. </div></li> <li><div> Add the following lines under the &quot;[TreeMenu]&quot; section: <pre class="wordwrap"><span class="line">[TreeMenu]</span>
+<span class="line">ShowClasses[]=user</span>
+<span class="line">ShowClasses[]=article</span>
+</pre>where &quot;user&quot; and &quot;article&quot; are class identifiers. </div></li> 
+</ol>
+ <p>It is possible (but not recommended) to make the treemenu showing objects of all classes as in previous versions of eZ Publish. To do this, use the following configuration in the &quot;contentstructuremenu.ini.append.php&quot; file: </p><pre class="wordwrap"><span class="line">[TreeMenu]</span>
+<span class="line">ShowClasses[]</span>
+</pre>   <a name="eztoc23434_4_7" id="eztoc23434_4_7"></a><h3>Binary files indexing configuration</h3> <p>
+In eZ Publish versions prior to 3.8.0, the following default settings for <a href="http://ez.no/products/ez_publish/documentation/configuration/configuration/search_engine/configuring_binary_file_indexing" target="_self">binary file indexing</a> were specified in the &quot;binaryfile.ini&quot; configuration file:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[HandlerSettings]</span>
+<span class="line">MetaDataExtractor[text/plain]=plaintext</span>
+<span class="line">MetaDataExtractor[application/pdf]=pdf</span>
+<span class="line">MetaDataExtractor[application/msword]=word</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[HandlerSettings]\r\nMetaDataExtractor[text/plain]=plaintext\r\nMetaDataExtractor[application/pdf]=pdf\r\nMetaDataExtractor[application/msword]=word' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>
+In eZ Publish 3.8.0, the default settings for binary file indexing have been changed. This is how the new settings look like:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">[HandlerSettings]</span>
+<span class="line">MetaDataExtractor[text/plain]=ezplaintext</span>
+<span class="line">MetaDataExtractor[application/pdf]=ezpdf</span>
+<span class="line">MetaDataExtractor[application/msword]=ezword</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[HandlerSettings]\r\nMetaDataExtractor[text/plain]=ezplaintext\r\nMetaDataExtractor[application/pdf]=ezpdf\r\nMetaDataExtractor[application/msword]=ezword' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>If you have overridden these settings in your &quot;binaryfile.ini.append.php&quot; then you need to review your settings.</p>   <a name="eztoc23434_4_8" id="eztoc23434_4_8"></a><h3>Default configuration of unique user emails</h3> <p>
+In eZ Publish versions prior to 3.8.0, the default configuration does not allow different users to be registered with the exact same email address. This is just a built-in precaution mechanism which can be easily turned off by setting the &quot;<a href="../../Technical-manual/3.8/Reference/Configuration-files/site.ini/UserSettings/RequireUniqueEmail.html" target="_self">RequireUniqueEmail</a>&quot; directive within the [UserSettings] block of a configuration override for &quot;site.ini&quot; to &quot;false&quot;. However, this default configuration has been accidentally changed in eZ Publish version 3.8.0 (refer to <a href="http://issues.ez.no/9643" target="_blank">http://issues.ez.no/9643</a> for more information). The change is reverted in eZ Publish version 3.8.7. If you are going to use eZ Publish 3.8.0-3.8.6, it is recommended to add the following line to the [UserSettings] block of the &quot;override/site.ini.append.php&quot; configuration file:<br /></p><pre class="wordwrap"><span class="line">RequireUniqueEmail=true</span>
+</pre><p>&nbsp;</p>    <a name="eztoc23434_5" id="eztoc23434_5"></a><h2>Step 5: Clearing the caches</h2> <p>Whenever an eZ Publish solution is upgraded, all caches must be cleared in a proper way. This should be done from within a system shell:</p> 
+<ol>
+ <li><div> Navigate into the eZ Publish 3.8.0 directory. </div></li> <li><div> 
+Run the clear cache script:<br /> <pre class="wordwrap"><span class="line">bin/shell/clearcache.sh --clear-all</span>
+</pre>  </div></li> 
+</ol>
+ <p>Make sure that all caches are cleared. Sometimes the script is unable to clear caches because of restrictive file/directory permission settings. Make sure that all caches have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Upgrading/Upgrading-to-3.8/from-3.6.x-or-3.7.x-to-3.8.0 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:49:28 GMT -->
+</html>

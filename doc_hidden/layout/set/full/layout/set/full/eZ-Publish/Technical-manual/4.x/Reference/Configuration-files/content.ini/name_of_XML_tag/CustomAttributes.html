@@ -1,0 +1,72 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/content.ini/name_of_XML_tag/CustomAttributes by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:42:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>CustomAttributes / [name_of_XML_tag] / content.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>CustomAttributes</h1>
+</div>
+<h3>Summary</h3>
+Sets which custom attributes that can be used within XML tags of this particular type.<h3>Usage</h3>
+<pre class="pfix"><p>
+CustomAttributes[]=attribute1<br />
+&nbsp;CustomAttributes[]=attribute2<br />&nbsp;...</p></pre><h3>Description</h3>
+<p>This setting makes it possible to specify which custom attributes that can be used within XML tags of the &quot;name_of_XML_tag&quot; type. It is an array of custom attribute names. If empty, the system will not allow the use of custom attributes within XML tags of the &quot;name_of_XML_tag&quot; type.</p><p>Also, note that before being able to specify CustomAttributes for a given custom tag, the tag needs to be defined in the&nbsp;<a href="../CustomTagSettings/AvailableCustomTags.html" title="AvailableCustomTags" target="_blank">AvailableCustomTags[]</a>&nbsp;list.</p><h3>Examples</h3>
+<a name="eztoc90932_0_0_1" id="eztoc90932_0_0_1"></a><h4>Example 1</h4><p>If you wish to use a specific summary field in your tables, you can add a custom attribute called &quot;summary&quot; to the &quot;table&quot; XML tag by adding the following lines to the [table] section of your &quot;content.ini.append.php&quot; file:</p><pre class="wordwrap copytoclipboard"><span class="line">[CustomTagSettings]</span>
+<span class="line">AvailableCustomTags[]=paragraph</span>
+<span class="line">&nbsp;</span>
+<span class="line">[paragraph]</span>
+<span class="line">CustomAttributes[]</span>
+<span class="line">CustomAttributes[]=summary</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[CustomTagSettings]\r\nAvailableCustomTags[]=paragraph\r\n\r\n[paragraph]\r\nCustomAttributes[]\r\nCustomAttributes[]=summary' ); return false;" /></p>
+<![endif]--><p>&nbsp;Now, if you create a table using an XML code like this:</p><pre class="wordwrap"><span class="line">&lt;table summary=&quot;The meaning of my favourite smiles&quot;&gt;</span>
+<span class="line">...</span>
+<span class="line">&lt;/table&gt;</span>
+</pre><p>&nbsp;and put the following code into an override template for the &quot;content/datatype/view/ezxmltags/table.tpl&quot; template:</p><pre class="wordwrap"><span class="line">summary: {$summary}</span>
+</pre><p>&nbsp;the following output will be produced: &quot;summary: The meaning of my favourite smiles&quot;.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/content.ini/name_of_XML_tag/CustomAttributes by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:42:38 GMT -->
+</html>

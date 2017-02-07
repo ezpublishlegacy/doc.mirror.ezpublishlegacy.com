@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Configuration-files/site.ini/SiteSettings/SSLProxyServerName by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>SSLProxyServerName / [SiteSettings] / site.ini / Configuration files / Reference / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>SSLProxyServerName</h1>
+</div>
+<h3>Summary</h3>
+Sets which virtual host that functions as a proxy server for incoming SSL requests.<h3>Usage</h3>
+<pre class="pfix"> <p>SSLProxyServerName=virtual_host_name</p></pre><h3>Description</h3>
+ <p>This setting was introduced in eZ Publish 3.10 as a part of a functionality that provides support for using SSL proxy servers. </p> <p>The purpose of this feature is to reduce complexity by decreasing the number of entries in the Apache configuration file. For each eZ Publish installation, only one virtual host is needed, plus the one that handles all incoming SSL requests. It is typically useful when several SSL-enabled eZ Publish sites/installations are running through different virtual hosts on the same server. Using this feature, it is possible to create an additional virtual host that functions as an SSL proxy server (a single-point-of-contact interface between the clients and the sites/installations). It will listen on port 443 and handle all incoming SSL requests no matter which site they were meant for. The requests are internally redirected to the corresponding virtual hosts running the actual sites. Finally, eZ Publish will handle them and provide the actual response. The responses are passed back to the SSL proxy server which then returns them to the clients that issued the corresponding requests.</p> <p>When redirecting an SSL request to a virtual host, the proxy server sets the &quot;HTTP_X_FORWARDED_SERVER&quot; header. The value will be the name of the proxy server (the name of the virtual host as configured in Apache). All eZ Publish installations running on different virtual hosts must have the &quot;SSLProxyServerName&quot; directive set to the same value. This makes it possible for eZ Publish to distinguish SSL requests from usual HTTP requests. The system will identify a request as an SSL request if the value of the &quot;HTTP_X_FORWARDED_SERVER&quot; header matches the value of the &quot;SSLProxyServerName&quot; configuration setting. Otherwise, it will be classified as an ordinary HTTP request. The response will be passed to the SSL proxy server and then returned to the client.</p> <p>The default value of the &quot;SSLProxyServerName&quot; directive is &quot;localhost&quot;.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.10/Reference/Configuration-files/site.ini/SiteSettings/SSLProxyServerName by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:36:35 GMT -->
+</html>

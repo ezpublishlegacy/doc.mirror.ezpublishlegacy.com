@@ -1,0 +1,565 @@
+Message-ID: <2109374095.982.1413884648074.JavaMail.confluence@ip-10-127-227-192>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_981_1262652186.1413884648074"
+
+------=_Part_981_1262652186.1413884648074
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Development Guidelines</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+#main {
+    padding-bottom: 1em !important; /* The default padding of 6em is too mu=
+ch for printouts */
+}
+
+body {
+    font-family: Arial, Helvetica, FreeSans, sans-serif;
+    font-size: 10pt;
+    line-height: 1.2;
+}
+
+body, #full-height-container, #main, #page, #content, .has-personal-sidebar=
+ #content {
+    background: #fff    !important;
+    color: #000         !important;
+    border: 0           !important;
+    width: 100%         !important;
+    height: auto        !important;
+    min-height: auto    !important;
+    margin: 0           !important;
+    padding: 0          !important;
+    display: block      !important;
+}
+
+a, a:link, a:visited, a:focus, a:hover, a:active {
+    color: #000;
+}
+#content h1,
+#content h2,
+#content h3,
+#content h4,
+#content h5,
+#content h6 {
+    font-family: Arial, Helvetica, FreeSans, sans-serif;
+    page-break-after: avoid;
+}
+pre {
+    font-family: Monaco, "Courier New", monospace;
+}
+
+#header,
+.aui-header-inner,
+#navigation,
+#sidebar,
+.sidebar,
+#personal-info-sidebar,
+.ia-fixed-sidebar,
+.page-actions,
+.navmenu,
+.ajs-menu-bar,
+.noprint,
+.inline-control-link,
+.inline-control-link a,
+a.show-labels-editor,
+.global-comment-actions,
+.comment-actions,
+.quick-comment-container,
+#addcomment {
+    display: none !important;
+}
+
+.comment .date::before {
+    content: none !important; /* remove middot for print view */
+}
+
+h1.pagetitle img {
+    height: auto;
+    width: auto;
+}
+
+.print-only {
+    display: block;
+}
+#footer {
+    position: relative !important; /* CONF-17506 Place the footer at end of=
+ the content */
+    margin: 0;
+    padding: 0;
+    background: none;
+    clear: both;
+}
+
+#poweredby {
+    border-top: none;
+    background: none;
+}
+
+#poweredby li.print-only {
+    display: list-item;
+    font-style: italic;
+}
+
+#poweredby li.noprint {
+    display:none;
+}
+
+
+/* no width controls in print */
+.wiki-content .table-wrap,
+.wiki-content p,
+.panel .codeContent,
+.panel .codeContent pre,
+.image-wrap {
+    overflow: visible !important;
+}
+
+/* TODO - should this work? */
+#children-section,
+#comments-section .comment,
+#comments-section .comment .comment-body,
+#comments-section .comment .comment-content,
+#comments-section .comment p {
+    page-break-inside: avoid;
+}
+
+#page-children a {
+    text-decoration: none;
+}
+
+/**
+ hide twixies
+
+ the specificity here is a hack because print styles
+ are getting loaded before the base styles. */
+#comments-section.pageSection .section-header,
+#comments-section.pageSection .section-title,
+#children-section.pageSection .section-header,
+#children-section.pageSection .section-title,
+.children-show-hide {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.children-show-hide.icon {
+    display: none;
+}
+
+/* personal sidebar */
+.has-personal-sidebar #content {
+    margin-right: 0px;
+}
+
+.has-personal-sidebar #content .pageSection {
+    margin-right: 0px;
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Development Guidelines</h1>
+    <div class=3D"Section1">
+        <p>These are the development/coding guidelines for eZ Publish 5.x k=
+ernel, they are the same if you intend to write Bundles, hack on eZ Publish=
+ itself or create new functionality for or on top of eZ Publish.</p>
+<p>Like most <span>development</span> guidelines these aims to improve secu=
+rity, maintainability, performance and readability of our software. They fo=
+llow industry standards but sometimes extend them to cater specifically to =
+our needs for eZ Publish ecosystem. The next sections will cover all releva=
+nt technologies from a high level point of view.</p>
+<p><style type=3D"text/css">/*<![CDATA[*/
+div.rbtoc1413884648000 {padding: 0px;}
+div.rbtoc1413884648000 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1413884648000 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style></p>
+<div class=3D"toc-macro rbtoc1413884648000">=20
+<ul class=3D"toc-indentation">=20
+<li><a href=3D"#DevelopmentGuidelines-HTTP">HTTP</a></li>=20
+<li><a href=3D"#DevelopmentGuidelines-REST">REST</a></li>=20
+<li><a href=3D"#DevelopmentGuidelines-UI">UI</a>=20
+<ul class=3D"toc-indentation">=20
+<li><a href=3D"#DevelopmentGuidelines-WEBForms/Ajax">WEB Forms/Ajax</a></li=
+>=20
+<li><a href=3D"#DevelopmentGuidelines-HTML/Templates">HTML/Templates</a></l=
+i>=20
+<li><a href=3D"#DevelopmentGuidelines-Admin">Admin</a></li>=20
+</ul> </li>=20
+<li><a href=3D"#DevelopmentGuidelines-PHP">PHP</a>=20
+<ul class=3D"toc-indentation">=20
+<li><a href=3D"#DevelopmentGuidelines-PublicAPI">Public API</a></li>=20
+<li><a href=3D"#DevelopmentGuidelines-Commandline">Command line</a></li>=20
+</ul> </li>=20
+<li><a href=3D"#DevelopmentGuidelines-Data&amp;Databases">Data &amp; Databa=
+ses</a>=20
+<ul class=3D"toc-indentation">=20
+<li><a href=3D"#DevelopmentGuidelines-Sessions">Sessions</a></li>=20
+<li><a href=3D"#DevelopmentGuidelines-Transactions">Transactions</a></li>=
+=20
+<li><a href=3D"#DevelopmentGuidelines-LimitationsintheSQLdialectsupported">=
+Limitations in the SQL dialect supported</a></li>=20
+</ul> </li>=20
+</ul>=20
+</div>
+<p></p>
+<h2 id=3D"DevelopmentGuidelines-HTTP">HTTP</h2>
+<p>eZ Publish is a web software that is reached via HTTP in most cases, out=
+ of the box in eZ Publish 5.x kernel this is specifically: web (usually HTM=
+L) or REST.</p>
+<p>We aim to follow the <a href=3D"http://trac.tools.ietf.org/wg/httpbis/tr=
+ac/wiki#HTTP1.1Deliverables" class=3D"external-link" rel=3D"nofollow">lates=
+t</a> stable HTTP specification, and industry best practice:</p>
+<ul>
+<li><strong>Expose our data in a RESTful way</strong><br />
+<ul>
+<li>GET, HEAD, OPTIONS &amp; TRACE methods are <a href=3D"http://tools.ietf=
+.org/html/draft-ietf-httpbis-p2-semantics-21#section-5.2.1" class=3D"extern=
+al-link" rel=3D"nofollow">safe</a>&nbsp;(otherwise known as <a href=3D"http=
+://en.wiktionary.org/wiki/nullipotent" class=3D"external-link" rel=3D"nofol=
+low">nullipotent</a>), as in: should never cause changes to resources (note=
+: things like writing a line in a log file are not considered resource chan=
+ges)</li>
+<li>PUT &amp; DELETE methods are <a href=3D"http://tools.ietf.org/html/draf=
+t-ietf-httpbis-p2-semantics-21#section-5.2.2" class=3D"external-link" rel=
+=3D"nofollow">idempotent</a>, as in multiple identical requests should all =
+have the same result as a single request</li>
+<li>GET &amp; HEAD methods should be <a href=3D"http://tools.ietf.org/html/=
+draft-ietf-httpbis-p2-semantics-21#section-5.2.3" class=3D"external-link" r=
+el=3D"nofollow">cacheable</a> both on client side, server-side and proxies =
+between, as further defined in the HTTP <a href=3D"http://tools.ietf.org/ht=
+ml/draft-ietf-httpbis-p6-cache-21" class=3D"external-link" rel=3D"nofollow"=
+>specification</a></li>
+<li>As PUT is for replacing a resource, we should use <a href=3D"http://too=
+ls.ietf.org/html/rfc5789" class=3D"external-link" rel=3D"nofollow">PATCH</a=
+> in cases where only partial replacement is intended</li>
+</ul></li>
+<li><strong>Authenticated traffic</strong><br />
+<ul>
+<li>Should use HTTPS</li>
+</ul></li>
+<li><strong>Session based traffic</strong><br />
+<ul>
+<li>Should follow recommendations for <em>Authenticated traffic</em></li>
+<li>Should use a per user session <a href=3D"http://en.wikipedia.org/wiki/C=
+ross-site_request_forgery" class=3D"external-link" rel=3D"nofollow">CSRF</a=
+> token on all requests using un-safe HTTP methods (POST, PUT, DELETE, PATC=
+H, ...)</li>
+<li>Should expire session id, session data and CSRF token on login, logout =
+and session time out, except:<br />
+<ul>
+<li>On login session data from previous session id is moved to new session =
+id, keeping for instance shopping basket on login</li>
+</ul></li>
+<li>Should avoid timing attacks by using a random amount of time for login =
+operation</li>
+<li>Should never use Session id in URI's. And this feature (&quot;SID&quot;=
+) must always be disabled on production servers</li>
+</ul></li>
+<li><strong>Sessions</strong><br />
+<ul>
+<li>Should not be used to store large amounts of data; store data in databa=
+se and id's in session if needed</li>
+<li>Should not store critical data: if user deletes his cookies or closes h=
+is browser session data is lost</li>
+<li>Should use an ID generated with enough randomness to prevent prediction=
+ or brute-force attacks</li>
+</ul></li>
+<li><strong>Cookies (especially session cookies)</strong><br />
+<ul>
+<li>Should never store sensitive data in cookies (only exception is session=
+ id in session cookie)</li>
+<li>Should always set <em>Full domain</em> to avoid <a href=3D"http://en.wi=
+kipedia.org/wiki/Session_fixation#Attacks_using_cross-subdomain_cooking" cl=
+ass=3D"external-link" rel=3D"nofollow">cross-subdomain cooking</a>&nbsp;whe=
+n on shared domain.</li>
+<li>Should set <em>HttpOnly</em> flag to reduce risk of attacks such as <a =
+href=3D"http://en.wikipedia.org/wiki/Session_fixation#Attacks_using_cross-s=
+ite_cooking" class=3D"external-link" rel=3D"nofollow">cross-site cooking</a=
+> and <a href=3D"http://en.wikipedia.org/wiki/Cross-site_scripting" title=
+=3D"Cross-site scripting" class=3D"external-link" rel=3D"nofollow">cross-si=
+te scripting</a></li>
+<li>Should set <em>Secure flag</em> if HTTPS is used (as recommended above)=
+</li>
+<li>Must never exceed 4kb</li>
+</ul></li>
+<li><strong>Headers</strong><br />
+<ul>
+<li>Should never include input data from user input or data from database w=
+ithout sanitizing it</li>
+</ul></li>
+<li><strong>Redirects</strong><br />
+<ul>
+<li>Should never take url from user input (example: POST parameter), instea=
+d allow identifiers instead that are understood by the backend</li>
+</ul></li>
+<li><strong>User input</strong><br />
+<ul>
+<li>Should always be validated, sanitized, casted and filtered to avoid <a =
+href=3D"http://en.wikipedia.org/wiki/Cross-site_scripting" class=3D"externa=
+l-link" rel=3D"nofollow">XSS</a> &amp; <a href=3D"http://en.wikipedia.org/w=
+iki/Clickjacking" class=3D"external-link" rel=3D"nofollow">c<span style=3D"=
+color: rgb(0,0,0);">lickjacking</span></a><span style=3D"color: rgb(0,0,0);=
+">&nbsp;</span> attacks<br />
+<ul>
+<li>NB: this includes variables in the php supervariable <code>$_SERVER</co=
+de> as well (e.g. hostname should not be trusted)</li>
+</ul></li>
+</ul></li>
+<li><strong>User file uploads</strong><br />
+<ul>
+<li>Should follow recommendations for &quot;User input&quot; to validate fi=
+le name</li>
+<li>Should place uploaded files in a non public folder to avoid access to e=
+xecute uploaded file or in case of assets white list the type</li>
+<li>Should be appropriately limited in size to avoid DOS attacks on disk sp=
+ace, cpu usage by antivirus tool etc...</li>
+</ul></li>
+<li><strong>File downloads</strong><br />
+<ul>
+<li>Should not rely on user provided file path for non public files, instea=
+d use a synthetic id</li>
+</ul></li>
+<li><strong>Admin operations</strong><br />
+<ul>
+<li>May be placed on a different (sub)domain then the front end website to =
+avoid session stealing across front and backend.</li>
+</ul></li>
+<li><strong>Fully support being placed behind a reverse proxy like <a href=
+=3D"https://www.varnish-cache.org/" class=3D"external-link" rel=3D"nofollow=
+">Varnish</a></strong></li>
+</ul>
+<h2 id=3D"DevelopmentGuidelines-REST">REST</h2>
+<p>For now see the living <a href=3D"https://github.com/ezsystems/ezp-next/=
+blob/master/doc/specifications/rest/REST-API-V2.rst" class=3D"external-link=
+" rel=3D"nofollow">REST v2 specification</a> in our git repository for furt=
+her details.</p>
+<h2 id=3D"DevelopmentGuidelines-UI">UI</h2>
+<p>eZ Publish is often used as a web content management software, so we alw=
+ays strive to use the HTML/CSS/EcmaScript specifications correctly, and kee=
+p new releases up to date on new revisions of those. We furthermore always =
+try to make sure our software gracefully degrades making sure it is useful =
+even on older or less capable web clients (browsers), the industry terms fo=
+r this approach are:</p>
+<ul>
+<li><a href=3D"http://en.wikipedia.org/wiki/Progressive_enhancement" title=
+=3D"Progressive enhancement" class=3D"external-link" rel=3D"nofollow">Progr=
+essive enhancement</a></li>
+<li><a href=3D"http://en.wikipedia.org/wiki/Unobtrusive_JavaScript" class=
+=3D"external-link" rel=3D"nofollow">Unobtrusive JavaScript</a></li>
+<li><a class=3D"external-link" href=3D"http://en.wikipedia.org/wiki/Respons=
+ive_Web_Design" title=3D"Responsive Web Design" rel=3D"nofollow">Responsive=
+ Design</a></li>
+</ul>
+<p>All these terms in general recommends aiming for the minimum standard fi=
+rst, and enhance with additional features/styling if the client is capable =
+of doing so. In essence this allows eZ Publish to be &quot;Mobile first&quo=
+t; if the design allows for it, which is recommended. But eZ Publish should=
+ always also be fully capable of having different sets of web presentations=
+ for different devices using one or several sets of &quot;SiteAccess&quot; =
+(see eZ Publish terms) matching rules for the domain, port or URI, so any k=
+ind of device detection can be used together with eZ Publish, making it ful=
+ly possible to write for instance <a href=3D"http://en.wikipedia.org/wiki/W=
+ireless_Application_Protocol" class=3D"external-link" rel=3D"nofollow">WAP<=
+/a> based websites and interfaces on top of eZ Publish.</p>
+<h3 id=3D"DevelopmentGuidelines-WEBForms/Ajax">WEB Forms/Ajax</h3>
+<p>As stated in the HTTP section, all unsafe requests to the web server sho=
+uld have a CSRF token to protect against attacks; this includes web forms a=
+nd ajax requests that don't use the GET http method. As also stated in the =
+HTTP section and further defined in the PHP section, User input should alwa=
+ys be validated to avoid XSS issues.</p>
+<h3 id=3D"DevelopmentGuidelines-HTML/Templates">HTML/Templates</h3>
+<p>All data that comes from backend and in return comes from user input sho=
+uld always be escaped, in case of Twig templates this done by default, but =
+in case of PHP templates, Ajax and other not Twig based output this must be=
+ handled manually.</p>
+<p>Output escaping must be properly executed according to the desired forma=
+t, eg. javascript vs. html, but also taking into account the correct charac=
+ter set (see eg. output escaping fallacy when not specifying charset encodi=
+ng in <a href=3D"http://www.php.net/htmlspecialchars" class=3D"external-lin=
+k" rel=3D"nofollow">htmlspecialchars</a>)</p>
+<h3 id=3D"DevelopmentGuidelines-Admin">Admin</h3>
+<p>Admin operations that can have a severe impact on the web applications s=
+hould require providing password and require it again after some time has g=
+one, normally 10 - 20 minutes, on all session based interfaces.</p>
+<p>&lt;TODO: Add more coding guidelines for HTML (XHTML5), Javascript, CSS =
+and templates&gt;</p>
+<h2 id=3D"DevelopmentGuidelines-PHP">PHP</h2>
+<p>For now see our comprehensive coding standard &amp; guidelines <a href=
+=3D"https://github.com/ezsystems/ezpublish-kernel/wiki/codingstandards" cla=
+ss=3D"external-link" rel=3D"nofollow">wiki page</a> on github.</p>=20
+<div class=3D"aui-message hint shadowed information-macro">=20
+<p class=3D"title">eZ Coding Standards Tools</p>=20
+<span class=3D"aui-icon icon-hint">Icon</span>=20
+<div class=3D"message-content">=20
+<p>See also <a href=3D"http://eZ%20Coding%20Standard%20tools" class=3D"exte=
+rnal-link" rel=3D"nofollow">eZ Coding Standards Tools</a> repository to get=
+ the configuration files for your favorite tools.</p>=20
+</div>=20
+</div>=20
+<h3 id=3D"DevelopmentGuidelines-PublicAPI">Public API</h3>
+<p>The PHP Public API provided in eZ Publish 5.0 is in most cases in charge=
+ of checking permissions to data for you, but some API's are not documented=
+ to throw UnauthorizedException, which means that it is the consumer of the=
+ API's who is responsible for checking permissions.</p>
+<p>The following example shows how this is done in the case of loading user=
+s:</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>loadUser()</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"theme: Eclipse; brush: php; gutter: false" style=3D"font-size=
+:12px;">// Get a user
+$userId =3D (int)$params['id'];
+$userService =3D $repository-&gt;getUserService();
+$user =3D $userService-&gt;loadUser( $userId );
+
+// Now check that current user has access to read this user
+if ( !$repository-&gt;canUser( 'content', 'read', $user ) )
+{
+    // Generates message: User does not have access to 'content' 'read' wit=
+h id '10'
+    throw new \eZ\Publish\Core\Base\Exceptions\UnauthorizedException( 'cont=
+ent', 'read', array( 'id' =3D&gt; $userId ) );
+}</pre>=20
+</div>
+</div>
+<h3 id=3D"DevelopmentGuidelines-Commandline">Command line</h3>
+<p>Output must always be escaped when displaying data from the database.</p=
+>
+<p><em>&lt;TODO: Expand on how best practice is to handle user input in eZ =
+Publish 5 to avoid XSS issues&gt;</em></p>
+<h2 id=3D"DevelopmentGuidelines-Data&amp;Databases">Data &amp; Databases</h=
+2>
+<ul>
+<li>Values coming from variables should always be appropriately quoted or b=
+inded in SQL statements</li>
+<li>The SQL statements used should never be created by hand with one versio=
+n per supported database, as this increases both the maintenance load and t=
+he chances for security-related problems</li>
+<li>Usage of temporary tables is discouraged, as their behaviour is very di=
+fferent on different databases. Subselects should be prefererred (esp. sinc=
+e recent mysql versions have much better support for them)</li>
+<li>Full table locking is discouraged</li>
+</ul>
+<p><em>&lt;TODO: guidelines for how data should be stored for maximum porta=
+bility (hint: XML &amp; abstraction)&gt;</em></p>
+<h3 id=3D"DevelopmentGuidelines-Sessions">Sessions</h3>
+<ul>
+<li>Business logic should not depend on database connections being either p=
+ersistent or not persistent</li>
+<li>The connection to the database should always be opened as late as possi=
+ble during page execution. Ideally, to improve scalability, a web page exec=
+uting no queries should not connect to the db at all (note that closing the=
+ db connection as soon as possible is a tricky problem, as we expect to sup=
+port persistent db connections as well for absolute best performances)</li>
+<li>The same principle applies to configurations where a master/slave db se=
+tup is in use: the chance for a failure due to a database malfunction shoul=
+d not increase with the number of db servers at play, but actually decrease=
+</li>
+<li>It is recommended to avoid as much as possible statements which alter t=
+he current session, as they slow down the application, are brittle and hard=
+ to debug. <br />Point in case; if a db session locks a table then is abrup=
+tly terminated, the table might stay locked for a long time</li>
+</ul>
+<h3 id=3D"DevelopmentGuidelines-Transactions">Transactions</h3>
+<ul>
+<li>Transactions should always be used to wrap sql statements which affect =
+data in multiple tables: either all data changes go through or none of them=
+</li>
+<li>Transactions are prone to locking issues, so the code executed within a=
+ transaction should be limited to the minimum necessary amount (ex. clearin=
+g caches should be done after the transaction is committed)</li>
+<li>When using transactions, always consider side effects on external syste=
+m, such as on-disk storage. F.e. is a transaction relative to creating an i=
+mage variation is rolled back, the corresponding file should not be left on=
+ disk</li>
+<li>Nested transactions are supported in the following way:<br />
+<ul>
+<li>a transaction within another one will not commit when requested, only t=
+he outhermost transaction will commit</li>
+<li>a transaction within another one will roll back all the way to the star=
+t of the outhermost transaction when requested</li>
+<li>as a result a transaction shall never be rolled back just as a means of=
+ cancelling its work - the side effect might be of cancelling other work wh=
+ich had just been done previously</li>
+</ul></li>
+</ul>
+<h3 id=3D"DevelopmentGuidelines-LimitationsintheSQLdialectsupported">Limita=
+tions in the SQL dialect supported</h3>
+<p>Striving to support Mysql 5, PostgreSQL xx and Oracle 10, the following =
+limitations apply:</p>
+<ul>
+<li>Tables, columns and other db objects should not use names longer than 3=
+0 chars</li>
+<li>Varchar columns with a definition of <em>default &quot;&quot; not null<=
+/em> are discouraged</li>
+<li>For SELECTs, offset and limit have to be handled by the php layer, not =
+hardcoded in the sql</li>
+<li>Never treat a NULL varchar value as semantically different from an empt=
+y string value</li>
+<li>The select list of a query cannot contain the same field multiple times=
+</li>
+<li>For GROUP BY statements, all fields in the group by clause should be in=
+ the select list as well</li>
+<li>For SELECTs, usage of the AS token is allowed in the select list, but n=
+ot in the list of tables</li>
+<li>Do not put quotes around numeric values (use proper casting/escaping to=
+ avoid SQL injection)</li>
+<li><em>&lt;TODO: finish sql guidelines&gt;</em></li>
+</ul>
+<p>&nbsp;</p>
+    </div>
+</body>
+</html>
+------=_Part_981_1262652186.1413884648074--

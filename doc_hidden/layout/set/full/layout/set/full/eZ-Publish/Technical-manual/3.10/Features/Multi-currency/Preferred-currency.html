@@ -1,0 +1,59 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Features/Multi-currency/Preferred-currency by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:01:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Preferred currency / Multi-currency / Features / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Preferred currency</h1>
+</div>
+
+ <p>A user can select one of the <a href="Creating-a-new-currency.html#status" target="_self">active</a> currencies as &quot;preferred currency&quot;. The system will then use this currency for the user. This can be done by requesting &quot;shop/preferredcurrency&quot; in the URL, choosing the desired currency from drop-down list and clicking the &quot;Set&quot; button. There is an additional possibility to set preferred currency by requesting &quot;shop/setpreferredcurrency/(currency)/NOK&quot; in the URL (you should replace &quot;NOK&quot; with the desired currency code). You can either create links for different currencies on your site or add a special toolbar as described below.</p> <p>If the preferred currency is not specified, the system will use the default value specified by the &quot;PreferredCurrency&quot; setting in the &quot;[CurrencySettings]&quot; section of the &quot;settings/shop.ini&quot; configuration file. It is strongly recommended that you specify one of the <a href="Creating-a-new-currency.html#status" target="_self">active</a> currencies in this setting.</p> <p>It is possible to display only price in preferred currency to your customers when they are viewing multi-price products (please refer to the &quot;<a href="Multi-price-products.html#templates" target="_self">Templates for viewing multi-price products</a>&quot; section for more information). Note that if you do not specify one of the existing currencies in the &quot;PreferredCurrency&quot; INI setting, the system will display zero prices to the first-time visitors of your site.</p>   <a name="eztoc74520_0_1" id="eztoc74520_0_1"></a><h3>Example</h3> <p>Let's say that you have two currencies: EUR, NOK and the &quot;settings/shop.ini&quot; configuration file (or an override configuration file) contains the following lines: </p><pre class="wordwrap"><span class="line">[CurrencySettings]</span>
+<span class="line">PreferredCurrency=USD</span>
+</pre> <p>If a user visits your site for the first time, the system knows nothing about his preferred currency and thus it will try to use the default value. However, the &quot;USD&quot; currency is not defined in your webshop system so there are no prices in this currency. The system will display zero prices using the currency symbol taken from your locale settings. <a name="toolbar"></a>
+ </p>    <a name="eztoc74520_1" id="eztoc74520_1"></a><h2>Adding a toolbar for customers</h2> <p>You can add a possibility for site visitors to change their preferred currency &quot;on-the-fly&quot; using the &quot;Preferred currency&quot; toolbar. To do this, add the following line into the &quot;[Toolbar_right]&quot; section of the &quot;settings/siteaccess/example/toolbar.ini.append.php&quot; file where &quot;example&quot; is your siteaccess name: </p><pre class="wordwrap"><span class="line">Tool[]=preferred_currency</span>
+</pre> <p>This setting instructs the system to display the toolbar which is determined by the &quot;preferred_currency.tpl&quot; template located in the &quot;templates/toolbar/full&quot; directory of the standard design.</p> <a name="eztoc74520_2" id="eztoc74520_2"></a><h2>Preferred currency for site administrators</h2> <p>A site administrator can choose the preferred currency by requesting &quot;shop/preferredcurrency&quot; in the URL, choosing the desired currency from drop-down list and clicking the &quot;Set&quot; button. This interface can also be accessed by clicking the &quot;Webshop&quot; tab and selecting the &quot;Preferred currency&quot; link on the left. The selected currency will be used for displaying prices in the <a href="Products-overview.html" target="_self">products overview</a> interface.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Features/Multi-currency/Preferred-currency by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:01:46 GMT -->
+</html>

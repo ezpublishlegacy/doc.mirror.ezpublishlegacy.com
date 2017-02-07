@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/VAT-charging-system/VAT-settings by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:44:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>VAT settings / VAT charging system / Features / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>VAT settings</h1>
+</div>
+
+ <p>The &quot;[VATSettings]&quot; section of the &quot;settings/shop.ini&quot; configuration file defines the VAT handler that will be used for assigning the value added taxes to your products. Under this section, the following settings can be specified: </p>
+<ul>
+ <li><div> The &quot;Handler&quot; setting specifies the VAT handler that will be used. </div></li> <li><div> The &quot;RepositoryDirectories[]&quot; array specifies the directories where eZ publish will search for built-in VAT handlers. </div></li> <li><div> The &quot;ExtensionDirectories[]&quot; array specifies the extension directories where eZ publish will search for additional VAT handlers. By default eZ publish will search in the &quot;vathandlers&quot; subdirectory inside your extension. </div></li> <li><div> The &quot;UserCountryAttribute&quot; setting specifies the identifier of the user country content attribute. </div></li> <li><div> The &quot;ProductCategoryAttribute&quot; setting specifies the identifier of the product category content attribute. </div></li> <li><div> The &quot;RequireUserCountry&quot; setting is set to true by default so that the system will always require a user country. If set to false, no error messages will be displayed in case if user country is not specified. </div></li> <li><div> The &quot;DynamicVatTypeName&quot; setting specifies how the system will display the name of the dynamic VAT type. This alternative is called &quot;Determined by VAT charging rules&quot; by default. You can specify for example &quot;Dynamic VAT&quot;, &quot;Country dependent VAT&quot;, &quot;Extended VAT&quot; or &quot;My own VAT&quot; in this setting. The system will use this name for the last item in the drop-down list of VAT types located in the class/object view and edit interfaces. </div></li> 
+</ul>
+   <a name="eztoc62881_0_1" id="eztoc62881_0_1"></a><h3>Example 1</h3> <p>The following lines can be specified under the &quot;[VATSettings]&quot; section of the &quot;shop.ini&quot; configuration file: </p><pre class="wordwrap copytoclipboard"><span class="line">[VATSettings]</span>
+<span class="line">Handler=ezdefault</span>
+<span class="line">RepositoryDirectories[]=kernel/classes/vathandlers</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[VATSettings]\r\nHandler=ezdefault\r\nRepositoryDirectories[]=kernel/classes/vathandlers' ); return false;" /></p>
+<![endif]--> <p>These settings will instruct eZ publish to use the built-in update handler located at &quot;kernel/classes/vathandlers/ezdefaultvathandler.php&quot;.</p> <a name="eztoc62881_0_2" id="eztoc62881_0_2"></a><h3>Example 2</h3> <p>You can extend the system by creating custom VAT handlers for special needs. For example, if you have an extension &quot;myextension&quot; that includes a VAT handler &quot;myrule&quot;, you can put the following lines into an override for the &quot;shop.ini&quot; configuration file: </p><pre class="wordwrap"><span class="line">[VATSettings]</span>
+<span class="line">Handler=myrule</span>
+<span class="line">ExtensionDirectories[]=myextension</span>
+</pre> <p>or </p><pre class="wordwrap"><span class="line">[VATSettings]</span>
+<span class="line">Handler=myrule</span>
+<span class="line">RepositoryDirectories[]=extension/myextension/vathandlers</span>
+</pre> <p>These settings will instruct eZ publish to use the VAT handler located at &quot;extension/myextension/vathandlers/myrulevathandler.php&quot;.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/VAT-charging-system/VAT-settings by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:44:54 GMT -->
+</html>

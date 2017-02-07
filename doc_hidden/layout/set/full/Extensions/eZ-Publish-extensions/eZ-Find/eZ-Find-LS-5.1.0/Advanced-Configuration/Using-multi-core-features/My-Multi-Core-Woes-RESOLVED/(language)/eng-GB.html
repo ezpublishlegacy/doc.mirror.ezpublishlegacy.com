@@ -1,0 +1,96 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.1.0/Advanced-Configuration/Using-multi-core-features/My-Multi-Core-Woes-RESOLVED/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:54:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>My Multi-Core Woes [RESOLVED] / Using multi-core features / Advanced Configuration / eZ Find LS 5.1.0 / eZ Find / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="content-view-line">
+<div class="class-comment">
+
+<form method="post" action="https://doc.ez.no/doc_hidden/layout/set/full/content/action">
+
+<div id="comment28882" class="attribute-heading">
+<h2>My Multi-Core Woes [RESOLVED]</h2>
+</div>
+
+<div class="attribute-byline float-break">
+    <p class="date">Tuesday 10 September 2013 11:49:22 am</p>
+    <p class="author">Jason Calhoun</p>
+</div>
+
+<div class="attribute-short">
+I was able to get mult-core installed with the instructions above. But the search did not work for my sites. My check list looked like this. <br />
+<br />
+Solr running: OK,  <br />
+Solr Administration Pages working: OK, <br />
+Index with updatesearchindexsolr.php: OK,?<br />
+Synchronize from site_admin: FAILED, <br />
+Search results from site: FAILED, <br />
+<br />
+[SOLUTION]  <br />
+<br />
+Make a change to each sites extension/ezfind/settings/solr.ini . add /&lt;corename&gt; to the end of each SearchServerURI like below: <br />
+<br />
+[SolrBase]<br />
+# Base URI of the Solr server<br />
+SearchServerURI=<a href="http://localhost:8983/solr/site1" title="http://localhost:8983/solr/site1">http://localhost:8983/solr/site1</a><br />
+<br />
+You must then re-index each site with php extension/ezfind/bin/php/updatesearchindexsolr.php -s site_admin<br />
+
+</div>
+
+<input class="button" type="submit" name="NewButton" value="Reply" />
+<input type="hidden" name="NodeID" value="28882" />
+<input type="hidden" name="ClassID" value="17" />
+     
+<input type="hidden" name="RedirectURIAfterPublish" value= />
+
+</form>
+
+
+</div>
+</div>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.1.0/Advanced-Configuration/Using-multi-core-features/My-Multi-Core-Woes-RESOLVED/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:54:09 GMT -->
+</html>

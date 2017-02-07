@@ -1,0 +1,158 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.7/Templates/The-pagelayout/The-page-head by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:54:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>The page head / The pagelayout / Templates / 3.7 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>The page head</h1>
+</div>
+
+ <p>The standard design contains a page head template that can be used to automatically generate important tags that should be included in the head section of every HTML response. The output of the standard head template (/design/standard/template/page_head.tpl) can be broken down into the following group of tags:</p> 
+<ul>
+ <li><div> Title tag </div></li> <li><div> Meta tags </div></li> <li><div> Link tags </div></li> 
+</ul>
+ <p>The following HTML dump shows an example of the output from the standard page head template.</p> <pre class="wordwrap nocopy"><span class="line">&lt;title&gt;Current / Parent / Top - Site name&lt;/title&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot; /&gt;</span>
+<span class="line">&lt;meta http-equiv=&quot;Content-language&quot; content=&quot;eng-GB&quot; /&gt;</span>
+<span class="line">&lt;meta name=&quot;author&quot; content=&quot;eZ Systems&quot; /&gt;</span>
+<span class="line">&lt;meta name=&quot;copyright&quot; content=&quot;eZ Systems&quot; /&gt;</span>
+<span class="line">&lt;meta name=&quot;description&quot; content=&quot;Content Management System&quot; /&gt;</span>
+<span class="line">&lt;meta name=&quot;keywords&quot; content=&quot;cms, publish, e-commerce, content management, development framework&quot; /&gt;</span>
+<span class="line">&lt;meta name=&quot;MSSmartTagsPreventParsing&quot; content=&quot;TRUE&quot; /&gt;</span>
+<span class="line">&lt;meta name=&quot;generator&quot; content=&quot;eZ publish&quot; /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;link rel=&quot;Home&quot; href=&quot;/&quot; title=&quot;Front page&quot; /&gt;</span>
+<span class="line">&lt;link rel=&quot;Index&quot; href=&quot;/&quot; /&gt;</span>
+<span class="line">&lt;link rel=&quot;Top&quot; &nbsp;href=&quot;/&quot; title=&quot;Current / Parent / Top - Site name&quot; /&gt;</span>
+<span class="line">&lt;link rel=&quot;Search&quot; href=&quot;/content/advancedsearch&quot; title=&quot;Search Site name&quot; /&gt;</span>
+<span class="line">&lt;link rel=&quot;Shortcut icon&quot; href=&quot;/design/standard/images/favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;</span>
+<span class="line">&lt;link rel=&quot;Copyright&quot; href=&quot;/ezinfo/copyright&quot; /&gt;</span>
+<span class="line">&lt;link rel=&quot;Author&quot; href=&quot;/ezinfo/about&quot; /&gt;</span>
+<span class="line">&lt;link rel=&quot;Alternate&quot; href=&quot;/layout/set/print/content/view/full/64&quot; media=&quot;print&quot; title=&quot;Printable version&quot; /&gt;</span>
+</pre>  <a name="eztoc16718_1" id="eztoc16718_1"></a><h2>Title</h2> <p>The contents of the title tag is based on the location being viewed (the location within either the content node tree or the system itself) and the actual name of the site. The path to the element being viewed is reversed and thus the current element becomes the first component of the title. The components of the path are separated by slashes. When a node is viewed, the path elements will be the actual names of the objects which are encapsulated by the nodes that make up the path up to and including the target node. When a system function is being accessed (for example the login view of the user module: &quot;/user/login&quot;), the path will most likely be a reversed version of the module/view combination that was used. The name of the site is appended at the end of the path, separated by a dash. The site name can be configured using the &quot;SiteName&quot; directive in a configuration override for &quot;site.ini&quot;.</p> <p>The example above demonstrates the output of the page head template when a node is being viewed. The name of the object encapsulating the node is &quot;Current&quot;. The name of the other objects (encapsulated by the parent node and so on) are &quot;Parent&quot; and &quot;Top&quot;. The name of the site is &quot;Site name&quot;.</p>   <a name="eztoc16718_2" id="eztoc16718_2"></a><h2>Meta tags</h2> <p>In addition to the actual information contained on a web page, the HTML of the page may also include information about the document itself. This is achieved by making use of so called meta tags. The information given by meta tags is usually not visible when the web page is viewed. However, the meta tags are used by the web browser and miscellaneous search engines that index and rank the contents of web pages. The standard page head template outputs the most commonly used meta tags. It can be broken down into three types of tags:</p> 
+<ul>
+ <li><div> HTTP-EQUIV meta tags </div></li> <li><div> Generic meta tags </div></li> <li><div> Additional meta tags </div></li> 
+</ul>
+  <a name="eztoc16718_2_1" id="eztoc16718_2_1"></a><h3>HTTP-EQUIV meta tags</h3> <p>Meta tags with an HTTP-EQUIV attribute are equivalent to HTTP headers. These tags usually control the way a browser interprets the document. Tags using this form should have an equivalent effect when specified as an HTTP header. Some web servers automatically translate the contents of these tags to actual HTTP headers. The HTTP-EQUIV meta tags in the page head make sure that the browser (and also search engines) know which character set and language the document uses. The languageand character set values are automatically set by eZ publish based on the language and character set that the site uses.</p>   <a name="eztoc16718_2_2" id="eztoc16718_2_2"></a><h3>Generic meta tags</h3> <p>
+The generic meta tags make it possible to reveal meta information about the document itself. <br />Although the specification of meta tags does not define a set of legal meta data properties, it is a common practice to include generic information such as the name of the author, description of the site, copyright notices, keywords, etc. By making use of the &quot;MetaDataArray[...]&quot; directive in a configuration override for &quot;site.ini&quot;, the site administrator can set up a custom set of generic meta tags. eZ publish will loop through and display the name and value of the specified tags. The example above shows the default meta tags that will be used if no custom meta tag configuration is present.</p>   <a name="eztoc16718_2_3" id="eztoc16718_2_3"></a><h3>Additional meta tags</h3> <p>The last meta tags set by the standard page head template prevent the usage of <a href="#smart-tags" target="_blank">smart tags</a> and reveal the name of the software that was used to generate the output.</p>    <a name="eztoc16718_3" id="eztoc16718_3"></a><h2>Link tags</h2> <p>Link tags in the HTML head make it possible to relate the document to other documents. This is done by the way of REL and REV attributes. While REL links are used to establish relationships, REV links are used to establish reverse relationships. Some browsers make use of the link tags in order to produce a navigation bar that can be used to quickly navigate the site. The links tags generated by eZ publish are specified in the &quot;link.tpl&quot; file within the templates directory of the standard design. The standard page head makes use of the &quot;links.tpl&quot; file. The default output of the standard page head template produces a basic set of links that can be used to navigate to different parts of the site. The following list shows the link tags that the page head generates:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Link</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Home</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Home&quot; link points to the root/start of the site. It will always bring the user back to the front page (for example http://www.example.com).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Index</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Index&quot; link points to the root/start of the site. It will always bring the user back to the front page (for example http://www.example.com).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Top</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Top&quot; link points to the root/start of the site. It will always bring the user back to the front page (for example http://www.example.com).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Search</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Search&quot; link points to the &quot;advanced search&quot; view of the &quot;content&quot; module. It will bring the user to the advanced search interface (http://www.example.com/content/advancedsearch).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Shortcut icon</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Shortcut icon&quot; defines the location of the favorite/shortcut icon. Most browsers will display this icon in front of URLs in the address field and in the bookmark list. The default shortcut icon is the double square white-orange eZ Systems logo. It can be easily replaced by putting a 16x16 pixel icon file (16 color BMP/Windows Icon Format) called &quot;favicon.ico&quot; in the images folder of a site design.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Copyright</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Copyright&quot; link points to the &quot;copyright&quot; view of the &quot;ezinfo&quot; module. The default copyright page of eZ publish will be displayed (http://www.example.com/ezinfo/copyright.).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Author</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Author&quot; link points to the &quot;about&quot; view of the &quot;ezinfo&quot; module. The default about page of eZ publish will be displayed (http://www.example.com/ezinfo/about).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Alternate</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The &quot;Alternate&quot; link points to a alternate/printerfriendly version of the page. The printerfriendly version of a page is achieved by making use of the &quot;set&quot; view of the &quot;layout&quot; module. This technique makes it possible to use an alternative pagelayout which is usually stripped for everything (menus, logos, etc.) except the actual content that is being presented.</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+  <a name="eztoc16718_3_4" id="eztoc16718_3_4"></a><h3>Link parameters</h3> <p>The links can be completely turned off by passing &quot;enable_link=false()&quot; when including the page head template:</p> <pre class="wordwrap"><span class="line">{include uri='design:page_head.tpl' enable_link=false()}</span>
+</pre> <p>The link to the alternate/print layout can be turned off by passing &quot;enable_print=false()&quot; when including the page head template:</p> <pre class="wordwrap"><span class="line">{include uri='design:page_head.tpl' enable_print=false()}</span>
+</pre>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.7/Templates/The-pagelayout/The-page-head by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:54:53 GMT -->
+</html>

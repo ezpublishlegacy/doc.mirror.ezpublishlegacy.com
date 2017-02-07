@@ -1,0 +1,95 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/VAT-charging-system/User-Country by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>User Country / VAT charging system / Features / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>User Country</h1>
+</div>
+
+
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>This part of the 4.x documentation is for eZ Publish 4.0, only&nbsp;<i><a href="../../Reference.html" target="_self">reference section</a></i>&nbsp;is common for all eZ Publish 4.x versions as well as eZ Publish 5.x &quot;LegacyStack&quot;, please&nbsp;<a href="../../../../../../../../../../../../eZ-Publish/Technical-manual.html" target="_self">select</a>&nbsp;the version you are using for the most up to date documentation!</p>
+    </td>
+</tr>
+</table>
+</div><p>The &quot;Country dependent VAT&quot; approach supposes that each of your users can be assigned a country. The next subsections reveal how this can be achieved. Note that the list of available countries and their properties (calling codes, etc.) can be configured from within an override for the &quot;<a href="../../Reference/Configuration-files/country.html" target="_self">country.ini</a>&quot; configuration file.</p><a name="eztoc86145_1" id="eztoc86145_1"></a><h2>Adding a new attribute to a user class</h2><p>&nbsp;It is necessary to add an attribute of the <a href="../../Reference/Datatypes/Country.html" target="_self">country</a> datatype to your user class otherwise it will be impossible to assign a country to a user. The following text reveals how this can be done.</p>
+<ol>
+<li><div>&nbsp;Access the &quot;Setup&quot; tab in the administration interface, click &quot;Classes&quot; on the left and select the &quot;Users&quot; class group. You should see the list of classes assigned to this group. Find your user class there and click the &quot;Edit&quot; button located in the same line of the list. You will be taken to the class edit interface.</div></li><li><div><p>&nbsp;Select the &quot;Country&quot; datatype from the drop-down list located in the bottom, click the &quot;Add attribute&quot; button and edit the newly added attribute as shown below. The following screenshot shows the fragment of the class edit interface with newly added attribute of the <a href="../../Reference/Datatypes/Country.html" target="_self">country</a> datatype.</p>
+<div class="">        <img src="../../../../../../../../../../../../var/doc/storage/images/media/images/country-attribute/133429-1-eng-GB/Country-Attribute_pdf.jpg" alt="Country Attribute" />
+<p>Country Attribute</p>
+
+
+
+
+
+
+
+</div><p>
+&nbsp;<br />
+&nbsp;The system will add a drop-down list called &quot;Country&quot; (the name of the newly added attribute) in the object edit interface for users. You can assign a country to the user that is being edited by selecting the desired country from this list.<br />&nbsp;</p></div></li><li><div>&nbsp;Specify the identifier of the newly added attribute in the &quot;UserCountryAttribute&quot; setting located under the &quot;[VATSettings]&quot; section of an override for the &quot;settings/shop.ini&quot; configuration file.</div></li>
+</ol>
+<a name="eztoc86145_2" id="eztoc86145_2"></a><h2>Assigning a country to a user</h2><p>&nbsp;If your user class contains an attribute of the country datatype then a country can be assigned to a user in one of the following ways:</p>
+<ul>
+<li><div>&nbsp;A new user will be asked to specify his/her country when filling in the registration form.</div></li><li><div>&nbsp;A site administrator will be able to assign a country to a user when editing a user's details (as described in the &quot;<a href="../../../../User-manual/3.8/Daily-tasks/Managing-users.html" target="_self">Managing users</a>&quot; section of the &quot;User manual&quot;).</div></li><li><div>&nbsp;A site administrator can add a toolbar that allows a user to change his country &quot;on-the-fly&quot;.</div></li>
+</ul>
+<p><a name="add_toolbar"></a>
+</p><a name="eztoc86145_2_1" id="eztoc86145_2_1"></a><h3>Adding a toolbar for customers</h3><p>&nbsp;It is recommended that you add a possibility for a user to choose his/her country &quot;on-the-fly&quot; using the &quot;User country&quot; toolbar. To do this, add the following line into the &quot;[Toolbar_right]&quot; section of the &quot;settings/siteaccess/example/toolbar.ini.append.php&quot; file where &quot;example&quot; is your siteaccess name:</p><pre class="wordwrap"><span class="line">Tool[]=user_country</span>
+</pre><p>&nbsp;This setting instructs the system to display the country selection toolbar on the right. When a user selects a country, the system will immediately update product prices according to the VAT rules specified for the selected country.</p><p>&nbsp;In order to avoid problems with content caching, you will have to specify &quot;user_preferred_country&quot; in the &quot;<a href="../../Reference/Configuration-files/site.ini/ContentSettings/CachedViewPreferences.html" target="_self">CachedViewPreferences</a>[full]&quot; setting for all siteaccesses. To do this, open the &quot;site.ini.append.php&quot; configuration file located in the &quot;settings/siteaccess/example&quot; directory (replace &quot;example&quot; with the actual name of the siteaccess) and edit it. If the &quot;[ContentSettings]&quot; section of the configuration file already contains something like</p><pre class="wordwrap"><span class="line">CachedViewPreferences[full]=&lt;list_of_user_preferences&gt;</span>
+</pre><p>&nbsp;then you will have to append a semicolon and &quot;user_preferred_country&quot; at the end of the line, for example:</p><pre class="wordwrap"><span class="line">CachedViewPreferences[full]=admin_navigation_content=0;</span>
+<span class="line">admin_navigation_details=0;&lt;...&gt;;admin_bookmarkmenu=1;</span>
+<span class="line">admin_left_menu_width=13;user_preferred_country=''</span>
+</pre><p>&nbsp;Note that this configuration line tends to be very long. It is simplified in the example above (a lot of settings were replaced with &lt;...&gt; in order to keep things short).</p><p>&nbsp;If the &quot;[ContentSettings]&quot; section does not contain a line that starts from &quot;CachedViewPreferences[full]&quot;, create it:</p><pre class="wordwrap"><span class="line">CachedViewPreferences[full]=user_preferred_country=''</span>
+</pre><p>&nbsp;If this setting is not specified, your customers will have problems when changing the country (the interface will not be updated because of the cache problem).</p><a name="eztoc86145_3" id="eztoc86145_3"></a><h2>Using alternative country datatypes</h2><p>&nbsp;There is an additional possibility to use an alternative country datatype instead of the built-in <a href="../../Reference/Datatypes/Country.html" target="_self">country</a> datatype. This means that you can integrate an alternative datatype to the system so that the user's country will be stored in the same way by the datatype, by the VAT rules management interface and by the shop user registration module (shop/userregister). The following list reveals how this can be achieved.</p>
+<ol>
+<li><div>&nbsp;Make sure your datatype's content is either a hash having &quot;value&quot; key or an object capable of getting and setting &quot;value&quot; attribute (like eZPersistentObject). It doesn't matter how the content is actually stored to database, but objectAttributeContent() method must return an array/object. The returned value (usually a country code) is then compared to VAT rules' countries.</div></li><li><div>&nbsp;Override the &quot;view.tpl&quot; and &quot;edit.tpl&quot; templates located in the &quot;templates/shop/country&quot; directory of the standard design in your datatype extension so that countries can be displayed and edited in the VAT rules management interface and the shop user registration module.</div></li>
+</ol>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Features/VAT-charging-system/User-Country by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:27 GMT -->
+</html>

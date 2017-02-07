@@ -1,0 +1,101 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.5/Features/Rest-API/Authentication/OAUTH-2.0/The-authentication-process by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:53:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>The authentication process / OAUTH 2.0 / Authentication / Rest API / Features / 4.5 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>The authentication process</h1>
+</div>
+
+<a name="eztoc123180_0_1" id="eztoc123180_0_1"></a><h3>The authentication process seen from a user's viewpoint</h3><p>OAUTH 2.0 provides a method for clients to access a protected resource/eZ Publish content on behalf of an eZ Publish user. Before an end user can access a protected resource/eZ Publish content, he/she must first obtain authorization from the eZ Publish OAUTH 2.0 module, then exchange the access grant for an access token (representing the grant's scope, duration, and other attributes) and a refresh token that is used when the access token expires. The client accesses the protected resource the first time by presenting the access token to the resource server.</p><p>The use cases below have a starting-point with a user who is:</p>
+<ul>
+<li><div><b>Use case 1:</b> Starting up to get authorization to the client application you have developed</div></li><li><div><b>Use case 2:</b> Authorized with an access token and needs to exchange it with a refresh token</div></li><li><div><b>Use case 3:</b> Authorized with both an access token and a refresh token and is good to go!</div></li>
+</ul>
+<a name="eztoc123180_0_1_1" id="eztoc123180_0_1_1"></a><h4>Getting authorization to your client application</h4><p>The flow illustrated in the figure below includes what goes on when a user (a registered eZ Publish user) wishes to access your newly developed REST API application:</p>
+<div class="object-center linked">            <a href="../../../../../../../layout/set/full/Media/Images/Oauth-flow-1.html" target="_self"><img src="../../../../../../../../../../../var/doc/storage/images/media/images/oauth-flow-1/123632-1-eng-GB/Oauth-flow-1_doc.png" alt="" /></a>
+
+
+
+
+
+
+
+
+</div>
+<ul>
+<li><div>The end user requests access to your client application.</div></li><li><div>The client application requests user authorization via the eZ Publish OAUTH 2.0 module that acts as the authentication filter. </div></li><li><div>A consistency check is carried out towards the eZ Publish user accounts.</div></li><li><div>Then the eZ Publish back-end displays an authentication form to the user.</div></li><li><div>The user logs in and authorizes the application.</div></li><li><div>An HTTP 302 message is sent to the client application with a &quot;code&quot; and &quot;expires in&quot; as GET parameters</div></li><li><div>The client application requests an access token via an HTTP POST to the eZ Publish back-end</div></li><li><div>The eZ Publish back-end now returns a temporary access token (1 hour), a refresh token and an expiry limit in JSON format.</div></li><li><div>The client application sends a REST request with an OAUTH header to the eZ Publish OAUTH 2.0 module, which in turn sends a request to the eZ Publish server to check that the access token is valid</div></li><li><div>The eZ Publish back-end returns the requested REST service data to the client application which in turn gives the temporary access token to the user.</div></li>
+</ul>
+<a name="eztoc123180_0_1_2" id="eztoc123180_0_1_2"></a><h4>Refreshing the expired access token with a refresh token</h4><p>The access token is for accessing the back-end, and the refresh token is for refreshing the access token when it is expired. You request a new access token with your refresh token. Then eZ Publish OAuth module will return a new access token, with a new refresh token. Follow the flow in the diagram below:</p>
+<div class="object-center">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/oauth-flow-2/123635-1-eng-GB/Oauth-flow-2_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div>
+<ul>
+<li><div>The end user requests the client application to refresh his temporary access token with a new access token and a refresh token.</div></li><li><div>The client application sends a REST request with the access token in the header to eZ Publish OAUTH 2.0 module, which in turn returns an &quot;expired token&quot; with a www-Authenticate header in an HTTP 401 format to the client application. </div></li><li><div>The client application requests a refresh token via an HTTP POST to the eZ Publish back-end</div></li><li><div>The eZ Publish back-end now returns a refresh token and an expiry limit in JSON format.</div></li><li><div>The client application sends a REST request with an OAUTH header to the ez Publish OAUTH 2.0 module, which in turn sends a request to the eZ Publish server to check that the access token is valid</div></li><li><div>The eZ Publish back-end returns the requested REST service data to the client application which in turn gives the refresh token to the user.</div></li>
+</ul>
+<a name="eztoc123180_0_1_3" id="eztoc123180_0_1_3"></a><h4>Authorization is ok and the user is ready to go</h4><p>Follow the flow in the diagram below:</p>
+<div class="">        <img src="../../../../../../../../../../../var/doc/storage/images/media/images/oauth-flow-3/123638-1-eng-GB/Oauth-flow-3_doc.png" alt="" />
+
+
+
+
+
+
+
+
+</div>
+<ul>
+<li><div>The end user wishes to access the new REST API application</div></li><li><div>The client application sends a REST request with the refresh token in the header to eZ Publish OAUTH 2.0 module, which in turn sends a request to the eZ Publish server to check that the access token is valid. </div></li><li><div>The eZ Publish back-end returns the requested REST service data to the client application which in turn gives access to the client application to the user.</div></li>
+</ul>
+<p>Note that all use cases above are either fully or partially automated, so in each case the whole process only takes a second or two.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.5/Features/Rest-API/Authentication/OAUTH-2.0/The-authentication-process by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:53:47 GMT -->
+</html>

@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location?focusedCommentId=19890734 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 09:46:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>How to use a custom controller to display a content or location - eZ Publish Platform 5.x - eZ Documentation</title>
+
+        
+
+                        
+    
+                        
+    
+                        
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE,chrome=IE7">
+<meta charset="UTF-8">
+<meta id="confluence-context-path" name="confluence-context-path" content="">
+<meta id="confluence-base-url" name="confluence-base-url" content="../../index.html">
+
+<meta id="atlassian-token" name="atlassian-token" content="494111f00e28ced96046bfb6fbe8f75e18d44b71">
+
+<meta id="confluence-space-key" name="confluence-space-key" content="EZP">
+<script type="text/javascript">
+        var contextPath = '';
+</script>
+
+    
+
+<!-- include system css resources -->
+
+
+    <link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch934e.css?media=print" media="print">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 8]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/47016f6b93087cd2003bf867318254ee/_/download/contextbatch/css/theme.doc/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.0.22/_/download/batch/confluence.extra.information_information-plugin/confluence.extra.information_information-plugin-adg-s" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.6.10/_/download/batch/org.randombits.confluence.toc_toc-plugin-styles/org.randombits.confluence.toc_toc-plugin-styles.117.d" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.1.4/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext.newcode-macro-plugin_synt" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.1.4/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext.newcode-macro-plugin_sh-t" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins.confluence-highlight-ac" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/5.3.3-m6/_/download/batch/confluence.extra.jira_web-resources-adg/confluence.extra.jira_web-resources-adg.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/51/_/styles/colorsb538.css?spaceKey=EZP" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/51/_/styles/customb538.css?spaceKey=EZP" media="all">
+
+<!-- end system css resources -->
+
+    <meta name="confluence-request-time" content="1413881958603">
+        
+    
+        
+            <meta name="ajs-is-confluence-admin" content="false">
+            <meta name="ajs-connection-timeout" content="10000">
+            <meta name="ajs-use-keyboard-shortcuts" content="true">
+            <meta name="ajs-keyboardshortcut-hash" content="ec556f85a7b4fc86b37ab7a78ce3d8b0">
+            <meta id="team-calendars-has-jira-link" content="true">
+            <meta name="ajs-team-calendars-display-time-format" content="displayTimeFormat12">
+            <meta id="team-calendars-user-timezone" content="UTC">
+            <script type="text/x-template" id="team-calendars-messages" title="team-calendars-messages">
+    <fieldset class="i18n hidden">
+                    <input type="hidden" name="calendar3.month.short.april" value="Apr">
+                    <input type="hidden" name="calendar3.month.short.november" value="Nov">
+                    <input type="hidden" name="calendar3.month.long.november" value="November">
+                    <input type="hidden" name="calendar3.day.short.friday" value="Fri">
+                    <input type="hidden" name="calendar3.month.long.february" value="February">
+                    <input type="hidden" name="calendar3.month.short.february" value="Feb">
+                    <input type="hidden" name="calendar3.day.long.wednesday" value="Wednesday">
+                    <input type="hidden" name="calendar3.month.long.december" value="December">
+                    <input type="hidden" name="calendar3.day.short.sunday" value="Sun">
+                    <input type="hidden" name="calendar3.month.long.april" value="April">
+                    <input type="hidden" name="calendar3.month.long.july" value="July">
+                    <input type="hidden" name="calendar3.month.long.september" value="September">
+                    <input type="hidden" name="calendar3.month.short.august" value="Aug">
+                    <input type="hidden" name="calendar3.month.short.june" value="Jun">
+                    <input type="hidden" name="calendar3.month.short.may" value="May">
+                    <input type="hidden" name="calendar3.day.short.tuesday" value="Tue">
+                    <input type="hidden" name="calendar3.day.short.wednesday" value="Wed">
+                    <input type="hidden" name="calendar3.day.long.thursday" value="Thursday">
+                    <input type="hidden" name="calendar3.month.long.march" value="March">
+                    <input type="hidden" name="calendar3.month.long.october" value="October">
+                    <input type="hidden" name="calendar3.day.short.saturday" value="Sat">
+                    <input type="hidden" name="calendar3.month.short.january" value="Jan">
+                    <input type="hidden" name="calendar3.month.long.may" value="May">
+                    <input type="hidden" name="calendar3.month.long.january" value="January">
+                    <input type="hidden" name="calendar3.month.short.october" value="Oct">
+                    <input type="hidden" name="calendar3.day.short.thursday" value="Thu">
+                    <input type="hidden" name="calendar3.day.long.friday" value="Friday">
+                    <input type="hidden" name="calendar3.day.long.sunday" value="Sunday">
+                    <input type="hidden" name="calendar3.month.long.june" value="June">
+                    <input type="hidden" name="calendar3.month.long.august" value="August">
+                    <input type="hidden" name="calendar3.day.long.tuesday" value="Tuesday">
+                    <input type="hidden" name="calendar3.day.long.saturday" value="Saturday">
+                    <input type="hidden" name="calendar3.month.short.september" value="Sep">
+                    <input type="hidden" name="calendar3.day.long.monday" value="Monday">
+                    <input type="hidden" name="calendar3.month.short.july" value="Jul">
+                    <input type="hidden" name="calendar3.month.short.march" value="Mar">
+                    <input type="hidden" name="calendar3.day.short.monday" value="Mon">
+                    <input type="hidden" name="calendar3.month.short.december" value="Dec">
+            </fieldset>
+</script>
+
+            
+
+    
+            
+    
+    
+            <meta name="ajs-page-id" content="13468497">
+            <meta name="ajs-content-type" content="page">
+            <meta name="ajs-page-title" content="How to use a custom controller to display a content or location">
+            <meta name="ajs-parent-page-title" content="Developer Cookbook">
+            <meta name="ajs-parent-page-id" content="11403951">
+            <meta name="ajs-space-key" content="EZP">
+            <meta name="ajs-space-name" content="eZ Publish Platform 5.x">
+            <meta name="ajs-comment-id" content="19890734">
+            <meta name="ajs-from-page-title" content="">
+            <meta name="ajs-can-remove-page" content="false">
+            <meta name="ajs-editor.loader.comment.resources" content="&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/9f01679814e63f4c0513d02c90477002/_/download/contextbatch/css/comment-editor/batch.html media=&quot;all&quot;&gt;
+">
+            <meta name="ajs-context-path" content="">
+            <meta name="ajs-base-url" content="https://doc.ez.no">
+            <meta name="ajs-version-number" content="5.4.4">
+            <meta name="ajs-build-number" content="4733">
+            <meta name="ajs-remote-user" content="">
+            <meta name="ajs-current-user-fullname" content="">
+            <meta name="ajs-current-user-avatar-url" content="">
+            <meta name="ajs-static-resource-url-prefix" content="/s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_">
+            <meta name="ajs-global-settings-attachment-max-size" content="10485760">
+            <meta name="ajs-user-locale" content="en_GB">
+            <meta name="ajs-enabled-dark-features" content="sync.event">
+            <meta name="ajs-atl-token" content="494111f00e28ced96046bfb6fbe8f75e18d44b71">
+            <meta name="ajs-confluence-flavour" content="VANILLA">
+            <meta name="ajs-editor.loader.resources" content="&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edi/batch.702.delaye media=&quot;all&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage/batch.703a781.delaye?media=%28max-width%3A+1450px%29%22 media=&quot;(max-width: 1450px)&quot;&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage/batch.70423d0.delaye?media=print%22 media=&quot;print&quot;&gt;
+&lt;!--[if lt IE 9]&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage/batch.705d0b5.delaye?conditionalComment=lt+IE+9%22 media=&quot;all&quot;&gt;
+&lt;![endif]--&gt;
+&lt;!--[if IE]&gt;
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage/batch.706be23.delaye?ieonly=true%22 media=&quot;all&quot;&gt;
+&lt;![endif]--&gt;
+&lt;script type=&quot;text/javascript&quot; src=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/js/editor%2cmacro-browser%2cfullpage-edit/batch.707.delaye &gt;&lt;/script&gt;
+">
+            <meta name="ajs-date.format" content="MMM dd, yyyy">
+    
+    <link rel="shortcut icon" href="../../favicon.html">
+    <link rel="icon" type="image/x-icon" href="../../favicon.html">
+
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch/osd.action" title="eZ Documentation"/>
+
+    <!-- include system javascript resources -->
+    <script type="text/javascript" src="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/js/batch.js" ></script>
+<!--[if lte IE 8]>
+<script type="text/javascript" src="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/js/batch.js?conditionalComment=lte+IE+8" ></script>
+<![endif]-->
+<script type="text/javascript" src="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/js/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batch.js" ></script>
+<script type="text/javascript" src="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/js/page/batch.js" ></script>
+<script type="text/javascript" src="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/84fc2bb4cbbfc06481d75335376bb250/_/download/contextbatch/js/atl.comments/batch.js" ></script>
+<script type="text/javascript" src="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.1.4/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext-2.newcode-macro-plugin_synt" ></script>
+<script type="text/javascript" src="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.1.4/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext-3.newcode-macro-plugin_synt" ></script>
+<script type="text/javascript" src="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins-2.confluence-highlight-ac" ></script>
+<script type="text/javascript" src="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.mywork.mywork-confluence-host-plu/com.atlassian.mywork.mywork-confluence-host-plugin_mw-he" ></script>
+
+    
+
+        
+    <!-- end system javascript resources -->
+
+        
+        
+
+    
+                <link rel="canonical" href="How%2bto%2buse%2ba%2bcustom%2bcontroller%2bto%2bdisplay%2ba%2bcontent%2bor%2blocation.html">
+        <link rel="shortlink" href="../../x/UYPN.html">
+    <meta name="wikilink" content="[EZP:How to use a custom controller to display a content or location]">
+    <meta name="page-version" content="18">
+
+</head>
+
+<body             onload="placeFocus()"
+     id="com-atlassian-confluence" class="theme-documentation  aui-theme-default aui-layout">
+
+        
+    <div id="full-height-container">
+    <div id="header-precursor">
+        
+                    </div>
+
+
+
+
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation"><div class="aui-header-inner"><div class="aui-header-before"><a class="aui-dropdown2-trigger app-switcher-trigger" aria-owns="app-switcher" aria-haspopup="true" tabindex="0"><span class="aui-icon aui-icon-small aui-iconfont-appswitcher">Linked Applications</span></a><div id="app-switcher" class="aui-dropdown2 aui-style-default"><div class="app-switcher-loading">Loading&hellip;</div></div><script>
+            (function (NL) {
+                var initialise = function () {
+                    // For some milestones of AUI, the atlassian soy namespace was renamed to aui. Handle that here by ensuring that window.atlassian is defined.
+                    window.atlassian = window.atlassian || window.aui;
+                    new NL.AppSwitcher({
+                        dropdownContents: '#app-switcher'
+                    });
+                };
+                if (NL.AppSwitcher) {
+                    initialise();
+                } else {
+                    NL.onInit = initialise;
+                }
+            }(window.NL = (window.NL || {})));
+            window.NL.isUserAdmin = false</script></div><div class="aui-header-primary"><h1 id="logo" class="aui-header-logo aui-header-logo-custom"><a href="../../index.html"><img src="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_/images/logo/atl.site.logo" alt="eZ Documentation" /></a></h1><ul class="aui-nav">
+                            <li>
+            
+        
+        
+<a  id="space-directory-link" href="../../spacedirectory/view.html"  class=" aui-nav-imagelink"   title="Spaces">
+            <span>Spaces</span>
+    </a>
+        </li>
+                            <li id="browseMenu" role="menu">
+            
+    
+        <a id="browse-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="browse-menu-link-content" title="Browse">
+        <span class="browse">Browse</span>
+    </a>
+    <nav id="browse-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                <ul  id="browse-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+    
+            
+<a  id="space-pages-link" href="../../pages/listpages-dirview4915.html?key=EZP" class="    "      title="Browse pages in the eZ Publish Platform 5.x space" >
+        Pages
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-blogposts-link" href="../../pages/viewrecentblogposts4915.html?key=EZP" class="    "      title="Browse blogs in the eZ Publish Platform 5.x space" >
+        Blog
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-labels-link" href="../../labels/listlabels-heatmap4915.html?key=EZP" class="    "      title="Browse labels in the eZ Publish Platform 5.x space" >
+        Labels
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-advanced-link" href="../../spaces/viewspacesummary4915.html?key=EZP" class="    "      title="Browse additional space functions in the eZ Publish Platform 5.x space" >
+        Space Operations
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    
+        </li>
+        </ul>
+</div><div class="aui-header-secondary"><ul class="aui-nav">
+                <li>
+        
+    
+            
+<a  id="doctheme-anchor" href="#"  class=" aui-nav-imagelink"   title="">
+            <span></span>
+    </a>
+    </li>
+        <li>
+<form id="quick-search" class="aui-quicksearch dont-default-focus header-quicksearch" action="https://doc.ez.no/dosearchsite.action" method="get">
+    <fieldset>
+                    <input type='hidden' name='where' value='EZP'/>
+                            <input type="hidden" name="spaceSearch" value="true"/>
+                <label for="quick-search-query" class="assistive">Quick Search</label>
+        <input id="quick-search-query" class="text app-search search quick-search-query" type="text"
+               accessKey="q" autocomplete="off" name="queryString" title="Quick Search"  placeholder="Search space" />
+        <input id="quick-search-submit" class="quick-search-submit" type="submit" value="Search"/>
+
+        <div class="aui-dd-parent quick-nav-drop-down"></div>
+    </fieldset>
+    <div class="hidden parameters">
+                    <!-- putMetadata failed to add value for key "quick-nav-enabled" so rendering metadata inline - see server debug log for details -->
+        <meta name="ajs-quick-nav-enabled" content="true">
+                </div>
+</form>
+</li>
+    <li>    
+        <a id="help-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="help-menu-link-content" title="Help">
+        <span class="aui-icon aui-icon-small aui-iconfont-help">Help</span>
+    </a>
+    <nav id="help-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                <ul  id="help-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+    
+            
+<a  id="confluence-help-link" href="http://docs.atlassian.com/confluence/docs-54/Getting+Help+And+Support" class="    "      title="Visit the Confluence documentation home"  target="_blank"
+>
+        Online Help
+</a>
+</li>
+                                            <li>
+    
+                
+<a  id="keyboard-shortcuts-link" href="#" class="    "      title="View available keyboard shortcuts" >
+        Keyboard Shortcuts
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="feed-builder-link" href="../../dashboard/configurerssfeed.html" class="    "      title="Create your custom RSS feed." >
+        Feed Builder
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="whats-new-menu-link" href="http://docs.atlassian.com/confluence/docs-54/whatsnew/iframe" class="    "      title="" >
+        What’s new
+</a>
+</li>
+                                            <li>
+    
+                
+<a  id="gadget-directory-link" href="#" class="   user-item administration-link "      title="Browse gadgets provided by Confluence" >
+        Available Gadgets
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="confluence-about-link" href="../../aboutconfluencepage.html" class="    "      title="Get more information about Confluence" >
+        About Confluence
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    </li>
+    <li>    
+    </li>
+                <li>                                    <li>
+    
+            
+<a  id="login-link" href="../../logina407.html?os_destination=%2Fdisplay%2FEZP%2FHow%2Bto%2Buse%2Ba%2Bcustom%2Bcontroller%2Bto%2Bdisplay%2Ba%2Bcontent%2Bor%2Blocation%3FfocusedCommentId%3D19890734" class="   user-item login-link "      title="" >
+        Log in
+</a>
+</li>
+                        </li>
+</ul>
+</div></div><!-- .aui-header-inner--></nav><!-- .aui-header -->
+    <br class="clear">
+</header>
+
+    <div id="splitter">
+    <div id="splitter-sidebar"  class="padding-div" >
+        
+        <p>&nbsp;<br/>
+<strong>Navigation</strong><br/>
+&bull; <a href="https://confluence.ez.no/display/MAIN" class="external-link" rel="nofollow">eZ Documentation Center</a><br/>
+&nbsp;</p>
+    
+
+                    
+    
+
+
+<div class="plugin_pagetree">
+
+        
+        
+    <ul class="plugin_pagetree_children_list plugin_pagetree_children_list_noleftspace">
+        <div class="plugin_pagetree_children">
+        </div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input type="hidden" name="treeId" value="">
+        <input type="hidden" name="treeRequestId" value="/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=false&amp;sort=position&amp;reverse=false&amp;disableLinks=false&amp;expandCurrent=false">
+        <input type="hidden" name="treePageId" value="13468497">
+
+        <input type="hidden" name="noRoot" value="false">
+        <input type="hidden" name="rootPageId" value="1114149">
+
+        <input type="hidden" name="rootPage" value="">
+        <input type="hidden" name="startDepth" value="0">
+        <input type="hidden" name="spaceKey" value="EZP" >
+
+        <input type="hidden" name="i18n-pagetree.loading" value="Loading...">
+        <input type="hidden" name="i18n-pagetree.error.permission" value="Unable to load page tree. It seems that you do not have permission to view the root page.">
+        <input type="hidden" name="i18n-pagetree.eeror.general" value="There was a problem retrieving the page tree. Please check the server log file for more information.">
+        <input type="hidden" name="loginUrl" value="/login.action?os_destination=%2Fpages%2Fviewpage.action%3FspaceKey%3DEZP%26title%3DHow%2Bto%2Buse%2Ba%2Bcustom%2Bcontroller%2Bto%2Bdisplay%2Ba%2Bcontent%2Bor%2Blocation%26focusedCommentId%3D19890734">
+        <input type="hidden" name="mobile" value="false">
+
+                <fieldset class="hidden">
+                                                <input type="hidden" name="ancestorId" value="11403951">
+                                    <input type="hidden" name="ancestorId" value="2720528">
+                                    <input type="hidden" name="ancestorId" value="6291674">
+                                    <input type="hidden" name="ancestorId" value="1114149">
+                                    </fieldset>
+    </fieldset>
+</div>
+
+
+
+            </div>
+    <div id="splitter-content">
+
+                    <script type="text/javascript" src="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/5.4.4/_/download/resources/com.atlassian.confluence.plugins.doctheme_resources/doc-theme.js"></script>
+    
+                        
+        <div id="theme-header">
+            <div class="sectionColumnWrapper"><div class="sectionMacro">
+<div class="sectionMacroRow"><div class="columnMacro"></div>
+<div class="columnMacro">
+<div class="panel" style="background-color: #ecf0f1;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: #ecf0f1;">
+<p>This documentation is for <strong>eZ Publish Platform 5.x</strong> "Platform stack". For documentation on "legacy" <a href="../../eZ-Publish/index.html" class="external-link" rel="nofollow">go here</a>, for explanation on difference see <a href="../../pages/viewpage0139.html?pageId=11403666" class="external-link" rel="nofollow">5.x Architecture overview</a></p>
+</div></div></div>
+<div class="columnMacro"></div></div></div></div>
+        </div>
+    
+            
+<div id="main"  class="aui-page-panel" >
+    <div id="main-header">
+        
+        
+    <div id="navigation" class="content-navigation view">
+                    <ul class="ajs-menu-bar">
+                                    
+                    
+        <li class="normal ajs-menu-item">
+        <a id="action-menu-link" class="action ajs-menu-title aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="action-menu" data-container="#navigation"><span><span>Tools</span></span></a>         <div id="action-menu" class="aui-dropdown2 aui-style-default">
+                            <ul  id="action-menu-primary"                     class="section-primary first aui-dropdown2-section">
+                                            <li>
+
+    
+        
+                            
+    
+    
+    <a  id="view-attachments-link" href="../../pages/viewpageattachments2392.html?pageId=13468497" rel="nofollow"  class="action-view-attachments"  accessKey="t"  title="View Attachments">
+                <span>A<u>t</u>tachments (0)</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-view-history-link" href="../../pages/viewpreviousversions2392.html?pageId=13468497" rel="nofollow"  class="action-view-history"   title="">
+                <span>Page History</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-page-permissions-link" href="../../pages/viewinfo2392.html?pageId=13468497" rel="nofollow"  class="action-page-permissions"   title="Edit restrictions">
+                <span>Restrictions</span>    </a>
+</li>
+                                </ul>
+                            <ul  id="action-menu-secondary"                     class="section-secondary aui-dropdown2-section">
+                                            <li>
+
+    
+        
+                            
+    
+    
+    <a  id="view-page-info-link" href="../../pages/viewinfo2392.html?pageId=13468497" rel="nofollow"  class="action-view-info"   title="">
+                <span>Page Information</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="link-to-page-link" href="../../pages/viewinfo2392.html?pageId=13468497" rel="nofollow"  class=""   title="Link to this Page">
+                <span>Link to this Page…</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="view-in-hierarchy-link" href="../../pages/listpages-dirview5aa3.html?key=EZP&amp;openId=13468497#selectedPageInHierarchy" rel="nofollow"  class=""   title="">
+                <span>View in Hierarchy</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-view-source-link" href="../../plugins/viewsource/viewpagesrc2392.html?pageId=13468497" rel="nofollow"  class="action-view-source popup-link"   title="">
+                <span>View Source</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-export-pdf-link" href="../../download/temp/pdfexport-20141021-211014-0859-421/EZP-Howtouseacustomcontrollertodisplayacontentorlocation-211014-0859-422f1f7.pdf?pageId=13468497" rel="nofollow"  class=""   title="">
+                <span>Export to PDF</span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                            
+    
+    
+    <a  id="action-export-word-link" href="../../exportword2392?pageId=13468497" rel="nofollow"  class="action-export-word"   title="">
+                <span>Export to Word</span>    </a>
+</li>
+                                </ul>
+                    </div>
+    </li>
+            </ul>
+    </div>
+
+        
+                <div id="title-heading" class="pagetitle with-breadcrumbs">
+        
+                            <div class="space-logo " data-key="EZP" data-name="eZ Publish Platform 5.x" data-entity-type="confluence.space">
+            <a><img class="logo space custom" src="../../download/attachments/1736738/EZP9600?version=4&amp;modificationDate=1405688262000&amp;api=v2" alt=""></a>
+        </div>            
+                            <div id="breadcrumb-section">
+                    
+    
+    
+    <ol id="breadcrumbs">
+                    
+                
+        <li class="first" >
+                
+
+                    <span class=""><a href="eZ%2bPublish%2bPlatform%2bDocumentation.html">eZ Publish Platform 5.x</a></span>
+                                                <li id="ellipsis" title="Show all breadcrumbs"><span><strong>&#8230;</strong></span></li>
+                                    
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="eZ%2bPublish%2bPlatform%2bDocumentation.html">eZ Publish Platform Documentation</a></span>
+                                        
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="../../pages/viewpage6ff2.html?pageId=6291674">Development &amp; Administration Guides</a></span>
+                                        
+                
+        <li class="hidden-crumb" >
+                
+
+                    <span class=""><a href="Developing%2bwith%2beZ%2bPublish%2b5.html">Developing with eZ Publish 5</a></span>
+                            
+                
+        <li>
+                
+
+                    <span class=""><a href="Developer%2bCookbook.html">Developer Cookbook</a></span>
+                </ol>
+
+
+                </div>
+            
+            <h1 id="title-text" class="with-breadcrumbs">
+                                        <a href="How%2bto%2buse%2ba%2bcustom%2bcontroller%2bto%2bdisplay%2ba%2bcontent%2bor%2blocation.html">How to use a custom controller to display a content or location</a>
+                            </h1>
+        </div>
+    </div>
+
+    
+
+    
+    
+    
+    
+    
+
+        
+
+
+
+
+        
+
+
+
+
+    
+
+    
+
+    
+
+
+
+
+
+
+
+    
+    
+        
+    
+    
+                    
+    
+
+    
+
+
+<div id="content" class="page view">
+    
+
+<div id="action-messages">
+                        </div>
+
+
+
+        <script type="text/x-template" title="searchResultsGrid">
+    <table class="aui">
+        <thead>
+            <tr class="header">
+                <th class="search-result-title">Page Title</th>
+                <th class="search-result-space">Space</th>
+                <th class="search-result-date">Updated</th>
+            </tr>
+        </thead>
+    </table>
+</script>
+<script type="text/x-template" title="searchResultsGridCount">
+    <p class="search-result-count">{0}</p>
+</script>
+<script type="text/x-template" title="searchResultsGridRow">
+    <tr class="search-result">
+        <td class="search-result-title"><a href="{1}" class="content-type-{2}"><span>{0}</span></a></td>
+        <td class="search-result-space"><a class="space" href="/display/{4}/" title="{3}">{3}</a></td>
+        <td class="search-result-date"><span class="date" title="{6}">{5}</span></td>
+    </tr>
+</script>
+        
+    
+    
+        <fieldset class="hidden parameters">
+            <input type="hidden" title="parentPageId" value="11403951">
+        </fieldset>
+
+                            
+    
+
+                    
+
+        
+        <a href="#page-metadata-end" class="assistive">Skip to end of metadata</a>
+<div id="page-metadata-start" class="assistive"></div>
+
+    <div class="page-metadata">
+        <ul>
+                            <li class="page-metadata-item noprint">
+
+    
+            
+                            
+    
+    
+    <a  id="content-metadata-page-restrictions" href="#" rel="nofollow"  class="hidden"   title="Restrictions apply">
+                    <img alt="" src="../../download/resources/com.atlassian.confluence.plugins.confluence-page-banner_page-banner-resources/images/red_padlock.png" height="16" width="16" title="">
+                <span></span>    </a>
+</li>
+                        <li class="page-metadata-modification-info">
+                
+        
+    
+        
+    
+        
+        
+            Created and last modified by <span class='author'>     <a href="../../loginaee9.html"
+                       class="url fn"
+                            >Jérôme Vieilledent</a></span> on <a class='last-modified' title='May 27, 2014 07:44' href='../../pages/diffpagesbyversioncaaa.html?pageId=13468497&amp;selectedPageVersions=17&amp;selectedPageVersions=18'>May 27, 2014</a>
+                </li>
+        </ul>
+    </div>
+
+
+<a href="#page-metadata-start" class="assistive">Go to start of metadata</a>
+<div id="page-metadata-end" class="assistive"></div>
+
+        
+        <fieldset class="hidden parameters">
+                        <input type="hidden" title="browsePageTreeMode" value="view">
+        </fieldset>
+
+        <div class="wiki-content">
+                           
+            <div class="aui-message warning shadowed information-macro">
+                    <p class="title">Version compatibility</p>
+                            <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                            <p>This recipe is compatible with <strong>eZ Publish 5.2 / 2013.07</strong></p>
+                    </div>
+    </div>
+<p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1413881958655 {padding: 0px;}
+div.rbtoc1413881958655 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1413881958655 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1413881958655'>
+<ul class='toc-indentation'>
+<li><a href='#Howtouseacustomcontrollertodisplayacontentorlocation-EnhancedviewsforContent/Location'>Enhanced views for Content/Location</a>
+<ul class='toc-indentation'>
+<li><a href='#Howtouseacustomcontrollertodisplayacontentorlocation-Description'>Description</a></li>
+<li><a href='#Howtouseacustomcontrollertodisplayacontentorlocation-Matchingcustomcontrollers'>Matching custom controllers</a>
+<ul class='toc-indentation'>
+<li><a href='#Howtouseacustomcontrollertodisplayacontentorlocation-OriginalViewControllersignatures'>Original ViewController signatures</a></li>
+</ul>
+</li>
+<li><a href='#Howtouseacustomcontrollertodisplayacontentorlocation-Examples'>Examples</a>
+<ul class='toc-indentation'>
+<li><a href='#Howtouseacustomcontrollertodisplayacontentorlocation-Enrichingbuilt-inViewController'>Enriching built-in ViewController</a></li>
+<li><a href='#Howtouseacustomcontrollertodisplayacontentorlocation-Usingacustomcontrollertogetfullcontrol'>Using a custom controller to get full control</a></li>
+</ul>
+</li>
+<li><a href='#Howtouseacustomcontrollertodisplayacontentorlocation-Overridingthebuilt-inViewController'>Overriding the built-in ViewController</a></li>
+</ul>
+</li>
+</ul>
+</div></p><h1 id="Howtouseacustomcontrollertodisplayacontentorlocation-EnhancedviewsforContent/Location">Enhanced views for Content/Location</h1><p>In some cases, displaying a content/location via the built-in <code>ViewController</code> is not sufficient and will lead you to do many sub-requests in order to access different parameters.</p><p>Typical use cases are access to:</p><ul><li>Settings (either coming from <code>ConfigResolver</code> or <code>ServiceContainer</code>)</li><li>Current content's <code>ContentType</code> object</li><li>Current location's parent</li><li>Current location's children count</li><li>Main location and alternative locations for the current content</li><li>etc…</li></ul><p>In those cases, you may want to <strong>use your own controller</strong> to display the current content/location instead of using the built-in <code>ViewController</code>.</p><h2 id="Howtouseacustomcontrollertodisplayacontentorlocation-Description">Description</h2><p>This feature covers 2 general use cases:</p><ul><li>Lets you configure a custom controller with the configured matcher rules.</li><li>Lets you override the built-in view controller in a clean way.</li></ul><h2 id="Howtouseacustomcontrollertodisplayacontentorlocation-Matchingcustomcontrollers">Matching custom controllers</h2><p>This is possible with the following piece of configuration:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[ezpublish:
+    system:
+        my_siteaccess:
+            location_view:
+                full:
+                    # Defining a ruleset matching a location and pointing to a controller
+                    my_ruleset:
+                        # The following will let you use your own custom controller for location #123
+                        # (Here it will use AcmeTestBundle/Controller/DefaultController::viewLocationAction(),
+                        # following the Symfony controller notation convention.
+                        # Method viewLocationAction() must follow the same prototype as in the built-in ViewController
+                        controller: AcmeTestBundle:Default:viewLocation
+                        match:
+                            Id\Location: 123]]></script>
+</div></div>    <div class="aui-message hint shadowed information-macro">
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            <p>You can point to any kind of <a href="http://symfony.com/doc/current/book/page_creation.html#step-2-create-the-controller" class="external-link" rel="nofollow">controller supported by Symfony</a> (including <a href="http://symfony.com/doc/current/cookbook/controller/service.html" class="external-link" rel="nofollow">controllers as a service</a>).</p>
+                    </div>
+    </div>
+<p><span style="font-size: 10.0pt;line-height: 13.0pt;">The only requirement here is that your action method has a similar signature than </span><code style="font-size: 10.0pt;line-height: 13.0pt;">ViewController::viewLocation()</code><span style="font-size: 10.0pt;line-height: 13.0pt;"> or </span><code style="font-size: 10.0pt;line-height: 13.0pt;">ViewController::viewContent()</code><span style="font-size: 10.0pt;line-height: 13.0pt;"> (depending on what you're matching of course). However, note that all arguments are not mandatory since </span><a href="http://symfony.com/doc/current/book/routing.html#route-parameters-and-controller-arguments" style="font-size: 10.0pt;line-height: 13.0pt;" class="external-link" rel="nofollow">Symfony is clever enough to know what to inject in your action method</a><span style="font-size: 10.0pt;line-height: 13.0pt;">. Hence <strong>you're not forced to mimic the <code>ViewController</code>'s signature strictly</strong>. For example, if you omit <code>$layout</code> and <code>$params</code> arguments, it will be still valid. Symfony will just avoid to inject them in your action method.</span></p><h3 id="Howtouseacustomcontrollertodisplayacontentorlocation-OriginalViewControllersignatures">Original ViewController signatures</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>viewLocation() signature</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[/**
+ * Main action for viewing content through a location in the repository.
+ *
+ * @param int $locationId
+ * @param string $viewType
+ * @param boolean $layout
+ * @param array $params
+ *
+ * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+ * @throws \Exception
+ *
+ * @return \Symfony\Component\HttpFoundation\Response
+ */
+public function viewLocation( $locationId, $viewType, $layout = false, array $params = array() )]]></script>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>viewContent() signature</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[/**
+ * Main action for viewing content.
+ *
+ * @param int $contentId
+ * @param string $viewType
+ * @param boolean $layout
+ * @param array $params
+ *
+ * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+ * @throws \Exception
+ *
+ * @return \Symfony\Component\HttpFoundation\Response
+ */
+public function viewContent( $contentId, $viewType, $layout = false, array $params = array() )]]></script>
+</div></div>    <div class="aui-message hint shadowed information-macro">
+                    <p class="title">Note</p>
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            <p>Controller selection doesn't apply to <code>block_view</code> since you can already <a href="The%2bPage%2bFieldType.html#ThePageFieldType-ThePageFieldType-Renderingblocks">use your own controller to display blocks</a>.</p>
+                    </div>
+    </div>
+    <div class="aui-message problem shadowed information-macro">
+                    <p class="title">Warning on caching</p>
+                            <span class="aui-icon icon-problem">Icon</span>
+                <div class="message-content">
+                            <p>Using your own controller, <u><strong>it is your responsibility to define cache rules</strong></u>, like for every custom controller !</p><p>So don't forget to <strong>set cache rules</strong> and the appropriate <strong><code>X-Location-Id</code> header</strong> in the returned <code>Response</code> object.</p><p><a href="https://github.com/ezsystems/ezpublish-kernel/blob/master/eZ/Publish/Core/MVC/Symfony/Controller/Content/ViewController.php#L76" class="external-link" rel="nofollow">See built-in ViewController</a> for more details on this.</p>
+                    </div>
+    </div>
+<h2 id="Howtouseacustomcontrollertodisplayacontentorlocation-Examples">Examples</h2><h3 id="Howtouseacustomcontrollertodisplayacontentorlocation-Enrichingbuilt-inViewController">Enriching built-in ViewController</h3><p>This example shows how to use a custom controller to enrich the final configured view template. Your controller will here forward the request to the built-in <code>ViewController</code> with some additional parameters.</p>    <div class="aui-message success shadowed information-macro">
+                            <span class="aui-icon icon-success">Icon</span>
+                <div class="message-content">
+                            <strong>This is usually the recommended way to use a custom controller.</strong>
+                    </div>
+    </div>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>ezpublish.yml</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[ezpublish:
+    system:
+        ezdemo_frontend_group:
+            location_view:
+                full:
+                    article_test:
+                        # Configuring both controller and template as the controller will forward
+                        # the request to the ViewController which will render the configured template.
+                        controller: AcmeTestBundle:Default:articleViewEnhanced
+                        template: AcmeTestBundle:full:article_test.html.twig
+                        match:
+                            Identifier\ContentType: [article]]]></script>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Controller</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[&lt;?php
+namespace Acme\TestBundle\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use eZ\Bundle\EzPublishCoreBundle\Controller;
+
+class DefaultController extends Controller
+{
+    public function articleViewEnhancedAction( $locationId, $viewType, $layout = false, array $params = array() )
+    {
+        $params += array( &#39;myCustomVariable&#39; =&gt; &quot;Hey, I&#39;m a custom message!&quot; );
+        // Forward the request to the original ViewController
+        // And get the response. Eventually alter it (here we change the smax-age for cache).
+        $response = $this-&gt;get( &#39;ez_content&#39; )-&gt;viewLocation( $locationId, $viewType, $layout, $params );
+        $response-&gt;setSharedMaxAge( 600 );
+
+        return $response;
+    }
+}]]></script>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>article_test.html.twig</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[{% extends noLayout ? viewbaseLayout : &quot;eZDemoBundle::pagelayout.html.twig&quot; %}
+
+{% block content %}
+    &lt;h1&gt;{{ ez_render_field( content, &#39;title&#39; ) }}&lt;/h1&gt;
+    &lt;h2&gt;{{ myCustomVariable }}&lt;/h2&gt;
+    {{ ez_render_field( content, &#39;body&#39; ) }}
+{% endblock %}]]></script>
+</div></div><h3 id="Howtouseacustomcontrollertodisplayacontentorlocation-Usingacustomcontrollertogetfullcontrol">Using a custom controller to get full control</h3><p>This example shows you how to configure and use your own controller to handle a location.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>ezpublish.yml</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[ezpublish:
+    system:
+        ezdemo_frontend_group:
+            location_view:
+                full:
+                    my_ruleset:
+                        controller: AcmeTestBundle:Default:viewFolder
+                        match:
+                            Identifier\ContentType: [folder]
+                            Identifier\Section: [standard]]]></script>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Controller</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[&lt;?php
+namespace Acme\TestBundle\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use eZ\Bundle\EzPublishCoreBundle\Controller;
+
+class DefaultController extends Controller
+{
+    public function viewFolderAction( $locationId, $layout = false )
+    {
+        $repository = $this-&gt;getRepository();
+        $location = $repository-&gt;getLocationService()-&gt;loadLocation( $locationId );
+        $response = new Response();
+        $response-&gt;headers-&gt;set( &#39;X-Location-Id&#39;, $locationId );
+        // Caching for 1h and make the cache vary on user hash
+        $response-&gt;setSharedMaxAge( 3600 );
+        $response-&gt;setVary( &#39;X-User-Hash&#39; );
+        return $this-&gt;render(
+            &#39;AcmeTestBundle::custom_controller_folder.html.twig&#39;,
+            array(
+                &#39;location&#39; =&gt; $location,
+                &#39;content&#39; =&gt; $repository-&gt;getContentService()-&gt;loadContentByContentInfo( $location-&gt;getContentInfo() ),
+                &#39;foo&#39; =&gt; &#39;Hey world!!!&#39;,
+                &#39;osTypes&#39; =&gt; array( &#39;osx&#39;, &#39;linux&#39;, &#39;losedows&#39; )
+            )
+        );
+    }
+}
+
+]]></script>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>custom_controller_folder.html.twig</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[{% extends &quot;eZDemoBundle::pagelayout.html.twig&quot; %}
+
+{% block content %}
+&lt;h1&gt;{{ ez_render_field( content, &#39;title&#39; ) }}&lt;/h1&gt;
+    &lt;h1&gt;{{ foo }}&lt;/h1&gt;
+    &lt;ul&gt;
+    {% for os in osTypes %}
+        &lt;li&gt;{{ os }}&lt;/li&gt;
+    {% endfor %}
+    &lt;/ul&gt;
+{% endblock %}
+]]></script>
+</div></div><h2 id="Howtouseacustomcontrollertodisplayacontentorlocation-Overridingthebuilt-inViewController">Overriding the built-in ViewController</h2><p>One other way to keep control on what is passed to the view is to use your own controller instead of the built-in ViewController.</p><p>Base ViewController being defined as a service, with a service alias, this can be easily achieved from your bundle's configuration:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="theme: Eclipse; brush: php; gutter: false"><![CDATA[parameters:
+    my.custom.view_controller.class: Acme\TestBundle\MyViewController
+
+services:
+    my.custom.view_controller:
+        class: %my.custom.view_controller.class%
+        arguments: [@some_dependency, @other_dependency]
+
+    # Change the alias here and make it point to your own controller
+    ez_content:
+        alias: my.custom.view_controller]]></script>
+</div></div>    <div class="aui-message problem shadowed information-macro">
+                    <p class="title">Warning</p>
+                            <span class="aui-icon icon-problem">Icon</span>
+                <div class="message-content">
+                            <p>Doing so will completely override the built-in ViewController! Use this at your own risk!</p>
+                    </div>
+    </div>
+    <div class="aui-message hint shadowed information-macro">
+                    <p class="title">See also</p>
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            <p>See also</p><p><a href="https://confluence.ez.no/display/EZP/Content+view#Contentview-Displayadefaulttext" class="external-link" rel="nofollow">How to Display a default text while asynchronous loading of a controller</a></p><p><a href="Content%2bview.html#Contentview-Renderembeddedcontentobjects" rel="nofollow">How to render an embedded content from a Twig template</a></p>
+                    </div>
+    </div>
+<p> </p><p> </p>
+
+                
+        
+    
+        </div>
+
+        <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location"
+    dc:identifier="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location"
+    dc:title="How to use a custom controller to display a content or location"
+    trackback:ping="https://doc.ez.no/rpc/trackback/13468497"/>
+</rdf:RDF>
+-->
+
+            
+    
+
+
+
+<div id="labels-section" class="pageSection group">
+    <div class="labels-section-content content-column" entityid="13468497" entitytype="page">
+	<div class="labels-content">
+		
+    <ul class="label-list label-list-right ">
+            
+
+<li class="aui-label " data-label-id="3276819">
+    <a class="aui-label-split-main" href="../../label/EZP/content.html">content</a>
+    </li><li class="aui-label " data-label-id="15630342">
+    <a class="aui-label-split-main" href="../../label/EZP/controller.html">controller</a>
+    </li>             </ul>
+
+    </div>
+</div></div>
+
+            
+            
+
+
+
+
+            
+    
+
+
+
+
+
+
+
+
+                    
+    
+<div id="comments-section" class="pageSection group">
+            <div class="section-header">
+            <h2 id="comments-section-title" class="section-title">
+                                    5 Comments
+                            </h2>
+        </div>
+    
+    
+    
+                            <ol class="comment-threads top-level" id="page-comments">
+                        <li id="comment-thread-19890734" class="comment-thread">
+                    <div class="comment  focused  " id="comment-19890734">
+                <p class="comment-user-logo">
+                    <img class="userLogo logo anonymous" src="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_/images/icons/profilepics/anonymous.png"
+           alt="User icon: gof" title="gof">                </p>
+                <div class="comment-header">
+                    <h4 class="author">    <a href="../../login4be8.html"
+                       class="url fn"
+                            >Ivo Lukač</a></h4>
+                </div>
+                <div class="comment-body">
+                    <div class="comment-content wiki-content">
+                        <p>Do I need to set the configuration in ezpublish/config/ezpublish.yml file</p><p>Or there is a way to put it in the Bundle?</p>
+                    </div>
+                    <div class="comment-actions">
+                                                      <ul class="comment-actions-secondary">
+                                                                      <li class="first comment-permalink"><a title="Permanent link to this comment" href="How%2bto%2buse%2ba%2bcustom%2bcontroller%2bto%2bdisplay%2ba%2bcontent%2bor%2blocationeef3.html?focusedCommentId=19890734#comment-19890734"
+                id="comment-permalink-19890734"                ><span>Permalink</span></a></li>
+            </ul>
+                                <ul class="comment-actions-primary">
+                                                                      <li class="first comment-date"><a title="Jan 23, 2014 23:00" href="How%2bto%2buse%2ba%2bcustom%2bcontroller%2bto%2bdisplay%2ba%2bcontent%2bor%2blocationeef3.html?focusedCommentId=19890734#comment-19890734"
+                              ><span>Jan 23, 2014</span></a></li>
+            </ul>
+                      </div>
+                </div>
+            </div>
+
+            <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location?focusedCommentId=19890734#comment-19890734"
+    dc:identifier="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location?focusedCommentId=19890734#comment-19890734"
+    dc:title="How to use a custom controller to display a content or location"
+    trackback:ping="https://doc.ez.no/rpc/trackback/19890734"/>
+</rdf:RDF>
+-->
+
+                    
+            </li>
+                        <li id="comment-thread-19890736" class="comment-thread">
+                    <div class="comment  " id="comment-19890736">
+                <p class="comment-user-logo">
+                    <img class="userLogo logo anonymous" src="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_/images/icons/profilepics/anonymous.png"
+           alt="User icon: jerome.vieilledent@ez.no" title="jerome.vieilledent@ez.no">                </p>
+                <div class="comment-header">
+                    <h4 class="author">    <a href="../../loginaee9.html"
+                       class="url fn"
+                            >Jérôme Vieilledent</a></h4>
+                </div>
+                <div class="comment-body">
+                    <div class="comment-content wiki-content">
+                        <p>You can of course put it in a bundle, <a href="https://confluence.ez.no/display/EZP/Import+settings+from+a+bundle" class="external-link" rel="nofollow">as explained here</a> <img class="emoticon emoticon-smile" src="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_/images/icons/emoticons/smile.png" data-emoticon-name="smile" alt="(smile)" />.</p><p>And there are examples in the DemoBundle.</p>
+                    </div>
+                    <div class="comment-actions">
+                                                      <ul class="comment-actions-secondary">
+                                                                      <li class="first comment-permalink"><a title="Permanent link to this comment" href="How%2bto%2buse%2ba%2bcustom%2bcontroller%2bto%2bdisplay%2ba%2bcontent%2bor%2blocation70af.html?focusedCommentId=19890736#comment-19890736"
+                id="comment-permalink-19890736"                ><span>Permalink</span></a></li>
+            </ul>
+                                <ul class="comment-actions-primary">
+                                                                      <li class="first comment-date"><a title="Jan 24, 2014 08:56" href="How%2bto%2buse%2ba%2bcustom%2bcontroller%2bto%2bdisplay%2ba%2bcontent%2bor%2blocation70af.html?focusedCommentId=19890736#comment-19890736"
+                              ><span>Jan 24, 2014</span></a></li>
+            </ul>
+                      </div>
+                </div>
+            </div>
+
+            <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location?focusedCommentId=19890736#comment-19890736"
+    dc:identifier="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location?focusedCommentId=19890736#comment-19890736"
+    dc:title="How to use a custom controller to display a content or location"
+    trackback:ping="https://doc.ez.no/rpc/trackback/19890736"/>
+</rdf:RDF>
+-->
+
+                    
+            </li>
+                        <li id="comment-thread-19890737" class="comment-thread">
+                    <div class="comment  " id="comment-19890737">
+                <p class="comment-user-logo">
+                    <img class="userLogo logo anonymous" src="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_/images/icons/profilepics/anonymous.png"
+           alt="User icon: gof" title="gof">                </p>
+                <div class="comment-header">
+                    <h4 class="author">    <a href="../../login4be8.html"
+                       class="url fn"
+                            >Ivo Lukač</a></h4>
+                </div>
+                <div class="comment-body">
+                    <div class="comment-content wiki-content">
+                        <p>Got it. Thanks!</p>
+                    </div>
+                    <div class="comment-actions">
+                                                      <ul class="comment-actions-secondary">
+                                                                      <li class="first comment-permalink"><a title="Permanent link to this comment" href="How%2bto%2buse%2ba%2bcustom%2bcontroller%2bto%2bdisplay%2ba%2bcontent%2bor%2blocation1b20.html?focusedCommentId=19890737#comment-19890737"
+                id="comment-permalink-19890737"                ><span>Permalink</span></a></li>
+            </ul>
+                                <ul class="comment-actions-primary">
+                                                                      <li class="first comment-date"><a title="Jan 24, 2014 09:06" href="How%2bto%2buse%2ba%2bcustom%2bcontroller%2bto%2bdisplay%2ba%2bcontent%2bor%2blocation1b20.html?focusedCommentId=19890737#comment-19890737"
+                              ><span>Jan 24, 2014</span></a></li>
+            </ul>
+                      </div>
+                </div>
+            </div>
+
+            <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location?focusedCommentId=19890737#comment-19890737"
+    dc:identifier="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location?focusedCommentId=19890737#comment-19890737"
+    dc:title="How to use a custom controller to display a content or location"
+    trackback:ping="https://doc.ez.no/rpc/trackback/19890737"/>
+</rdf:RDF>
+-->
+
+                    
+            </li>
+                        <li id="comment-thread-23528913" class="comment-thread">
+                    <div class="comment  " id="comment-23528913">
+                <p class="comment-user-logo">
+                    <img class="userLogo logo anonymous" src="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_/images/icons/profilepics/anonymous.png"
+           alt="User icon: taenadil" title="taenadil">                </p>
+                <div class="comment-header">
+                    <h4 class="author">    <a href="../../login643f.html"
+                       class="url fn"
+                            >Xavier Van Herpe</a></h4>
+                </div>
+                <div class="comment-body">
+                    <div class="comment-content wiki-content">
+                        <p>Shouldn't &quot;viewLocation()&quot; and &quot;viewContent()&quot; in this page be replaced with &quot;viewLocationAction()&quot; and &quot;viewContentAction()&quot; ?</p>
+                    </div>
+                    <div class="comment-actions">
+                                                      <ul class="comment-actions-secondary">
+                                                                      <li class="first comment-permalink"><a title="Permanent link to this comment" href="How%2bto%2buse%2ba%2bcustom%2bcontroller%2bto%2bdisplay%2ba%2bcontent%2bor%2blocationdbad.html?focusedCommentId=23528913#comment-23528913"
+                id="comment-permalink-23528913"                ><span>Permalink</span></a></li>
+            </ul>
+                                <ul class="comment-actions-primary">
+                                                                      <li class="first comment-date"><a title="Aug 29, 2014 12:14" href="How%2bto%2buse%2ba%2bcustom%2bcontroller%2bto%2bdisplay%2ba%2bcontent%2bor%2blocationdbad.html?focusedCommentId=23528913#comment-23528913"
+                              ><span>Aug 29, 2014</span></a></li>
+            </ul>
+                      </div>
+                </div>
+            </div>
+
+            <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location?focusedCommentId=23528913#comment-23528913"
+    dc:identifier="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location?focusedCommentId=23528913#comment-23528913"
+    dc:title="How to use a custom controller to display a content or location"
+    trackback:ping="https://doc.ez.no/rpc/trackback/23528913"/>
+</rdf:RDF>
+-->
+
+                    
+            </li>
+                        <li id="comment-thread-23528919" class="comment-thread">
+                    <div class="comment  " id="comment-23528919">
+                <p class="comment-user-logo">
+                    <img class="userLogo logo anonymous" src="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_/images/icons/profilepics/anonymous.png"
+           alt="User icon: jerome.vieilledent@ez.no" title="jerome.vieilledent@ez.no">                </p>
+                <div class="comment-header">
+                    <h4 class="author">    <a href="../../loginaee9.html"
+                       class="url fn"
+                            >Jérôme Vieilledent</a></h4>
+                </div>
+                <div class="comment-body">
+                    <div class="comment-content wiki-content">
+                        <p><a class="confluence-userlink user-mention" data-username="taenadil" href="../../login643f.html" data-linked-resource-id="18118550" data-linked-resource-type="userinfo" data-base-url="https://doc.ez.no">Xavier Van Herpe</a>: No, we just present the base ViewController method signatures here.</p>
+                    </div>
+                    <div class="comment-actions">
+                                                      <ul class="comment-actions-secondary">
+                                                                      <li class="first comment-permalink"><a title="Permanent link to this comment" href="How%2bto%2buse%2ba%2bcustom%2bcontroller%2bto%2bdisplay%2ba%2bcontent%2bor%2blocation8099.html?focusedCommentId=23528919#comment-23528919"
+                id="comment-permalink-23528919"                ><span>Permalink</span></a></li>
+            </ul>
+                                <ul class="comment-actions-primary">
+                                                                      <li class="first comment-date"><a title="Aug 29, 2014 21:14" href="How%2bto%2buse%2ba%2bcustom%2bcontroller%2bto%2bdisplay%2ba%2bcontent%2bor%2blocation8099.html?focusedCommentId=23528919#comment-23528919"
+                              ><span>Aug 29, 2014</span></a></li>
+            </ul>
+                      </div>
+                </div>
+            </div>
+
+            <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location?focusedCommentId=23528919#comment-23528919"
+    dc:identifier="https://doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location?focusedCommentId=23528919#comment-23528919"
+    dc:title="How to use a custom controller to display a content or location"
+    trackback:ping="https://doc.ez.no/rpc/trackback/23528919"/>
+</rdf:RDF>
+-->
+
+                    
+            </li>
+                </ol>
+    
+            <div class="bottom-comment-panels comment-panels">
+                                    
+    
+
+
+    
+            </div>
+    
+    </div>
+
+
+            
+</div>
+
+
+    
+
+
+
+
+    
+    
+
+    
+    
+    
+
+
+
+
+
+
+
+
+</div>
+  
+        <div id="theme-footer">
+            <div class="sectionColumnWrapper"><div class="sectionMacro">
+<div class="sectionMacroRow"><div class="columnMacro"></div>
+<div class="columnMacro">
+<div class="panel" style="background-color: #ecf0f1;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: #ecf0f1;">
+<p>Where Content Means Business</p>
+</div></div></div>
+<div class="columnMacro"></div></div></div></div>
+        </div>
+    
+    </div>
+</div>
+
+
+        
+            <div id="footer">
+
+    <section class="footer-body">
+
+                                                <p class="license license-opensource">
+                  Powered by a free <b>Atlassian Confluence Open Source Project License</b> granted to eZ Publish. <a href="http://www.atlassian.com/c/conf/11461">Evaluate Confluence today</a>.<br>
+                </p>
+                        
+    
+
+    <ul id="poweredby">
+        <li class="noprint">Powered by <a href="http://www.atlassian.com/software/confluence" class="hover-footer-link">Atlassian Confluence</a> <span id='footer-build-information'>5.4.4</span>, <a href="http://www.atlassian.com/software/confluence/overview/team-collaboration-software?utm_source=confluence-footer" class="hover-footer-link">Team Collaboration Software</a></li>
+        <li class="print-only">Printed by Atlassian Confluence 5.4.4, Team Collaboration Software.</li>
+        <li class="noprint"><a href="http://jira.atlassian.com/secure/BrowseProject.jspa?id=10470" class="hover-footer-link">Report a bug</a></li>
+        <li class="noprint"><a href="http://www.atlassian.com/about/connected.jsp?s_kwcid=Confluence-stayintouch" class="hover-footer-link">Atlassian News</a></li>
+    </ul>
+
+    
+
+            <script>
+AJS.toInit(function(){
+ if(AJS.params.spaceKey &&
+    AJS.params.spaceKey === 'MAIN' ||
+    AJS.params.spaceKey === 'EZMA' ||
+    AJS.params.spaceKey === 'ODC' ||
+    AJS.params.spaceKey === 'EZP50' ||
+    AJS.params.spaceKey === 'EZP51' ||
+    AJS.params.spaceKey === 'EZP52' ||
+    AJS.params.spaceKey === 'EZPCLOUD' ||
+    AJS.params.spaceKey === 'EZP' ||
+    AJS.params.spaceKey === 'EZRECO'
+){
+
+(function()
+{var isSecure=('https:'==document.location.protocol);var ff=document.createElement('script');ff.type='text/javascript';ff.async=true;ff.src=(isSecure?'https':'http')+'://'+(isSecure?'secure.':'lb.')+'liveviewer.ez.no/statjs/sst-120-1304513615/stat.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ff,s);}
+)();
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-303624-13', 'ez.no');
+  ga('send', 'pageview');
+}}
+);
+</script>
+    
+    </section>
+
+</div>
+
+            
+    </div>
+</body>
+
+<!-- Mirrored from doc.ez.no/display/EZP/How+to+use+a+custom+controller+to+display+a+content+or+location?focusedCommentId=19890734 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 09:46:03 GMT -->
+</html>

@@ -1,0 +1,170 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-currency/Rounding-auto-prices/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Rounding auto prices / Multi-currency / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Rounding auto prices</h1>
+</div>
+
+ <p>The price rounding process is affected by settings which are specified in the &quot;[MathSettings]&quot; section of the &quot;settings/shop.ini&quot; configuration file such as: </p>
+<ul>
+ <li><div> RoundingPrecision </div></li> <li><div> RoundingType </div></li> <li><div> RoundingTarget </div></li> 
+</ul>
+ <p>You can specify your own price rounding criteria for auto prices calculation by creating an override for this configuration file.</p>  <a name="eztoc132446_1" id="eztoc132446_1"></a><h2>RoundingPrecision</h2> <p>This setting specifies how many significant digits after the decimal point should be kept while rounding. By default, the precision is set to 2. Normally, there is no need to set for example &quot;RoundingPrecision=3&quot; because only two decimal digits are stored in the database for each price.</p> <a name="eztoc132446_2" id="eztoc132446_2"></a><h2>RoundingType</h2> <p>This setting defines which rounding method should be used. The possible values are described in the following table. </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Setting</p> 
+  </th> <th >   <p>Description</p> 
+  </th> <th >   <p>Actual value</p> 
+  </th> <th >   <p>Rounded value</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>RoundingType=round</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>returns the closest value</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.124</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.12</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>RoundingType=round</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>returns the closest value</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.125</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.13</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>RoundingType=ceil</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>returns the next highest value by rounding up</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.121</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.13</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>RoundingType=floor</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>returns the next lowest value by rounding down</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.129</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>0.12</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>RoundingType=none</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>rounding is not used</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>1/3</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>*0.333333...</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>* as long as only two decimal digits are stored in the database for each price, the result will be 0.33</p> <p>Please note that the examples above are calculated supposing that RoundingPrecision is set to 2.</p> <p>The default value of the &quot;RoundingType&quot; setting is &quot;round&quot;.</p>   <a name="eztoc132446_3" id="eztoc132446_3"></a><h2>RoundingTarget</h2> <p>This setting allows you to force rounding to the specified target. For example, if you prefer &quot;retail&quot; prices like $2.49 instead of $2.50, you can instruct the system to use 9 as the end digit for all your auto prices.</p> <p>The default value of the &quot;RoundingTarget&quot; is &quot;false&quot;.</p> <p>Please refer to the following table for examples of usage. </p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Setting</p> 
+  </th> <th >   <p>Actual value</p> 
+  </th> <th >   <p>Rounded value</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>RoundingTarget=false</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>89.468543</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>89.47</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>RoundingTarget=5</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>89.468543</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>89.45</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>RoundingTarget=99</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>89.468543</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>89.99</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>Please note that the examples above are calculated supposing that RoundingPrecision is set to 2 and RoundingType is set to &quot;round&quot;.</p> <p>Don't forget to <a href="../../Editing-a-currency.html#update" target="_self">update auto prices</a> for existing products after changing the rounding settings.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-currency/Rounding-auto-prices/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:06:12 GMT -->
+</html>

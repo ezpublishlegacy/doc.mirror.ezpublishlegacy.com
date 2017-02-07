@@ -1,0 +1,86 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=19890943 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 10:09:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage119f.html?pageId=19890943" />
+        <link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch934e.css?media=print" media="print">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 8]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1f2a9c4c7f2593422cc9b02d1a652a22/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/26ac2724af3c6ece1051365650d982fa/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins.confluence-highlight-ac" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/51/_/styles/colorsb538.css?spaceKey=EZP" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/51/_/styles/customb538.css?spaceKey=EZP" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><span style="color: rgb(0,0,0);">So far, our type’s value is represented by the <code>Tweet\Value</code> class. It holds a semantic representation of the type’s data: an url, and author url, and the tweet's content.</span></p><p><span style="color: rgb(0,0,0);">The next step is to tell the system how to actually <em>store</em> this.</span></p><h3>About converters</h3><p><span style="color: rgb(0,0,0);">Unlike eZ Publish Legacy, eZ Publish 5 supports (by design) multiple storage engines</span><span style="color: rgb(0,0,0);">. The main, and almost only one right now is the Legacy Storage Engine, based on the legacy database, with a new implementation. </span><span style="color: rgb(0,0,0);">Since each storage engine may have its own way of storing data, we need to map each FieldType value to something legacy can understand. To do this, we will implement a FieldType Converter, each storage engine defining its own interface for those.</span></p><h3><span style="color: rgb(0,0,0);">Legacy FieldType converters</span></h3><p><span style="color: rgb(0,0,0);">The legacy storage engine uses the </span><code><span style="color: rgb(0,0,0);">ezcontentobject_attribute</span></code><span style="color: rgb(0,0,0);"> table to store field values, and </span><code><span style="color: rgb(0,0,0);">ezcontentclass_attribute</span></code><span style="color: rgb(0,0,0);"> to store field definition values (settings, etc). They're both based on the same principle. Each row reprensents a Field or a FieldDefinition, and offers several free fields, of different types, where the type can store its data:</span></p><ul><li><code><span style="color: rgb(0,0,0);">ezcontentobject_attribute</span></code><span style="color: rgb(0,0,0);"> offers three fields for this purpose: </span><code><span style="color: rgb(0,0,0);">data_int</span></code><span style="color: rgb(0,0,0);">, </span><code><span style="color: rgb(0,0,0);">data_text</span></code><span style="color: rgb(0,0,0);"> and </span><code><span style="color: rgb(0,0,0);">data_float</span></code></li><li><code><span style="color: rgb(0,0,0);">ezcontentclass_attribute</span></code><span style="color: rgb(0,0,0);"> offers a few more: four </span><span style="color: rgb(0,0,0);"><code>data_int</code> (<code>data_int1</code> to <code>data_int4</code>)</span><span style="color: rgb(0,0,0);"> fields, four </span><code><span style="color: rgb(0,0,0);">data_float</span></code><span style="color: rgb(0,0,0);"> (<code>data_float1</code> to <code>data_float5</code>) ones, and five </span><span style="color: rgb(0,0,0);"><code>data_text</code> (<code>data_text1</code> to <code>data_text5</code>)</span><span style="color: rgb(0,0,0);">.</span></li></ul><p><span><span><span style="color: rgb(0,0,0);">Each type is free to use those fields in any way it requires. </span></span></span><span style="color: rgb(0,0,0);">Converters will map a field’s semantic values to the fields described above, for both settings (validation + configuration) as well as value.</span></p><h3><span style="color: rgb(102,102,102);">Implementing Tweet\LegacyConverter</span></h3><p><span style="color: rgb(0,0,0);">The Converter will be placed along with the </span><span style="color: rgb(0,0,0);">Type</span><span style="color: rgb(0,0,0);"> and </span><span style="color: rgb(0,0,0);">Value</span><span style="color: rgb(0,0,0);"> definitions (the Kernel stores them inside the Legacy Storage Engine structure): </span><code><span style="color: rgb(0,0,0);">eZ/Publish/FieldType/Tweet/LegacyConverter.php</span></code><span style="color: rgb(0,0,0);">. A Legacy Converter</span><span style="color: rgb(0,0,0);"> must implement the </span><span style="color: rgb(0,0,0);">eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter</span><span style="color: rgb(0,0,0);"> interface:</span></p><p><span style="color: rgb(0,0,0);"> </span></p><table class="wysiwyg-macro" data-macro-name="code" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>namespace EzSystems\TweetFieldTypeBundle\eZ\Publish\FieldType\Tweet;
+
+use eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter;
+
+class LegacyConverter implements Converter
+{
+}</pre></td></tr></table><p><span style="color: rgb(0,0,0);">The Converter interface expects us to implement five methods:</span></p><ul><li><p><code><span>toStorageValue()</span></code><span> &amp; </span><span><code>toFieldValue()</code><br class="kix-line-break" /></span><span>used to convert an API field value to a legacy storage value, and a legacy storage value to an API field value.</span><span> </span></p></li><li><p><span><code>toStorageFieldDefinition()</code> &amp; <code>toFieldDefinition()</code><br class="kix-line-break" /></span><span>used to convert a field definition to a legacy one, and a stored legacy field definition to an API field definition</span><span> </span></p></li><li><p><span><code>getIndexColumn()</code><br class="kix-line-break" /></span><span>Tell the API which legacy DB field should be used to sort &amp; filter content, either <code>sort_key_string</code> or <code>sort_key_int</code></span></p></li></ul><h4><span style="color: rgb(102,102,102);">Implementing Field Value converters: toFieldValue() and toStorageValue()</span></h4><p><span style="color: rgb(0,0,0);">As said above, those two methods are used to convert from a Field to a value Legacy can store, and the other way around.</span></p><p><span style="color: rgb(0,0,0);">We have defined that we wanted to store the tweet’s URL in <code>data_text</code>, and that sorting would be done on the <code>username-status-tweetid</code> string we extract in </span><code><span style="color: rgb(0,0,0);">getName()</span></code><span style="color: rgb(0,0,0);"> and </span><code><span style="color: rgb(0,0,0);">getSortInfo()</span></code><span style="color: rgb(0,0,0);">. </span></p><p><span style="color: rgb(0,0,0);"> </span><code><span style="color: rgb(0,0,0);">toStorageValue()</span></code><span style="color: rgb(0,0,0);"> will fill the provided </span><code><span style="color: rgb(0,0,0);">eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue</span></code><span style="color: rgb(0,0,0);"> from a </span><code><span style="color: rgb(0,0,0);">Tweet\Value</span></code><span style="color: rgb(0,0,0);">, while </span><code><span style="color: rgb(0,0,0);">toFieldValue()</span></code><span style="color: rgb(0,0,0);"> will do the exact opposite:</span></p><p><span style="color: rgb(0,0,0);"> </span></p><table class="wysiwyg-macro" data-macro-name="code" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue;
+use eZ\Publish\SPI\Persistence\Content\FieldValue;
+
+// [...]
+
+public function toStorageValue( FieldValue $value, StorageFieldValue $storageFieldValue )
+{
+   $storageFieldValue->dataText = $value->url;
+   $storageFieldValue->sortKeyString = $value->sortKey;
+}
+public function toFieldValue( StorageFieldValue $value, FieldValue $fieldValue )
+{
+   $fieldValue->url = $value->dataText;
+   $fieldValue->sortKey = $value->sortKeyString;
+}
+</pre></td></tr></table><p><span style="color: rgb(0,0,0);">With these two methods, the legacy storage engine is able to convert <span style="color: rgb(0,0,0);">a <code>Tweet\Value</code> </span>into legacy data, and legacy data back into a <code>Tweet\Value</code> object.</span></p><h4>Implementing Field Definition converters: <code>toStorageFieldDefinition()</code> and <code>toFieldDefinition()</code></h4><p><span style="color: rgb(0,0,0);">The first two methods we have implemented apply to a Field’s </span><span style="color: rgb(0,0,0);">value</span><span style="color: rgb(0,0,0);">. But we also need to convert our Field’s definition. For example, a TextLine’s max length, or any FieldDefinition option.</span></p><p><span style="color: rgb(0,0,0);">This is done using <code>toStorageDefinition()</code>, that converts a <code>FieldDefinition</code> into a </span><code>StorageFieldDefinition</code>. <code>toFieldDefinition()</code><span style="color: rgb(0,0,0);"> does the opposite. In our case, we actually don’t need to implement those methods since our Tweet Type doesn’t have settings:</span></p><p><span style="color: rgb(0,0,0);"> </span></p><table class="wysiwyg-macro" data-macro-name="code" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldDefinition;
+use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
+
+// [...]
+
+public function toStorageFieldDefinition( FieldDefinition $fieldDef, StorageFieldDefinition $storageDef )
+{
+}
+ 
+public function toFieldDefinition( StorageFieldDefinition $storageDef, FieldDefinition $fieldDef )
+{
+}</pre></td></tr></table><h4><span style="color: rgb(102,102,102);">Implementing <code>getIndexColumn()</code></span></h4><p><span style="color: rgb(0,0,0);">In </span><code><span style="color: rgb(0,0,0);">toFieldValue()</span></code><span style="color: rgb(0,0,0);"> and </span><code><span style="color: rgb(0,0,0);">toStorageValue()</span></code><span style="color: rgb(0,0,0);">, we have used the </span><code><span style="color: rgb(0,0,0);">sortKeyString</span></code><span style="color: rgb(0,0,0);"> property from </span><code><span style="color: rgb(0,0,0);">StorageFieldValue</span></code><span style="color: rgb(0,0,0);">. </span><code><span style="color: rgb(0,0,0);">getIndexColumn()</span></code><span style="color: rgb(0,0,0);"> will tell provide the legacy storage engine the type of index / sort column it should use: string (<code>sort_key_string</code>) or int (<code>sort_key_int</code>). Depending on which one is returned, the system will either use the </span><code><span style="color: rgb(0,0,0);">sortKeyString</span></code><span style="color: rgb(0,0,0);"> or the </span><code><span style="color: rgb(0,0,0);">sortKeyInt</span></code><span style="color: rgb(0,0,0);"> properties from the </span><code><span style="color: rgb(0,0,0);">StorageFieldValue</span></code><span style="color: rgb(0,0,0);">.</span></p><p> </p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="language=php" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>public function getIndexColumn()
+{
+   return 'sort_key_string';
+}</pre></td></tr></table><h3><span><span style="color: rgb(0,0,0);">Registering the converter</span></span></h3><p><span><span style="color: rgb(0,0,0);">Just like a Type, a Legacy Converter needs to be registered and tagged in the service container.</span></span></p><p><span><span style="color: rgb(0,0,0);">The tag is <code>ezpublish.storageEngine.legacy.converter</code>, and it requires an <code>alias</code> attribute to be set to the FieldType identifier (<code>eztweet</code>). Let's add this block to <span style="color: rgb(0,0,0);"><code>Resources/config/services.yml</code>:</span></span></span></p><p> </p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="language=php|title=Resources/config/services.yml" style="background-image: url(../servlet/confluence/placeholder/macro-heading62ce.png?definition=e2NvZGU6dGl0bGU9UmVzb3VyY2VzL2NvbmZpZy9zZXJ2aWNlcy55bWx8bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>services:
+    ezsystems.tweetbundle.fieldType.eztweet.converter:
+        class: EzSystems\TweetFieldTypeBundle\eZ\Publish\FieldType\Tweet\LegacyConverter
+        tags:
+            - {name: ezpublish.storageEngine.legacy.converter, alias: eztweet}</pre></td></tr></table><p> </p><p> </p><p> </p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=19890943 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 10:09:51 GMT -->
+</html>

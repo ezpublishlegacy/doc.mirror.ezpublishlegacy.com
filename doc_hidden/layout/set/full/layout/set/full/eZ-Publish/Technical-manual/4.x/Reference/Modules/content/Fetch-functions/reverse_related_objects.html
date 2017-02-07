@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Modules/content/Fetch-functions/reverse_related_objects by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:36:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>reverse_related_objects / Fetch functions / content / Modules / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>reverse_related_objects</h1>
+</div>
+<h3>Summary</h3>
+Fetches reverse related objects.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'content', 'reverse_related_objects',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'object_id', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object_id,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'attribute_identifier', attribute_identifier, ]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'all_relations', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'group_by_attribute', &nbsp;&nbsp;boolean, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'sort_by', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sort_by &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'ignore_visibility', &nbsp;&nbsp;&nbsp;ignore_visibility &nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'limit', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'offset', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'as_object', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as_object &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'load_data_map', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;load_data_map &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>object_id</td>
+        <td>integer</td>
+        <td>The ID number of the target object.</td>
+        <td>Yes.</td>
+    </tr><tr class="bgdark">
+        <td>attribute_identifier</td>
+        <td>mixed</td>
+        <td>The ID number or class/attribute identifier of the target attribute.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>all_relations</td>
+        <td>boolean</td>
+        <td>Controls whether to fetch all types of relastions or not, default is FALSE.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>group_by_attribute</td>
+        <td>boolean</td>
+        <td>Groups the result based on the attributes, default value is TRUE.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>sort_by</td>
+        <td>array</td>
+        <td>The sorting mechanism that should be used.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>ignore_visibility</td>
+        <td>boolean</td>
+        <td>Makes it possible to fetch hidden nodes (TRUE by default).</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>limit</td>
+        <td>integer</td>
+        <td>A new parameter since eZ Publish 4.1 which enables you to fetch an exact number of items</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>offset </td>
+        <td>integer</td>
+        <td>A new parameter since eZ Publish 4.1 which enables you to define an offset.</td>
+        <td>No.</td>
+    </tr><tr class="bglight">
+        <td>as_object</td>
+        <td>boolean</td>
+        <td>A new parameter since eZ Publish 4.1 which enables you to fetch the items as objects.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>load_data_map</td>
+        <td>boolean</td>
+        <td>A new parameter since eZ Publish 4.1 which enables you to load the data_map array.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An array of <a href="../../../Objects/ezcontentobject.html" target="_self">ezcontentobject</a> objects or FALSE.</p><h3>Description</h3>
+ <p>This function makes it possible to fetch reverse related objects. The target object must be specified using the &quot;object_id&quot; parameter. The function will return an array of <a href="../../../Objects/ezcontentobject.html" target="_self">ezcontentobject</a> objects which are using the target object through the conventional object relation mechanism. If no objects are found, the function will return FALSE.</p>    <a name="eztoc87871_0_0_1" id="eztoc87871_0_0_1"></a><h4>Class attribute filtering</h4> <p>By making use of the &quot;attribute_identifier&quot; parameter, it is possible to fetch reverse related objects that make use of the target object by the way of an attribute. The attribute must use either the <a href="../../../Datatypes/Object-relation.html" target="_self">&quot;Object relation&quot;</a> or the <a href="../../../Datatypes/Object-relations.html" target="_self">&quot;Object relations&quot;</a> datatype. The &quot;attribute_identifier&quot; parameter can either be the ID number of the class attribute or a string that consists of the class identifier, a slash and the class attribute identifier (for example &quot;my_class/my_attribute&quot;).</p> <p>The &quot;all_relations&quot; parameter makes it possible to fetch all types of relations. This parameter is not required and the default value is FALSE.</p> <p>The &quot;group_by_attribute&quot; parameter can only be used when the &quot;all_relations&quot; parameter has been set to TRUE. When the &quot;group_by_attribute&quot; parameter has been set to TRUE, the function will return a two-dimensional array instead of just an array of objects. The following example shows how this structure is built up:</p> <pre class="wordwrap copytoclipboard"><span class="line">$related_objects_grouped = array(</span>
+<span class="line">&nbsp;</span>
+<span class="line">0 =&gt; array( $object1, $object2 ... ),</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Objects related on content object level</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attr_id_1 =&gt; array( $object1, $object2 ... ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attr_id_2 =&gt; array( $object1, $object2 ... ),</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Objects related by attributes</span>
+<span class="line">);</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '$related_objects_grouped = array(\r\n\r\n0 =&gt; array( $object1, $object2 ... ),\r\n\r\n     // Objects related on content object level\r\n     attr_id_1 =&gt; array( $object1, $object2 ... ),\r\n     attr_id_2 =&gt; array( $object1, $object2 ... ),\r\n\r\n     ...\r\n\r\n     // Objects related by attributes\r\n);' ); return false;" /></p>
+<![endif]--> <p>The &quot;sort_by&quot; parameter makes it possible to sort the result in different ways. This parameter must be provided as an array of arrays that define the sorting methods. The first element of each array must be the desired sorting method. The second element of the array must be the sorting direction, it can be either TRUE or FALSE (ascending or descending). Please note that this parameter works in the very same way as the &quot;sort_by&quot; parameter of the <a href="list.html" target="_self">list</a> fetch function. However, it currently only supports the following sorting methods:</p> 
+<ul>
+ <li><div> class_identifier </div></li> <li><div> class_name </div></li> <li><div> modified </div></li> <li><div> name </div></li> <li><div> published </div></li> <li><div> section </div></li> 
+</ul>
+ <p>Please note that using other sort methods will lead to an error.</p>       <a name="eztoc87871_0_0_2" id="eztoc87871_0_0_2"></a><h4>Fetching hidden nodes</h4> <p>The &quot;ignore_visibility&quot; parameter makes it possible to fetch hidden nodes. It can be set to either &quot;true()&quot; or &quot;false()&quot;. If set to &quot;true()&quot;, the fetch will ignore the visibility flags of nodes and thus it will return all nodes regardless of their visibility status.</p>   <h3>Examples</h3>
+    <a name="eztoc87872_0_0_1" id="eztoc87872_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $objects=fetch( 'content', 'reverse_related_objects',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'object_id', 256 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $objects as $object}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$object.name|wash} &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $objects=fetch( \'content\', \'reverse_related_objects\',\r\n                     hash( \'object_id\', 256 ) )}\r\n\r\n{foreach $objects as $object}\r\n    {$object.name|wash} &lt;br /&gt;\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>Outputs the names of the objects that make use of object number 256 through the conventional related objects mechanism.</p>       <a name="eztoc87872_0_0_2" id="eztoc87872_0_0_2"></a><h4>Example 3</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $objects=fetch( 'content', 'reverse_related_objects',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'object_id', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;256,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'attribute_identifier', '4096' ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $objects as $object}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$object.name|wash} &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $objects=fetch( \'content\', \'reverse_related_objects\',\r\n                     hash( \'object_id\',            256,\r\n                           \'attribute_identifier\', \'4096\' ) )}\r\n\r\n{foreach $objects as $object}\r\n    {$object.name|wash} &lt;br /&gt;\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>Outputs the names of the objects that make use of object number 256 through class attribute number 4096.</p>       <a name="eztoc87872_0_0_3" id="eztoc87872_0_0_3"></a><h4>Example 3</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $objects=fetch( 'content', 'reverse_related_objects',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'object_id', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;256,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'attribute_identifier', 'my_class/my_attribute' ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $objects as $object}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{$object.name|wash} &lt;br /&gt;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $objects=fetch( \'content\', \'reverse_related_objects\',\r\n                     hash( \'object_id\',            256,\r\n                           \'attribute_identifier\', \'my_class/my_attribute\' ) )}\r\n\r\n{foreach $objects as $object}\r\n    {$object.name|wash} &lt;br /&gt;\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>Outputs the names of the objects that make use of object number 256 through an attribute called &quot;my_attribute&quot; that is a part of class &quot;my_class&quot;.</p>       <a name="eztoc87872_0_0_4" id="eztoc87872_0_0_4"></a><h4>Example 4</h4> <pre class="wordwrap"><span class="line">fetch('content', 'reverse_related_objects', hash(..., 'limit', '10', offset, '0', 'as_object', true(), 'load_data_map', false()))&lt;/pre&gt;</span>
+</pre>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Modules/content/Fetch-functions/reverse_related_objects by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:36:25 GMT -->
+</html>

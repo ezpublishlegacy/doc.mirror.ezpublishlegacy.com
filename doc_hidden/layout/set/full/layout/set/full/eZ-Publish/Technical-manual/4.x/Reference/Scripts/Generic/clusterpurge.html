@@ -1,0 +1,195 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/clusterpurge.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:42:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>clusterpurge.php / Generic / Scripts / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>clusterpurge.php</h1>
+</div>
+
+<h3>Summary</h3>
+eZ Publish cluster files purge.
+
+<h3>Location</h3>    ./bin/php/clusterpurge.php<h3>Parameters</h3><p>
+<a href=#allow-root-user>allow-root-user</a><br/>
+
+<a href=#colors>colors</a><br/>
+
+<a href=#debug>debug</a><br/>
+
+<a href=#dry-run>dry-run</a><br/>
+
+<a href=#expiry>expiry</a><br/>
+
+<a href=#help>help</a><br/>
+
+<a href=#iteration-limit>iteration-limit</a><br/>
+
+<a href=#iteration-sleep>iteration-sleep</a><br/>
+
+<a href=#logfiles>logfiles</a><br/>
+
+<a href=#memory-monitoring>memory-monitoring</a><br/>
+
+<a href=#no-colors>no-colors</a><br/>
+
+<a href=#no-logfiles>no-logfiles</a><br/>
+
+<a href=#quiet>quiet</a><br/>
+
+<a href=#scopes>scopes</a><br/>
+
+<a href=#siteaccess>siteaccess</a><br/>
+
+<a href=#verbose>verbose</a><br/>
+</p>
+
+    <a name="allow-root-user"></a>
+    <h4>-r,--allow-root-user</h3>
+    <div style="margin-left:35px;">
+        
+<p>Allows your root user to run the clusterpurge.php script. The usage of this parameter is only recommended for advanced users. With great power comes great responsibility.</p>    </div>
+
+    <a name="colors"></a>
+    <h4>-c, --colors</h3>
+    <div style="margin-left:35px;">
+        
+<p>Use ANSI colors when generating debug output (default).</p>    </div>
+
+    <a name="debug"></a>
+    <h4>-d[&lt;option&gt;[,&lt;option2&gt;...]], --debug[=&lt;option&gt;[,&lt;option2&gt;...]]</h3>
+    <div style="margin-left:35px;">
+        
+<p>Output debug information. The following options can be used to control what the debug output should include: &quot;all&quot; (everything), &quot;accumulator&quot; (accumulators), &quot;include&quot; (included files), &quot;timing&quot; (timing points), &quot;error&quot; (errors), &quot;warning&quot; (warnings), &quot;notice&quot; (notices).</p>    </div>
+
+    <a name="dry-run"></a>
+    <h4>--dry-run</h3>
+    <div style="margin-left:35px;">
+        
+<p>Test mode, output the list of affected files without removing them.</p>    </div>
+
+    <a name="expiry"></a>
+    <h4>--expiry=VALUE</h3>
+    <div style="margin-left:35px;">
+        
+<p>Number of days since the file was expired. Only files older than this will be purged. Default is 30, minimum is 1.</p>    </div>
+
+    <a name="help"></a>
+    <h4>-h, --help</h3>
+    <div style="margin-left:35px;">
+        
+<p>Output information about the script and supported parameters.</p>    </div>
+
+    <a name="iteration-limit"></a>
+    <h4>--iteration-limit=VALUE</h3>
+    <div style="margin-left:35px;">
+        
+<p>Amount of items to remove in each iteration when performing a purge operation. Default is 100.</p>    </div>
+
+    <a name="iteration-sleep"></a>
+    <h4>--iteration-sleep=VALUE</h3>
+    <div style="margin-left:35px;">
+        
+<p>Amount of seconds to sleep between each iteration when performing a purge operation, can be a float. Default is one second.</p>    </div>
+
+    <a name="logfiles"></a>
+    <h4>--logfiles</h3>
+    <div style="margin-left:35px;">
+        
+<p>Generate log files. This parameter must be used together with the debug parameter (&quot;-d&quot; or &quot;--debug&quot;). The log files (for example &quot;warning.log&quot;) will be stored in the &quot;var/log&quot; directory of the eZ Publish installation.</p>    </div>
+
+    <a name="memory-monitoring"></a>
+    <h4>--memory-monitoring</h3>
+    <div style="margin-left:35px;">
+        
+<p>Generates memory monitoring output. If set, memory usage will be logged in var/log/clusterpurge.log.</p>    </div>
+
+    <a name="no-colors"></a>
+    <h4>--no-colors</h3>
+    <div style="margin-left:35px;">
+        
+<p>Do not use ANSI colors when generating debug output.</p>    </div>
+
+    <a name="no-logfiles"></a>
+    <h4>--no-logfiles</h3>
+    <div style="margin-left:35px;">
+        
+<p>Do not generate log files (default).</p>    </div>
+
+    <a name="quiet"></a>
+    <h4>-q, --quiet</h3>
+    <div style="margin-left:35px;">
+        
+<p>Run the script in &quot;quiet&quot; mode. No output will be generated.</p>    </div>
+
+    <a name="scopes"></a>
+    <h4>--scopes=VALUE</h3>
+    <div style="margin-left:35px;">
+        
+<p>Comma separated list of file types to purge. Possible values are: classattridentifiers, classidentifiers, content, expirycache, statelimitations, user-info-cache, viewcache, wildcard-cache-index, image, binaryfile, media.</p>    </div>
+
+    <a name="siteaccess"></a>
+    <h4>-s &lt;siteaccess&gt;, --siteaccess=&lt;siteaccess&gt;</h3>
+    <div style="margin-left:35px;">
+        
+<p>The siteaccess to run the script for. If omitted, the&nbsp;<a href="../../Configuration-files/site.ini/SiteSettings/DefaultAccess.html" target="_self">default siteaccess</a>&nbsp;will be used.</p>    </div>
+
+    <a name="verbose"></a>
+    <h4>-v, --verbose</h3>
+    <div style="margin-left:35px;">
+        
+<p>Output verbose / additional information.</p>    </div>
+
+<h3>Description</h3>
+<p>Physically purges files.</p><pre class="wordwrap"><span class="line">php bin/php/clusterpurge.php [OPTION]</span>
+</pre>
+<h3>Examples</h3>
+<p><b>Example 1</b></p><pre class="wordwrap"><span class="line">php bin/php/clusterpurge.php</span>
+</pre><p><b>Example 2</b></p><pre class="wordwrap"><span class="line">php bin/php/clusterpurge.php --scopes=user-info-cache,viewcache --expiry=20</span>
+</pre><p><b>Example 3</b></p><pre class="wordwrap"><span class="line">php bin/php/clusterpurge.php --scopes=user-info-cache,viewcache, --expiry=30 --memory-monitoring</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/clusterpurge.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:42:26 GMT -->
+</html>

@@ -1,0 +1,96 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/Paynet-Direct/1.x/Requirements-and-preparation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:14:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Requirements and preparation / 1.x / Paynet Direct / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Requirements and preparation</h1>
+</div>
+
+ <p>The &quot;Paynet Direct&quot; extension will only work if the following requirements are met:</p> 
+<ul>
+ <li><div> The web server must be configured in a special way. </div></li> <li><div> The eZ Publish version must be 3.5.0 or higher. </div></li> <li><div> For production use, a Paynet merchant account is needed. </div></li> 
+</ul>
+  <a name="eztoc7808_1" id="eztoc7808_1"></a><h2>Web server preparation</h2> <p>The web server needs to be configured in a special way. The following list reveals the most important issues that have to be taken care of.</p> 
+<ul>
+ <li><div> The web server must be able to access the Paynet server. </div></li> <li><div> The web server should use PHP 4.3.2 or higher. </div></li> <li><div> CURL support must be installed for PHP. </div></li> <li><div> The web server should be SSL-enabled. </div></li> 
+</ul>
+  <a name="eztoc7808_1_1" id="eztoc7808_1_1"></a><h3>Access to Paynet server</h3> <p>The web server on which eZ Publish is running must be able to access the Paynet server using HTTPS on port 8210. In particular, eZ Publish will attempt to access the following address: https://www.paynet.no:8210/if2. This means that the outer firewall must be opened, the local firewall (which is running on the web server itself, if any) must be configured, and so on.</p>  <a name="eztoc7808_1_1_1" id="eztoc7808_1_1_1"></a><h4>Testing access</h4> <p>The &quot;telnet&quot; command line application (available on both Linux/UNIX and Windows systems) can be used to test whether the web server (the machine running the eZ Publish solution) has access to the paynet service or not. Instructions:</p> 
+<ol>
+ <li><div> Bring up a shell / command line interface. </div></li> <li><div> 
+Attempt to access the paynet server using port 8210:<br /> <pre class="wordwrap"><span class="line">telnet paynet.no 8210</span>
+</pre>A connection should be established. On Linux/UNIX systems, this is indicated with a line saying &quot;connected to paynet.no.&quot;. On Windows, an empty command window will be displayed. </div></li> <li><div> 
+Use the established connection to send a bogus GET request to Paynet:<br /> <pre class="wordwrap"><span class="line">GET / HTTP/1.0</span>
+</pre>There is a space between the first slash and HTTP. Hereafter press enter a couple of times. </div></li> <li><div> The Paynet server should reply with something like &quot;Your browser sent a request that this server could not understand&quot;. You should be able to see the HTTP response. </div></li> 
+</ol>
+ <p>If everything works as described in the list above, it means that the web server running eZ Publish has proper access to the Paynet server. If something goes wrong or if no response is produced, a firewall somewhere between the web server running eZ Publish and the Paynet server is most likely blocking the traffic. This or these firewalls will need to be reconfigured. If you do not know how to do this or do not have access, you will have to consult either the local system administrator or the internet service provider.</p>    <a name="eztoc7808_1_2" id="eztoc7808_1_2"></a><h3>CURL support for PHP</h3> <p>The &quot;Paynet Direct&quot; extension uses the &quot;Client URL Library&quot; (CURL) functions, which provide solutions for communication over a range of protocols (in particular HTTPS). This means that the CURL extension for PHP must be installed and enabled. Furthermore, the PHP version should be at least 4.3.2 if not higher. The installation instructions are available within the <a href="http://www.php.net/curl" target="_blank">documentation page of CURL</a>. The following text shows two methods that can be used to check if CURL is installed or not.</p>  <a name="eztoc7808_1_2_2" id="eztoc7808_1_2_2"></a><h4>Checking CURL support using eZ Publish</h4> 
+<ol>
+ <li><div> Log into the administration interface of eZ Publish. </div></li> <li><div> Click on the &quot;Setup&quot; tab. </div></li> <li><div> Select &quot;System information&quot; from the menu on the left </div></li> <li><div> Check if &quot;CURL&quot; is displayed under the &quot;Extensions&quot; section for PHP. </div></li> 
+</ol>
+   <a name="eztoc7808_1_2_3" id="eztoc7808_1_2_3"></a><h4>Checking CURL support using a PHP file</h4> 
+<ol>
+ <li><div> 
+Create a PHP file (for example &quot;test.php&quot;) and make sure it contains the following:<br /> <pre class="wordwrap"><span class="line">&lt;?php phpinfo(); ?&gt;</span>
+</pre>  </div></li> <li><div> Access the script (for example &quot;http://www.example.com/test.php&quot;) from within a browser. </div></li> <li><div> The output should reveal whether CURL is installed or not (just search for &quot;curl&quot; on the page). </div></li> 
+</ol>
+    <a name="eztoc7808_1_3" id="eztoc7808_1_3"></a><h3>SSL support</h3> <p>The CURL extension for PHP (mentioned above) will only encrypt communication between the web server running eZ Publish and the Paynet server. However, communication between the customers and the web server running eZ Publish should also be encrypted. Otherwise, the solution will be open and thus extremely insecure. Having SSL support on the web server running eZ Publish is highly recommend because it will encrypt the communication between the customers and eZ Publish. This means that it should be possible to access an eZ Publish page using a secure HTTP (HTTPS) connection. Please refer to the <a href="http://httpd.apache.org/docs/2.0/ssl/" target="_blank">documentation of Apache SSL</a> for information about installation, configuration, etc. The following illustration shows an overview of the visitor, the web server running eZ Publish and the Paynet server.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../var/doc/storage/images/extensions/paynet_direct/1_x/images/payment_encryption/9916-4-eng-GB/payment_encryption_doc.png" alt="Payment traffic and encryption" />
+ <p>Payment traffic and encryption</p>
+
+
+
+
+
+
+
+</div>  <a name="eztoc7808_1_3_4" id="eztoc7808_1_3_4"></a><h4>Testing the SSL mechanism</h4> <p>To test whether SSL is working or not, attempt to access an eZ Publish page using the HTTPS protocol. This can be done by instructing a browser to access an URL that is similar to the following:</p> <pre class="wordwrap"><span class="line">https://www.example.com/content/view/full/2</span>
+</pre> <p>If everything works, the expected eZ Publish generated page should be visible in the browser.</p>     <a name="eztoc7808_2" id="eztoc7808_2"></a><h2>Registering a Paynet merchant account</h2> <p>The Paynet service can only be used by authorized/registered Paynet merchants. In other words, you will have to sign up and become Paynet merchant. More information about becoming a Paynet merchant can be found at the following address: <a href="http://www.paynet.no/index.php/paynet/sign_up/merchant_application.html" target="_blank">http://www.paynet.no/index.php/paynet/sign_up/merchant_application.html</a>. When setting up the eZ Publish Paynet extension, make sure that you have the following information available:</p> 
+<ul>
+ <li><div> Your Paynet merchant number (also known as the agreement number) </div></li> <li><div> Your Paynet key-certificate </div></li> 
+</ul>
+ <p>Please note that the Paynet extension can be tested using a special demo key-certificate. In other words, you do not need an actual Paynet account to test the solution. Please refer to the <a href="../../Testing.html" target="_self">&quot;Testing&quot;</a> section for more information about testing and the demo key-certificate.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/Paynet-Direct/1.x/Requirements-and-preparation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:14:36 GMT -->
+</html>

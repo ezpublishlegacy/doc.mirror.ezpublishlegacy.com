@@ -1,0 +1,101 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Clustering/Uninstalling-an-eZDB-cluster by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:59:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Uninstalling an eZDB cluster / Clustering / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Uninstalling an eZDB cluster</h1>
+</div>
+
+<p>Since users may decide not to use cluster anymore, or even choose to use another file handler, this chapter would show how to uninstall an existing eZDB cluster.</p>
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    
+<div class="object-left">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/warning/136156-1-eng-GB/warning_medium.png" alt="" />
+
+
+
+
+
+
+
+
+</div><p>The following procedures may cause loss of information, since this is a cluster removal guide.&nbsp;Before proceeding, please be sure to make a complete backup of your site, cluster folder and database, to avoid losing data.</p>
+    </td>
+</tr>
+</table>
+</div><a name="eztoc136163_1" id="eztoc136163_1"></a><h2>Removing an&nbsp;eZDB cluster</h2><a name="eztoc136163_1_1" id="eztoc136163_1_1"></a><h3>1. Clear the cache</h3><p>Before starting it's better to clear the eZ Publish's cache, by running the following command from&nbsp;your&nbsp;<i>ezpublish_legacy/</i>&nbsp;folder:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all</span>
+</pre><a name="eztoc136163_1_2" id="eztoc136163_1_2"></a><h3>2. Unclusterize your eZDB cluster</h3><p>Run the following shell command&nbsp;from your&nbsp;<i>ezpublish_legacy/</i> folder:</p><pre class="wordwrap"><span class="line">php bin/php/clusterize.php -u</span>
+</pre><p>This will move cluster cache and binaries from the cluster path to the original locations.</p><a name="eztoc136163_1_3" id="eztoc136163_1_3"></a><h3>3. Remove the images serving script</h3><p>Remove the&nbsp;<i>config.cluster.php</i> file, which has been created while setting up the cluster environment. For that, you can use the following command from your <i>ezpublish_legacy/</i> folder:</p><pre class="wordwrap"><span class="line">rm config.cluster.php</span>
+</pre><a name="eztoc136163_1_4" id="eztoc136163_1_4"></a><h3>4. Remove the cluster database table</h3><p>On MySQL the database table can be removed by executing the following shell command:</p><pre class="wordwrap"><span class="line">mysqladmin -u &lt;user&gt; -p&lt;password&gt; drop ezdbfile</span>
+<span class="line">mysqladmin -u &lt;user&gt; -p&lt;password&gt; drop ezdbfile_data</span>
+</pre><p>Note: On Oracle the same <i>ezdbfile</i>&nbsp; and <i>ezdbfile_data</i>&nbsp;tables need to be removed.</p><a name="eztoc136163_1_5" id="eztoc136163_1_5"></a><h3>5. Remove the Clustering Setting from your&nbsp;file.ini.append.php:</h3><p>Simply edit your file.ini.append.php file and remove the <i>ClusteringSettings</i> block completelly. You can see an example below:</p><pre class="wordwrap copytoclipboard"><span class="line">[ClusteringSettings]</span>
+<span class="line">FileHandler=eZDBFileHandler</span>
+<span class="line">DBBackend=eZDBFileHandlerMysqliBackend</span>
+<span class="line">DBHost=localhost</span>
+<span class="line">DBPort=3306</span>
+<span class="line">DBName=name</span>
+<span class="line">&nbsp;</span>
+<span class="line">DBUser=user</span>
+<span class="line">DBPassword=pass</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ClusteringSettings]\r\nFileHandler=eZDBFileHandler\r\nDBBackend=eZDBFileHandlerMysqliBackend\r\nDBHost=localhost\r\nDBPort=3306\r\nDBName=name\r\n\r\nDBUser=user\r\nDBPassword=pass\r\n' ); return false;" /></p>
+<![endif]--><a name="eztoc136163_1_6" id="eztoc136163_1_6"></a><h3>6. Disable kernel clustering debug</h3><p>Disable the kernel-clustering setting from <i>debug.ini</i>, by setting its value to <i>disabled</i>, as in the following example:</p><pre class="wordwrap copytoclipboard"><span class="line">[GeneralCondition]</span>
+<span class="line">&nbsp;</span>
+<span class="line">kernel-clustering=disabled</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[GeneralCondition]\r\n\r\nkernel-clustering=disabled\r\n' ); return false;" /></p>
+<![endif]--><a name="eztoc136163_1_7" id="eztoc136163_1_7"></a><h3>7. Remove the cluster rewrite rules from&nbsp;the Apache configuration</h3><p>Edit your apache configurations file and remove the following rules:</p><pre class="wordwrap copytoclipboard"><span class="line">RewriteRule ^/var/([^/]+/)?storage/images-versioned/.* /index_cluster.php [L]</span>
+<span class="line">RewriteRule ^/var/([^/]+/)?storage/images/.* /index_cluster.php [L]</span>
+<span class="line">RewriteRule ^/var/([^/]+/)?cache/public/(stylesheets|javascript) /index_cluster.php &amp;nbsp;[L]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'RewriteRule ^/var/([^/]+/)?storage/images-versioned/.* /index_cluster.php [L]\r\nRewriteRule ^/var/([^/]+/)?storage/images/.* /index_cluster.php [L]\r\nRewriteRule ^/var/([^/]+/)?cache/public/(stylesheets|javascript) /index_cluster.php &amp;nbsp;[L]\r\n' ); return false;" /></p>
+<![endif]--><a name="eztoc136163_1_8" id="eztoc136163_1_8"></a><h3>8. Restart Apache and test the site</h3><p>Restart the Apache web server. After it has been restarted, the system should be up and running in cluster mode. Verify that the site works correctly, content images are displayed and content binary files are accessible (open the site pages in a web browser, log in to the administration interface, try clicking around and so on).</p><a name="eztoc136163_1_9" id="eztoc136163_1_9"></a><h3>9. Clear the cache files</h3><p>Clear the cache files again, to make sure your sites generate clean caches. To do so, use the following command:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Clustering/Uninstalling-an-eZDB-cluster by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:59:22 GMT -->
+</html>

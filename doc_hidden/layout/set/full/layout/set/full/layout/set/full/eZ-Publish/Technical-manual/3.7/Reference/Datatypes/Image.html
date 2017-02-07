@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.7/Reference/Datatypes/Image by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:17:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Image / Datatypes / Reference / 3.7 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Image</h1>
+</div>
+
+<h3>Summary</h3>
+Validates and stores a digital image.
+<h3>Properties</h3>
+<table class="renderedtable" cellspacing="0">
+<tr><th>Name</th><th>Internal name</th><th>Searchable</th><th>Information collector</th></tr>
+<tr>
+    <td>Image</td>
+    <td>ezimage</td>
+    <td>No.</td>
+    <td>No.</td>
+</tr>
+</table>
+
+<h3>Description</h3>
+ <p>This datatype allows the storage of digital images. It is capable of handling virtually any image type. The maximum allowed file size is determined by the &quot;Max file size&quot; class attribute edit parameter and the &quot;upload_max_filesize&quot; directive in the main PHP configuration file (&quot;php.ini&quot;). The following screenshot shows the class attribute edit interface for this datatype.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_7/images/reference/datatypes/image_class_attribute_edit_interface/22576-1-eng-GB/image_class_attribute_edit_interface_doc.png" alt="Class attribute edit interface for the &quot;Image&quot; datatype." />
+ <p>Class attribute edit interface for the &quot;Image&quot; datatype.</p>
+
+
+
+
+
+
+
+</div>    <a name="eztoc16957_0_0_1" id="eztoc16957_0_0_1"></a><h4>Max file size</h4> <p>The &quot;Max file size&quot; parameter makes it possible to set the highest size (in megabytes) that the system will allow. By default, this parameters is zero, which means that eZ Publish will not do any size checking when image files are uploaded. In the example above, the &quot;Max file size&quot; parameter is set to 16 MB, which means that the object edit interface will not allow the upload of images that are larger than 16 megabytes. However, if the value of the &quot;upload_max_filesize&quot; PHP setting is lower than 16 megabytes, the underlying system will cancel the upload.</p>   <a name="eztoc16957_0_0_2" id="eztoc16957_0_0_2"></a><h4>Object attribute edit interface</h4> <p>The following screenshot shows the object attribute edit interface when an attribute using this datatype does not contain an image.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_7/images/reference/datatypes/image_object_attribute_edit_interface_1/22621-1-eng-GB/image_object_attribute_edit_interface_1_doc.png" alt="Object attribute edit interface for the &quot;Image&quot; datatype." />
+ <p>Object attribute edit interface for the &quot;Image&quot; datatype.</p>
+
+
+
+
+
+
+
+</div> <p>The following screenshot shows the object attribute edit interface when an attribute using this datatype contains an actual image. The interface reveals the image itself, the name of the file that was uploaded (&quot;dj_cat.jpg&quot;), the MIME type (&quot;image/jpeg&quot;) and the size (29.02 kB).</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_7/images/reference/datatypes/image_object_attribute_edit_interface_2/22624-1-eng-GB/image_object_attribute_edit_interface_2_doc.png" alt="Object attribute edit interface for the &quot;Image&quot; datatype." />
+ <p>Object attribute edit interface for the &quot;Image&quot; datatype.</p>
+
+
+
+
+
+
+
+</div>   <a name="eztoc16957_0_0_3" id="eztoc16957_0_0_3"></a><h4>Storage</h4> <p>The uploaded images are stored on the filesystem. The main reason for this is because the filesystem is much faster than the database when it comes to the storage and retrieval of large data chunks. Having the images on the filesystem allows the webserver to serve them directly without the need of going through the database. In addition, this technique makes it easier to use external tools to manipulate the images and it dramatically decreases the size of the database.</p> <p>All images uploaded through an attribute that makes use of the image datatype will be stored below &quot;storage/images&quot; within the directory specified by the &quot;VarDir&quot; directive in a configuration override for &quot;site.ini&quot;. A directory structure is generated for each object that stores an image. The structure will be an exact copy of the actual node path (consisting of the object names) from the root to the main node that references the object which contains images. The following illustration shows the path to a directory on the filesystem in which the different images of an object are stored.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_7/images/reference/datatypes/image_var_directory_structure_1/22627-1-eng-GB/image_var_directory_structure_1_doc.png" alt="Example of image path on the filesystem." />
+ <p>Example of image path on the filesystem.</p>
+
+
+
+
+
+
+
+</div> <p>In the example above, an image has been stored by an object called &quot;My Something&quot;. The main node of this object is a child of a node called &quot;Example&quot;. The var directory used by the siteaccess is &quot;var/my_site&quot;. The images stored by the &quot;My Something&quot; object will be located in this directory. For each image, version and translation, a new directory will be created. The following illustration shows the naming convention of the directories under which the actual images are stored.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_7/images/reference/datatypes/image_var_directory_structure_2/22630-1-eng-GB/image_var_directory_structure_2_doc.png" alt="Example of an image subdirectory." />
+ <p>Example of an image subdirectory.</p>
+
+
+
+
+
+
+
+</div> <p>The example above shows a directory for an image that has been stored by the 1024th object attribute. The image belongs to the British translation for the eight version of the content object. The following illustration shows a complete directory structure with actual image files.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_7/images/reference/datatypes/image_complete_directory_structure/22645-1-eng-GB/image_complete_directory_structure_doc.png" alt="Complete directory structure with uploaded image and generated variations." />
+ <p>Complete directory structure with uploaded image and generated variations.</p>
+
+
+
+
+
+
+
+</div> <p>As the illustration indicates, the image stored by the 1024th attribute (that belongs to the &quot;My Something&quot; object) is represented by multiple files. The original image is &quot;test.png&quot;, the rest of the images are the different image variations.</p>   <a name="eztoc16957_0_0_4" id="eztoc16957_0_0_4"></a><h4>Image variations</h4> <p>With the help of an external application (ImageMagick) or the PHP image library (GD), eZ Publish is capable of generating different variations of an uploaded image. This feature is typically useful when there is a need to show the same image in different ways (for example different sizes). The image variations are controlled by different configuration directives in image.ini. The following table shows the default image variations.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Variation</p> 
+  </th> <th >   <p>Width</p> 
+  </th> <th >   <p>Height</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>reference</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>max 600 pixels</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>max 600 pixels</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>small</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>max 100 pixels</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>max 100 pixels</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>medium</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>max 200 pixels</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>max 200 pixels</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>large</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>max 300 pixels</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>max 300 pixels</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>rss</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>max 88 pixels</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>max 31 pixels</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>When an image variation is created (and the default settings are used), eZ Publish will generate a reference image using the file that was uploaded. The reference image is then used to generate the different image variations (small, medium, large and rss) on-demand using the constraints specified in the table above. The generated variations will be cached on the filesystem.</p> <p>Depending on the image system used, eZ Publish is capable of generating image variations that consist of much more than just scaling. For example, it is possible to generate sharpened grayscale images for the thumbnails of a photo album. Please refer to the documentation of the image.ini configuration file for more information about the different possibilities.</p>   <a name="eztoc16957_0_0_5" id="eztoc16957_0_0_5"></a><h4>Raw output</h4> <p>The &quot;.content&quot; of an <a href="../Objects/ezcontentobjectattribute.html" target="_self">ezcontentobjectattribute</a> object using this datatype returns an <a href="../Objects/ezimagealiashandler.html" target="_self">ezimagealiashandler</a> object.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.7/Reference/Datatypes/Image by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:17:53 GMT -->
+</html>

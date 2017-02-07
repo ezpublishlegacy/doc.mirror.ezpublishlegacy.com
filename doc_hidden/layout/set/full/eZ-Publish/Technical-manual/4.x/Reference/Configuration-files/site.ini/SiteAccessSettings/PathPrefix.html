@@ -1,0 +1,164 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/SiteAccessSettings/PathPrefix by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>PathPrefix / [SiteAccessSettings] / site.ini / Configuration files / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>PathPrefix</h1>
+</div>
+<h3>Summary</h3>
+Sets the hidden prefix that will be added to virtual URLs entered by users.<h3>Usage</h3>
+<pre class="pfix"> <p>PathPrefix=prefix</p></pre><h3>Description</h3>
+ <p>This directive sets the hidden prefix that will be added to <a href="../../../../Concepts-and-basics/URL-translation.html#virtual_url" target="_self">virtual URLs</a> entered by users. It is typically useful for multiple public siteaccesses that are used to display different parts of the content tree.</p> <p>Consider an example siteaccess called &quot;news&quot; that should display content located under the &quot;info&quot; folder, which can be accessed at &quot;www.example.com/news/info/&quot;. Normally, if an article called &quot;conference&quot; is located one level beneath the &quot;info&quot; folder, the URL to access this article will be &quot;www.example.com/news/info/conference&quot;. If you specify &quot;PathPrefix=info&quot; in the &quot;settings/siteaccess/news/site.ini.append.php&quot; configuration file, the &quot;conference&quot; article will also be accessible through a shortened URL &quot;www.example.com/news/conference&quot; (in addition to the full URL mentioned above). This is because the system will automatically add the specified prefix after the siteaccess in the URL and look for the matching entry in the database table that stores the URL aliases. Since the URL alias table contains the &quot;info/conference&quot; entry, which points to the &quot;conference&quot; article node, this article will be displayed. The prefix is considered hidden because the URL in the browser remains as &quot;news/conference&quot;.</p> <p>With this configuration, only content located under the &quot;info&quot; folder will be accessible for the &quot;news&quot; siteaccess. To make other subtrees available for this siteaccess, you need to specify the corresponding prefixes using the &quot;PathPrefixExclude&quot; configuration array. For example, let's say that another folder called &quot;articles&quot; is located at the same level as the &quot;info&quot; folder in the content tree. If somebody enters &quot;www.example.com/news/articles&quot; as a URL, the system will automatically add the &quot;info&quot; prefix and attempt to access, without any success, &quot;www.example.com/news/info/articles&quot;. To make the system properly handle virtual URLs in the &quot;articles&quot; subtree, you need to specify &quot;PathPrefixExclude[]=articles&quot; in the same configuration file. This will make all content located in the &quot;articles&quot; folder available for the &quot;news&quot; siteaccess.</p> <p>If the &quot;news&quot; siteaccess makes use of multiple <a href="../../../../Features/Multi-language.html#site_languages" target="_self">site languages</a>, make sure you use the most prioritized one when setting the prefix for virtual URLs (see Example 3).</p> <p>Note that the explanation above only uses URL aliases with lowercase Latin letters. In reality, folder names may contain different characters (spaces, uppercase letters, Unicode characters), while URL aliases are generated according to the &quot;<a href="../URLTranslator/TransformationGroup.html" target="_self">TransformationGroup</a>&quot; and &quot;<a href="../URLTranslator/WordSeparator.html" target="_self">WordSeparator</a>&quot; configuration directives. By default, the system uses the &quot;<a href="../../../../Features/Multi-language-support-for-URL-aliases.html#transformation" target="_self">urlalias</a>&quot; transformation method and dashes as word separators. For example, if you create a folder called &quot;Company news&quot;, it will get an auto-generated URL alias &quot;Company-news&quot; (stored in the database), while the actual URLs for site visitors can contain &quot;company-news&quot;, &quot;COMPANY-NEWS&quot;, &quot;company-News&quot; and so on. (Refer to &quot;<a href="../../../../Features/Multi-language-support-for-URL-aliases/URL-transformation-rules.html#case_sensitivity" target="_self">URL transformation rules</a>&quot; for more information.)</p> <p>
+However, the &quot;PathPrefix&quot; directive is case sensitive, and when used, the prefix part becomes case sensitive when the full URL is accessed. In the example above, the prefix for the &quot;Company news&quot; folder must be specified as shown below:<br /></p><pre class="wordwrap"><span class="line">PathPrefix=Company-news</span>
+</pre><p>
+ <br />If you specify &quot;company-news&quot;, &quot;COMPANY-NEWS&quot; or &quot;company-News&quot; as a prefix, it will not work correctly.</p> <p>With this configuration, if an article called &quot;Conference&quot; is located one level beneath the &quot;Company news&quot; folder, it can be accessed at both &quot;www.example.com/news/Conference&quot; (short URL) and &quot;www.example.com/news/Company-news/Conference&quot; (full URL). While the short URL is not case sensitive, the prefix part of the full URL is. This means that both URLs can contain, for example, &quot;conference&quot; instead of &quot;Conference&quot;. However, if you replace &quot;Company-news&quot; with &quot;company-news&quot;, &quot;COMPANY-NEWS&quot; or &quot;company-News&quot; in the full URL, it will not work any longer.</p> <p>The &quot;PathPrefixExclude&quot; directive is also case sensitive. To make the content located in the &quot;My articles&quot; folder available for the &quot;news&quot; siteaccess, you need to add the corresponding URL alias to the PathPrefixExclude[] configuration array as shown below:</p> <pre class="wordwrap"><span class="line">PathPrefixExclude[]=My-articles</span>
+</pre> <p>In addition, it is recommended to have &quot;Users&quot; and &quot;Media&quot; listed in the &quot;PathPrefixExclude[]&quot; configuration array in order to make user accounts and media content available for this siteaccess through virtual URLs (otherwise only system URLs like &quot;www.example.com/content/view/full/45/&quot; will work for these items). In the URLs that point to user accounts and media content, the prefix part will become case sensitive.</p> <p>If your site makes use of another URL alias configuration, URL aliases are generated differently than in the examples above, so be sure to use URLs appropriate for your setup. For example, if the &quot;<a href="../../../../Features/Multi-language-support-for-URL-aliases.html#transformation" target="_self">urlalias_compat</a>&quot; transformation method is used, only lowercase letters are allowed in URL aliases. (This also means that you'll have to specify &quot;users&quot; and &quot;media&quot; in the &quot;PathPrefixExclude&quot; setting in order to make user accounts and media content accessible.)</p><h3>Examples</h3>
+    <a name="eztoc89508_0_0_1" id="eztoc89508_0_0_1"></a><h4>Example 1</h4> <p>
+Suppose you have two folders called &quot;Books&quot; and &quot;Postcards&quot; located right under the &quot;Content&quot; top level node. If you use two public siteaccesses called &quot;bookshop&quot; and &quot;cards&quot; for displaying content located in these folders, you will most likely have something like this in the &quot;[SiteAccessSettings]&quot; section of the &quot;settings/override/site.ini.append.php&quot; configuration file:<br /></p><pre class="wordwrap copytoclipboard"><span class="line">...</span>
+<span class="line">AvailableSiteAccessList[]</span>
+<span class="line">AvailableSiteAccessList[]=bookshop</span>
+<span class="line">AvailableSiteAccessList[]=cards</span>
+<span class="line">RelatedSiteAccessList[]</span>
+<span class="line">RelatedSiteAccessList[]=bookshop</span>
+<span class="line">RelatedSiteAccessList[]=cards</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '...\r\nAvailableSiteAccessList[]\r\nAvailableSiteAccessList[]=bookshop\r\nAvailableSiteAccessList[]=cards\r\nRelatedSiteAccessList[]\r\nRelatedSiteAccessList[]=bookshop\r\nRelatedSiteAccessList[]=cards\r\n...' ); return false;" /></p>
+<![endif]--><p>&nbsp;</p> <p>With this configuration, content located in both folders will be available for both siteaccesses. The &quot;Books&quot; folder can be accessed using URLs like &quot;www.example.com/bookshop/Books/&quot; and &quot;www.example.com/cards/Books/&quot;. In the same way, the &quot;Postcards&quot; folder will be accessible through both &quot;www.example.com/bookshop/Postcards/&quot; and &quot;www.example.com/cards/Postcards/&quot;.</p> <p>Now, you can configure the &quot;bookshop&quot; siteaccess to only display content located in the &quot;Books&quot; folder. To do that, add the following lines to the &quot;site.ini.append.php&quot; configuration file of the &quot;bookshop&quot; siteaccess:</p> <pre class="wordwrap"><span class="line">[SiteAccessSettings]</span>
+<span class="line">PathPrefix=Books</span>
+</pre> <p>With this configuration, content located in the &quot;Books&quot; folder can be accessed using URLs like &quot;www.example.com/bookshop/MyBook&quot; and &quot;www.example.com/cards/Books/MyBook&quot;. URLs like &quot;www.example.com/bookshop/Postcards/MyPostcard&quot; will not work any longer.</p> <p>To configure the &quot;cards&quot; siteaccess to only display content located in the &quot;Postcards&quot; folder, add the following lines to the &quot;site.ini.append.php&quot; configuration file located in the &quot;settings/siteaccess/cards&quot; directory:</p> <pre class="wordwrap"><span class="line">[SiteAccessSettings]</span>
+<span class="line">PathPrefix=Postcards</span>
+</pre> <p>With this configuration, content located in the &quot;Postcards&quot; folder can be accessed using URLs like &quot;www.example.com/cards/MyPostcard&quot; and &quot;www.example.com/cards/Postcards/MyPostcard&quot;. URLs like &quot;www.example.com/bookshop/Postcards/MyPostcard&quot; and &quot;www.example.com/cards/Books/MyBook&quot; will not work any longer.</p>       <a name="eztoc89508_0_0_2" id="eztoc89508_0_0_2"></a><h4>Example 2</h4> <p>Let's have a look at the previous example assuming that the <a href="../../../../Concepts-and-basics/Configuration/Access-methods.html#host" target="_self">host access method</a> is used instead of the default one. This means that eZ Publish is set up to use different siteaccesses based on the host/domain combinations of the incoming requests. In this case, the &quot;[SiteAccessSettings]&quot; section in the &quot;settings/override/site.ini.append.php&quot; configuration file will most likely contain the following additional lines:</p> <pre class="wordwrap copytoclipboard"><span class="line">...</span>
+<span class="line">MatchOrder=host</span>
+<span class="line">HostMatchType=map</span>
+<span class="line">HostMatchMapItems[]=www.books.example.com;bookshop</span>
+<span class="line">HostMatchMapItems[]=www.greetings.example.com;cards</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '...\r\nMatchOrder=host\r\nHostMatchType=map\r\nHostMatchMapItems[]=www.books.example.com;bookshop\r\nHostMatchMapItems[]=www.greetings.example.com;cards\r\n...' ); return false;" /></p>
+<![endif]--> <p>With this configuration, the system will use the &quot;bookshop&quot; siteaccess if the requested URL starts with &quot;www.books.example.com&quot;. The &quot;cards&quot; siteaccess will be used if the requested URL starts with &quot;www.greetings.example.com&quot;. The &quot;Books&quot; folder can be accessed using URLs like &quot;www.books.example.com/Books/&quot; and &quot;www.greetings.example.com/Books/&quot;. The &quot;Postcards&quot; folder will be accessible through both &quot;www.books.example.com/Postcards/&quot; and &quot;www.greetings.example.com/Postcards/&quot;.</p> <p>If you specify &quot;PathPrefix=Books&quot; for the &quot;bookshop&quot; siteaccess as shown above, content located in the &quot;Books&quot; folder will be accessible through the following URLs:</p>
+<ul>
+ <li><div> www.books.example.com/MyBook (short URL) </div></li> <li><div> www.books.example.com/Books/MyBook (full URL) </div></li> <li><div> www.greetings.example.com/Books/MyBook (full URL for the &quot;cards&quot; siteaccess) </div></li> 
+</ul>
+<p>URLs like &quot;www.books.example.com/Postcards/MyPostcard&quot; will not work any longer.</p> <p>If you also specify &quot;PathPrefix=Postcards&quot; for the &quot;cards&quot; siteaccess, content located in the &quot;Postcards&quot; folder will be accessible through the following URLs:</p>
+<ul>
+ <li><div> www.greetings.example.com/MyPostcard (short URL) </div></li> <li><div> www.greetings.example.com/Postcards/MyPostcard (full URL) </div></li> 
+</ul>
+ <p>URLs like &quot;www.greetings.example.com/Books/MyBook&quot; will not work any longer.</p>       <a name="eztoc89508_0_0_3" id="eztoc89508_0_0_3"></a><h4>Example 3</h4> <p>Let's say that your site content exists in English and French languages and you have two public siteaccesses called &quot;gb&quot; and &quot;fr&quot; with the following language configuration:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Siteaccess &quot;gb&quot;</p> 
+  </th> <th >   <p>Siteaccess &quot;fr&quot;</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <pre class="wordwrap copytoclipboard"><span class="line">[RegionalSettings]</span>
+<span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=eng-GB</span>
+<span class="line">SiteLanguageList[]=fre-FR</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[RegionalSettings]\r\nSiteLanguageList[]\r\nSiteLanguageList[]=eng-GB\r\nSiteLanguageList[]=fre-FR' ); return false;" /></p>
+<![endif]--> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <pre class="wordwrap copytoclipboard"><span class="line">[RegionalSettings]</span>
+<span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=fre-FR</span>
+<span class="line">SiteLanguageList[]=eng-GB</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[RegionalSettings]\r\nSiteLanguageList[]\r\nSiteLanguageList[]=fre-FR\r\nSiteLanguageList[]=eng-GB' ); return false;" /></p>
+<![endif]--> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>If a folder is called &quot;Company&quot; in English and &quot;Compagnie&quot; in French, it can be accessed using the following URLs:</p> 
+<ul>
+ <li><div> www.example.com/gb/Company </div></li> <li><div> www.example.com/gb/Compagnie </div></li> <li><div> www.example.com/fr/Company </div></li> <li><div> www.example.com/fr/Compagnie </div></li> 
+</ul>
+ <p>While the first two URLs bring up the English version of the folder, the other ones will bring up the French version.</p> <p>If you want the &quot;gb&quot; siteaccess to only display content located in this subtree, you need to add the following lines to the &quot;settings/siteaccess/gb/site.ini.append.php&quot; configuration file:</p> <pre class="wordwrap"><span class="line">[SiteAccessSettings]</span>
+<span class="line">PathPrefix=Company</span>
+</pre> <p>For the &quot;fr&quot; siteaccess, you would have to specify &quot;Compagnie&quot; as a prefix, since French is the most prioritized language for this siteaccess.</p>       <a name="eztoc89508_0_0_4" id="eztoc89508_0_0_4"></a><h4>Example 4</h4> <p>Suppose that your site content exists in the Norwegian language. If you create a folder called &quot;Ostehøvel&quot; (Cheese slicer) located in the &quot;Produkter&quot; (Products) folder, the system will automatically generate a URL alias for it depending on which transformation method is used:</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Transformation method</p> 
+  </th> <th >   <p>URL alias</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>urlalias (default)</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Produkter/Ostehoevel</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>urlalias_iri</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Produkter/Ostehøvel</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>urlalias_compat</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>produkter/ostehoevel</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>You can configure a siteaccess to only display content located in the &quot;Ostehøvel&quot; folder and skip the corresponding prefix in the URLs. If the default transformation method is used, this can be done by adding the following line to the &quot;[SiteAccessSettings]&quot; section of the &quot;site.ini.append.php&quot; file for this siteaccess:</p> <pre class="wordwrap"><span class="line">PathPrefix=Produkter/Ostehoevel</span>
+</pre> <p>If the &quot;urlalias_iri&quot; transformation method is used, the corresponding line will look like this:</p> <pre class="wordwrap"><span class="line">PathPrefix=Produkter/Ostehøvel</span>
+</pre> <p>If the &quot;urlalias_compat&quot; transformation method is used, you need to specify the prefix as shown below:</p> <pre class="wordwrap"><span class="line">PathPrefix=produkter/ostehoevel</span>
+</pre>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/SiteAccessSettings/PathPrefix by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:15:49 GMT -->
+</html>

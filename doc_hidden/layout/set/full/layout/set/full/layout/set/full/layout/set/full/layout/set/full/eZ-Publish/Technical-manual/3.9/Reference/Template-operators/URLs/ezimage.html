@@ -1,0 +1,74 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Template-operators/URLs/ezimage by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:57:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>ezimage / URLs / Template operators / Reference / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ezimage</h1>
+</div>
+<h3>Summary</h3>
+Returns the input string prepended with the current image directory.<h3>Usage</h3>
+<pre>input|ezimage( [ quote [, slash_skip ] ] )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>quote</td>
+        <td>string</td>
+        <td>Quote style: &quot;no&quot;, &quot;single&quot; or &quot;double&quot; (default).</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>skip_slash</td>
+        <td>boolean</td>
+        <td>Include (FALSE, default) or skip (TRUE)  the first slash.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+The input string prepended with the current image directory.<h3>Description</h3>
+ <p>This operator prepends the input string with the location of the image directory used by the current design. If the operator is unable to find the specified file within the &quot;images&quot; subdirectory of the current design, it will attempt to locate it in the &quot;images&quot; subdirectory of the <a href="../../../Concepts-and-basics/Designs/Design-combinations.html#automatic_fallback" target="_self">fallback designs</a> or the standard design. The &quot;ezimage&quot; operator should always be used when an image is included in a template. It will make sure that the path to the image is always correct, regardless of the location of the eZ Publish directory, the access method, the environment, and so on.</p> <p>By default, this operator returns a double-quoted string. The optional &quot;quote&quot; parameter can be used to control the way the address is returned: &quot;no&quot; (no quotes), &quot;single&quot; (single quotes) or &quot;double&quot; (double quotes, the default). The optional &quot;skip_slash&quot; parameter can be used to get rid of the first slash within the string that is being returned (when set to false()).</p><h3>Examples</h3>
+    <a name="eztoc69416_0_0_1" id="eztoc69416_0_0_1"></a><h4>Example 1</h4> <p>
+In this example, the design &quot;my_company&quot; is used by the siteaccess. Images should be included in the following way:<br /></p><pre class="wordwrap"><span class="line">&lt;img src={'banner.jpg'|ezimage()} alt=&quot;My banner&quot; ...&gt;</span>
+</pre><p>&nbsp;</p> <p>The following output will be produced:</p><div class="output"> <pre class="wordwrap"><span class="line">&lt;img src=&quot;/design/my_company/images/banner.jpg&quot; alt=&quot;My company&quot; ... /&gt;</span>
+</pre> </div> <p>If eZ Publish is unable to find the image within the images directory of the current design directory, it will attempt to find it within the images subdirectory of the additional designs. At last, it will fallback to the standard design. In this case, the output will be the following:</p><div class="output"> <pre class="wordwrap"><span class="line">&lt;img src=&quot;/design/standard/images/banner.jpg&quot; alt=&quot;My company&quot; ...&gt;</span>
+</pre> </div>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Reference/Template-operators/URLs/ezimage by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:57:29 GMT -->
+</html>

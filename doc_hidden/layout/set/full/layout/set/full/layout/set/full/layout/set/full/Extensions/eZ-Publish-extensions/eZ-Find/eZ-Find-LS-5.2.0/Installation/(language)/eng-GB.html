@@ -1,0 +1,66 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.2.0/Installation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:25:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Installation / eZ Find LS 5.2.0 / eZ Find / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Installation</h1>
+</div>
+
+<a name="eztoc135908_0_1" id="eztoc135908_0_1"></a><h3>Java Runtime Environment</h3><p>The extension requires the Sun supplied Java Runtime Environment (JRE) version 5 for Linux and 6 for Windows, Mac OS and Solaris. This can be obtained from the Java download pages. Follow the corresponding installation instructions as described on the Java home pages.</p><p>Once the JRE is installed, you can reach the eZ Find extension on the&nbsp;<a href="http://share.ez.no/downloads/downloads/" target="_self">eZ Publish community sources</a>. Please note that the version of eZ Find which are bundled with eZ Publish community versions aren't certified for eZ Publish 5 Platform, and can't be support. The eZ Find extension has to be placed under your eZ Publish site location in the path <i>ezpublish_legacy/extension/ezfind/</i>.</p><a name="eztoc135908_0_2" id="eztoc135908_0_2"></a><h3>Enable eZ Find and upgrade DB schema</h3><p>To enable your eZ Find extension, open settings/override/site.ini.append.php and add the following parameter to the [ExtensionSettings] section:</p><pre class="wordwrap"><span class="line">ActiveExtensions[]=ezfind</span>
+</pre><p>Here you should add the eZ Find extensions before the ezwebin (Website Interface) and ezflow extensions, in order to use the correct templates for these extensions. Your [ExtensionSettings] section might then look like this:</p><pre class="wordwrap"><span class="line">ActiveExtensions[]=ezfind</span>
+<span class="line">ActiveExtensions[]=ezwebin</span>
+<span class="line">ActiveExtensions[]=ezflow</span>
+</pre><p>Please note that from version 2.3 onwards eZ Find supports the new <a href="../../../../../../eZ-Publish/Technical-manual/4.4/Installation/Extensions/Extension-load-ordering.html" target="_self">extension load ordering</a> feature that makes the extension load ordering more automated. Please read more in <a href="../../../eZ-Find-2.3/What-s-new-in-eZ-Find-2.html" target="_self">What's new in eZ Find 2.3</a>.</p><p>Clear the ini caches for the next settings to be updated:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-tag=ini</span>
+</pre><p>Next, you will need to update the class autoloads by running the script from you <i>ezpublish_legacy/</i> directory under your eZ Publish site location:</p><pre class="wordwrap"><span class="line">cd ezpublish_legacy/</span>
+<span class="line">php bin/php/ezpgenerateautoloads.php</span>
+</pre><p>You will also need to add a table to the database used by your eZ Publish installation. You can do this as follows from the eZ Publish root directory if you are using MySQL:</p><pre class="wordwrap"><span class="line">mysql -u &lt;user&gt; -p &lt;database_name&gt; &lt; ezpublish_legacy/extension/ezfind/sql/&lt;database&gt;/&lt;database&gt;.sql</span>
+</pre><p>In case you are using another RDMS the procedure is very similar. You may want to have a look at sql/oracle (for Oracle) or sql/postgresql (for PostgreSQL). Please refer to the documentation reference for your DBMS if you are experiencing problems.</p><p>Finally, also clear the template override cache with following command:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-id=template-override</span>
+</pre><p>Now that eZ Find is installed you are able to start solr, by running the following command from your&nbsp;<i>ezpublish_legacy/extension/ezfind/java/</i>&nbsp;directory under your site's location:</p><pre class="wordwrap"><span class="line">&lt;span class=&quot;line&quot;&gt;java -Dezfind -jar start.jar&lt;/span&gt;</span>
+</pre><p>For more details please check the <a href="../Solr-backend.html" target="_self">solr backend</a> documentation.</p><p>To re-index the content of the site run the command&nbsp;from your&nbsp;<i>ezpublish_legacy/</i>&nbsp;directory under your site's location:</p><pre class="wordwrap"><span class="line">php extension/ezfind/bin/php/updatesearchindexsolr.php -s &lt;admin siteaccess&gt;</span>
+</pre><a name="eztoc135908_0_3" id="eztoc135908_0_3"></a><h3>Configuration</h3><p>Please visit the <a href="../../Basic-Configuration.html" title="Basic Configuration" target="_blank">Basic</a>&nbsp;and <a href="../../Advanced-Configuration.html" title="Advanced Configuration" target="_blank">Advanced Configuration</a> pages to learn how to configure your installation to suit your needs.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.2.0/Installation/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:25:15 GMT -->
+</html>

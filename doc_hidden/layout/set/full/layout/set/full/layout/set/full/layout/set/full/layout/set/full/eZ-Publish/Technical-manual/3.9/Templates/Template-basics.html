@@ -1,0 +1,82 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Templates/Template-basics by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:49:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Template basics / Templates / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Template basics</h1>
+</div>
+
+ <p>This section explains the concepts behind templates and the template system. eZ publish uses templates as the fundamental unit of site design. A <i>template</i> is basically a custom HTML file that describes how some particular type of content should be visualized. A template file always ends with a &quot;.tpl&quot; extension. Actual HTML code in the built-in/default templates follow the <a href="http://www.w3.org/TR/xhtml1/dtds.html#a_dtd_XHTML-1.0-Transitional" target="_blank">XHTML 1.0 Transitional</a> specification. In addition to standard HTML syntax, a template consists of eZ publish specific code. The eZ publish specific code makes it possible to extract information from the system and to solve common programmatic issues like for example conditional branching, looping, etc. All eZ publish specific code must be placed inside a set of curly brackets, &quot;{&quot; and &quot;}&quot;. The following example shows a part of a template that prints out the current time:</p> <pre class="wordwrap nocopy"><span class="line">...</span>
+<span class="line">&lt;h1&gt;Time machine&lt;/h1&gt;</span>
+<span class="line">&lt;p&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;The current time is: {currentdate()|l10n( time )}</span>
+<span class="line">&lt;/p&gt;</span>
+<span class="line">...</span>
+</pre> <p>The example above demonstrates how standard HTML is mixed with eZ publish specific code. It shows the usage of the <a href="../Reference/Template-operators/Data-and-information-extraction/currentdate.html" target="_self">&quot;currentdate&quot;</a> and the <a href="../Reference/Template-operators/Formatting-and-internationalization/l10n.html" target="_self">&quot;l10n&quot;</a> template operators. Since &quot;currentdate&quot; returns a UNIX timestamp, it must be formatted using the &quot;l10n&quot; localization operator (or else the output would not make any sense to humans). This is done by piping the output from the &quot;currentdate&quot; operator into the &quot;l10n&quot; operator, which will output the requested information according to the current locale settings. The &quot;time&quot; parameter tells the operator to output only the time (it could have been &quot;date&quot;, &quot;shortdate&quot;, &quot;datetime&quot; and so on).</p> <p> <a name="template_generation"></a>
+ </p>  <a name="eztoc63499_1" id="eztoc63499_1"></a><h2>Template generation</h2> <p>The template system is component based. In other words, an actual HTML page is usually made up of several templates. At the minimum, eZ publish always renders the main template, which is called <i>pagelayout</i>. The pagelayout contains the HTML, HEAD and BODY tags; it dictates the overall look of a site. Among other things, it describes the visual structure (main layout, logo, main menu, footer, etc.) that will be presented for each HTML page that the system generates.</p> <p>Every incoming request tells eZ publish to run a specific module and to execute one of the module's views. When finished, the requested module/view combination will generate a result. The result can be accessed through the <a href="The-pagelayout/Variables-in-pagelayout.html#module_result" target="_self">$module_result</a> array which is available in the pagelayout template. The following illustration shows a simplified 3-step explanation of how eZ publish responds to an HTTP request.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/templates/client_server_cycle/6276-4-eng-GB/client_server_cycle_doc.png" alt="Client -server cycle." />
+ <p>Client - server cycle.</p>
+
+
+
+
+
+
+
+</div> <p>Every view generates a chunk of HTML code by making use of a template. Templates that are used by views are often referred to as <i>view templates</i>. Whenever a view has finished running, it will issue an internal template request. The requested template will be interpreted, processed and thus converted to HTML. After processing, the system will put the resulting HTML in the module's result array. The module/view's result can be accessed through the &quot;.content&quot; extension: {$module_result.content}. By printing out the contents of this variable, it is possible to include the HTML code that was generated by the view in the pagelayout. The following illustration shows how the module/view result (generated by different modules/views - depending on the request) is included in the pagelayout:</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/templates/pagelayout/1285-3-eng-GB/pagelayout_doc.png" alt="The module result as a part of the pagelayout." />
+ <p>The module result as a part of the pagelayout.</p>
+
+
+
+
+
+
+
+</div>  <a name="eztoc63499_1_1" id="eztoc63499_1_1"></a><h3>View templates</h3> <p>A template used by a view can either be a <i>node template</i> or a <i>system template</i>. A node template will only be used when a node is being viewed, for example when a system URL containing &quot;/content/view&quot; or the virtual URL of a node is requested. A system template typically provides an HTML interface to a specific eZ publish feature. For example, the template used by the &quot;search&quot; view of the &quot;content&quot; module provides an interface to the built-in search engine.</p> <p>The difference between the template types mentioned above is the available variables and the combination of override rules that can be used. A <a href="Template-basics/Node-templates.html" target="_self">node template</a> gives access to a variable ($node) which contains information about the actual node that is being viewed. Depending on the view that was called, a <a href="Template-basics/System-templates.html" target="_self">system template</a> typically gives access to several variables. A template override rule makes it possible to display custom templates in specific cases. The override rules for node templates are much more flexible than the override rules for system templates. For example, it is possible to set up complex rule combinations that depend on the type of the node being viewed, the depth of the node in the tree, the section which the node's object is assigned to and so on. Please refer to the <a href="The-template-override-system.html" target="_self">&quot;The template override system&quot;</a> section for a detailed description of the template override mechanism.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Templates/Template-basics by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:49:27 GMT -->
+</html>

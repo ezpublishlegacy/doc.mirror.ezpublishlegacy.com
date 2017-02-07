@@ -1,0 +1,192 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Features/WebDAV by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:28:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>WebDAV / Features / 3.10 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>WebDAV</h1>
+</div>
+
+ <p>WebDAV is an abbreviation for &quot;Web-based Distributed Authoring and Versioning&quot; (published as an open standard under RFC 2518). WebDAV is a set of extensions to the HTTP protocol which allows users to collaboratively edit and manage files on a web server. This is achieved by making use of a WebDAV compatible client / application. For example, it is possible to use recent versions of KDE's Konqueror or Microsoft's Internet Explorer. Using a WebDAV compatible client, the user connects to the server and is able to browse and manage files in a similar way as with a network share or an FTP server. In other words, what this protocol does is that it makes it possible to browse, create, remove, upload, download, rename, etc. files and directories on a web server. One of the most important advantages of this technology is that it uses port 80 for network traffic. This means that if you are able to surf the site from your workstation, you can also use WebDAV to administer it. It does not require firewall reconfiguration.</p>  <a name="eztoc74439_1" id="eztoc74439_1"></a><h2>eZ Publish and WebDAV</h2> <p>From version 3.2 and up, eZ Publish provides a built in WebDAV server. This implementation allows users to communicate with eZ Publish using a WebDAV compatible client. Once connected, it is possible to browse and manage the node tree of a site. The tree will be displayed as if it were a filesystem (as directories and files).</p> <p>When a user connects to the eZ Publish WebDAV server for the first time, the system will display a list of the siteaccesses that have been made available for WebDAV. This list can be configured using the &quot;SiteList[]&quot; directive under &quot;[SiteSettings]&quot; in a configuration override for &quot;site.ini&quot;. Please note that the system does not ask for a username/password combination at this stage. In other words, anyone with network access will be able to see the names of the available siteaccesses. The following screenshot shows what the user will see if there are two available siteaccesses, &quot;example&quot; and &quot;plain_user&quot;.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_10/images/features/webdav_virtual_top_folder/12620-1-eng-GB/webdav_virtual_top_folder_doc.png" alt="WebDAV - Virtual top folder" />
+ <p>WebDAV - Virtual top folder</p>
+
+
+
+
+
+
+
+</div> <p>When a siteaccess is chosen, the system will attempt to authenticate the user by asking for a username/password combination. The next screenshot shows this.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_10/images/features/webdav_login/12623-1-eng-GB/webdav_login_doc.png" alt="WebDAV - Login" />
+ <p>WebDAV - Login</p>
+
+
+
+
+
+
+
+</div> <p>The provided username and password must belong to a valid eZ Publish user that exists for the selected siteaccess. Furthermore, the user must have sufficient privileges in order to be able to see the contents of the node tree. The following screenshot shows a WebDAV client displaying the contents of the root node of an eZ Publish siteaccess called &quot;plain_user&quot;.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_10/images/features/webdav_top_level_nodes/30047-2-eng-GB/webdav_top_level_nodes_doc.png" alt="WebDAV - Top level nodes" />
+ <p>WebDAV - Top level nodes</p>
+
+
+
+
+
+
+
+</div> <p>As the screenshot indicates, the user will be able to browse and manage the contents of the &quot;Content&quot; and &quot;Media&quot; top level nodes. The next screenshot shows an example of what the user will see after doing some exploration of the node structure of the &quot;Content&quot; top level node.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_10/images/features/webdav_content_node_tree/12629-3-eng-GB/webdav_content_node_tree_doc.png" alt="WebDAV - Content node tree" />
+ <p>WebDAV - Content node tree</p>
+
+
+
+
+
+
+
+</div>   <a name="eztoc74439_2" id="eztoc74439_2"></a><h2>Browsing and downloading</h2> <p>The default behavior is that all nodes are displayed as directories. The reason for this is because in eZ Publish any object can be placed under any other object by the way of nodes. Displaying the nodes as directories makes it possible to explore the structure of the node tree. However, not all nodes are displayed as directories.</p> <p>Nodes that reference objects containing datatypes that store files will be displayed as files instead of directories. This means that for example nodes that make use of the image, media or the file datatype will be displayed as files. When downloaded, eZ Publish will send the file that is contained in the attribute which is represented by a datatype capable of storing a file. If several attributes are represented by such datatypes, it is the contents of the first attribute that will be used.</p> <p>The &quot;FolderClasses[]&quot; directive in &quot;webdav.ini&quot; can be used to configure which types of nodes that should be shown as directories in the WebDAV client. The default configuration assures that nodes referencing folder objects are always displayed as directories. Adding a class that makes use of a datatype capable of storing a file will result in an override of the behavior described in the previous paragraph. In other words, this setting makes it possible to display different types of nodes as directories even if they contain files.</p>   <a name="eztoc74439_3" id="eztoc74439_3"></a><h2>Uploading</h2> <p>Any type of file can be uploaded to the system. Files will be stored using instances of the file class. In other words, every time a file is uploaded, eZ Publish will create a file object where the file attribute will contain the uploaded data. In addition, a node will be created at the location where the file was uploaded in the tree. This is the default behavior. However, not all file types will be created as file objects.</p> <p>
+ <a name="mapping_mime_types"></a>
+ <br />It is possible to configure the system so that it creates different kinds of objects based on the type of the uploaded file. For example, the default configuration makes sure that uploaded images are created as image objects. This behavior is controlled by mapping MIME types to classes. The mappings can be configured using the &quot;MimeClassMap[]&quot; directive under &quot;CreateSettings&quot; in a configuration override for &quot;upload.ini&quot;. The &quot;DefaultClass&quot; directive determines which class that should be used if there is no suitable mapping. This is usually set to &quot;file&quot;, which means that unrecognized file types will be created as file objects. The following example shows the default mappings.</p> <pre class="wordwrap copytoclipboard"><span class="line">MimeClassMap[]</span>
+<span class="line">MimeClassMap[image]=image</span>
+<span class="line">MimeClassMap[video/quicktime]=quicktime</span>
+<span class="line">MimeClassMap[video/x-msvideo]=windows_media</span>
+<span class="line">MimeClassMap[video/vnd.rn-realvideo]=real_video</span>
+<span class="line">MimeClassMap[application/vnd.rn-realmedia]=real_video</span>
+<span class="line">MimeClassMap[application/x-shockwave-flash]=flash</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'MimeClassMap[]\r\nMimeClassMap[image]=image\r\nMimeClassMap[video/quicktime]=quicktime\r\nMimeClassMap[video/x-msvideo]=windows_media\r\nMimeClassMap[video/vnd.rn-realvideo]=real_video\r\nMimeClassMap[application/vnd.rn-realmedia]=real_video\r\nMimeClassMap[application/x-shockwave-flash]=flash' ); return false;" /></p>
+<![endif]--> <p>Each entry in the &quot;MimeClassMap[]&quot; array must be further specified using a block that reveals details about the class that is being mapped to. The blocks must contain the following information:</p> 
+<ul>
+ <li><div> The identifier of the target class (appended with &quot;_ClassSettings&quot;). </div></li> <li><div> The class attribute identifier which will get the file data. </div></li> <li><div> The class attribute identifier which will get the name. </div></li> <li><div> A pattern that defines the name of the object. </div></li> 
+</ul>
+ <p>The following example shows the default class map block for images.</p> <pre class="wordwrap copytoclipboard"><span class="line">[image_ClassSettings]</span>
+<span class="line">FileAttribute=image</span>
+<span class="line">NameAttribute=name</span>
+<span class="line">NamePattern=&lt;original_filename_base&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[image_ClassSettings]\r\nFileAttribute=image\r\nNameAttribute=name\r\nNamePattern=&lt;original_filename_base&gt;' ); return false;" /></p>
+<![endif]--> <p>The example above will tell eZ Publish that when an image is uploaded, the actual file data should be put into an attribute identified by the string &quot;image&quot;. The name of the image should be stored using an attribute called &quot;name&quot; (as before, it is the identifier of the attribute that is used). The &quot;NamePattern&quot; tells the system about how it should generate the name for uploaded images. It may contain plain text and special tags enclosed by angle brackets (&quot;&lt;&quot; and &quot;&gt;&quot;). The following table reveals the tags that can be used.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Tag</p> 
+  </th> <th >   <p>Description</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>original_filename</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the uploaded file, like it was on the local machine (for example &quot;test.jpg&quot;.</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>original_filename_base</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The name of the uploaded file without an extension (for example &quot;test&quot;).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>original_filename_suffix</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The extension of the uploaded file (for example &quot;.jpg&quot;).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>mime_type</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The MIME type of the uploaded file (for example &quot;image/jpeg&quot;).</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+  <a name="eztoc74439_3_1" id="eztoc74439_3_1"></a><h3>Custom upload handling</h3> <p>It is possible to use custom upload handlers in order to process uploaded files in a special way. Custom upload handlers must be provided as extensions. A handler must be automatically triggered whenever a certain type of file is uploaded to the system. This can be done by making use of the &quot;MimeUploadHandlerMap[]&quot; directive under &quot;[CreateSettings]&quot; in &quot;upload.ini&quot;. For example, the following line will make sure that uploaded images (regardless of type) are handled by a class called &quot;ezimageuploadhandler&quot; located in &quot;ezimageuploadhandler.php&quot;.</p> <pre class="wordwrap"><span class="line">MimeUploadHandlerMap[image]=ezimageuploadhandler</span>
+</pre> <p>It is also possible to have only a specific type of file be processed by the upload handler. The following example demonstrates how to only handle JPEG images.</p> <pre class="wordwrap"><span class="line">MimeUploadHandlerMap[image/jpeg]=ezimageuploadhandler</span>
+</pre> <p>The upload handler itself must be put in a directory called &quot;uploadhandlers&quot; in an extension, like this:</p> <pre class="wordwrap copytoclipboard"><span class="line">eZ Publish</span>
+<span class="line">|</span>
+<span class="line">&nbsp;-extensions</span>
+<span class="line">&nbsp;&nbsp;|</span>
+<span class="line">&nbsp;&nbsp;&nbsp;-example</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;|</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-uploadhandlers</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-ezimageuploadhandler.php</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'eZ Publish\r\n|\r\n -extensions\r\n  |\r\n   -example\r\n    |\r\n     -uploadhandlers\r\n      |\r\n       -ezimageuploadhandler.php' ); return false;" /></p>
+<![endif]--> <p>The following code shows the skeleton of a custom upload handler.</p> <pre class="wordwrap copytoclipboard"><span class="line">include_once( 'kernel/classes/ezcontentuploadhandler.php' );</span>
+<span class="line">&nbsp;</span>
+<span class="line">class eZExampleUploadHandler extends eZContentUploadHandler</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;function eZExampleUploadHandler()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;eZContentUploadHandler( 'Example file handling', 'example' );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/*!</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles the uploading of example files.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;function handleFile( &amp;$upload, &amp;$result,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$filePath, $originalFilename, $mimeInfo,</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$location, $existingNode )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Implement your import/conversion routine here</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;copy( $filepath, &quot;var/cache/example.jpeg&quot; );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'include_once( \'kernel/classes/ezcontentuploadhandler.php\' );\r\n\r\nclass eZExampleUploadHandler extends eZContentUploadHandler\r\n{\r\n    function eZExampleUploadHandler()\r\n    {\r\n        $this-&gt;eZContentUploadHandler( \'Example file handling\', \'example\' );\r\n    }\r\n\r\n    /*!\r\n      Handles the uploading of example files.\r\n    */\r\n    function handleFile( &amp;$upload, &amp;$result,\r\n                         $filePath, $originalFilename, $mimeInfo,\r\n                         $location, $existingNode )\r\n    {\r\n        // Implement your import/conversion routine here\r\n        copy( $filepath, &quot;var/cache/example.jpeg&quot; );\r\n    }\r\n}' ); return false;" /></p>
+<![endif]-->  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.10/Features/WebDAV by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:28:13 GMT -->
+</html>

@@ -1,0 +1,166 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.5/Installation/Virtual-host-setup/Virtual-host-example by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:41:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Virtual host example / Virtual host setup / Installation / 4.5 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Virtual host example</h1>
+</div>
+
+<p>This example demonstrates how to set up a virtual host on the Apache web server for an eZ Publish installation located in &quot;/var/www/example&quot;. Let's say that we want to access eZ Publish by using the following URLs:</p>
+<ul>
+<li><div>http://www.example.com (actual website for public access) </div></li><li><div>http://admin.example.com (administration interface for the webmaster) </div></li>
+</ul>
+<p>In order to achieve this, we need to set up both eZ Publish and the web server so that they respond correctly to the different requests.</p><a name="eztoc121757_1" id="eztoc121757_1"></a><h2>eZ Publish configuration: siteaccess settings</h2><p>eZ Publish needs to be configured to use the host access method. This can be done from within the web based setup wizard or by manually editing the global override for the site.ini configuration file: &quot;/settings/override/site.ini.append.php&quot;. A typical configuration would look something like this:</p><pre class="wordwrap copytoclipboard"><span class="line">...</span>
+<span class="line">[SiteAccessSettings]</span>
+<span class="line">AvailableSiteAccessList[]</span>
+<span class="line">AvailableSiteAccessList[]=example</span>
+<span class="line">AvailableSiteAccessList[]=example_admin</span>
+<span class="line">MatchOrder=host</span>
+<span class="line">&nbsp;</span>
+<span class="line">HostMatchMapItems[]=www.example.com;example</span>
+<span class="line">HostMatchMapItems[]=admin.example.com;example_admin</span>
+<span class="line">...</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '...\r\n[SiteAccessSettings]\r\nAvailableSiteAccessList[]\r\nAvailableSiteAccessList[]=example\r\nAvailableSiteAccessList[]=example_admin\r\nMatchOrder=host\r\n\r\nHostMatchMapItems[]=www.example.com;example\r\nHostMatchMapItems[]=admin.example.com;example_admin\r\n...' ); return false;" /></p>
+<![endif]--><p>This configuration tells eZ Publish that it should use the &quot;example&quot; siteaccess if a request starts with &quot;www.example.com&quot; and &quot;example_admin&quot; if the request starts with &quot;admin.example.com&quot;. For more information about site management in eZ Publish, please refer to the <a href="../../Concepts-and-basics/Configuration/Site-management.html" target="_self">&quot;Site management&quot;</a> part of the &quot;Concepts and basics&quot; chapter.</p><a name="eztoc121757_2" id="eztoc121757_2"></a><h2>Apache configuration: virtual host settings</h2><p>Assuming that...</p>
+<ul>
+<li><div>eZ Publish is located in &quot;/var/www/example&quot; </div></li><li><div>the server's IP address is 128.39.140.28 </div></li><li><div>we wish to access eZ Publish using &quot;www.example.com&quot; and &quot;admin.example.com&quot; </div></li>
+</ul>
+<p>...the following virtual host configuration needs to be added at the end of &quot;http.conf&quot;:</p><pre class="wordwrap copytoclipboard"><span class="line">NameVirtualHost 128.39.140.28</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;VirtualHost 128.39.140.28&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory /var/www/example&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Options FollowSymLinks</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AllowOverride None</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Directory&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;IfModule mod_php5.c&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_admin_flag safe_mode Off</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_admin_value register_globals &nbsp;&nbsp;&nbsp;0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_value magic_quotes_gpc &nbsp;0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_value magic_quotes_runtime &nbsp;0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_value allow_call_time_pass_reference 0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/IfModule&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;DirectoryIndex index.php</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;IfModule mod_rewrite.c&gt;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteEngine On</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/api/ /index_rest\.php [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/([^/]+/)?content/treemenu.* /index_treemenu\.php [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/var/([^/]+/)?storage/images(-versioned)?/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/design/[^/]+/(stylesheets|images|javascript)/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/share/icons/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/extension/[^/]+/design/[^/]+/(stylesheets|flash|images|lib|javascripts?)/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/packages/styles/.+/(stylesheets|images|javascript)/[^/]+/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/packages/styles/.+/thumbnail/.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/var/storage/packages/.* - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# &nbsp;Makes it possible to place your favicon at the root of your</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# &nbsp;eZ Publish instance. It will then be served directly.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/favicon\.ico - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# &nbsp;Uncomment the line below if you want you favicon be served from the standard design.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# &nbsp;You can customize the path to favicon.ico by replacing design/standard/images/favicon.ico</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# &nbsp;by the adequate path.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#RewriteRule ^/favicon\.ico /design/standard/images/favicon\.ico [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/design/standard/images/favicon\.ico - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Give direct access to robots.txt for use by crawlers (Google, Bing, Spammers..)</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/robots\.txt - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Platform for Privacy Preferences Project ( P3P ) related files for Internet Explorer</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# More info here : http://en.wikipedia.org/wiki/P3p</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule ^/w3c/p3p\.xml - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Uncomment the following lines when using popup style debug.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# RewriteRule ^/var/cache/debug\.html.* - [L]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# RewriteRule ^/var/[^/]+/cache/debug\.html.* - [L]</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RewriteRule .* /index\.php</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/IfModule&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;DocumentRoot /var/www/example</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;ServerName www.example.com</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;ServerAlias admin.example.com</span>
+<span class="line">&lt;/VirtualHost&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', 'NameVirtualHost 128.39.140.28\r\n\r\n&lt;VirtualHost 128.39.140.28&gt;\r\n    &lt;Directory /var/www/example&gt;\r\n        Options FollowSymLinks\r\n        AllowOverride None\r\n    &lt;/Directory&gt;\r\n\r\n    &lt;IfModule mod_php5.c&gt;\r\n        php_admin_flag safe_mode Off\r\n        php_admin_value register_globals    0\r\n        php_value magic_quotes_gpc  0\r\n        php_value magic_quotes_runtime  0\r\n        php_value allow_call_time_pass_reference 0\r\n    &lt;/IfModule&gt;\r\n\r\n    DirectoryIndex index.php \r\n\r\n    &lt;IfModule mod_rewrite.c&gt;\r\n        RewriteEngine On\r\n        RewriteRule ^/api/ /index_rest\.php [L]\r\n        RewriteRule ^/([^/]+/)?content/treemenu.* /index_treemenu\.php [L]\r\n        RewriteRule ^/var/([^/]+/)?storage/images(-versioned)?/.* - [L]\r\n        RewriteRule ^/var/([^/]+/)?cache/(texttoimage|public)/.* - [L]\r\n        RewriteRule ^/design/[^/]+/(stylesheets|images|javascript)/.* - [L]\r\n        RewriteRule ^/share/icons/.* - [L]\r\n        RewriteRule ^/extension/[^/]+/design/[^/]+/(stylesheets|flash|images|lib|javascripts?)/.* - [L]\r\n        RewriteRule ^/packages/styles/.+/(stylesheets|images|javascript)/[^/]+/.* - [L]\r\n        RewriteRule ^/packages/styles/.+/thumbnail/.* - [L]\r\n        RewriteRule ^/var/storage/packages/.* - [L]\r\n\r\n        #  Makes it possible to place your favicon at the root of your\r\n        #  eZ Publish instance. It will then be served directly.\r\n        RewriteRule ^/favicon\.ico - [L]\r\n        #  Uncomment the line below if you want you favicon be served from the standard design.\r\n        #  You can customize the path to favicon.ico by replacing design/standard/images/favicon.ico\r\n        #  by the adequate path.\r\n        #RewriteRule ^/favicon\.ico /design/standard/images/favicon\.ico [L]\r\n        RewriteRule ^/design/standard/images/favicon\.ico - [L]\r\n\r\n        # Give direct access to robots.txt for use by crawlers (Google, Bing, Spammers..)\r\n        RewriteRule ^/robots\.txt - [L]\r\n\r\n        # Platform for Privacy Preferences Project ( P3P ) related files for Internet Explorer\r\n        # More info here : http://en.wikipedia.org/wiki/P3p\r\n        RewriteRule ^/w3c/p3p\.xml - [L]\r\n\r\n        # Uncomment the following lines when using popup style debug.\r\n        # RewriteRule ^/var/cache/debug\.html.* - [L]\r\n        # RewriteRule ^/var/[^/]+/cache/debug\.html.* - [L]\r\n\r\n        RewriteRule .* /index\.php\r\n    &lt;/IfModule&gt;\r\n\r\n    DocumentRoot /var/www/example\r\n    ServerName www.example.com\r\n    ServerAlias admin.example.com\r\n&lt;/VirtualHost&gt;' ); return false;" /></p>
+<![endif]--><p>Note that it isn't necessary to create a separate virtual host block for &quot;admin.example.com&quot;, it can be added to the existing block using the &quot;ServerAlias&quot; directive.</p><p>You can have apache1 and apache2 part in the sample vhost. That way allows to use one vhost for both servers.</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;IfModule mod_php5.c&gt;</span>
+<span class="line"># If you are using Apache 2, you have to use &lt;IfModule sapi_apache2.c&gt;</span>
+<span class="line"># instead of &lt;IfModule mod_php5.c&gt;.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# some parts/addons might only run safe mode on</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_admin_flag safe_mode Off</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# security just in case</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_admin_value register_globals &nbsp;&nbsp;&nbsp;0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# performance</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_value magic_quotes_gpc &nbsp;0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# performance</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_value magic_quotes_runtime &nbsp;0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#http://www.php.net/manual/en/ini.core.php#ini.allow-call-time-pass-reference</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_value allow_call_time_pass_reference 0</span>
+<span class="line">&lt;/IfModule&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&lt;IfModule sapi_apache2.c&gt;</span>
+<span class="line"># If you are using Apache 2, you have to use &lt;IfModule sapi_apache2.c&gt;</span>
+<span class="line"># instead of &lt;IfModule mod_php5.c&gt;.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# some parts/addons might only run safe mode on</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_admin_flag safe_mode Off</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# security just in case</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_admin_value register_globals &nbsp;&nbsp;&nbsp;0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# performance</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_value magic_quotes_gpc &nbsp;0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# performance</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_value magic_quotes_runtime &nbsp;0</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#http://www.php.net/manual/en/ini.core.php#ini.allow-call-time-pass-reference</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php_value allow_call_time_pass_reference 0</span>
+<span class="line">&lt;/IfModule&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;IfModule mod_php5.c&gt;\r\n# If you are using Apache 2, you have to use &lt;IfModule sapi_apache2.c&gt;\r\n# instead of &lt;IfModule mod_php5.c&gt;.\r\n        # some parts/addons might only run safe mode on\r\n        php_admin_flag safe_mode Off\r\n        # security just in case\r\n        php_admin_value register_globals    0\r\n        # performance\r\n        php_value magic_quotes_gpc  0\r\n        # performance\r\n        php_value magic_quotes_runtime  0\r\n        #http://www.php.net/manual/en/ini.core.php#ini.allow-call-time-pass-reference\r\n        php_value allow_call_time_pass_reference 0\r\n&lt;/IfModule&gt;\r\n\r\n&lt;IfModule sapi_apache2.c&gt;\r\n# If you are using Apache 2, you have to use &lt;IfModule sapi_apache2.c&gt;\r\n# instead of &lt;IfModule mod_php5.c&gt;.\r\n        # some parts/addons might only run safe mode on\r\n        php_admin_flag safe_mode Off\r\n        # security just in case\r\n        php_admin_value register_globals    0\r\n        # performance\r\n        php_value magic_quotes_gpc  0\r\n        # performance\r\n        php_value magic_quotes_runtime  0\r\n        #http://www.php.net/manual/en/ini.core.php#ini.allow-call-time-pass-reference\r\n        php_value allow_call_time_pass_reference 0\r\n&lt;/IfModule&gt;' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.5/Installation/Virtual-host-setup/Virtual-host-example by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 16:41:52 GMT -->
+</html>

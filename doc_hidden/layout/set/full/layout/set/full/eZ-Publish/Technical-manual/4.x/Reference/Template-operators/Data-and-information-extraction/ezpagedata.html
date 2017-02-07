@@ -1,0 +1,2230 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-operators/Data-and-information-extraction/ezpagedata by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:36:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                          
+    <title>ezpagedata / Data and information extraction / Template operators / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>ezpagedata</h1>
+</div>
+<h3>Summary</h3>
+Extracts all the page data information.<h3>Usage</h3>
+<pre>ezpagedata( params )</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>params</td>
+        <td>hash</td>
+        <td>Attributes to override.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+An array containing all the page data.<h3>Description</h3>
+<p>This operator extracts information from the page data, and make it available both for content templates and module templates.</p><p>The <i>ezpagedata</i>&nbsp;operator has been introduced by eZ Website Interface and it requires the <i>ezwebin</i> extension to be installed.</p><p>
+It allows to override several attributes by specifying them in the <i>params</i> parameter in the form of an hash.<br />Possible attributes to override are the following:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Attribute</p>
+  </th><th >  <p>Type</p>
+  </th><th >  <p>Default value</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>current_node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>current node id</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>template_look <b>(deprecated)</b></p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>canonical_url</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>show_path</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean | string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>path</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>website_toolbar</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>top_menu</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean | string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>from menu.ini[SelectedMenu]TopMenu</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>left_menu</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean | string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>from menu.ini[SelectedMenu]LeftMenu</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>extra_menu</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean | string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>extra_info</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>extra_menu_node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer | array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>current node id</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>extra_menu_class_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean | array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>infobox</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>extra_menu_subitems</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+</table>
+<h3>Examples</h3>
+<a name="eztoc134910_0_0_1" id="eztoc134910_0_0_1"></a><h4>Example 1</h4><pre class="wordwrap"><span class="line">{def $pageData = ezpagedata()}</span>
+<span class="line">{$pageData|attribute(show)}</span>
+</pre><p>If the requested URL is &quot;/content/view/full/106&quot; (or using URL alias that points to &quot;/content/view/full/106&quot;), the following output will be produced:</p><div class="output"><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Attribute</p>
+  </th><th >  <p>Type</p>
+  </th><th >  <p>Value</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>persistent_variable</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;js_files</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(6)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>main_node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>106</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>show_path</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'path'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>website_toolbar</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>106</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>is_edit</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>page_root_depth</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>page_depth</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>root_node</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>canonical_url</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>canonical_language_url</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>template_look</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentObject]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>54</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;section_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>5</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;owner_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>14</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;contentclass_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>15</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;name</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'Website Interface LS'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;published</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1082016652</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;modified</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1301062376</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;current_version</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;status</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;remote_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'8b8b22fe3c6061ed500fbd2b377b885f'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;language_mask</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;initial_language_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;current</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentObjectVersion]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;versions</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(3)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;author_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;class_name</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'Template look'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;content_class</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentClass]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;contentobject_attributes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(18)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;owner</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentObject]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;related_contentobject_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;related_contentobject_count</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;reverse_related_contentobject_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;reverse_related_contentobject_count</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;linked_contentobject_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;linked_contentobject_count</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;reverse_linked_contentobject_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;reverse_linked_contentobject_count</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;embedded_contentobject_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;embedded_contentobject_count</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;reverse_embedded_contentobject_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;reverse_embedded_contentobject_count</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_read</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_pdf</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_diff</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_create</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_create_class_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(35)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_edit</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_translate</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_remove</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_move</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_move_from</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_view_embed</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;data_map</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(18)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;grouped_data_map</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;main_parent_node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>58</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;assigned_nodes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;parent_nodes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;main_node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>56</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;main_node</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentObjectTreeNode]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;default_language</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'eng-GB'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;content_action_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;class_identifier</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'template_look'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;class_group_id_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;match_ingroup_id_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;current_language</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'eng-GB'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;current_language_object</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentLanguage]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;initial_language</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentLanguage]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;initial_language_code</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'eng-GB'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;available_languages</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;language_codes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;language_js_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'[{&quot;locale&quot;:&quot;eng-GB&quot;,&quot;name&quot;:&quot;English (United Kingdom)&quot;}]'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;languages</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;all_languages</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_edit_languages</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_create_languages</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;always_available</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;allowed_assign_section_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(6)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;allowed_assign_state_id_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;allowed_assign_state_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;state_id_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;state_identifier_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>class_identifier</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'folder'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>top_menu</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'flat_top'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>left_menu</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>''</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>current_menu</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'TopOnly'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>extra_menu</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>extra_menu_node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>106</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>extra_menu_subitems</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>extra_menu_class_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;0</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'infobox'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>path_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(2)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;0</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(4)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;1</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(4)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>path_id_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(2)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;0</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;1</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>106</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>path_normalized</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>' subtree_level_0_node_id_2 subtree_level_1_node_id_106'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>css_classes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'nosidemenu noextrainfo section_id_1 subtree_level_0_node_id_2 subtree_level_1_node_id_106'</p>
+  </td>
+
+</tr>
+
+</table>
+</div><a name="eztoc134910_0_0_2" id="eztoc134910_0_0_2"></a><h4>Example 2</h4><pre class="wordwrap"><span class="line">{def $pageData = ezpagedata(hash('current_node_id',108,'show_path','/my/custom/path','website_toolbar',false(),'left_menu','my_left_menu','top_menu','my_top_menu'))}</span>
+<span class="line">{$pageData|attribute(show)}</span>
+</pre><p>When requesting the URL &quot;/content/view/full/106&quot; (like on example 1) we can see that the override to the attributes 'current_node_id', 'show_path', 'top_menu' and 'left_menu' have been performed successful, as you can see in the following output:</p><div class="output"><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Attribute</p>
+  </th><th >  <p>Type</p>
+  </th><th >  <p>Value</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>persistent_variable</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;js_files</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(6)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>main_node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>106</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>show_path</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>'/my/custom/path'</b></p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>website_toolbar</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>108</b></p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>is_edit</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>page_root_depth</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>page_depth</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>root_node</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>canonical_url</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>canonical_language_url</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>template_look</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentObject]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>54</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;section_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>5</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;owner_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>14</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;contentclass_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>15</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;name</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'Website Interface LS'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;published</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1082016652</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;modified</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1301062376</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;current_version</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;status</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>1</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;remote_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'8b8b22fe3c6061ed500fbd2b377b885f'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;language_mask</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;initial_language_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;current</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentObjectVersion]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;versions</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(3)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;author_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;class_name</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'Template look'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;content_class</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentClass]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;contentobject_attributes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(18)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;owner</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentObject]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;related_contentobject_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;related_contentobject_count</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;reverse_related_contentobject_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;reverse_related_contentobject_count</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;linked_contentobject_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;linked_contentobject_count</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;reverse_linked_contentobject_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;reverse_linked_contentobject_count</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;embedded_contentobject_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;embedded_contentobject_count</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;reverse_embedded_contentobject_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;reverse_embedded_contentobject_count</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_read</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_pdf</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_diff</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_create</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_create_class_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(35)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_edit</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_translate</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_remove</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_move</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_move_from</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_view_embed</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>true</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;data_map</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(18)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;grouped_data_map</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;main_parent_node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>58</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;assigned_nodes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;parent_nodes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;main_node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>56</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;main_node</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentObjectTreeNode]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;default_language</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'eng-GB'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;content_action_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;class_identifier</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'template_look'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;class_group_id_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;match_ingroup_id_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;current_language</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'eng-GB'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;current_language_object</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentLanguage]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;initial_language</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>object[eZContentLanguage]</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Object</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;initial_language_code</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'eng-GB'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;available_languages</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;language_codes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;language_js_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'[{&quot;locale&quot;:&quot;eng-GB&quot;,&quot;name&quot;:&quot;English (United Kingdom)&quot;}]'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;languages</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;all_languages</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_edit_languages</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;can_create_languages</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;always_available</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;allowed_assign_section_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(6)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;allowed_assign_state_id_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;allowed_assign_state_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(0)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;state_id_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;state_identifier_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>class_identifier</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'folder'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>top_menu</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>'my_top_menu'</b></p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>left_menu</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p><b>'my_left_menu'</b></p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>current_menu</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'TopOnly'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>extra_menu</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>boolean</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>false</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>extra_menu_node_id</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>integer</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>108</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>extra_menu_subitems</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>0</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>extra_menu_class_list</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(1)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;0</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'infobox'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>path_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(2)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;0</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(4)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;1</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(4)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>path_id_array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>array</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>Array(2)</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;0</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>2</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>&gt;1</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>106</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>path_normalized</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>' subtree_level_0_node_id_2 subtree_level_1_node_id_106'</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>css_classes</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>string</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>'sidemenu noextrainfo section_id_1 subtree_level_0_node_id_2 subtree_level_1_node_id_106'</p>
+  </td>
+
+</tr>
+
+</table>
+</div>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Template-operators/Data-and-information-extraction/ezpagedata by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:36:21 GMT -->
+</html>

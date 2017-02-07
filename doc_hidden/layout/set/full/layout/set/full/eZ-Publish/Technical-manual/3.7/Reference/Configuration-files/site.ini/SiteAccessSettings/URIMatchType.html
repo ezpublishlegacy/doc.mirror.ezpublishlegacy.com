@@ -1,0 +1,69 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.7/Reference/Configuration-files/site.ini/SiteAccessSettings/URIMatchType by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>URIMatchType / [SiteAccessSettings] / site.ini / Configuration files / Reference / 3.7 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>URIMatchType</h1>
+</div>
+<h3>Summary</h3>
+Configures the URI match access method<h3>Usage</h3>
+<pre class="pfix"> <p>URIMatchType=disabled|map|element|text|regexp</p></pre><h3>Description</h3>
+ <p>URI matching is used to select the siteaccess from the location part of the URL: URL matching can be used in two different modes or be disabled completely. The options you have for this settings are:</p> 
+<ul>
+ <li><div>  <b>disabled</b> - Disables URI matching. If URI matching is present in the <a href="MatchOrder.html" target="_self">MatchOrder</a> setting it will be ignored. </div></li> <li><div>  <b>map</b> - Select the siteaccess to use based on the first element of a given URL. Specify the mapping between the URL element and the siteaccess to use with the URIMatchMapItems setting. </div></li> <li><div>  <b>element</b> - Select the siteaccess to use based on the elements separated by &quot;/&quot; in the location part. If you specify &quot;URIMatchElement=N&quot;, the system will take N parts of the URL (separated by &quot;/&quot;) and replace slashes with underscores in the resulting string. </div></li> <li><div>  <b>text</b> - Match URL using pre- or post- substrings (URIMatchSubtextPre, URIMatchSubtextPost). </div></li> <li><div>  <b>regexp</b> - Works similarly to the element setting but you can specify the delimiter with a regular expression. The settings URIMatchRegExp and URIMatchRegExpItem control how to split the URL and what part to use for the siteaccess. </div></li> 
+</ul>
+<h3>Examples</h3>
+    <a name="eztoc18925_0_0_1" id="eztoc18925_0_0_1"></a><h4>Example 1 (element matching)</h4> <pre class="wordwrap"><span class="line">URIMatchType=element</span>
+<span class="line">URIMatchElement=1</span>
+</pre> <p>With this configuration the second element (the first element is element 0) of the URI will be used as the siteaccess. For example, in the URL &quot;http://www.mysite.com/news/site/admin/content/view/full/32&quot; the siteaccess name will be &quot;news&quot;.</p>       <a name="eztoc18925_0_0_2" id="eztoc18925_0_0_2"></a><h4>Example 2 (element matching)</h4> <pre class="wordwrap"><span class="line">URIMatchType=element</span>
+<span class="line">URIMatchElement=3</span>
+</pre> <p>With this configuration the second element (the first element is element 0) of the URI will be used as the siteaccess. For example, in the URL &quot;http://www.mysite.com/news/site/admin/content/view/full/32&quot; the siteaccess name will be &quot;news_site_admin&quot;.</p>       <a name="eztoc18925_0_0_3" id="eztoc18925_0_0_3"></a><h4>Example 3 (map matching)</h4> <pre class="wordwrap"><span class="line">URIMatchType=map</span>
+<span class="line">URIMatchMapItems[]=myadmin_de;admin_de</span>
+<span class="line">URIMatchMapItems[]=MYADMIN_DE;admin_de</span>
+</pre> <p>This will tell the system to use the &quot;admin_de&quot; siteaccess when the first element of a given URI is 'myadmin_de' or 'MYADMIN_DE'.</p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.7/Reference/Configuration-files/site.ini/SiteAccessSettings/URIMatchType by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 15:04:41 GMT -->
+</html>

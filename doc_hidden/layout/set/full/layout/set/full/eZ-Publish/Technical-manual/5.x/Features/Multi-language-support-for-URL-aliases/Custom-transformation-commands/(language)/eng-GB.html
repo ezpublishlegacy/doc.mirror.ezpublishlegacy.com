@@ -1,0 +1,81 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-language-support-for-URL-aliases/Custom-transformation-commands/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:04:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Custom transformation commands / Multi-language support for URL aliases / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Custom transformation commands</h1>
+</div>
+
+<p>In order to transform the URLs according to specific needs, it is possible to create and use so-called custom commands. The commands can be created as extensions and added to the system using an override of the &quot;transform.ini&quot; configuration file. The following text explains how to create a custom transformation command for URLs.</p><p>Let's say that for some reason, we would like all URLs to be reversed. This can be achieved by creating a custom transformation command.</p><a name="eztoc132683_1" id="eztoc132683_1"></a><h2>1. Creating a new extension</h2><p>A new file must be create and placed inside the directory of an extension. The file must contain a class that has a static method called &quot;executeCommand&quot; with three parameters: &quot;$text&quot;, &quot;$command&quot; and &quot;$charsetName&quot;.</p>
+<ul>
+<li><div> $text - The input text to transform </div></li><li><div> $command - The name of the command to execute, this can be used to keep multiple commands in one function </div></li><li><div> $charsetName - The name of the charset in use for $text, usually not needed </div></li>
+</ul>
+<p>In this example, we will create a &quot;myreverse.php&quot; file under the &quot;extension/myextension/transformation&quot; directory and put the following lines of code into it:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">&nbsp;&nbsp;&nbsp;class MyReverse</span>
+<span class="line">&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function executeCommand( $text, $command, $charsetName )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$text = strrev( $text );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $text;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php  \r\n   class MyReverse\r\n   {\r\n       function executeCommand( $text, $command, $charsetName )\r\n       {\r\n           $text = strrev( $text );\r\n           return $text;\r\n       }\r\n   }\r\n?&gt;' ); return false;" /></p>
+<![endif]--><p>As the code shows, the function will return a reversed version of the inputted text.</p><a name="eztoc132683_2" id="eztoc132683_2"></a><h2>2. Registering a new transformation command in the &quot;transform.ini&quot; file</h2><p>The command must be registered in the &quot;transform.ini&quot; configuration file. To do that, you need to add a new line into the &quot;Commands[]&quot; array located under the &quot;[Extensions]&quot; section. The line must contain the path to the PHP file, a colon (used for separation) and the class name that should be used. The following example demonstrates how this can be done.</p><pre class="wordwrap"><span class="line">[Extensions]</span>
+<span class="line">Commands[]</span>
+<span class="line">Commands[my_reverse]=extension/myextension/transformation/myreverse.php:MyReverse</span>
+</pre><a name="eztoc132683_3" id="eztoc132683_3"></a><h2>3. Adding a new command to the corresponding transformation group</h2><p>The newly created command must be added in the &quot;transform.ini&quot; file to one of the groups that will be used for URL text transformation. In the example below, the custom command &quot;my_reverse&quot; is added to the &quot;urlalias_iri&quot; transformation group.</p><pre class="wordwrap copytoclipboard"><span class="line">[urlalias_iri]</span>
+<span class="line">&nbsp;</span>
+<span class="line">Commands[]</span>
+<span class="line">Commands[]=url_cleanup_iri</span>
+<span class="line">Commands[]=my_reverse</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[urlalias_iri]\r\n\r\nCommands[]\r\nCommands[]=url_cleanup_iri\r\nCommands[]=my_reverse' ); return false;" /></p>
+<![endif]--><p>From now on, newly generated URLs will be reversed because they will be processed by the custom &quot;my_reverse&quot; command that we added to the list of commands to be performed when the &quot;urlalias_iri&quot; transformation method is used.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-language-support-for-URL-aliases/Custom-transformation-commands/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:04:05 GMT -->
+</html>

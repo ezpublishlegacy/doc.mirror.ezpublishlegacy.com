@@ -1,0 +1,75 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/Notifications by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:20:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Notifications / Features / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Notifications</h1>
+</div>
+
+ <p>eZ Publish has a built-in notification system that allows users to be informed about miscellaneous events that occur. It is possible to be notified when objects are updated or published, when workflows are executed and so on.</p> <p>There are two built-in types of notifications:</p>
+<ul>
+ <li><div> Subtree notifications </div></li> <li><div> Collaboration notifications </div></li> 
+</ul>
+ <p> <a name="subtree"></a>
+ </p>  <a name="eztoc62779_1" id="eztoc62779_1"></a><h2>Subtree notifications</h2> <p>It is possible to subscribe for notifications about a subtree. For example, if you have a set of articles located under a folder called &quot;Business&quot;, a user can subscribe for <i>subtree notifications</i> for this folder. The system will then send an E-mail to the user every time changes are made under the &quot;Business&quot; folder. The following changes will trigger a notification:</p>
+<ul>
+ <li><div> When a new node is published within the subtree. </div></li> <li><div> When the contents of an existing node is changed. </div></li> 
+</ul>
+ <p>A user can choose to receive notifications in the form of a single E-mail or as a digest of messages.</p>   <a name="eztoc62779_2" id="eztoc62779_2"></a><h2>Collaboration notifications</h2> <p>The eZ Publish collaboration system allows you to work together with other people so that you can approve/reject any changes they made when it comes to content. For example, you can specify that all the changes made in the <a href="../Concepts-and-basics/Content-management/Sections.html" target="_self">&quot;Standard&quot; section</a> can not be published without your approval. (This can be done by creating a new <a href="../Reference/Workflow-events/Approve.html" target="_self">&quot;Approve&quot; event</a> within a new <a href="../Concepts-and-basics/Workflows.html" target="_self">workflow</a> initiated by the &quot;content-publish-before&quot; trigger function.) If somebody (except you, the administrator) edits content located under the &quot;Standard&quot; section, the system will generate new collaboration messages. For example, if somebody changes article &quot;A&quot;, the system will generate a new collaboration message &quot;article A awaits your approval&quot; for you and another collaboration message &quot;article A awaits approval by editor&quot; for the user who changed it.</p> <p>To view your collaboration messages, click the &quot;My Account&quot; tab in the administration interface and then access the &quot;Collaboration&quot; link on the left. You will be able to review/approve/reject the changes.</p> <p>You can use collaboration notifications to be notified by E-mail about new collaboration messages. The system will send you an E-mail every time a new collaboration message is generated for you. <a name="runcronjobs"></a>
+ </p>   <a name="eztoc62779_3" id="eztoc62779_3"></a><h2>Processing notifications</h2> <p>In the root of the eZ Publish directory there is a file called &quot;runcronjobs.php&quot;. It takes care of processing the workflows, notifications and other tasks that should be processed in the background. If you are going to use the notification system, &quot;runcronjobs.php&quot; must be executed periodically. The most common way to do this is to set up a scheduled job that runs every 30-60 minutes or so. Please refer to the &quot;<a href="Cronjobs/Configuring-cronjobs.html" target="_self">Configuring cronjobs</a>&quot; and &quot;<a href="Cronjobs/Running-cronjobs.html" target="_self">Running cronjobs</a>&quot; sections for more information.</p> <p>In accordance with the instructions specified in the &quot;cronjobs/notification.php&quot; file, &quot;runcronjobs.php&quot; launches the main notification processing script &quot;kernel/classes/notification/eznotificationeventfilter.php&quot;.</p> <p>If you need to launch this script manually, add the &quot;notification/runfilter&quot; notation to the administration interface URL and then click the &quot;Run notification filter&quot; button there (see the next screenshot). </p>
+<div class="object-center">        <img src="../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/features/notifications/runfilter/14863-1-eng-GB/runfilter_doc.png" alt="" />
+ <p>The notification filter interface.</p>
+
+
+
+
+
+
+
+</div><p> Please note that processing notifications may cause a timeout error if there is a huge amount of notification events in the database. Because of this, the &quot;runfilter&quot; view of the <a href="../Reference/Modules/notification.html" target="_self">&quot;notification&quot; module</a> should only be used for testing and debugging.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/Notifications by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 12:20:41 GMT -->
+</html>

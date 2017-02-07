@@ -1,0 +1,94 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Reference/Modules/content/Fetch-functions/bookmarks by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:10:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>bookmarks / Fetch functions / content / Modules / Reference / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>bookmarks</h1>
+</div>
+<h3>Summary</h3>
+Fetches the bookmarks of the current user.<h3>Usage</h3>
+<pre class="wordwrap">
+<span class="line">fetch( 'content', 'bookmarks', hash( [ 'offset', offset, ]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 'limit', &nbsp;limit &nbsp;&nbsp;] ) )</span>
+
+</pre><h3>Parameters</h3><table class="list" cellspacing="0">
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Required</th></tr><tr class="bglight">
+        <td>offset</td>
+        <td>integer</td>
+        <td>Number of bookmarks to skip.</td>
+        <td>No.</td>
+    </tr><tr class="bgdark">
+        <td>limit</td>
+        <td>integer</td>
+        <td>Maximum number of  bookmarks to fetch.</td>
+        <td>No.</td>
+    </tr></table><h3>Returns</h3>
+ <p>An array of <a href="../../../Objects/ezcontentbrowsebookmark.html" target="_self">ezcontentbrowsebookmark</a> objects.</p><h3>Description</h3>
+ <p>Fetches the bookmarks of the current user and returns an array of <a href="../../../Objects/ezcontentbrowsebookmark.html" target="_self">ezcontentbrowsebookmark</a> objects. The resulting array starts with the most recently added bookmark.</p><h3>Examples</h3>
+    <a name="eztoc24345_0_0_1" id="eztoc24345_0_0_1"></a><h4>Example 1</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $bookmarks=fetch( 'content', 'bookmarks' )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $bookmarks as $bookmark}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href={$bookmark.node.url_alias|ezurl}&gt;{$bookmark.name|wash}&lt;/a&gt; &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $bookmarks=fetch( \'content\', \'bookmarks\' )}\r\n\r\n{foreach $bookmarks as $bookmark}\r\n\r\n    &lt;a href={$bookmark.node.url_alias|ezurl}&gt;{$bookmark.name|wash}&lt;/a&gt; &lt;br /&gt;\r\n\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>Outputs all the bookmarks (as links) for the current user.</p>       <a name="eztoc24345_0_0_2" id="eztoc24345_0_0_2"></a><h4>Example 2</h4> <pre class="wordwrap copytoclipboard"><span class="line">{def $bookmarks=fetch( 'content', 'bookmarks',</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash( 'limit', 5 ) )}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{foreach $bookmarks as $bookmark}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href={$bookmark.node.url_alias|ezurl}&gt;{$bookmark.name|wash}&lt;/a&gt; &lt;br /&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{def $bookmarks=fetch( \'content\', \'bookmarks\', \r\n                       hash( \'limit\', 5 ) )}\r\n\r\n{foreach $bookmarks as $bookmark}\r\n\r\n    &lt;a href={$bookmark.node.url_alias|ezurl}&gt;{$bookmark.name|wash}&lt;/a&gt; &lt;br /&gt;\r\n\r\n{/foreach}' ); return false;" /></p>
+<![endif]--> <p>Outputs the five most recently added bookmarks (as links) for the current user.</p>   
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/3.8/Reference/Modules/content/Fetch-functions/bookmarks by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:10:51 GMT -->
+</html>

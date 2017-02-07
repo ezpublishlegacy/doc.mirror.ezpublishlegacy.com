@@ -1,0 +1,174 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Rest-API/Extension-functionality/Steps/Step-3-Extending-the-REST-API/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:16:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Step 3: Extending the REST API / Steps / Extension functionality / Rest API / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Step 3: Extending the REST API</h1>
+</div>
+
+<p>As of now it is possible to extend the eZ Publish REST interface with custom functionality. One REST extension can support many different data providers as well as different versions. The following steps present how to create a new eZ Publish REST extension.</p>
+<ul>
+<li><div>Create an empty folder called “ezxrestapidemo” under the “ &lt;eZ Publish&gt;/extension” location.</div></li><li><div>Inside “ezxrestapidemo” create a setting with the “rest.ini.append.php” file with following content:</div></li>
+</ul>
+<pre class="wordwrap copytoclipboard"><span class="line">&lt;?php /*</span>
+<span class="line">[ApiProvider]</span>
+<span class="line">ProviderClass[ezx]=ezxRestApiProvider</span>
+<span class="line">*/ ?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php /*\r\n[ApiProvider]\r\nProviderClass[ezx]=ezxRestApiProvider\r\n*/ ?&gt;' ); return false;" /></p>
+<![endif]--><p>ProviderClass is an array where the index is a provider token used in the resource URI. For example for URI: “/api/ezx/v1/foo” the registered provider with token “ezx” will be called. You can have many providers registered within one extension.</p>
+<ul>
+<li><div>Next create a folder called “classes” under the “&lt;eZ Publish&gt;/extension/ezxrestapidemo/” location with the “rest_provider.php file”. Edit the newly created PHP file and add the following code:</div></li>
+</ul>
+<pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">&nbsp;&amp;nbsp;</span>
+<span class="line">&nbsp;class ezxRestApiProvider implements ezpRestProviderInterface</span>
+<span class="line">&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Returns registered versioned routes for provider</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return array Associative array. Key is the route name (beware of name collision!). Value is the versioned route.</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public function getRoutes()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return array( 'foo'&amp; &nbsp;&nbsp;&nbsp;=&gt; new ezpRestVersionedRoute( new &nbsp;ezcMvcRailsRoute( '/foo', 'ezxRestController', 'foo' ), 1 ),</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'foobar' =&gt; new ezpRestVersionedRoute( new &nbsp;ezcMvcRailsRoute( '/foo', 'ezxRestController', 'fooBar' ), 2 ) );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Returns associated with provider view controller</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return ezpRestViewController</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public function getViewController()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ezxRestApiViewController();</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\n &amp;nbsp;\r\n class ezxRestApiProvider implements ezpRestProviderInterface\r\n {\r\n    /**\r\n     * Returns registered versioned routes for provider\r\n     *\r\n     * @return array Associative array. Key is the route name (beware of name collision!). Value is the versioned route.\r\n     */\r\n     public function getRoutes()\r\n     {\r\n            return array( \'foo\'&amp;    =&gt; new ezpRestVersionedRoute( new  ezcMvcRailsRoute( \'/foo\', \'ezxRestController\', \'foo\' ), 1 ),\r\n                                 \'foobar\' =&gt; new ezpRestVersionedRoute( new  ezcMvcRailsRoute( \'/foo\', \'ezxRestController\', \'fooBar\' ), 2 ) );\r\n     }\r\n \r\n    /**\r\n     * Returns associated with provider view controller\r\n     *\r\n     * @return ezpRestViewController\r\n     */\r\n     public function getViewController()\r\n     {\r\n             return new ezxRestApiViewController();\r\n     }\r\n }\r\n \r\n ?&gt;' ); return false;" /></p>
+<![endif]--><p>Every REST API provider has to implement the “ezpRestProviderInterface” where “getRoutes()” methods returns registered versioned routes for provider and “getViewController()” returns view controller object which has to implement the “ezpRestViewControllerInterface”.</p>
+<ul>
+<li><div>In the next step create the file “view_controller.php” under the “&lt;eZ Publish&gt;/extension/ezxrestapidemo/classes” folder with following code:</div></li>
+</ul>
+<pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">&nbsp;</span>
+<span class="line">class ezxRestApiViewController implements ezpRestViewControllerInterface</span>
+<span class="line">&nbsp;</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Creates a view required by controller's result</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param ezcMvcRoutingInformation $routeInfo</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param ezcMvcRequest $request</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param ezcMvcResult $result</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return ezcMvcView</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public function loadView( ezcMvcRoutingInformation $routeInfo, ezcMvcRequest $request, ezcMvcResult $result )</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ezpRestJsonView( $request, $result );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\n\r\nclass ezxRestApiViewController implements ezpRestViewControllerInterface\r\n\r\n{\r\n           /**\r\n           * Creates a view required by controller\'s result\r\n           *\r\n           * @param ezcMvcRoutingInformation $routeInfo\r\n           * @param ezcMvcRequest $request\r\n           * @param ezcMvcResult $result\r\n           * @return ezcMvcView\r\n           */\r\n           public function loadView( ezcMvcRoutingInformation $routeInfo, ezcMvcRequest $request, ezcMvcResult $result )\r\n           {\r\n                    return new ezpRestJsonView( $request, $result );\r\n           }\r\n\r\n}\r\n\r\n?&gt;' ); return false;" /></p>
+<![endif]--><p>Every view controller has to implement the “ezpRestViewControllerInterface” where the “loadView()” method returns an instance of the “ezcMvcView” object. In this example we re-use the “ezpRestJsonView” which is a part of &nbsp;the built-in API, if your provider need a custom view, you can return it here.</p>
+<ul>
+<li><div>Registered for REST provider URIs are associated with controllers. This example calls the methods foo() and fooBar() on “ezxRestController”. Create a file called “rest_controller.php” under “&lt;eZ Publish&gt;/extension/ezxrestapidemo/classes” folder and put the following code inside:</div></li>
+</ul>
+<pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">&nbsp;</span>
+<span class="line">class ezxRestController extends ezcMvcController</span>
+<span class="line">&nbsp;</span>
+<span class="line">{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public function doFoo()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$res = new ezcMvcResult();</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$res-&gt;variables['message'] = &quot;This is FOO!&quot;;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $res;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public function doFooBar()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$res = new ezcMvcResult();</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$res-&gt;variables['message'] = &quot;This is FOOBAR!&quot;;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $res;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">}</span>
+<span class="line">&nbsp;</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n&lt;?php\r\n\r\nclass ezxRestController extends ezcMvcController\r\n\r\n{\r\n           public function doFoo()\r\n           {\r\n                 $res = new ezcMvcResult();\r\n           $res-&gt;variables[\'message\'] = &quot;This is FOO!&quot;;\r\n           return $res;\r\n        }\r\n\r\n           public function doFooBar()\r\n           {\r\n                   $res = new ezcMvcResult();\r\n            $res-&gt;variables[\'message\'] = &quot;This is FOOBAR!&quot;;\r\n            return $res;\r\n        }\r\n\r\n}\r\n\r\n?&gt;' ); return false;" /></p>
+<![endif]--><p>Notice the controller methods naming convention. All methods have to be prefixed with “do” word. This is a “ezcMvcController” requirement.</p>
+<ul>
+<li><div>Enable “ezxrestapidemo” by adding the following to “ActiveExtensions” list in the “settings/override/site.ini.append.php”</div></li>
+</ul>
+<pre class="wordwrap copytoclipboard"><span class="line">[ExtensionSettings]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;[...]</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;ActiveExtensions[]=oauth</span>
+<span class="line">ActiveExtensions[]=rest</span>
+<span class="line">ActiveExtensions[]=ezprestapiprovider</span>
+<span class="line">ActiveExtensions[]=ezxrestapidemo</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '\r\n[ExtensionSettings]\r\n    [...]\r\n    ActiveExtensions[]=oauth\r\nActiveExtensions[]=rest\r\nActiveExtensions[]=ezprestapiprovider\r\nActiveExtensions[]=ezxrestapidemo\r\n' ); return false;" /></p>
+<![endif]--><p>Update the autoload array with a following command from the eZ Publish root folder:</p><pre class="wordwrap"><span class="line">php bin/php/ezpgenerateautoloads.php -e -p</span>
+</pre>
+<ul>
+<li><div>If you have followed all steps carefully then you should be ready to test your new REST API provider by calling</div></li>
+</ul>
+<p>
+&nbsp;&nbsp;&nbsp; <a href="http://www.example.com/api/ezx/v1/foo" target="_self">www.example.com/api/ezx/v1/foo</a> <br />
+&nbsp;&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; A simple JSON response should look like:</p><pre class="wordwrap"><span class="line">{&quot;message&quot;:&quot;This is FOO!&quot;}</span>
+</pre><p>&nbsp;&nbsp;&nbsp; For the second URI <a href="http://www.example.com/api/ezx/v2/foo" target="_self">www.example.com/api/ezx/v2/foo</a> output should be following:</p><pre class="wordwrap"><span class="line">{&quot;message&quot;:&quot;This is FOOBAR!&quot;}</span>
+</pre>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Rest-API/Extension-functionality/Steps/Step-3-Extending-the-REST-API/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 19:16:40 GMT -->
+</html>

@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Datatypes/Multi-option2 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:38:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Multi-option2 / Datatypes / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Multi-option2</h1>
+</div>
+
+<h3>Summary</h3>
+Allows option selections (supports enabling/disabling of options, images, nested option sets and dependencies). [Webshop]
+<h3>Properties</h3>
+<table class="renderedtable" cellspacing="0">
+<tr><th>Name</th><th>Internal name</th><th>Searchable</th><th>Information collector</th></tr>
+<tr>
+    <td>Multi-option2</td>
+    <td>ezmultioption2</td>
+    <td>Yes.</td>
+    <td>No.</td>
+</tr>
+</table>
+
+<h3>Description</h3>
+ <p> <b>Note: </b>&quot;This datatype is a replacement for the deprecated &quot;Multi-option&quot; datatype. Refer to the <a href="../../../../Upgrading/Upgrading-to-3.html" target="_self">3.10 upgrading manuals</a> for information about how to convert the data.</p> <p>This datatype makes it possible to create multiple and distinctive groups of multi-options for each content object. The multi-options can be nested (there is a limit, see below). For each option, you can specify an additional price, an image, whether the option should be the default selection and if it should be possible to select it (sometimes you wish to force the selection of a set of options without providing a default selection for the user; in that case, the first option can be set to something like &quot;Make a choice&quot;). In addition, this datatype makes it possible to set up rules for allowing/disallowing certain combinations of options. </p> <p>All configuration is done at the object level. This provides great flexibility. Every object using the &quot;Multi-option2&quot; datatype can be different since there is no class-level configuration to be followed. In other words, if you need to represent different types of products, you can just create a simple and generic &quot;Product&quot; class that uses this datatype. The products (objects) themselves can be of completely different types with different traits (options). For example, you can create an object representing a computer with different options (memory, processor, etc.). At the same time, you can create another object that represents a couch; again with different options (color, finish, size, softness, etc.) and so on. All options, additional prices, rules / dependencies and so on can be defined at the object level. </p> <p>The capabilities and practical usage of this datatype will be explained using an example of cars being sold through the webshop. Note that there will only be one car object. However, the options, rules and so on will make it possible to sell different versions (custom configurations) of the product. The price of the car will vary depending on the selected options. Note that some options will be default while others must be selected (the user will not be allowed to continue until a selection is made). In addition, some combination of options will not be allowed. Note that this particular feature requires JavaScript support in the browser because the validation will be done on-the-fly while the user is tweaking the options. However, there is a fallback mechanism for non-JavaScript clients. It will take care of the validation when the product is added to the basket. In this case, the product will not be added to the basket as long as an invalid set of selections is provided.</p> <p>The product (car) in this example will have three different traits: body, color and seats. We will use three multi-options called &quot;Body&quot;, &quot;Color&quot; and &quot;Seats&quot; to represent the possible combinations/variations. </p> <p>The following table shows the available options for this example.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Body</p> 
+  </th> <th >   <p>Color</p> 
+  </th> <th >   <p>Seats</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Sedan </div></li> <li><div> Combi </div></li> <li><div> Hatchback </div></li> 
+</ul>
+ 
+  </td>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Black </div></li> <li><div> Red </div></li> 
+</ul>
+ 
+  </td>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Cloth </div></li> <li><div> Leather </div></li> 
+</ul>
+ 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>Each option can be assigned a short text and an additional price. It is also possible to add images for options. In the example above, images can be used to demonstrate the colors that the vehicle is available in and/or show how the different bodies look like. An option can be disabled. Disabling an option will make it non-selectable when the object is viewed. For each multi-option, it is possible to specify a default selection. If a disabled option is chosen as the default selection, users will be forced to select one of the enabled options instead. The following table shows how the default and disabled options are set for the example described above.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Body</p> 
+  </th> <th >   <p>Color</p> 
+  </th> <th >   <p>Seats</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Sedan (default) </div></li> <li><div> Combi </div></li> <li><div> Hatchback </div></li> 
+</ul>
+ 
+  </td>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Black </div></li> <li><div> Red (default) </div></li> 
+</ul>
+ 
+  </td>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Make your choice (default, disabled) </div></li> <li><div> Cloth </div></li> <li><div> Leather </div></li> 
+</ul>
+ 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>As the table shows, the default choice for body style is &quot;Sedan&quot;, the default color is red. The &quot;Seats&quot; multi-option contains a new option called &quot;Make your choice&quot;, which will be selected by default. Since this option is disabled, the user will have to select either &quot;Cloth&quot; or &quot;Leather&quot; in order to buy a car (&quot;Make your choice&quot; will be treated as an invalid selection).</p> <p>This datatype supports hierarchical organization of the multi-options for each content object. This means that it is possible to create new multi-options beneath existing ones, thus allowing the site administrator to build complex multi-level structures. In the car example, two new multi-options called &quot;Bumpers&quot; and &quot;Mirrors&quot; added beneath the &quot;Color&quot; multi-option could represent the available colors of bumpers and mirrors (the &quot;Color&quot; multi-option represents available body colors). The following table shows the resulting two-level structure.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th >   <p>Body</p> 
+  </th> <th  colspan="2">   <p>Color</p> 
+  </th> <th >   <p>Seats</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Sedan </div></li> <li><div> Combi </div></li> <li><div> Hatchback </div></li> 
+</ul>
+ 
+  </td>
+ <td colspan="2" valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Black </div></li> <li><div> Red </div></li> 
+</ul>
+ 
+  </td>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div>  <i>Make your choice</i>  </div></li> <li><div> Cloth </div></li> <li><div> Leather </div></li> 
+</ul>
+ 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ <th >   <p>Bumpers</p> 
+  </th> <th >   <p>Mirrors</p> 
+  </th> <td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Same as body </div></li> <li><div> Non-painted </div></li> 
+</ul>
+ 
+  </td>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Silver </div></li> <li><div> Same as body </div></li> <li><div> Non-painted </div></li> 
+</ul>
+ 
+  </td>
+ <td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>It is possible to specify dependency rules for options located in nested groups. Let's say that for example red cars can not have their bumpers painted in the same color as the body. This situation can be described using the following table where each column corresponds to one of the options of the outer group (&quot;Color&quot;), while the options of the nested group (&quot;Bumpers&quot;) are represented by the rows.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th  rowspan="2">   <p>Bumpers</p> 
+  </th> <th  colspan="2">   <p>Color of the body</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Black</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Red</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Same as body</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Available </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Not available</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Non-painted</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Available </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Available </p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>In a similar way, the following table demonstrates the dependency rules between the &quot;Color&quot; and &quot;Mirrors&quot; groups of options.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th  rowspan="2">   <p>Mirrors</p> 
+  </th> <th  colspan="2">   <p>Color of the body</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Black</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Red</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Silver</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Not available </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Available </p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Same as body</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Available </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Available </p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>Non-painted</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Available </p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>Not available </p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>As the table shows, silver mirrors are not available for black cars and red cars can not have non-painted mirrors. If the dependency rules are specified as shown in the tables above, the system will make the specified options of the inner groups disabled depending on the options that are selected in the outer group. This is achieved by making use of JavaScript in the resulting HTML and thus the client browser must support JavaScript for it to work. If JavaScript is not supported, the interface will allow invalid selections while the visitor/customer plays around with the different options. However, the product will not be added to the basket as long as an invalid set of selections is provided. As previously mentioned, the combination of options will be validated when the user attempts to add the object to the shopping basket.</p> <p>This datatype supports grouping of multi-options. A multi-option located at the top level of the structure always belongs to a group. Multi-options located beneath it (second level, third level and so on) will be considered to be in the same group. The following table shows the situation with two groups called &quot;Exterior&quot; and &quot;Interior&quot;.</p> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <th  colspan="3">   <p>EXTERIOR</p> 
+  </th> <th >   <p>INTERIOR</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <th >   <p>Body</p> 
+  </th> <th  colspan="2">   <p>Color</p> 
+  </th> <th >   <p>Seats</p> 
+  </th> 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Sedan </div></li> <li><div> Combi </div></li> <li><div> Hatchback </div></li> 
+</ul>
+ 
+  </td>
+ <td colspan="2" valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Black </div></li> <li><div> Red </div></li> 
+</ul>
+ 
+  </td>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div>  <i>Make your choice</i>  </div></li> <li><div> Cloth </div></li> <li><div> Leather </div></li> 
+</ul>
+ 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ <th >   <p>Bumpers</p> 
+  </th> <th >   <p>Mirrors</p> 
+  </th> <td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Same as body </div></li> <li><div> Non-painted </div></li> 
+</ul>
+ 
+  </td>
+ <td valign="top" style="vertical-align: top">   
+<ul>
+ <li><div> Silver </div></li> <li><div> Same as body </div></li> <li><div> Non-painted </div></li> 
+</ul>
+ 
+  </td>
+ <td valign="top" style="vertical-align: top">  &nbsp;
+  </td>
+ 
+</tr>
+ 
+</table>
+ <p>In the example above, while the &quot;Body&quot; and &quot;Color&quot; multi-options belong to the &quot;Exterior&quot; group, the &quot;Seats&quot; multi-option belongs to another group called &quot;Interior&quot;. In other words, the multi-options located at the top level are grouped. The &quot;Bumpers&quot; and &quot;Mirrors&quot; multi-options located at the second level belong to the same group as &quot;Color&quot;.</p> <p>Note that both grouping and nesting of multi-options are defined at the time of creation. It is not possible to move an existing multi-option to another group or place it beneath a different multi-option. This is why the multi-level structure must be carefully thought out beforehand. It is not recommended to create structures containing more than ten levels. The maximum number of levels is limited to 15. Refer to the source code if you need to change this limitation.</p> <p>Removal of a multi-option will also remove all its sub items (multi-options located beneath it). By removing all multi-options that belong to a group, you can remove the the group itself. Note that this is the only way of removing a group. </p> <p>The following screenshot shows the class attribute edit interface for this datatype.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/reference/datatypes/class_attribute_edit_interface_for_the_multi_op/83780-6-eng-GB/class_attribute_edit_interface_for_the_multi_option2_datatype_doc.png" alt="Class attribute edit interface for the &quot;Multi-option2&quot; datatype." />
+ <p>Class attribute edit interface for the &quot;Multi-option2&quot; datatype.</p>
+
+
+
+
+
+
+
+</div>    <a name="eztoc87455_0_0_1" id="eztoc87455_0_0_1"></a><h4>Object attribute edit interface</h4> <p>The following screenshot shows the object attribute edit interface for this datatype.</p> 
+<div class="object-center linked">            <a href="../../../../../layout/set/full/eZ-Publish/Technical-manual/4.x/Images/Reference/Datatypes/Object-attribute-edit-interface-for-the-Multi-option2-datatype.html" target="_self"><img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/reference/datatypes/object_attribute_edit_interface_for_the_multi_o/83786-1-eng-GB/object_attribute_edit_interface_for_the_multi_option2_datatype_doc.png" alt="Object attribute edit interface for the &quot;Multi-option2&quot; datatype." /></a>
+ <p>Object attribute edit interface for the &quot;Multi-option2&quot; datatype.</p>
+
+
+
+
+
+
+
+</div> <p>As you can see from the screenshot above, options are represented as lines in the table (one table for each multi-option). The &quot;Option&quot; field contains the name of the option. The value specified in the &quot;Additional price&quot; column will be added to the product price in case the corresponding option is selected. The &quot;Image&quot; column can be used to add images to options. When viewing a product, users will see a thumbnail/icon that links to the original image. In this case, the system will display options as a list with radio buttons (if no images are added, the options are shown using a drop-down list). Note that it is possible to add other types of related objects instead of images, but the default templates are for images only.</p> <p>While the &quot;Def&quot; column with radio buttons can be used to specify the default selection, the &quot;Dis&quot; column contains checkboxes for disabling the options. The &quot;Add option&quot; button can be used to add a new empty line to the table. To remove one or more options, select them using the checkboxes located in the first unnamed column and click the &quot;Remove selected&quot; button. </p> <p>To add a new multi-option beneath an existing one, click the &quot;Add multioption sub level&quot; button. Note that this button will not be shown for multi-options that already have sub items (multi-options located beneath them). In this case, the system will show a list of the sub items with checkboxes on the left side plus two new buttons called &quot;Remove multioption&quot; and &quot;Add multioption&quot; below. These buttons are present at each level of the structure, allowing you to add and remove multi-options located at the different levels. Note that removing a multi-option will also remove all its sub items.</p>  <a name="eztoc87455_0_0_1_1" id="eztoc87455_0_0_1_1"></a><h5>Adding a new group of multi-options</h5> <p>The &quot;Add group&quot; button makes it possible to add a new group of multi-options. The following screenshot shows a part of the object attribute edit interface that corresponds to a newly created empty group of multi-options.</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/reference/datatypes/a_part_of_the_object_attribute_edit_interface_f/83789-4-eng-GB/a_part_of_the_object_attribute_edit_interface_for_the_multi_option2_datatype_doc" alt="A part of the object attribute edit interface for the &quot;Multi-option2&quot; datatype." />
+ <p>A part of the object attribute edit interface for the &quot;Multi-option2&quot; datatype.</p>
+
+
+
+
+
+
+
+</div> <p>As the screenshot shows, a newly created group consists of one multi-option containing only one option (all the fields are empty). At this stage, you should enter the name of the group and the name of multi-option, plus create the necessary options. Nested multi-options can be created using the &quot;Add multioption sub level&quot; button. </p> <p>The &quot;Add multioption&quot; button allows you to add new multi-options to the top level within the group. The system will show all multi-options that belong to the group with checkboxes on the left hand side. The &quot;Remove multioption&quot; button can be used to remove selected multi-options. The group itself is automatically removed when all multi-options that belong to it are removed.</p>   <a name="eztoc87455_0_0_1_2" id="eztoc87455_0_0_1_2"></a><h5>Adding dependency rules</h5> <p>The &quot;Rules&quot; button located at the bottom makes it possible to specify dependency rules for nested multi-options. When this button is clicked, the object attribute edit interface will change. Instead of showing an interface for editing the options, the system will show an interface that can be used to define the rules. Note that this behavior isn't common when it comes to other datatypes. The following screenshot shows what the object attribute edit interface will change into when the &quot;Rules&quot; button is clicked. </p> 
+<div class="object-center linked">            <a href="../../../../../layout/set/full/eZ-Publish/Technical-manual/4.x/Images/Reference/Datatypes/Dependency-rules-in-the-object-attribute-edit-interface-for-the-Multi-option" target="_self"><img src="../../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/reference/datatypes/dependency_rules_in_the_object_attribute_edit_i/83792-1-eng-GB/dependency_rules_in_the_object_attribute_edit_interface_for_the_multi_option2_dat" alt="Dependency rules in the object attribute edit interface for the &quot;Multi-option2&quot; datatype." /></a>
+ <p>Dependency rules in the object attribute edit interface for the &quot;Multi-option2&quot; datatype.</p>
+
+
+
+
+
+
+
+</div> <p>As the screenshot shows, every nested multi-option (&quot;Bumpers&quot; and &quot;Mirrors&quot;) has a table with checkboxes that make it possible to specify which options are available for each possible value of the parent multi-option (&quot;Color&quot;). By default, all checkboxes are selected, meaning that all options are available. The screenshot above shows a situation which follows the rules that were discussed earlier. In other words, the following limitations are introduced: </p> 
+<ul>
+ <li><div> Red cars can not have bumpers painted in the same color as the body. </div></li> <li><div> Black cars can not have silver mirrors. </div></li> <li><div> Red cars can not have non-painted mirrors. </div></li> 
+</ul>
+ <p>The &quot;Reset rules&quot; button located at the bottom of the interface makes it possible to restore the default configuration (allowing all possible combinations). Note that pressing this button will wipe out the custom rules. Clicking the &quot;Options&quot; button will bring you back to the interface for editing options. In other words, the &quot;Rules&quot; and the &quot;Options&quot; buttons make it possible to switch between the two object edit interfaces of this datatype. </p>        <a name="eztoc87455_0_0_2" id="eztoc87455_0_0_2"></a><h4>Raw output</h4> <p>The &quot;.content&quot; of an <a href="../Objects/ezcontentobjectattribute.html" target="_self">ezcontentobjectattribute</a> object using this datatype returns an <a href="../Objects/ezmultioption2.html" target="_self">ezmultioption2</a> object. </p>   
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Datatypes/Multi-option2 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:38:49 GMT -->
+</html>

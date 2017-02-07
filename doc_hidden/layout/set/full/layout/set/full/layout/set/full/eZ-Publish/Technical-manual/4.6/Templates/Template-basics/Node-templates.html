@@ -1,0 +1,75 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.6/Templates/Template-basics/Node-templates by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:14:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Node templates / Template basics / Templates / 4.6 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Node templates</h1>
+</div>
+
+<p>Whenever eZ Publish is requested to output information about a node (either by a system URL or a virtual URL), it executes the <a href="../../../4.x/Reference/Modules/content/Views/view.html" target="_self">&quot;view&quot;</a> view of the <a href="../../../4.x/Reference/Modules/content.html" target="_self">&quot;content&quot;</a> module. If a system URL is used, both the desired view mode and the target node must be specified in the URL. If a virtual URL is used, eZ Publish will automatically know which node that should be accessed by looking up the corresponding system URL in the internal URL table. When a virtual URL is used, the system will always use the full view mode.</p><p>The templates for the different view modes must be placed inside the &quot;/templates/node/view/&quot; directory of a design. If the requested file is not found within the main design of the siteaccess, the system will search for it in the additional designs and the standard design. Please refer to the documentation of the <a href="../../Concepts-and-basics/Designs/Design-combinations.html" target="_self">automatic fallback system</a> for more information about this feature. The &quot;/templates/node/view&quot; directory of the standard design contains templates for different view modes. A basic custom design typically contains a page layout and a full view template. The following illustration shows the locations of these templates in a custom design called &quot;example&quot;.</p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/templates/filesystem_pagelayout_full_view_template_in_example_design/6263-2-eng-GB/filesystem_pagelayout_full_view_template_in_example_design_doc.png" alt="Location of pagelayout and full view template in example design." />
+ <p>Location of pagelayout and full view template in example design.</p>
+
+
+
+
+
+
+
+</div><p>When a node is requested (and there are no template override rules for node templates), eZ Publish will generate a page that is built up of the following templates:</p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/4_0/images/templates/pagelayout_node_view_full_template/6273-3-eng-GB/pagelayout_node_view_full_template_doc.png" alt="Pagelayout + node view full template." />
+ <p>Pagelayout + node view full template.</p>
+
+
+
+
+
+
+
+</div><a name="eztoc125556_1" id="eztoc125556_1"></a><h2>Custom node templates</h2><p>A typical eZ Publish site always makes use of custom node templates. The main reason for this is because there is almost always a need for displaying the various types of nodes in different ways. For example, information pages need to look different than news articles; the welcome page has to be formatted in a special way, and so on. Unlike custom system templates (which are mostly just modified copies of the standard templates placed in a custom design), custom node templates are created as override templates. The override templates are triggered by the template override system. This system offers a flexible mechanism that can be programmed to use different templates based on various conditions. For example, it can be programmed to use a template called &quot;article.tpl&quot; when the system is requested to show the contents of nodes referencing article objects and at the same time show &quot;special_article.tpl&quot; when a specific article is accessed. Note that override templates (in this case &quot;article.tpl&quot; and &quot;special_article.tpl&quot;) must be placed in the &quot;override/templates&quot; directory of the main design used by the siteaccess. Please refer to the documentation of the <a href="../The-template-override-system.html" target="_self">template override system</a> for more information about how this mechanism actually works and how it can be used to trigger override templates. </p><a name="eztoc125556_2" id="eztoc125556_2"></a><h2>The $node variable</h2><p>Whenever the system makes use of a node template (regardless of the view mode, the target node and if the template is an override or not), a variable called $node will be available in the template that is used. This variable is automatically set by the system and it contains an <a href="../../../4.x/Reference/Objects/ezcontentobjecttreenode.html" target="_self">ezcontentobjecttreenode</a> object that represents the requested node. This variable allows the extraction and display of various information about the node and the object that it encapsulates. Please refer to <a href="../Information-extraction/Outputting-node-and-object-data.html" target="_self">&quot;Outputting node and object data&quot;</a> for information about how to display node/object data.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/4.6/Templates/Template-basics/Node-templates by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:14:25 GMT -->
+</html>

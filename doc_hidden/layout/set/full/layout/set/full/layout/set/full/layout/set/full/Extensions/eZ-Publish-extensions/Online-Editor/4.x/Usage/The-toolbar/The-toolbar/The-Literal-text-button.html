@@ -1,0 +1,119 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/Online-Editor/4.x/Usage/The-toolbar/The-toolbar/The-Literal-text-button by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:59:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>The &quot;Literal text&quot; button / The toolbar / The toolbar / Usage / 4.x / Online Editor / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>The &quot;Literal text&quot; button</h1>
+</div>
+
+ <p>The &quot;Literal text&quot; button is located in the &quot;Special Tools&quot; area of the OE toolbar, it looks like this:</p> 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../../var/doc/storage/images/extensions/online_editor/4_x/images/oe_toolbar_literal_text/13658-3-eng-GB/oe_toolbar_literal_text_doc.png" alt="The &quot;Literal text&quot; button" />
+ <p>The &quot;Literal text&quot; button</p>
+
+
+
+
+
+
+
+</div> <p>This button can be used to create an area into which you may input unformatted text, for example program source code, HTML code, XML content, etc. Everything that is inside a literal block will be rendered in the same way (character by character) when the final output (the XHTML code) is generated. The system will use the &quot;pre&quot; tag when rendering literal blocks, this behavior is determined by the &quot;/design/standard/templates/content/datatype/view/ezxmltags/literal.tpl&quot; template.</p> <p> <a name="insert_literal"></a>
+ </p>  <a name="eztoc13675_1" id="eztoc13675_1"></a><h2>Inserting literal text</h2> 
+<ol>
+ <li><div> Position the cursor at a location where you for example want to have a chunk of source code. </div></li> <li><div> Click the &quot;Literal text&quot; button. You can also right click at the target location and choose the &quot;Insert literal text&quot; from the context menu. A <a href="../../Modal-dialogs.html" target="_self">modal dialog</a> will appear (the screenshot is given below). 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../../../../var/doc/storage/images/extensions/online_editor/4_x/images/oe_insert_literal1/13661-1-eng-GB/oe_insert_literal1_doc.png" alt="" />
+ <p>The &quot;Insert literal text&quot; dialog.</p>
+
+
+
+
+
+
+
+</div>  </div></li> <li><div> 
+If necessary, choose a class from the dropdown list. Click the &quot;OK&quot; button.<br />A box with purple background will appear in the OE text area. </div></li> <li><div> Type in the text inside the purple box as shown in the screenshot below. 
+<div class="object-center linked">            <a href="../../../../../../../layout/set/full/Extensions/eZ-Publish-extensions/Online-Editor/4.x/Images/oe_insert_literal2.html" target="_self"><img src="../../../../../../../../../../../../../../../../../../../../var/doc/storage/images/extensions/online_editor/4_x/images/oe_insert_literal2/13664-1-eng-GB/oe_insert_literal2_doc.png" alt="" /></a>
+ <p>Online Editor: the content of the purple box will be displayed as literal text.</p>
+
+
+
+
+
+
+
+</div>  </div></li> 
+</ol>
+   <a name="eztoc13675_2" id="eztoc13675_2"></a><h2>Changing the class for a literal box</h2> 
+<ol>
+ <li><div> Right click on the table border and select &quot;Properties&quot; from the context menu: 
+<div class="object-center linked">            <a href="../../../../../../../layout/set/full/Extensions/eZ-Publish-extensions/Online-Editor/4.x/Images/oe_insert_literal3.html" target="_self"><img src="../../../../../../../../../../../../../../../../../../../../var/doc/storage/images/extensions/online_editor/4_x/images/oe_insert_literal3/13667-1-eng-GB/oe_insert_literal3_doc.png" alt="" /></a>
+ <p>Online Editor: accessing the literal text properties.</p>
+
+
+
+
+
+
+
+</div>
+ <br />You will see a modal dialog (as described in &quot;<a href="#insert_literal" target="_self">Inserting a literal text</a>). </div></li> <li><div> Select the desired class from the dropdown list and click the &quot;OK&quot; button. </div></li> 
+</ol>
+   <a name="eztoc13675_3" id="eztoc13675_3"></a><h2>Removing literal text</h2> <p>Literal text is visualized using a purple box. When using a Mozilla based browser, you can simply click somewhere inside the purple area, you will see two &quot;x&quot; elements near the borders. Click on one of the &quot;x&quot; elements to remove the table. When using Internet Explorer, you can simply right click on the purple box and select &quot;Delete&quot; from the context menu. <a name="html_classification"></a>
+ </p>   <a name="eztoc13675_4" id="eztoc13675_4"></a><h2>Creating a simple HTML editor using the literal feature</h2> <p>In this example we will create a special literal box that will function as a simple HTML editor. In other words, the solution will allow you to use and publish HTML directly using the Online Editor. This will be done using a custom class and a modified version of the template that is used to render literal text.</p> 
+<ol>
+ <li><div> Add a class called &quot;html&quot; using the &quot;AvailableClasses[]&quot; configuration array within an override for &quot;content.ini&quot;. </div></li> <li><div> Create a custom/replacement version of the &quot;literal.tpl&quot; template. Simply copy the standard template and place it in the &quot;templates/content/datatype/view/ezxmltags/&quot; directory within your custom design. The system will use this template when rendering literal text. </div></li> <li><div> 
+If the &quot;html&quot; class is used, the literal text should be rendered directly as HTML code. If not, it should be rendered using the &quot;pre&quot; tag. You can easily achieve this functionality by replacing the original template code in the custom &quot;literal.tpl&quot; file with the following:<br /> <pre class="wordwrap copytoclipboard"><span class="line">{if ne( $classification, 'html' )}</span>
+<span class="line">&lt;pre{if ne( $classification|trim, '' )} class=&quot;{$classification|wash}&quot;{/if}&gt;{$content|wash( xhtml )}&lt;/pre&gt;</span>
+<span class="line">{else}</span>
+<span class="line">{$content}</span>
+<span class="line">{/if}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{if ne( $classification, \'html\' )}\r\n&lt;pre{if ne( $classification|trim, \'\' )} class=&quot;{$classification|wash}&quot;{/if}&gt;{$content|wash( xhtml )}&lt;/pre&gt;\r\n{else}\r\n{$content}\r\n{/if}' ); return false;" /></p>
+<![endif]-->  </div></li> <li><div> Clear the caches and test the functionality by writing HTML into an &quot;html&quot;-classified literal box. When the page is rendered, the code that you typed into the &quot;html&quot;-classified literal box should be output as HTML. Literal content that is not using the &quot;html&quot; class will be washed and encapsulated by &quot;pre&quot; tags. </div></li> 
+</ol>
+ <p>Please note that in eZ Publish 3.8.4 and later versions this type of classification will be disabled by default since allowing editors to insert HTML and Javascript code directly into XML blocks is not safe. It is not recommended to enable the &quot;html&quot; class unless you really trust all users who have privileges to edit objects containing XML blocks.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/Online-Editor/4.x/Usage/The-toolbar/The-toolbar/The-Literal-text-button by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:59:26 GMT -->
+</html>

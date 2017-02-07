@@ -1,0 +1,110 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Features/Cronjobs/Configuring-cronjobs by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:46:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Configuring cronjobs / Cronjobs / Features / 3.8 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Configuring cronjobs</h1>
+</div>
+
+ <p>You can configure which cronjob that will be enabled (can be executed by the &quot;runcronjobs.php&quot; script) from within an override for the &quot;settings/cronjob.ini&quot; configuration file. The following list reveals which settings that can be specified in the &quot;[CronjobSettings]&quot; section of this file.</p> 
+<ul>
+ <li><div> The <a href="../../Reference/Configuration-files/cronjob.ini/CronjobSettings/ScriptDirectories.html" target="_self">ScriptDirectories</a> configuration array specifies the directories where eZ Publish will search for built-in cronjob scripts (the &quot;cronjobs&quot; directory is used by default). </div></li> <li><div> The <a href="../../Reference/Configuration-files/cronjob.ini/CronjobSettings/ExtensionDirectories.html" target="_self">ExtensionDirectories</a> directive specifies the extension directories where eZ Publish will search for additional/custom cronjob scripts. By default, eZ Publish will search in the &quot;cronjobs&quot; subdirectory inside your extension(s). </div></li> <li><div> The <a href="../../Reference/Configuration-files/cronjob.ini/CronjobSettings/Scripts.html" target="_self">Scripts</a> array contains a list of cronjob scripts that will be run when the main &quot;runcronjobs.php&quot; script is executed without specifying the <a href="Running-cronjobs.html#group_of_tasks" target="_self">&quot;group_of_tasks&quot; option</a>. The tasks specified in this configuration array is called the <i>main set of cronjobs</i>. </div></li> 
+</ul>
+  <a name="eztoc34552_1" id="eztoc34552_1"></a><h2>Cronjob parts</h2> <p>Some cronjobs must be executed more frequently than others. It is possible to configure <i>additional sets of cronjobs</i> by adding specific sections (cronjob parts) to an override for &quot;cronjob.ini&quot; (see example 2).</p> <p>The next examples demonstrate how the cronjobs can be configured.</p>  <a name="default" /><a name="eztoc34552_1_1" id="eztoc34552_1_1"></a><h3>Example 1 (default settings)</h3> <p>The following settings are specified in the &quot;[CronjobSettings]&quot; section of &quot;cronjob.ini&quot; by default:</p> <pre class="wordwrap copytoclipboard"><span class="line">[CronjobSettings]</span>
+<span class="line">ScriptDirectories[]=cronjobs</span>
+<span class="line">Scripts[]=workflow.php</span>
+<span class="line">Scripts[]=notification.php</span>
+<span class="line">Scripts[]=linkcheck.php</span>
+<span class="line">Scripts[]=unpublish.php</span>
+<span class="line">Scripts[]=rssimport.php</span>
+<span class="line">Scripts[]=indexcontent.php</span>
+<span class="line">Scripts[]=hide.php</span>
+<span class="line">Scripts[]=subtreeexpirycleanup.php</span>
+<span class="line">Scripts[]=basket_cleanup.php</span>
+<span class="line">Scripts[]=internal_drafts_cleanup.php</span>
+<span class="line">ExtensionDirectories[]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[CronjobSettings]\r\nScriptDirectories[]=cronjobs\r\nScripts[]=workflow.php\r\nScripts[]=notification.php\r\nScripts[]=linkcheck.php\r\nScripts[]=unpublish.php\r\nScripts[]=rssimport.php\r\nScripts[]=indexcontent.php\r\nScripts[]=hide.php\r\nScripts[]=subtreeexpirycleanup.php\r\nScripts[]=basket_cleanup.php\r\nScripts[]=internal_drafts_cleanup.php\r\nExtensionDirectories[]' ); return false;" /></p>
+<![endif]--> <p>This means that the main set of cronjobs contains the following ten tasks:</p> 
+<ul>
+ <li><div> workflow.php </div></li> <li><div> notification.php </div></li> <li><div> linkcheck.php </div></li> <li><div> unpublish.php </div></li> <li><div> rssimport.php </div></li> <li><div> indexcontent.php </div></li> <li><div> hide.php </div></li> <li><div> subtreeexpirycleanup.php </div></li> <li><div> basket_cleanup.php </div></li> <li><div> internal_drafts_cleanup.php </div></li> 
+</ul>
+ <p>These scripts will be run each time the &quot;runcronjobs.php&quot; script is executed without the &quot;group_of_tasks&quot; option. The system will expect these scripts to be located in the &quot;cronjobs&quot; directory.</p>   <a name="eztoc34552_1_2" id="eztoc34552_1_2"></a><h3>Example 2</h3> <p>To be able to run the cronjobs separately, you can add the following settings to the &quot;cronjob.ini.append.php&quot; file located in the &quot;settings/siteaccess/example&quot; directory (replace &quot;example&quot; by the actual name of the siteaccess):</p> <pre class="wordwrap copytoclipboard"><span class="line">[CronjobSettings]</span>
+<span class="line">Scripts[]=hide.php</span>
+<span class="line">Scripts[]=indexcontent.php</span>
+<span class="line">Scripts[]=ldapusermanage.php</span>
+<span class="line">Scripts[]=rssimport.php</span>
+<span class="line">Scripts[]=subtreeexpirycleanup.php</span>
+<span class="line">Scripts[]=unpublish.php</span>
+<span class="line">Scripts[]=updateviewcount.php</span>
+<span class="line">&nbsp;</span>
+<span class="line">[CronjobPart-infrequent]</span>
+<span class="line">Scripts[]=basket_cleanup.php</span>
+<span class="line">Scripts[]=internal_drafts_cleanup.php</span>
+<span class="line">Scripts[]=linkcheck.php</span>
+<span class="line">&nbsp;</span>
+<span class="line">[CronjobPart-frequent]</span>
+<span class="line">Scripts[]=notification.php</span>
+<span class="line">Scripts[]=workflow.php</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[CronjobSettings]\r\nScripts[]=hide.php\r\nScripts[]=indexcontent.php\r\nScripts[]=ldapusermanage.php\r\nScripts[]=rssimport.php\r\nScripts[]=subtreeexpirycleanup.php\r\nScripts[]=unpublish.php\r\nScripts[]=updateviewcount.php\r\n\r\n[CronjobPart-infrequent]\r\nScripts[]=basket_cleanup.php\r\nScripts[]=internal_drafts_cleanup.php\r\nScripts[]=linkcheck.php\r\n\r\n[CronjobPart-frequent]\r\nScripts[]=notification.php\r\nScripts[]=workflow.php' ); return false;" /></p>
+<![endif]--> <p>In this case, the main set of cronjobs will only contain seven scripts that are listed under the &quot;[CronjobSettings]&quot; section. These scripts will be run when the &quot;runcronjobs.php&quot; script is executed in the following way:</p> <pre class="wordwrap"><span class="line">php runcronjobs.php -s example</span>
+</pre> <p>The settings located in the &quot;[CronjobPart-infrequent]&quot; section will instruct the system to run the &quot;basket_cleanup.php&quot;, &quot;internal_drafts_cleanup.php&quot; and &quot;linkcheck.php&quot; scripts when the &quot;runcronjobs.php&quot; script is executed in the following way:</p> <pre class="wordwrap"><span class="line">php runcronjobs.php infrequent -s example</span>
+</pre> <p>The &quot;frequent&quot; set of tasks will only include the notification and workflow cronjobs. These scripts will be run when the &quot;runcronjobs.php&quot; script is executed in the following way:</p> <pre class="wordwrap"><span class="line">php runcronjobs.php frequent -s example</span>
+</pre> <p>However, you may need to divide cronjobs into a couple of groups/sets and run them separately because some tasks must be executed more frequently than others.</p> <p>With this configuration, you will be able to run each set of cronjobs separately, e.g.:</p> 
+<ul>
+ <li><div> Workflow.php and notification.php - every 15 minutes. </div></li> <li><div> The basket cleanup, internal drafts cleanup and link check cronjobs - once a week. </div></li> <li><div> All other cronjobs - once a day. </div></li> 
+</ul>
+   <a name="eztoc34552_1_3" id="eztoc34552_1_3"></a><h3>Example 3</h3> <p>It is possible to extend the system by creating custom cronjob scripts. For example, if you have an extension &quot;nExt&quot; that includes a cronjob script &quot;myjob.php&quot;, you'll need to put the following lines into an override for the &quot;cronjob.ini&quot; configuration file:</p> <pre class="wordwrap"><span class="line">[CronjobSettings]</span>
+<span class="line">ExtensionDirectories[]=nExt</span>
+<span class="line">Scripts[]=myjob.php</span>
+</pre> <p>or</p> <pre class="wordwrap"><span class="line">[CronjobSettings]</span>
+<span class="line">ScriptDirectories[]=extension/nExt/cronjobs</span>
+<span class="line">Scripts[]=myjob.php</span>
+</pre> <p>These settings will make eZ Publish expect the additional cronjob script to be located at &quot;extension/nExt/cronjobs/myjob.php&quot;. This script will be added to the main set of cronjobs and thus it will be run each time the &quot;runcronjobs.php&quot; script is executed without the &quot;group_of_tasks&quot; option.</p>  
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.8/Features/Cronjobs/Configuring-cronjobs by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 14:46:52 GMT -->
+</html>

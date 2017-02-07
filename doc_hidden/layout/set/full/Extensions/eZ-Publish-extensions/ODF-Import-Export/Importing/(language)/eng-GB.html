@@ -1,0 +1,99 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/ODF-Import-Export/Importing/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                        
+    <title>Importing / ODF Import / Export / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Importing</h1>
+</div>
+
+<a name="eztoc131281_1" id="eztoc131281_1"></a><h2>Importing</h2><p>To import OpenDocument Text (.odt) documents to eZ Publish, access the URL <i>example.com/index.php/ezodf/import</i>. (Replace “<i>example.com/index.php</i>” with the URL for the Administration Interface of your eZ Publish site.).</p>
+<div class="">        <img src="../../../../../../../../../var/doc/storage/images/media/images/importing-openoffice.org-document2/131309-1-eng-GB/Importing-OpenOffice.org-Document_reference.jpg" alt="Importing OpenOffice.org Document" />
+<p>Importing OpenOffice.org Document</p>
+
+
+
+
+
+
+
+</div><p>The import screen is shown below. Browse your local filesystem for the <b>.odt</b> file to import, then click on the <b>Upload file</b> button.</p><p>After uploading the file, you need to place it in the eZ Publish content node tree. The eZ Publish tree browser window is shown below. Find the container under which you wish to import the file, select the corresponding radio button, then click on the <b>OK</b> button. To cancel the import, simply press the <b>Cancel</b> button.</p>
+<div class="">        <img src="../../../../../../../../../var/doc/storage/images/media/images/choosing-document-placement3/131312-1-eng-GB/Choosing-Document-Placement_reference.jpg" alt="Choosing Document Placement" />
+<p>Choosing Document Placement</p>
+
+
+
+
+
+
+
+</div><p>If the import is successful you will see the screen below that provides a link to the imported object and the option to import more files.</p>
+<div class="">        <img src="../../../../../../../../../var/doc/storage/images/media/images/object-is-now-imported-message2/131315-1-eng-GB/Object-is-Now-Imported-Message_reference.jpg" alt="Object is Now Imported Message" />
+<p>Object is Now Imported Message</p>
+
+
+
+
+
+
+
+</div><a name="eztoc131281_1_1" id="eztoc131281_1_1"></a><h3>Configuring Imported Documents</h3><p>OpenDocument Text (.odt) documents are imported into the default eZ Publish content class as specified in the <b>odf.ini configuration file</b>. The title of the object is derived from the filename and the contents of the document are stored in the attributes defined in the <b>odf.ini configuration file</b> located in the <i>extensions/odf/settings/</i> folder.</p><p>The settings below show a configuration example where documents are imported as articles. The title is stored in the title attribute and the document contents are stored in the body attribute.</p><pre class="wordwrap copytoclipboard"><span class="line">[ODFImport]</span>
+<span class="line">DefaultImportClass=article</span>
+<span class="line">DefaultImportTitleAttribute=title</span>
+<span class="line">DefaultImportBodyAttribute=body</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ODFImport]\r\nDefaultImportClass=article\r\nDefaultImportTitleAttribute=title\r\nDefaultImportBodyAttribute=body' ); return false;" /></p>
+<![endif]--><p>Sections in <b>.odt</b> documents map to eZ Publish attributes. (Refer to the “Section” chapter in the OpenOffice.org documentation for information about configuring document sections.). For example, you can define sections in an <b>.odt</b> document that map to the title, introduction and body attributes, while another document can be imported as a product content class.</p><p>The sample documents in the <i>examples/</i> folder in the eZODF extension can be used for testing and as a guideline for configuring your site.</p><a name="eztoc131281_1_2" id="eztoc131281_1_2"></a><h3>Supported Datatypes</h3><p>When importing OpenDocument Text (.odt) documents, there are some limitations to the datatypes that can store imported content. Currently the following datatypes are supported:</p>
+<ul>
+<li><div>Text line</div></li><li><div>Text fields</div></li><li><div>XML text</div></li><li><div>Image</div></li><li><div>Date</div></li><li><div>Date and time</div></li><li><div>Matrix</div></li>
+</ul>
+<a name="eztoc131281_1_3" id="eztoc131281_1_3"></a><h3>Supported Formatting</h3><p>When importing text into XML text fields, the following formatting styles are supported:</p>
+<ul>
+<li><div>Normal text</div></li><li><div>Bold and italic text spans</div></li><li><div>Text links</div></li><li><div>Custom tags (such as a factbox)</div></li><li><div>Numbered and bulleted lists (one level)</div></li><li><div>Headers (multiple levels)</div></li><li><div>Tables (without collapsed rows or columns)</div></li><li><div>Embedded images</div></li><li><div>Alignment and size are supported</div></li><li><div>Image captions are not supported</div></li>
+</ul>
+
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/ODF-Import-Export/Importing/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:29:26 GMT -->
+</html>

@@ -1,0 +1,139 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/Advanced-redirection-after-login by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:05:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Advanced redirection after login / Features / 3.9 / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Advanced redirection after login</h1>
+</div>
+
+ <p>In eZ publish 3.8 you can configure where to redirect a user when he/she logs in to the system. To enable this possibility for users, do the following:</p>
+<ol>
+ <li><div> Add an attribute of the &quot;<a href="../Reference/Datatypes/Text-line.html" target="_self">Text line</a>&quot; datatype to your user class. If you have several user classes and wish to enable advanced redirection for all of them then you should add this attribute to each of your user classes (make sure you enter the same attribute identifier for all of them). </div></li> <li><div> <p>Specify the identifier of the newly added attribute in the &quot;LoginRedirectionUriAttribute&quot; setting located in the &quot;[UserSettings]&quot; section of the &quot;settings/siteaccess/example/site.ini.append.php&quot; configuration file (replace &quot;example&quot; with the actual name of your siteaccess) like this:</p><pre class="wordwrap"><span class="line">LoginRedirectionUriAttribute[key]=attribute_id</span>
+</pre> <table class="renderedtable" cellpadding="2" cellspacing="0">
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>key</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>There are two keys that can be used: &quot;user&quot; for user class(es) or &quot;group&quot; for user group class(es).</p> 
+  </td>
+ 
+</tr>
+ 
+<tr>
+ <td valign="top" style="vertical-align: top">   <p>attribute_id</p> 
+  </td>
+ <td valign="top" style="vertical-align: top">   <p>The identifier of the newly added attribute (not ID number of the attribute).</p> 
+  </td>
+ 
+</tr>
+ 
+</table>
+ </div></li> 
+</ol>
+ <p>Now you can specify the redirection URI in the text line field when creating/editing a user.</p> <p>This possibility can be also enabled for user groups in the same way as for users. This means that you should add an attribute of the &quot;<a href="../Reference/Datatypes/Text-line.html" target="_self">Text line</a>&quot; datatype to your user group class(es) and specify its identifier in the &quot;LoginRedirectionUriAttribute&quot; setting using &quot;group&quot; as a key.</p>  <a name="eztoc62893_1" id="eztoc62893_1"></a><h2>Example 1</h2> <p>Let's say that user John must be redirected to the &quot;News&quot; folder after login. The following list reveals how this could be done: </p>
+<ol>
+ <li><div> Access the &quot;Setup&quot; tab in the administration interface, click &quot;Classes&quot; on the left and select the &quot;Users&quot; class group. You should see the list of classes assigned to this group. Find your user class there and click the &quot;Edit&quot; button located in the same line of the list. You will be taken to the class edit interface. Select the &quot;Text line&quot; datatype from the drop-down list located in the bottom, click the &quot;Add attribute&quot; button and edit the newly added attribute as shown below. 
+<div class="object-center linked">            <a href="../../../../layout/set/full/eZ-Publish/Technical-manual/3.9/Images/Features/Advanced-redirection/textline_class_attribute1.html" target="_self"><img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/features/advanced_redirection/textline_class_attribute1/31255-1-eng-GB/textline_class_attribute1_doc.png" alt="A fragment of the class edit interface." /></a>
+ <p>A fragment of the class edit interface.</p>
+
+
+
+
+
+
+
+</div>Click &quot;OK&quot; to save your changes. </div></li> <li><div> <p>Specify the identifier of the newly added attribute in the &quot;LoginRedirectionUriAttribute&quot; setting located under the &quot;[UserSettings]&quot; section of an override for the &quot;settings/site.ini&quot; configuration file. To do this, you should add the following line: </p><pre class="wordwrap"><span class="line">LoginRedirectionUriAttribute[user]=redirection_uri</span>
+</pre> <p>where &quot;redirection_uri&quot; is the attribute identifier.</p> </div></li> <li><div> Access the &quot;User accounts&quot; tab in the administration interface, use the &quot;Sub items&quot; list to find the user John and click the &quot;Edit&quot; button located in the same line of the list. You will be taken to the user edit interface. Specify &quot;/news&quot; in the text field called &quot;Redirection URI&quot; (the name of the newly added class attribute) as shown below. 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/features/advanced_redirection/redirection_uri_for_user/31258-1-eng-GB/redirection_uri_for_user_doc.png" alt="Setting the redirection URI for the user John" />
+ <p>Setting the redirection URI for the user John</p>
+
+
+
+
+
+
+
+</div>Click the &quot;Send for publishing&quot; button to save your changes and the user &quot;John&quot; will be always redirected to the &quot;News&quot; folder after login. </div></li> 
+</ol>
+ <a name="eztoc62893_2" id="eztoc62893_2"></a><h2>Example 2</h2> <p>Let's say that you wish to redirect all users that belong to the &quot;Guest accounts&quot; group to the &quot;News&quot; folder after login. The following list reveals how this could be done: </p>
+<ol>
+ <li><div> Edit your user group class and add an attribute of the &quot;Text line&quot; datatype as shown below: 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/features/advanced_redirection/textline_class_attribute2/31261-1-eng-GB/textline_class_attribute2_doc.png" alt="A fragment of the class edit interface." />
+ <p>A fragment of the class edit interface.</p>
+
+
+
+
+
+
+
+</div>  </div></li> <li><div> <p>Add the following line into the &quot;[UserSettings]&quot; section of an override for the &quot;settings/site.ini&quot; configuration file: </p><pre class="wordwrap"><span class="line">LoginRedirectionUriAttribute[group]=start_page</span>
+</pre> <p>where &quot;start_page&quot; is the attribute identifier.</p> </div></li> <li><div> Edit the &quot;Guest accounts&quot; user group and specify &quot;/news&quot; in the text field called &quot;Start page&quot; (the name of the newly added class attribute) as shown below. 
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/features/advanced_redirection/redirection_uri_for_user_group/31264-1-eng-GB/redirection_uri_for_user_group_doc.png" alt="Setting the redirection URI for the &quot;Guest accounts&quot; user group" />
+ <p>Setting the redirection URI for the &quot;Guest accounts&quot; user group</p>
+
+
+
+
+
+
+
+</div>Click the &quot;Send for publishing&quot; button to save your changes and all the users that belong to the &quot;Guest accounts&quot; group will be always redirected to the &quot;News&quot; folder after login. </div></li> 
+</ol>
+ <a name="eztoc62893_3" id="eztoc62893_3"></a><h2>Important notes</h2> <p>If a user is a member of several groups (a child of several &quot;User group&quot; nodes), the system will use the redirection URI that is specified for the &quot;main&quot; group (main parent node). The following screenshot shows the user view interface for the user John that belongs to both &quot;Guest accounts&quot; and &quot;Editors&quot; user groups. The &quot;Locations&quot; list located under user preview allows to view and manage locations for the user object that is currently being viewed. The main location is displayed in a bold type (&quot;Users / Guest accounts / John Doe&quot; in our example). </p>
+<div class="object-center linked">            <a href="../../../../layout/set/full/eZ-Publish/Technical-manual/3.9/Images/Features/Advanced-redirection/user_in_two_groups.html" target="_self"><img src="../../../../../../../../../../../../../../../../../var/doc/storage/images/ez_publish/technical_manual/3_9/images/features/advanced_redirection/user_in_two_groups/31267-1-eng-GB/user_in_two_groups_doc.png" alt="A fragment of the object view interface for the user with two locations." /></a>
+ <p>A fragment of the object view interface for the user with two locations.</p>
+
+
+
+
+
+
+
+</div><p>Please note that the advanced redirection feature will get disabled if the redirection URI is already specified (e.g. via the &quot;LastAccessesURI&quot; session variable. Let's say that you have specified &quot;/news&quot; as the redirection URI for user John (see Example 1). If John launches a browser and goes directly to for example &quot;http://yoursite.com/media_files&quot; then he will not be redirected to &quot;http://yoursite.com/news&quot;.</p> 
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/3.9/Features/Advanced-redirection-after-login by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 17:05:41 GMT -->
+</html>
