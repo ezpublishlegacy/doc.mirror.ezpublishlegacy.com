@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 
-<!-- Mirrored from doc.ez.no/pages/viewpage.action?pageId=11403666 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 07:24:44 GMT -->
+<!-- Mirrored from doc.ez.no/pages/viewpage.action?pageId=11403666 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 04:04:16 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-    <title>eZ Publish 5 Architecture - Introduction &amp; Overview - eZ Publish Platform 5.x - eZ Documentation</title>
+    <title>Architecture - eZ Publish 5.x - eZ Documentation</title>
 
         
 
@@ -20,7 +20,8 @@
 <meta id="confluence-context-path" name="confluence-context-path" content="">
 <meta id="confluence-base-url" name="confluence-base-url" content="../index.html">
 
-<meta id="atlassian-token" name="atlassian-token" content="494111f00e28ced96046bfb6fbe8f75e18d44b71">
+<meta id="atlassian-token" name="atlassian-token" content="695502686d9a7cb56c0dd1dc84b5c3fd2f8345f9">
+
 
 <meta id="confluence-space-key" name="confluence-space-key" content="EZP">
 <script type="text/javascript">
@@ -29,167 +30,109 @@
 
     
 
-<!-- include system css resources -->
-
-
-    <link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css" media="all">
-<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch934e.css?media=print" media="print">
-<!--[if lt IE 9]>
-<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
-<![endif]-->
-<!--[if lte IE 8]>
-<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+8" media="all">
-<![endif]-->
-<!--[if lte IE 9]>
-<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
-<![endif]-->
-<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batch.css" media="all">
-<!--[if lt IE 9]>
-<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general/batch.css?conditionalComment=lt+IE+9" media="all">
-<![endif]-->
-<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css" media="all">
-<!--[if lt IE 9]>
-<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
-<![endif]-->
-<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/47016f6b93087cd2003bf867318254ee/_/download/contextbatch/css/theme.doc/batch.css" media="all">
-<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.6.10/_/download/batch/org.randombits.confluence.toc_toc-plugin-styles/org.randombits.confluence.toc_toc-plugin-styles.117.d" media="all">
-<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/2.0.22/_/download/batch/confluence.extra.information_information-plugin/confluence.extra.information_information-plugin-adg-s" media="all">
-<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins.confluence-highlight-ac" media="all">
-<!--[if lt IE 9]>
-<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources/com.atlassian.confluence.plugins.confluence-highlight-actions:highlighting-experiment-resources.css?conditionalComment=lt+IE+9" media="all">
-<![endif]-->
-<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/5.3.3-m6/_/download/batch/confluence.extra.jira_web-resources-adg/confluence.extra.jira_web-resources-adg.css" media="all">
-<link type="text/css" rel="stylesheet" href="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/51/_/styles/colorsb538.css?spaceKey=EZP" media="all">
-<link type="text/css" rel="stylesheet" href="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/51/_/styles/customb538.css?spaceKey=EZP" media="all">
-
-<!-- end system css resources -->
-
-    <meta name="confluence-request-time" content="1413876171769">
+    <meta name="confluence-request-time" content="1485835313479">
         
     
         
-            <meta name="ajs-is-confluence-admin" content="false">
-            <meta name="ajs-connection-timeout" content="10000">
+            <meta name="ajs-is-space-admin" content=""> <meta name="ajs-has-space-config" content="">
             <meta name="ajs-use-keyboard-shortcuts" content="true">
-            <meta name="ajs-keyboardshortcut-hash" content="ec556f85a7b4fc86b37ab7a78ce3d8b0">
+            <meta name="ajs-discovered-plugin-features" content="$discoveredList">
+            <meta name="stp-license-product-name" content="Confluence"/> <meta name="stp-license-days-to-expiry" content="807"/> <meta name="stp-license-is-admin" content="false"/> <meta name="stp-license-should-keep-banner-hidden" content="true"/>
+            <meta name="ajs-keyboardshortcut-hash" content="206314443b3cf79696d4ad89324a059c">
             <meta id="team-calendars-has-jira-link" content="true">
             <meta name="ajs-team-calendars-display-time-format" content="displayTimeFormat12">
             <meta id="team-calendars-user-timezone" content="UTC">
-            <script type="text/x-template" id="team-calendars-messages" title="team-calendars-messages">
-    <fieldset class="i18n hidden">
-                    <input type="hidden" name="calendar3.month.short.april" value="Apr">
-                    <input type="hidden" name="calendar3.month.short.november" value="Nov">
-                    <input type="hidden" name="calendar3.month.long.november" value="November">
-                    <input type="hidden" name="calendar3.day.short.friday" value="Fri">
-                    <input type="hidden" name="calendar3.month.long.february" value="February">
-                    <input type="hidden" name="calendar3.month.short.february" value="Feb">
-                    <input type="hidden" name="calendar3.day.long.wednesday" value="Wednesday">
-                    <input type="hidden" name="calendar3.month.long.december" value="December">
-                    <input type="hidden" name="calendar3.day.short.sunday" value="Sun">
-                    <input type="hidden" name="calendar3.month.long.april" value="April">
-                    <input type="hidden" name="calendar3.month.long.july" value="July">
-                    <input type="hidden" name="calendar3.month.long.september" value="September">
-                    <input type="hidden" name="calendar3.month.short.august" value="Aug">
-                    <input type="hidden" name="calendar3.month.short.june" value="Jun">
-                    <input type="hidden" name="calendar3.month.short.may" value="May">
-                    <input type="hidden" name="calendar3.day.short.tuesday" value="Tue">
-                    <input type="hidden" name="calendar3.day.short.wednesday" value="Wed">
-                    <input type="hidden" name="calendar3.day.long.thursday" value="Thursday">
-                    <input type="hidden" name="calendar3.month.long.march" value="March">
-                    <input type="hidden" name="calendar3.month.long.october" value="October">
-                    <input type="hidden" name="calendar3.day.short.saturday" value="Sat">
-                    <input type="hidden" name="calendar3.month.short.january" value="Jan">
-                    <input type="hidden" name="calendar3.month.long.may" value="May">
-                    <input type="hidden" name="calendar3.month.long.january" value="January">
-                    <input type="hidden" name="calendar3.month.short.october" value="Oct">
-                    <input type="hidden" name="calendar3.day.short.thursday" value="Thu">
-                    <input type="hidden" name="calendar3.day.long.friday" value="Friday">
-                    <input type="hidden" name="calendar3.day.long.sunday" value="Sunday">
-                    <input type="hidden" name="calendar3.month.long.june" value="June">
-                    <input type="hidden" name="calendar3.month.long.august" value="August">
-                    <input type="hidden" name="calendar3.day.long.tuesday" value="Tuesday">
-                    <input type="hidden" name="calendar3.day.long.saturday" value="Saturday">
-                    <input type="hidden" name="calendar3.month.short.september" value="Sep">
-                    <input type="hidden" name="calendar3.day.long.monday" value="Monday">
-                    <input type="hidden" name="calendar3.month.short.july" value="Jul">
-                    <input type="hidden" name="calendar3.month.short.march" value="Mar">
-                    <input type="hidden" name="calendar3.day.short.monday" value="Mon">
-                    <input type="hidden" name="calendar3.month.short.december" value="Dec">
-            </fieldset>
-</script>
-
-            
-
-    
+            <script type="text/x-template" id="team-calendars-messages" title="team-calendars-messages"><fieldset class="i18n hidden"><input type="hidden" name="calendar3.month.long.july" value="July"><input type="hidden" name="calendar3.day.short.wednesday" value="Wed"><input type="hidden" name="calendar3.day.short.thursday" value="Thu"><input type="hidden" name="calendar3.month.short.march" value="Mar"><input type="hidden" name="calendar3.month.long.april" value="April"><input type="hidden" name="calendar3.month.long.october" value="October"><input type="hidden" name="calendar3.month.long.august" value="August"><input type="hidden" name="calendar3.month.short.july" value="Jul"><input type="hidden" name="calendar3.month.short.may" value="May"><input type="hidden" name="calendar3.month.short.november" value="Nov"><input type="hidden" name="calendar3.day.long.friday" value="Friday"><input type="hidden" name="calendar3.day.long.sunday" value="Sunday"><input type="hidden" name="calendar3.day.long.saturday" value="Saturday"><input type="hidden" name="calendar3.month.short.april" value="Apr"><input type="hidden" name="calendar3.day.long.wednesday" value="Wednesday"><input type="hidden" name="calendar3.month.long.december" value="December"><input type="hidden" name="calendar3.month.short.october" value="Oct"><input type="hidden" name="calendar3.day.long.monday" value="Monday"><input type="hidden" name="calendar3.month.short.june" value="Jun"><input type="hidden" name="calendar3.day.short.monday" value="Mon"><input type="hidden" name="calendar3.day.short.tuesday" value="Tue"><input type="hidden" name="calendar3.day.short.saturday" value="Sat"><input type="hidden" name="calendar3.month.long.march" value="March"><input type="hidden" name="calendar3.month.long.june" value="June"><input type="hidden" name="calendar3.month.short.february" value="Feb"><input type="hidden" name="calendar3.month.short.august" value="Aug"><input type="hidden" name="calendar3.month.short.december" value="Dec"><input type="hidden" name="calendar3.day.short.sunday" value="Sun"><input type="hidden" name="calendar3.month.long.february" value="February"><input type="hidden" name="calendar3.day.long.tuesday" value="Tuesday"><input type="hidden" name="calendar3.month.long.may" value="May"><input type="hidden" name="calendar3.month.long.september" value="September"><input type="hidden" name="calendar3.month.long.november" value="November"><input type="hidden" name="calendar3.month.short.january" value="Jan"><input type="hidden" name="calendar3.month.short.september" value="Sep"><input type="hidden" name="calendar3.day.long.thursday" value="Thursday"><input type="hidden" name="calendar3.month.long.january" value="January"><input type="hidden" name="calendar3.day.short.friday" value="Fri"></fieldset></script>
+            <meta name="ajs-is-confluence-admin" content="false">
+            <meta name="ajs-connection-timeout" content="10000">
             
     
     
             <meta name="ajs-page-id" content="11403666">
+            <meta name="ajs-latest-page-id" content="11403666">
             <meta name="ajs-content-type" content="page">
-            <meta name="ajs-page-title" content="eZ Publish 5 Architecture - Introduction &amp; Overview">
+            <meta name="ajs-page-title" content="Architecture">
             <meta name="ajs-parent-page-title" content="Development &amp; Administration Guides">
             <meta name="ajs-parent-page-id" content="6291674">
             <meta name="ajs-space-key" content="EZP">
-            <meta name="ajs-space-name" content="eZ Publish Platform 5.x">
+            <meta name="ajs-space-name" content="eZ Publish 5.x">
             <meta name="ajs-from-page-title" content="">
             <meta name="ajs-can-remove-page" content="false">
-            <meta name="ajs-editor.loader.comment.resources" content="&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/9f01679814e63f4c0513d02c90477002/_/download/contextbatch/css/comment-editor/batch.html media=&quot;all&quot;&gt;
-">
             <meta name="ajs-context-path" content="">
             <meta name="ajs-base-url" content="https://doc.ez.no">
-            <meta name="ajs-version-number" content="5.4.4">
-            <meta name="ajs-build-number" content="4733">
+            <meta name="ajs-version-number" content="5.8.5">
+            <meta name="ajs-build-number" content="5983">
             <meta name="ajs-remote-user" content="">
+            <meta name="ajs-remote-user-key" content="">
             <meta name="ajs-current-user-fullname" content="">
             <meta name="ajs-current-user-avatar-url" content="">
-            <meta name="ajs-static-resource-url-prefix" content="/s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_">
+            <meta name="ajs-static-resource-url-prefix" content="/s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_">
             <meta name="ajs-global-settings-attachment-max-size" content="10485760">
             <meta name="ajs-user-locale" content="en_GB">
-            <meta name="ajs-enabled-dark-features" content="sync.event">
-            <meta name="ajs-atl-token" content="494111f00e28ced96046bfb6fbe8f75e18d44b71">
+            <meta name="ajs-enabled-dark-features" content="confluence-inline-comments-resolved,notification.plugin.api.enabled.com.atlassian.confluence.plugins.sharepage.api.ShareContentEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.mentions.api.ConfluenceMentionEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.security.ForgotPasswordEvent,pdf-preview,notification.plugin.api.enabled.com.atlassian.confluence.plugins.tasklist.event.SendTaskEmailEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.async.PageMovedEvent,previews.sharing,previews.versions,notification.plugin.api.enabled.com.atlassian.confluence.plugins.files.notifications.event.FileContentUpdateEvent,file-annotations,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.attachment.AttachmentBatchUploadCompletedEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.comment.CommentCreateEvent,notification.plugin.api.enabled.com.atlassian.confluence.efi.emails.events.OnboardingLessUsersEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.files.notifications.event.FileContentRemoveEvent,atlassian.aui.raphael.disabled,previews.conversion-service,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.comment.CommentUpdateEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.follow.FollowEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.async.PageEditedEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.blogpost.BlogPostCreateEvent,previews.trigger-all-file-types,notification.plugin.api.enabled.com.atlassian.confluence.plugins.inlinecomments.events.InlineCommentResolveEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.like.LikeCreatedEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.inlinecomments.events.InlineCommentCreateEvent,previews.sharing.pushstate,confluence-inline-comments-rich-editor,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.blogpost.BlogPostUpdateEvent,file-annotations.likes,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.async.PageCreatedEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.files.notifications.event.FileContentMentionUpdateEvent,notification.plugin.api.enabled.com.atlassian.confluence.efi.emails.events.OnboardingNoSpaceCreatedEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.hipchat.api.events.HipChatUserMapped,notification.plugin.api.enabled.com.atlassian.confluence.plugins.sharepage.api.ShareAttachmentEvent,confluence-inline-comments,confluence-inline-comments-dangling-comment,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.blogpost.BlogPostMovedEvent">
+            <meta name="ajs-atl-token" content="695502686d9a7cb56c0dd1dc84b5c3fd2f8345f9">
             <meta name="ajs-confluence-flavour" content="VANILLA">
-            <meta name="ajs-editor.loader.resources" content="&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-editor%2c-v/batch.11b.delaye media=&quot;all&quot;&gt;
-&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11ca781.delaye?media=%28max-width%3A+1450px%29%22 media=&quot;(max-width: 1450px)&quot;&gt;
-&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11d23d0.delaye?media=print%22 media=&quot;print&quot;&gt;
-&lt;!--[if lt IE 9]&gt;
-&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11ed0b5.delaye?conditionalComment=lt+IE+9%22 media=&quot;all&quot;&gt;
-&lt;![endif]--&gt;
-&lt;!--[if IE]&gt;
-&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/css/editor%2cmacro-browser%2cfullpage-edito/batch.11fbe23.delaye?ieonly=true%22 media=&quot;all&quot;&gt;
-&lt;![endif]--&gt;
-&lt;script type=&quot;text/javascript&quot; src=_/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/eb8de6aa7acc3a4b2e8aee165b9628ad/_/download/contextbatch/js/editor%2cmacro-browser%2cfullpage-editor%2c-vi/batch.120.delaye &gt;&lt;/script&gt;
-">
+            <meta name="ajs-user-date-pattern" content="dd MMM yyyy">
             <meta name="ajs-date.format" content="MMM dd, yyyy">
     
-    <link rel="shortcut icon" href="../favicon.html">
-    <link rel="icon" type="image/x-icon" href="../favicon.html">
+    <link rel="shortcut icon" href="../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_/favicon.ico">
 
 <link rel="search" type="application/opensearchdescription+xml" href="../opensearch/osd.action" title="eZ Documentation"/>
 
-    <!-- include system javascript resources -->
-    <script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/js/batch.js" ></script>
-<!--[if lte IE 8]>
-<script type="text/javascript" src="/s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/73/_/download/superbatch/js/batch.js?conditionalComment=lte+IE+8" ></script>
+<script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.confluence.plugins.confluence-feature-discovery-plugin:confluence-feature-discovery-plugin-resources.test-mode"]="false";
+WRM._unparsedData["com.atlassian.confluence.plugins.confluence-hipchat-integration-plugin:discovery-javascript-data.link-active"]="{\"linkActive\":false,\"conditionsMet\":true,\"admin\":false}";
+WRM._unparsedData["com.atlassian.confluence.plugins.confluence-license-banner:confluence-license-banner-resources.license-details"]="{\"daysBeforeLicenseExpiry\":0,\"daysBeforeMaintenanceExpiry\":0,\"showLicenseExpiryBanner\":false,\"showMaintenanceExpiryBanner\":false,\"renewUrl\":null,\"salesEmail\":null}";
+WRM._unparsedData["com.atlassian.plugins.atlassian-nps-plugin:atlassian-nps-plugin-resources.is-server-instance-data-provider"]="true";
+WRM._unparsedData["com.atlassian.plugins.atlassian-nps-plugin:nps-acknowledgement-resources.analytics-enabled-data-provider"]="\"false\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-nps-plugin:nps-acknowledgement-resources.sen-data-provider"]="\"SEN-2255945\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:api.feature-data-provider"]="true";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
 <![endif]-->
-<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/6e55d36b98fe54865e616dc7ce47dca4/_/download/contextbatch/js/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batch.js" ></script>
-<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/70f6d025b64de5008ccd042576cd8d90/_/download/contextbatch/js/page/batch.js" ></script>
-<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/84fc2bb4cbbfc06481d75335376bb250/_/download/contextbatch/js/atl.comments/batch.js" ></script>
-<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.confluence.plugins.confluence-hig/com.atlassian.confluence.plugins-2.confluence-highlight-ac" ></script>
-<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/1.3/_/download/batch/com.atlassian.mywork.mywork-confluence-host-plu/com.atlassian.mywork.mywork-confluence-host-plugin_mw-he" ></script>
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/fcf875d0c4710a8c828036f5c6fb7fa5-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/b8d35340d2d85de2791f14a4692ecf7b/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batchd6a4.css?highlightactions=true&amp;flavour=VANILLA&amp;locale=en-GB" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/6c0981174e94142364564819dc0d1413-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/b8d35340d2d85de2791f14a4692ecf7b/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general,page,atl.comments/batch.css?conditionalComment=lt+IE+9&amp;locale=en-GB" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/7893b9affdc3bf828ad93d0610d3d5f3-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/b8d35340d2d85de2791f14a4692ecf7b/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general,page,atl.comments/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/3a21f7b21af4c67045d1e0255f2ac570/_/download/contextbatch/css/theme.doc/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.8.6/_/download/batch/org.randombits.confluence.toc_toc-plugin-styles/org.randombits.confluence.toc_toc-plugin-styles.css" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/3.7.2/_/download/batch/confluence.extra.information_information-plugin/confluence.extra.information_information-plugin-adg-styles.cc" media="all">
+<link type="text/css" rel="stylesheet" href="../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/51/_/styles/colorsb538.css?spaceKey=EZP" media="all">
+<link type="text/css" rel="stylesheet" href="../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/51/_/styles/customb538.css?spaceKey=EZP" media="all">
+<script type="text/javascript" src="../s/1f7b22082ef39a4bb134622dae929bdc-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/js/batch32f4.js?atlassian.aui.raphael.disabled=true&amp;locale=en-GB&amp;build-number=5983" ></script>
+<script type="text/javascript" src="../s/aa56759c03dcb293b394c4b46058625c-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/b8d35340d2d85de2791f14a4692ecf7b/_/download/contextbatch/js/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batcha41c.js?highlightactions=true&amp;flavour=VANILLA&amp;locale=en-GB&amp;anonymous-access-enabled=true&amp;is-server-instance=true&amp;hostenabled=true" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.8.6/_/download/batch/org.randombits.confluence.toc_client-side-toc-r/org.randombits.confluence.toc_client-side-toc-resources.cf.de" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.8.6/_/download/batch/org.randombits.confluence.toc_toc-plugin-analytics/org.randombits.confluence.toc_toc-plugin-analytics.js" ></script>
 
+
+        
+            <meta name="stp-license-product-name" content="Confluence"/> <meta name="stp-license-days-to-expiry" content="807"/> <meta name="stp-license-is-admin" content="false"/> <meta name="stp-license-should-keep-banner-hidden" content="true"/>
     
 
         
-    <!-- end system javascript resources -->
-
-        
-        
+        <meta name="ajs-site-title" content="eZ Documentation" />
 
     
-                <link rel="canonical" href="viewpage0139.html?pageId=11403666">
-        <link rel="shortlink" href="../x/kgGu.html">
-    <meta name="wikilink" content="[EZP:eZ Publish 5 Architecture - Introduction &amp; Overview]">
-    <meta name="page-version" content="13">
+    
+
+    
+                <link rel="canonical" href="../display/EZP/Architecture.html">
+        <link rel="shortlink" href="../display/EZP/Architecture.html">
+    <meta name="wikilink" content="[EZP:Architecture]">
+    <meta name="page-version" content="20">
 
 </head>
 
@@ -197,6 +140,7 @@
      id="com-atlassian-confluence" class="theme-documentation  aui-theme-default aui-layout">
 
         
+            <div id='stp-licenseStatus-banner'></div>
     <div id="full-height-container">
     <div id="header-precursor">
         
@@ -208,7 +152,7 @@
 
 
 <header id="header" role="banner">
-    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation"><div class="aui-header-inner"><div class="aui-header-before"><a class="aui-dropdown2-trigger app-switcher-trigger" aria-owns="app-switcher" aria-haspopup="true" tabindex="0"><span class="aui-icon aui-icon-small aui-iconfont-appswitcher">Linked Applications</span></a><div id="app-switcher" class="aui-dropdown2 aui-style-default"><div class="app-switcher-loading">Loading&hellip;</div></div><script>
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation"><div class="aui-header-inner"><div class="aui-header-before"><a class=" aui-dropdown2-trigger app-switcher-trigger" aria-owns="app-switcher" aria-controls="app-switcher" aria-haspopup="true" data-aui-trigger href="#app-switcher"><span class="aui-icon aui-icon-small aui-iconfont-appswitcher">Linked Applications</span></a><div id="app-switcher" class="aui-dropdown2 aui-style-default"><div class="app-switcher-loading">Loading&hellip;</div></div><script>
             (function (NL) {
                 var initialise = function () {
                     // For some milestones of AUI, the atlassian soy namespace was renamed to aui. Handle that here by ensuring that window.atlassian is defined.
@@ -223,7 +167,7 @@
                     NL.onInit = initialise;
                 }
             }(window.NL = (window.NL || {})));
-            window.NL.isUserAdmin = false</script></div><div class="aui-header-primary"><h1 id="logo" class="aui-header-logo aui-header-logo-custom"><a href="../index.html"><img src="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/_/images/logo/atl.site.logo" alt="eZ Documentation" /></a></h1><ul class="aui-nav">
+            window.NL.isUserAdmin = false</script></div><div class="aui-header-primary"><h1 id="logo" class="aui-header-logo aui-header-logo-custom"><a href="../index.html"><img src="../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_/images/logo/atl.site.logo" alt="eZ Documentation" /></a></h1><ul class="aui-nav">
                             <li>
             
         
@@ -240,32 +184,32 @@
     </a>
     <nav id="browse-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
                     <div class="aui-dropdown2-section">
-                <ul  id="browse-menu-link-leading" class="aui-list-truncate section-leading first">
+                                <ul  id="browse-menu-link-leading" class="aui-list-truncate section-leading first">
                                             <li>
     
             
-<a  id="space-pages-link" href="listpages-dirview4915.html?key=EZP" class="    "      title="Browse pages in the eZ Publish Platform 5.x space" >
+<a  id="space-pages-link" href="listpages-dirview4915.html?key=EZP" class="    "      title="Browse pages in the eZ Publish 5.x space" >
         Pages
 </a>
 </li>
                                             <li>
     
             
-<a  id="space-blogposts-link" href="viewrecentblogposts4915.html?key=EZP" class="    "      title="Browse blogs in the eZ Publish Platform 5.x space" >
+<a  id="space-blogposts-link" href="viewrecentblogposts4915.html?key=EZP" class="    "      title="Browse blogs in the eZ Publish 5.x space" >
         Blog
 </a>
 </li>
                                             <li>
     
             
-<a  id="space-labels-link" href="../labels/listlabels-heatmap4915.html?key=EZP" class="    "      title="Browse labels in the eZ Publish Platform 5.x space" >
+<a  id="space-labels-link" href="../labels/listlabels-heatmap4915.html?key=EZP" class="    "      title="Browse labels in the eZ Publish 5.x space" >
         Labels
 </a>
 </li>
                                             <li>
     
             
-<a  id="space-advanced-link" href="../spaces/viewspacesummary4915.html?key=EZP" class="    "      title="Browse additional space functions in the eZ Publish Platform 5.x space" >
+<a  id="space-advanced-link" href="../spaces/viewspacesummary4915.html?key=EZP" class="    "      title="Browse additional space functions in the eZ Publish 5.x space" >
         Space Operations
 </a>
 </li>
@@ -276,7 +220,7 @@
         </li>
         </ul>
 </div><div class="aui-header-secondary"><ul class="aui-nav">
-                <li>
+            <li>
         
     
             
@@ -284,35 +228,21 @@
             <span></span>
     </a>
     </li>
+                    <li>
+        <form id="quick-search" class="aui-quicksearch dont-default-focus header-quicksearch" action="https://doc.ez.no/dosearchsite.action" method="get"><fieldset><input type="hidden" name="where" value="EZP"/><input type="hidden" name="spaceSearch" value="true"/><label for="quick-search-query" class="assistive">Quick Search</label><input id="quick-search-query" class="text app-search search quick-search-query" type="text" accessKey="q" autocomplete="off" name="queryString" title="Quick Search" placeholder="Search space" /><input id="quick-search-submit" class="quick-search-submit" type="submit" value="Search"/><div class="aui-dd-parent quick-nav-drop-down"></div></fieldset></form>
+    </li>
         <li>
-<form id="quick-search" class="aui-quicksearch dont-default-focus header-quicksearch" action="https://doc.ez.no/dosearchsite.action" method="get">
-    <fieldset>
-                    <input type='hidden' name='where' value='EZP'/>
-                            <input type="hidden" name="spaceSearch" value="true"/>
-                <label for="quick-search-query" class="assistive">Quick Search</label>
-        <input id="quick-search-query" class="text app-search search quick-search-query" type="text"
-               accessKey="q" autocomplete="off" name="queryString" title="Quick Search"  placeholder="Search space" />
-        <input id="quick-search-submit" class="quick-search-submit" type="submit" value="Search"/>
-
-        <div class="aui-dd-parent quick-nav-drop-down"></div>
-    </fieldset>
-    <div class="hidden parameters">
-                    <!-- putMetadata failed to add value for key "quick-nav-enabled" so rendering metadata inline - see server debug log for details -->
-        <meta name="ajs-quick-nav-enabled" content="true">
-                </div>
-</form>
-</li>
-    <li>    
+            
         <a id="help-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="help-menu-link-content" title="Help">
         <span class="aui-icon aui-icon-small aui-iconfont-help">Help</span>
     </a>
     <nav id="help-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
                     <div class="aui-dropdown2-section">
-                <ul  id="help-menu-link-leading" class="aui-list-truncate section-leading first">
+                                <ul  id="help-menu-link-leading" class="aui-list-truncate section-leading first">
                                             <li>
-    
+        
             
-<a  id="confluence-help-link" href="http://docs.atlassian.com/confluence/docs-54/Getting+Help+And+Support" class="    "      title="Visit the Confluence documentation home"  target="_blank"
+<a  id="confluence-help-link" href="https://docs.atlassian.com/confluence/docs-58/Getting+Help+And+Support" class="    "      title="Visit the Confluence documentation home"  target="_blank"
 >
         Online Help
 </a>
@@ -334,7 +264,7 @@
                                             <li>
     
             
-<a  id="whats-new-menu-link" href="http://docs.atlassian.com/confluence/docs-54/whatsnew/iframe" class="    "      title="" >
+<a  id="whats-new-menu-link" href="https://docs.atlassian.com/confluence/docs-58/whatsnew/iframe" class="    "      title="" >
         What’s new
 </a>
 </li>
@@ -355,18 +285,26 @@
                                     </ul>
             </div>
             </nav>
-    </li>
-    <li>    
-    </li>
-                <li>                                    <li>
     
+    </li>
+        <li>
+                
+    
+    </li>
+        <li>
+            
+    </li>
+        <li>
+                                            <li>
+        
             
 <a  id="login-link" href="../logina015.html?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D11403666" class="   user-item login-link "      title="" >
         Log in
 </a>
 </li>
-                        </li>
-</ul>
+                        
+    </li>
+    </ul>
 </div></div><!-- .aui-header-inner--></nav><!-- .aui-header -->
     <br class="clear">
 </header>
@@ -375,9 +313,19 @@
     <div id="splitter-sidebar"  class="padding-div" >
         
         <p>&nbsp;<br/>
-<strong>Navigation</strong><br/>
-&bull; <a href="https://confluence.ez.no/display/MAIN" class="external-link" rel="nofollow">eZ Documentation Center</a><br/>
-&nbsp;</p>
+<strong>Global navigation</strong></p>
+
+<p>&nbsp;<font color="#999">&bull;</font>&nbsp; <a href="../display/MAIN/eZ%2bDocumentation%2bCenter.html">Documentation Center</a><br/>
+&nbsp;<font color="#999">&bull;</font>&nbsp; <a href="../display/TECHDOC/eZ%2bTechnical%2bManual.html">eZ Studio &amp; eZ Platform</a><br/>
+&nbsp; &nbsp;<font color="#999">&bull;</font>&nbsp; <a href="../display/USERGUIDE/eZ%2bUser%2bManual.html">User Manual</a><br/>
+&nbsp; &nbsp;<font color="#999">&bull;</font>&nbsp; <a href="../display/TECHDOC/eZ%2bTechnical%2bManual.html">Technical Manual</a><br/>
+&nbsp; &nbsp;<font color="#999">&bull;</font>&nbsp; <a href="../display/MAIN/Glossary.html" title="Glossary">Glossary</a><br/>
+&nbsp;<font color="#999">&bull;</font>&nbsp; <a href="../eZ-Publish/index.html" class="external-link" rel="nofollow">eZ Publish 4.x / legacy</a></p>
+
+
+
+<p>&nbsp;<br/>
+<a href="../display/EZP/eZ%2bPublish%2b5.html"><strong>eZ Publish (5.x)</strong></a></p>
     
 
                     
@@ -423,17 +371,16 @@
             </div>
     <div id="splitter-content">
 
-                    <script type="text/javascript" src="../s/en_GB-1988229788/4733/f235dd088df5682b0560ab6fc66ed22c9124c0be.12/5.4.4/_/download/resources/com.atlassian.confluence.plugins.doctheme_resources/doc-theme.js"></script>
+                    <script type="text/javascript" src="../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5.8.5/_/download/resources/com.atlassian.confluence.plugins.doctheme_resources/doc-theme.js"></script>
     
                         
         <div id="theme-header">
             <div class="sectionColumnWrapper"><div class="sectionMacro">
 <div class="sectionMacroRow"><div class="columnMacro"></div>
 <div class="columnMacro">
-<div class="panel" style="background-color: #ecf0f1;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: #ecf0f1;">
-<p>This documentation is for <strong>eZ Publish Platform 5.x</strong> "Platform stack". For documentation on "legacy" <a href="../eZ-Publish/index.html" class="external-link" rel="nofollow">go here</a>, for explanation on difference see <a href="viewpage0139.html?pageId=11403666" class="external-link" rel="nofollow">5.x Architecture overview</a></p>
-</div></div></div>
-<div class="columnMacro"></div></div></div></div>
+<div class="panel" style="background-color: #F0F0F0;border-color: #999999;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: #F0F0F0;">
+<p><strong>eZ Publish 5.x</strong> | For <em>eZ Platform</em> &amp; <em>eZ Studio</em> topics see <a href="../display/DEVELOPER/Documentation.html">Technical manual</a> and <a href="../display/USER/Documentation.html">User manual</a>, for <em>eZ Publish 4.x</em> and <em>Legacy</em> topics see <a href="../eZ-Publish/index.html" class="external-link" rel="nofollow">eZ Publish legacy</a></p>
+</div></div></div><div class="columnMacro"></div></div></div></div>
         </div>
     
             
@@ -443,40 +390,51 @@
         
     <div id="navigation" class="content-navigation view">
                     <ul class="ajs-menu-bar">
-                                    
+                                                        
                     
         <li class="normal ajs-menu-item">
-        <a id="action-menu-link" class="action ajs-menu-title aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="action-menu" data-container="#navigation"><span><span>Tools</span></span></a>         <div id="action-menu" class="aui-dropdown2 aui-style-default">
+        <a id="action-menu-link" class="action aui-dropdown2-trigger-arrowless aui-button aui-button-subtle ajs-menu-title aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="action-menu" data-container="#navigation">
+            <span>
+                                    <span class="aui-icon aui-icon-small aui-iconfont-more"></span>
+                                
+            </span>
+        </a>         <div id="action-menu" class="aui-dropdown2 aui-style-default">
                             <ul  id="action-menu-primary"                     class="section-primary first aui-dropdown2-section">
                                             <li>
 
     
         
-                            
+                                            
     
     
-    <a  id="view-attachments-link" href="viewpageattachments0139.html?pageId=11403666" rel="nofollow"  class="action-view-attachments"  accessKey="t"  title="View Attachments">
-                <span>A<u>t</u>tachments (0)</span>    </a>
+    <a  id="view-attachments-link" href="viewpageattachments0139.html?pageId=11403666" rel="nofollow" class="action-view-attachments"  accessKey="t"  title="View Attachments">
+                <span>
+                        A<u>t</u>tachments (2)
+        </span>    </a>
 </li>
                                         <li>
 
     
         
-                            
+                                            
     
     
-    <a  id="action-view-history-link" href="viewpreviousversions0139.html?pageId=11403666" rel="nofollow"  class="action-view-history"   title="">
-                <span>Page History</span>    </a>
+    <a  id="action-view-history-link" href="viewpreviousversions0139.html?pageId=11403666" rel="nofollow" class="action-view-history"   title="">
+                <span>
+                        Page History
+        </span>    </a>
 </li>
                                         <li>
 
     
         
-                            
+                                            
     
     
-    <a  id="action-page-permissions-link" href="viewinfo0139.html?pageId=11403666" rel="nofollow"  class="action-page-permissions"   title="Edit restrictions">
-                <span>Restrictions</span>    </a>
+    <a  id="action-page-permissions-link" href="viewinfo0139.html?pageId=11403666" rel="nofollow" class="action-page-permissions"   title="Edit restrictions">
+                <span>
+                        Restrictions
+        </span>    </a>
 </li>
                                 </ul>
                             <ul  id="action-menu-secondary"                     class="section-secondary aui-dropdown2-section">
@@ -484,61 +442,85 @@
 
     
         
-                            
+                                            
     
     
-    <a  id="view-page-info-link" href="viewinfo0139.html?pageId=11403666" rel="nofollow"  class="action-view-info"   title="">
-                <span>Page Information</span>    </a>
+    <a  id="view-page-info-link" href="viewinfo0139.html?pageId=11403666" rel="nofollow" class="action-view-info"   title="">
+                <span>
+                        Page Information
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+            
+                                            
+    
+    
+    <a  id="view-resolved-comments" href="#" rel="nofollow" class=""   title="">
+                <span>
+                        Resolved comments
+        </span>    </a>
 </li>
                                         <li>
 
     
         
-                            
+                                            
     
     
-    <a  id="link-to-page-link" href="viewinfo0139.html?pageId=11403666" rel="nofollow"  class=""   title="Link to this Page">
-                <span>Link to this Page…</span>    </a>
+    <a  id="link-to-page-link" href="viewinfo0139.html?pageId=11403666" rel="nofollow" class=""   title="Link to this Page">
+                <span>
+                        Link to this Page…
+        </span>    </a>
 </li>
                                         <li>
 
     
         
-                            
+                                            
     
     
-    <a  id="view-in-hierarchy-link" href="listpages-dirviewca5a.html?key=EZP&amp;openId=11403666#selectedPageInHierarchy" rel="nofollow"  class=""   title="">
-                <span>View in Hierarchy</span>    </a>
+    <a  id="view-in-hierarchy-link" href="listpages-dirviewca5a.html?key=EZP&amp;openId=11403666#selectedPageInHierarchy" rel="nofollow" class=""   title="">
+                <span>
+                        View in Hierarchy
+        </span>    </a>
 </li>
                                         <li>
 
     
         
-                            
+                                            
     
     
-    <a  id="action-view-source-link" href="../plugins/viewsource/viewpagesrc0139.html?pageId=11403666" rel="nofollow"  class="action-view-source popup-link"   title="">
-                <span>View Source</span>    </a>
+    <a  id="action-view-source-link" href="../plugins/viewsource/viewpagesrc0139.html?pageId=11403666" rel="nofollow" class="action-view-source popup-link"   title="">
+                <span>
+                        View Source
+        </span>    </a>
 </li>
                                         <li>
 
     
         
-                            
+                                            
     
     
-    <a  id="action-export-pdf-link" href="../download/temp/pdfexport-20141021-211014-0724-243/EZP-11403666-211014-0724-244f1f7.pdf?pageId=11403666" rel="nofollow"  class=""   title="">
-                <span>Export to PDF</span>    </a>
+    <a  id="action-export-pdf-link" href="../download/temp/pdfexport-20170131-310117-0404-2091/EZP-Architecture-310117-0404-2092f1f7.pdf?pageId=11403666" rel="nofollow" class=""   title="">
+                <span>
+                        Export to PDF
+        </span>    </a>
 </li>
                                         <li>
 
     
         
-                            
+                                            
     
     
-    <a  id="action-export-word-link" href="../exportword0139?pageId=11403666" rel="nofollow"  class="action-export-word"   title="">
-                <span>Export to Word</span>    </a>
+    <a  id="action-export-word-link" href="../exportword0139?pageId=11403666" rel="nofollow" class="action-export-word"   title="">
+                <span>
+                        Export to Word
+        </span>    </a>
 </li>
                                 </ul>
                     </div>
@@ -549,39 +531,36 @@
         
                 <div id="title-heading" class="pagetitle with-breadcrumbs">
         
-                            <div class="space-logo " data-key="EZP" data-name="eZ Publish Platform 5.x" data-entity-type="confluence.space">
-            <a><img class="logo space custom" src="../download/attachments/1736738/EZP9600?version=4&amp;modificationDate=1405688262000&amp;api=v2" alt=""></a>
+                            <div class="space-logo " data-key="EZP" data-name="eZ Publish 5.x" data-entity-type="confluence.space">
+            <a><img class="logo space custom" src="../download/attachments/1736738/EZPc728?version=5&amp;modificationDate=1434758205000&amp;api=v2" alt=""></a>
         </div>            
                             <div id="breadcrumb-section">
                     
     
     
     <ol id="breadcrumbs">
-                    
-                
+                                        
+                        
         <li class="first" >
-                
-
-                    <span class=""><a href="../display/EZP/eZ%2bPublish%2bPlatform%2bDocumentation.html">eZ Publish Platform 5.x</a></span>
-                            
-                
+                        
+                            <span class=""><a href="../display/EZP/eZ%2bPublish%2b5.html">eZ Publish 5.x</a></span>
+                                                                    
+                        
         <li>
-                
-
-                    <span class=""><a href="../display/EZP/eZ%2bPublish%2bPlatform%2bDocumentation.html">eZ Publish Platform Documentation</a></span>
-                            
-                
+                        
+                            <span class=""><a href="../display/EZP/eZ%2bPublish%2b5.html">eZ Publish 5.x Developer Documentation</a></span>
+                                                                    
+                        
         <li>
-                
-
-                    <span class=""><a href="viewpage6ff2.html?pageId=6291674">Development &amp; Administration Guides</a></span>
-                </ol>
+                        
+                            <span class=""><a href="viewpage6ff2.html?pageId=6291674">Development &amp; Administration Guides</a></span>
+                                                    </ol>
 
 
                 </div>
             
             <h1 id="title-text" class="with-breadcrumbs">
-                                        <a href="viewpage0139.html?pageId=11403666">eZ Publish 5 Architecture - Introduction &amp; Overview</a>
+                                        <a href="../display/EZP/Architecture.html">Architecture</a>
                             </h1>
         </div>
     </div>
@@ -629,6 +608,7 @@
 
 <div id="content" class="page view">
     
+
 
 <div id="action-messages">
                         </div>
@@ -678,12 +658,27 @@
 
     
             
-                            
+                                            
     
     
-    <a  id="content-metadata-page-restrictions" href="#" rel="nofollow"  class="hidden"   title="Restrictions apply">
+    <a  id="content-metadata-page-restrictions" href="#" rel="nofollow" class="hidden"   title="Restrictions apply">
                     <img alt="" src="../download/resources/com.atlassian.confluence.plugins.confluence-page-banner_page-banner-resources/images/red_padlock.png" height="16" width="16" title="">
-                <span></span>    </a>
+                <span>
+                        
+        </span>    </a>
+</li>
+                            <li class="page-metadata-item noprint">
+
+    
+        
+                                            
+    
+    
+    <a  id="content-metadata-attachments" href="viewpageattachmentsc9da.html?pageId=11403666&amp;metadataLink=true" rel="nofollow" class=""  accessKey="t"  title="2 attachments">
+                    <img alt="" src="../download/resources/com.atlassian.confluence.plugins.confluence-page-banner_page-banner-resources/images/grey_attach.png" height="16" width="16" title="">
+                <span>
+                        
+        </span>    </a>
 </li>
                         <li class="page-metadata-modification-info">
                 
@@ -692,12 +687,12 @@
         
     
         
-        
-            Created by <span class='author'>     <a href="../logine6fa.html"
+            
+            Created by <span class='author'>     <a href="../login6527.html"
                        class="url fn"
-                            >Ricardo Correia</a></span>, last modified by <span class='editor'>     <a href="../loginc848.html"
+                            >Ricardo Correia</a></span>, last modified by <span class='editor'>     <a href="../login2ee6.html"
                        class="url fn"
-                            >André Rømcke</a></span> on <a class='last-modified' title='Jul 28, 2014 07:24' href='diffpagesbyversiondca9.html?pageId=11403666&amp;selectedPageVersions=12&amp;selectedPageVersions=13'>Jul 28, 2014</a>
+                            >André Rømcke</a></span> on <a class='last-modified' title='Show changes' href='diffpagesbyversiond963.html?pageId=11403666&amp;selectedPageVersions=19&amp;selectedPageVersions=20'>Jan 29, 2016</a>
                 </li>
         </ul>
     </div>
@@ -711,52 +706,13 @@
                         <input type="hidden" title="browsePageTreeMode" value="view">
         </fieldset>
 
-        <div class="wiki-content">
+        <div id="main-content" class="wiki-content">
                            
-        <p><span style="color: rgb(0,0,0);text-decoration: none;">(Version : EZP &gt;= 5)<br /></span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">With the 5.0 release eZ Publish is making an important leap forwards in terms of technology.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"><style type='text/css'>/*<![CDATA[*/
-div.rbtoc1413876171803 {padding: 0px;}
-div.rbtoc1413876171803 ul {list-style: disc;margin-left: 0px;}
-div.rbtoc1413876171803 li {margin-left: 0px;padding-left: 0px;}
-
-/*]]>*/</style><div class='toc-macro rbtoc1413876171803'>
-<ul class='toc-indentation'>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-Whythischangeintechnology'>Why this change in technology</a></li>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-Whatarethechanges?'>What are the changes?</a></li>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-Whatwillbegained?'>What will be gained?</a>
-<ul class='toc-indentation'>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-Symfony2'>Symfony2</a></li>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-Twig'>Twig</a></li>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-Newstoragesystems'>New storage systems</a></li>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-RestAPI'>Rest API</a></li>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-PHPAPI'>PHP API</a></li>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-Compatibilitywiththelegacyarchitecture'>Compatibility with the legacy architecture</a></li>
-</ul>
-</li>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-Understandingthearchitectureinmoredetail'>Understanding the architecture in more detail</a>
-<ul class='toc-indentation'>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-Thetargetarchitecture:&quot;eZPlatform&quot;'>The target architecture: &quot;eZ Platform&quot;</a></li>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-The&quot;real&quot;version5.xarchitecture:&quot;Legacy&quot;and&quot;Platform&quot;together'>The &quot;real&quot; version 5.x architecture: &quot;Legacy&quot; and &quot;Platform&quot; together</a></li>
-</ul>
-</li>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-SummaryonthewaystouseeZPublish5'>Summary on the ways to use eZ Publish 5</a>
-<ul class='toc-indentation'>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-UsingeZPublish5infulllegacymode'>Using eZ Publish 5 in full legacy mode</a></li>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-Usingezpublish5.0throughthelegacystackbutrelyingonthenewcontrollerandnewtemplatesystemaswellasthenewkernel.'>Using ez publish 5.0 through the legacy stack but relying on the new controller and new template system as well as the new kernel.</a></li>
-<li><a href='#eZPublish5Architecture-Introduction&amp;Overview-Usingthebrandnew&quot;Platform&quot;architectureonly'>Using the brand new &quot;Platform&quot;architecture only</a></li>
-</ul>
-</li>
-</ul>
-</div></span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"><br />This document will explain why <strong>we are renewing our technology platform</strong>, and to some degree explain what this <strong>evolution in architecture</strong> means to eZ Publish developers and users, and last but not least <strong>how eZ Systems is affected</strong> by these changes.</span></p><h2 id="eZPublish5Architecture-Introduction&amp;Overview-Whythischangeintechnology"><span style="color: rgb(0,0,0);text-decoration: none;">Why this change in technology</span></h2><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">The background for the changes is to meet the challenges ahead:</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Customer and User Experience Management requirements</span><span style="color: rgb(0,0,0);text-decoration: none;">: beyond simple web content management, enable the building of any digital user experience</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Performance and scalability</span><span style="color: rgb(0,0,0);text-decoration: none;">: deliver on the ever increasing need for performance and scalability</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">The big data situation:</span><span style="color: rgb(0,0,0);text-decoration: none;">  embrace big data situation as an opportunity to build new digital services and not view it as a hurdle</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Fulfill the multichannel vision</span><span style="color: rgb(0,0,0);text-decoration: none;">: enable content to live in any screen, any app, any device</span></p></li></ul><p><span style="color: rgb(0,0,0);text-decoration: none;">The overall goal is <strong>to reach Digital Service Excellence</strong>, ie, we would like our partners to be able to offer the customers exactly what they want, within acceptable timeframes and price tags on the eZ Publish Platform.</span></p><h2 id="eZPublish5Architecture-Introduction&amp;Overview-Whatarethechanges?"><span style="color: rgb(0,0,0);text-decoration: none;">What are the changes?</span></h2><p><span style="color: rgb(0,0,0);text-decoration: none;">eZ Systems is now introducing the following as the new &quot;Platform&quot;:</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"><strong>An extended and sustainable Public API</strong>. This will speed up developments on the platform and improve their quality and maintainability both for eZ core developers and extension developers, which in turn will lead to more efficient implementation projects</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"><strong>An improved REST API</strong> with read and write functionality and support all the core content management functionality.  This way, eZ Publish will better integrate with any programming framework, for instance into mobile applications or any other web application. Better meaning faster and simpler. in order to fulfill the multichannel vision and execute on the User Experience demands and needs of customers and users of the eZ Publish platform</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Introducing <strong>Symfony</strong> as the PHP framework under the platform to make developers lives easier and to make developments on eZ Publish accessible for more developers to further support innovation in eZ Publish</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Introducing <strong>Twig as the template engine</strong> to simplify working with templates in eZ Publish. And as a standard template engine this will also make eZ Publish templating accessible to more developers</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Introducing<strong> a new storage system</strong> for scalability, performance and maintainability reasons</span></p></li></ul><p><span style="color: rgb(0,0,0);text-decoration: none;">And as a result of all these changes, a major last item is</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;">Introducing <strong>a backward compatibility</strong> between the new <em>&quot;Platform&quot;</em> architecture resulting from the above and the <em>&quot;legacy&quot;</em> architecture as known in eZ Publish 4.x</span></p></li></ul><h2 id="eZPublish5Architecture-Introduction&amp;Overview-Whatwillbegained?"><span style="color: rgb(0,0,0);text-decoration: none;">What will be gained?</span></h2><h3 id="eZPublish5Architecture-Introduction&amp;Overview-Symfony2"><span style="color: rgb(0,0,0);text-decoration: none;">Symfony2</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">With <a href="http://symfony.com/" class="external-link" rel="nofollow">Symfony</a> as the web framework eZ Publish will be more accessible. Thanks to the framework, it will be used for instance to extend eZ Publish applications with new features, potentially not based at all on the content repository (for example, business specific application logic) using a standard PHP framework and a very clean application design with minimum interlocking with eZ Publish itself.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">Any developer knowing Symfony will then be able to easily develop <a href="../display/EZP/Extensions.html">eZ Publish Bundles</a> <span style="color: rgb(0,0,0);text-decoration: none;">the equivalent of eZ Publish legacy extensions.</span><br /></span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">This will cater for :</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;">a better quality of the code</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;">a lower entry point to do developments in eZ Publish</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;">more innovation faster since more developers will use a standard PHP framework</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;">Symfony has an open-source community that will help developers</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;">Symfony is commercially backed up, so they are in it for the long run and Sensio Lab (maker of Symfony) will naturally extend the eZ offering to the framework level if need be.</span><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p></li></ul><h3 id="eZPublish5Architecture-Introduction&amp;Overview-Twig"><span style="color: rgb(0,0,0);text-decoration: none;">Twig</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">Initially, eZ Systems has developed its own templating engine. eZ has also worked and redeveloped a second one at some point as part of the eZ Component project. When designing eZ Publish 5, we knew the old template engine was not good enough anymore and needed to be replaced. We knew the eZ Components template engine we contributed and originated was an option, but we decided to go for another one: <a href="http://twig.sensiolabs.org/" class="external-link" rel="nofollow">Twig</a>. Reasons are multiple: quality of course (even if the eZ components one was also very high quality), integration and cohesion to use it with the Symfony stack and finally again the strength and size of the community using it today. Symfony has developed Twig as a standard template engine, and eZ Systems is using it to further the following:</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">to update the legacy template engine</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">to simplify template coding in eZ Publish</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">to have faster page rendering</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">to benefit of more features which were not in the original engine</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">to make extension developments easier to speed up innovation in eZ Publish</span><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p></li></ul><p><span style="color: rgb(0,0,0);text-decoration: none;">This is a move that will influence every stakeholder in the eZ Publish development. As developers will implement faster, this also mean project will significantly improve in total cost of ownership as well as in <strong>time to market</strong>.</span><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><h3 id="eZPublish5Architecture-Introduction&amp;Overview-Newstoragesystems"><span style="color: rgb(0,0,0);text-decoration: none;">New storage systems</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">In order to meet performance and scalability requirements in the future, eZ introduces new storage systems with the version 5 serie. </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">In 5.0, this storage system lives beside the legacy storage system and data model, but will use the new API to access the data. </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">Also in 5.0 version, this new storage engine only support MySQL relational database, nevertheless it is designed to allow the development of drivers for other storage engines through the Persistence SPI (service provider interface) and in the future will include drivers for NoSQL and Document based storage engine. </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">The ultimate goal is to open for custom storage developments. </span></p><h3 id="eZPublish5Architecture-Introduction&amp;Overview-RestAPI"><span style="color: rgb(0,0,0);text-decoration: none;">Rest API</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">In order to meet all multi-channel requirements we are developing a <a href="../display/EZP/eZ%2bPublish%2bREST%2bAPI.html">Rest API</a> that cover all core feature of content management so we can integrate with any application on any channel in any programming language. <br />The gain for users will be for anyone integrating eZ Publish with other applications, not only the development will be significantly improved but more importantly, the value of an API also lies in the <strong>maintainability and sustainability</strong> it offers. the new rest api is designed to stay and will remain identical in all future 5.x version. this means that development done on top of the api will seamlessly support eZ Publish version upgrades.</span></p><h3 id="eZPublish5Architecture-Introduction&amp;Overview-PHPAPI"><span style="color: rgb(0,0,0);text-decoration: none;">PHP API</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">The PHP API, also called <a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a>, is the development glue and will a create shield between internal and external developments on eZ Publish. This will cater for an easier maintainability of code and speed up the performance of eZ Publish. PHP developers will experience a better extensibility which in turn  will enable them to create extensions to eZ Publish faster and easier.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">The <span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a></span> is key to development speed, shorter projects and better quality. Important to be noted: the php api is the foundation for the rest api and the second is naturally relying on the first.<br /></span></p><h3 id="eZPublish5Architecture-Introduction&amp;Overview-Compatibilitywiththelegacyarchitecture"><span style="color: rgb(0,0,0);text-decoration: none;">Compatibility with the legacy architecture</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">When we introduce changes of this magnitude, eZ Systems as an international software house must also consider the reality of the installed customer base. Every installation must be able to take care of the old and create on the new architecture. <br />The reason for change is of course to be able to meet new requirements and the need to enable progressive changes.</span><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><h2 id="eZPublish5Architecture-Introduction&amp;Overview-Understandingthearchitectureinmoredetail"><span style="color: rgb(0,0,0);text-decoration: none;">Understanding the architecture in more detail</span></h2><h3 id="eZPublish5Architecture-Introduction&amp;Overview-Thetargetarchitecture:&quot;eZPlatform&quot;"><span style="color: rgb(0,0,0);text-decoration: none;">The target architecture: &quot;eZ Platform&quot;</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">The first important thing to understand about the new architecture is to explain it standalone, without considering the old legacy architecture. </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">The following diagram shows a simplistic view of this new architecture.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><img class="confluence-embedded-image confluence-external-resource" width="500" src="https://lh5.googleusercontent.com/HxSTBlMNSYkYyQxVCgj_zhHlEcl_YbKv14x8B65gZ1D8ROJilIQqk5zfblgJr4-EQOD5RCB5T_tMF1V7aNCQ0wOlTgugHLl8e1gSVEURJMvhqGecjvzx" data-image-src="https://lh5.googleusercontent.com/HxSTBlMNSYkYyQxVCgj_zhHlEcl_YbKv14x8B65gZ1D8ROJilIQqk5zfblgJr4-EQOD5RCB5T_tMF1V7aNCQ0wOlTgugHLl8e1gSVEURJMvhqGecjvzx"><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">The new architecture is layered and uses clearly defined API’s between the layers.</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">The <strong>business logic</strong> is defined in a new kernel. This business logic is exposed to applications via an API (the <span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a></span></span>). Developers rely on this to develop websites and web applications using Symfony to organize the way they develop the user interface layer. </span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">User interfaces are developed using the Twig template engine but directly querying the <span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a></span></span>.</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Integration of eZ Publish in other applications are done using the <span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/eZ%2bPublish%2bREST%2bAPI.html">Rest API</a></span>, which itself relies also on the <span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a></span></span>.</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">finally development of extensions of eZ Publish is done using the Symfony framework when it comes to the structure of the code, and once again relying on the Public API when it comes to accessing content management functions</span></p></li></ul><p><span style="color: rgb(0,0,0);text-decoration: none;">To a lower level, the new architecture also totally redefined the way the system store data. while this is not finalized in version 5.0 (where the new storage system is only shipped with MySQL support), the architecture, when finalized will rely on a storage API that will be used to develop drivers to any kind of storage subsystem.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">A motto for this new architecture is to <strong>heavily use APIs</strong> that will be maintained on the long term to <strong>ease upgrades and provide lossless couplings</strong> between each part of the architecture, improving the migration capabilities of the system at the same time. </span></p><h3 id="eZPublish5Architecture-Introduction&amp;Overview-The&quot;real&quot;version5.xarchitecture:&quot;Legacy&quot;and&quot;Platform&quot;together"><span style="color: rgb(0,0,0);text-decoration: none;">The &quot;real&quot; version 5.x architecture: &quot;Legacy&quot; and &quot;Platform&quot; together</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">The chapter above is only explaining the new architecture but, as mentioned, version 5 also offers a way to run the <em>legacy</em> eZ Publish stack, in order to simplify upgrade and switch to version 5. This result in the end in a more sophisticated architecture that is illustrated in the diagram below.</span></p><p><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span><img class="confluence-embedded-image confluence-external-resource" width="500" src="https://lh4.googleusercontent.com/-HnGbujQWt5MWUdOYkKK_6nBj3sc-vaFEuSzRPaEto-Hi_LRqKQZcf014eJ2e0be8P4yVwfAq8D4y0A4p2PahKy9f6Kd3gDMv0A0X1lwNhV8HDu-0IJ2" data-image-src="https://lh4.googleusercontent.com/-HnGbujQWt5MWUdOYkKK_6nBj3sc-vaFEuSzRPaEto-Hi_LRqKQZcf014eJ2e0be8P4yVwfAq8D4y0A4p2PahKy9f6Kd3gDMv0A0X1lwNhV8HDu-0IJ2"><span style="color: rgb(0,0,0);text-decoration: none;"> </span><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">The main difference is, <strong>the cohabitation</strong> between the new architecture explained in the previous chapter (on the right) and the previous architecture (on the left).</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">If we look at the old architecture, we can see that it is more monolithic: no defined public PHP API, a business logic implemented in the kernel but very dependent of the storage system and the underlying data model, an existing rest api but limited to read access to the content repository.</span><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><strong><span style="color: rgb(0,0,0);text-decoration: none;">This whole legacy architecture is in its whole included with version 5, and can be used as is.</span></strong></p><p><span style="color: rgb(0,0,0);text-decoration: none;">This means that, for people having developed 4.x websites and that are reluctant to invest time in migrating or even learning the new architecture components, they can use version 5 exactly as they were using version 4. Even the controller (access to the application through the web server) can totally bypass the new architecture (in that case the Symfony framework controller) and directly call the legacy eZ Publish controller and the legacy template engine.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">On its side, the new architecture has been implemented, and eZ will implement new features and applications on top of it subsequently. So, as part of 5.0, the new architecture is in place, but does not provide yet the full application scope.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">What is more interesting to understand is how these two integrate:</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><ol><li><span style="color: rgb(0,0,0);text-decoration: none;">First on the presentation side, the new eZ Publish 5 controller makes it <strong>possible to serve pages and functions that are either resulting from the new template engine or the legacy template engine</strong>. This is a first level of dual compatibility that will help developers in a smooth transition from one architecture to the other, starting with legacy templates and progressively replacing them with templates for the new system, Twig.</span><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span></li><li><span style="color: rgb(0,0,0);text-decoration: none;">Second, on the api side, the <span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a></span></span></span> has been designed to work against the business logic and <strong>to be used either on top of the legacy storage or on top of the new storage system</strong>. This means that, by implementing the new architecture and embracing the PHP Public API, developers enable <strong>an easy transition from the old data model to the new one.</strong>  An extension developed on top of the <span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a></span></span></span> will equally work on an old content repository or on a brand new one based on the new architecture.</span></li></ol><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">These two ways to implement a compatibility between the past architecture and the new one offers a wide range of possibilities and a smooth transition path.</span></p><h2 id="eZPublish5Architecture-Introduction&amp;Overview-SummaryonthewaystouseeZPublish5"><span style="color: rgb(0,0,0);text-decoration: none;">Summary on the ways to use eZ Publish 5</span></h2><h3 id="eZPublish5Architecture-Introduction&amp;Overview-UsingeZPublish5infulllegacymode"><span style="color: rgb(0,0,0);text-decoration: none;">Using eZ Publish 5 in full legacy mode</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">This way is the less disruptive. In this way, eZ Publish 5.0 totally behave as if it was an eZ Publish 4.7, or we should say 4.8. This is ideal for users who have large existing applications with large amount of data and who are not willing to invest in learning and migrating them immediately.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">In this way, even the siteaccess and vhost configuration bypass the legacy stack, and developers will see almost no differences.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><img class="confluence-embedded-image confluence-external-resource" width="500" src="https://lh6.googleusercontent.com/Ad_iBlE0hJCQMJT8WGO5-6Hvx1OxMt5xJCMNZVgJ5kL_4_Gp-TCi5_Zd5DMz0LZXv8AY3hrPvmtQtY2Qh_lheRF9Oa76iwSMRs6dMyWhotL4hvIPCB5R" data-image-src="https://lh6.googleusercontent.com/Ad_iBlE0hJCQMJT8WGO5-6Hvx1OxMt5xJCMNZVgJ5kL_4_Gp-TCi5_Zd5DMz0LZXv8AY3hrPvmtQtY2Qh_lheRF9Oa76iwSMRs6dMyWhotL4hvIPCB5R"><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><br /><span style="color: rgb(102,102,102);text-decoration: none;"> </span></p><h3 id="eZPublish5Architecture-Introduction&amp;Overview-Usingezpublish5.0throughthelegacystackbutrelyingonthenewcontrollerandnewtemplatesystemaswellasthenewkernel."><span style="color: rgb(0,0,0);text-decoration: none;">Using ez publish 5.0 through the legacy stack but relying on the new controller and new template system as well as the new kernel.</span></h3><p><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">This way offers a transition and allows to combine old template and new templates in the same application. In this case, the users will rely on the administration interface of eZ Publish as well as on the ez tool bar for front-end editing, through the legacy templates, but the front end will be either based on legacy or new twig based templates.</span></p><p><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">In this model, the two kernels can be used and the system can this way benefit from the Public API and the new REST API built on top.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><img class="confluence-embedded-image confluence-external-resource" width="500" src="https://lh5.googleusercontent.com/Lk9x17V7USgSzT537l_PBhrPFWQzQXev9LkK5PwBDXSGHD2H5CGAAobyk5kCTJ_QOgZj0LptwkiNA31kykr9QcY9fFFFakkHBXbNM1NgRsMduk-XrpJA" data-image-src="https://lh5.googleusercontent.com/Lk9x17V7USgSzT537l_PBhrPFWQzQXev9LkK5PwBDXSGHD2H5CGAAobyk5kCTJ_QOgZj0LptwkiNA31kykr9QcY9fFFFakkHBXbNM1NgRsMduk-XrpJA"><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><h3 id="eZPublish5Architecture-Introduction&amp;Overview-Usingthebrandnew&quot;Platform&quot;architectureonly"><span style="color: rgb(102,102,102);text-decoration: none;"><span style="color: rgb(0,0,0);">Using the brand new &quot;Platform&quot;architecture only</span> </span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">This case is the one that will deliver very strong improvements in scalability and performance, in this case the whole new architecture is used and there is no way to reuse components from the legacy architecture. </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">This means that:</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">the administration interface is not available in 5.0</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">existing templates and site won't run without having been migrated</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">the old storage system is not used any more</span></p></li></ul><p><span style="color: rgb(0,0,0);text-decoration: none;"> <em>Note: because of these restrictions, a new storage engine has not been made yet. Similar setup can use the &quot;Legacy storage engine&quot; for the time being to be ready to migrate data and not have to change code when a new engine is added in the future.</em></span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">While this might sound restricting for the time being, it is clearly the foundation of the future of eZ Publish. </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">In the context of eZ Publish 5, it can be useful for new projects relying only on the concept of &quot;content as a service&quot; the platform is a high performance and scalability content repository with very advanced services but provide no editorial user interface. for traditional content management.</span></p><p><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span><img class="confluence-embedded-image confluence-external-resource" width="500" src="https://lh4.googleusercontent.com/f-3X7xtnw6j-powG51msjXYT1HrJy4fah-bEK0lsmgxGrMiBixIoX9sQw78tjyNKD7xNqwauoDJJj4BJjl1XJoCcAvNKEp-TceIw5yKyJv7WlBmUi03g" data-image-src="https://lh4.googleusercontent.com/f-3X7xtnw6j-powG51msjXYT1HrJy4fah-bEK0lsmgxGrMiBixIoX9sQw78tjyNKD7xNqwauoDJJj4BJjl1XJoCcAvNKEp-TceIw5yKyJv7WlBmUi03g"></p>    <div class="aui-message hint shadowed information-macro">
-                    <p class="title">Video : Overview of the eZ Publish 5 architecture</p>
-                            <span class="aui-icon icon-hint">Icon</span>
-                <div class="message-content">
-                            <p> Learn more with this video :</p><p><iframe class="youtube-player" type="text/html" style="width: 400px; height: 300px"
+        <p><span style="color: rgb(0,0,0);text-decoration: none;"><span class="status-macro aui-lozenge aui-lozenge-success">5.X</span><br /></span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">With the introduction of 5.x in 2012, eZ Publish made an important leap forwards in terms of technology, introducing a new architecture side by side with the 4.x based &quot;Legacy&quot;, allowing user to gradually migrate towards what by 2015 was set to become the 6th generation eZ CMS: <a href="../display/TECHDOC/Architecture.html">eZ Platform</a>.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"><div class="toc-macro client-side-toc-macro " data-headerelements="H1,H2,H3,H4,H5,H6,H7"></div></span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);">In summary eZ Publish 5.0 introduces a new technology stack referred to as &quot;Platform&quot; </span><em>(earlier sometimes referred to as &quot;new stack&quot;, &quot;6.x stack&quot; or &quot;Symfony stack&quot;)</em><span style="color: rgb(0,0,0);"> next to the existing eZ Publish 4.x technology, herby referred to as </span><em>Legacy.</em><span style="color: rgb(0,0,0);"> Platform Stack will throughout the 5.x series mature for each release until it becomes ready to be next evolution of eZ Publish. This approach allows for very high degree of forward and backwards compatibility.</span></span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">This document will explain why <strong>we are renewing our technology platform</strong>, and to some degree explain what this <strong>evolution in architecture</strong> means to eZ Publish developers and users, and last but not least <strong>how eZ Systems is affected</strong> by these changes.</span></p><h2 id="Architecture-Whythischangeintechnology"><span style="color: rgb(0,0,0);text-decoration: none;">Why this change in technology</span></h2><p><span style="color: rgb(0,0,0);">The background for the changes is to meet the challenges ahead:</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Customer and User Experience Management requirements</span><span style="color: rgb(0,0,0);text-decoration: none;">: beyond simple web content management, enable the building of any digital user experience</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Performance and scalability</span><span style="color: rgb(0,0,0);text-decoration: none;">: deliver on the ever increasing need for performance and scalability</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">The big data situation:</span><span style="color: rgb(0,0,0);text-decoration: none;">  embrace big data situation as an opportunity to build new digital services and not view it as a hurdle</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Fulfill the multichannel vision</span><span style="color: rgb(0,0,0);text-decoration: none;">: enable content to live in any screen, any app, any device</span></p></li></ul><p><span style="color: rgb(0,0,0);text-decoration: none;">The overall goal is <strong>to reach Digital Service Excellence</strong>, ie, we would like our partners to be able to offer the customers exactly what they want, within acceptable timeframes and price tags on the eZ Publish Platform.</span></p><h2 id="Architecture-Whatarethechanges?"><span style="color: rgb(0,0,0);text-decoration: none;">What are the changes?</span></h2><p><span style="color: rgb(0,0,0);text-decoration: none;">eZ Systems is now introducing the following as the new &quot;Platform&quot;:</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"><strong>An extended and sustainable Public API</strong>. This will speed up developments on the platform and improve their quality and maintainability both for eZ core developers and extension developers, which in turn will lead to more efficient implementation projects</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"><strong>An improved REST API</strong> with read and write functionality and support all the core content management functionality.  This way, eZ Publish will better integrate with any programming framework, for instance into mobile applications or any other web application. Better meaning faster and simpler. in order to fulfill the multichannel vision and execute on the User Experience demands and needs of customers and users of the eZ Publish platform</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Introducing <strong>Symfony</strong> as the Web Framework (PHP) under the platform to make developers lives easier and to make developments on eZ Publish accessible for more developers to further support innovation in eZ Publish</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Introducing <strong>Twig as the template engine</strong> to simplify working with templates in eZ Publish. And as a standard template engine this will also make eZ Publish templating accessible to more developers</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Introducing<strong> a new storage system</strong> for scalability, performance and maintainability reasons</span></p></li></ul><p><span style="color: rgb(0,0,0);text-decoration: none;">And as a result of all these changes, a major last item is</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;">Introducing <strong>a backward compatibility</strong> between the new <em>&quot;Platform&quot;</em> architecture resulting from the above and the <em>&quot;legacy&quot;</em> architecture as known in eZ Publish 4.x</span></p></li></ul><h2 id="Architecture-Whatwillbegained?"><span style="color: rgb(0,0,0);text-decoration: none;">What will be gained?</span></h2><h3 id="Architecture-Symfony2"><span style="color: rgb(0,0,0);text-decoration: none;">Symfony2</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">With <a href="http://symfony.com/" class="external-link" rel="nofollow">Symfony</a> as the web framework eZ Publish will be more accessible. Thanks to the framework, it will be used for instance to extend eZ Publish applications with new features, potentially not based at all on the content repository (for example, business specific application logic) using a standard PHP framework and a very clean application design with minimum interlocking with eZ Publish itself.</span></p><p><span style="color: rgb(0,0,0);">Any developer knowing Symfony will then be able to easily develop </span><a href="../display/EZP/Extensions.html">eZ Publish Bundles</a><span style="color: rgb(0,0,0);"> </span><span style="color: rgb(0,0,0);text-decoration: none;">the equivalent of eZ Publish legacy extensions.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">This will cater for :</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;">a better quality of the code</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;">a lower entry point to do developments in eZ Publish</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;">more innovation faster since more developers will use a standard PHP framework</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;">Symfony has an open-source community that will help developers</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;">Symfony is commercially backed up, so they are in it for the long run and Sensio Lab (maker of Symfony) will naturally extend the eZ offering to the framework level if need be.</span><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p></li></ul><h3 id="Architecture-Twig"><span style="color: rgb(0,0,0);text-decoration: none;">Twig</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">Initially, eZ Systems has developed its own templating engine. eZ has also worked and redeveloped a second one at some point as part of the eZ Component project. When designing eZ Publish 5, we knew the old template engine was not good enough anymore and needed to be replaced. We knew the eZ Components template engine we contributed and originated was an option, but we decided to go for another one: <a href="http://twig.sensiolabs.org/" class="external-link" rel="nofollow">Twig</a>. Reasons are multiple: quality of course (even if the eZ components one was also very high quality), integration and cohesion to use it with the Symfony stack and finally again the strength and size of the community using it today. Symfony has developed Twig as a standard template engine, and eZ Systems is using it to further the following:</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">to update the legacy template engine</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">to simplify template coding in eZ Publish</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">to have faster page rendering</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">to benefit of more features which were not in the original engine</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">to make extension developments easier to speed up innovation in eZ Publish</span><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p></li></ul><p><span style="color: rgb(0,0,0);text-decoration: none;">This is a move that will influence every stakeholder in the eZ Publish development. As developers will implement faster, this also mean project will significantly improve in total cost of ownership as well as in <strong>time to market</strong>.</span><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><h3 id="Architecture-Newstoragesystems"><span style="color: rgb(0,0,0);text-decoration: none;">New storage systems</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">In order to meet performance and scalability requirements in the future, eZ introduces new storage systems with the version 5 serie. </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">In 5.0, this storage system lives beside the legacy storage system and data model, but will use the new API to access the data. </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">Also in 5.0 version, this new storage engine only support MySQL relational database, nevertheless it is designed to allow the development of drivers for other storage engines through the Persistence SPI (service provider interface) and in the future will include drivers for NoSQL and Document based storage engine. </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">The ultimate goal is to open for custom storage developments. </span></p><h3 id="Architecture-RestAPI"><span style="color: rgb(0,0,0);text-decoration: none;">Rest API</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">In order to meet all multi-channel requirements we are developing a <a href="../display/EZP/eZ%2bPublish%2bREST%2bAPI.html">Rest API</a> that cover all core feature of content management so we can integrate with any application on any channel in any programming language. <br />The gain for users will be for anyone integrating eZ Publish with other applications, not only the development will be significantly improved but more importantly, the value of an API also lies in the <strong>maintainability and sustainability</strong> it offers. the new rest api is designed to stay and will remain identical in all future 5.x version. this means that development done on top of the api will seamlessly support eZ Publish version upgrades.</span></p><h3 id="Architecture-PHPAPI"><span style="color: rgb(0,0,0);text-decoration: none;">PHP API</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">The PHP API, also called <a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a>, is the development glue and will a create shield between internal and external developments on eZ Publish. This will cater for an easier maintainability of code and speed up the performance of eZ Publish. PHP developers will experience a better extensibility which in turn  will enable them to create extensions to eZ Publish faster and easier.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">The <span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a></span> is key to development speed, shorter projects and better quality. Important to be noted: the php api is the foundation for the rest api and the second is naturally relying on the first.<br /></span></p><h3 id="Architecture-Compatibilitywiththelegacyarchitecture"><span style="color: rgb(0,0,0);text-decoration: none;">Compatibility with the legacy architecture</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">When we introduce changes of this magnitude, eZ Systems as an international software house must also consider the reality of the installed customer base. Every installation must be able to take care of the old and create on the new architecture. <br />The reason for change is of course to be able to meet new requirements and the need to enable progressive changes.</span><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><h2 id="Architecture-Understandingthearchitectureinmoredetail"><span style="color: rgb(0,0,0);text-decoration: none;">Understanding the architecture in more detail</span></h2><h3 id="Architecture-Thetargetarchitecture:&quot;eZPlatform&quot;"><span style="color: rgb(0,0,0);text-decoration: none;">The target architecture: &quot;eZ Platform&quot;</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">The first important thing to understand about the new architecture is to explain it standalone, without considering the old legacy architecture. </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">The following diagram shows a simplistic view of this new architecture, and a more detailed view for developers.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Simplified view</th><th class="confluenceTh">Detailed view</th></tr><tr><td class="confluenceTd"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" width="500" src="https://lh5.googleusercontent.com/HxSTBlMNSYkYyQxVCgj_zhHlEcl_YbKv14x8B65gZ1D8ROJilIQqk5zfblgJr4-EQOD5RCB5T_tMF1V7aNCQ0wOlTgugHLl8e1gSVEURJMvhqGecjvzx" data-image-src="https://lh5.googleusercontent.com/HxSTBlMNSYkYyQxVCgj_zhHlEcl_YbKv14x8B65gZ1D8ROJilIQqk5zfblgJr4-EQOD5RCB5T_tMF1V7aNCQ0wOlTgugHLl8e1gSVEURJMvhqGecjvzx"></span></td><td class="confluenceTd"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="400" src="../download/attachments/11403666/ez5-architecture%205.4.55c9f.png?version=3&amp;modificationDate=1442319232000&amp;api=v2" data-image-src="/download/attachments/11403666/ez5-architecture%205.4.5.png?version=3&amp;modificationDate=1442319232000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="30704997" data-linked-resource-version="3" data-linked-resource-type="attachment" data-linked-resource-default-alias="ez5-architecture 5.4.5.png" data-base-url="https://doc.ez.no" data-linked-resource-content-type="image/png" data-linked-resource-container-id="11403666" data-linked-resource-container-version="20"></span></td></tr></tbody></table></div><p><span style="color: rgb(0,0,0);text-decoration: none;"><br /></span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">The new architecture is layered and uses clearly defined API’s between the layers.</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">The <strong>business logic</strong> is defined in a new kernel. This business logic is exposed to applications via an API (the <span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a></span></span>). Developers rely on this to develop websites and web applications using Symfony to organize the way they develop the user interface layer. </span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">User interfaces are developed using the Twig template engine but directly querying the <span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a></span></span>.</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">Integration of eZ Publish in other applications are done using the <span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/eZ%2bPublish%2bREST%2bAPI.html">Rest API</a></span>, which itself relies also on the <span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a></span></span>.</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">finally development of extensions of eZ Publish is done using the Symfony framework when it comes to the structure of the code, and once again relying on the Public API when it comes to accessing content management functions</span></p></li></ul><p><span style="color: rgb(0,0,0);text-decoration: none;">To a lower level, the new architecture also totally redefined the way the system store data. while this is not finalized in version 5.0 (where the new storage system is only shipped with MySQL support), the architecture, when finalized will rely on a storage API that will be used to develop drivers to any kind of storage subsystem.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">A motto for this new architecture is to <strong>heavily use APIs</strong> that will be maintained on the long term to <strong>ease upgrades and provide lossless couplings</strong> between each part of the architecture, improving the migration capabilities of the system at the same time. </span></p><p> </p><h3 id="Architecture-The&quot;real&quot;version5.xarchitecture:&quot;Legacy&quot;and&quot;Platform&quot;together"><span style="color: rgb(0,0,0);text-decoration: none;">The &quot;real&quot; version 5.x architecture: &quot;Legacy&quot; and &quot;Platform&quot; together</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">The chapter above is only explaining the new architecture but, as mentioned, version 5 also offers a way to run the <em>legacy</em> eZ Publish stack, in order to simplify upgrade and switch to version 5. This result in the end in a more sophisticated architecture that is illustrated in the diagram below.</span></p><p><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" width="500" src="https://lh4.googleusercontent.com/-HnGbujQWt5MWUdOYkKK_6nBj3sc-vaFEuSzRPaEto-Hi_LRqKQZcf014eJ2e0be8P4yVwfAq8D4y0A4p2PahKy9f6Kd3gDMv0A0X1lwNhV8HDu-0IJ2" data-image-src="https://lh4.googleusercontent.com/-HnGbujQWt5MWUdOYkKK_6nBj3sc-vaFEuSzRPaEto-Hi_LRqKQZcf014eJ2e0be8P4yVwfAq8D4y0A4p2PahKy9f6Kd3gDMv0A0X1lwNhV8HDu-0IJ2"></span><span style="color: rgb(0,0,0);text-decoration: none;"> </span><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">The main difference is, <strong>the cohabitation</strong> between the new architecture explained in the previous chapter (on the right) and the previous architecture (on the left).</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">If we look at the old architecture, we can see that it is more monolithic: no defined public PHP API, a business logic implemented in the kernel but very dependent of the storage system and the underlying data model, an existing rest api but limited to read access to the content repository.</span><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><strong><span style="color: rgb(0,0,0);text-decoration: none;">This whole legacy architecture is in its whole included with version 5, and can be used as is.</span></strong></p><p><span style="color: rgb(0,0,0);text-decoration: none;">This means that, for people having developed 4.x websites and that are reluctant to invest time in migrating or even learning the new architecture components, they can use version 5 exactly as they were using version 4. Even the controller (access to the application through the web server) can totally bypass the new architecture (in that case the Symfony framework controller) and directly call the legacy eZ Publish controller and the legacy template engine.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">On its side, the new architecture has been implemented, and eZ will implement new features and applications on top of it subsequently. So, as part of 5.0, the new architecture is in place, but does not provide yet the full application scope.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">What is more interesting to understand is how these two integrate:</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><ol><li><span style="color: rgb(0,0,0);text-decoration: none;">First on the presentation side, the new eZ Publish 5 controller makes it <strong>possible to serve pages and functions that are either resulting from the new template engine or the legacy template engine</strong>. This is a first level of dual compatibility that will help developers in a smooth transition from one architecture to the other, starting with legacy templates and progressively replacing them with templates for the new system, Twig.</span><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span></li><li><span style="color: rgb(0,0,0);text-decoration: none;">Second, on the api side, the <span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a></span></span></span> has been designed to work against the business logic and <strong>to be used either on top of the legacy storage or on top of the new storage system</strong>. This means that, by implementing the new architecture and embracing the PHP Public API, developers enable <strong>an easy transition from the old data model to the new one.</strong>  An extension developed on top of the <span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,0,0);text-decoration: none;"><a href="../display/EZP/Public%2bAPI%2bbasics.html">Public API</a></span></span></span> will equally work on an old content repository or on a brand new one based on the new architecture.</span></li></ol><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">These two ways to implement a compatibility between the past architecture and the new one offers a wide range of possibilities and a smooth transition path.</span></p><h2 id="Architecture-SummaryonthewaystouseeZPublish5"><span style="color: rgb(0,0,0);text-decoration: none;">Summary on the ways to use eZ Publish 5</span></h2><h3 id="Architecture-UsingeZPublish5infulllegacymode"><span style="color: rgb(0,0,0);text-decoration: none;">Using eZ Publish 5 in full legacy mode</span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">This way is the less disruptive. In this way, eZ Publish 5.0 totally behave as if it was an eZ Publish 4.7, or we should say 4.8. This is ideal for users who have large existing applications with large amount of data and who are not willing to invest in learning and migrating them immediately.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">In this way, even the siteaccess and vhost configuration bypass the legacy stack, and developers will see almost no differences.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" width="500" src="https://lh6.googleusercontent.com/Ad_iBlE0hJCQMJT8WGO5-6Hvx1OxMt5xJCMNZVgJ5kL_4_Gp-TCi5_Zd5DMz0LZXv8AY3hrPvmtQtY2Qh_lheRF9Oa76iwSMRs6dMyWhotL4hvIPCB5R" data-image-src="https://lh6.googleusercontent.com/Ad_iBlE0hJCQMJT8WGO5-6Hvx1OxMt5xJCMNZVgJ5kL_4_Gp-TCi5_Zd5DMz0LZXv8AY3hrPvmtQtY2Qh_lheRF9Oa76iwSMRs6dMyWhotL4hvIPCB5R"></span><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><br /><span style="color: rgb(102,102,102);text-decoration: none;"> </span></p><h3 id="Architecture-Usingezpublish5.0throughthelegacystackbutrelyingonthenewcontrollerandnewtemplatesystemaswellasthenewkernel."><span style="color: rgb(0,0,0);text-decoration: none;">Using ez publish 5.0 through the legacy stack but relying on the new controller and new template system as well as the new kernel.</span></h3><p><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">This way offers a transition and allows to combine old template and new templates in the same application. In this case, the users will rely on the administration interface of eZ Publish as well as on the ez tool bar for front-end editing, through the legacy templates, but the front end will be either based on legacy or new twig based templates.</span></p><p><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">In this model, the two kernels can be used and the system can this way benefit from the Public API and the new REST API built on top.</span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" width="500" src="https://lh5.googleusercontent.com/Lk9x17V7USgSzT537l_PBhrPFWQzQXev9LkK5PwBDXSGHD2H5CGAAobyk5kCTJ_QOgZj0LptwkiNA31kykr9QcY9fFFFakkHBXbNM1NgRsMduk-XrpJA" data-image-src="https://lh5.googleusercontent.com/Lk9x17V7USgSzT537l_PBhrPFWQzQXev9LkK5PwBDXSGHD2H5CGAAobyk5kCTJ_QOgZj0LptwkiNA31kykr9QcY9fFFFakkHBXbNM1NgRsMduk-XrpJA"></span><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><h3 id="Architecture-Usingthebrandnew&quot;Platform&quot;architectureonly"><span style="color: rgb(102,102,102);text-decoration: none;"><span style="color: rgb(0,0,0);">Using the brand new &quot;Platform&quot;architecture only</span> </span></h3><p><span style="color: rgb(0,0,0);text-decoration: none;">This case is the one that will deliver very strong improvements in scalability and performance, in this case the whole new architecture is used and there is no way to reuse components from the legacy architecture. </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;"> </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">This means that:</span></p><ul><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">the administration interface is not available in 5.0</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">existing templates and site won't run without having been migrated</span></p></li><li style="text-decoration: none;"><p><span style="color: rgb(0,0,0);text-decoration: none;">the old storage system is not used any more</span></p></li></ul><p><span style="color: rgb(0,0,0);text-decoration: none;"> <em>Note: because of these restrictions, a new storage engine has not been made yet. Similar setup can use the &quot;Legacy storage engine&quot; for the time being to be ready to migrate data and not have to change code when a new engine is added in the future.</em></span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">While this might sound restricting for the time being, it is clearly the foundation of the future of eZ Publish. </span></p><p><span style="color: rgb(0,0,0);text-decoration: none;">In the context of eZ Publish 5, it can be useful for new projects relying only on the concept of &quot;content as a service&quot; the platform is a high performance and scalability content repository with very advanced services but provide no editorial user interface. for traditional content management.</span></p><p><br /><span style="color: rgb(0,0,0);text-decoration: none;"> </span><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" width="500" src="https://lh4.googleusercontent.com/f-3X7xtnw6j-powG51msjXYT1HrJy4fah-bEK0lsmgxGrMiBixIoX9sQw78tjyNKD7xNqwauoDJJj4BJjl1XJoCcAvNKEp-TceIw5yKyJv7WlBmUi03g" data-image-src="https://lh4.googleusercontent.com/f-3X7xtnw6j-powG51msjXYT1HrJy4fah-bEK0lsmgxGrMiBixIoX9sQw78tjyNKD7xNqwauoDJJj4BJjl1XJoCcAvNKEp-TceIw5yKyJv7WlBmUi03g"></span></p><div class="confluence-information-macro confluence-information-macro-information"><p class="title">Video : Overview of the eZ Publish 5 architecture</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p> Learn more with this video :</p><p><iframe class="youtube-player" type="text/html" style="width: 400px; height: 300px"
 	src="http://www.youtube.com/embed/cJmor1gQj1c?wmode=opaque" frameborder="0">
 </iframe>
     
-</p>
-                    </div>
-    </div>
+</p></div></div>
 
                 
         
@@ -768,9 +724,9 @@ div.rbtoc1413876171803 li {margin-left: 0px;padding-left: 0px;}
          xmlns:dc="http://purl.org/dc/elements/1.1/"
          xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
          <rdf:Description
-    rdf:about="https://doc.ez.no/pages/viewpage.action?pageId=11403666"
-    dc:identifier="https://doc.ez.no/pages/viewpage.action?pageId=11403666"
-    dc:title="eZ Publish 5 Architecture - Introduction &amp; Overview"
+    rdf:about="https://doc.ez.no/display/EZP/Architecture"
+    dc:identifier="https://doc.ez.no/display/EZP/Architecture"
+    dc:title="Architecture"
     trackback:ping="https://doc.ez.no/rpc/trackback/11403666"/>
 </rdf:RDF>
 -->
@@ -785,78 +741,13 @@ div.rbtoc1413876171803 li {margin-left: 0px;padding-left: 0px;}
 	<div class="labels-content">
 		
     <ul class="label-list label-list-right ">
-            
-
-<li class="aui-label " data-label-id="21430309">
-    <a class="aui-label-split-main" href="../label/EZP/publish.html">publish</a>
-    </li><li class="aui-label " data-label-id="21430310">
-    <a class="aui-label-split-main" href="../label/EZP/quality.html">quality</a>
-    </li><li class="aui-label " data-label-id="21430311">
-    <a class="aui-label-split-main" href="../label/EZP/relying.html">relying</a>
-    </li><li class="aui-label " data-label-id="20971538">
-    <a class="aui-label-split-main" href="../label/EZP/rest.html">rest</a>
-    </li><li class="aui-label " data-label-id="21430312">
-    <a class="aui-label-split-main" href="../label/EZP/scalability.html">scalability</a>
-    </li><li class="aui-label " data-label-id="21430313">
-    <a class="aui-label-split-main" href="../label/EZP/stack.html">stack</a>
-    </li><li class="aui-label " data-label-id="21430314">
-    <a class="aui-label-split-main" href="../label/EZP/storage.html">storage</a>
-    </li><li class="aui-label " data-label-id="20971529">
-    <a class="aui-label-split-main" href="../label/EZP/symfony.html">symfony</a>
-    </li><li class="aui-label " data-label-id="21430316">
-    <a class="aui-label-split-main" href="../label/EZP/system.html">system</a>
-    </li><li class="aui-label " data-label-id="21430317">
-    <a class="aui-label-split-main" href="../label/EZP/template.html">template</a>
-    </li><li class="aui-label " data-label-id="21430305">
-    <a class="aui-label-split-main" href="../label/EZP/twig.html">twig</a>
-    </li><li class="aui-label " data-label-id="21430319">
-    <a class="aui-label-split-main" href="../label/EZP/user.html">user</a>
-    </li><li class="aui-label " data-label-id="21430320">
-    <a class="aui-label-split-main" href="../label/EZP/version.html">version</a>
-    </li><li class="aui-label " data-label-id="21430322">
-    <a class="aui-label-split-main" href="../label/EZP/engine.html">engine</a>
-    </li><li class="aui-label " data-label-id="21430324">
-    <a class="aui-label-split-main" href="../label/EZP/framework.html">framework</a>
-    </li><li class="aui-label " data-label-id="21430326">
-    <a class="aui-label-split-main" href="../label/EZP/improve.html">improve</a>
-    </li><li class="aui-label " data-label-id="21430327">
-    <a class="aui-label-split-main" href="../label/EZP/integrate.html">integrate</a>
-    </li><li class="aui-label " data-label-id="21430328">
-    <a class="aui-label-split-main" href="../label/EZP/interface.html">interface</a>
-    </li><li class="aui-label " data-label-id="21430329">
-    <a class="aui-label-split-main" href="../label/EZP/kernel.html">kernel</a>
-    </li><li class="aui-label " data-label-id="20381712">
-    <a class="aui-label-split-main" href="../label/EZP/legacy.html">legacy</a>
-    </li><li class="aui-label " data-label-id="21430330">
-    <a class="aui-label-split-main" href="../label/EZP/maintainability.html">maintainability</a>
-    </li><li class="aui-label " data-label-id="21430332">
-    <a class="aui-label-split-main" href="../label/EZP/performance.html">performance</a>
-    </li><li class="aui-label " data-label-id="21430275">
-    <a class="aui-label-split-main" href="../label/EZP/platform.html">platform</a>
-    </li><li class="aui-label " data-label-id="21430333">
-    <a class="aui-label-split-main" href="../label/EZP/projects.html">projects</a>
-    </li><li class="aui-label " data-label-id="21430334">
-    <a class="aui-label-split-main" href="../label/EZP/access.html">access</a>
-    </li><li class="aui-label " data-label-id="13336585">
-    <a class="aui-label-split-main" href="../label/EZP/api.html">api</a>
-    </li><li class="aui-label " data-label-id="21430335">
-    <a class="aui-label-split-main" href="../label/EZP/applications.html">applications</a>
-    </li><li class="aui-label " data-label-id="21430336">
-    <a class="aui-label-split-main" href="../label/EZP/architecture.html">architecture</a>
-    </li><li class="aui-label " data-label-id="21430338">
-    <a class="aui-label-split-main" href="../label/EZP/business.html">business</a>
-    </li><li class="aui-label " data-label-id="21430340">
-    <a class="aui-label-split-main" href="../label/EZP/compatibility.html">compatibility</a>
-    </li><li class="aui-label " data-label-id="3276819">
-    <a class="aui-label-split-main" href="../label/EZP/content.html">content</a>
-    </li><li class="aui-label " data-label-id="15630342">
-    <a class="aui-label-split-main" href="../label/EZP/controller.html">controller</a>
-    </li><li class="aui-label " data-label-id="21430343">
-    <a class="aui-label-split-main" href="../label/EZP/designed.html">designed</a>
-    </li>             </ul>
+                    
+        <li class="aui-label " data-label-id="21430309"><a class="aui-label-split-main" href="../label/EZP/publish.html" rel="tag">publish</a></li><li class="aui-label " data-label-id="21430310"><a class="aui-label-split-main" href="../label/EZP/quality.html" rel="tag">quality</a></li><li class="aui-label " data-label-id="21430311"><a class="aui-label-split-main" href="../label/EZP/relying.html" rel="tag">relying</a></li><li class="aui-label " data-label-id="20971538"><a class="aui-label-split-main" href="../label/EZP/rest.html" rel="tag">rest</a></li><li class="aui-label " data-label-id="21430312"><a class="aui-label-split-main" href="../label/EZP/scalability.html" rel="tag">scalability</a></li><li class="aui-label " data-label-id="21430313"><a class="aui-label-split-main" href="../label/EZP/stack.html" rel="tag">stack</a></li><li class="aui-label " data-label-id="21430314"><a class="aui-label-split-main" href="../label/EZP/storage.html" rel="tag">storage</a></li><li class="aui-label " data-label-id="20971529"><a class="aui-label-split-main" href="../label/EZP/symfony.html" rel="tag">symfony</a></li><li class="aui-label " data-label-id="21430316"><a class="aui-label-split-main" href="../label/EZP/system.html" rel="tag">system</a></li><li class="aui-label " data-label-id="21430317"><a class="aui-label-split-main" href="../label/EZP/template.html" rel="tag">template</a></li><li class="aui-label " data-label-id="21430305"><a class="aui-label-split-main" href="../label/EZP/twig.html" rel="tag">twig</a></li><li class="aui-label " data-label-id="21430319"><a class="aui-label-split-main" href="../label/EZP/user.html" rel="tag">user</a></li><li class="aui-label " data-label-id="21430320"><a class="aui-label-split-main" href="../label/EZP/version.html" rel="tag">version</a></li><li class="aui-label " data-label-id="21430322"><a class="aui-label-split-main" href="../label/EZP/engine.html" rel="tag">engine</a></li><li class="aui-label " data-label-id="21430324"><a class="aui-label-split-main" href="../label/EZP/framework.html" rel="tag">framework</a></li><li class="aui-label " data-label-id="21430326"><a class="aui-label-split-main" href="../label/EZP/improve.html" rel="tag">improve</a></li><li class="aui-label " data-label-id="21430327"><a class="aui-label-split-main" href="../label/EZP/integrate.html" rel="tag">integrate</a></li><li class="aui-label " data-label-id="21430328"><a class="aui-label-split-main" href="../label/EZP/interface.html" rel="tag">interface</a></li><li class="aui-label " data-label-id="21430329"><a class="aui-label-split-main" href="../label/EZP/kernel.html" rel="tag">kernel</a></li><li class="aui-label " data-label-id="20381712"><a class="aui-label-split-main" href="../label/EZP/legacy.html" rel="tag">legacy</a></li><li class="aui-label " data-label-id="21430330"><a class="aui-label-split-main" href="../label/EZP/maintainability.html" rel="tag">maintainability</a></li><li class="aui-label " data-label-id="21430332"><a class="aui-label-split-main" href="../label/EZP/performance.html" rel="tag">performance</a></li><li class="aui-label " data-label-id="21430275"><a class="aui-label-split-main" href="../label/EZP/platform.html" rel="tag">platform</a></li><li class="aui-label " data-label-id="21430333"><a class="aui-label-split-main" href="../label/EZP/projects.html" rel="tag">projects</a></li><li class="aui-label " data-label-id="21430334"><a class="aui-label-split-main" href="../label/EZP/access.html" rel="tag">access</a></li><li class="aui-label " data-label-id="13336585"><a class="aui-label-split-main" href="../label/EZP/api.html" rel="tag">api</a></li><li class="aui-label " data-label-id="21430335"><a class="aui-label-split-main" href="../label/EZP/applications.html" rel="tag">applications</a></li><li class="aui-label " data-label-id="21430336"><a class="aui-label-split-main" href="../label/EZP/architecture.html" rel="tag">architecture</a></li><li class="aui-label " data-label-id="21430338"><a class="aui-label-split-main" href="../label/EZP/business.html" rel="tag">business</a></li><li class="aui-label " data-label-id="21430340"><a class="aui-label-split-main" href="../label/EZP/compatibility.html" rel="tag">compatibility</a></li><li class="aui-label " data-label-id="3276819"><a class="aui-label-split-main" href="../label/EZP/content.html" rel="tag">content</a></li><li class="aui-label " data-label-id="15630342"><a class="aui-label-split-main" href="../label/EZP/controller.html" rel="tag">controller</a></li><li class="aui-label " data-label-id="21430343"><a class="aui-label-split-main" href="../label/EZP/designed.html" rel="tag">designed</a></li>
+            </ul>
 
     </div>
-</div></div>
+</div>
+</div>
 
             
             
@@ -874,22 +765,15 @@ div.rbtoc1413876171803 li {margin-left: 0px;padding-left: 0px;}
 
 
 
-                    
+                        
     
 <div id="comments-section" class="pageSection group">
-    
-    
-    
-    
-            <div class="bottom-comment-panels comment-panels">
-                                    
+        
     
 
 
-    
-            </div>
-    
-    </div>
+
+</div>
 
 
             
@@ -918,13 +802,7 @@ div.rbtoc1413876171803 li {margin-left: 0px;padding-left: 0px;}
 </div>
   
         <div id="theme-footer">
-            <div class="sectionColumnWrapper"><div class="sectionMacro">
-<div class="sectionMacroRow"><div class="columnMacro"></div>
-<div class="columnMacro">
-<div class="panel" style="background-color: #ecf0f1;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: #ecf0f1;">
-<p>Where Content Means Business</p>
-</div></div></div>
-<div class="columnMacro"></div></div></div></div>
+            <p>© 1999-2016 <a href="http://ez.no/" class="external-link" rel="nofollow">eZ Systems AS</a> and others</p>
         </div>
     
     </div>
@@ -932,26 +810,30 @@ div.rbtoc1413876171803 li {margin-left: 0px;padding-left: 0px;}
 
 
         
-            <div id="footer">
+            
+            
 
+<div id="footer" role="contentinfo">
     <section class="footer-body">
 
-                                                <p class="license license-opensource">
-                  Powered by a free <b>Atlassian Confluence Open Source Project License</b> granted to eZ Publish. <a href="http://www.atlassian.com/c/conf/11461">Evaluate Confluence today</a>.<br>
+                                                            <p class="license license-opensource">
+                    Powered by a free <b>Atlassian Confluence Open Source Project License</b> granted to eZ Publish. <a href="http://www.atlassian.com/c/conf/11461">Evaluate Confluence today</a>.<br>
                 </p>
-                        
-    
+                    
+        
 
-    <ul id="poweredby">
-        <li class="noprint">Powered by <a href="http://www.atlassian.com/software/confluence" class="hover-footer-link">Atlassian Confluence</a> <span id='footer-build-information'>5.4.4</span>, <a href="http://www.atlassian.com/software/confluence/overview/team-collaboration-software?utm_source=confluence-footer" class="hover-footer-link">Team Collaboration Software</a></li>
-        <li class="print-only">Printed by Atlassian Confluence 5.4.4, Team Collaboration Software.</li>
-        <li class="noprint"><a href="http://jira.atlassian.com/secure/BrowseProject.jspa?id=10470" class="hover-footer-link">Report a bug</a></li>
-        <li class="noprint"><a href="http://www.atlassian.com/about/connected.jsp?s_kwcid=Confluence-stayintouch" class="hover-footer-link">Atlassian News</a></li>
-    </ul>
+        <ul id="poweredby">
+            <li class="noprint">Powered by <a href="http://www.atlassian.com/software/confluence" class="hover-footer-link">Atlassian Confluence</a> <span id='footer-build-information'>5.8.5</span>, <a href="http://www.atlassian.com/software/confluence/overview/team-collaboration-software?utm_source=confluence-footer" class="hover-footer-link">Team Collaboration Software</a></li>
+            <li class="print-only">Printed by Atlassian Confluence 5.8.5, Team Collaboration Software.</li>
+            <li class="noprint"><a href="https://jira.atlassian.com/browse/CONF" class="hover-footer-link">Report a bug</a></li>
+            <li class="noprint"><a href="http://www.atlassian.com/about/connected.jsp?s_kwcid=Confluence-stayintouch" class="hover-footer-link">Atlassian News</a></li>
+        </ul>
 
-    
+        
 
-            <script>
+        <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+
+                    <script>
 AJS.toInit(function(){
  if(AJS.params.spaceKey &&
     AJS.params.spaceKey === 'MAIN' ||
@@ -962,6 +844,8 @@ AJS.toInit(function(){
     AJS.params.spaceKey === 'EZP52' ||
     AJS.params.spaceKey === 'EZPCLOUD' ||
     AJS.params.spaceKey === 'EZP' ||
+    AJS.params.spaceKey === 'TECHDOC' ||
+    AJS.params.spaceKey === 'USERGUIDE' ||
     AJS.params.spaceKey === 'EZRECO'
 ){
 
@@ -979,14 +863,12 @@ AJS.toInit(function(){
 }}
 );
 </script>
-    
+        
     </section>
-
 </div>
 
-            
     </div>
 </body>
 
-<!-- Mirrored from doc.ez.no/pages/viewpage.action?pageId=11403666 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 07:25:06 GMT -->
+<!-- Mirrored from doc.ez.no/pages/viewpage.action?pageId=11403666 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 04:04:56 GMT -->
 </html>

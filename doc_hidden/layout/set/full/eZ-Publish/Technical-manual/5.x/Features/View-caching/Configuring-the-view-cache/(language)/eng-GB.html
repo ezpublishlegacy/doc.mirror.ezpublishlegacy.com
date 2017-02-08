@@ -4,7 +4,7 @@
 <html lang="en-GB">
 
 
-<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/View-caching/Configuring-the-view-cache/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:28:51 GMT -->
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/View-caching/Configuring-the-view-cache/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 22:39:10 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
 <style type="text/css"></style>
@@ -41,12 +41,22 @@
 
 <p>The view caching mechanism is enabled by default. However, you probably want to turn it off during site development (otherwise any changes being made in your custom <a href="../../../../Templates/Template-basics/Node-templates.html" target="_self">node templates</a> will not be visible on the site until you clear the caches). This can be done by adding the following line under the &quot;[ContentSettings]&quot; section in the &quot;site.ini.append.php&quot; file of your siteaccess:</p><pre class="wordwrap"><span class="line">ViewCaching=disabled</span>
 </pre><p>Note that it is strongly recommended to re-enable the view caching when development has finished. This can be done by changing it from &quot;disabled&quot; to &quot;enabled&quot;:</p><pre class="wordwrap"><span class="line">ViewCaching=enabled</span>
-</pre><p>The <a href="../../../../../4.x/Reference/Configuration-files/site.ini/ContentSettings/CachedViewModes.html" target="_self">CachedViewModes</a> setting located in the &quot;[ContentSettings]&quot; section of the &quot;site.ini&quot; configuration file (or an override) controls which view modes the caching will be enabled for. The default value of this setting defines that view cache should be stored for &quot;full&quot;, &quot;sitemap&quot; view modes and for the &quot;pdf&quot; view:</p><pre class="wordwrap"><span class="line">CachedViewModes=full;sitemap;pdf</span>
+</pre>
+<div>
+<table bgcolor="#eeeeee">
+<tr>
+    <td>
+    <p>
+<b>Note :</b> When using Symfony the Viewcaching is always enabled.<br />You can however set the <a href="../../../../../4.x/Reference/Configuration-files/site.ini/TemplateSettings/DevelopmentMode2.html" target="_self">DevelopmentMode</a> in TemplateSettings in order to clear the cache when modifying templates.</p>
+    </td>
+</tr>
+</table>
+</div><p>The <a href="../../../../../4.x/Reference/Configuration-files/site.ini/ContentSettings/CachedViewModes.html" target="_self">CachedViewModes</a> setting located in the &quot;[ContentSettings]&quot; section of the &quot;site.ini&quot; configuration file (or an override) controls which view modes the caching will be enabled for. The default value of this setting defines that view cache should be stored for &quot;full&quot;, &quot;sitemap&quot; view modes and for the &quot;pdf&quot; view:</p><pre class="wordwrap"><span class="line">CachedViewModes=full;sitemap;pdf</span>
 </pre><p>However, note that the &quot;pdf&quot; view of the content module is deprecated.</p><p>If you need to disable view caching for a specific page, add the following line in the beginning of the template that is used:</p><pre class="wordwrap"><span class="line">{set-block scope=global variable=cache_ttl}0{/set-block}</span>
 </pre><p>This will set the global variable &quot;cache_ttl&quot; to zero for the current template. The &quot;cache_ttl&quot; variable contains the TTL (Time To Live) value as seconds. A value of 0 means that the result should not be changed. A value of -1 means that the view cache should never expire, see the example below.</p><pre class="wordwrap"><span class="line">{set-block scope=global variable=cache_ttl}-1{/set-block}</span>
-</pre><a name="eztoc132416_1" id="eztoc132416_1"></a><h2>Roles</h2><p>The cache files are different for dissimilar role combinations. This means that the templates can have conditions based on <a href="../../../../Concepts-and-basics/Access-control.html" target="_self">roles</a> even when view caching is on. </p><a name="eztoc132416_2" id="eztoc132416_2"></a><h2>User preferences</h2><p>The following text describes handling of <a href="../../../../../4.x/Reference/Template-operators/Data-and-information-extraction/ezpreference.html" target="_self">user preferences</a> and the way the preferences of the current user are taken into account when generating content view cache.</p><p>For example, whenever the user performs the following actions using the administration interface:</p>
+</pre><a name="eztoc132416_1" id="eztoc132416_1"></a><h2>Roles</h2><p>The cache files are different for dissimilar role combinations. This means that the templates can have conditions based on <a href="../../../../Concepts-and-basics/Access-control.html" target="_self">roles</a> even when view caching is on.</p><a name="eztoc132416_2" id="eztoc132416_2"></a><h2>User preferences</h2><p>The following text describes handling of <a href="../../../../../4.x/Reference/Template-operators/Data-and-information-extraction/ezpreference.html" target="_self">user preferences</a> and the way the preferences of the current user are taken into account when generating content view cache.</p><p>For example, whenever the user performs the following actions using the administration interface:</p>
 <ul>
-<li><div> Enabling or disabling the bookmark menu (+/-) </div></li><li><div> Adjusting the horizontal size of the content structure menu (small / medium / large) </div></li><li><div> Choosing the view mode (list / thumbnail / detailed) and &quot;items per page&quot; limitation (10 / 25 / 50) for the sub items window </div></li><li><div> Changing the visibility of different windows (Preview / Details / Translations / Locations / Relations) </div></li>
+<li><div>&nbsp;Enabling or disabling the bookmark menu (+/-)</div></li><li><div>&nbsp;Adjusting the horizontal size of the content structure menu (small / medium / large)</div></li><li><div>&nbsp;Choosing the view mode (list / thumbnail / detailed) and &quot;items per page&quot; limitation (10 / 25 / 50) for the sub items window</div></li><li><div>&nbsp;Changing the visibility of different windows (Preview / Details / Translations / Locations / Relations)</div></li>
 </ul>
 <p>...or sets any other user preference, the system executes the &quot;<a href="../../../../../4.x/Reference/Modules/user/Views/preferences.html" target="_self">preferences</a>&quot; view of the &quot;<a href="../../../../../4.x/Reference/Modules/user.html" target="_self">user</a>&quot; module in order to save the selected value. The information about which preference has been changed is passed using view parameters:</p><pre class="wordwrap"><span class="line">.../user/preferences/set/&lt;name_of_preference&gt;/&lt;value&gt;</span>
 </pre><p>for example</p><pre class="wordwrap"><span class="line">http://my.com/myadmin/user/preferences/set/admin_left_menu_width/medium</span>
@@ -67,5 +77,5 @@ Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open So
 
 </body>
 
-<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/View-caching/Configuring-the-view-cache/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 18:28:51 GMT -->
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/View-caching/Configuring-the-view-cache/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 22:39:12 GMT -->
 </html>

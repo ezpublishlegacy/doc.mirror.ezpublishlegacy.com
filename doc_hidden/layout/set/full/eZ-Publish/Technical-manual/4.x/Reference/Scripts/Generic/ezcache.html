@@ -4,7 +4,7 @@
 <html lang="en-GB">
 
 
-<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/ezcache.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:05:49 GMT -->
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/ezcache.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 22:17:24 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
 <style type="text/css"></style>
@@ -104,7 +104,7 @@ Clears the eZ Publish caches.
     <h4>--clear-tag=&lt;cache_tag&gt;[,&lt;cache_tag2&gt;...]</h3>
     <div style="margin-left:35px;">
         
- <p>Expire all caches related to the specified cache tag. Multiple tags can be provided as a comma separated list. When combined with the &quot;--purge&quot; parameter, the script will clear the caches instead of expiring them.</p>    </div>
+<p>Expire all caches related to the specified cache tag.</p><p>From eZ Publish 5.3.4 version, multiple tags can be provided as a comma separated list. When combined with the &quot;--purge&quot; parameter, the script will clear the caches instead of expiring them.</p>    </div>
 
     <a name="colors"></a>
     <h4>-c, --colors</h3>
@@ -122,7 +122,7 @@ Clears the eZ Publish caches.
     <h4>--expiry=&lt;textual_date_format&gt;</h3>
     <div style="margin-left:35px;">
         
- <p>Expire caches that are older than the specified date. The date must be provided according to the <a href="http://www.gnu.org/software/tar/manual/html_node/tar_113.html" target="_blank">GNU Date Input Formats</a> syntax. When combined with the &quot;--purge&quot; parameter, the script will clear the caches instead of expiring them.</p>    </div>
+<p>Expire caches that are older than the specified date. The date must be provided according to the <a href="http://www.gnu.org/software/tar/manual/html_node/tar_113.html" target="_blank">GNU Date Input Formats</a> syntax. This can only be used together with the &quot;--purge&quot; parameter, which means the script will delete the caches.</p>    </div>
 
     <a name="help"></a>
     <h4>-h, --help</h3>
@@ -466,8 +466,8 @@ Clears the eZ Publish caches.
 </pre><p>Expire all user info caches.</p><a name="eztoc96941_0_0_5" id="eztoc96941_0_0_5"></a><h4>Example 5</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-tag=ini --purge</span>
 </pre><p>Clear both INI cache and global INI cache.</p><a name="eztoc96941_0_0_6" id="eztoc96941_0_0_6"></a><h4>Example 6</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --iteration-sleep='5.5'</span>
 <span class="line">--iteration-max=100 --purge</span>
-</pre><p>Clear all caches. The purging will be done with the interval between the iterations equal to 5.5 seconds. During one iteration, a maximum number of 100 items will be removed.</p><a name="eztoc96941_0_0_7" id="eztoc96941_0_0_7"></a><h4>Example 7</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --expiry='-2 days'</span>
-</pre><p>Expire all caches that are older than two days.</p><a name="eztoc96941_0_0_8" id="eztoc96941_0_0_8"></a><h4>Example 8</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --expiry='last monday' --purge</span>
+</pre><p>Clear all caches. The purging will be done with the interval between the iterations equal to 5.5 seconds. During one iteration, a maximum number of 100 items will be removed.</p><a name="eztoc96941_0_0_7" id="eztoc96941_0_0_7"></a><h4>Example 7</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --expiry='-2 days' --purge</span>
+</pre><p>Clear all caches that are older than two days.</p><a name="eztoc96941_0_0_8" id="eztoc96941_0_0_8"></a><h4>Example 8</h4><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --expiry='last monday' --purge</span>
 </pre><p>Clear all caches generated before last Monday.</p>
 
 
@@ -480,5 +480,5 @@ Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open So
 
 </body>
 
-<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/ezcache.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 21 Oct 2014 13:05:49 GMT -->
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/ezcache.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 22:17:24 GMT -->
 </html>
