@@ -1,0 +1,481 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/ezcache.php/(language)/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/ezcache.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 21:58:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+
+<link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/core.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/header-footer.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/header-footer-lookfeel.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/pagelayout.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/buttons.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/960.css" /><link rel="stylesheet" type="text/css" href="https://ez.no/extension/ez_ezno/design/ezno_2011/stylesheets/superfish.css" /><script type="text/javascript" src="https://ez.no/extension/ez_ezno/design/ezno_2011/javascript/jquery-1.6.3.min.js" charset="utf-8"></script><script type="text/javascript" src="https://ez.no/extension/ez_ezno/design/ezno_2011/javascript/superfish.js" charset="utf-8"></script><script type="text/javascript" src="https://ez.no/extension/ez_ezno/design/ezno_2011/javascript/jquery.popmenu.min.js" charset="utf-8"></script>
+<style type="text/css">
+    @import url(../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css);
+    @import url(../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/classes.css);
+    @import url(../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/doc.css);
+    @import url(../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/print.css) print;</style>
+
+<link type="text/css" rel="stylesheet" href="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/print.css" media="print" />
+
+<!-- IE conditional comments; for bug fixes for different IE versions -->
+<!--[if IE 5]>     <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie5.css);    </style>     <![endif]-->
+<!--[if lte IE 6]> <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie6lte.css); </style>     <![endif]-->
+<!--[if lte IE 6]> <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie6lte-doc.css); </style> <![endif]-->
+<!--[if IE 6]>     <style type="text/css"> @import url(/extension/ezdoc/design/doc/stylesheets/ie6.css);    </style>     <![endif]-->
+
+<!-- Load special stylesheet (if necessary) for newer Netscape decendants, Mozilla and Firefox, using the Gecko renderer -->
+<script type="text/javascript"><!-- if ((navigator.userAgent.indexOf("Gecko") != -1)&&(navigator.userAgent.indexOf("KHTML") == -1)) document.write("<style type=\"text/css\">@import url(/extension/ezdoc/design/doc/stylesheets/gecko.css);</style>"); --></script>
+
+<script type="text/javascript" src="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/javascripts/mainmenu-hover.js"></script>
+<script type="text/javascript" src="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/javascripts/dropdownmenu.js"></script>
+<script type="text/javascript" src="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/javascripts/ezno-searchbox.js"></script>
+                                                          
+    <title>ezcache.php / Generic / Scripts / Reference / 4.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../../../../../../../../../../../../../../doc_hidden.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../../../../../../../../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+<body onload="initDocSearch();menuInit();">
+
+<!-- Complete page area: START -->
+<div id="page">
+
+
+	<div id="header-bg">
+			<div id="header" class="container_12">
+				<div class="grid_12">
+					<div class="searchboxes" id="searchbox">
+	  <form action="https://ez.no/headerandfooteraccess/content/search">
+	    <label for="searchtext" class="hide">Search text:</label>
+	    	    <div class="ezautocomplete">
+	        <button value="Search" title="Search" type="submit"><span class="w"><span class="l"></span><span class="c">Search</span><span class="r"></span></span></button>
+	        <div class="searchtext-wrap"><input class="searchtext" id="searchtext" name="SearchText" type="text" value="Search" size="12" onblur="if(this.value=='') this.value='Search';" onfocus="if(this.value=='Search') this.value='';" /></div>
+	        <div class="ezautocompletecontainer"></div>
+	    </div>
+	    
+	    	  </form>
+	</div>
+
+                <div id="header-social-connect">
+    <a href="http://www.youtube.com/user/ezpublish/" class="youtube" target="_blank">youtube</a>
+    <a href="https://google.com/+ezsystems" class="googleplus" target="_blank">google plus</a>
+    <a href="http://www.linkedin.com/groups?gid=2759&amp;trk=myg_ugrp_ovr" class="linkedin" target="_blank">linkedin</a>
+    <a href="https://www.facebook.com/eZPublishEnterprise" class="facebook" target="_blank">facebook</a>
+    <a href="http://twitter.com/#!/ezsystems" class="twitter" target="_blank">twitter</a>
+</div>
+				<div id="links">
+		
+							
+		
+		</div>                <div id="languages" class="popmenu">	<div class="eng"><a href="#">English&nbsp;<span></span></a></div></div>
+
+				<p class="hide"><a href="#main">Skip to main content</a></p>
+				</div>
+			</div>
+
+			
+	</div>
+
+    <div class="topmenu-anchor"></div>
+    <div id="topmenu-bg">
+	    <div id="logo" class="container_12">
+
+    <div class="grid_3">
+        <a href="https://ez.no/headerandfooteraccess" title="eZ Publish Platform, CXM &amp; CMS">
+            <img src="https://ez.no/extension/ez_ezno/design/ezno_2011/images/ez-logo.png"
+                 alt="" height="45px"/>
+        </a>
+    </div>
+
+    <div class="grid_9">
+                <div class="topmenu-design">
+	<!-- Top menu content: START -->
+	<div id="topmenu-firstlevel-position">
+	<ul id="topmenu-firstlevel" class="sf-menu sf-js-enabled sf-shadow">
+		
+		
+		        </ul>
+    </div>
+        <!-- Top menu content: END -->
+</div>        </div>
+</div>    </div>
+
+
+<div id="page-content-position"><div id="page-content-position-inner"><div id="page-content">
+
+<!-- Path area: START -->
+<div id="path">
+
+<div id="page-width4">
+<h2 class="hide">Path</h2>
+
+<!-- Path content: START -->
+<p> <a href="http://ez.no/">ez.no</a> /
+                        <a href="../../../../../../../../../../../../../../../../../../../../../doc_hidden.html">documentation</a>
+        
+                        /
+                            <a href="../../../../../../../../../../../../../../../../../../../../eZ-Publish.html">ez publish</a>
+        
+                        /
+                            <a href="../../../../../../../../../../../../../../../../../../../Technical-manual.html">technical manual</a>
+        
+                        /
+                            <a href="../../../../../../../../../../../../../../../../../../4-6.html">4.x</a>
+        
+                        /
+                            <a href="../../../../../../../../../../../../../../../../../Reference.html">reference</a>
+        
+                        /
+                            <a href="../../../../../../../../../../../../../../../../Scripts.html">scripts</a>
+        
+                        /
+                            <a href="../../../../../../../../../../../../../../../Generic.html">generic</a>
+        
+                        /
+                            ezcache.php
+        
+            </p>
+<!-- Path content: END -->
+
+</div>
+
+</div>
+<!-- Path area: END -->
+
+<hr class="hide" />
+
+<!-- Main area: START -->
+                                    <div id="ezp5disclaimer">
+                <p><strong style="color: red">Caution:</strong> This documentation is for <strong>eZ Publish</strong> <em>legacy</em>, from version 3.x to 5.x.<br/>
+                For 5.x documentation covering <em>Platform</em> see <a href="../../../../../../../../../../../../../../../../../../../../../display/MAIN/eZ%2bDocumentation%2bCenter.html">eZ Documentation Center</a>, for difference between <em>legacy</em> and <em>Platform</em> see <a href="../../../../../../../../../../../../../../../../../../../../../pages/viewpage0139.html?pageId=11403666">5.x Architecture overview</a>.</p>
+            </div>
+            
+<div id="page-width5">
+<div id="main" class="float-break">
+
+
+<div class="template-design area-docmenu-normal">
+<div class="template-module">
+<div class="template-object">
+<div id="contentmenu">
+                        <div class="attribute-heading"><h2 class="bullet"><a href="../../../../../../../../../../../../../../../../../../4-6.html">Table of contents</a></h2></div>
+<div class="boxcontent">
+
+<map id="contentstructure">
+
+    
+    
+</map>
+
+</div>            
+</div>
+</div>
+</div>
+</div>
+<div class="area-docmain-normal">
+<div class="template-design">
+<div class="template-module content-view-full">
+<div class="template-object">
+
+<div class="attribute-heading">
+<h1></h1>
+</div>
+
+<h3>Summary</h3>
+
+
+<h3>Location</h3>    /<h3>Parameters</h3><p>
+<a href=#allow-root-user>allow-root-user</a><br/>
+
+<a href=#clear-all>clear-all</a><br/>
+
+<a href=#clear-id>clear-id</a><br/>
+
+<a href=#clear-tag>clear-tag</a><br/>
+
+<a href=#colors>colors</a><br/>
+
+<a href=#debug>debug</a><br/>
+
+<a href=#expiry>expiry</a><br/>
+
+<a href=#help>help</a><br/>
+
+<a href=#iteration-max>iteration-max</a><br/>
+
+<a href=#iteration-sleep>iteration-sleep</a><br/>
+
+<a href=#list-ids>list-ids</a><br/>
+
+<a href=#list-tags>list-tags</a><br/>
+
+<a href=#logfiles>logfiles</a><br/>
+
+<a href=#no-colors>no-colors</a><br/>
+
+<a href=#no-logfiles>no-logfiles</a><br/>
+
+<a href=#purge>purge</a><br/>
+
+<a href=#quiet>quiet</a><br/>
+
+<a href=#siteaccess>siteaccess</a><br/>
+
+<a href=#verbose>verbose</a><br/>
+</p>
+
+    <a name="allow-root-user"></a>
+    <h4>-r,--allow-root-user</h3>
+    <div style="margin-left:35px;">
+        
+<p>Allows your root user to run the ezcache.php script. The usage of this parameter is only recommended for advanced users. With great power comes great responsibility.</p>    </div>
+
+    <a name="clear-all"></a>
+    <h4>--clear-all</h3>
+    <div style="margin-left:35px;">
+        
+<p>Clears all caches. This parameter can be useful if you want to clean all caches instead of deleting a particular cache tag or identifier.</p>    </div>
+
+    <a name="clear-id"></a>
+    <h4>--clear-id=&lt;cache_id&gt;[,&lt;cache_id2&gt;…]</h3>
+    <div style="margin-left:35px;">
+        
+<p>Expire all caches of a particular type specified by &quot;cache_id&quot;. Multiple identifiers can be provided as a comma separated list. When combined with the &quot;--purge&quot; parameter, the script will clear the caches instead of expiring them.</p><p>Note that there are dependencies between caches, and that clearing only one ID will most likely require that other caches are cleared as well. Example: clearing the ezjscore-packer cache will require that templte-cache is cleared as well, since ezjscore is used within cache blocks.</p>    </div>
+
+    <a name="clear-tag"></a>
+    <h4>--clear-tag=&lt;cache_tag&gt;[,&lt;cache_tag2&gt;...]</h3>
+    <div style="margin-left:35px;">
+        
+<p>Expire all caches related to the specified cache tag.</p><p>From eZ Publish 5.3.4 version, multiple tags can be provided as a comma separated list. When combined with the &quot;--purge&quot; parameter, the script will clear the caches instead of expiring them.</p>    </div>
+
+    <a name="colors"></a>
+    <h4>-c, --colors</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Use ANSI colors when generating debug output (default).</p>    </div>
+
+    <a name="debug"></a>
+    <h4>-d[&lt;option&gt;[,&lt;option2&gt;...]], --debug[=&lt;option&gt;[,&lt;option2&gt;...]]</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output debug information. The following options can be used to control what the debug output should include: &quot;all&quot; (everything), &quot;accumulator&quot; (accumulators), &quot;include&quot; (included files), &quot;timing&quot; (timing points), &quot;error&quot; (errors), &quot;warning&quot; (warnings), &quot;notice&quot; (notices).</p>    </div>
+
+    <a name="expiry"></a>
+    <h4>--expiry=&lt;textual_date_format&gt;</h3>
+    <div style="margin-left:35px;">
+        
+<p>Expire caches that are older than the specified date. The date must be provided according to the <a href="http://www.gnu.org/software/tar/manual/html_node/tar_113.html" target="_blank">GNU Date Input Formats</a> syntax. This can only be used together with the &quot;--purge&quot; parameter, which means the script will delete the caches.</p>    </div>
+
+    <a name="help"></a>
+    <h4>-h, --help</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output information about the script and supported parameters.</p>    </div>
+
+    <a name="iteration-max"></a>
+    <h4>--iteration-max=&lt;number_of_items&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The maximum number of items to remove during one iteration of cache purging.</p>    </div>
+
+    <a name="iteration-sleep"></a>
+    <h4>--iteration-sleep=&lt;number_of_seconds&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The number of seconds to wait between cache purge iterations.</p>    </div>
+
+    <a name="list-ids"></a>
+    <h4>--list-ids</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output a list of cache type identifiers that are supported by the &quot;--clear-id&quot; parameter. When used together with the &quot;--verbose&quot; parameter, the script will output additional information about the cache types and their identifiers.</p>    </div>
+
+    <a name="list-tags"></a>
+    <h4>--list-tags</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output a list of cache tags that are supported by the &quot;--clear-tag&quot; parameter. When used together with the &quot;--verbose&quot; parameter, the script will output additional information about the cache tags.</p>    </div>
+
+    <a name="logfiles"></a>
+    <h4>--logfiles</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Generate log files. This parameter must be used together with the debug parameter (&quot;-d&quot; or &quot;--debug&quot;). The log files (for example &quot;warning.log&quot;) will be stored in the &quot;var/log&quot; directory of the eZ Publish installation.</p>    </div>
+
+    <a name="no-colors"></a>
+    <h4>--no-colors</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Do not use ANSI colors when generating debug output.</p>    </div>
+
+    <a name="no-logfiles"></a>
+    <h4>--no-logfiles</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Do not generate log files (default).</p>    </div>
+
+    <a name="purge"></a>
+    <h4>--purge</h3>
+    <div style="margin-left:35px;">
+        
+<p>Enforces purging of cache items, DELETING the entries from the database and the cache files from file system, which ensures that specified entries are physically removed (Useful for saving disk space).&nbsp;This parameter must be used together with &quot;--clear-all&quot;, &quot;--clear-id&quot;, &quot;--clear-tag&quot; or &quot;--expiry&quot;.</p>    </div>
+
+    <a name="quiet"></a>
+    <h4>-q, --quiet</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Run the script in &quot;quiet&quot; mode. No output will be generated.</p>    </div>
+
+    <a name="siteaccess"></a>
+    <h4>-s &lt;siteaccess&gt;, --siteaccess=&lt;siteaccess&gt;</h3>
+    <div style="margin-left:35px;">
+        
+ <p>The siteaccess to run the script for. If omitted, the <a href="../../../../../../../../../../../../../../../../Configuration-files/site.ini/SiteSettings/DefaultAccess.html" target="_self">default siteaccess</a> will be used.</p>    </div>
+
+    <a name="verbose"></a>
+    <h4> -v, --verbose</h3>
+    <div style="margin-left:35px;">
+        
+ <p>Output verbose / additional information.</p>    </div>
+
+
+
+
+<div class="break"></div><div class="pageinfo float-break">
+<div class="created">
+
+
+<p><label>Written by:</label>Julia Shymova&nbsp;(01/11/2007 1:57 pm)</p>
+</div>
+<div class="modified">
+<p><label>Last updated by:</label>Sarah Haïm-Lubczanski&nbsp;(30/06/2015 2:07 pm)</p>
+</div><div class="authors">
+<p><label>Maintainers:</label>Julia Shymova, Svitlana Shatokhina, Ricardo Correia, Sarah Haïm-Lubczanski</p>
+</div></div>
+<hr class="hide" />
+
+</div>
+</div>
+</div>
+
+<div id="comments" class="class-comment">
+<div class="content-view-children">
+
+<h1>Comments</h1>
+<p>There are no comments.</p>
+<div class="toolbar">
+
+<form method="post" action="https://doc.ez.no/doc_hidden/content/action">
+<input class="button" type="submit" name="NewButton" value="New comment" />
+<input type="hidden" name="NodeID" value="19891" />
+<input type="hidden" name="RedirectURIAfterPublish" value="../Gener/ezcache.10ccb.delaye" />
+<input type="hidden" name="ClassID" value="17" />
+</form>
+</div>
+
+</div>
+</div>
+
+</div>
+<!-- Main area content: END -->
+
+</div>
+</div>
+<!-- Main area: END -->
+<hr class="hide" />
+
+</div></div></div>
+
+        <div id="footer-bg">
+        <div id="footer" class="container_12">
+
+            <div class="grid_3">
+                <img src="https://ez.no/extension/ez_ezno/design/ezno_2011/images/ez-logo-white.png" alt="ez-publish" />
+                <div id="footer-copyright" class="grid_3 alpha omega">
+                                    </div>
+            </div>
+
+            <div class="grid_6 middle">
+                <div class="grid_6 alpha omega">
+                    <div class="grid_3 alpha"><div></div></div>
+                    <div class="grid_3 omega"><div></div></div>
+                </div>
+            </div>
+
+            <div class="grid_3 right">
+                <div class="contact-ez">
+                        <a id="cta-contact" href="https://ez.no/headerandfooteraccess/Home/Forms/Contact-eZ/(origin)/footer" title="Contact eZ!" class="btn-green btn--small">Contact eZ!</a>
+                </div>
+
+                <div class="adress"></div>
+            </div>
+
+        </div>
+    </div>
+<div id="footer-connect-bg">
+    <div id="footer" class="container_12">
+        <div id="footer-connect-copyright" class="grid_8 alpha omega">
+            Copyright © 2013 eZ Systems AS (except where otherwise noted). All rights reserved.
+            <br/><br/>
+            Powered by <a href="http://ez.no/ezpublish" title="eZ Publish Platform">the eZ Publish Platform</a>.<br />
+        </div>
+
+        <div id="footer-connect-social" class="grid_4 right">
+            <a href="http://www.youtube.com/user/ezpublish/" class="youtube" target="_blank">youtube</a>
+            <a href="https://google.com/+ezsystems" class="googleplus" target="_blank">google plus</a>
+            <a href="http://www.linkedin.com/groups?gid=2759&amp;trk=myg_ugrp_ovr" class="linkedin" target="_blank">linkedin</a>
+            <a href="https://www.facebook.com/eZPublishEnterprise" class="facebook" target="_blank">facebook</a>
+            <a href="http://twitter.com/#!/ezsystems" class="twitter" target="_blank">twitter</a>
+        </div>
+
+
+    </div>
+</div>
+
+
+</div>
+<!-- Complete page area: END -->
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-303624-13', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+<script type="text/javascript">
+(function()
+{var ff=document.createElement('script');ff.type='text/javascript';ff.async=true;ff.src='https://secure.liveviewer.ez.no/statjs/sst-120-1304513615/stat.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ff,s);}
+)();
+</script>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/ezcache.php/(language)/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/eZ-Publish/Technical-manual/4.x/Reference/Scripts/Generic/ezcache.php by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 21:58:13 GMT -->
+</html>
+
+<!-- th[eZ] 20050804 -->

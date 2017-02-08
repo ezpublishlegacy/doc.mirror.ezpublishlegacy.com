@@ -1,0 +1,85 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31429770 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:26:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage9849.html?pageId=31429770" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/6/_/styles/colors74cd.css?spaceKey=DEVELOPER" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/6/_/styles/custom74cd.css?spaceKey=DEVELOPER" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <div class="contentLayout2">
+<div class="columnLayout two-right-sidebar" data-layout="two-right-sidebar">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>The Value class of a Field Type is by design very simple. It is meant to be stateless, and as lightweight as possible. Therefore, this class must contain as little logic as possible, as this is the responsibility of the Type class .</p><p>The Value will at least contain:</p><ul><li><p>public properties, used to store the actual data </p></li><li><p>an implementation of the <code>__toString()</code> method (required by the Value interface we inherit from)</p></li></ul><p>By default, the constructor from <code>
+     FieldType\Value 
+  </code> will be used, and allows you to pass a hash of property/value pairs. In our example, we can see that we can override it as well if we want.</p><p>The Tweet Field Type is going to store three things:</p><ul><li><p>The tweet’s URL</p></li><li><p>The tweet’s author URL</p></li><li><p>The body, as an HTML string  </p></li></ul><p>At this point, we don’t care where those are stored. All we care about is what we want our Field Type to expose as an API. We end up with the following properties:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="5ed0d747-6424-4846-9ba9-b7df5c7312dd" data-macro-parameters="language=php|title=eZ/FieldType/Tweet/Value.php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd8c0.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRpdGxlPWVaL0ZpZWxkVHlwZS9Ud2VldC9WYWx1ZS5waHB9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>/**
+* Tweet URL on twitter.com (http://twitter.com/UserName/status/id).
+* @var string
+*/
+public $url;
+
+ 
+/**
+* Author's tweet URL (http://twitter.com/UserName)
+* @var string
+*/
+public $authorUrl;
+
+ 
+/**
+* The tweet's embed HTML
+* @var string
+*/
+public $contents;</pre></td></tr></table><p>The only thing left to honor the <code>
+     FieldType\Value 
+  </code> interface is the <code>
+     __toString()</code> method. Let’s say that ours will return the tweet’s URL:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="1197e98a-8cbf-467e-985e-1b65eb958f01" data-macro-parameters="language=php|title=eZ/FieldType/Tweet/Value.php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd8c0.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRpdGxlPWVaL0ZpZWxkVHlwZS9Ud2VldC9WYWx1ZS5waHB9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>public function __toString()
+{
+   return $this->url;
+}</pre></td></tr></table></div>
+</div>
+<div class="cell aside" data-type="aside">
+<div class="innerCell">
+<table class="wysiwyg-macro" data-macro-name="panel" data-macro-id="e5d4c3f2-1aae-44b2-88ab-6039da6cff42" data-macro-parameters="title=Tutorial path" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headinga671.png?definition=e3BhbmVsOnRpdGxlPVR1dG9yaWFsIHBhdGh9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macrof992.png?definition=e3BhZ2V0cmVlOnJvb3Q9Q3JlYXRpbmcgYSBUd2VldCBGaWVsZCBUeXBlfQ&amp;locale=en_GB&amp;version=2" data-macro-name="pagetree" data-macro-id="ec41a9a1-4619-4506-9be9-ff5bc10457b7" data-macro-parameters="root=Creating a Tweet Field Type" data-macro-schema-version="1"></p></td></tr></table></div>
+</div>
+</div>
+</div>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31429770 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:26:13 GMT -->
+</html>

@@ -1,0 +1,88 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/2.0/Clustering/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 01 Feb 2017 02:17:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Clustering / 2.0 / eZ Publish Extension for Oracle® database / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Clustering</h1>
+</div>
+
+<p>You can configure eZ Publish to store images, binary files and content-related caches in an Oracle database. This is typically useful if you want to run a site on a cluster of servers (refer to the &quot;<a href="../../../../../../eZ-Publish/Technical-manual/4.x/Features/Clustering.html" target="_self">Clustering</a>&quot; section in the &quot;Features&quot; chapter of the eZ Publish Technical Manual for more information).</p><p>The following instructions explain how this can be done, assuming that you already have an eZ Publish site running on an Oracle database. The procedure consists of the following steps:</p>
+<ol>
+<li><div>Clearing the caches (optional)</div></li><li><div>Modifying the &quot;file.ini&quot; settings</div></li><li><div>Creating a new script for serving images</div></li><li><div>Creating new database structures</div></li><li><div>Importing files to the database</div></li><li><div>Compiling the templates (optional)</div></li><li><div>Updating the Apache configuration</div></li><li><div>Restarting Apache and testing the site</div></li><li><div>Removing the imported files from the filesystem</div></li>
+</ol>
+<p>These steps are very similar to the ones that are used when configuring eZ Publish to use clustering on a MySQL database, with a few differences in the first four steps, as described below.</p><a name="eztoc100097_1" id="eztoc100097_1"></a><h2>1. Clearing the caches (optional)</h2><p>It is recommended (but not required) to clear all eZ Publish caches before enabling the clustering functionality. This can be done by running the &quot;bin/php/ezcache.php&quot; script as shown below:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+</pre><p>After running the script, make sure that all cache files have been cleared by inspecting the contents of the various cache subdirectories within the &quot;var&quot; directory (typically the &quot;var/cache/&quot; and &quot;var/&lt;name_of_siteaccess&gt;/cache/&quot; directories). If there are any cache files left, remove them manually.</p><a name="eztoc100097_2" id="eztoc100097_2"></a><h2>2. Modifying the &quot;file.ini&quot; settings</h2><p>Add the following lines to an override for the &quot;file.ini&quot; configuration file (&quot;settings/override/file.ini.append.php&quot; or &quot;settings/siteaccess/ezwebin_site/file.ini.append.php&quot; where &quot;ezwebin_site&quot; is the name of your siteaccess):</p><pre class="wordwrap copytoclipboard"><span class="line">[ClusteringSettings]</span>
+<span class="line">FileHandler=ezdb</span>
+<span class="line">DBBackend=oracle</span>
+<span class="line">DBHost=</span>
+<span class="line">DBPort=</span>
+<span class="line">DBSocket=</span>
+<span class="line">DBName=ORCL</span>
+<span class="line">DBUser=scott</span>
+<span class="line">DBPassword=tiger</span>
+<span class="line">DBChunkSize=65535</span>
+<span class="line">ExtensionDirectories[]=ezoracle</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ClusteringSettings]\r\nFileHandler=ezdb\r\nDBBackend=oracle\r\nDBHost=\r\nDBPort=\r\nDBSocket=\r\nDBName=ORCL\r\nDBUser=scott\r\nDBPassword=tiger\r\nDBChunkSize=65535\r\nExtensionDirectories[]=ezoracle' ); return false;" /></p>
+<![endif]--><p>Replace &quot;ORCL&quot;, &quot;scott&quot; and &quot;tiger&quot; with the actual data:</p>
+<ul>
+<li><div>Name of the Oracle instance (usually a simple name specified in your &quot;tnsnames.ora&quot; file)</div></li><li><div>User name</div></li><li><div>Password</div></li>
+</ul>
+<p>In most cases these values will be the same as the &quot;Database&quot;, &quot;User&quot; and &quot;Password&quot; settings specified in the [DatabaseSettings] block of your &quot;site.ini.append.php&quot; configuration file.</p><p>The &quot;DBHost&quot;, &quot;DBPort&quot; and &quot;DBSocket&quot; settings can be left empty, since they are not used when running eZ Publish on an Oracle database.</p><p>Setting the &quot;FileHandler&quot; configuration directive to &quot;ezdb&quot; will instruct eZ Publish to use the specified database for storing images, binary files and content-related caches. The &quot;DBBackend&quot; setting specifies the back-end to be used by the <a href="../../../../../../eZ-Publish/Technical-manual/4.x/Features/Clustering.html#ezdb" target="_self">&quot;ezdb&quot; file handler</a>. The &quot;ExtensionDirectories&quot; configuration array specifies the extension directories where eZ Publish should search for additional cluster file handlers and/or back-ends. The settings above will instruct eZ Publish to use the back-end located in &quot;extension/ezoracle/clusterfilehandlers/dbbackends/oracle.php&quot;.</p><p>The &quot;DBChunkSize&quot; setting determines the size of the blocks (in bytes) into which files are split when they are fetched from the database.</p><a name="eztoc100097_3" id="eztoc100097_3"></a><h2>3. Creating a new script for serving images</h2><p>All images (except design images) will be served by PHP. Apache will be instructed to use a specific PHP script called &quot;index_cluster.php&quot; for handling images. The script must include &quot;index_image.php&quot; along with a collection of configuration settings. This trick makes the serving of images faster because the system does not have to read the configuration from the database. Create the &quot;index_cluster.php&quot; inside the eZ Publish root directory and make sure that it contains the following lines:</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">define( 'STORAGE_BACKEND', &nbsp;&nbsp;&nbsp;&nbsp;'oracle' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">define( 'STORAGE_USER', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'scott' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">define( 'STORAGE_PASS', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'tiger' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">define( 'STORAGE_DB', &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'ORCL' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">define( 'STORAGE_CHUNK_SIZE', &nbsp;65535 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</span>
+<span class="line">&nbsp;</span>
+<span class="line">include_once( 'index_image.php' );</span>
+<span class="line">?&gt;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\ndefine( \'STORAGE_BACKEND\',     \'oracle\'          );\r\ndefine( \'STORAGE_USER\',        \'scott\'           );\r\ndefine( \'STORAGE_PASS\',        \'tiger\'           );\r\ndefine( \'STORAGE_DB\',          \'ORCL\'            );\r\ndefine( \'STORAGE_CHUNK_SIZE\',  65535             );\r\n\r\ninclude_once( \'index_image.php\' );\r\n?&gt;' ); return false;" /></p>
+<![endif]--><p>Make sure you specify the same database settings as indicated in the &quot;[ClusteringSettings]&quot; block in your &quot;file.ini.append.php&quot; configuration file.</p><p>You must also copy the &quot;index_image_oracle.php&quot; file from the &quot;extension/ezoracle&quot; directory to the root directory of your eZ Publish installation.</p><a name="eztoc100097_4" id="eztoc100097_4"></a><h2>4. Creating new database structures</h2><p>You have to create some structures in the database manually. You'll find the needed definitions in the &quot;oracle.php&quot; file located in the &quot;extension/ezoracle/clusterfilehandlers/dbbackends&quot; for&nbsp;eZDBFileHandlerOracleBackend and in the &quot;extension/ezoracle/clusterfilehandlers/dfsbackends&quot; for eZDFSFileHandlerOracleBackend subdirectories. The definitions are placed inside comment blocks in the beginning of the file.</p><p>When using the SQL*Plus command line tool, be sure not to miss the ending slash (&quot;/&quot;) in the last line of the PL/SQL code copied from the &quot;oracle.php&quot; file.</p><a name="eztoc100097_5" id="eztoc100097_5"></a><h2>5. Importing files to the database</h2><p>Refer to the &quot;<a href="../../../../../../eZ-Publish/Technical-manual/4.7/Features/Clustering/Setting-it-up-for-an-eZDFSFileHandler.html" target="_self">Clustering - Setting it up</a>&quot; documentation page for details on steps 5-9.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Publish-Extension-for-Oracle-R-database/2.0/Clustering/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 01 Feb 2017 02:17:36 GMT -->
+</html>

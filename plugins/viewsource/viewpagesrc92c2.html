@@ -1,0 +1,129 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31424678 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:02:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage92c2.html?pageId=31424678" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro4170.png?definition=e3RvY30&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="2c8453ae-468f-4d98-98fa-2a1da82f8bda" data-macro-schema-version="1"></p><p>This step is very similar to the previous one <a class="confluence-link" href="../../display/TECHDOC/Pagination.html" data-linked-resource-id="31424670" data-linked-resource-version="6" data-linked-resource-type="page" data-linked-resource-default-alias="Pagination" data-base-url="https://doc.ez.no">on adding pagination</a>. We are going to add a new <code>type</code> parameter in the whole component <em>stack</em>; the main difference with the <code>offset</code> case is that the user will pick a Content Type in a drop-down list instead of just using the Next/Previous links in the page.</p><h2>Symfony Controller and routing configuration to accept a <code>type</code> parameter</h2><p>In addition to the <code>offset</code> parameter, the Symfony action has to accept a <code>type</code> parameter. Like in the previous step, this involves changing the <code>routing.yml</code> configuration file and changing the logic in the Controller to do a search request based on this parameter if it is provided. This is done <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/commit/f5c7c7fafb18db91b3f6698fb5aa765c59a8b7cf">in the related commit</a>.</p><h2>JavaScript application routing to accept a <code>type</code> parameter</h2><p>Like in the <code>offset</code> case, we have to add a new route to support the <code>type</code> parameter. Again, this is done in the application plugin with the following code:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="672e3a3d-02cc-4761-999f-49c9d1e3d1c4" data-macro-parameters="language=js|theme=Midnight|title=ezconf-listappplugin.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1ee9.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9ZXpjb25mLWxpc3RhcHBwbHVnaW4uanN9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>app.route({
+    name: "eZConfListOffsetTypeIdentifier",
+    path: "/ezconf/list/:offset/:typeIdentifier",
+    view: "ezconfListView",
+    service: Y.eZConf.ListViewService,
+    sideViews: {'navigationHub': true, 'discoveryBar': false},
+    callbacks: ['open', 'checkUser', 'handleSideViews', 'handleMainView'],
+});</pre></td></tr></table><h2>Request the server with the given type</h2><p>Again, this is very similar to the <code>offset</code> case, now that we have a Content Type identifier in the matched route parameters, we can request the server to get a filtered list by changing the <code>_load</code> implementation in our view service:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="aa57b109-4852-48f2-b3c7-71f8a6a4280b" data-macro-parameters="language=js|theme=Midnight|title=_load method in ezconf-listviewservice.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingbd84.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9X2xvYWQgbWV0aG9kIGluIGV6Y29uZi1saXN0dmlld3NlcnZpY2UuanN9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>_load: function (callback) {
+    // the request allows to retrieve the matched parameters
+    var offset = this.get('request').params.offset,
+        typeIdentifier = this.get('request').params.typeIdentifier,
+        uri;
+
+    if ( !offset ) {
+        offset = 0;
+    }
+    uri = this.get('app').get('apiRoot') + 'list/' + offset;
+    if ( typeIdentifier ) {
+        uri += '/' + typeIdentifier;
+    }
+
+    Y.io(uri, {
+        method: 'GET',
+        on: {
+            success: function (tId, response) {
+                this._parseResponse(response);
+                callback(this);
+            },
+            failure: this._handleLoadFailure,
+        },
+        context: this,
+    });
+},</pre></td></tr></table><p>After doing hat, you can manually tweak the URI to get a filtered list. For instance, if you go to <code>/ez#/ezconf/list/10/folder</code> you should only see Locations of Folders in the repository.</p><h2>Content Type drop down list in the server response</h2><p>Of course, the end user is not supposed to tweak the URI to filter by Content Type. To provide a usable interface, we will add a drop-down list where they can choose a Content Type to only get the corresponding list. Again, this is done server side by modifying the Controller to fetch the list of Content Types and Content Type Groups with the Content Type Service. Once this is done, the types and the groups can be passed to the Twig template to build a drop-down list in the following way:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="923b3234-ecf8-47bd-9cef-702e6acde26c" data-macro-parameters="language=xml|theme=Midnight|title=Drop down list building" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading06d0.png?definition=e2NvZGU6bGFuZ3VhZ2U9eG1sfHRoZW1lPU1pZG5pZ2h0fHRpdGxlPURyb3AgZG93biBsaXN0IGJ1aWxkaW5nfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{% block content %}
+&lt;div class="ezconf-list-toolbar">
+    &lt;label for="types-list">Filter by content type&lt;/label>
+    &lt;select id="types-list" class="ezconf-list-types">
+        &lt;option value="">None&lt;/option>
+    {% for group in groups %}
+        &lt;optgroup label="{{ group.identifier }}">
+        {% for type in typesByGroup[group.identifier] %}
+            &lt;option value="{{ type.identifier }}"{% if type.identifier == typeIdentifier %}selected{% endif %}>{{ type.names['eng-GB'] }}&lt;/option>
+        {% endfor %}
+        &lt;/optgroup>
+    {% endfor %}
+    &lt;/select>
+&lt;/div>
+
+&lt;!-- ... the rest of the content goes here -->
+
+{% endblock %}</pre></td></tr></table><p>The complete change for that can be seen in <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/commit/7fd4ae253f4fd8400365a6d519c99ef1bfd5dae9">the corresponding commit</a>.</p><h2>Filter by Content Type by using the drop down list</h2><p>The only remaining feature is now to take into account the user interaction on the added drop-down list. The view is responsible for that and it will basically subscribe to the <code>change</code> DOM event on the list and will fire the <span class="blob-code-inner"><span class="pl-s"><span class="pl-pds"> </span>navigateTo<span class="pl-pds"> event like we did in the <code>offset</code> case:</span></span></span></p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="cbfc234c-966b-4ba8-a99e-1625f26347d4" data-macro-parameters="language=js|theme=Midnight|title=Drop down list change handling" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading3c6e.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9RHJvcCBkb3duIGxpc3QgY2hhbmdlIGhhbmRsaW5nfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-listview', function (Y) {
+    Y.namespace('eZConf');
+
+    Y.eZConf.ListView = Y.Base.create('ezconfListView', Y.eZ.ServerSideView, [], {
+        events: {
+            '.ezconf-list-location': {
+                // tap is 'fast click' (touch friendly)
+                'tap': '_navigateToLocation'
+            },
+            '.ezconf-list-page-link': {
+                'tap': '_navigateToOffset'
+            },
+            '.ezconf-list-types': {
+                'change': '_filterByType'
+            }
+        },
+
+        _filterByType: function (e) {
+            var select = e.target;
+
+            this.fire('navigateTo', {
+                routeName: 'eZConfListOffsetTypeIdentifier',
+                routeParams: {
+                    offset: "0", // offset: 0 does not work, because of a bug in PlatformUI
+                    typeIdentifier: select.get('value'),
+                }
+            });
+        },
+
+        // ... the rest of the view code should still be there
+    });
+});
+</pre></td></tr></table><p>Basically, when the user selects a value in the drop-down list, the view fires the <code>navigateTo</code> event to navigate to the <code>eZConfListOffsetTypeIdentifier</code> route with the corresponding Content Type identifier and the offset set to 0. The view service is still handling this event and takes the user to the corresponding page in the application.</p><table class="wysiwyg-macro" data-macro-name="tip" data-macro-id="12e861b0-d95a-4deb-b7d5-8544f9248180" data-macro-parameters="title=Results" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading9837.png?definition=e3RpcDp0aXRsZT1SZXN1bHRzfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>And that's it! We now have a working interface to navigate through Content with a flat list that can be filtered by Content Type. The resulting code can be seen in <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/releases/tag/8_filter">the <code>8_filter</code> tag on GitHub</a>, this step result can also be viewed as <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/compare/7_pagination...8_filter">a diff between tags <code>7_pagination</code> and <code>8_filter</code></a>. <a class="confluence-link" href="../../display/TECHDOC/Conclusion.html" data-linked-resource-id="31424698" data-linked-resource-version="3" data-linked-resource-type="page" data-linked-resource-default-alias="Conclusion" data-base-url="../../index.html">The conclusion page</a> lists the potential improvement and some bugs in our current implementation. It also gives a list of documentation pages to read to go into more detail.</p></td></tr></table><p> </p><p> </p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31424678 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:02:16 GMT -->
+</html>

@@ -1,0 +1,48 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=27395777 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:40:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage915f.html?pageId=27395777" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/51/_/styles/colorsb538.css?spaceKey=EZP" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/51/_/styles/customb538.css?spaceKey=EZP" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p>This page describes commands involved in clearing cache from the command line, these commands runs on a web server level.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="f436a78c-c441-4d87-9a2c-752e44fe42dc" data-macro-parameters="title=Cluster note" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading0d86.png?definition=e2luZm86dGl0bGU9Q2x1c3RlciBub3RlfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>On <a class="confluence-link" href="../../display/EZP/Clustering.html" data-linked-resource-id="25985700" data-linked-resource-version="9" data-linked-resource-type="page" data-linked-resource-default-alias="Clustering" data-base-url="../../index.html">Cluster</a> <em>(Setup with several web servers)</em> these commands needs to be executed on each and every web server!<br />The exception is C<em>ontent Cache,</em> which in a cluster is shared between each server using Memcached/Varnish/Redis/.. to allow cache to be cleared on content updates.</p></td></tr></table><h2>The Symfony cache:clear command</h2><p>Out of the box Symfony provides a command to perform cache clearing. It will delete all file based caches, which mainly consists of Twig template, Symfony container, and Symfony route cache. However as it deletes everything in folder <code>ezpublish/cache/&lt;environment&gt;/* </code>this also implies Symfony Proxy being deleted if you use that for Symfony <a class="confluence-link" href="../../display/EZP/HttpCache.html" data-linked-resource-id="6291892" data-linked-resource-version="10" data-linked-resource-type="page" data-linked-resource-default-alias="HttpCache" data-base-url="../../index.html">HTTPCache</a> <em>(the default single sever choice)</em> as opposed to Varnish, and eZ <a class="confluence-link" href="../../display/EZP/Persistence%2bcache.html" data-linked-resource-id="10158280" data-linked-resource-version="54" data-linked-resource-type="page" data-linked-resource-default-alias="Persistence cache" data-base-url="../../index.html">Persistent Cache</a> unless you use Memcached. </p><p>For information of use, see the help text of the command:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="b8548eeb-8adc-4479-bbd8-2ee4e8585898" data-macro-parameters="language=bash|theme=RDark" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading613e.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaHx0aGVtZT1SRGFya30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>php ezpublish/console cache:clear -h</pre></td></tr></table><h3>Integration with Legacy</h3><p><img class="editor-inline-macro" height="18" width="88" src="../servlet/status-macro/placeholder05f2.png?title=5.x&amp;colour=Yellow" data-macro-name="status" data-macro-id="07798655-5128-4855-9a77-d5abf8ed1c4c" data-macro-parameters="colour=Yellow|title=5.x" data-macro-schema-version="1"></p><p>The Symfony <code>cache:clear</code> command is extended via Legacy (Bundle/Bridge) to also clear legacy cache.</p><p>Prior to version 5.3.5 and 5.4.2 the command cleared all default cache items in legacy, however as of these releases (<a href="https://jira.ez.no/browse/EZP-24048">see EZP-24048</a>) this is now like the Symfony command itself deleting only code related caches, and not content related caches. Specifically the following legacy cache &quot;tags&quot; are now cleared:</p><ul><li><span style="color: rgb(24,54,145);">template</span></li><li><span style="color: rgb(24,54,145);">ini</span></li><li><span style="color: rgb(24,54,145);">i18n</span></li></ul><p>For further info on other cache clearing options in legacy see below.</p><h2>Clearing <em>Content Cache</em> via legacy <span style="color: rgb(0,0,0);">ezcontentcache command</span></h2><p><span style="color: rgb(0,0,0);"><img class="editor-inline-macro" height="18" width="88" src="../servlet/status-macro/placeholder05f2.png?title=5.x&amp;colour=Yellow" data-macro-name="status" data-macro-id="83ddd2d9-cd3a-4ac0-b75b-062d53c37716" data-macro-parameters="colour=Yellow|title=5.x" data-macro-schema-version="1"><br /></span></p><p><span style="color: rgb(0,0,0);">For Cluster setups or other setups where Varnish and/or Memchached is used, the legacy cache clearing command can be used to delete content cache both in legacy, and in Platform stack thanks to ViewCache integration in Legacy Bundle/Bridge.</span></p><p><span style="color: rgb(0,0,0);">For using it make sure you use </span><code>ezpublish:legacy:script</code>, like this:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="4ceed10b-7f63-45b3-a055-705bc91161e3" data-macro-parameters="language=bash|theme=RDark" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading613e.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaHx0aGVtZT1SRGFya30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>php ezpublish/console ezpublish:legacy:script --legacy-help bin/php/ezcontentcache.php</pre></td></tr></table><p>For example of use, execute help command above, and/or see <a href="../../eZ-Publish/Technical-manual/5.x/Features/View-caching/Clearing-the-view-cache.html">legacy documentation on clearing ViewCache</a>.</p><p> </p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=27395777 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:40:25 GMT -->
+</html>

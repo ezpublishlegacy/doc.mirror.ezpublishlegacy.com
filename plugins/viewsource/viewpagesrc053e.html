@@ -1,0 +1,107 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711225 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:58:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage053e.html?pageId=30711225" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro4170.png?definition=e3RvY30&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="fde6da72-b332-4ab4-80c3-06679e978bae" data-macro-schema-version="1"></p><h2>Authentication using Symfony Security component</h2><p><a href="http://symfony.com/doc/2.3/book/security.html#using-a-traditional-login-form"><span>Native and universal </span><code>form_login</code></a><span> is used, in conjunction with an extended </span><code>DaoAuthenticationProvider</code><span> (DAO stands for </span><em>Data Access Object</em><span>), the </span><code>RepositoryAuthenticationProvider</code><span>. Native behavior of </span><code>DaoAuthenticationProvider</code><span> has been preserved, making it possible to still use it for pure Symfony applications.</span></p><h3><span>Security controller</span></h3><p>A <code>SecurityController</code> is used to manage all security-related actions and is thus used to display login form. It is pretty straightforward and follows all standards explained in <a href="http://symfony.com/doc/2.3/book/security.html#using-a-traditional-login-form">Symfony security documentation</a>.</p><p>Base template used is <code>EzPublishCoreBundle:Security:login.html.twig</code> and stands as follows:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="4612cb25-adea-43b8-aff4-5abad646d12c" data-macro-parameters="language=xml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingf20b.png?definition=e2NvZGU6bGFuZ3VhZ2U9eG1sfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{% extends layout %}
+
+{% block content %}
+    {% block login_content %}
+        {% if error %}
+            &lt;div>{{ error.message|trans }}&lt;/div>
+        {% endif %}
+
+        &lt;form action="{{ path( 'login_check' ) }}" method="post">
+        {% block login_fields %}
+            &lt;label for="username">{{ 'Username:'|trans }}&lt;/label>
+            &lt;input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+            &lt;label for="password">{{ 'Password:'|trans }}&lt;/label>
+            &lt;input type="password" id="password" name="_password" />
+
+            &lt;input type="hidden" name="_csrf_token" value="{{ csrf_token("authenticate") }}" />
+
+            {#
+                If you want to control the URL the user
+                is redirected to on success (more details below)
+                &lt;input type="hidden" name="_target_path" value="/account" />
+            #}
+
+            &lt;button type="submit">{{ 'Login'|trans }}&lt;/button>
+        {% endblock %}
+        &lt;/form>
+    {% endblock %}
+{% endblock %}</pre></td></tr></table><p><span><span>The layout used by default is </span><code>%ezpublish.content_view.viewbase_layout%</code><span> (empty layout) but can be configured easily together with the login template:</span></span></p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="161984f8-0713-4c11-87b2-658f99bc65fb" data-macro-parameters="title=ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfc7c.png?definition=e2NvZGU6dGl0bGU9ZXpwbGF0Zm9ybS55bWx9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    system:
+        my_siteaccess:
+            user:
+                layout: "AcmeTestBundle::layout.html.twig"
+                login_template: "AcmeTestBundle:User:login.html.twig"</pre></td></tr></table><h4>Redirection after login</h4><p>By default, Symfony redirects to the <a href="http://symfony.com/doc/2.3/reference/configuration/security.html">URI configured in <code>security.yml</code> as <code>default_target_path</code></a>. If not set, it will default to <code>/</code>.</p><p>This setting can be set by siteaccess, via <a class="confluence-link" href="../../display/TECHDOC/EzPublishCoreBundle%2bConfiguration.html#EzPublishCoreBundleConfiguration-EzPublishCoreBundleConfiguration-Defaultpage" data-anchor="EzPublishCoreBundleConfiguration-Defaultpage" data-linked-resource-id="30711456" data-linked-resource-version="4" data-linked-resource-type="page" data-linked-resource-default-alias="EzPublishCoreBundle Configuration#EzPublishCoreBundleConfiguration-Defaultpage" data-base-url="../../index.html"><code>default_page</code> setting</a>.</p><h3>Configuration</h3><p><span>To use Symfony authentication with eZ Platform, the configuration goes as follows:</span></p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="a137b206-8a5e-45f6-bf5a-b50ad56504e6" data-macro-parameters="title=app/config/security.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading70f3.png?definition=e2NvZGU6dGl0bGU9YXBwL2NvbmZpZy9zZWN1cml0eS55bWx9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>security:
+    firewalls:
+        ezpublish_front:
+            pattern: ^/
+            anonymous: ~
+            form_login:
+                require_previous_session: false
+            logout: ~</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="d0b9fab8-d27d-4b14-9345-f50607037e59" data-macro-parameters="title=app/config/routing.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headinge5c9.png?definition=e2NvZGU6dGl0bGU9YXBwL2NvbmZpZy9yb3V0aW5nLnltbH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>login:
+    path:   /login
+    defaults:  { _controller: ezpublish.security.controller:loginAction }
+login_check:
+    path:   /login_check
+logout:
+    path:   /logout</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="ca47362e-1c83-4c43-9957-c3916287d41e" data-macro-parameters="title=Note" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingb7a0.png?definition=e2luZm86dGl0bGU9Tm90ZX0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>You can fully customize the routes and/or the controller used for login. However, remember to match <code>login_path</code>, <code>check_path</code> and <code>logout.path</code> from <code>security.yml</code>.</p><p>See <a href="http://symfony.com/doc/2.3/reference/configuration/security.html">security configuration reference</a> and <a href="http://symfony.com/doc/2.3/book/security.html#using-a-traditional-login-form">standard login form documentation</a>.</p></td></tr></table><p> </p><h3>Access control</h3><p>See the <a href="../../eZ-Publish/Technical-manual/5.x/Concepts-and-basics/Access-control.html">documentation on access control.</a></p><h3>Remember me</h3><p>It is possible to use the <code>remember_me</code> functionality. For this you can refer to the <a href="http://symfony.com/doc/2.3/cookbook/security/remember_me.html">Symfony cookbook on this topic</a>.</p><p>If you want to use this feature, you must at least extend the login template in order to add the required checkbox:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="db78c11c-3a2f-47ed-b267-0efae26dd4d4" data-macro-parameters="language=xml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingf20b.png?definition=e2NvZGU6bGFuZ3VhZ2U9eG1sfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{# your_login_template.html.twig #}
+{% extends "EzPublishCoreBundle:Security:login.html.twig" %}
+
+{% block login_fields %}
+    {{ parent() }}
+    &lt;input type="checkbox" id="remember_me" name="_remember_me" checked />
+    &lt;label for="remember_me">Keep me logged in&lt;/label>
+{% endblock %}</pre></td></tr></table><h3>Login handlers / SSO</h3><p>Symfony provides native support for <a href="http://symfony.com/doc/2.3/book/security.html#using-multiple-user-providers">multiple user providers</a>. This makes it easy to integrate any kind of login handlers, including SSO and existing third-party bundles (e.g. <a href="https://github.com/Maks3w/FR3DLdapBundle">FR3DLdapBundle</a>, <a href="https://github.com/hwi/HWIOAuthBundle">HWIOauthBundle</a>, <a href="https://github.com/FriendsOfSymfony/FOSUserBundle">FOSUserBundle</a>, <a href="http://github.com/BeSimple/BeSimpleSsoAuthBundle">BeSimpleSsoAuthBundle</a>, etc.).</p><p>Further explanation can be found in the <a class="confluence-link" href="../../display/TECHDOC/How%2bto%2bauthenticate%2ba%2buser%2bwith%2bmultiple%2buser%2bproviders.html" data-linked-resource-id="30711532" data-linked-resource-version="4" data-linked-resource-type="page" data-linked-resource-default-alias="How to authenticate a user with multiple user providers" data-base-url="../../index.html">multiple user providers cookbook entry</a>.</p><h3>Integration with Legacy</h3><ul><li>When <strong>not</strong> in legacy mode, legacy <code>user/login</code> and <code>user/logout</code> views are deactivated.</li><li>Authenticated user is injected in legacy kernel.</li></ul><h2>Authentication with Legacy SSO Handlers</h2><p>To be able to use your legacy SSO (Single Sign-on) handlers, use the following config in your <code>ezpublish/config/security.yml</code>:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="ddc77061-83c1-4d43-92a6-b015b3a1be1d" data-macro-parameters="title=Use your legacy SSO handlers" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingf04c.png?definition=e2NvZGU6dGl0bGU9VXNlIHlvdXIgbGVnYWN5IFNTTyBoYW5kbGVyc30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>security:
+    firewalls:
+        ezpublish_front:
+            pattern: ^/
+            anonymous: ~
+            # Adding the following entry will activate the use of old SSO handlers.
+            ezpublish_legacy_sso: ~ </pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="tip" data-macro-id="cf29f610-2203-4281-b997-15b6174614f8" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading7f8c.png?definition=e3RpcH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body">If you need to<a href="http://share.ez.no/learn/ez-publish/using-a-sso-in-ez-publish"> create your legacy SSO Handler, please read this entry</a></td></tr></table><p> </p><p> </p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711225 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:58:36 GMT -->
+</html>

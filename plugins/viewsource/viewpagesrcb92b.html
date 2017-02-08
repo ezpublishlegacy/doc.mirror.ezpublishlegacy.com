@@ -1,0 +1,125 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31424670 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:02:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpageb92b.html?pageId=31424670" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro4170.png?definition=e3RvY30&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="6f8b5d33-212e-47af-b9c3-991ab5186d7d" data-macro-schema-version="1"></p><p>By default, the Search Service returns 25 results so, without pagination, the current interface allows you to view only the 25 Locations. To add the pagination, we need to modify the whole component <em>stack</em> to accept an offset parameter and to use it:</p><ul><li>the Symfony Controller and the routing configuration should accept an <code>offset</code> parameter and the search query should be built with it</li><li>the JavaScript application should also have a route with an <code>offset</code> parameter</li><li>this <code>offset</code> should be used in the view service when doing the AJAX request</li><li>the server side code should generate the pagination links and the view should handle those links as the Location links <a class="confluence-link" href="../../display/TECHDOC/Build%2bthe%2bcontent%2blist.html" data-linked-resource-id="31424553" data-linked-resource-version="12" data-linked-resource-type="page" data-linked-resource-default-alias="Build the content list" data-base-url="https://doc.ez.no">in the previous step</a>.</li></ul><h3>Symfony controller and routing configuration to accept an <code>offset</code> parameter</h3><p>As you can see in <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/commit/3c447588bff4e021ea16ec7f18ab23e812a4bf40">the corresponding commit</a>, this is a purely Symfony-related task where we have to modify the <code>routing.yml</code> to accept an optional parameter and the action to use it.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="3ba8edb8-2486-4347-825c-b0ea144541fe" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>This is detailed in <a href="http://symfony.com/doc/current/book/controller.html">the Symfony Controller documentation</a>.</p></td></tr></table><h3>JavaScript application routing to accept an <code>offset</code> parameter</h3><p>The PlatformUI application does not support route with optional parameter, as a result, here we are forced to declare a new route which will accept the new parameter. To do that, we have to modify the application plugin to add a second route called <span class="blob-code-inner"><span class="pl-s"><span class="pl-pds"> </span><code>eZConfListOffset</code><span class="pl-pds"> </span></span></span>:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="ac487528-ae54-4c09-be3a-f2e154d5029c" data-macro-parameters="language=js|theme=Midnight|title=ezconf-listappplugin.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1ee9.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9ZXpjb25mLWxpc3RhcHBwbHVnaW4uanN9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>            // adding a new route so that we don't have anything else to change
+            // and we can manage the default `offset` value in the view service
+            app.route({
+                name: "eZConfListOffset",
+                path: "/ezconf/list/:offset/",
+                view: "ezconfListView",
+                service: Y.eZConf.ListViewService,
+                sideViews: {'navigationHub': true, 'discoveryBar': false},
+                callbacks: ['open', 'checkUser', 'handleSideViews', 'handleMainView'],
+            });</pre></td></tr></table><p>The new route is very similar to the existing one with the exception of its <code>path</code> property.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="14f50e1d-8949-45bd-9fc3-664bc4ff2972" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>The route placeholder concept is documented in <a href="http://yuilibrary.com/yui/docs/router/">the YUI Router component</a>.</p></td></tr></table><h3>Change the view service to use the <code>offset</code> parameter</h3><p>Depending on which route is matched, an offset parameter might be available. The matched route parameters are available in the request object stored in the <code>request</code> attribute of the view service. So to work with both the <span class="blob-code-inner"><span class="pl-s"><code>eZConfList</code><span class="pl-pds"> route and the <span class="blob-code-inner"><span class="pl-s"><code>eZConfListOffset</code><span class="pl-pds"> </span></span></span>route, the view service has to check if an offset was passed and to use 0 as its default value if none is provided. Once that is done, it can build the URI to use to do the AJAX request. The <code>_load</code> method then becomes:</span></span></span></p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="2b9e9457-526e-4d07-aa42-61db5a0f4fc1" data-macro-parameters="language=js|theme=Midnight|title=_load method in ezconf-listviewservice.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingbd84.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9X2xvYWQgbWV0aG9kIGluIGV6Y29uZi1saXN0dmlld3NlcnZpY2UuanN9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>        _load: function (callback) {
+            // the request allows to retrieve the matched parameters
+            var offset = this.get('request').params.offset,
+                uri;
+
+            if ( !offset ) {
+                offset = 0;
+            }
+            uri = this.get('app').get('apiRoot') + 'list/' + offset;
+
+            Y.io(uri, {
+                method: 'GET',
+                on: {
+                    success: function (tId, response) {
+                        this._parseResponse(response);
+                        callback(this);
+                    },
+                    failure: this._handleLoadFailure,
+                },
+                context: this,
+            });
+        },</pre></td></tr></table><p>At this point, the interface in the browser should remain the same, but by using for instance the URL <code>/ez#/ezconf/list/10</code>, you check that the offset is correctly taken into account.</p><h3><span class="blob-code-inner"><span class="pl-s"><span class="pl-pds">Pagination links</span></span></span></h3><p><span class="blob-code-inner"><span class="pl-s"><span class="pl-pds">To have working pagination links, the first thing to do is to change the server side code to generate them. In <span class="blob-code-inner"><span class="pl-s"><span class="pl-pds"><a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/commit/7e6f510ca3cf6e9f17ba2e6932d2e9148f5f9860">the corresponding commit</a> we also define the default limit at 10 elements.</span></span></span> Like for the Location links, the server side code is not really able to generate a link in the JavaScript application, so we have to generate the markup with the offset as metadata so that the view can recognize and correctly handle those links. So those links get a <code>data-offset</code> attribute with the corresponding offset:<br /></span></span></span></p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="f9589b24-0ff1-4a47-b962-b8736be67c03" data-macro-parameters="language=js|theme=Midnight" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd04d.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{% block content %}
+&lt;!-- [...] this list is generated, removed here to keep this code short -->
+
+&lt;ul class="ezconf-list-pagination">
+    &lt;li class="ezconf-list-page ezconf-list-previous">
+    {% if previous is not same as(false) %}
+        &lt;a href="{{ path('list', {offset: previous}) }}" class="ezconf-list-page-link" data-offset="{{ previous }}">&amp;laquo; Previous&lt;/a>
+    {% else %}
+        &lt;span>&amp;laquo; Previous&lt;/span>
+    {% endif %}
+    &lt;/li>
+    &lt;li class="ezconf-list-page ezconf-list-next">
+    {% if next %}
+        &lt;a href="{{ path('list', {offset: next}) }}" class="ezconf-list-page-link" data-offset="{{ next }}">Next &amp;raquo;&lt;/a>
+    {% else %}
+        &lt;span>Next &amp;raquo;&lt;/span>
+    {% endif %}
+    &lt;/li>
+&lt;/ul>
+{% endblock %}</pre></td></tr></table><p>After, we just have to change the view code to handle a <em>tap</em> on the next/previous links and when this happens, we can again fire the<span class="pl-s"><span class="pl-pds"> </span><code>navigateTo</code><span class="pl-pds"> application level event to ask the view service to trigger the navigation but this time to the <code>eZConfListOffset</code> route with the given <code>offset</code>, this is done with:</span></span></p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="e448434d-543d-44dc-bf02-aecf856b1f0d" data-macro-parameters="language=js|theme=Midnight|title=Pagination links handling in ezconf-listview.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingab0f.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9UGFnaW5hdGlvbiBsaW5rcyBoYW5kbGluZyBpbiBlemNvbmYtbGlzdHZpZXcuanN9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-listview', function (Y) {
+    Y.namespace('eZConf');
+
+    Y.eZConf.ListView = Y.Base.create('ezconfListView', Y.eZ.ServerSideView, [], {
+        events: {
+            '.ezconf-list-location': {
+                'tap': '_navigateToLocation'
+            },
+            '.ezconf-list-page-link': {
+                'tap': '_navigateToOffset' // new event detected
+            },
+        },
+
+        _navigateToOffset: function (e) {
+            var offset = e.target.getData('offset');
+
+            e.preventDefault();
+            this.fire('navigateTo', {
+                routeName: 'eZConfListOffset',
+                routeParams: {
+                    offset: offset,
+                },
+            });
+        },
+
+        // ... the rest remains unchanged, removed to keep the code short
+    });
+});
+</pre></td></tr></table><p>After this change, the pagination should work as expected and you should be able to navigate through the complete list of Locations.</p><table class="wysiwyg-macro" data-macro-name="tip" data-macro-id="38297fbf-1326-4088-824a-e2899175c5b3" data-macro-parameters="title=Results and next step" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headinga15d.png?definition=e3RpcDp0aXRsZT1SZXN1bHRzIGFuZCBuZXh0IHN0ZXB9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>The resulting code can be seen in <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/releases/tag/7_pagination">the <code>7_pagination</code> tag on GitHub</a>, this step result can also be viewed as <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/compare/6_2_list_server...7_pagination">a diff between tags <code>6_2_list_server</code> and <code>7_pagination</code></a>.</p><p>The next and final step is to <a class="confluence-link" href="../../display/TECHDOC/Filter%2bby%2bContent%2bType.html" data-linked-resource-id="31424678" data-linked-resource-version="6" data-linked-resource-type="page" data-linked-resource-default-alias="Filter by Content Type" data-base-url="../../index.html">add a way for the user to filter by Content Type</a>.</p></td></tr></table>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31424670 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:02:14 GMT -->
+</html>

@@ -1,0 +1,119 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711529 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:01:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpagec14b.html?pageId=30711529" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p>So far, our Field Type’s value is represented by the <code>Tweet\Value</code> class. It holds a semantic representation of the type’s data: a url, author url and the tweet's content.</p><p>The next step is to tell the system how to actually <em>store</em> this.</p><h3>About converters</h3><p>Unlike eZ Publish Legacy, eZ Platform supports (by design) multiple storage engines. The main, and almost only one right now is the Legacy Storage Engine, based on the legacy database, with a new implementation. Since each storage engine may have its own way of storing data, we need to map each Field Type value to something legacy can understand. To do this, we will implement a Field Type Converter, each storage engine defining its own interface for those.</p><h3>Legacy Field Type converters</h3><p>The legacy storage engine uses the <code>
+    ezcontentobject_attribute
+  </code> table to store Field values, and <code>
+    ezcontentclass_attribute
+  </code> to store Field definition values (settings, etc.). They're both based on the same principle. Each row represents a Field or a FieldDefinition, and offers several free fields, of different types, where the type can store its data:</p><ul><li><code>
+      ezcontentobject_attribute
+    </code> offers three fields for this purpose: <code>
+      data_int
+    </code> , <code>
+      data_text
+    </code> and <code>
+      data_float
+    </code></li><li><code>
+      ezcontentclass_attribute
+    </code> offers a few more: four <code>data_int</code> (<code>data_int1</code> to <code>data_int4</code>) fields, four <code>
+      data_float
+    </code>  (<code>data_float1</code> to <code>data_float5</code>) ones, and five <code>data_text</code> (<code>data_text1</code> to <code>data_text5</code>) .</li></ul><p>Each type is free to use those fields in any way it requires. Converters will map a field’s semantic values to the fields described above, for both settings (validation + configuration) as well as value.</p><h3>Implementing Tweet\LegacyConverter</h3><p>The Converter will be placed along with the Type and Value definitions (the Kernel stores them inside the Legacy Storage Engine structure): <code>
+    eZ/Publish/FieldType/Tweet/LegacyConverter.php
+  </code> . A Legacy Converter must implement the eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter interface:</p><p> </p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="78145c02-8d58-4089-9598-91bd6dbf1f6e" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>namespace EzSystems\TweetFieldTypeBundle\eZ\Publish\FieldType\Tweet;
+
+use eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter;
+
+class LegacyConverter implements Converter
+{
+}</pre></td></tr></table><p>The Converter interface expects us to implement five methods:</p><ul><li><p><code>
+        toStorageValue()</code> and <code>toFieldValue()</code> <br class="kix-line-break" /> used to convert an API field value to a legacy storage value, and a legacy storage value to an API field value.  </p></li><li><p><code>toStorageFieldDefinition()</code> and <code>toFieldDefinition()</code> <br class="kix-line-break" /> used to convert a field definition to a legacy one, and a stored legacy field definition to an API field definition.</p></li><li><p><code>getIndexColumn()</code> <br class="kix-line-break" /> Tell the API which legacy DB field should be used to sort &amp; filter content, either <code>sort_key_string</code> or <code>sort_key_int</code></p></li></ul><h4>Implementing Field Value converters: toFieldValue() and toStorageValue()</h4><p>As said above, those two methods are used to convert from a Field to a value that Legacy can store, and the other way around.</p><p>We have defined that we wanted to store the tweet’s URL in <code>data_text</code>, and that sorting would be done on the <code>username-status-tweetid</code> string we extract in <code>
+    getName()</code> and <code>
+    getSortInfo()</code>. </p><p><code>toStorageValue()</code> will fill the provided <code>eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue</code> from a <code>
+    Tweet\Value</code>, while <code>
+    toFieldValue()</code> will do the exact opposite:</p><p> </p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="b022b137-49b1-4b7d-8e4c-2cf30776ba8b" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue;
+use eZ\Publish\SPI\Persistence\Content\FieldValue;
+
+// [...]
+
+public function toStorageValue( FieldValue $value, StorageFieldValue $storageFieldValue )
+{
+   $storageFieldValue->dataText = $value->url;
+   $storageFieldValue->sortKeyString = $value->sortKey;
+}
+public function toFieldValue( StorageFieldValue $value, FieldValue $fieldValue )
+{
+   $fieldValue->url = $value->dataText;
+   $fieldValue->sortKey = $value->sortKeyString;
+}
+</pre></td></tr></table><p>With these two methods, the legacy storage engine is able to convert a <code>Tweet\Value</code> into legacy data, and legacy data back into a <code>Tweet\Value</code> object.</p><h4>Implementing Field Definition converters: <code>toStorageFieldDefinition()</code> and <code>toFieldDefinition()</code></h4><p>The first two methods we have implemented apply to a Field’s value . But we also need to convert our Field’s definition. For example, a TextLine’s max length, or any FieldDefinition option.</p><p>This is done using <code>toStorageDefinition()</code> that converts a <code>FieldDefinition</code> into a <code>StorageFieldDefinition</code>. <code>toFieldDefinition()</code> does the opposite. In our case, we actually don’t need to implement those methods since our Tweet Type doesn’t have settings:</p><p> </p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="a57bdee8-6e74-4059-ada2-ba847ab2975c" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldDefinition;
+use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
+
+// [...]
+
+public function toStorageFieldDefinition( FieldDefinition $fieldDef, StorageFieldDefinition $storageDef )
+{
+}
+ 
+public function toFieldDefinition( StorageFieldDefinition $storageDef, FieldDefinition $fieldDef )
+{
+}</pre></td></tr></table><h4>Implementing <code>getIndexColumn()</code></h4><p>In <code>
+    toFieldValue()</code> and <code>
+    toStorageValue()</code> we have used the <code>
+    sortKeyString
+  </code> property from <code>
+    StorageFieldValue</code>. <code>
+    getIndexColumn()</code> will tell provide the legacy storage engine the type of index / sort column it should use: string (<code>sort_key_string</code>) or int (<code>sort_key_int</code>). Depending on which one is returned, the system will either use the <code>
+    sortKeyString</code> or the <code>
+    sortKeyInt</code> properties from the <code>
+    StorageFieldValue</code>.</p><p> </p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="5e950abf-7b0c-4855-a46a-aba5b37c0a5b" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>public function getIndexColumn()
+{
+   return 'sort_key_string';
+}</pre></td></tr></table><h3>Registering the converter</h3><p>Just like a Type, a Legacy Converter needs to be registered and tagged in the service container.</p><p>The tag is <code>ezpublish.storageEngine.legacy.converter</code>, and it requires an <code>alias</code> attribute to be set to the Field Type identifier (<code>eztweet</code>). Let's add this block to  <code>Resources/config/services.yml</code>:</p><p> </p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="a3ea9bc0-346a-44bb-9e5f-a34c6552828b" data-macro-parameters="language=php|title=Resources/config/services.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading81ec.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRpdGxlPVJlc291cmNlcy9jb25maWcvc2VydmljZXMueW1sfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>services:
+    ezsystems.tweetbundle.fieldType.eztweet.converter:
+        class: EzSystems\TweetFieldTypeBundle\eZ\Publish\FieldType\Tweet\LegacyConverter
+        tags:
+            - {name: ezpublish.storageEngine.legacy.converter, alias: eztweet}</pre></td></tr></table><p> </p><p> </p><p> </p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711529 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:01:18 GMT -->
+</html>

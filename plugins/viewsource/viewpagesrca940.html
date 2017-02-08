@@ -1,0 +1,443 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31430152 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:37:52 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpagea940.html?pageId=31430152" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/6/_/styles/colors74cd.css?spaceKey=DEVELOPER" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/6/_/styles/custom74cd.css?spaceKey=DEVELOPER" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <div class="contentLayout2">
+<div class="columnLayout two-right-sidebar" data-layout="two-right-sidebar">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1>Introduction</h1><h2>Smart HTTP cache clearing</h2><p><strong>Smart HTTP cache clearing</strong> refers to the ability to clear cache for Locations/content that is in relation with the content being currently cleared.</p><p>When published, any Content item usually has at least one Location, identified by its URL. Therefore, HTTP cache being bound to URLs, if a Content item is updated (a new version is published), we want HTTP cache for all its Locations to be cleared, so the content itself can be updated everywhere it is supposed to be displayed. Sometimes, clearing cache for the content's Locations is not sufficient. You can, for instance, have an excerpt of it displayed in a list from the parent Location, or from within a relation. In this case, cache for the parent Location and/or the relation need to be cleared as well (at least if an ESI is not used).</p><h3>The mechanism</h3><p><strong>Smart HTTP cache clearing</strong> is an event-based mechanism. Whenever a content item needs its cache cleared, the cache purger service sends an <code>ezpublish.cache_clear.content</code> event (also identified by <code>eZ\Publish\Core\MVC\Symfony\MVCEvents::CACHE_CLEAR_CONTENT</code> constant) and passes an <code>eZ\Publish\Core\MVC\Symfony\Event\ContentCacheClearEvent</code> event object. This object contains the ContentInfo object we need to clear the cache for. Every listener for this event can add Location objects to the <em>cache clear list</em>.</p><p>Once the event is dispatched, the purger passes collected Location objects to the purge client, which will effectively send the cache <code>BAN</code> request.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="79e9ed79-7a29-4b1e-936d-c550414b2554" data-macro-parameters="title=Note" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingb7a0.png?definition=e2luZm86dGl0bGU9Tm90ZX0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body">The event is dispatched with a dedicated event dispatcher, <code>ezpublish.http_cache.event_dispatcher</code>.</td></tr></table><h3>Default behavior</h3><p>By default, following Locations will be added to the cache clear list:</p><ul class="task-list"><li>All Locations assigned to content (<code>AssignedLocationsListener</code>)</li><li>Parent Location of all Content item's Locations (<code>ParentLocationsListener</code>)</li><li>Locations for content's relations, including reverse relations (<code>RelatedLocationsListener</code>)</li></ul><h3>Implementing a custom listener</h3><p>By design, smart HTTP cache clearing is extensible. One can easily implement an event listener/subscriber to the <code>ezpublish.cache_clear.content</code> event and add Locations to the cache clear list.</p><h4>Example</h4><p>Here's a very simple custom listener example, adding an arbitrary Location to the list.</p><table class="wysiwyg-macro" data-macro-name="note" data-macro-id="ef5b5f84-9b88-486a-93ea-c013b265b42a" data-macro-parameters="title=Important" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading5653.png?definition=e25vdGU6dGl0bGU9SW1wb3J0YW50fQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body">Cache clear listener services <strong>must</strong> be tagged as <code>ezpublish.http_cache.event_subscriber</code> or <code>ezpublish.http_cache.event_listener</code>.</td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="b224d3fb-1e01-4e3b-a722-08a3db630cfe" data-macro-parameters="language=php|theme=RDark" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfff0.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRoZW1lPVJEYXJrfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>namespace Acme\AcmeTestBundle\EventListener;
+
+use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\Core\MVC\Symfony\Event\ContentCacheClearEvent;
+use eZ\Publish\Core\MVC\Symfony\MVCEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class ArbitraryLocationsListener implements EventSubscriberInterface
+{
+    /**
+     * @var LocationService
+     */
+    private $locationService;
+
+    public function __construct( LocationService $locationService )
+    {
+        $this->locationService = $locationService;
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return [MVCEvents::CACHE_CLEAR_CONTENT => ['onContentCacheClear', 100]];
+    }
+
+    public function onContentCacheClear( ContentCacheClearEvent $event )
+    {
+        // $contentInfo is the ContentInfo object for the content being cleared.
+        // You can extract information from it (e.g. ContentType from its contentTypeId), using appropriate Repository services.
+        $contentInfo = $event->getContentInfo();
+
+        // Adding arbitrary locations to the cache clear list.
+        $event->addLocationToClear( $this->locationService->loadLocation( 123 ) );
+        $event->addLocationToClear( $this->locationService->loadLocation( 456 ) );
+    }
+}</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="21ab2d88-8092-474b-a8c0-1b2b9dbb6ead" data-macro-parameters="language=perl|theme=RDark" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingeca8.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGVybHx0aGVtZT1SRGFya30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>parameters:
+    acme.cache_clear.arbitrary_locations_listener.class: Acme\AcmeTestBundle\EventListener\ArbitraryLocationsListener
+
+services:
+    acme.cache_clear.arbitrary_locations_listener:
+        class: %acme.cache_clear.arbitrary_locations_listener.class%
+        arguments: [@ezpublish.api.service.location]
+        tags:
+            - { name: ezpublish.http_cache.event_subscriber }
+
+</pre></td></tr></table><h2>Content Cache</h2><p> </p><p>eZ Platform uses <a href="http://symfony.com/doc/current/book/http_cache.html">Symfony HttpCache</a> to manage content &quot;view&quot; cache with an <a href="http://symfony.com/doc/current/book/http_cache.html#http-expiration-and-validation">expiration model</a>. In addition it is extended <em>(using FOSHttpCache)</em> to add several advanced features. For content coming from the CMS the following is taken advantage of out of the box:</p><ul><li>To be able to always keep cache up to date, cache is made &quot;content-aware&quot; to allow updates to content to trigger <em>cache invalidation.</em><ul><li>Uses a custom <code>X-Location-Id</code> header, which both Symfony and Varnish Proxy are able to invalidate cache on <em><span style="line-height: 1.42857;">(for details see </span><span class="confluence-link"><a href="../../display/DEVELOPER/HTTP%2bCache.html#HTTPCache-CachePurge">Cache purge</a>.)</span></em></li></ul></li><li>To be able to also cache requests by logged-in users, cache is made &quot;<a class="confluence-link" href="#HTTPCache-Context-awareHTTPCache" data-anchor="Context-awareHTTPCache" data-linked-resource-default-alias="Context-awareHTTPCache" data-base-url="../../index.html"><span class="confluence-link"><span class="confluence-link"><span class="confluence-link">context-aware</span></span></span></a><span class="confluence-link"> </span>.&quot;<ul><li>Uses a custom vary header <code>X-User-Hash</code> to allow pages to var by user <u>rights</u> <em>(so not per unique user, that is better served by browser cache.)</em></li></ul></li></ul><h3>Cache and Expiration Configuration</h3><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="45f055e3-f332-406f-a138-0c486d08e5fc" data-macro-parameters="title=ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfc7c.png?definition=e2NvZGU6dGl0bGU9ZXpwbGF0Zm9ybS55bWx9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    system:
+        my_siteaccess:
+            content:
+                view_cache: true      # Activates HttpCache for content
+                ttl_cache: true       # Activates expiration based HttpCache for content (very fast)
+                default_ttl: 60       # Number of seconds an Http response is valid in cache (if ttl_cache is true)</pre></td></tr></table><h3>Making your controller response content-aware</h3><p>Sometimes you need your controller's cache to be invalidated at the same time as specific content changes (i.e. <a href="http://symfony.com/doc/current/book/http_cache.html#using-esi-in-symfony2">ESI sub-requests with <code>render</code> twig helper</a>, for a menu for instance). To be able to do that, you just need to add <code><strong>X-Location-Id</strong></code> header to the response object:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="9ae11110-a665-4786-ac2a-3e94c9a536a8" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>use Symfony\Component\HttpFoundation\Response;
+ 
+// Inside a controller action
+// "Connects" the response to location #123 and sets a max age (TTL) of 1 hour.
+$response = new Response();
+$response->headers->set('X-Location-Id', 123);
+$response->setSharedMaxAge(3600);</pre></td></tr></table><h3>Making your controller response context-aware</h3><p>If the content you're rendering depends on a user's permissions, then you should make the response <span class="confluence-link"><span class="confluence-link">context-aware</span></span>:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="509bf65e-6bf5-4c3b-b51d-2ff9d9b73c09" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>use Symfony\Component\HttpFoundation\Response;
+ 
+// Inside a controller action
+// Tells proxy configured to support this header to take the rights of a user (user hash) into account for the cache
+$response = new Response();
+$response->setVary('X-User-Hash');</pre></td></tr></table><h1>Configuration</h1><h2>Cache Purge</h2><p style="margin-left: 0.0px;">This page explains the content cache purge <em>(aka invalidate)</em> mechanism used when publishing content from the UI or from a container-aware script, resulting in cache being invalidated either in the built-in Symfony Reverse Proxy, or on the much faster Varnish reverse proxy.</p><h3>Overview</h3><p>eZ Platform returns content-related responses with an <code>X-Location-Id</code> header that are stored together by the configured HTTP cache. This allows you to clear <em>(invalidate)</em> HTTP cache representing specifically a given Content item. On publishing the content, a cache purger is triggered with the Content ID in question, which in turn figures out affected content Locations based on <a href="../../display/DEVELOPER/HTTP%2bCache.html#HTTPCache-SmartHTTPcacheclearing">Smart HTTP cache clearing</a> logic. The returned Location IDs are sent for purge using the purge type explained further below.</p><h3>Purge types</h3><h4>Symfony Proxy: Local purge type</h4><p>By default, invalidation requests will be emulated and sent to the Symfony Proxy cache Store. Cache purge will thus be synchronous, meaning no HTTP purge requests will be sent around when publishing.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="28ecd9c4-77a1-4da5-9656-5e4d3b14befe" data-macro-parameters="title=ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfc7c.png?definition=e2NvZGU6dGl0bGU9ZXpwbGF0Zm9ybS55bWx9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    http_cache:
+        purge_type: local</pre></td></tr></table><h3>Varnish: HTTP purge type</h3><p>With Varnish you can configure one or several servers that should be purged over HTTP. This purge type is asynchronous, and flushed by the end of Symfony kernel-request/console cycle <em>(during terminate event)</em>. Settings for purge servers can be configured per site group or site access:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="e841414f-8228-4c3b-a175-2eb45c4511cf" data-macro-parameters="title=ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfc7c.png?definition=e2NvZGU6dGl0bGU9ZXpwbGF0Zm9ybS55bWx9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    http_cache:
+        purge_type: http
+
+    system:
+        my_siteacess:
+            http_cache:
+                purge_servers: ["http://varnish.server1", "http://varnish.server2", "http://varnish.server3"]</pre></td></tr></table><p>For further information on setting up Varnish, see <a href="../../display/DEVELOPER/HTTP%2bCache.html#HTTPCache-UsingVarnish">Using Varnish</a>.</p><h3>Purging</h3><p>While purging on content, updates are handled for you; on actions against the eZ Platform APIs, there are times you might have to purge manually.</p><h4>Manual by code</h4><p>Manual purging from code which takes <a href="../../display/DEVELOPER/HTTP%2bCache.html#HTTPCache-SmartHTTPcacheclearing">Smart HTTP cache clearing</a> logic into account, this is using the service also used internally for cache clearing on content updates:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="caf72e5e-5a4c-4b2f-bf1d-d07d2c8a041a" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>// Purging cache based on content id, this will trigger cache clear of all locations found by Smart HttpCache clear
+// typically self, parent, related, ..
+$container->get('ezpublish.http_cache.purger')->purgeForContent(55);</pre></td></tr></table><h4><span style="color: rgb(0,98,147);">Manually by command with Symfony Proxy</span></h4><p>Symfony Proxy stores its cache in the Symfony cache directory, so a regular <code>cache:clear</code> commands will clear it:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="73c0ee25-9445-455c-844e-e555ea40a031" data-macro-parameters="language=bash" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading174f.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>php app/console --env=prod cache:clear</pre></td></tr></table><h4>Manual by HTTP BAN request on Varnish</h4><p>When using Varnish and in need to purge content directly, then the following examples show how this is done internally by our <span>FOSPurgeClient, and in turn </span>FOSHttpCache Varnish proxy client:</p><p>For purging all:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="8d1b97ea-e8ac-4025-b332-1cc5a26627b5" data-macro-parameters="language=bash" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading174f.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>BAN / HTTP 1.1 
+Host: localhost 
+X-Location-Id: .* </pre></td></tr></table><p>Or with given location ids <em>(here 123 and 234)</em>:<span style="color: rgb(0,128,0);"> </span></p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="1f3ab84d-6552-431b-9837-11a72ec5ca93" data-macro-parameters="language=bash" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading174f.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>BAN / HTTP 1.1 
+Host: localhost 
+X-Location-Id: ^(123|234)$</pre></td></tr></table><pre><span style="color: rgb(0,128,0);"> </span></pre><h2>Using Varnish</h2><p>eZ Platform being built on top of Symfony, it uses standard HTTP cache headers. By default the Symfony reverse proxy, written in PHP, is used to handle cache, but it can be easily replaced with any other reverse proxy like Varnish.</p><p><em>Use of Varnish is a requirement for use in Clustering setup, for overview of clustering feature see <a class="confluence-link" href="../../display/DEVELOPER/Clustering.html" data-linked-resource-id="31430387" data-linked-resource-version="19" data-linked-resource-type="page" data-linked-resource-default-alias="Clustering" data-base-url="../../index.html">Clustering</a>. </em></p><p> </p><h3>Prerequisites</h3><ul class="task-list"><li>A working Varnish 3 or Varnish 4 setup.</li></ul><h3>Recommended VCL base files</h3><p>For Varnish to work properly with eZ, you'll need to use one of the provided files as a basis:</p><ul class="task-list"><li><a href="https://github.com/ezsystems/ezplatform/blob/master/doc/varnish/vcl/varnish3.vcl">Varnish 3 VCL example</a></li><li><a href="https://github.com/ezsystems/ezplatform/blob/master/doc/varnish/vcl/varnish4.vcl">Varnish 4 VCL example</a></li></ul><blockquote><p><strong>Note:</strong> Http cache management is done with the help of <a href="http://foshttpcachebundle.readthedocs.org/">FOSHttpCacheBundle</a>. You may need to tweak your VCL further on according to <a href="http://foshttpcache.readthedocs.org/en/latest/varnish-configuration.html">FOSHttpCache documentation</a> in order to use features supported by it.</p></blockquote><h3>Configure eZ Publish</h3><h4>Update your Virtual Host</h4><p>Somehow we need to tell php process that we are behind a Varnish proxy and not the built in Symfony Http Proxy. If you use fastcgi/fpm you can pass these directly to php process, but you can in all cases also specify them in your web server config.</p><h4>On apache:</h4><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="bdd86f5c-6773-4ab6-b828-ddcb4829190f" data-macro-parameters="language=none|title=my_virtualhost.conf" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading601f.png?definition=e2NvZGU6bGFuZ3VhZ2U9bm9uZXx0aXRsZT1teV92aXJ0dWFsaG9zdC5jb25mfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;VirthualHost *:80>
+    # Configure your VirtualHost with rewrite rules and stuff
+ 
+    # Force front controller NOT to use built-in reverse proxy.
+    SetEnv SYMFONY_HTTP_CACHE 0
+ 
+	# Configure IP of your Varnish server to be trusted proxy
+    # Replace fake IP address below by your Varnish IP address
+    SetEnv SYMFONY_TRUSTED_PROXIES "193.22.44.22"
+&lt;/VirtualHost></pre></td></tr></table><h4>On nginx:</h4><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="577ee5ed-26f7-42ed-9634-06488d08ddc3" data-macro-parameters="title=mysite.com" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headinga4ff.png?definition=e2NvZGU6dGl0bGU9bXlzaXRlLmNvbX0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>fastcgi_param SYMFONY_HTTP_CACHE 0;
+# Configure IP of your Varnish server to be trusted proxy
+# Replace fake IP address below by your Varnish IP address
+fastcgi_param SYMFONY_TRUSTED_PROXIES "193.22.44.22";</pre></td></tr></table><h3>Update YML configuration</h3><p>Secondly we need to tell eZ Platform to change to use http based purge client <em>(specifically FosHttpCache Varnish purge client is used)</em>, and specify url Varnish can be reached on:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="49d9dad1-776b-407d-85df-052d55641f69" data-macro-parameters="title=ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfc7c.png?definition=e2NvZGU6dGl0bGU9ZXpwbGF0Zm9ybS55bWx9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    http_cache:
+        purge_type: http
+ 
+    system:
+        # Assuming that my_siteaccess_group your frontend AND backend siteaccesses
+        my_siteaccess_group:
+            http_cache:
+                # Fill in your Varnish server(s) address(es).
+                purge_servers: [http://my.varnish.server:8081]</pre></td></tr></table><p> </p><h1>Usage</h1><h2><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro2250.png?definition=e2FuY2hvcjpDb250ZW50LWF3YXJlSFRUUENhY2hlfQ&amp;locale=en_GB&amp;version=2" data-macro-name="anchor" data-macro-id="8cfe79aa-d078-4384-a347-5bec16c0279a" data-macro-default-parameter="Content-awareHTTPCache" data-macro-schema-version="1">Context-aware HTTP cache</h2><h3>Use case</h3><p>As it is based on Symfony 2, eZ Platform uses HTTP cache <span class="confluence-link">extended with features like content awareness</span>. However, this cache management is only available for anonymous users due to HTTP restrictions.</p><p>It is of course possible to make HTTP cache vary thanks to the <code>Vary</code> response header, but this header can only be based on one of the request headers (e.g. <code>Accept-Encoding</code>). Thus, to make the cache vary on a specific context <em>(for example a hash based on a user roles and limitations)</em>, this context must be present in the original request.</p><h3>Feature</h3><p>As the response can vary on a request header, the base solution is to make the kernel do a sub-request in order to retrieve the user context hash (aka <strong>user hash</strong>). Once the <em>user hash</em> has been retrieved, it's injected in the original request in the <code>X-User-Hash</code> custom header, making it possible to <em>vary</em> the HTTP response on this header:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="5b4fe00a-e523-496c-a04d-71d6c5b1b6e8" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;?php
+use Symfony\Component\HttpFoundation\Response;
+
+// ...
+
+// Inside a controller action
+$response = new Response();
+$response->setVary('X-User-Hash');</pre></td></tr></table><p>This solution is implemented in Symfony reverse proxy (aka <em>HttpCache</em>) and is also accessible to dedicated reverse proxies like Varnish.</p><table class="wysiwyg-macro" data-macro-name="note" data-macro-id="82cafdd5-e0ee-4620-af13-100acc38b10f" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingdd57.png?definition=e25vdGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>Note that sharing ESIs across SiteAccesses is not possible by design (see <img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro746e.png?definition=e2ppcmE6a2V5PUVaUC0yMjUzNX0=&amp;locale=en_GB" data-macro-name="jira" data-macro-id="3376c096-5aff-463e-9c3d-1f9cbb393986" data-macro-parameters="key=EZP-22535|server=eZ Systems JIRA tracker|serverId=841cf523-cc54-30bc-bc5d-89e63192498a" data-macro-schema-version="1"> for technical details)</p></td></tr></table><table class="wysiwyg-macro" data-macro-name="tip" data-macro-id="9e794657-4115-4ba0-8de8-2c541ad65e6d" data-macro-parameters="title=Vary by User" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingc5c1.png?definition=e3RpcDp0aXRsZT1WYXJ5IGJ5IFVzZXJ9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>In cases where you need to deliver content uniquely to a given user, and tricks like using JavaScript and cookie values, hinclude, or disabling cache is not an option. Then remaining option is to vary response by cookie:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="579ae860-977d-44e9-9e96-3d2fab95851b" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>$response->setVary('Cookie');</pre></td></tr></table><p>Unfortunately this is not optimal as it will by default vary by all cookies, including those set by add trackers, analytics tools, recommendation services, etc. However, as long as <em>your</em> application backend does not need these cookies, you can solve this by stripping everything but the session cookie. Example for Varnish can be found in the default VCL examples in part dealing with User Hash, for single-server setup this can easily be accomplished in Apache / Nginx as well.</p></td></tr></table><p> </p><h3>HTTP cache clear</h3><p>As eZ Platform uses <a href="http://foshttpcachebundle.readthedocs.org/">FOSHttpCacheBundle</a>, this impacts the following features:</p><ul class="task-list"><li>HTTP cache purge</li><li>User context hash</li></ul><p>Varnish proxy client from FOSHttpCache lib is used for clearing eZ HTTP cache, even when using Symfony HttpCache. A single <code>BAN</code> request is sent to registered purge servers, containing a <code>X-Location-Id</code> header. This header contains all Location IDs for which objects in cache need to be cleared.</p><h3>Symfony reverse proxy</h3><p>Symfony reverse proxy (aka HttpCache) is supported out of the box, all you have to do is to activate it.</p><h3>Varnish</h3><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="5327bf81-70ef-4c85-a651-c590adaeab61" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body">Please refer to <a href="../../display/DEVELOPER/HTTP%2bCache.html#HTTPCache-UsingVarnish">Using Varnish</a></td></tr></table><h3>User context hash</h3><p><a href="http://foshttpcachebundle.readthedocs.org/en/latest/features/user-context.html">FOSHttpCacheBundle <em>User Context feature</em></a> is activated by default.</p><p>As the response can vary on a request header, the base solution is to make the kernel do a sub-request in order to retrieve the context (aka <strong>user context hash</strong>). Once the <em>user hash</em> has been retrieved, it's injected in the original request in the <code>X-User-Hash</code> header, making it possible to <em>vary</em> the HTTP response on this header:</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="c2b6738d-ffc4-4426-bd69-138157865ae1" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body">Name of the <a href="http://foshttpcachebundle.readthedocs.org/en/latest/reference/configuration/user-context.html">user hash header is configurable in FOSHttpCacheBundle</a>. By default eZ Platform sets it to <code>**X-User-Hash**</code>.</td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="5fbe94f7-e206-4fb0-9b63-dbdfe0dd762b" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;?php 
+use Symfony\Component\HttpFoundation\Response;
+ 
+// ...
+ 
+// Inside a controller action
+$response = new Response();
+$response->setVary('X-User-Hash');
+
+</pre></td></tr></table><p> </p><p>This solution is <a href="http://foshttpcachebundle.readthedocs.org/en/latest/features/symfony-http-cache.html">implemented in Symfony reverse proxy (aka <em>HttpCache</em>)</a> and is also accessible to <a href="http://foshttpcache.readthedocs.org/en/latest/varnish-configuration.html">dedicated reverse proxies like Varnish</a>.</p><h3>Workflow</h3><table class="wysiwyg-macro" data-macro-name="tip" data-macro-id="03eec63b-26f9-4128-a16e-b4a03658d44e" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading7f8c.png?definition=e3RpcH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body">Please refer to <a href="http://foshttpcachebundle.readthedocs.org/en/latest/features/user-context.html#how-it-works">FOSHttpCacheBundle documentation on how user context feature works</a>.</td></tr></table><h3>User hash generation</h3><table class="wysiwyg-macro" data-macro-name="tip" data-macro-id="6e24f711-c2f1-49f8-8614-bcad6ead94eb" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading7f8c.png?definition=e3RpcH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body">Please refer to <a href="http://foshttpcachebundle.readthedocs.org/en/latest/features/user-context.html#generating-hashes">FOSHttpCacheBundle documentation on how user hashes are being generated</a>.</td></tr></table><p>eZ Platform already interferes with the hash generation process by adding current user permissions and limitations. You can also interfere in this process by <a href="http://foshttpcachebundle.readthedocs.org/en/latest/reference/configuration/user-context.html#custom-context-providers">implementing custom context provider(s)</a>.</p><h4>User hash generation with Varnish 3</h4><p>The behavior described here comes out of the box with Symfony reverse proxy, but it's of course possible to use Varnish to achieve the same.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="864f19bc-7624-47e2-931d-e240d6af307a" data-macro-parameters="language=bash" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading174f.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre># Varnish 3 style for eZ Platform
+# Our Backend - We assume that eZ Platform Web server listen on port 80 on the same machine.
+backend ezplatform {
+    .host = "127.0.0.1";
+    .port = "80";
+}
+
+# Called at the beginning of a request, after the complete request has been received
+sub vcl_recv {
+
+    # Set the backend
+    set req.backend = ezplatform;
+
+    # ...
+
+    # Retrieve client user hash and add it to the forwarded request.
+    call ez_user_hash;
+
+    # If it passes all these tests, do a lookup anyway;
+    return (lookup);
+}
+
+# Sub-routine to get client user hash, for context-aware HTTP cache.
+# Don't forget to correctly set the backend host for the Curl sub-request.
+sub ez_user_hash {
+
+    # Prevent tampering attacks on the hash mechanism
+    if (req.restarts == 0
+        &amp;&amp; (req.http.accept ~ "application/vnd.fos.user-context-hash"
+            || req.http.x-user-context-hash
+        )
+    ) {
+        error 400;
+    }
+
+    if (req.restarts == 0 &amp;&amp; (req.request == "GET" || req.request == "HEAD")) {
+        # Get User (Context) hash, for varying cache by what user has access to.
+        # https://doc.ez.no/display/EZP/Context+aware+HTTP+cach
+
+        # Anonymous user w/o session => Use hardcoded anonymous hash to avoid backend lookup for hash
+        if (req.http.Cookie !~ "eZSESSID" &amp;&amp; !req.http.authorization) {
+            # You may update this hash with the actual one for anonymous user
+            # to get a better cache hit ratio across anonymous users.
+            # Note: Then needs update every time anonymous user role assignments change.
+            set req.http.X-User-Hash = "38015b703d82206ebc01d17a39c727e5";
+        }
+        # Pre-authenticate request to get shared cache, even when authenticated
+        else {
+            set req.http.x-fos-original-url    = req.url;
+            set req.http.x-fos-original-accept = req.http.accept;
+            set req.http.x-fos-original-cookie = req.http.cookie;
+            # Clean up cookie for the hash request to only keep session cookie, as hash cache will vary on cookie.
+            set req.http.cookie = ";" + req.http.cookie;
+            set req.http.cookie = regsuball(req.http.cookie, "; +", ";");
+            set req.http.cookie = regsuball(req.http.cookie, ";(eZSESSID[^=]*)=", "; \1=");
+            set req.http.cookie = regsuball(req.http.cookie, ";[^ ][^;]*", "");
+            set req.http.cookie = regsuball(req.http.cookie, "^[; ]+|[; ]+$", "");
+
+            set req.http.accept = "application/vnd.fos.user-context-hash";
+            set req.url = "/_fos_user_context_hash";
+
+            # Force the lookup, the backend must tell not to cache or vary on all
+            # headers that are used to build the hash.
+
+            return (lookup);
+        }
+    }
+
+    # Rebuild the original request which now has the hash.
+    if (req.restarts > 0
+        &amp;&amp; req.http.accept == "application/vnd.fos.user-context-hash"
+    ) {
+        set req.url         = req.http.x-fos-original-url;
+        set req.http.accept = req.http.x-fos-original-accept;
+        set req.http.cookie = req.http.x-fos-original-cookie;
+
+        unset req.http.x-fos-original-url;
+        unset req.http.x-fos-original-accept;
+        unset req.http.x-fos-original-cookie;
+
+        # Force the lookup, the backend must tell not to cache or vary on the
+        # user hash to properly separate cached data.
+
+        return (lookup);
+    }
+}
+
+sub vcl_fetch {
+
+    # ...
+
+    if (req.restarts == 0
+        &amp;&amp; req.http.accept ~ "application/vnd.fos.user-context-hash"
+        &amp;&amp; beresp.status >= 500
+    ) {
+        error 503 "Hash error";
+    }
+}
+
+sub vcl_deliver {
+    # On receiving the hash response, copy the hash header to the original
+    # request and restart.
+    if (req.restarts == 0
+        &amp;&amp; resp.http.content-type ~ "application/vnd.fos.user-context-hash"
+        &amp;&amp; resp.status == 200
+    ) {
+        set req.http.x-user-hash = resp.http.x-user-hash;
+
+        return (restart);
+    }
+
+    # If we get here, this is a real response that gets sent to the client.
+
+    # Remove the vary on context user hash, this is nothing public. Keep all
+    # other vary headers.
+    set resp.http.Vary = regsub(resp.http.Vary, "(?i),? *x-user-hash *", "");
+    set resp.http.Vary = regsub(resp.http.Vary, "^, *", "");
+    if (resp.http.Vary == "") {
+        remove resp.http.Vary;
+    }
+
+    # Sanity check to prevent ever exposing the hash to a client.
+    remove resp.http.x-user-hash;
+}
+</pre></td></tr></table><h4>User hash generation with Varnish 4</h4><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="f67124b4-ca56-4932-a5c2-1705ae2d8b75" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>// Varnish 4 style for eZ Platform
+// Complete VCL example
+
+vcl 4.0;
+
+// Our Backend - Assuming that web server is listening on port 80
+// Replace the host to fit your setup
+backend ezplatform {
+    .host = "127.0.0.1";
+    .port = "80";
+}
+
+// Called at the beginning of a request, after the complete request has been received
+sub vcl_recv {
+
+    // Set the backend
+    set req.backend_hint = ezplatform;
+
+    // ...
+
+    // Retrieve client user hash and add it to the forwarded request.
+    call ez_user_hash;
+
+    // If it passes all these tests, do a lookup anyway.
+    return (hash);
+}
+ 
+// Called when the requested object has been retrieved from the backend
+sub vcl_backend_response {
+    if (bereq.http.accept ~ "application/vnd.fos.user-context-hash"
+        &amp;&amp; beresp.status >= 500
+    ) {
+        return (abandon);
+    }
+    
+    // ...
+}
+
+// Sub-routine to get client user hash, for context-aware HTTP cache.
+sub ez_user_hash {
+
+    // Prevent tampering attacks on the hash mechanism
+    if (req.restarts == 0
+        &amp;&amp; (req.http.accept ~ "application/vnd.fos.user-context-hash"
+            || req.http.x-user-hash
+        )
+    ) {
+        return (synth(400));
+    }
+
+    if (req.restarts == 0 &amp;&amp; (req.method == "GET" || req.method == "HEAD")) {
+        // Get User (Context) hash, for varying cache by what user has access to.
+        // https://doc.ez.no/display/EZP/Context+aware+HTTP+cache
+
+        // Anonymous user w/o session => Use hardcoded anonymous hash to avoid backend lookup for hash
+        if (req.http.Cookie !~ "eZSESSID" &amp;&amp; !req.http.authorization) {
+            // You may update this hash with the actual one for anonymous user
+            // to get a better cache hit ratio across anonymous users.
+            // Note: You should then update it every time anonymous user rights change.
+            set req.http.X-User-Hash = "38015b703d82206ebc01d17a39c727e5";
+        }
+        // Pre-authenticate request to get shared cache, even when authenticated
+        else {
+            set req.http.x-fos-original-url    = req.url;
+            set req.http.x-fos-original-accept = req.http.accept;
+            set req.http.x-fos-original-cookie = req.http.cookie;
+            // Clean up cookie for the hash request to only keep session cookie, as hash cache will vary on cookie.
+            set req.http.cookie = ";" + req.http.cookie;
+            set req.http.cookie = regsuball(req.http.cookie, "; +", ";");
+            set req.http.cookie = regsuball(req.http.cookie, ";(eZSESSID[^=]*)=", "; \1=");
+            set req.http.cookie = regsuball(req.http.cookie, ";[^ ][^;]*", "");
+            set req.http.cookie = regsuball(req.http.cookie, "^[; ]+|[; ]+$", "");
+            set req.http.accept = "application/vnd.fos.user-context-hash";
+            set req.url = "/_fos_user_context_hash";
+
+            // Force the lookup, the backend must tell how to cache/vary response containing the user hash
+            return (hash);
+        }
+    }
+
+    // Rebuild the original request which now has the hash.
+    if (req.restarts > 0
+        &amp;&amp; req.http.accept == "application/vnd.fos.user-context-hash"
+    ) {
+        set req.url         = req.http.x-fos-original-url;
+        set req.http.accept = req.http.x-fos-original-accept;
+        set req.http.cookie = req.http.x-fos-original-cookie;
+        unset req.http.x-fos-original-url;
+        unset req.http.x-fos-original-accept;
+        unset req.http.x-fos-original-cookie;
+
+        // Force the lookup, the backend must tell not to cache or vary on the
+        // user hash to properly separate cached data.
+
+        return (hash);
+    }
+}
+
+sub vcl_deliver {
+    // On receiving the hash response, copy the hash header to the original
+    // request and restart.
+    if (req.restarts == 0
+        &amp;&amp; resp.http.content-type ~ "application/vnd.fos.user-context-hash"
+    ) {
+        set req.http.x-user-hash = resp.http.x-user-hash;
+        return (restart);
+    }
+
+    // If we get here, this is a real response that gets sent to the client.
+    // Remove the vary on context user hash, this is nothing public. Keep all
+    // other vary headers.
+    set resp.http.Vary = regsub(resp.http.Vary, "(?i),? *x-user-hash *", "");
+    set resp.http.Vary = regsub(resp.http.Vary, "^, *", "");
+    if (resp.http.Vary == "") {
+        unset resp.http.Vary;
+    }
+
+    // Sanity check to prevent ever exposing the hash to a client.
+    unset resp.http.x-user-hash;
+    if (client.ip ~ debuggers) {
+        if (obj.hits > 0) {
+            set resp.http.X-Cache = "HIT";
+            set resp.http.X-Cache-Hits = obj.hits;
+        } else {
+            set resp.http.X-Cache = "MISS";
+        }
+    }
+}</pre></td></tr></table><h4>New anonymous X-User-Hash</h4><p>The anonymous X-User-Hash is generated based on the <em>anonymous user</em>, <em>group</em> and <em>role</em>. The <code>38015b703d82206ebc01d17a39c727e5</code> hash that is provided in the code above will work only when these three variables are left unchanged. Once you change the default permissions and settings, the X-User-Hash will change and Varnish won't be able to effectively handle cache anymore.</p><p>In that case you need to find out the new anonymous X-User-Hash and change the VCL accordingly, else Varnish will return a no-cache header.</p><p>The easiest way to find the new hash is:</p><p><strong>1.</strong> Connect to your server (<em>shh</em> should be enough)</p><p><strong>2.</strong> Add <code>&lt;<a href="http://your-domain.com/">your-domain.com</a>&gt;</code> to your <code>/etc/hosts</code> file</p><p><strong>3.</strong> Execute the following command:</p><p><code>curl -I -H &quot;Accept: application/vnd.fos.user-context-hash&quot; http://&lt;<a href="http://your-domain.com/">your-domain.com</a>&gt;/_fos_user_context_hash</code></p><p>You should get a result like this:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="50d99d5f-c508-45e6-98db-f0b5a1c4dc5e" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>HTTP/1.1 200 OK
+Date: Mon, 03 Oct 2016 15:34:08 GMT
+Server: Apache/2.4.18 (Ubuntu)
+X-Powered-By: PHP/7.0.8-0ubuntu0.16.04.2
+X-User-Hash: b1731d46b0e7a375a5b024e950fdb8d49dd25af85a5c7dd5116ad2a18cda82cb
+Cache-Control: max-age=600, public
+Vary: Cookie,Authorization
+Content-Type: application/vnd.fos.user-context-hash</pre></td></tr></table><p><strong>4.</strong> Now, replace the existing X-User-Hash value with the new one:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="332c59b3-c317-4657-8ff0-8b57495af369" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre># Note: This needs update every time anonymous user role assignments change.
+set req.http.X-User-Hash = "b1731d46b0e7a375a5b024e950fdb8d49dd25af85a5c7dd5116ad2a18cda82cb";</pre></td></tr></table><p><strong>5.</strong> Restart the Varnish server and everything should work fine.</p><h4>Default options for FOSHttpCacheBundle defined in eZ</h4><p>The following configuration is defined in eZ by default for FOSHttpCacheBundle. You may override these settings.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="f95a1b97-a4eb-417f-bb80-15de550e8b1c" data-macro-parameters="language=bash" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading174f.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>fos_http_cache: 
+    proxy_client: 
+        # "varnish" is used, even when using Symfony HttpCache.
+        default: varnish
+        varnish: 
+            # Means http_cache.purge_servers defined for current SiteAccess.
+            servers: [$http_cache.purge_servers$]
+
+    user_context: 
+        enabled: true
+        # User context hash is cached during 10min
+        hash_cache_ttl: 600
+        user_hash_header: X-User-Hash</pre></td></tr></table><p><span> </span></p><div class="highlight highlight-yaml"><h3>Credits</h3><p>This feature is based on <a href="http://asm89.github.io/2012/09/26/context-aware-http-caching.html">Context aware HTTP caching post</a> by <a href="https://github.com/asm89">asm89</a>.</p></div></div>
+</div>
+<div class="cell aside" data-type="aside">
+<div class="innerCell">
+<h4>In this topic:</h4><p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro7c73.png?definition=e3RvYzptYXhMZXZlbD0zfQ&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="83cda3e5-66ca-4738-9bb1-3f4a3fe3cfab" data-macro-parameters="maxLevel=3" data-macro-schema-version="1"></p><h4>Related:</h4><ul><li><a class="confluence-link" href="../../display/DEVELOPER/Steps%2bto%2bset%2bup%2bCluster.html" data-linked-resource-id="31432321" data-linked-resource-version="7" data-linked-resource-type="page" data-linked-resource-default-alias="Steps to set up Cluster" data-base-url="../../index.html">Overview of steps to set up Cluster</a><a class="confluence-link" href="#HTTPCache-Persistencecacheconfiguration" data-anchor="Persistencecacheconfiguration" data-linked-resource-default-alias="Persistencecacheconfiguration" data-base-url="../../index.html">:</a><ul><li><a class="confluence-link" href="../../display/DEVELOPER/Clustering.html" data-linked-resource-id="31430387" data-linked-resource-version="19" data-linked-resource-type="page" data-linked-resource-default-alias="Clustering" data-base-url="../../index.html">Set up DFS IO Handler</a></li><li><a class="confluence-link" href="../../display/DEVELOPER/Repository.html#Repository-Persistencecacheconfiguration" data-anchor="Persistencecacheconfiguration" data-linked-resource-id="31432023" data-linked-resource-version="48" data-linked-resource-type="page" data-linked-resource-default-alias="Repository#Persistencecacheconfiguration" data-base-url="../../index.html">Configure Persistence Cache</a></li><li><span class="confluence-link"><a class="confluence-link" href="../../display/DEVELOPER/Sessions.html" data-linked-resource-id="31429667" data-linked-resource-version="9" data-linked-resource-type="page" data-linked-resource-default-alias="Sessions" data-base-url="../../index.html">Configure sessions</a></span></li></ul></li></ul></div>
+</div>
+</div>
+</div>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31430152 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:37:54 GMT -->
+</html>

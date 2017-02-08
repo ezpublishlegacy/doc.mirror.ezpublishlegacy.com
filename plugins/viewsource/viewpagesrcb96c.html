@@ -1,0 +1,111 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30712500 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:58:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpageb96c.html?pageId=30712500" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro4170.png?definition=e3RvY30&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="6165ce8a-9ef3-4a66-875d-529b7184e70b" data-macro-schema-version="1"></p><h2>PlatformUI routing mechanism</h2><p>The essential task of the PlatformUI Application component is to handle the routing. It is based on <a href="http://yuilibrary.com/yui/docs/app/#hash-based-urls-only">the routing capabilities provided by the YUI App component</a> and it uses hash-based URIs. By default, the PlatformUI Application will recognize and handle <a href="https://github.com/ezsystems/PlatformUIBundle/blob/master/Resources/public/js/apps/ez-platformuiapp.js#L720">several routes which are declared in the app component itself</a>.</p><p>A route is described by an object with the following properties:</p><ul><li><code>path</code>: the path to match</li><li><code>view</code>: the identifier of the main view to render when the route is matched</li><li><code>callbacks</code>: a list of <em>middlewares</em> to execute</li><li><code>name</code>: an optional name to generate links</li><li><code>sideViews</code>: an optional side view configuration</li><li><code>service</code>: an optional reference to a view service constructor</li></ul><h2>Modifying the routing from the bundle with a plugin</h2><p>To tweak any behavior in the application, the way to go is to write a plugin and in this case a plugin for the Application.</p><h3>Declaring the module providing plugin</h3><p>The module has to be declared in the extension bundle's <code>yui.yml</code> file. It can be done in the following way:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="fdcdf273-9bbc-44fd-a273-6f8cf1ff9b22" data-macro-parameters="theme=Midnight" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading86ef.png?definition=e2NvZGU6dGhlbWU9TWlkbmlnaHR9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>system:
+    default:
+        yui:
+            modules:
+                # use your own prefix, not "ez-"
+                ezconf-listapplugin: # module identifier
+                    dependencyOf: ['ez-platformuiapp']
+                    requires: ['ez-pluginregistry', 'plugin', 'base'] # depends on the plugin code
+                    path: %extending_platformui.public_dir%/js/apps/plugins/ezconf-listappplugin.js</pre></td></tr></table><p>This configuration means we are declaring a module whose identifier is <code>ezconf-listapplugin</code>. It will be added to the dependency list of the module <code>ez-platformuiapp</code> (the one providing the application component). The plugin module requires <code>ez-pluginregistry</code>, <code>plugin</code> and <code>base.</code> It is stored on the disk in <code>%extending_platformui.public_dir%/js/apps/plugins/ezconf-listappplugin.js</code>.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="6b040ed8-dbb5-42b1-9701-52754adb7d27" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p><code>%extending_platformui.public_dir%</code> is a container parameter which was added in the previous step. It is here to avoid repeating again and again the base path to the public directory. Of course, it is also perfectly possible to write the full path to the module.</p></td></tr></table><h3>Module creation</h3><p>Before creating the actual plugin code, we have to first create the module in the configured file. The minimal module code is:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="604f8262-ecb1-4c4f-b869-6b0a74553a41" data-macro-parameters="language=js|theme=Midnight|title=%extending_platformui.public_dir%/js/apps/plugins/ezconf-listappplugin.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading7619.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9JWV4dGVuZGluZ19wbGF0Zm9ybXVpLnB1YmxpY19kaXIlL2pzL2FwcHMvcGx1Z2lucy9lemNvbmYtbGlzdGFwcHBsdWdpbi5qc30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-listapplugin', function (Y) {
+    // module code goes here!
+	// this function will executed when the module loaded in the app,
+    // not when the file is loaded by the browser
+    // the Y parameter gives access to the YUI env, for instance the components
+    // defined by others modules.
+}); </pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="warning" data-macro-id="5b02f6e7-f9d1-45b8-bcda-47d43d840777" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingca13.png?definition=e3dhcm5pbmd9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>The first parameter of <code>YUI.add</code> should be exactly the module identifier used in <code>yui.yml</code> otherwise the module won't be correctly loaded in the application. If the module code does not seem to be taken into account, it is the very first thing to check.</p></td></tr></table><h3>Base plugin code</h3><p>After the module creation, it is time to create the minimal Application plugin:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="625fa233-ecb3-4218-9df5-b45ab525799b" data-macro-parameters="language=js|theme=Midnight|title=%extending_platformui.public_dir%/js/apps/plugins/ezconf-listappplugin.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading7619.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9JWV4dGVuZGluZ19wbGF0Zm9ybXVpLnB1YmxpY19kaXIlL2pzL2FwcHMvcGx1Z2lucy9lemNvbmYtbGlzdGFwcHBsdWdpbi5qc30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-listapplugin', function (Y) {
+    // Good practices:
+    // * use a custom namespace. 'eZConf' is used as an example here.
+    // * put the plugins in a 'Plugin' sub namespace
+    Y.namespace('eZConf.Plugin');
+
+    Y.eZConf.Plugin.ListAppPlugin = Y.Base.create('ezconfListAppPlugin', Y.Plugin.Base, [], {
+        initializer: function () {
+            var app = this.get('host'); // the plugged object is called host
+
+            console.log("Hey, I'm a plugin for PlatformUI App!");
+            console.log("And I'm plugged in ", app);
+        },
+    }, {
+        NS: 'ezconfTypeApp' // don't forget that
+    });
+
+    // registering the plugin for the app
+    // with that, the plugin is automatically instantiated and plugged in
+    // 'platformuiApp' component.
+    Y.eZ.PluginRegistry.registerPlugin(
+        Y.eZConf.Plugin.ListAppPlugin, ['platformuiApp']
+    );
+});
+</pre></td></tr></table><p>The added code creates a plugin class and registers it under <code>Y.eZConf.Plugin.ListAppPlugin</code>, then the PlatformUI plugin registry is configured so that this plugin is automatically instantiated and plugged in the PlatformUI App component.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="371ddca1-22ad-43cc-8a0b-b5bd6d67f447" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>The PlatformUI's plugin system comes almost entirely from <a href="http://yuilibrary.com/yui/docs/plugin/">the YUI plugin</a>. While that's not a strict requirement, you should use the <em>Advanced Plugins</em> strategy mentioned in the YUI documentation. That's why in this example and in most cases, the plugin will have the <code>plugin</code> and <code>base</code> YUI plugin as dependencies. <code>base</code> also provides the low level foundations for most PlatformUI component, so reading <a href="http://yuilibrary.com/yui/docs/base/">the Base YUI documentation</a> will also help understanding several concepts used all over the application.</p></td></tr></table><p>At this point, if you open PlatformUI in your favorite browser with the console open, you should see the result of the <code>console.log</code> calls in the above code.</p><h3>Adding a route to the application</h3><p>Finally, the plugin is ready to add a new route to the application. As written in the previous code sample, the plugged object, the application here, is available through <code>this.get('host')</code> in the plugin. The App object provides <a href="http://yuilibrary.com/yui/docs/api/classes/App.html#method_route">a <code>route</code> method</a> allowing to add route.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="89c50c02-f2f2-461e-aaaf-ba512e57a62b" data-macro-parameters="language=js|theme=Midnight|title=%extending_platformui.public_dir%/js/apps/plugins/ezconf-listappplugin.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading7619.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9JWV4dGVuZGluZ19wbGF0Zm9ybXVpLnB1YmxpY19kaXIlL2pzL2FwcHMvcGx1Z2lucy9lemNvbmYtbGlzdGFwcHBsdWdpbi5qc30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-listapplugin', function (Y) {
+    Y.namespace('eZConf.Plugin');
+
+    Y.eZConf.Plugin.ListAppPlugin = Y.Base.create('ezconfListAppPlugin', Y.Plugin.Base, [], {
+        initializer: function () {
+            var app = this.get('host'); // the plugged object is called host
+
+            app.route({
+                name: "eZConfList",
+                path: "/ezconf/list",
+                view: "dashboardView", // let's display the dashboard since we don't have a custom view... yet :)
+                // we want the navigationHub (top menu) but not the discoveryBar
+                // (left bar), we can try different options
+                sideViews: {'navigationHub': true, 'discoveryBar': false},
+                callbacks: ['open', 'checkUser', 'handleSideViews', 'handleMainView'],
+            });
+        },
+    }, {
+        NS: 'ezconfTypeApp' // don't forget that
+    });
+
+    Y.eZ.PluginRegistry.registerPlugin(
+        Y.eZConf.Plugin.ListAppPlugin, ['platformuiApp']
+    );
+});
+</pre></td></tr></table><p>Now, if you refresh your browser, you still need not see any visible change but the application should recognize the <code>/ezconf/list</code> hash URI. Going to <code>/ez#/ezconf/list</code> should display the same thing as <code>/ez#/dashboard</code>.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="57e178b2-9a57-48d9-a35b-75f25bfb5438" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>The PlatformUI Application component extends the YUI App component, as a result <a href="http://yuilibrary.com/yui/docs/api/classes/App.html">the complete API of this component</a> can be used.</p></td></tr></table><table class="wysiwyg-macro" data-macro-name="tip" data-macro-id="57bd861c-9918-40bf-a6c5-adfca6ed0517" data-macro-parameters="title=Results and next step:" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading31fc.png?definition=e3RpcDp0aXRsZT1SZXN1bHRzIGFuZCBuZXh0IHN0ZXA6fQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>The resulting code can be seen in <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/tree/3_routing">the 3_routing tag on GitHub</a>, this step result can also be viewed as <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/compare/2_configuration...3_routing">a diff between tags <code>2_configuration</code> and <code>3_routing</code></a>.</p><p>The next step is then <a class="confluence-link" href="../../display/TECHDOC/Define%2ba%2bView.html" data-linked-resource-id="30712516" data-linked-resource-version="6" data-linked-resource-type="page" data-linked-resource-default-alias="Define a View" data-base-url="../../index.html">to define a new view and to use it when the newly added route is matched</a>.</p></td></tr></table>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30712500 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:58:34 GMT -->
+</html>

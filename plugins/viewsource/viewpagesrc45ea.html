@@ -1,0 +1,92 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=26674396 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:40:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage45ea.html?pageId=26674396" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/51/_/styles/colorsb538.css?spaceKey=EZP" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/51/_/styles/customb538.css?spaceKey=EZP" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><strong><img class="editor-inline-macro" height="18" width="88" src="../servlet/status-macro/placeholdera046.png?title=EZP+%3E%3D+2015.01&amp;colour=Yellow" data-macro-name="status" data-macro-id="a7488b9d-0f10-403e-9239-e2dcb3e0afb0" data-macro-parameters="colour=Yellow|title=EZP >\= 2015.01" data-macro-schema-version="1"><br /></strong></p><p><strong>Smart Http cache clearing</strong> refers to the ability to clear cache for locations/content that can be in relation with the content being currently cleared.</p><p>When published, any content item usually has at least one location, figured by its URL. Therefore Http cache being bound to URLs, if content <code>A</code> is updated (new version is published), we want Http cache for all its locations to be cleared, so the content itself can appear up-to-date everywhere it is supposed to be displayed. Sometimes, clearing cache for the content's locations is not sufficient. You can for instance have an excerpt of it displayed in a list from the parent location, or from within a relation. In this case, cache for the parent location and/or the relation need to be cleared as well (at least if an ESI is not used).</p><h2>The mechanism</h2><p><strong>Smart Http cache clearing</strong> is an event based mechanism. Whenever a content item needs its cache to be cleared, the cache purger service sends an <code>ezpublish.cache_clear.content</code> event (also identified by <code>eZ\Publish\Core\MVC\Symfony\MVCEvents::CACHE_CLEAR_CONTENT</code> constant) and passes a <code>eZ\Publish\Core\MVC\Symfony\Event\ContentCacheClearEvent</code> event object. This object contains the ContentInfo object we need to clear the cache for. Every listener for this event can add location objects to the <em>cache clear list</em>.</p><p>Once the event dispatched, the purger passes collected location objects to the purge client, which will effectively send the cache <code>BAN</code> request.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="9d6df5ed-53f0-4af2-b245-b3322fa4f446" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><strong>Note</strong>: The event is dispatched with a dedicated event dispatcher, <code>ezpublish.http_cache.event_dispatcher</code>.</td></tr></table><h2>Default behavior</h2><p>By default, following locations will be added to the cache clear list:</p><ul class="task-list"><li>All locations assigned to content (<code>AssignedLocationsListener</code>)</li><li>Parent location of all content's locations (<code>ParentLocationsListener</code>)</li><li>Locations for content's relations, including reverse relations (<code>RelatedLocationsListener</code>)</li></ul><h2>Implementing a custom listener</h2><p>By design, smart Http cache clearing is extensible. One can easily implement an event listener/subscriber to the <code>ezpublish.cache_clear.content</code> event and add locations to the cache clear list.</p><h3>Example</h3><p>Here's a very simple custom listener example, adding an arbitrary location to the list.</p><table class="wysiwyg-macro" data-macro-name="note" data-macro-id="6d53d740-981e-4032-b52a-f453a39f7095" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingdd57.png?definition=e25vdGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><strong>Important</strong>: Cache clear listener services <strong>must</strong> be tagged as <code>ezpublish.http_cache.event_subscriber</code> or <code>ezpublish.http_cache.event_listener</code>.</td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="b224d3fb-1e01-4e3b-a722-08a3db630cfe" data-macro-parameters="language=php|theme=RDark" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfff0.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRoZW1lPVJEYXJrfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>namespace Acme\AcmeTestBundle\EventListener;
+
+use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\Core\MVC\Symfony\Event\ContentCacheClearEvent;
+use eZ\Publish\Core\MVC\Symfony\MVCEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class ArbitraryLocationsListener implements EventSubscriberInterface
+{
+    /**
+     * @var LocationService
+     */
+    private $locationService;
+
+    public function __construct( LocationService $locationService )
+    {
+        $this->locationService = $locationService;
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return [MVCEvents::CACHE_CLEAR_CONTENT => ['onContentCacheClear', 100]];
+    }
+
+    public function onContentCacheClear( ContentCacheClearEvent $event )
+    {
+        // $contentInfo is the ContentInfo object for the content being cleared.
+        // You can extract information from it (e.g. ContentType from its contentTypeId), using appropriate Repository services.
+        $contentInfo = $event->getContentInfo();
+
+        // Adding arbitrary locations to the cache clear list.
+        $event->addLocationToClear( $this->locationService->loadLocation( 123 ) );
+        $event->addLocationToClear( $this->locationService->loadLocation( 456 ) );
+    }
+}</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="21ab2d88-8092-474b-a8c0-1b2b9dbb6ead" data-macro-parameters="language=perl|theme=RDark" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingeca8.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGVybHx0aGVtZT1SRGFya30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>parameters:
+    acme.cache_clear.arbitrary_locations_listener.class: Acme\AcmeTestBundle\EventListener\ArbitraryLocationsListener
+
+services:
+    acme.cache_clear.arbitrary_locations_listener:
+        class: %acme.cache_clear.arbitrary_locations_listener.class%
+        arguments: [@ezpublish.api.service.location]
+        tags:
+            - { name: ezpublish.http_cache.event_subscriber }
+
+</pre></td></tr></table>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=26674396 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:40:03 GMT -->
+</html>

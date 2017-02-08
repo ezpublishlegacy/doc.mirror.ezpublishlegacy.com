@@ -1,0 +1,86 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711299 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:42:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpagec795.html?pageId=30711299" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><em>DFS is a requirement for use in Clustering setup. <em>See <a href="../../display/EZP/Clustering.html">Clustering</a></em> for an overview of the feature. </em></p><h2>What it is meant for</h2><p>The DFS IO handler (<code>legacy_dfs_cluster)</code> can be used to store binary files on an NFS server. It will use a database to manipulate metadata, making up for the potential inconsistency of network based filesystems.</p><h2><a class="anchor" href="https://github.com/ezsystems/ezpublish-kernel/blob/master/doc/specifications/io/legacy_dfs_cluster.md#configuration" name="user-content-configuration" />Configuration</h2><p>You need to configure both metadata and binarydata handlers.</p><p>As the binarydata handler, create a new Flysystem local adapter configured to read/write to the NFS mount point on each local server. As metadata handler handler, create a dfs one, configured with a doctrine connection. We recommend that a dedicated database is used for DFS metadata. In our example, we will use one named <code>dfs</code>. </p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="5d377ec2-f9a2-400a-8c1f-c4620201af2c" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre># new doctrine connection for the dfs legacy_dfs_cluster metadata handler.
+doctrine:
+    dbal:
+        connections:
+            dfs:
+                driver: pdo_mysql
+                host: 127.0.0.1
+                port: 3306
+                dbname: ezdfs
+                user: root
+                password: "rootpassword"
+                charset: UTF8
+
+# declare the handlers
+ez_io:
+    binarydata_handlers:
+        nfs:
+            flysystem:
+                adapter: nfs_adapter
+    metadata_handlers:transp
+        dfs:
+            legacy_dfs_cluster:
+                connection: doctrine.dbal.dfs_connection
+# set the handlers
+
+ezpublish:
+    system:
+        default:
+            io:
+                metadata_handler: dfs
+                binarydata_handler: nfs</pre></td></tr></table><h3>Customizing the storage directory</h3><p>eZ Publish 5.x required the NFS adapter directory to be set to <code>$var_dir$/$storage_dir$</code> part for the NFS path. This is no longer required with eZ Platform, but the default prefix used to serve binary files will still match this expectation.</p><p>If you decide to change this setting, make sure you also set <code>io.url_prefix</code> to a matching value. If you set the NFS adapter's directory to &quot;/path/to/nfs/storage&quot;, use this configuration so that the files can be served by Symfony:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="ebf85fbe-2ac7-419e-b1e8-e4305931ee92" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+	system:
+		default:
+			io:
+				url_prefix: "storage"</pre></td></tr></table><div class="highlight highlight-yaml"><span><br /></span></div><div class="highlight highlight-yaml"><span>As an alternative, you may serve images from NFS using a dedicated web server. If in the example above, this server listens on </span><a href="http://static.example.com/">http://static.example.com</a><span> and uses </span><code>/path/to/nfs/storage</code><span> as the document root, configure </span><code>io.url_prefix</code><span> as follows:</span></div><div class="highlight highlight-yaml"><p> </p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="bcaeb8ef-459f-4361-95b3-02df3351e1c1" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+	system:
+		default:
+			io:
+				url_prefix: "http://static.example.com/"</pre></td></tr></table><p>You can read more about that on <a class="confluence-link" href="../../display/TECHDOC/Binary%2bfiles%2bURL%2bhandling.html" data-linked-resource-id="30711298" data-linked-resource-version="2" data-linked-resource-type="page" data-linked-resource-default-alias="Binary files URL handling" data-base-url="../../index.html">Binary files URL handling</a>.</p></div><h2>Web server rewrite rules.</h2><p>The default eZ Platform rewrite rules will let image requests be served directly from disk. With native support, files matching <code>^/var/([^/]+/)?storage/images(-versioned)?/.*</code> have to be passed through <code>/web/app.php</code>.</p><p>In any case, this specific rewrite rule must be placed without the ones that &quot;ignore&quot; image files and just let the web server serve the files.</p><h3><a class="anchor" href="https://github.com/ezsystems/ezpublish-kernel/blob/master/doc/specifications/io/legacy_dfs_cluster.md#apache" name="user-content-apache" />Apache</h3><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="a2b54cc1-975d-4158-9ac7-e5678db3f4a7" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>RewriteRule ^/var/([^/]+/)?storage/images(-versioned)?/.* /app.php [L]</pre></td></tr></table><h3><a class="anchor" href="https://github.com/ezsystems/ezpublish-kernel/blob/master/doc/specifications/io/legacy_dfs_cluster.md#nginx" name="user-content-nginx" />nginx</h3><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="d65a615c-7a97-4422-956e-e975c27af6df" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>rewrite "^/var/([^/]+/)?storage/images(-versioned)?/(.*)" "/app.php" break;</pre></td></tr></table>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711299 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:42:39 GMT -->
+</html>

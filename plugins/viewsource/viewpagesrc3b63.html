@@ -1,0 +1,86 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=25985794 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:28:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage3b63.html?pageId=25985794" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/51/_/styles/colorsb538.css?spaceKey=EZP" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/51/_/styles/customb538.css?spaceKey=EZP" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><span style="color: rgb(51,51,51);">This only applies to installations that are configured with DFS clustering. Native support is added in eZ Publish 5.4, and does not use legacy kernel callbacks anymore. As a consequence, you need to configure DFS on the new stack (no migration of data is required).</span></p><p>Assuming a typical dfs configuration, in <code>ezpublish_legacy/settings/override/file.ini.append.php</code>, like the following.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>[ClusteringSettings]
+FileHandler=eZDFSFileHandler
+
+[eZDFSClusteringSettings]
+MountPointPath=/var/nfs
+DBBackend=eZDFSFileHandlerMySQLiBackend
+DBHost=clusterhost
+DBPort=3306
+DBName=ezpublish_cluster
+DBUser=clusteruser
+DBPassword=clusterpassword
+MetaDataTableNameCache=ezdfsfile_cache</pre></td></tr></table><h5>Where should configuration be placed</h5><p>Either <code>ezpublish/config/ezpublish.yml</code>, <code><span>ezpublish/config/</span>config.yml</code> or any equivalent file that you are using.</p><h5>Cluster doctrine connection</h5><p>First, if the cluster database is different from the content database (and it should), you need to create a new doctrine dbal connection.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>doctrine:
+   dbal:
+       connections:
+           cluster:
+               driver: pdo_mysql
+               host: clusterhost
+               port: 3306
+               dbname: ezpublish_cluster
+               user: clusteruser
+               password: clusterpassword
+               charset: UTF8</pre></td></tr></table><p>This connection will be made available as <code>doctrine.dbal.cluster_connection</code>.</p><h5>Metadata handler configuration</h5><p>Handing of file metadata in the <code>ezdfs</code> tables is handled by the <code>legacy_dfs_cluster</code> IO metadata handler. You need to declare a new one that uses the doctrine connection created above.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ez_io:
+   metadata_handlers:
+       dfs:
+           legacy_dfs_cluster:
+               connection: doctrine.dbal.cluster_connection</pre></td></tr></table><p><code>dfs</code> is the name of our custom metadata handler, and <code>legacy_dfs_cluster</code> its type.</p><h5>Flysystem adapter</h5><p>In order to read and write files to the NFS mount point <code>/var/nfs</code>, you need to add a flysystem adapter. One important note is that the var storage directories will not be added when writing files, meaning that they need to be specified them in the configuration.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>oneup_flysystem:
+   adapters:
+       nfs_adapter:
+           local:
+               directory: "/var/nfs/$var_dir$/$storage_dir$"</pre></td></tr></table><p><code>$var_dir$</code> and <code>$storage_dir$</code> will be replaced by the matching configuration values, and should be used as is for legacy compatibility. The value of “directory” will be set depending on the configuration, for instance to <code>“/var/nfs/var/ezdemo_site/storage”</code>.</p><h5>DFS binary data handler</h5><p>The next step is to configure a binary data handler that uses the flysystem adapter we created above. It is very similar to what was done for the metadata one:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ez_io:
+   binarydata_handlers:
+       nfs:
+           flysystem:
+               adapter: nfs_adapter</pre></td></tr></table><h5>Pre-Final step: configuring the metadata and binarydata handlers</h5><p>The last thing to do is set eZ Publish to use the binarydata and metadata handlers we created above, in the siteaccess aware configuration:</p><div><p> </p><table class="wysiwyg-macro" data-macro-name="code" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+   system:
+       default:
+           io:
+               metadata_handler: dfs
+               binarydata_handler: nfs</pre></td></tr></table></div>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=25985794 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:28:17 GMT -->
+</html>

@@ -1,0 +1,88 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31429779 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:26:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage4cd9.html?pageId=31429779" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/6/_/styles/colors74cd.css?spaceKey=DEVELOPER" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/6/_/styles/custom74cd.css?spaceKey=DEVELOPER" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <div class="contentLayout2">
+<div class="columnLayout two-right-sidebar" data-layout="two-right-sidebar">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>In order to display data of our Field Type from templates, we need to create and register a template for it. You can find documentation about <a class="confluence-link" href="../../display/DEVELOPER/Field%2bType%2btemplate.html" data-linked-resource-id="31430773" data-linked-resource-version="2" data-linked-resource-type="page" data-linked-resource-default-alias="Field Type template" data-base-url="https://doc.ez.no">FieldType templates</a>, as well as on <a class="confluence-link" href="../../display/DEVELOPER/Importing%2bsettings%2bfrom%2ba%2bbundle.html" data-linked-resource-id="31429803" data-linked-resource-version="4" data-linked-resource-type="page" data-linked-resource-default-alias="Importing settings from a bundle" data-base-url="https://doc.ez.no"><span class="confluence-link">importing settings from a bundle</span></a><span class="confluence-link"> </span>.</p><p>In a couple words, such a template must:</p><ul><li><p>extend <code>
+        EzPublishCoreBundle::content_fields.html.twig
+      </code></p></li><li><p>define a dedicated Twig block for the type, named by convention <code>&lt;TypeIdentifier_field&gt;</code>. In our case, <code>eztweet_field</code></p></li><li><p>be registered in parameters</p></li></ul><h2>The template: <code>Resources/views/fields/eztweet.tpl</code></h2><p>The first thing we will do is create the template. It will basically define the default display of a tweet. Remember that <a href="https://confluence.ez.no/display/DEVELOPER/ez_render_field#ez_render_field-Overrideafieldtemplateblock">field type templates can be overridden</a> in order to tweak what is displayed and how.</p><p>Each Field Type template receives a set of variables that can be used to achieve the desired goal. The variable we care about is <code>field</code>, an instance of <code>eZ\Publish\API\Repository\Values\Content\Field</code>. In addition to its own metadata (<code>id</code>, <code>fieldDefIdentifier</code>, etc.), it exposes the Field Value (<code>Tweet\Value</code>) through the <code>value</code> property.</p><p>This would work as a primitive template:  </p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="efc2924e-bc4c-4a13-b679-bd94f75ad7b7" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{% block eztweet_field %}
+{% spaceless %}
+    {{ field.value.contents|raw }}
+{% endspaceless %}
+{% endblock %}</pre></td></tr></table><p><code>field.value.contents</code> is piped through the <code>raw</code> twig operator, since the variable contains HTML code. Without it, the HTML markup would be visible directly, since twig escapes variables by default. Notice that we nest our code within a <code style="line-height: 1.4285715;">spaceless</code> tag, so that we can format our template in a readable manner without jeopardizing the display with unwanted spaces.</p><h3>Using the content fields helpers</h3><p>Even though the above will work just fine, a couple of helpers will help us get something a bit more flexible. The <a href="https://github.com/ezsystems/ezpublish-kernel/blob/master/eZ/Bundle/EzPublishCoreBundle/Resources/views/content_fields.html.twig" style="line-height: 1.4285715;">EzPublishCoreBundle::content_fields.html.twig</a> template, where the native Field Type templates are implemented, provides a couple of helpers: <code>simple_block_field</code>, <code>simple_inline_field</code> and <code>field_attributes</code>. The first two are used to display a field either as a block or inline. <code>field_attributes</code> makes it easier to use the attr variable that contains additional (HTML) attributes for the field.</p><p>Let's consider that we will display the value as a block element.</p><p>First, we need to make our template inherit from <code>content_fields.html.twig</code>. Then, we will create a <code>field_value</code> variable that will be used by the helper to print out the content inside the markup. And that's it. The helper will use <code>field_attributes</code> to add the HTML attributes to the generated <code>div</code>.</p><div><p> </p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="346ec549-42e9-4e2e-9d5a-c85909be7639" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{% block eztweet_field %}
+{% spaceless %}
+    {% set field_value %}
+        {{ field.value.contents|raw }}
+    {% endset %}
+    {{ block( 'simple_block_field' ) }}
+{% endspaceless %}
+{% endblock %}</pre></td></tr></table><p><code>fieldValue</code> is set to the markup we had above, using a <code>{% set %}</code> block. We then call the <code>block</code> function to process the <code>simple_block_field</code> template block.</p><h2>Registering the template</h2><p>As explained in the <a href="https://confluence.ez.no/display/DEVELOPER/Field+Type+template#FieldTypetemplate-Registeringyourtemplate">FieldType template documentation</a>, a FieldType template needs to be registered in the eZ Publish semantic configuration. The most basic way to do this would be to do so in <code>app/config/ezplatform.yml</code>:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="1b8facb8-833e-45b3-ad78-6ea4e3c0d0f5" data-macro-parameters="title=app/config/ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading8c42.png?definition=e2NvZGU6dGl0bGU9YXBwL2NvbmZpZy9lenBsYXRmb3JtLnltbH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    global:
+        field_templates:
+            - { template: "EzSystemsTweetFieldTypeBundle:fields:eztweet.html.twig"}</pre></td></tr></table><p>However, this is far from ideal. We want this to be part of our bundle, so that no manual configuration is required. For that to happen, we need to make our bundle extend the eZ Platform semantic configuration. To do so, we are going to make our bundle's dependency injection extension (<code>DependencyInjection/EzSystemsTweetFieldTypeExtension.php</code>) implement <code>Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface</code>. This interface will let us prepend bundle configuration:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="8aa3037f-5eda-4350-a92b-350fee44baff" data-macro-parameters="language=php|title=DependencyInjection/EzSystemsTweetFieldTypeExtension.php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingf343.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRpdGxlPURlcGVuZGVuY3lJbmplY3Rpb24vRXpTeXN0ZW1zVHdlZXRGaWVsZFR5cGVFeHRlbnNpb24ucGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\Yaml\Yaml;
+
+class EzSystemsTweetFieldTypeExtension extends Extension implements PrependExtensionInterface
+{
+    public function prepend( ContainerBuilder $container )
+    {
+        $config = Yaml::parse( __DIR__ . '/../Resources/config/ezpublish_field_templates.yml' );
+        $container->prependExtensionConfig( 'ezpublish', $config );
+    }
+}</pre></td></tr></table><p>The last thing to do is move the template mapping from <code>app/config/ezplatform.yml</code> to <code>Resources/config/ezpublish_field_templates.yml</code>:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="8ce861e7-2680-4471-94b9-717efa620249" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>system:
+    default:
+        field_templates:
+            - {template: "EzSystemsTweetFieldTypeBundle:fields:eztweet.html.twig"}</pre></td></tr></table><p>Notice that the <code>ezpublish</code> yaml block was deleted. This is because we already import our configuration under the <code>ezpublish</code> namespace in the prepend method.</p><p>You should now be able to display a content item with this Field Type from the frontoffice, with a fully functional embed:</p><p><img class="confluence-embedded-image" src="../../download/attachments/31429779/fieldtype%20tutorial%2c%20final%20resultc0e1.PNG?version=1&amp;modificationDate=1460722734000&amp;api=v2" data-image-src="/download/attachments/31429779/fieldtype%20tutorial%2C%20final%20result.PNG?version=1&amp;modificationDate=1460722734000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="31429778" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="fieldtype tutorial, final result.PNG" data-base-url="https://doc.ez.no" data-linked-resource-content-type="image/png" data-linked-resource-container-id="31429779" data-linked-resource-container-version="5" title="Developer > Introduce a template > fieldtype tutorial, final result.PNG" data-location="Developer > Introduce a template > fieldtype tutorial, final result.PNG" data-image-height="397" data-image-width="366"></p></div></div>
+</div>
+<div class="cell aside" data-type="aside">
+<div class="innerCell">
+<table class="wysiwyg-macro" data-macro-name="panel" data-macro-id="e5d4c3f2-1aae-44b2-88ab-6039da6cff42" data-macro-parameters="title=Tutorial path" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headinga671.png?definition=e3BhbmVsOnRpdGxlPVR1dG9yaWFsIHBhdGh9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macrof992.png?definition=e3BhZ2V0cmVlOnJvb3Q9Q3JlYXRpbmcgYSBUd2VldCBGaWVsZCBUeXBlfQ&amp;locale=en_GB&amp;version=2" data-macro-name="pagetree" data-macro-id="4fe5f518-ce28-4000-bd1b-d92cde3a6350" data-macro-parameters="root=Creating a Tweet Field Type" data-macro-schema-version="1"></p></td></tr></table></div>
+</div>
+</div>
+</div>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31429779 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:26:16 GMT -->
+</html>

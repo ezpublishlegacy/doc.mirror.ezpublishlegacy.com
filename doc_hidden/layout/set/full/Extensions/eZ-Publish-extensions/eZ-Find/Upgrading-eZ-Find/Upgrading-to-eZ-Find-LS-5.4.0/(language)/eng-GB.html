@@ -1,0 +1,76 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/Upgrading-eZ-Find/Upgrading-to-eZ-Find-LS-5.4.0/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 22:39:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Upgrading to eZ Find LS 5.4.0 / Upgrading eZ Find / eZ Find / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Upgrading to eZ Find LS 5.4.0</h1>
+</div>
+
+<a name="eztoc138752_1" id="eztoc138752_1"></a><h2>Back-up</h2><p>Before starting the eZ Find upgrading process make sure that you have a working backup of the existing website state including database, extensions, INI settings, etc. During the upgrade process the existing eZ Find extension will be removed and replaced with a new version.</p><a name="eztoc138752_2" id="eztoc138752_2"></a><h2>Download</h2><p>Note: First make sure you familiarize with the &quot;Using Composer&quot; page on <a href="../../../../../../null.html" target="_self">doc.ez.no</a>.</p>
+<ol>
+<li><div>Install <a href="https://getcomposer.org/download/" target="_self">composer</a> in your eZ Publish Platform folder</div></li><li><div>Run &quot;php composer.phar require --prefer-dist &lt;package&gt;&quot;
+<ul>
+<li><div>Example: <i>php composer.phar require --prefer-dist --update-no-dev ezsystems/ezfind-ls:5.4.*</i></div></li>
+</ul>
+</div></li>
+</ol>
+<p>You can find it under&nbsp;<i>ezpublish_legacy/extension/ezfind</i>.</p><p>Make sure the extension is activated under the&nbsp;<i>[ExtensionSettings]</i>&nbsp;block in the &quot;ezpublish_legacy/settings/override/site.ini.append.php&quot; like this:</p><pre class="wordwrap copytoclipboard"><span class="line">[ExtensionSettings]</span>
+<span class="line">&nbsp;</span>
+<span class="line">ActiveExtensions[]=ezfind</span>
+<span class="line">[...]</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[ExtensionSettings]\r\n\r\nActiveExtensions[]=ezfind\r\n[...]' ); return false;" /></p>
+<![endif]--><p>It is important that eZ Find is activated before eZ Webin and eZ Flow, if you use those extensions, to ensure that your installation uses the correct search templates.</p><a name="eztoc138752_3" id="eztoc138752_3"></a><h2>Clear ini and template override cache</h2><p>Clear the ini and template override caches (mandatory) with the following command from your &quot;ezpublish_legacy&quot;&nbsp;folder:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all</span>
+</pre><a name="eztoc138752_4" id="eztoc138752_4"></a><h2>Autoload update</h2><p>Next the autoload array needs to be updated for the extension. To do this, execute following command from your &quot;ezpublish_legacy&quot;&nbsp;folder:</p><pre class="wordwrap"><span class="line">$ php bin/php/ezpgenerateautoloads.php -e -p</span>
+</pre><a name="eztoc138752_5" id="eztoc138752_5"></a><h2>Update the core configuration</h2><p>
+Starting in ezfind 5.3, SOLR is by default used in multicore. A default multicore configuration is provided (ezp-default) in order to work out of the box like it used to for users not using multicore.<br />For those using multicore on version below 5.3, the configuration needs to be recreated.</p><a name="eztoc138752_6" id="eztoc138752_6"></a><h2>Using multicore setup:</h2><p>
+In ezfind/java/solr/ copy the ezfind/java/solr/ezp-default as a base for your core.<br />For example: ezfind/java/solr/my-custom-core</p><p>
+Then, edit ezfind/java/solr/solr.xml and add new &lt;core&gt; to &lt;cores adminPath=&quot;/admin/cores&quot; defaultCoreName=&quot;ezp-default&quot;&gt;.<br />You can also specify the default core in the &lt;cores&gt; tag.</p><p>
+If you core is using content in another language than english. Copy the content of the folder ezfind/java/solr.languages/&lt;my-language&gt; into your core's conf folder.<br />For example: cp -a ezfind/java/solr.languages/fr/* ezfind/java/solr/my-custom-core/conf</p><p>For more information check out the <a href="https://github.com/ezsystems/ezfind/blob/master/java/solr.languages/README.txt" target="_self">README file</a>.</p><a name="eztoc138752_7" id="eztoc138752_7"></a><h2>Re-index</h2><p>Next re-index the content of the site by running the command, also from your &quot;ezpublish_legacy&quot;&nbsp;folder:</p><pre class="wordwrap"><span class="line">php extension/ezfind/bin/php/updatesearchindexsolr.php -s &lt;admin &nbsp;siteaccess&gt; --clean</span>
+</pre><p><b>Note:</b>&nbsp;Internally the schema used by Solr has changed, this means that to upgrade to eZ Find LS 5.4.0 a full index update is required. This also means that some attribute names from the old schema might have a different name/format/properties now so every site specific code using Solr defined field names for eZ Publish attributes directly has to be reviewed.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Find/Upgrading-eZ-Find/Upgrading-to-eZ-Find-LS-5.4.0/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 22:39:18 GMT -->
+</html>

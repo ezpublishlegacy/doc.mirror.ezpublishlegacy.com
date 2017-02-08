@@ -1,0 +1,166 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Flow/eZ-Flow-LS-5.x/Configuration/Configuring-the-eZ-Flow-block-system/Defining-the-eZ-Flow-blocks/Defining-page-layouts/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 01 Feb 2017 00:46:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Defining page layouts / Defining the eZ Flow blocks / Configuring the eZ Flow block system / Configuration / eZ Flow LS 5.x / eZ Flow / eZ Publish extensions / Extensions / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Defining page layouts</h1>
+</div>
+
+<p>By default eZ Flow has five layouts. The screenshot below shows the editor's view for selecting one of the five layouts in the Website Interface. Because layouts are defined via a configurable plug-in system, it is possible to create custom layouts.</p>
+<div class="object-center">        <img src="../../../../../../../../../../../../../../../../var/doc/storage/images/media/images/zone_layout/107725-1-eng-GB/zone_layout_doc.jpg" alt="" />
+
+
+
+
+
+
+
+
+</div><a name="eztoc136379_0_1" id="eztoc136379_0_1"></a><h3><b>Defining new layouts</b></h3><p>A layout is a combination of zones that are placed on a page. The placement of the zones is defined in a template that is specified as part of the layout configuration. You can define as many layouts as you need. To define a new layout, edit the <i>zone.ini</i> file located by default in the following directory:</p><pre class="wordwrap"><span class="line">ezpublish_legacy/extension/ezflow/settings/zone.ini.append.php</span>
+</pre><p>Add the layout name to the AllowedTypes array.</p><p>Once you have defined the layout type, define the following settings:</p><table class="renderedtable tight" cellpadding="2" cellspacing="0">
+
+<tr>
+<th  width="40%">  <p>Setting Name</p>
+  </th><th  width="32%">  <p>Description</p>
+  </th><th  width="29%">  <p>Valid values</p>
+  </th>
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>ZoneTypeName</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The name of the layout.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>String</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>Zones[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>An array defining the available zones and their identifier.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>String</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>ZoneName[index]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The visible name of the indexed zone. Use the zone name as the index value.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>String</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>ZoneThumbnail</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>
+The filename of the thumbnail image to use. The thumbnail shows the arrangement of the zones. The thumbnails are by default located in the directory<br />&nbsp;<i>ezpublish_legacy/extension/ezflow/design/standard/images/ezpage/thumbnails.</i></p><p>If you are using a custom design, place the thumbnails in the folder&nbsp;<i>ezpublish_legacy/design/&lt;your_design&gt;/images/ezpage/thumbnails.</i></p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Filename</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>Template</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>The file containing the template that should be used for the layout. The layout templates are by default located in the directory</p><p><i>ezpublish_legacy/extension/ezflow/design/standard/templates/zone.</i></p><p>If you have a custom design the directory will be <i>ezpublish_legacy/design/&lt;your_design&gt;/templates/zone</i></p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>Filename</p>
+  </td>
+
+</tr>
+
+<tr>
+<td width="40%" valign="top" style="vertical-align: top">  <p>AvailableForClasses[]</p>
+  </td>
+<td width="32%" valign="top" style="vertical-align: top">  <p>Zone will be available for classes defined in this array.</p>
+  </td>
+<td width="29%" valign="top" style="vertical-align: top">  <p>String [class_identifier]</p>
+  </td>
+
+</tr>
+
+</table>
+<p>This example shows a configuration for a layout called '2ZonesLayout1&quot;:</p><pre class="wordwrap copytoclipboard"><span class="line">[General]</span>
+<span class="line">AllowedTypes[]=2ZonesLayout1</span>
+<span class="line">&nbsp;</span>
+<span class="line">[2ZonesLayout1]</span>
+<span class="line">ZoneTypeName=2 zones (layout 1)</span>
+<span class="line">&nbsp;</span>
+<span class="line">Zones[]=left</span>
+<span class="line">Zones[]=right</span>
+<span class="line">&nbsp;</span>
+<span class="line">ZoneName[left]=Left zone</span>
+<span class="line">ZoneName[right]=Right zone</span>
+<span class="line">&nbsp;</span>
+<span class="line">ZoneThumbnail=2zones_layout1.gif</span>
+<span class="line">&nbsp;</span>
+<span class="line">Template=2zoneslayout1.tpl</span>
+<span class="line">AvailableForClasses[]=frontpage</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[General]\r\nAllowedTypes[]=2ZonesLayout1\r\n\r\n[2ZonesLayout1]\r\nZoneTypeName=2 zones (layout 1)\r\n\r\nZones[]=left\r\nZones[]=right\r\n\r\nZoneName[left]=Left zone\r\nZoneName[right]=Right zone\r\n\r\nZoneThumbnail=2zones_layout1.gif\r\n\r\nTemplate=2zoneslayout1.tpl\r\nAvailableForClasses[]=frontpage' ); return false;" /></p>
+<![endif]--><a name="eztoc136379_0_2" id="eztoc136379_0_2"></a><h3>&nbsp;Layout templates for zone definition</h3><p>The template used by a layout must display the contents of the layout's zones. You can place the zones anywhere in the template. The variable that is made available in the template is called $zones. This variable is an array containing different $zone objects. Each $zone variable contains both a $zone.name and $zone.blocks.</p><p>A simple example of a layout template is shown below:</p><pre class="wordwrap copytoclipboard"><span class="line">{foreach $zones as $zone}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&lt;h1&gt;Zone: {$zone.name}&lt;/h1&gt;</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{foreach $zone.blocks as $block}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{block_view_gui block=$block}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{/foreach}</span>
+<span class="line">&nbsp;</span>
+<span class="line">{/foreach}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '{foreach $zones as $zone}\r\n\r\n &lt;h1&gt;Zone: {$zone.name}&lt;/h1&gt;\r\n\r\n        {foreach $zone.blocks as $block}\r\n            {block_view_gui block=$block}\r\n        {/foreach}\r\n\r\n{/foreach}' ); return false;" /></p>
+<![endif]-->
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/Extensions/eZ-Publish-extensions/eZ-Flow/eZ-Flow-LS-5.x/Configuration/Configuring-the-eZ-Flow-block-system/Defining-the-eZ-Flow-blocks/Defining-page-layouts/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 01 Feb 2017 00:46:25 GMT -->
+</html>

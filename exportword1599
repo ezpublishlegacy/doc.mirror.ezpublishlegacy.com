@@ -1,0 +1,768 @@
+Message-ID: <1856043874.3272.1485852575016.JavaMail.confluence@ip-10-127-227-164>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_3271_1248852105.1485852575016"
+
+------=_Part_3271_1248852105.1485852575016
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Implementing the Tweet\Type class</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        font-size: 10pt;
+        line-height: 1.2;
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: #fff !important;
+        color: #000 !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: #000;
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        page-break-after: avoid;
+    }
+
+    pre {
+        font-family: Monaco, "Courier New", monospace;
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Implementing the Tweet\Type class</h1>
+    <div class=3D"Section1">
+        <p>As said in the introduction, the Type class of a Field Type must=
+ implement <code>eZ\Publish\SPI\FieldType\FieldType</code> (later referred =
+to as "Field Type interface").</p>
+<p>All native Field Types also extend the <code>eZ\Publish\Core\FieldType\F=
+ieldType</code> abstract class that implements this interface and provides =
+implementation facilities through a set of abstract methods of its own. In =
+this case, Type classes implement a mix of methods from the Field Type inte=
+rface and from the abstract&nbsp;Field Type.</p>
+<p>Let=E2=80=99s go over those methods and their implementation.</p>
+<h4 id=3D"ImplementingtheTweet\Typeclass-Identificationmethod:getFieldTypeI=
+dentifier()">Identification method: <code>getFieldTypeIdentifier()</code></=
+h4>
+<p>It must return the string that uniquely identifies this Field Type (Data=
+TypeString in legacy). We will use "<code>eztweet</code>":</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>eZ/FieldType/Tweet/Type</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">public function getFieldTypeIdentifier()
+{
+&nbsp;&nbsp;&nbsp;return 'eztweet';
+}</pre>=20
+</div>
+</div>
+<h4 id=3D"ImplementingtheTweet\Typeclass-Valuehandlingmethods:createValueFr=
+omInput()andcheckValueStructure()">Value handling methods:&nbsp;<code>creat=
+eValueFromInput()</code>&nbsp;and&nbsp;<code>checkValueStructure()</code></=
+h4>
+<p>Both methods are used by the abstract Field Type implementation of <code=
+>acceptValue()</code>. This Field Type interface&nbsp;method checks and tra=
+nsforms various input values into the type's own Value class: <code>eZ\Fiel=
+dType\Tweet\Value</code>. This method must:</p>
+<ul>
+<li>either return the Value object it was able to create out of the input v=
+alue,</li>
+<li>or return this value untouched. The API will detect this and inform tha=
+t the input value was not accepted.</li>
+</ul>
+<p>The only acceptable value for our type is the URL of a tweet (we could o=
+f course imagine more possibilities). This should do:</p>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">protected function createValueFromInput( $inputValue )
+{
+&nbsp;&nbsp;&nbsp;if ( is_string( $inputValue ) )
+&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$inputValue =3D new Value( array(=
+ 'url' =3D&gt; $inputValue ) );
+&nbsp;&nbsp;&nbsp;}
+&nbsp;
+&nbsp;&nbsp;&nbsp;return $inputValue;
+}
+</pre>=20
+</div>
+</div>
+<p><br> Use this method to provide convenient ways to set an attribute=E2=
+=80=99s value using the API. This can be anything from primitives to comple=
+x business objects.</p>
+<p>Next, we will implement <code> checkValueStructure()</code>. It is calle=
+d by the abstract Field Type to ensure that the Value fed to the Type is ac=
+ceptable. In our case, we want to be sure that <code>Tweet</code> <code> \V=
+alue::$url</code> is a string:</p>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">protected function checkValueStructure( BaseValue $value )
+{
+&nbsp;&nbsp;&nbsp;if ( !is_string( $value-&gt;url ) )
+&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new eZ\Publish\Core\Base\Ex=
+ceptions\InvalidArgumentType(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'$value-&=
+gt;url',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'string',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$value-&g=
+t;url
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+&nbsp;&nbsp;&nbsp;}
+}
+</pre>=20
+</div>
+</div>
+<p>Yes, we execute the same check as in <code>createValueFromInput()</code>=
+. But both methods aren't responsible for the same thing. The first will, <=
+em>if given something else than a Value of its type</em>, try to convert it=
+ to one. <code>checkValueStructure()</code>&nbsp;will always be used, even =
+if the Field Type is directly fed a <code>Value</code> object, and not a st=
+ring.</p>
+<h4 id=3D"ImplementingtheTweet\Typeclass-Valueinitialization:getEmptyValue(=
+)">Value initialization: <code>getEmptyValue()</code></h4>
+<p>This method provides what is considered as an empty value of this type, =
+depending on our business requirements. No extra initialization is required=
+ in our case.</p>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">public function getEmptyValue()
+{
+&nbsp;&nbsp;&nbsp;return new Value;
+}</pre>=20
+</div>
+</div>
+<p>If you run the unit tests at this point, you should get about five failu=
+res, all of them on the <code>fromHash()</code> or <code> toHash()</code> m=
+ethods.</p>
+<h4 id=3D"ImplementingtheTweet\Typeclass-Validationmethods:validateValidato=
+rConfiguration()andvalidate()">Validation methods: <code>validateValidatorC=
+onfiguration()</code> and <code>validate()</code></h4>
+<p>The Type class is also responsible for validating input data (to a <code=
+>Field</code>), as well as configuration input data (to a <code>FieldDefini=
+tion</code>). In this tutorial, we will run two validation operations on in=
+put data:</p>
+<ul>
+<li><p>validate submitted urls, ensuring they actually reference a twitter =
+status;</p></li>
+<li><p>limit input to a known list of authors, as an optional validation st=
+ep.</p></li>
+</ul>
+<p><code> validateValidatorConfiguration()</code> will be called when an in=
+stance of the Field Type is added to a Content Type, to ensure that the val=
+idator configuration is valid. For a TextLine (length validation), it means=
+ checking that both min length and max length are positive integers, and th=
+at min is lower than max.</p>
+<p>When an instance of the type is added to a Content Type, <code>validateV=
+alidatorConfiguration()</code>&nbsp;receives the configuration for the vali=
+dators used by the Type as an array. It must return an array of error messa=
+ges if errors are found in the configuration, and an empty array if no erro=
+rs were found.</p>
+<p>For TextLine, the provided array looks like this:</p>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">array(
+&nbsp;&nbsp;&nbsp;'StringLengthValidator' =3D&gt; array(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'minStringLength' =3D&gt; 0,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'maxStringLength' =3D&gt; 100
+&nbsp;&nbsp;&nbsp;)
+);
+</pre>=20
+</div>
+</div>
+<p>The structure of this array is totally free, and up to each type impleme=
+ntation. We will in this tutorial mimic what is done in native Field Types:=
+</p>
+<p>Each level one key is the name of a validator, as acknowledged by the Ty=
+pe. That key contains a set of parameter name / parameter value rows. We mu=
+st check that:</p>
+<ul>
+<li><p>all the validators in this array are known to the type</p></li>
+<li><p>arguments for those validators are valid and have sane values</p></l=
+i>
+</ul>
+<p>We do not need to include mandatory validators if they don=E2=80=99t hav=
+e options. Here is an example of what our Type expects as validation config=
+uration:</p>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">array(
+&nbsp;&nbsp;&nbsp;=E2=80=98TweetAuthorValidator=E2=80=99 =3D&gt; array(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=E2=80=98AuthorList=E2=80=99 =3D&=
+gt; array( =E2=80=98johndoe=E2=80=99, =E2=80=98janedoe=E2=80=99 )
+&nbsp;&nbsp;&nbsp;)
+);
+</pre>=20
+</div>
+</div>
+<p><br> The configuration says that tweets must&nbsp;be either by johndoe o=
+r by janedoe. If we had not provided TweetAuthorValidator at all, it would =
+have been ignored.</p>
+<p>We will iterate over the items in <code>$validatorConfiguration</code> a=
+nd:</p>
+<ul>
+<li><p>add errors for those we don=E2=80=99t know about;</p></li>
+<li><p>check that provided arguments are known and valid:</p></li>
+<ul>
+<li><p>TweetAuthorValidator accepts a non-empty array of valid Twitter user=
+names</p></li>
+</ul>
+</ul>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">public function validateValidatorConfiguration( $validatorConfigura=
+tion )
+{
+&nbsp;&nbsp;&nbsp;$validationErrors =3D array();
+
+&nbsp;&nbsp;&nbsp;foreach ( $validatorConfiguration as $validatorIdentifier=
+ =3D&gt; $constraints )
+&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Report unknown validators
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( !$validatorIdentifier !=3D '=
+TweetAuthorValidator' )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$validati=
+onErrors[] =3D new ValidationError( "Validator '$validatorIdentifier' is un=
+known" );
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Validate arguments from TweetA=
+uthorValidator
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( !isset( $constraints['Author=
+List'] ) || !is_array( $constraints['AuthorList'] ) )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$validati=
+onErrors[] =3D new ValidationError( "Missing or invalid AuthorList argument=
+" );
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach ( $constraints['AuthorLis=
+t'] as $authorName )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( !pre=
+g_match( '/^[a-z0-9_]{1,15}$/i', $authorName ) )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;$validationErrors[] =3D new ValidationError( "Invalid twitte=
+r username" );
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;}
+
+&nbsp;
+   return $validationErrors;
+}</pre>=20
+</div>
+</div>
+<p><code> validate()</code> is the method that runs the actual validation o=
+n data, when a content item is created with a Field of this type:</p>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">&nbsp;&nbsp;&nbsp;public function validate( FieldDefinition $fieldD=
+efinition, SPIValue $fieldValue )
+&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$errors =3D array();
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( $this-&gt;isEmptyValue( $fie=
+ldValue ) )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $e=
+rrors;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Tweet Url validation
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( !preg_match( '#^https?://twi=
+tter.com/([^/]+)/status/[0-9]+$#', $fieldValue-&gt;url, $m ) )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$errors[]=
+ =3D new ValidationError( "Invalid twitter status url %url%", null, array( =
+$fieldValue-&gt;url ) );
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$validatorConfiguration =3D $fiel=
+dDefinition-&gt;getValidatorConfiguration();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( isset( $validatorConfigurati=
+on['TweetAuthorValidator'] ) )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( !in_=
+array( $m[1], $validatorConfiguration['TweetAuthorValidator']['AuthorList']=
+ ) )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;$errors[] =3D new ValidationError(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Twitter user %user% is not in the a=
+pproved author list",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array( $m[1] )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $errors;
+&nbsp;&nbsp;&nbsp;}
+</pre>=20
+</div>
+</div>
+<p>First, we validate the url with a regular expression. If it doesn=E2=80=
+=99t match, we add an instance of <code> ValidationError </code> to the ret=
+urn array. Note that the tested value isn=E2=80=99t directly embedded in th=
+e message but passed as an argument. This ensures that the variable is prop=
+erly encoded in order to prevent attacks, and allows for singular/plural ph=
+rases using the second parameter.</p>
+<p>Then, if our Field Type instance=E2=80=99s configuration contains a <cod=
+e> TweetAuthorValidator </code> key, we check that the username in the stat=
+us url matches one of the valid authors.</p>
+<h4 id=3D"ImplementingtheTweet\Typeclass-Metadatahandlingmethods:getName()a=
+ndgetSortInfo().">Metadata handling methods: <code>getName()</code> and <co=
+de>getSortInfo()</code>.</h4>
+<p>Field Types require two methods related to Field metadata:</p>
+<ul>
+<li><p><code> getName() </code> is used to generate a name out of a Field v=
+alue, either to name a Content item (naming pattern in legacy) or to genera=
+te a part for an URL Alias.</p></li>
+<li><p><code> getSortInfo() </code> is used by the persistence layer to obt=
+ain the value it can use to sort &amp; filter on a Field of this type</p></=
+li>
+</ul>
+<p>Obviously, a tweet=E2=80=99s full URL isn=E2=80=99t really suitable as a=
+ name. Let=E2=80=99s use a subset of it: <code> &lt;username&gt;-&lt;tweetI=
+d&gt; </code> should be reasonable enough, and suitable for both sorting an=
+d naming.</p>
+<p>&nbsp;</p>
+<p>We can assume that this method will not be called if the Field is empty,=
+ and will assume that the URL is a valid twitter URL:</p>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">public function getName( SPIValue $value )
+{
+&nbsp;&nbsp;&nbsp;return preg_replace(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'#^https?://twitter\.com/([^/]+)/=
+status/([0-9]+)$#',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'$1-$2',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(string)$value-&gt;url );
+}
+
+&nbsp;
+protected function getSortInfo( CoreValue $value )
+{
+   return $this-&gt;getName( $value );
+}</pre>=20
+</div>
+</div>
+<p>In <code> getName()</code> we run a regular expression replace on the UR=
+L to extract the part we=E2=80=99re interested in.</p>
+<p>This name is a perfect match for <code> getSortInfo()</code> as it allow=
+s us to sort on the tweet=E2=80=99s author and on the tweet=E2=80=99s ID.</=
+p>
+<h4 id=3D"ImplementingtheTweet\Typeclass-FieldTypeserializationmethods:from=
+Hash()andtoHash()">Field Type serialization methods: <code>fromHash()</code=
+> and <code>toHash()</code></h4>
+<p>Both methods defined in the Field Type interface, are core to the REST A=
+PI. They are used to export values to serializable hashes.</p>
+<p>In our case, it is quite easy:</p>
+<ul>
+<li><p><code> toHash() </code> will build a hash with every property from <=
+code>Tweet\Value</code>;</p></li>
+<li><p><code> fromHash() </code> will instantiate a <code>Tweet\Value</code=
+> with the hash it receives. &nbsp;</p></li>
+</ul>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">public function fromHash( $hash )
+{
+&nbsp;&nbsp;&nbsp;if ( $hash =3D=3D=3D null )
+&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $this-&gt;getEmptyValue();
+&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;return new Value( $hash );
+}
+&nbsp;
+public function toHash( SPIValue $value )
+{
+&nbsp;&nbsp;&nbsp;if ( $this-&gt;isEmptyValue( $value ) )
+&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return null;
+&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;return array(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'url' =3D&gt; $value-&gt;url
+&nbsp;&nbsp;&nbsp;);
+}
+</pre>=20
+</div>
+</div>
+<h4 id=3D"ImplementingtheTweet\Typeclass-Persistencemethods:fromPersistence=
+ValueandtoPersistenceValue">Persistence methods:&nbsp;<code>fromPersistence=
+Value</code> and&nbsp;<code>toPersistenceValue</code></h4>
+<p>Storage of Field Type data is done through the persistence layer (SPI).<=
+/p>
+<p>Field Types use their own Value objects to expose their contents using t=
+heir own domain language. However, to store those objects, the Type needs t=
+o map this custom object to a structure understood by the persistence layer=
+:&nbsp;<code>PersistenceValue</code>. This simple value object has three pr=
+operties:</p>
+<ul style=3D"list-style-type: square;">
+<li><code>data</code> =E2=80=93 standard data, stored using the storage eng=
+ine's native features</li>
+<li><code>externalData</code> =E2=80=93 external data, stored using a custo=
+m storage handler</li>
+<li><code>sortKey</code> =E2=80=93 sort value used for sorting</li>
+</ul>
+<p>The role of those mapping methods is to convert a <code>Value</code>&nbs=
+p;of the Field Type into a <code>PersistenceValue</code> and the other way =
+around.</p>
+<div class=3D"confluence-information-macro confluence-information-macro-inf=
+ormation">
+<p class=3D"title">About external storage</p>
+<span class=3D"aui-icon aui-icon-small aui-iconfont-info confluence-informa=
+tion-macro-icon"></span>
+<div class=3D"confluence-information-macro-body">
+<p>Whatever is stored in {{externalData}} requires an external storage hand=
+ler to be written. Read more about external storage on <a href=3D"/display/=
+TECHDOC/Field+Type+API+and+best+practices">Field Type API and best practice=
+s</a>.</p>
+<p>External storage is beyond the scope of this tutorial, but many examples=
+ can be found in existing Field Types.</p>
+</div>
+</div>
+<p>We will follow a simple implementation here: the <code>Tweet\Value</code=
+> object will be serialized as an array&nbsp;to the <code>code</code>&nbsp;=
+property using <code>fromHash()</code>&nbsp;and&nbsp;<code>toHash()</code>:=
+</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>Tweet\Type</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">/**
+ * @param \EzSystems\TweetFieldTypeBundle\eZ\Publish\FieldType\Tweet\Value =
+$value
+ * @return \eZ\Publish\SPI\Persistence\Content\FieldValue
+ */
+public function toPersistenceValue( SPIValue $value )
+{
+    if ( $value =3D=3D=3D null )
+    {
+        return new PersistenceValue(
+            array(
+                "data" =3D&gt; null,
+                "externalData" =3D&gt; null,
+                "sortKey" =3D&gt; null,
+            )
+        );
+    }
+    return new PersistenceValue(
+        array(
+            "data" =3D&gt; $this-&gt;toHash( $value ),
+            "sortKey" =3D&gt; $this-&gt;getSortInfo( $value ),
+        )
+    );
+}
+/**
+ * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
+ * @return \EzSystems\TweetFieldTypeBundle\eZ\Publish\FieldType\Tweet\Value
+ */
+public function fromPersistenceValue( PersistenceValue $fieldValue )
+{
+    if ( $fieldValue-&gt;data =3D=3D=3D null )
+    {
+        return $this-&gt;getEmptyValue();
+    }
+    return new Value( $fieldValue-&gt;data );
+}</pre>=20
+</div>
+</div>
+<p>&nbsp;</p>
+<h5 id=3D"ImplementingtheTweet\Typeclass-FetchingdatafromtheTwitterAPI">Fet=
+ching data from the Twitter API</h5>
+<p>As explained in the tutorial's introduction, we will enrich our tweet's =
+URL with the embed version, fetched using the Twitter API. To do so, we wil=
+l, when <code>toPersistenceValue()</code>&nbsp;is called, fill in the value=
+'s contents property from this method, before creating the <code>Persistenc=
+eValue</code>&nbsp;object.</p>
+<p>First, we need a twitter client in&nbsp;<code>Tweet\Type</code>. For con=
+venience, we provide one in this tutorial's bundle:</p>
+<div>
+<ul style=3D"list-style-type: square;">
+<li>The <code>Twitter\TwitterClient</code>&nbsp;class:</li>
+<li>The <code>Twitter\TwitterClientInterface</code>&nbsp;interface</li>
+<li>An&nbsp;<code>ezsystems.tweetbundle.twitter.client</code> service that =
+uses the class above.</li>
+</ul>
+<p>The interface has one method: <code>getEmbed( $statusUrl )</code> that, =
+given a tweet's URL, returns the embed code as a string. The implementation=
+ is very simple, for the sake of simplicity, but gets the job done. Ideally=
+, it should at the very least handle errors, but it is not necessary here.<=
+/p>
+<h6 id=3D"ImplementingtheTweet\Typeclass-InjectingtheTwitterclientintoTweet=
+\Type">Injecting the Twitter client into&nbsp;<code>Tweet\Type</code></h6>
+<p>Our Field Type doesn't have a constructor yet. We will create one, with =
+an instance of&nbsp;<code>Twitter\TwitterClientInterface</code> as the argu=
+ment, and store it in a new protected property:</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>eZ/Publish/FieldType/Tweet/Type.php:</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">use EzSystems\TweetFieldTypeBundle\Twitter\TwitterClientInterface;
+&nbsp;
+class Type extends FieldType
+{
+    /** @var TwitterClientInterface */
+    protected $twitterClient;
+
+    public function __construct( TwitterClientInterface $twitterClient )
+    {
+        $this-&gt;twitterClient =3D $twitterClient;
+    }
+}</pre>=20
+</div>
+</div>
+<h6 id=3D"ImplementingtheTweet\Typeclass-Completingthevalueusingthetwitterc=
+lient">Completing the value using the twitter client</h6>
+<p>As described above, before creating the <code>PersistenceValue</code> ob=
+ject in <code>toPersistenceValue</code>, we will fetch the tweet's embed co=
+ntents using the client, and assign it to&nbsp;<code>Tweet\Value::$data</co=
+de>:</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>eZ/Publish/FieldType/Tweet/Type.php</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">&nbsp;public function toPersistenceValue( SPIValue $value )
+{
+    // if ( $value =3D=3D=3D null )
+    // {...}
+
+
+    if ( $value-&gt;contents =3D=3D=3D null )
+    {
+        $value-&gt;contents =3D $this-&gt;twitterClient-&gt;getEmbed( $valu=
+e-&gt;url );
+    }
+    return new PersistenceValue(
+    // array(...)
+}
+
+</pre>=20
+</div>
+</div>
+<p>And that's it! When the persistence layer stores content from our type, =
+the value will be completed with what the twitter API returns.</p>
+<p>&nbsp;</p>
+</div>
+    </div>
+</body>
+</html>
+------=_Part_3271_1248852105.1485852575016--

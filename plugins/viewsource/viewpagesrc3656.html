@@ -1,0 +1,283 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31424553 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:58:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage3656.html?pageId=31424553" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro4170.png?definition=e3RvY30&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="949d8f09-6ae9-4a5b-8fc0-6f1e8d1726e3" data-macro-schema-version="1"></p><h2>Two ways to generate pages in PlatformUI</h2><p>As written in <a class="confluence-link" href="../../display/TECHDOC/Backend%2binterface.html" data-linked-resource-id="30712101" data-linked-resource-version="11" data-linked-resource-type="page" data-linked-resource-default-alias="Backend interface" data-base-url="https://doc.ez.no">the PlatformUI technical introduction</a>, pages in PlatformUI can be generated either by the browser based on the REST API (or any other API) responses or by doing part of the rendering on the server side for instance with some Twig templates called by a Symfony controller. Both options are perfectly valid and choosing one or the other is mainly a matter of taste. This step will examine both strategies even if the later steps will be based on the server side rendering.</p><h2>Browser side rendering</h2><p>In this case, the browser uses the REST API to fetch the necessary objects/structures and then the logic of transforming that to an HTML page is written in JavaScript and executed by the browser.</p><h3>View service to fetch the Location list</h3><h4>Minimal view service</h4><p>The first thing to do is to create a view service. A view service is a component extending <code>Y.eZ.ViewService</code>. So we first need to declare and create a module and then this module will create the minimal view service class:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="b3be573c-e00a-40c0-bebf-c36ea30294e3" data-macro-parameters="language=text|theme=Midnight|title=yui.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading3009.png?definition=e2NvZGU6bGFuZ3VhZ2U9dGV4dHx0aGVtZT1NaWRuaWdodHx0aXRsZT15dWkueW1sfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezconf-listviewservice:
+     requires: ['ez-viewservice']
+     path: %extending_platformui.public_dir%/js/views/services/ezconf-listviewservice.js</pre></td></tr></table><p>Then in <code>ezconf-listviewservice.js</code> we can write the minimal view service:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="3e3d9343-456d-4494-bd02-b67de22f163b" data-macro-parameters="language=js|theme=Midnight|title=Minimal ListViewService" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1d43.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9TWluaW1hbCBMaXN0Vmlld1NlcnZpY2V9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-listviewservice', function (Y) {
+    Y.namespace('eZConf');
+
+    Y.eZConf.ListViewService = Y.Base.create('ezconfListViewService', Y.eZ.ViewService, [], {
+        initializer: function () {
+            console.log("Hey, I'm the ListViewService");
+        },
+    });
+});
+</pre></td></tr></table><p>This is the minimal view service, it only writes a &quot;hello world&quot; message in the console when instantiated but for now it's not used anywhere in the application.</p><h4>Configure the route to use the view service</h4><p>To really use our view service in the application, we have to change the route so that the PlatformUI application instantiates and uses the view service when building the page. To do that, we have to add the route <code>service</code> property to hold the constructor function of the view service so the application plugin that adds the route will also have to require the <code>ezconf-listviewservice</code> module:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="8bb611ae-fa36-4a50-9c62-897dc0579d4e" data-macro-parameters="language=text|theme=Midnight|title=yui.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading3009.png?definition=e2NvZGU6bGFuZ3VhZ2U9dGV4dHx0aGVtZT1NaWRuaWdodHx0aXRsZT15dWkueW1sfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre> ezconf-listapplugin:
+     requires: ['ez-pluginregistry', 'plugin', 'base', 'ezconf-listview', 'ezconf-listviewservice'] # the view module has been added
+     dependencyOf: ['ez-platformuiapp']</pre></td></tr></table><p>After doing that, <code>Y.eZConf.ListViewService</code> becomes available in the application plugin code and we can change the <code>eZConfList</code> route to:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="ea1015e0-40e6-47c3-b136-95989d152204" data-macro-parameters="language=js|theme=Midnight|title=Creating a route with a view service" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headinga0be.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9Q3JlYXRpbmcgYSByb3V0ZSB3aXRoIGEgdmlldyBzZXJ2aWNlfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>app.route({
+    name: "eZConfList",
+    path: "/ezconf/list",
+    view: "ezconfListView",
+    service: Y.eZConf.ListViewService, // constructor function to use to instantiate the view service
+    sideViews: {'navigationHub': true, 'discoveryBar': false},
+    callbacks: ['open', 'checkUser', 'handleSideViews', 'handleMainView'],
+});</pre></td></tr></table><p>After this change, the <code>Y.eZConf.ListViewService</code> is used when a user reaches the <code>eZConfList</code> route.</p><h4>Fetching Locations from the view service</h4><p>A view service is responsible for fetching data so it can be rendered. For a given route, the view service is instantiated the first time the route is accessed and then the same instance is reused. On that instance, the <code>_load</code> method is automatically called. This is where the loading logic should be in most cases. This method also receives a callback as its only parameter. This callback function should be called once the loading is finished. Typically, a view service will use <a href="http://ezsystems.github.io/javascript-rest-client/">the JavaScript REST Client</a> to request <a class="confluence-link" href="../../display/TECHDOC/REST%2bAPI%2bTutorials.html" data-linked-resource-id="30711247" data-linked-resource-version="7" data-linked-resource-type="page" data-linked-resource-default-alias="REST API Tutorials" data-base-url="../../index.html">the eZ Platform REST API</a>. To do that, a JavaScript REST Client instance is available in the <code>capi</code> attribute of the view service.</p><p>In this tutorial, we want to display the Content in a flat list and filter this list by Content Types. For now, let's fetch everything; to do that, the view service will create a REST view to search for every Location in the repository:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="f4ed80bf-3dc0-46fa-8879-2daa28398a5e" data-macro-parameters="language=js|theme=Midnight|title=ezconf-listviewservice.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading48ee.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9ZXpjb25mLWxpc3R2aWV3c2VydmljZS5qc30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-listviewservice', function (Y) {
+    Y.namespace('eZConf');
+
+    Y.eZConf.ListViewService = Y.Base.create('ezconfListViewService', Y.eZ.ViewService, [], {
+        initializer: function () {
+            console.log("Hey, I'm the ListViewService");
+        },
+
+        // _load is automatically called when the view service is configured for
+        // a route. callback should be executed when everything is finished
+        _load: function (callback) {
+            var capi = this.get('capi'), // REST API JavaScript client
+                contentService = capi.getContentService(),
+                query = contentService.newViewCreateStruct('ezconf-list', 'LocationQuery');
+
+            // searching for "everything"
+            query.body.ViewInput.LocationQuery.Criteria = {SubtreeCriterion: "/1/"};
+            contentService.createView(query, Y.bind(function (err, response) {
+                // parsing the response and storing the location list in the "location" attribute
+                var locations;
+
+                locations = Y.Array.map(response.document.View.Result.searchHits.searchHit, function (hit) {
+                    var loc = new Y.eZ.Location({id: hit.value.Location._href});
+
+                    loc.loadFromHash(hit.value.Location);
+                    return loc;
+                });
+                this.set('locations', locations);
+                callback();
+            }, this));
+        },
+    }, {
+        ATTRS: {
+            locations: {
+                value: [],
+            }
+        }
+    });
+});
+</pre></td></tr></table><p>At this point, if you refresh the PlatformUI application and follow the link added <a class="confluence-link" href="../../display/TECHDOC/Configure%2bthe%2bnavigation.html" data-linked-resource-id="31424526" data-linked-resource-version="9" data-linked-resource-type="page" data-linked-resource-default-alias="Configure the navigation" data-base-url="../../index.html">in the previous step</a>, you should see a new REST API request to <code>/api/ezp/v2/views</code> in the network panel of the browser:</p><p><img class="confluence-embedded-image confluence-content-image-border" height="400" src="../../download/attachments/31424553/restview39ed.png?version=1&amp;modificationDate=1450713270000&amp;api=v2" data-image-src="/download/attachments/31424553/restview.png?version=1&amp;modificationDate=1450713270000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="31424635" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="restview.png" data-base-url="https://doc.ez.no" data-linked-resource-content-type="image/png" data-linked-resource-container-id="31424553" data-linked-resource-container-version="12" title="TECHDOC > Build the content list > restview.png" data-location="TECHDOC > Build the content list > restview.png" data-image-height="691" data-image-width="1070"></p><p>The Locations are built in the application but not yet used anywhere.</p><h4>Passing the Location to the view</h4><p>Now that we have the Locations, we have to give them to the view. For that, we have to implement the <code>_getViewParameters</code> method in the view service. This method is automatically called when view service loading is finished, it should return an object that will be used as a configuration object for the main view.</p><p>In our case, we just want to give the Location list to the view, so the <code>_getViewParameters</code> method is quite simple:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="17d66d00-2aa7-4e00-8155-235b8151fac2" data-macro-parameters="language=js|theme=Midnight|title=_getViewParameters of the view service" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingb297.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9X2dldFZpZXdQYXJhbWV0ZXJzIG9mIHRoZSB2aWV3IHNlcnZpY2V9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>_getViewParameters: function () {
+    return {
+        locations: this.get('locations'),
+    };
+},</pre></td></tr></table><p>With that code, the view will receive the Location list as an attribute under the name <code>locations</code>.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="8ddcee33-e5a9-4aea-a576-d9c81223513d" data-macro-parameters="title=Why implement _load and _getViewParameters and not load and getViewParameters?" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading085f.png?definition=e2luZm86dGl0bGU9V2h5IGltcGxlbWVudCBfbG9hZCBhbmQgX2dldFZpZXdQYXJhbWV0ZXJzIGFuZCBub3QgbG9hZCBhbmQgZ2V0Vmlld1BhcmFtZXRlcnM_fQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>When implementing a custom view service, you should always implement the protected <code>_load</code> and <code>_getViewParameters</code> methods, not their public counterparts <code>load</code> and <code>getViewParameters</code>. By implementing the protected versions, you keep the opportunity for a developer to write a plugin to enhance your view service.</p></td></tr></table><h3>View to display a list of Location</h3><p>The view now receives the Location list in the <code>locations</code> attribute so we have to change the view to take that into account. For now, let's change it to just display the Location it receives as an unordered HTML list of links to those Locations. To do that, we have to:</p><ol><li>Declare the <code>locations</code> attribute in the view</li><li>Give that list to the template in a form it can understand</li><li>Update the template to generate the list</li></ol><p>Point 2 is required because Handlebars is not able to understand the complex model objects generated by YUI. So we have to transform those complex object into plain JavaScript objects. After doing the changes in steps 1 and 2, the view looks like this:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="b18742d9-82c7-42aa-ae7e-ab1716eb2a65" data-macro-parameters="language=js|theme=Midnight|title=ezconf-listview.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingea0e.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9ZXpjb25mLWxpc3R2aWV3LmpzfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-listview', function (Y) {
+    Y.namespace('eZConf');
+
+    Y.eZConf.ListView = Y.Base.create('ezconfListView', Y.eZ.TemplateBasedView, [], {
+        initializer: function () {
+            console.log("Hey, I'm the list view");
+        },
+
+        render: function () {
+            this.get('container').setHTML(
+                this.template({
+                    locations: this._getJsonifiedLocations(),
+                })
+            );
+            return this;
+        },
+
+        _getJsonifiedLocations: function () {
+            // to get usable objects in the template
+            return Y.Array.map(this.get('locations'), function (loc) {
+                return loc.toJSON();
+            });
+        },
+    }, {
+        ATTRS: {
+            locations: {
+                value: [],
+            }
+        }
+    });
+});
+</pre></td></tr></table><p>Then the template has to be changed to something like:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="04158856-b900-422d-999c-bc0b00aabb61" data-macro-parameters="language=xml|theme=Midnight|title=ezconflistview.hbt" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingbdde.png?definition=e2NvZGU6bGFuZ3VhZ2U9eG1sfHRoZW1lPU1pZG5pZ2h0fHRpdGxlPWV6Y29uZmxpc3R2aWV3LmhidH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;h1 class="ezconf-list-title">List view&lt;/h1>
+
+&lt;ul class="ezconf-list">
+{{#each locations}}
+    &lt;li>&lt;a href="{{path 'viewLocation' id=id languageCode=contentInfo.mainLanguageCode}}">{{ contentInfo.name }}&lt;/a>&lt;/li>
+{{/each}}
+&lt;/ul>
+</pre></td></tr></table><p>PlatformUI provides a <code>path</code> template helper that allows you to generate a route URL in PlatformUI. It expects a route name and the route parameters.</p><table class="wysiwyg-macro" data-macro-name="tip" data-macro-id="1d9ca61c-762d-415d-be1d-a1bee3fda711" data-macro-parameters="title=Results" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading9837.png?definition=e3RpcDp0aXRsZT1SZXN1bHRzfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>The resulting code can be been in <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/releases/tag/6_1_list_client">the <code>6_1_list_client</code> tag on GitHub</a>, this step result can also be viewed as <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/compare/5_navigation...6_1_list_client">a diff between tags <code>5_navigation</code> and <code>6_1_list_client</code></a>.</p><p>The rest of this tutorial is focused on the server side rendering strategy. Completing the browser side rendering strategy to get the expected features is left as an exercise.</p></td></tr></table><h2>Server side rendering</h2><p>In this case a part of the rendering is delegated to the server. When building a PlatformUI page this way, the application will just do one or more AJAX request(s) and inject the result in the UI. The PlatformUI <em>Admin part</em> is built this way. To be easily usable in the JavaScript application, the server response has to be structured so that the application can retrieve and set the page title, the potential notifications to issue and the actual page content. This is done by generating an HTML fragment, in the following way:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="7fed1b68-1cfd-4323-8485-0a448795f8ab" data-macro-parameters="language=xml|theme=Midnight|title=Example of server side response" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading4d20.png?definition=e2NvZGU6bGFuZ3VhZ2U9eG1sfHRoZW1lPU1pZG5pZ2h0fHRpdGxlPUV4YW1wbGUgb2Ygc2VydmVyIHNpZGUgcmVzcG9uc2V9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;div data-name="title">Title to set in the application&lt;/div>
+&lt;div data-name="html">
+    &lt;p>Page content&lt;/p>
+&lt;/div>
+&lt;ul data-name="notification">
+    &lt;li data-state="done">I'm a "done" notification to display in the application&lt;/li>
+&lt;/ul></pre></td></tr></table><h3>View service to fetch an HTML fragment</h3><h4>Minimal view service</h4><p>In the case, the minimal view service is exactly the same as the one produced in <a class="confluence-link" href="#Buildthecontentlist-Buildthecontentlist-Minimalviewservice" data-anchor="Buildthecontentlist-Minimalviewservice" data-linked-resource-default-alias="Buildthecontentlist-Minimalviewservice" data-base-url="../../index.html">the previous Minimal view service paragraph</a>.</p><h4>Configure the route to use the view service</h4><p>The eZConfList route also has to be configured exactly in the same way as in <a class="confluence-link" href="#Buildthecontentlist-Buildthecontentlist-Configuretheroutetousetheviewservice" data-anchor="Buildthecontentlist-Configuretheroutetousetheviewservice" data-linked-resource-default-alias="Buildthecontentlist-Configuretheroutetousetheviewservice" data-base-url="../../index.html">the previous Configure the route to use the view service paragraph</a>.</p><h4>Generate the HTML fragment server side</h4><p>This will be done by a Symfony Controller that will use the Search Service and a Twig template to generate the HTML code. As you can see in <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/commit/01c43cee899e295109060ab89a7ea705e8171cd0#diff-2e1a19129e23e2d757512a5da45ffa54R1">this Github commit</a>, it's a very basic Symfony Controller that extends <code><span class="blob-code-inner"><span class="pl-s1"><span class="pl-c1">EzSystems\PlatformUIBundle\Controller\Controller</span></span></span></code>.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="6b5d72e3-a68d-4243-a643-4ebb1cee2dd5" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>Extending <code><span class="blob-code-inner"><span class="pl-s1"><span class="pl-c1">EzSystems\PlatformUIBundle\Controller\Controller</span></span></span></code> is not strictly required. By doing that, the actions provided by the controller are automatically restricted to authenticated users. This base controller also provides the base API to handle notifications if needed.</p><p>To learn how to write Symfony controllers, please read <a href="http://symfony.com/doc/current/book/controller.html">the Symfony Controller documentation</a>.</p></td></tr></table><p>The <code>list</code> action in <code>ListController</code> uses the following Twig template:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="e751318c-055b-402b-bd2e-175933f73d13" data-macro-parameters="language=text|theme=Midnight|title=list.html.twig" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingc5ec.png?definition=e2NvZGU6bGFuZ3VhZ2U9dGV4dHx0aGVtZT1NaWRuaWdodHx0aXRsZT1saXN0Lmh0bWwudHdpZ30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{% extends "eZPlatformUIBundle::pjax_admin.html.twig" %}
+
+{% block header_title %}
+    &lt;h1 class="ezconf-list-title">List view&lt;/h1>
+{% endblock %}
+
+{% block content %}
+&lt;ul class="ezconf-list">
+{% for value in results.searchHits %}
+    &lt;li>&lt;a href="">{{ value.valueObject.contentInfo.name }}&lt;/a>&lt;/li>
+{% endfor %}
+&lt;/ul>
+{% endblock %}
+
+{% block title %}List{% endblock %}
+</pre></td></tr></table><p>Again, it's a quite a regular template but to ease the generation of the expected structured HTML fragment, this template extends<code><span class="blob-code-inner"> </span><a href="https://github.com/ezsystems/PlatformUIBundle/blob/master/Resources/views/pjax_admin.html.twig"><span class="blob-code-inner"><span class="pl-s">eZPlatformUIBundle::pjax_admin.html.twig</span></span></a></code> and redefines a few blocks, the main one being <code>content</code> where the actual page content is supposed to be generated.</p><h4>Update the view service to fetch the generated HTML fragment</h4><p>We now have a Symfony Controller able to generate our Location list but this list is not yet available in the application. As in <a class="confluence-link" href="#Buildthecontentlist-Buildthecontentlist-FetchingLocationsfromtheviewservice" data-anchor="Buildthecontentlist-FetchingLocationsfromtheviewservice" data-linked-resource-default-alias="Buildthecontentlist-FetchingLocationsfromtheviewservice" data-base-url="../../index.html">Fetching Locations from the view service</a> and <span class="toc-item-body"><a href="../../index.html#Buildthecontentlist-PassingtheLocationtotheview">Passing the Location to the view</a></span>, we have to add the code in the view service. But in the case of a server side rendering, we can reuse <span class="blob-code-inner"><code><span class="pl-smi">Y</span>.<span class="pl-smi">eZ</span>.</code><span class="pl-smi x x-first x-last"><code>ServerSideViewService</code> which provides the base API to parse an HTML fragment which also provides a ready to use <code>_getViewParameters</code> method. All we have to do then is to implement the loading logic in <code>_load</code>:</span></span></p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="05b7602d-180c-4de7-a96e-133543819771" data-macro-parameters="language=js|theme=Midnight|title=ezconf-listviewservice.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading48ee.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9ZXpjb25mLWxpc3R2aWV3c2VydmljZS5qc30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-listviewservice', function (Y) {
+    Y.namespace('eZConf');
+
+    Y.eZConf.ListViewService = Y.Base.create('ezconfListViewService', Y.eZ.ServerSideViewService, [], {
+        initializer: function () {
+            console.log("Hey, I'm the ListViewService");
+        },
+
+        _load: function (callback) {
+            var uri = this.get('app').get('apiRoot') + 'list';
+
+            Y.io(uri, { // YUI helper to do AJAX request, see http://yuilibrary.com/yui/docs/io/
+                method: 'GET',
+                on: {
+                    success: function (tId, response) {
+                        this._parseResponse(response); // provided by Y.eZ.ServerSideViewService
+                        callback(this);
+                    },
+                    failure: this._handleLoadFailure, // provided by Y.eZ.ServerSideViewService
+                },
+                context: this,
+            });
+        },
+    });
+});
+</pre></td></tr></table><p>The resulting <code>_load</code> method will just do an AJAX request to the action provided by our Symfony controller.</p><p>At this point, if you refresh your browser, nothing should have changed but you should see the AJAX request in the network panel of your browser.</p><p><img class="confluence-embedded-image confluence-content-image-border" height="400" width="916" src="../../download/attachments/31424553/nw_panel280f.png?version=1&amp;modificationDate=1450779340000&amp;api=v2" data-image-src="/download/attachments/31424553/nw_panel.png?version=1&amp;modificationDate=1450779340000&amp;api=v2" data-unresolved-comment-count="0" data-linked-resource-id="31424659" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="nw_panel.png" data-base-url="https://doc.ez.no" data-linked-resource-content-type="image/png" data-linked-resource-container-id="31424553" data-linked-resource-container-version="12" title="TECHDOC > Build the content list > nw_panel.png" data-location="TECHDOC > Build the content list > nw_panel.png" data-image-height="467" data-image-width="1070"></p><h3>View to handle the server side generated code</h3><h4>Change the view to be server side view</h4><p>To have a visual change, we now have to change the <code><span class="blob-code-inner"><span class="pl-smi">ListView</span></span></code> to be a server side view. This operations involves removing some code added in <a class="confluence-link" href="../../display/TECHDOC/Define%2ba%2bView.html" data-linked-resource-id="30712516" data-linked-resource-version="6" data-linked-resource-type="page" data-linked-resource-default-alias="Define a View" data-base-url="../../index.html">the Define a View step</a>. Basically, the View does not need any template but it will inherit from <code>Y.eZ.ServerSideView</code>. As a result, the view module definition becomes:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="295350b2-acd4-4554-8dbf-8f29c296ae34" data-macro-parameters="language=text|theme=Midnight|title=View module definition" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading3ac7.png?definition=e2NvZGU6bGFuZ3VhZ2U9dGV4dHx0aGVtZT1NaWRuaWdodHx0aXRsZT1WaWV3IG1vZHVsZSBkZWZpbml0aW9ufQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezconf-listview:
+    requires: ['ez-serversideview']
+    path: %extending_platformui.public_dir%/js/views/ezconf-listview.js</pre></td></tr></table><p>And the View component also has to be simplified to:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="823aa63d-98b7-4116-9b40-bfaa50a52213" data-macro-parameters="language=js|theme=Midnight|title=ezconf-listview.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingea0e.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9ZXpjb25mLWxpc3R2aWV3LmpzfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-listview', function (Y) {
+    Y.namespace('eZConf');
+
+    Y.eZConf.ListView = Y.Base.create('ezconfListView', Y.eZ.ServerSideView, [], {
+        initializer: function () {
+            console.log("Hey, I'm the list view");
+            this.containerTemplate = '&lt;div class="ez-view-ezconflistview"/>'; // make sure we keep the same class on the container
+        },
+    });
+});
+</pre></td></tr></table><p>At this point, you should see the same list as the one that was generated in <a class="confluence-link" href="#Buildthecontentlist-Buildthecontentlist-Browsersiderendering" data-anchor="Buildthecontentlist-Browsersiderendering" data-linked-resource-default-alias="Buildthecontentlist-Browsersiderendering" data-base-url="../../index.html">Browser side rendering</a> section. The only difference lies in the non-working links being generated in the server side solution.</p><h4>Navigating in the app from the view</h4><p>There are several ways to fix the link issue. In this step we are going to add some metadata to the generated HTML links, then we'll change the view to recognize the enhanced links and finally we'll change the server side view to achieve the navigation.</p><p>The server side code has no knowledge of the JavaScript application routing mechanism as a result, it can not directly generate any PlatformUI Application URI, but we know while generating the HTML fragment that we want each link to allow the navigation to the <code>viewLocation</code> route for the Location being displayed. We can then change the Twig template to add the necessary metadata on each link so that the application has a way of guessing where the user is supposed to go when clicking on the link:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="72597f5f-7bb1-4aa4-b135-42e052ecd317" data-macro-parameters="language=xml|theme=Midnight|title=&quot;content&quot; block in the Twig template" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading7800.png?definition=e2NvZGU6bGFuZ3VhZ2U9eG1sfHRoZW1lPU1pZG5pZ2h0fHRpdGxlPSJjb250ZW50IiBibG9jayBpbiB0aGUgVHdpZyB0ZW1wbGF0ZX0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{% block content %}
+&lt;ul class="ezconf-list">
+{% for value in results.searchHits %}
+    &lt;li>&lt;a class="ezconf-list-location" href=""
+        data-route-name="viewLocation"
+        data-route-id="{{ path('ezpublish_rest_loadLocation', {locationPath: value.valueObject.pathString|trim('/')}) }}"
+        data-route-languageCode="{{ value.valueObject.contentInfo.mainLanguageCode }}"
+        >{{ value.valueObject.contentInfo.name }}&lt;/a>&lt;/li>
+{% endfor %}
+&lt;/ul>
+{% endblock %}</pre></td></tr></table><p>For each link we are basically saying to the application that the user should directed to the <code>viewLocation</code> route for the given Location id and the given language code.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="80103307-cc35-4816-9f22-51393bcb1fc0" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>In PlatformUI code, the Locations, Content items and Content Types are identified by their REST id, that is the REST resource URL which allows you to fetch the object in the REST API. That's why we are using the <code>path</code> Twig template function to build the Location id.</p></td></tr></table><p>Then we have to change the view to add a special behavior when the user clicks on them. The view can not directly trigger the navigation to the expected route. So in this case, we are firing an application level event with all the data we have on the link and we'll let the view service handle this application level event to take the user to the expected page. So, we have to configure our view to recognize the click on the links and to fire the <code>navigateTo</code> custom event:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="051222aa-9001-4736-a2fc-f5a4e6c06dc7" data-macro-parameters="language=js|theme=Midnight|title=ezconf-listview.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingea0e.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9ZXpjb25mLWxpc3R2aWV3LmpzfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-listview', function (Y) {
+    Y.namespace('eZConf');
+
+    Y.eZConf.ListView = Y.Base.create('ezconfListView', Y.eZ.ServerSideView, [], {
+        // this is YUI View mechanic to subscribe to DOM events (click, submit,
+        // ...) and synthetic event (some custom event provided by YUI) like
+        // 'tap' here.
+        events: {
+            '.ezconf-list-location': {
+                // tap is 'fast click' (touch friendly)
+                'tap': '_navigateToLocation'
+            }
+        },
+
+        initializer: function () {
+            console.log("Hey, I'm the list view");
+            this.containerTemplate = '&lt;div class="ez-view-ezconflistview"/>';
+        },
+
+        _navigateToLocation: function (e) {
+            var link = e.target;
+
+            e.preventDefault(); // don't want the normal link behavior
+
+            // tell the view service we want to navigate somewhere
+            // it's a custom event that will be bubble up to the view service
+            // (and the app)
+            // the second parameter is the data to add in the event facade, this
+            // can be used by any event handler function bound to this event.
+            this.fire('navigateTo', {
+                routeName: link.getData('route-name'),
+                routeParams: {
+                    id: link.getData('route-id'),
+                    languageCode: link.getData('route-languagecode'),
+                }
+            });
+        },
+    });
+});
+</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="5ab83641-7d98-4422-87a0-b8864a3475b4" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>The DOM event handling is one of the main YUI View features. It is documented in <a href="http://yuilibrary.com/yui/docs/view/#handling-dom-events">the YUI View guide</a>.</p></td></tr></table><p>Now the click on the Location link is transformed in a <code>navigateTo</code> event, we have to subscribe to that event in the view service to trigger the expected navigation:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="685479fe-cecd-49d2-80bc-fdec80099cd9" data-macro-parameters="language=js|theme=Midnight|title=ezconf-listviewservice.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading48ee.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9ZXpjb25mLWxpc3R2aWV3c2VydmljZS5qc30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-listviewservice', function (Y) {
+    Y.namespace('eZConf');
+
+    Y.eZConf.ListViewService = Y.Base.create('ezconfListViewService', Y.eZ.ServerSideViewService, [], {
+        initializer: function () {
+            console.log("Hey, I'm the ListViewService");
+
+            // we catch the `navigateTo` event no matter from where it comes
+            // when bubbling, the event is prefixed with the name of the
+            // component which fired the event first.
+            // so in this case we could also write
+            // this.on('ezconflistview:navigateTo', function (e) {});
+            // `e` is the event facade. It contains various informations about
+            // the event and if any the custom data passed to fire().
+            this.on('*:navigateTo', function (e) {
+                this.get('app').navigateTo(
+                    e.routeName,
+                    e.routeParams
+                );
+            });
+        },
+
+        _load: function (callback) {
+            // [...] skip to keep the example short
+        },
+    });
+});
+</pre></td></tr></table><p>With that in place and after a refresh, the Location list should allow you to the navigate to the expected Location in PlatformUI.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="826016f7-9c07-4e91-9f79-4fa658a3aaaf" data-macro-parameters="title=Application level events" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading8357.png?definition=e2luZm86dGl0bGU9QXBwbGljYXRpb24gbGV2ZWwgZXZlbnRzfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>PlatformUI uses a lot of custom application level events thanks to <a href="http://yuilibrary.com/yui/docs/event-custom/">the EventTarget YUI component</a>. Those events are very similar to <a href="http://yuilibrary.com/yui/docs/event/">DOM events</a> but they are attached to the application components instead of the DOM elements. Like for DOM events, there is <a href="http://yuilibrary.com/yui/docs/event-custom/#bubbling">a bubbling mechanism</a>. For instance, here the view is firing an event and unless the propagation of the event is stopped, it will bubble to the view service and then to the application. The event basically follows <a class="confluence-link" href="../../display/TECHDOC/Backend%2binterface.html" data-linked-resource-id="30712101" data-linked-resource-version="11" data-linked-resource-type="page" data-linked-resource-default-alias="Backend interface" data-base-url="../../index.html">the components tree until the application</a>. <strong>An application level event is way for a deeply nested component to communicate with a higher level component.</strong></p></td></tr></table><table class="wysiwyg-macro" data-macro-name="tip" data-macro-id="4f34a16e-c115-405e-9960-46cc97a1549d" data-macro-parameters="title=Results and next step" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headinga15d.png?definition=e3RpcDp0aXRsZT1SZXN1bHRzIGFuZCBuZXh0IHN0ZXB9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>The resulting code can be seen in <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/releases/tag/6_2_list_server">the <code>6_2_list_server</code> tag on GitHub</a>, this step result can also be viewed as <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/compare/5_navigation...6_2_list_server">a diff between tags <code>5_navigation</code> and <code>6_2_list_server</code></a>.</p><p>The next step is then <a class="confluence-link" href="../../display/TECHDOC/Pagination.html" data-linked-resource-id="31424670" data-linked-resource-version="6" data-linked-resource-type="page" data-linked-resource-default-alias="Pagination" data-base-url="../../index.html">to add the pagination</a>.</p></td></tr></table>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31424553 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:58:54 GMT -->
+</html>

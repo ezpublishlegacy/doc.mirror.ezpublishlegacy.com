@@ -1,0 +1,65 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31429807 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:33:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage636f.html?pageId=31429807" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/6/_/styles/colors74cd.css?spaceKey=DEVELOPER" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/6/_/styles/custom74cd.css?spaceKey=DEVELOPER" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <div class="contentLayout2">
+<div class="columnLayout two-right-sidebar" data-layout="two-right-sidebar">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1>Description</h1><p>In lots of cases, a request will provide a contentId or a locationId. Before using them, you will have to load API object within your controller.</p><h1>Solution</h1><p>For example:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="c69cbbbd-5491-4e15-a1b2-04fbc83773ed" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>public function listBlogPostsAction( $locationId )
+{
+	$location = $repository->getLocationService()->loadLocation( $locationId );</pre></td></tr></table><p>Thanks to the param converter, you can directly have the API object at your disposal. All you have to do is:</p><ul style="list-style-type: square;"><li>For Locations:<ul style="list-style-type: square;"><li>In your controller's signature, type int the variable to Location.</li><li>Make sure a parameter named &quot;locationId&quot; is provided by the request.</li></ul></li><li>For Content items:<ul style="list-style-type: square;"><li>In your controller's signature, typeint the variable to Content</li><li>Make sure a parameter named &quot;contentId&quot; is provided by the request</li></ul></li></ul><h1>Example</h1><p>Example using Locations:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="9b75fbd1-6284-42cc-837c-a745c2083a90" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>use eZ\Publish\API\Repository\Values\Content\Location;
+
+public function listBlogPostsAction( Location $location )
+{
+	// use my $location object</pre></td></tr></table><h2>Further information</h2><p>If you want to understand how it works, you can check <a href="http://symfony.com/doc/master/bundles/SensioFrameworkExtraBundle/annotations/converters.html">Symfony's param converter documentation</a> and the <a href="https://github.com/ezsystems/ezpublish-kernel/pull/1128">pull request implementing the Repository ParamConverters</a>.</p><h2>Migrating your current application</h2><p><a href="https://github.com/ezsystems/DemoBundle/pull/129/files">See example pull request on the DemoBundle</a> which provides a few concrete examples.</p></div>
+</div>
+<div class="cell aside" data-type="aside">
+<div class="innerCell">
+<h4>In this topic:</h4><p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro7c73.png?definition=e3RvYzptYXhMZXZlbD0zfQ&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="ae33b28d-0768-4e85-8031-c815c8342083" data-macro-parameters="maxLevel=3" data-macro-schema-version="1"></p></div>
+</div>
+</div>
+</div>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31429807 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:33:02 GMT -->
+</html>

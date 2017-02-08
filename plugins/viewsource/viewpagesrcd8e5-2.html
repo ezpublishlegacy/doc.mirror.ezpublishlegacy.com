@@ -1,0 +1,104 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30705489 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:46:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpaged8e5-2.html?pageId=30705489" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/51/_/styles/colorsb538.css?spaceKey=EZP" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/51/_/styles/customb538.css?spaceKey=EZP" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><img class="editor-inline-macro" height="18" width="88" src="../servlet/status-macro/placeholdera237.png?title=Platform+%3E%3D+2015.09&amp;colour=Yellow" data-macro-name="status" data-macro-id="4ca500d2-b489-4c4e-a947-c5e3f62c61f2" data-macro-parameters="colour=Yellow|title=Platform >\= 2015.09" data-macro-schema-version="1"></p><h1>Description</h1><p>eZ content repository uses the concept of roles and policies in order to authorize a user to do something (e.g. read content).</p><ul><li>A role is composed of policies and can be assigned to a user or a user group.</li><li>A policy is composed of a combination of <strong>module</strong> and <strong>function</strong> (e.g. <code>content/read</code>, <code>content</code> being the module and <code>read</code> being the function).</li><li>Depending on <strong>module</strong> and <strong>function</strong> combination, a policy can also be composed of limitations.</li></ul><p>It is possible for any bundle to expose available policies via a <code>PolicyProvider</code> which can be added to EzPublishCoreBundle's DIC extension.</p><h1>PolicyProvider</h1><p>A <code>PolicyProvider</code> is an object providing a hash containing declared modules, functions and limitations.</p><ul><li>Each policy provider provides a collection of permission <em>modules</em>.</li><li>Each module can provide <em>functions</em> (e.g. &quot;content/read&quot;: &quot;content&quot; is the module, &quot;read&quot; is the function)</li><li>Each function can provide a collection of limitations.</li></ul><p>Policies configuration hash contains declared these modules, functions and limitations.<br />First level key is the module name, value is a hash of available functions, with function name as key.<br />Function value is an array of available limitations, identified by the alias declared in LimitationType service tag.<br />If no limitation is provided, value can be <code>null</code> or an empty array.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="51ad6600-4bd4-4670-b898-e10ee4117977" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>[
+    "content" => [
+        "read" => ["Class", "ParentClass", "Node", "Language"],
+        "edit" => ["Class", "ParentClass", "Language"]
+    ],
+    "custom_module" => [
+        "custom_function_1" => null,
+        "custom_function_2" => ["CustomLimitation"]
+    ],
+]</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="note" data-macro-id="9295c16b-f750-45e1-8d0e-d1f91a380214" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingdd57.png?definition=e25vdGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>Limitations need to be implemented as <em>limitation types</em> and declared as services identified with <code>ezpublish.limitationType</code> tag. Name provided in the hash for each limitation is the same value set in <code>alias</code> attribute in the service tag.</p></td></tr></table><h2>Example</h2><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="29c8ede3-7fa1-4003-b0ea-1b458b2062aa" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>namespace Acme\FooBundle\AcmeFooBundle\Security;
+
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ConfigBuilderInterface;
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Security\PolicyProvider\PolicyProviderInterface;
+
+class MyPolicyProvider implements PolicyProviderInterface
+{
+    public function addPolicies(ConfigBuilderInterface $configBuilder)
+    {
+        $configBuilder->addConfig([
+             "custom_module" => [
+                 "custom_function_1" => null,
+                 "custom_function_2" => ["CustomLimitation"],
+             ],
+         ]);
+    }
+}</pre></td></tr></table><h2>YamlPolicyProvider</h2><p><span>An abstract class based on YAML is provided: </span><code>eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Security\PolicyProvider\YamlPolicyProvider</code><span>.<br /></span><span style="line-height: 1.42857;">It defines an abstract </span><code style="line-height: 1.42857;">getFiles()</code><span style="line-height: 1.42857;"> method. </span></p><p><span style="line-height: 1.42857;">Extend <code>YamlPolicyProvider</code> and implement <code>getFiles()</code> to return absolute paths to your YAML files.</span></p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="625f0eed-a08f-406b-8dfa-7890f2769f01" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>namespace Acme\FooBundle\AcmeFooBundle\Security;
+
+use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Security\PolicyProvider\YamlPolicyProvider;
+
+class MyPolicyProvider extends YamlPolicyProvider
+{
+    protected function getFiles()
+    {
+        return [
+             __DIR__ . '/../Resources/config/policies.yml',
+         ];
+    }
+}</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="4a34d237-2d5b-48c4-927c-8661e0496eda" data-macro-parameters="language=bash|title=AcmeFooBundle/Resources/config/policies.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingf8b3.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaHx0aXRsZT1BY21lRm9vQnVuZGxlL1Jlc291cmNlcy9jb25maWcvcG9saWNpZXMueW1sfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>custom_module:
+    custom_function_1: ~
+    custom_function_2: [CustomLimitation]</pre></td></tr></table><h2><span style="line-height: 1.42857;">Extending existing policies</span></h2><p>A <code>PolicyProvider</code> may provide new functions to a module, and additional limitations to an existing function. <br /><strong style="line-height: 1.42857;">It is however strongly encouraged to add functions to your own policy modules.</strong></p><table class="wysiwyg-macro" data-macro-name="note" data-macro-id="61c1da4d-016a-4f96-afc3-7cf7b58fbb71" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingdd57.png?definition=e25vdGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>It is not possible to remove an existing module, function or limitation from a policy.</p></td></tr></table><h1>Integrating the PolicyProvider into EzPublishCoreBundle</h1><p><span>For a PolicyProvider to be active, it must be properly declared in EzPublishCoreBundle. <br />A bundle just has to retrieve CoreBundle's DIC extension and call </span><code>addPolicyProvider()</code><span>. This must be done in bundle's </span><code>build()</code><span> method.</span></p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="be858e35-f469-453a-a207-18e44b5e8a02" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>namespace Acme\FooBundle\AcmeFooBundle;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+class AcmeFooBundle extends Bundle
+{
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        // ...
+ 
+        // Retrieve "ezpublish" container extension.
+        $eZExtension = $container->getExtension('ezpublish');
+        // Add the policy provider.
+        $eZExtension->addPolicyProvider(new MyPolicyProvider());
+    }
+}</pre></td></tr></table><h1><span>Core policies</span></h1><p><span style="line-height: 1.42857;"><span>Policies used internally in repository services are defined in </span><code><a href="https://github.com/ezsystems/ezpublish-kernel/blob/master/eZ/Bundle/EzPublishCoreBundle/Resources/config/policies.yml">EzPublishCoreBundle/Resources/config/policies.yml</a></code><span>.</span></span></p><p> </p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30705489 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:46:07 GMT -->
+</html>

@@ -1,0 +1,102 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31424526 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:58:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage72a5.html?pageId=31424526" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro4170.png?definition=e3RvY30&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="c12ee3fc-5d0d-44be-891c-7a7a512c5b1c" data-macro-schema-version="1"></p><h2>PlatformUI Navigation Hub</h2><p>As written in <a class="confluence-link" href="../../display/TECHDOC/Backend%2binterface.html" data-linked-resource-id="30712101" data-linked-resource-version="11" data-linked-resource-type="page" data-linked-resource-default-alias="Backend interface" data-base-url="https://doc.ez.no">the PlatformUI technical introduction</a>, the Navigation Hub gives access to 4 navigation zones which have a set of navigation items. Each Navigation Item is actually a View in the Navigation Hub which can generate one or more links in the menu. Most Navigation Items can even be seen as a View of a given application route. A Navigation Item View is also responsible for handling its <em>selected state</em>. This means that the Navigation Items are notified when the application matches a new route and the view can then decide to react accordingly.</p><p>PlatformUI comes with 3 different implementations of Navigation Item. They all generate a link to a route with a given anchor text and they differ by the ability to check if the newly matched route in the application is the route they represent:</p><ul><li>the base implementation is <code><span class="pl-smi">Y</span>.<span class="pl-smi">eZ</span>.<span class="pl-smi">NavigationItemView</span></code>. When the matched application route changes, it sets its selected state if the navigation item route name matches the name of the new matched route in the application</li><li>the <code><span class="pl-smi">Y</span>.<span class="pl-smi">eZ</span>.<span class="pl-smi">NavigationItemParameterView</span></code> implementation adds a check on a route parameter. So to appear selected, the route names must match and a given route parameter should be the same in both the application matched route and in the route the view is representing</li><li>the <code><span class="pl-smi">Y</span>.<span class="pl-smi">eZ</span>.<span class="pl-smi">NavigationItemSubtreeView</span></code> also adds a match on a route parameter, but in this case it considers the <code>id</code> route parameter and checks whether the matched id in the application route is a descendant of a given Location id.</li></ul><p>The default structure of the Navigation Hub is defined in <a href="https://github.com/ezsystems/PlatformUIBundle/blob/master/Resources/public/js/views/services/ez-navigationhubviewservice.js#L377">the Navigation Hub view service attributes</a>.</p><h2>Adding a new navigation item</h2><h3>Plugin for the Navigation Hub view service</h3><p>Since the menu structure is defined in the Navigation Hub view service, we need to write a plugin for the Navigation Hub view service. Again, we'll create a module that will define a plugin. So the first thing to do is to declare our new module in <code>yui.yml</code>:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="292119ab-69da-4d17-857e-bec1917bb9eb" data-macro-parameters="language=text|theme=Midnight|title=yui.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading3009.png?definition=e2NvZGU6bGFuZ3VhZ2U9dGV4dHx0aGVtZT1NaWRuaWdodHx0aXRsZT15dWkueW1sfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezconf-navigationplugin:
+    requires: ['ez-pluginregistry', 'ez-viewservicebaseplugin'] # ez-viewservicebaseplugin instead of plugin, base for plugins for view services
+    dependencyOf: ['ez-navigationhubviewservice']
+    path: %extending_platformui.public_dir%/js/views/services/plugins/ezconf-navigationplugin.js</pre></td></tr></table><p>View service plugins are a bit special, they need to follow a specific interface provided by <code><span class="blob-code-inner"><span class="pl-smi">Y</span>.<span class="pl-smi">eZ</span>.<span class="pl-smi">Plugin</span>.<span class="pl-smi">ViewServiceBase</span></span></code> which is defined in the <code>ez-viewservicebaseplugin</code> module, so our module needs to require it.</p><p>Then, the base plugin can be written on disk. It is very close to the base plugin written in <a class="confluence-link" href="../../display/TECHDOC/Alter%2bthe%2bJavaScript%2bApplication%2brouting.html" data-linked-resource-id="30712500" data-linked-resource-version="12" data-linked-resource-type="page" data-linked-resource-default-alias="Alter the JavaScript Application routing" data-base-url="../../index.html">the Alter the JavaScript Application routing step</a>:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="d96e0b93-4955-4da8-a7c3-85a4970e1e02" data-macro-parameters="language=js|theme=Midnight|title=ezconf-navigationplugin.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfe60.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9ZXpjb25mLW5hdmlnYXRpb25wbHVnaW4uanN9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-navigationplugin', function (Y) {
+    Y.namespace('eZConf.Plugin');
+
+    // view service plugins must extend Y.eZ.Plugin.ViewServiceBase
+    // Y.eZ.Plugin.ViewServiceBase provides several method allowing to deeply
+    // hook into the view service behaviour
+    Y.eZConf.Plugin.NavigationPlugin = Y.Base.create('ezconfNavigationPlugin', Y.eZ.Plugin.ViewServiceBase, [], {
+        initializer: function () {
+            var service = this.get('host'); // the plugged object is called host
+
+            console.log("Hey, I'm a plugin for NavigationHubViewService");
+            console.log("And I'm plugged in ", service);
+        },
+    }, {
+        NS: 'ezconfNavigation'
+    });
+
+    Y.eZ.PluginRegistry.registerPlugin(
+        Y.eZConf.Plugin.NavigationPlugin, ['navigationHubViewService']
+    );
+});
+</pre></td></tr></table><p>At this point, if you refresh you browser, the navigation hub should remain the same but you should see new messages in the console.</p><h3>Adding a new navigation item</h3><p>Now that we have plugin plugged in the Navigation Hub View service, we can change the menu structure. Among others methods, the Navigation Hub view service has an <a href="http://ezsystems.github.io/platformui-javascript-api/classes/eZ.NavigationHubViewService.html#method_addNavigationItem"><code><span class="blob-code-inner"><span class="pl-en">addNavigationItem</span></span></code> method</a> to add a navigation item in a given zone, so we can use it in our plugin to add a new item:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="0ec56b4e-8db2-4540-b488-b159cbc980b2" data-macro-parameters="language=js|theme=Midnight|title=ezconf-navigationplugin.js" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfe60.png?definition=e2NvZGU6bGFuZ3VhZ2U9anN8dGhlbWU9TWlkbmlnaHR8dGl0bGU9ZXpjb25mLW5hdmlnYXRpb25wbHVnaW4uanN9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>YUI.add('ezconf-navigationplugin', function (Y) {
+    Y.namespace('eZConf.Plugin');
+
+    Y.eZConf.Plugin.NavigationPlugin = Y.Base.create('ezconfNavigationPlugin', Y.eZ.Plugin.ViewServiceBase, [], {
+        initializer: function () {
+            var service = this.get('host');
+
+            console.log("Hey, I'm a plugin for NavigationHubViewService");
+            console.log("And I'm plugged in ", service);
+
+            console.log("Let's add the navigation item in the Content zone");
+            service.addNavigationItem({
+                Constructor: Y.eZ.NavigationItemView,
+                config: {
+                    title: "List contents",
+                    identifier: "ezconf-list-contents",
+                    route: {
+                        name: "eZConfList" // same route name of the one added in the app plugin
+                    }
+                }
+            }, 'platform'); // identifier of the zone called "Content" in the UI
+        },
+    }, {
+        NS: 'ezconfNavigation'
+    });
+
+    Y.eZ.PluginRegistry.registerPlugin(
+        Y.eZConf.Plugin.NavigationPlugin, ['navigationHubViewService']
+    );
+});
+</pre></td></tr></table><p>At this point, if you refresh you browser, you should see a new entry in the <em>Content</em> zone called <em>List contents</em>. Clicking on this link should even get you to the page defined <a class="confluence-link" href="../../display/TECHDOC/Define%2ba%2bView.html" data-linked-resource-id="30712516" data-linked-resource-version="6" data-linked-resource-type="page" data-linked-resource-default-alias="Define a View" data-base-url="../../index.html">in the previous step</a>. And you can also notice that the navigation item gets a special style (a green bottom border) when the <code>eZConfList</code> route is matched and that it loses this style if you navigate elsewhere.</p><table class="wysiwyg-macro" data-macro-name="tip" data-macro-id="d3171ff8-eb48-46de-9488-454dd337f5fb" data-macro-parameters="title=Results and next step:" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading31fc.png?definition=e3RpcDp0aXRsZT1SZXN1bHRzIGFuZCBuZXh0IHN0ZXA6fQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><div class="confluence-information-macro-body"><p>The resulting code can be seen in <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/releases/tag/5_navigation">the 5_navigation tag on GitHub</a>, this step result can also be viewed as <a href="https://github.com/ezsystems/ExtendingPlatformUIConferenceBundle/compare/4_view...5_navigation">a diff between tags <code>4_view</code> and <code>5_navigation</code></a>.</p><p>The next step is then <a class="confluence-link" href="../../display/TECHDOC/Build%2bthe%2bcontent%2blist.html" data-linked-resource-id="31424553" data-linked-resource-version="12" data-linked-resource-type="page" data-linked-resource-default-alias="Build the content list" data-base-url="../../index.html">to build and display the content list</a>.</p></div></td></tr></table>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31424526 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:59:00 GMT -->
+</html>

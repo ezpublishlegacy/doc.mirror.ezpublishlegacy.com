@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-language/Configuring-the-site-languages by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 01 Feb 2017 02:40:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                    
+    <title>Configuring the site languages / Multi-language / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Configuring the site languages</h1>
+</div>
+
+<p>No <a href="../../../4.4/Features/Multi-language.html" target="_self">site languages</a> are specified by default (i.e. after downloading and unpacking the eZ Publish distribution). During the installation process, the <a href="../../../4.4/Installation/The-setup-wizard.html" target="_self">setup wizard</a> allows the user to choose the languages that should be used on the site which is being created. The list of available languages displayed at this step is built using the INI files located in the &quot;share/locale&quot; directory. Use the radio buttons to choose the default language (required), and the checkboxes to choose the additional languages (optional).</p><p>Please note that choosing the default language at this step will affect both <a href="../../../4.4/Features/Multi-language.html#default_language" target="_self">default language</a> and <a href="../../../4.4/Features/Multi-language.html#locales" target="_self">system locale</a>. Please note that one of the radio buttons will be pre-selected i.e. the default language will be specified according to the language settings of your browser . However, you can choose another language instead. If you select for example &quot;German&quot;, then both locale and default language will be set to &quot;ger-DE&quot; and your administration interface will be translated into German (in addition, the &quot;TextTranslation&quot; setting will be enabled).</p><p>All the selected languages will be added to the system as <a href="../../../4.4/Features/Multi-language.html#translation_languages" target="_self">translation languages</a> and recorded as site languages for both public and admin siteaccesses. The default language will be recorded as the most prioritized language. You will be able to use any of these languages for creating and translating your content after the setup wizard is finished. It is also possible to <a href="../../../4.4/Features/Multi-language/Managing-the-translation-languages.html" target="_self">add new translation languages</a> using the administration interface and to change the site languages configuration by editing your configuration settings.</p><a name="eztoc132191_1" id="eztoc132191_1"></a><h2>Displaying untranslated content</h2><p>Since it may be useful to display all translation languages, an additional configuration setting called &quot;ShowUntranslatedObjects&quot; has been added. It can be set to either &quot;enabled&quot; or &quot;disabled&quot;. If this setting is enabled, the system will still use the language priorities determined by the &quot;SiteLanguageList[]&quot; array, but it will not filter away languages that are not on the list. In other words, all objects will be displayed regardless of which language they exist in - and objects that exist in a language specified in the priority list will be displayed using the prioritized language.</p><p>The &quot;ShowUntranslatedObjects&quot; setting is disabled by default. However, the setup wizard usually enables it for the admin siteaccess. This allows the site administrator to create and edit objects in any of the <a href="../../../4.4/Features/Multi-language/Managing-the-translation-languages.html" target="_self">translation languages</a> even if some of these languages are not listed as site languages.</p><a name="eztoc132191_1_1" id="eztoc132191_1_1"></a><h3>Example</h3><p>Let's say that you have selected British English as default language, French and Norwegian as additional languages, when running the <a href="../../../4.4/Installation/The-setup-wizard.html" target="_self">setup wizard</a>.</p><p>In this case, you will have the following settings for locale, default language and site languages after the setup wizard is finished:</p><pre class="wordwrap copytoclipboard"><span class="line">[RegionalSettings]</span>
+<span class="line">Locale=eng-GB</span>
+<span class="line">ContentObjectLocale=eng-GB</span>
+<span class="line">SiteLanguageList[]=eng-GB</span>
+<span class="line">SiteLanguageList[]=fre-FR</span>
+<span class="line">SiteLanguageList[]=nor-NO</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[RegionalSettings]\r\nLocale=eng-GB\r\nContentObjectLocale=eng-GB\r\nSiteLanguageList[]=eng-GB\r\nSiteLanguageList[]=fre-FR\r\nSiteLanguageList[]=nor-NO' ); return false;" /></p>
+<![endif]--><p>This means that the site locale is set to &quot;eng-GB&quot;, the default language is English, the most prioritized language is English, the second prioritized language is French and the third prioritized language is Norwegian. The setup wizard will put these settings into the &quot;site.ini.append.php&quot; files for both public and admin siteaccesses. The &quot;<a href="../../../4.x/Reference/Configuration-files/site.ini/RegionalSettings/TextTranslation.html" target="_self">TextTranslation</a>&quot; setting will be disabled for both siteaccesses because the &quot;eng-GB&quot; locale is used.</p><p>Any of these three languages can be used for creating and translating your content. You can change the site language configuration later by editing the &quot;site.ini.append.php&quot; file for the desired siteaccess.</p><p>The setup wizard will add one more line in the &quot;site.ini.append.php&quot; file for the admin siteaccess:</p><pre class="wordwrap"><span class="line">ShowUntranslatedObjects=enabled</span>
+</pre><p>This will tell the system to make all the translation languages available when working with content objects in the administration interface.</p><p>You can add new translation languages using the admin interface. Let's go to &quot;Setup - Languages&quot; and add Dutch.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/media/images/adding-a-new-language/133165-1-eng-GB/Adding-a-New-Language_large.jpg" alt="Adding a New Language" />
+<p>Adding a New Language</p>
+
+
+
+
+
+
+
+</div><p>This language will not be displayed on your site (public siteaccess) because it is not included in the list of site languages (i.e. not specified in the &quot;SiteLanguageList[]&quot; array). However, after clearing the caches, it will be displayed in the list of available languages for object creation in the administration interface (look at the next screenshot) because the &quot;ShowUntranslatedObjects&quot; setting is enabled for the admin siteaccess.</p>
+<div class="">        <img src="../../../../../../../../../../../../../../../var/doc/storage/images/media/images/language-selection/133168-1-eng-GB/Language-Selection_large.jpg" alt="Language Selection" />
+<p>Language Selection</p>
+
+
+
+
+
+
+
+</div><a name="eztoc132191_2" id="eztoc132191_2"></a><h2>Changing the language priorities</h2><p>The &quot;SiteLanguageList[]&quot; setting specified in the siteaccess &quot;site.ini.append.php&quot; file contains the prioritized list of site languages where items appearing at the top get higher priority than the others. The system will try to display content in the most prioritized language first. If an object is not translated to this language then the second prioritized language will be displayed. If an object does not exist in this language then the third prioritized language will be used and so on. If an object does not exist in any of the site languages, it will not be shown unless it is <a href="../Multi-language.html#always_available" target="_self">always available</a> or if you configure the siteaccess to <a href="../../../4.4/Features/Multi-language/Configuring-the-site-languages.html" target="_self">display untranslated content</a>.</p><p>To change the site language priorities, open the configuration file, edit it and re-arrange the elements of this array in the desired way.</p><a name="eztoc132191_2_2" id="eztoc132191_2_2"></a><h3>Example</h3><p>Let's say that the following settings are specified in the &quot;site.ini.append.php&quot; file for your public siteaccess:</p><pre class="wordwrap copytoclipboard"><span class="line">[RegionalSettings]</span>
+<span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=eng-GB</span>
+<span class="line">SiteLanguageList[]=fre-FR</span>
+<span class="line">SiteLanguageList[]=ger-DE</span>
+<span class="line">SiteLanguageList[]=nor-NO</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[RegionalSettings]\r\nSiteLanguageList[]\r\nSiteLanguageList[]=eng-GB\r\nSiteLanguageList[]=fre-FR\r\nSiteLanguageList[]=ger-DE\r\nSiteLanguageList[]=nor-NO' ); return false;" /></p>
+<![endif]--><p>If an article exists in French and Norwegian languages, the system will follow the prioritized list of site languages and display the article in French which is the second prioritized language. This behavior will not change if you translate this article into German (the third prioritized language). However, if you translate the article into English (which is the most prioritized language), then it will be displayed in English.</p><p>If you move the line &quot;SiteLanguageList[]=nor-NO&quot; to the top of the list, then Norwegian will become the most prioritized language. This will instruct the system to display content in Norwegian and use other site languages only when a Norwegian translation is not available.</p><a name="eztoc132191_3" id="eztoc132191_3"></a><h2>Using several public siteaccesses</h2><p>In the previous example only one public siteaccess was used. A multi-language site typically uses several public siteaccesses. If your site content exists in for example English and French then it is recommended to have two public siteaccesses with the following language configuration:</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  <p>Siteaccess &quot;gb&quot;</p>
+  </th><th >  <p>Siteaccess &quot;fr&quot;</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <pre class="wordwrap"><span class="line">[RegionalSettings]</span>
+<span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=eng-GB</span>
+</pre>
+  </td>
+<td valign="top" style="vertical-align: top">  <pre class="wordwrap copytoclipboard"><span class="line">[RegionalSettings]</span>
+<span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=fre-FR</span>
+<span class="line">SiteLanguageList[]=eng-GB</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '[RegionalSettings]\r\nSiteLanguageList[]\r\nSiteLanguageList[]=fre-FR\r\nSiteLanguageList[]=eng-GB' ); return false;" /></p>
+<![endif]-->
+  </td>
+
+</tr>
+
+</table>
+<p>If an article exists only in English, it will be displayed to the visitors of both siteaccesses (because English is the only site language for the &quot;gb&quot; siteaccess and the second prioritized language for the &quot;fr&quot; siteaccess). If you translate this article into French, it will be shown in French when viewing the &quot;fr&quot; siteaccess (since French is the most prioritized language for this siteaccess). If an article exists only in French, it will be available for the visitors of the &quot;fr&quot; siteaccess but it will not show up in the &quot;gb&quot; siteaccess.</p><p>Now, let's say that you wish to start using for example Norwegian language on your site. In this case, you will probably add Norwegian as a new translation language, create a new siteaccess called &quot;no&quot; and specify the following settings in the &quot;site.ini.append.php&quot; file of the newly created siteaccess:</p><pre class="wordwrap"><span class="line">[RegionalSettings]</span>
+<span class="line">SiteLanguageList[]</span>
+<span class="line">SiteLanguageList[]=nor-NO</span>
+</pre><p>This will tell the system to use Norwegian as the only site language for this siteaccess. In other words, if an article does not exist in Norwegian, it will not be displayed.</p><p>Of course, it is possible to add the following line to these settings:</p><pre class="wordwrap"><span class="line">SiteLanguageList[]=eng-GB</span>
+</pre><p>In this case Norwegian will be the most prioritized language for the &quot;no&quot; siteaccess and English will be the second prioritized one (look at the next table).</p><table class="renderedtable" cellpadding="2" cellspacing="0">
+
+<tr>
+<th >  &nbsp;
+  </th><th >  <p>Siteaccess &quot;gb&quot;</p>
+  </th><th >  <p>Siteaccess &quot;fr&quot;</p>
+  </th><th >  <p>Siteaccess &quot;no&quot;</p>
+  </th>
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>The most prioritized language</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>eng-GB</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>fre-FR</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>nor-NO</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>The second prioritized language</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>-</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>eng-GB</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>eng-GB</p>
+  </td>
+
+</tr>
+
+<tr>
+<td valign="top" style="vertical-align: top">  <p>The third prioritized language</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>-</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>-</p>
+  </td>
+<td valign="top" style="vertical-align: top">  <p>-</p>
+  </td>
+
+</tr>
+
+</table>
+<p>Articles that exist only in English will be displayed in English to the visitors of all three siteaccesses. If an article exists only in Norwegian, it will be shown only on the &quot;no&quot; siteaccess.</p><p>Let's create a new article called &quot;Lundi&quot; (Monday) in French. This article will be displayed to the visitors of the &quot;fr&quot; siteaccess but not to the visitors of the &quot;gb&quot; and &quot;no&quot; siteaccesses (because French is not listed as site language for these siteaccesses). If you translate this article into Norwegian then it will become available as &quot;Mandag&quot; (Monday) when viewing the &quot;no&quot; siteaccess but still invisible for the users of the &quot;gb&quot; siteaccess. If you add English translation for this article, it will become available as &quot;Monday&quot; for the visitors of the &quot;gb&quot; siteaccess. However, nothing will change for the &quot;fr&quot; and &quot;no&quot; siteaccesses because English is their second prioritized language.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Multi-language/Configuring-the-site-languages by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 01 Feb 2017 02:40:34 GMT -->
+</html>

@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from doc.ez.no/pages/viewpage.action?pageId=31429772 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:34:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Implement the Tweet\Type class - Developer - eZ Documentation</title>
+
+        
+
+                        
+    
+                        
+    
+                        
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE,chrome=IE7">
+<meta charset="UTF-8">
+<meta id="confluence-context-path" name="confluence-context-path" content="">
+<meta id="confluence-base-url" name="confluence-base-url" content="../index.html">
+
+<meta id="atlassian-token" name="atlassian-token" content="9996d8127abd36d1b757536de859090f8b455d10">
+
+
+<meta id="confluence-space-key" name="confluence-space-key" content="DEVELOPER">
+<script type="text/javascript">
+        var contextPath = '';
+</script>
+
+    
+
+    <meta name="confluence-request-time" content="1485850839506">
+        
+    
+        
+            <meta name="ajs-is-space-admin" content=""> <meta name="ajs-has-space-config" content="">
+            <meta name="ajs-use-keyboard-shortcuts" content="true">
+            <meta name="ajs-discovered-plugin-features" content="$discoveredList">
+            <meta name="stp-license-product-name" content="Confluence"/> <meta name="stp-license-days-to-expiry" content="807"/> <meta name="stp-license-is-admin" content="false"/> <meta name="stp-license-should-keep-banner-hidden" content="true"/>
+            <meta name="ajs-keyboardshortcut-hash" content="206314443b3cf79696d4ad89324a059c">
+            <meta id="team-calendars-has-jira-link" content="true">
+            <meta name="ajs-team-calendars-display-time-format" content="displayTimeFormat12">
+            <meta id="team-calendars-user-timezone" content="UTC">
+            <script type="text/x-template" id="team-calendars-messages" title="team-calendars-messages"><fieldset class="i18n hidden"><input type="hidden" name="calendar3.month.long.july" value="July"><input type="hidden" name="calendar3.day.short.wednesday" value="Wed"><input type="hidden" name="calendar3.day.short.thursday" value="Thu"><input type="hidden" name="calendar3.month.short.march" value="Mar"><input type="hidden" name="calendar3.month.long.april" value="April"><input type="hidden" name="calendar3.month.long.october" value="October"><input type="hidden" name="calendar3.month.long.august" value="August"><input type="hidden" name="calendar3.month.short.july" value="Jul"><input type="hidden" name="calendar3.month.short.may" value="May"><input type="hidden" name="calendar3.month.short.november" value="Nov"><input type="hidden" name="calendar3.day.long.friday" value="Friday"><input type="hidden" name="calendar3.day.long.sunday" value="Sunday"><input type="hidden" name="calendar3.day.long.saturday" value="Saturday"><input type="hidden" name="calendar3.month.short.april" value="Apr"><input type="hidden" name="calendar3.day.long.wednesday" value="Wednesday"><input type="hidden" name="calendar3.month.long.december" value="December"><input type="hidden" name="calendar3.month.short.october" value="Oct"><input type="hidden" name="calendar3.day.long.monday" value="Monday"><input type="hidden" name="calendar3.month.short.june" value="Jun"><input type="hidden" name="calendar3.day.short.monday" value="Mon"><input type="hidden" name="calendar3.day.short.tuesday" value="Tue"><input type="hidden" name="calendar3.day.short.saturday" value="Sat"><input type="hidden" name="calendar3.month.long.march" value="March"><input type="hidden" name="calendar3.month.long.june" value="June"><input type="hidden" name="calendar3.month.short.february" value="Feb"><input type="hidden" name="calendar3.month.short.august" value="Aug"><input type="hidden" name="calendar3.month.short.december" value="Dec"><input type="hidden" name="calendar3.day.short.sunday" value="Sun"><input type="hidden" name="calendar3.month.long.february" value="February"><input type="hidden" name="calendar3.day.long.tuesday" value="Tuesday"><input type="hidden" name="calendar3.month.long.may" value="May"><input type="hidden" name="calendar3.month.long.september" value="September"><input type="hidden" name="calendar3.month.long.november" value="November"><input type="hidden" name="calendar3.month.short.january" value="Jan"><input type="hidden" name="calendar3.month.short.september" value="Sep"><input type="hidden" name="calendar3.day.long.thursday" value="Thursday"><input type="hidden" name="calendar3.month.long.january" value="January"><input type="hidden" name="calendar3.day.short.friday" value="Fri"></fieldset></script>
+            <meta name="ajs-is-confluence-admin" content="false">
+            <meta name="ajs-connection-timeout" content="10000">
+            
+    
+    
+            <meta name="ajs-page-id" content="31429772">
+            <meta name="ajs-latest-page-id" content="31429772">
+            <meta name="ajs-content-type" content="page">
+            <meta name="ajs-page-title" content="Implement the Tweet\Type class">
+            <meta name="ajs-parent-page-title" content="Creating a Tweet Field Type">
+            <meta name="ajs-parent-page-id" content="31429766">
+            <meta name="ajs-space-key" content="DEVELOPER">
+            <meta name="ajs-space-name" content="Developer">
+            <meta name="ajs-from-page-title" content="">
+            <meta name="ajs-can-remove-page" content="false">
+            <meta name="ajs-context-path" content="">
+            <meta name="ajs-base-url" content="https://doc.ez.no">
+            <meta name="ajs-version-number" content="5.8.5">
+            <meta name="ajs-build-number" content="5983">
+            <meta name="ajs-remote-user" content="">
+            <meta name="ajs-remote-user-key" content="">
+            <meta name="ajs-current-user-fullname" content="">
+            <meta name="ajs-current-user-avatar-url" content="">
+            <meta name="ajs-static-resource-url-prefix" content="/s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_">
+            <meta name="ajs-global-settings-attachment-max-size" content="10485760">
+            <meta name="ajs-user-locale" content="en_GB">
+            <meta name="ajs-enabled-dark-features" content="confluence-inline-comments-resolved,notification.plugin.api.enabled.com.atlassian.confluence.plugins.sharepage.api.ShareContentEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.mentions.api.ConfluenceMentionEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.security.ForgotPasswordEvent,pdf-preview,notification.plugin.api.enabled.com.atlassian.confluence.plugins.tasklist.event.SendTaskEmailEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.async.PageMovedEvent,previews.sharing,previews.versions,notification.plugin.api.enabled.com.atlassian.confluence.plugins.files.notifications.event.FileContentUpdateEvent,file-annotations,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.attachment.AttachmentBatchUploadCompletedEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.comment.CommentCreateEvent,notification.plugin.api.enabled.com.atlassian.confluence.efi.emails.events.OnboardingLessUsersEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.files.notifications.event.FileContentRemoveEvent,atlassian.aui.raphael.disabled,previews.conversion-service,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.comment.CommentUpdateEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.follow.FollowEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.async.PageEditedEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.blogpost.BlogPostCreateEvent,previews.trigger-all-file-types,notification.plugin.api.enabled.com.atlassian.confluence.plugins.inlinecomments.events.InlineCommentResolveEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.like.LikeCreatedEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.inlinecomments.events.InlineCommentCreateEvent,previews.sharing.pushstate,confluence-inline-comments-rich-editor,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.blogpost.BlogPostUpdateEvent,file-annotations.likes,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.async.PageCreatedEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.files.notifications.event.FileContentMentionUpdateEvent,notification.plugin.api.enabled.com.atlassian.confluence.efi.emails.events.OnboardingNoSpaceCreatedEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.hipchat.api.events.HipChatUserMapped,notification.plugin.api.enabled.com.atlassian.confluence.plugins.sharepage.api.ShareAttachmentEvent,confluence-inline-comments,confluence-inline-comments-dangling-comment,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.blogpost.BlogPostMovedEvent">
+            <meta name="ajs-atl-token" content="9996d8127abd36d1b757536de859090f8b455d10">
+            <meta name="ajs-confluence-flavour" content="VANILLA">
+            <meta name="ajs-user-date-pattern" content="dd MMM yyyy">
+            <meta name="ajs-date.format" content="MMM dd, yyyy">
+    
+    <link rel="shortcut icon" href="../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_/favicon.ico">
+
+<link rel="search" type="application/opensearchdescription+xml" href="../opensearch/osd.action" title="eZ Documentation"/>
+
+<script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-nps-plugin:atlassian-nps-plugin-resources.is-server-instance-data-provider"]="true";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.confluence.plugins.confluence-license-banner:confluence-license-banner-resources.license-details"]="{\"daysBeforeLicenseExpiry\":0,\"daysBeforeMaintenanceExpiry\":0,\"showLicenseExpiryBanner\":false,\"showMaintenanceExpiryBanner\":false,\"renewUrl\":null,\"salesEmail\":null}";
+WRM._unparsedData["com.atlassian.confluence.plugins.confluence-hipchat-integration-plugin:discovery-javascript-data.link-active"]="{\"linkActive\":false,\"conditionsMet\":true,\"admin\":false}";
+WRM._unparsedData["com.atlassian.plugins.atlassian-nps-plugin:nps-acknowledgement-resources.analytics-enabled-data-provider"]="\"false\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-nps-plugin:nps-acknowledgement-resources.sen-data-provider"]="\"SEN-2255945\"";
+WRM._unparsedData["com.atlassian.confluence.plugins.confluence-feature-discovery-plugin:confluence-feature-discovery-plugin-resources.test-mode"]="false";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:api.feature-data-provider"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/fcf875d0c4710a8c828036f5c6fb7fa5-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/b8d35340d2d85de2791f14a4692ecf7b/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batchd6a4.css?highlightactions=true&amp;flavour=VANILLA&amp;locale=en-GB" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/6c0981174e94142364564819dc0d1413-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/b8d35340d2d85de2791f14a4692ecf7b/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general,page,atl.comments/batch.css?conditionalComment=lt+IE+9&amp;locale=en-GB" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/7893b9affdc3bf828ad93d0610d3d5f3-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/b8d35340d2d85de2791f14a4692ecf7b/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general,page,atl.comments/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/3a21f7b21af4c67045d1e0255f2ac570/_/download/contextbatch/css/theme.doc/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.1.7/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext.newcode-macro-plugin_syntaxhighl" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.1.7/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext.newcode-macro-plugin_sh-theme-ec" media="all">
+<link type="text/css" rel="stylesheet" href="../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/3.7.2/_/download/batch/confluence.extra.information_information-plugin/confluence.extra.information_information-plugin-adg-styles.cc" media="all">
+<link type="text/css" rel="stylesheet" href="../s/dfa57710662c34cadfcdc17e2cded5b2-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/3.0.11/_/download/batch/confluence.extra.livesearch_livesearch-macro-we/confluence.extra.livesearch_livesearch-macro-web-resources.9" media="all">
+<link type="text/css" rel="stylesheet" href="../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/6/_/styles/colors74cd.css?spaceKey=DEVELOPER" media="all">
+<link type="text/css" rel="stylesheet" href="../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/6/_/styles/custom74cd.css?spaceKey=DEVELOPER" media="all">
+<script type="text/javascript" src="../s/1f7b22082ef39a4bb134622dae929bdc-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/js/batch32f4.js?atlassian.aui.raphael.disabled=true&amp;locale=en-GB&amp;build-number=5983" ></script>
+<script type="text/javascript" src="../s/aa56759c03dcb293b394c4b46058625c-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/b8d35340d2d85de2791f14a4692ecf7b/_/download/contextbatch/js/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batcha41c.js?highlightactions=true&amp;flavour=VANILLA&amp;locale=en-GB&amp;anonymous-access-enabled=true&amp;is-server-instance=true&amp;hostenabled=true" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.1.7/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext-2.newcode-macro-plugin_syntaxhighl" ></script>
+<script type="text/javascript" src="../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.1.7/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext-3.newcode-macro-plugin_syntaxhighl" ></script>
+<script type="text/javascript" src="../s/6c0981174e94142364564819dc0d1413-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.1.7/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext.newcode-macro-plugin_syntaxhighl?locale=en-GB" ></script>
+<script type="text/javascript" src="../s/6c0981174e94142364564819dc0d1413-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/3.0.11/_/download/batch/confluence.extra.livesearch_livesearch-macro-we/confluence.extra.livesearch_livesearch-macro-web-resources.a?locale=en-GB" ></script>
+
+
+        
+            <meta name="stp-license-product-name" content="Confluence"/> <meta name="stp-license-days-to-expiry" content="807"/> <meta name="stp-license-is-admin" content="false"/> <meta name="stp-license-should-keep-banner-hidden" content="true"/>
+    
+
+        
+        <meta name="ajs-site-title" content="eZ Documentation" />
+
+    
+    
+
+    
+                <link rel="canonical" href="viewpage0351.html?pageId=31429772">
+        <link rel="shortlink" href="viewpage0351.html">
+    <meta name="wikilink" content="[DEVELOPER:Implement the Tweet\Type class]">
+    <meta name="page-version" content="3">
+
+</head>
+
+<body             onload="placeFocus()"
+     id="com-atlassian-confluence" class="theme-documentation  aui-theme-default aui-layout">
+
+        
+            <div id='stp-licenseStatus-banner'></div>
+    <div id="full-height-container">
+    <div id="header-precursor">
+        
+                    </div>
+
+
+
+
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation"><div class="aui-header-inner"><div class="aui-header-before"><a class=" aui-dropdown2-trigger app-switcher-trigger" aria-owns="app-switcher" aria-controls="app-switcher" aria-haspopup="true" data-aui-trigger href="#app-switcher"><span class="aui-icon aui-icon-small aui-iconfont-appswitcher">Linked Applications</span></a><div id="app-switcher" class="aui-dropdown2 aui-style-default"><div class="app-switcher-loading">Loading&hellip;</div></div><script>
+            (function (NL) {
+                var initialise = function () {
+                    // For some milestones of AUI, the atlassian soy namespace was renamed to aui. Handle that here by ensuring that window.atlassian is defined.
+                    window.atlassian = window.atlassian || window.aui;
+                    new NL.AppSwitcher({
+                        dropdownContents: '#app-switcher'
+                    });
+                };
+                if (NL.AppSwitcher) {
+                    initialise();
+                } else {
+                    NL.onInit = initialise;
+                }
+            }(window.NL = (window.NL || {})));
+            window.NL.isUserAdmin = false</script></div><div class="aui-header-primary"><h1 id="logo" class="aui-header-logo aui-header-logo-custom"><a href="../index.html"><img src="../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_/images/logo/atl.site.logo" alt="eZ Documentation" /></a></h1><ul class="aui-nav">
+                            <li>
+            
+        
+        
+<a  id="space-directory-link" href="../spacedirectory/view.html"  class=" aui-nav-imagelink"   title="Spaces">
+            <span>Spaces</span>
+    </a>
+        </li>
+                            <li id="browseMenu" role="menu">
+            
+    
+        <a id="browse-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="browse-menu-link-content" title="Browse">
+        <span class="browse">Browse</span>
+    </a>
+    <nav id="browse-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                                <ul  id="browse-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+    
+            
+<a  id="space-pages-link" href="listpages-dirviewda82.html?key=DEVELOPER" class="    "      title="Browse pages in the Developer space" >
+        Pages
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-blogposts-link" href="viewrecentblogpostsda82.html?key=DEVELOPER" class="    "      title="Browse blogs in the Developer space" >
+        Blog
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-labels-link" href="../labels/listlabels-heatmapda82.html?key=DEVELOPER" class="    "      title="Browse labels in the Developer space" >
+        Labels
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-advanced-link" href="../spaces/viewspacesummaryda82.html?key=DEVELOPER" class="    "      title="Browse additional space functions in the Developer space" >
+        Space Operations
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    
+        </li>
+        </ul>
+</div><div class="aui-header-secondary"><ul class="aui-nav">
+            <li>
+        
+    
+            
+<a  id="doctheme-anchor" href="#"  class=" aui-nav-imagelink"   title="">
+            <span></span>
+    </a>
+    </li>
+                    <li>
+        <form id="quick-search" class="aui-quicksearch dont-default-focus header-quicksearch" action="https://doc.ez.no/dosearchsite.action" method="get"><fieldset><label for="quick-search-query" class="assistive">Quick Search</label><input id="quick-search-query" class="text app-search search quick-search-query" type="text" accessKey="q" autocomplete="off" name="queryString" title="Quick Search" placeholder="Search" /><input id="quick-search-submit" class="quick-search-submit" type="submit" value="Search"/><div class="aui-dd-parent quick-nav-drop-down"></div></fieldset></form>
+    </li>
+        <li>
+            
+        <a id="help-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="help-menu-link-content" title="Help">
+        <span class="aui-icon aui-icon-small aui-iconfont-help">Help</span>
+    </a>
+    <nav id="help-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                                <ul  id="help-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+        
+            
+<a  id="confluence-help-link" href="https://docs.atlassian.com/confluence/docs-58/Getting+Help+And+Support" class="    "      title="Visit the Confluence documentation home"  target="_blank"
+>
+        Online Help
+</a>
+</li>
+                                            <li>
+    
+                
+<a  id="keyboard-shortcuts-link" href="#" class="    "      title="View available keyboard shortcuts" >
+        Keyboard Shortcuts
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="feed-builder-link" href="../dashboard/configurerssfeed.html" class="    "      title="Create your custom RSS feed." >
+        Feed Builder
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="whats-new-menu-link" href="https://docs.atlassian.com/confluence/docs-58/whatsnew/iframe" class="    "      title="" >
+        What’s new
+</a>
+</li>
+                                            <li>
+    
+                
+<a  id="gadget-directory-link" href="#" class="   user-item administration-link "      title="Browse gadgets provided by Confluence" >
+        Available Gadgets
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="confluence-about-link" href="../aboutconfluencepage.html" class="    "      title="Get more information about Confluence" >
+        About Confluence
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    
+    </li>
+        <li>
+                
+    
+    </li>
+        <li>
+            
+    </li>
+        <li>
+                                            <li>
+        
+            
+<a  id="login-link" href="../loginae21.html?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D31429772" class="   user-item login-link "      title="" >
+        Log in
+</a>
+</li>
+                        
+    </li>
+    </ul>
+</div></div><!-- .aui-header-inner--></nav><!-- .aui-header -->
+    <br class="clear">
+</header>
+
+    <div id="splitter">
+    <div id="splitter-sidebar" >
+        
+        <p>&nbsp;</p>
+<h4><a name="ImplementtheTweet\Typeclass-&amp;nbsp;General"></a>&nbsp; General</h4>
+<p><font color="#999">&bull;</font>&nbsp;&nbsp;<a href="http://ez.no/" class="external-link" rel="nofollow">eZ Systems Website</a><br/>
+<font color="#999">&bull;</font>&nbsp;&nbsp;<a href="../display/USER.html" class="external-link" rel="nofollow">Editor documentation</a></p>
+<hr />
+<h4><a name="ImplementtheTweet\Typeclass-&amp;nbsp;Developerdocumentation"></a>&nbsp; Developer documentation</h4>
+<p>&nbsp;&nbsp;<sup><a href="../display/DEVELOPER/Documentation.html" class="external-link" rel="nofollow">Back to the top</a></sup><br/>
+    
+    
+
+
+<div class="search-macro search-macro-medium">
+    <div class="aui-dd-parent"></div>
+    <form class="aui aui-dd-parent" name="livesearchForm" method="POST" action="https://doc.ez.no/dosearchsite.action">
+        <fieldset class="search-macro-fields">
+            <div class="search-macro-query">
+                <input class="text" type="text" name="queryString" autocomplete="off" placeholder="search Developer docs">
+                            </div>
+                        <button type="submit" class="search-macro-button aui-button">
+                <span class="aui-icon aui-icon-small aui-iconfont-search">Search</span>
+            </button>
+                        <input type="hidden" name="where" value="DEVELOPER">
+            <input type="hidden" name="additional" value="space name">
+            <input type="hidden" name="labels" value="">
+            <input type="hidden" name="contentType" value="page">
+        </fieldset>
+    </form>
+</div>
+</p>
+
+
+
+<div class="plugin_pagetree">
+
+        
+        
+    <ul class="plugin_pagetree_children_list plugin_pagetree_children_list_noleftspace">
+        <div class="plugin_pagetree_children">
+        </div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input type="hidden" name="treeId" value="">
+        <input type="hidden" name="treeRequestId" value="/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=false&amp;sort=position&amp;reverse=false&amp;disableLinks=false&amp;expandCurrent=false">
+        <input type="hidden" name="treePageId" value="31429772">
+
+        <input type="hidden" name="noRoot" value="false">
+        <input type="hidden" name="rootPageId" value="31429504">
+
+        <input type="hidden" name="rootPage" value="">
+        <input type="hidden" name="startDepth" value="0">
+        <input type="hidden" name="spaceKey" value="DEVELOPER" >
+
+        <input type="hidden" name="i18n-pagetree.loading" value="Loading...">
+        <input type="hidden" name="i18n-pagetree.error.permission" value="Unable to load page tree. It seems that you do not have permission to view the root page.">
+        <input type="hidden" name="i18n-pagetree.eeror.general" value="There was a problem retrieving the page tree. Please check the server log file for more information.">
+        <input type="hidden" name="loginUrl" value="/login.action?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D31429772">
+        <input type="hidden" name="mobile" value="false">
+
+                <fieldset class="hidden">
+                                                <input type="hidden" name="ancestorId" value="31429766">
+                                    <input type="hidden" name="ancestorId" value="31429522">
+                                    <input type="hidden" name="ancestorId" value="31429504">
+                                    </fieldset>
+    </fieldset>
+</div>
+
+
+    
+
+            </div>
+    <div id="splitter-content">
+
+                    <script type="text/javascript" src="../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5.8.5/_/download/resources/com.atlassian.confluence.plugins.doctheme_resources/doc-theme.js"></script>
+    
+                        
+            
+<div id="main"  class="aui-page-panel" >
+    <div id="main-header">
+        
+        
+    <div id="navigation" class="content-navigation view">
+                    <ul class="ajs-menu-bar">
+                                                        
+                    
+        <li class="normal ajs-menu-item">
+        <a id="action-menu-link" class="action aui-dropdown2-trigger-arrowless aui-button aui-button-subtle ajs-menu-title aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="action-menu" data-container="#navigation">
+            <span>
+                                    <span class="aui-icon aui-icon-small aui-iconfont-more"></span>
+                                
+            </span>
+        </a>         <div id="action-menu" class="aui-dropdown2 aui-style-default">
+                            <ul  id="action-menu-primary"                     class="section-primary first aui-dropdown2-section">
+                                            <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="view-attachments-link" href="viewpageattachments0351.html?pageId=31429772" rel="nofollow" class="action-view-attachments"  accessKey="t"  title="View Attachments">
+                <span>
+                        A<u>t</u>tachments (0)
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="action-view-history-link" href="viewpreviousversions0351.html?pageId=31429772" rel="nofollow" class="action-view-history"   title="">
+                <span>
+                        Page History
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="action-page-permissions-link" href="viewinfo0351.html?pageId=31429772" rel="nofollow" class="action-page-permissions"   title="Edit restrictions">
+                <span>
+                        Restrictions
+        </span>    </a>
+</li>
+                                </ul>
+                            <ul  id="action-menu-secondary"                     class="section-secondary aui-dropdown2-section">
+                                            <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="view-page-info-link" href="viewinfo0351.html?pageId=31429772" rel="nofollow" class="action-view-info"   title="">
+                <span>
+                        Page Information
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+            
+                                            
+    
+    
+    <a  id="view-resolved-comments" href="#" rel="nofollow" class=""   title="">
+                <span>
+                        Resolved comments
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="link-to-page-link" href="viewinfo0351.html?pageId=31429772" rel="nofollow" class=""   title="Link to this Page">
+                <span>
+                        Link to this Page…
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="view-in-hierarchy-link" href="listpages-dirview6dfb.html?key=DEVELOPER&amp;openId=31429772#selectedPageInHierarchy" rel="nofollow" class=""   title="">
+                <span>
+                        View in Hierarchy
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="action-view-source-link" href="../plugins/viewsource/viewpagesrc0351.html?pageId=31429772" rel="nofollow" class="action-view-source popup-link"   title="">
+                <span>
+                        View Source
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="action-export-pdf-link" href="../download/temp/pdfexport-20170131-310117-0934-3423/DEVELOPER-31429772-310117-0934-3424f1f7.pdf?pageId=31429772" rel="nofollow" class=""   title="">
+                <span>
+                        Export to PDF
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="action-export-word-link" href="../exportword0351?pageId=31429772" rel="nofollow" class="action-export-word"   title="">
+                <span>
+                        Export to Word
+        </span>    </a>
+</li>
+                                </ul>
+                    </div>
+    </li>
+            </ul>
+    </div>
+
+        
+                <div id="title-heading" class="pagetitle with-breadcrumbs">
+        
+                            <div class="space-logo " data-key="DEVELOPER" data-name="Developer" data-entity-type="confluence.space">
+            <a><img class="logo global custom" src="../download/attachments/327681/globalbff7.logo?version=1&amp;modificationDate=1434758222000&amp;api=v2" alt=""></a>
+        </div>            
+                            <div id="breadcrumb-section">
+                    
+    
+    
+    <ol id="breadcrumbs">
+                                        
+                        
+        <li class="first" >
+                        
+                            <span class=""><a href="../display/DEVELOPER/Documentation.html">Developer</a></span>
+                                                                                            <li id="ellipsis" title="Show all breadcrumbs"><span><strong>&#8230;</strong></span></li>
+                                                
+                        
+        <li class="hidden-crumb" >
+                        
+                            <span class=""><a href="../display/DEVELOPER/Documentation.html">Documentation</a></span>
+                                                                                    
+                        
+        <li class="hidden-crumb" >
+                        
+                            <span class=""><a href="../display/DEVELOPER/Tutorials.html">Tutorials</a></span>
+                                                                    
+                        
+        <li>
+                        
+                            <span class=""><a href="../display/DEVELOPER/Creating%2ba%2bTweet%2bField%2bType.html">Creating a Tweet Field Type</a></span>
+                                                    </ol>
+
+
+                </div>
+            
+            <h1 id="title-text" class="with-breadcrumbs">
+                                        <a href="viewpage0351.html?pageId=31429772">Implement the Tweet\Type class</a>
+                            </h1>
+        </div>
+    </div>
+
+    
+
+    
+    
+    
+    
+    
+
+        
+
+
+
+
+        
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+
+
+    
+    
+        
+    
+    
+                    
+    
+
+    
+
+
+<div id="content" class="page view">
+    
+
+
+<div id="action-messages">
+                        </div>
+
+
+
+        <script type="text/x-template" title="searchResultsGrid">
+    <table class="aui">
+        <thead>
+            <tr class="header">
+                <th class="search-result-title">Page Title</th>
+                <th class="search-result-space">Space</th>
+                <th class="search-result-date">Updated</th>
+            </tr>
+        </thead>
+    </table>
+</script>
+<script type="text/x-template" title="searchResultsGridCount">
+    <p class="search-result-count">{0}</p>
+</script>
+<script type="text/x-template" title="searchResultsGridRow">
+    <tr class="search-result">
+        <td class="search-result-title"><a href="{1}" class="content-type-{2}"><span>{0}</span></a></td>
+        <td class="search-result-space"><a class="space" href="/display/{4}/" title="{3}">{3}</a></td>
+        <td class="search-result-date"><span class="date" title="{6}">{5}</span></td>
+    </tr>
+</script>
+        
+    
+    
+        <fieldset class="hidden parameters">
+            <input type="hidden" title="parentPageId" value="31429766">
+        </fieldset>
+
+                            
+    
+
+                    
+
+        
+        <a href="#page-metadata-end" class="assistive">Skip to end of metadata</a>
+<div id="page-metadata-start" class="assistive"></div>
+
+    <div class="page-metadata">
+        <ul>
+                            <li class="page-metadata-item noprint">
+
+    
+            
+                                            
+    
+    
+    <a  id="content-metadata-page-restrictions" href="#" rel="nofollow" class="hidden"   title="Restrictions apply">
+                    <img alt="" src="../download/resources/com.atlassian.confluence.plugins.confluence-page-banner_page-banner-resources/images/red_padlock.png" height="16" width="16" title="">
+                <span>
+                        
+        </span>    </a>
+</li>
+                        <li class="page-metadata-modification-info">
+                
+        
+    
+        
+    
+        
+            
+            Created by <span class='author'>     <a href="../loginee65.html"
+                       class="url fn"
+                            >Dominika Kurek</a></span>, last modified on <a class='last-modified' title='Show changes' href='diffpagesbyversion8ca9.html?pageId=31429772&amp;selectedPageVersions=2&amp;selectedPageVersions=3'>May 05, 2016</a>
+                </li>
+        </ul>
+    </div>
+
+
+<a href="#page-metadata-start" class="assistive">Go to start of metadata</a>
+<div id="page-metadata-end" class="assistive"></div>
+
+        
+        <fieldset class="hidden parameters">
+                        <input type="hidden" title="browsePageTreeMode" value="view">
+        </fieldset>
+
+        <div id="main-content" class="wiki-content">
+                           
+        <div class="contentLayout2">
+<div class="columnLayout two-right-sidebar" data-layout="two-right-sidebar">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>As said in the introduction, the Type class of a Field Type must implement <code>eZ\Publish\SPI\FieldType\FieldType</code> (later referred to as &quot;Field Type interface&quot;).</p><p>All native Field Types also extend the <code>eZ\Publish\Core\FieldType\FieldType</code> abstract class that implements this interface and provides implementation facilities through a set of abstract methods of its own. In this case, Type classes implement a mix of methods from the Field Type interface and from the abstract Field Type.</p><p>Let’s go over those methods and their implementation.</p><h4 id="ImplementtheTweet\Typeclass-Identificationmethod:getFieldTypeIdentifier()">Identification method: <code>getFieldTypeIdentifier()</code></h4><p>It must return the string that uniquely identifies this Field Type (DataTypeString in legacy). We will use &quot;<code>eztweet</code>&quot;:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>eZ/FieldType/Tweet/Type</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[public function getFieldTypeIdentifier()
+{
+   return &#39;eztweet&#39;;
+}]]></script>
+</div></div><h4 id="ImplementtheTweet\Typeclass-Valuehandlingmethods:createValueFromInput()andcheckValueStructure()">Value handling methods: <code>createValueFromInput()</code> and <code>checkValueStructure()</code></h4><p>Both methods are used by the abstract Field Type implementation of <code>acceptValue()</code>. This Field Type interface method checks and transforms various input values into the type's own Value class: <code>eZ\FieldType\Tweet\Value</code>. This method must:</p><ul><li>either return the Value object it was able to create out of the input value,</li><li>or return this value untouched. The API will detect this and inform that the input value was not accepted.</li></ul><p>The only acceptable value for our type is the URL of a tweet (we could of course imagine more possibilities). This should do:</p><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[protected function createValueFromInput( $inputValue )
+{
+   if ( is_string( $inputValue ) )
+   {
+       $inputValue = new Value( array( &#39;url&#39; =&gt; $inputValue ) );
+   }
+ 
+   return $inputValue;
+}
+]]></script>
+</div></div><p><br /> Use this method to provide convenient ways to set an attribute’s value using the API. This can be anything from primitives to complex business objects.</p><p>Next, we will implement <code>
+    checkValueStructure()</code>. It is called by the abstract Field Type to ensure that the Value fed to the Type is acceptable. In our case, we want to be sure that <code>Tweet</code> <code>
+    \Value::$url</code> is a string:</p><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[protected function checkValueStructure( BaseValue $value )
+{
+   if ( !is_string( $value-&gt;url ) )
+   {
+       throw new eZ\Publish\Core\Base\Exceptions\InvalidArgumentType(
+           &#39;$value-&gt;url&#39;,
+           &#39;string&#39;,
+           $value-&gt;url
+       );
+   }
+}
+]]></script>
+</div></div><p>Yes, we execute the same check as in <code>createValueFromInput()</code>. But both methods aren't responsible for the same thing. The first will, <em>if given something else than a Value of its type</em>, try to convert it to one. <code>checkValueStructure()</code> will always be used, even if the Field Type is directly fed a <code>Value</code> object, and not a string.</p><h4 id="ImplementtheTweet\Typeclass-Valueinitialization:getEmptyValue()">Value initialization: <code>getEmptyValue()</code></h4><p>This method provides what is considered as an empty value of this type, depending on our business requirements. No extra initialization is required in our case.</p><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[public function getEmptyValue()
+{
+   return new Value;
+}]]></script>
+</div></div><p>If you run the unit tests at this point, you should get about five failures, all of them on the <code>fromHash()</code> or <code>
+    toHash()</code> methods.</p><h4 id="ImplementtheTweet\Typeclass-Validationmethods:validateValidatorConfiguration()andvalidate()">Validation methods: <code>validateValidatorConfiguration()</code> and <code>validate()</code></h4><p>The Type class is also responsible for validating input data (to a <code>Field</code>), as well as configuration input data (to a <code>FieldDefinition</code>). In this tutorial, we will run two validation operations on input data:</p><ul><li><p>validate submitted urls, ensuring they actually reference a twitter status;</p></li><li><p>limit input to a known list of authors, as an optional validation step.</p></li></ul><p><code>
+    validateValidatorConfiguration()</code> will be called when an instance of the Field Type is added to a Content Type, to ensure that the validator configuration is valid. For a TextLine (length validation), it means checking that both min length and max length are positive integers, and that min is lower than max.</p><p>When an instance of the type is added to a Content Type, <code>validateValidatorConfiguration()</code> receives the configuration for the validators used by the Type as an array. It must return an array of error messages if errors are found in the configuration, and an empty array if no errors were found.</p><p>For TextLine, the provided array looks like this:</p><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[array(
+   &#39;StringLengthValidator&#39; =&gt; array(
+       &#39;minStringLength&#39; =&gt; 0,
+       &#39;maxStringLength&#39; =&gt; 100
+   )
+);
+]]></script>
+</div></div><p>The structure of this array is totally free, and up to each type implementation. We will in this tutorial mimic what is done in native Field Types:</p><p>Each level one key is the name of a validator, as acknowledged by the Type. That key contains a set of parameter name / parameter value rows. We must check that:</p><ul><li><p>all the validators in this array are known to the type</p></li><li><p>arguments for those validators are valid and have sane values</p></li></ul><p>We do not need to include mandatory validators if they don’t have options. Here is an example of what our Type expects as validation configuration:</p><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[array(
+   ‘TweetAuthorValidator’ =&gt; array(
+       ‘AuthorList’ =&gt; array( ‘johndoe’, ‘janedoe’ )
+   )
+);
+]]></script>
+</div></div><p><br /> The configuration says that tweets must be either by johndoe or by janedoe. If we had not provided TweetAuthorValidator at all, it would have been ignored.</p><p>We will iterate over the items in <code>$validatorConfiguration</code> and:</p><ul><li><p>add errors for those we don’t know about;</p></li><li><p>check that provided arguments are known and valid:</p></li><ul><li><p>TweetAuthorValidator accepts a non-empty array of valid Twitter usernames</p></li></ul></ul><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[public function validateValidatorConfiguration( $validatorConfiguration )
+{
+   $validationErrors = array();
+
+   foreach ( $validatorConfiguration as $validatorIdentifier =&gt; $constraints )
+   {
+       // Report unknown validators
+       if ( !$validatorIdentifier != &#39;TweetAuthorValidator&#39; )
+       {
+           $validationErrors[] = new ValidationError( &quot;Validator &#39;$validatorIdentifier&#39; is unknown&quot; );
+           continue;
+       }
+ 
+       // Validate arguments from TweetAuthorValidator
+       if ( !isset( $constraints[&#39;AuthorList&#39;] ) || !is_array( $constraints[&#39;AuthorList&#39;] ) )
+       {
+           $validationErrors[] = new ValidationError( &quot;Missing or invalid AuthorList argument&quot; );
+           continue;
+       }
+ 
+       foreach ( $constraints[&#39;AuthorList&#39;] as $authorName )
+       {
+           if ( !preg_match( &#39;/^[a-z0-9_]{1,15}$/i&#39;, $authorName ) )
+           {
+               $validationErrors[] = new ValidationError( &quot;Invalid twitter username&quot; );
+           }
+       }
+   }
+
+ 
+   return $validationErrors;
+}]]></script>
+</div></div><p><code>
+    validate()</code> is the method that runs the actual validation on data, when a content item is created with a Field of this type:</p><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[   public function validate( FieldDefinition $fieldDefinition, SPIValue $fieldValue )
+   {
+       $errors = array();
+
+       if ( $this-&gt;isEmptyValue( $fieldValue ) )
+       {
+           return $errors;
+       }
+ 
+       // Tweet Url validation
+       if ( !preg_match( &#39;#^https?://twitter.com/([^/]+)/status/[0-9]+$#&#39;, $fieldValue-&gt;url, $m ) )
+           $errors[] = new ValidationError( &quot;Invalid twitter status url %url%&quot;, null, array( $fieldValue-&gt;url ) );
+
+       $validatorConfiguration = $fieldDefinition-&gt;getValidatorConfiguration();
+       if ( isset( $validatorConfiguration[&#39;TweetAuthorValidator&#39;] ) )
+       {
+           if ( !in_array( $m[1], $validatorConfiguration[&#39;TweetAuthorValidator&#39;][&#39;AuthorList&#39;] ) )
+           {
+               $errors[] = new ValidationError(
+                   &quot;Twitter user %user% is not in the approved author list&quot;,
+                   null,
+                   array( $m[1] )
+               );
+           }
+       }
+ 
+       return $errors;
+   }
+]]></script>
+</div></div><p>First, we validate the url with a regular expression. If it doesn’t match, we add an instance of <code>
+    ValidationError
+  </code> to the return array. Note that the tested value isn’t directly embedded in the message but passed as an argument. This ensures that the variable is properly encoded in order to prevent attacks, and allows for singular/plural phrases using the second parameter.</p><p>Then, if our Field Type instance’s configuration contains a <code>
+    TweetAuthorValidator
+  </code> key, we check that the username in the status url matches one of the valid authors.</p><h4 id="ImplementtheTweet\Typeclass-Metadatahandlingmethods:getName()andgetSortInfo().">Metadata handling methods: <code>getName()</code> and <code>getSortInfo()</code>.</h4><p>Field Types require two methods related to Field metadata:</p><ul><li><p><code>
+getName()
+      </code> is used to generate a name out of a Field value, either to name a Content item (naming pattern in legacy) or to generate a part for an URL Alias.</p></li><li><p><code>
+getSortInfo()
+      </code> is used by the persistence layer to obtain the value it can use to sort &amp; filter on a Field of this type</p></li></ul><p>Obviously, a tweet’s full URL isn’t really suitable as a name. Let’s use a subset of it: <code>
+    &lt;username&gt;-&lt;tweetId&gt;
+  </code> should be reasonable enough, and suitable for both sorting and naming.</p><p> </p><p>We can assume that this method will not be called if the Field is empty, and will assume that the URL is a valid twitter URL:</p><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[public function getName( SPIValue $value )
+{
+   return preg_replace(
+       &#39;#^https?://twitter\.com/([^/]+)/status/([0-9]+)$#&#39;,
+       &#39;$1-$2&#39;,
+       (string)$value-&gt;url );
+}
+
+ 
+protected function getSortInfo( CoreValue $value )
+{
+   return $this-&gt;getName( $value );
+}]]></script>
+</div></div><p>In <code>
+    getName()</code> we run a regular expression replace on the URL to extract the part we’re interested in.</p><p>This name is a perfect match for <code>
+    getSortInfo()</code> as it allows us to sort on the tweet’s author and on the tweet’s ID.</p><h4 id="ImplementtheTweet\Typeclass-FieldTypeserializationmethods:fromHash()andtoHash()">Field Type serialization methods: <code>fromHash()</code> and <code>toHash()</code></h4><p>Both methods defined in the Field Type interface, are core to the REST API. They are used to export values to serializable hashes.</p><p>In our case, it is quite easy:</p><ul><li><p><code>
+toHash()
+      </code> will build a hash with every property from <code>Tweet\Value</code>;</p></li><li><p><code>
+fromHash()
+      </code> will instantiate a <code>Tweet\Value</code> with the hash it receives.  </p></li></ul><p> </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[public function fromHash( $hash )
+{
+   if ( $hash === null )
+   {
+       return $this-&gt;getEmptyValue();
+   }
+   return new Value( $hash );
+}
+ 
+public function toHash( SPIValue $value )
+{
+   if ( $this-&gt;isEmptyValue( $value ) )
+   {
+       return null;
+   }
+   return array(
+       &#39;url&#39; =&gt; $value-&gt;url
+   );
+}
+]]></script>
+</div></div><h4 id="ImplementtheTweet\Typeclass-Persistencemethods:fromPersistenceValueandtoPersistenceValue">Persistence methods: <code>fromPersistenceValue</code> and <code>toPersistenceValue</code></h4><p>Storage of Field Type data is done through the persistence layer (SPI).</p><p>Field Types use their own Value objects to expose their contents using their own domain language. However, to store those objects, the Type needs to map this custom object to a structure understood by the persistence layer: <code>PersistenceValue</code>. This simple value object has three properties:</p><ul style="list-style-type: square;"><li><code>data</code> – standard data, stored using the storage engine's native features</li><li><code>externalData</code> – external data, stored using a custom storage handler</li><li><code>sortKey</code> – sort value used for sorting</li></ul><p>The role of those mapping methods is to convert a <code>Value</code> of the Field Type into a <code>PersistenceValue</code> and the other way around.</p><div class="confluence-information-macro confluence-information-macro-information"><p class="title">About external storage</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Whatever is stored in {{externalData}} requires an external storage handler to be written. Read more about external storage on <a href="../display/DEVELOPER/Field%2bType%2bAPI%2band%2bbest%2bpractices.html">Field Type API and best practices</a>.</p><p>External storage is beyond the scope of this tutorial, but many examples can be found in existing Field Types.</p></div></div><p>We will follow a simple implementation here: the <code>Tweet\Value</code> object will be serialized as an array to the <code>code</code> property using <code>fromHash()</code> and <code>toHash()</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Tweet\Type</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[/**
+ * @param \EzSystems\TweetFieldTypeBundle\eZ\Publish\FieldType\Tweet\Value $value
+ * @return \eZ\Publish\SPI\Persistence\Content\FieldValue
+ */
+public function toPersistenceValue( SPIValue $value )
+{
+    if ( $value === null )
+    {
+        return new PersistenceValue(
+            array(
+                &quot;data&quot; =&gt; null,
+                &quot;externalData&quot; =&gt; null,
+                &quot;sortKey&quot; =&gt; null,
+            )
+        );
+    }
+    return new PersistenceValue(
+        array(
+            &quot;data&quot; =&gt; $this-&gt;toHash( $value ),
+            &quot;sortKey&quot; =&gt; $this-&gt;getSortInfo( $value ),
+        )
+    );
+}
+/**
+ * @param \eZ\Publish\SPI\Persistence\Content\FieldValue $fieldValue
+ * @return \EzSystems\TweetFieldTypeBundle\eZ\Publish\FieldType\Tweet\Value
+ */
+public function fromPersistenceValue( PersistenceValue $fieldValue )
+{
+    if ( $fieldValue-&gt;data === null )
+    {
+        return $this-&gt;getEmptyValue();
+    }
+    return new Value( $fieldValue-&gt;data );
+}]]></script>
+</div></div><p> </p><h5 id="ImplementtheTweet\Typeclass-FetchingdatafromtheTwitterAPI">Fetching data from the Twitter API</h5><p>As explained in the tutorial's introduction, we will enrich our tweet's URL with the embed version, fetched using the Twitter API. To do so, we will, when <code>toPersistenceValue()</code> is called, fill in the value's contents property from this method, before creating the <code>PersistenceValue</code> object.</p><p>First, we need a twitter client in <code>Tweet\Type</code>. For convenience, we provide one in this tutorial's bundle:</p><div><ul style="list-style-type: square;"><li>The <code>Twitter\TwitterClient</code> class:</li><li>The <code>Twitter\TwitterClientInterface</code> interface</li><li>An <code>ezsystems.tweetbundle.twitter.client</code> service that uses the class above.</li></ul><p>The interface has one method: <code>getEmbed( $statusUrl )</code> that, given a tweet's URL, returns the embed code as a string. The implementation is very simple, for the sake of simplicity, but gets the job done. Ideally, it should at the very least handle errors, but it is not necessary here.</p><h6 id="ImplementtheTweet\Typeclass-InjectingtheTwitterclientintoTweet\Type">Injecting the Twitter client into <code>Tweet\Type</code></h6><p>Our Field Type doesn't have a constructor yet. We will create one, with an instance of <code>Twitter\TwitterClientInterface</code> as the argument, and store it in a new protected property:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>eZ/Publish/FieldType/Tweet/Type.php:</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[use EzSystems\TweetFieldTypeBundle\Twitter\TwitterClientInterface;
+ 
+class Type extends FieldType
+{
+    /** @var TwitterClientInterface */
+    protected $twitterClient;
+
+    public function __construct( TwitterClientInterface $twitterClient )
+    {
+        $this-&gt;twitterClient = $twitterClient;
+    }
+}]]></script>
+</div></div><h6 id="ImplementtheTweet\Typeclass-Completingthevalueusingthetwitterclient">Completing the value using the twitter client</h6><p>As described above, before creating the <code>PersistenceValue</code> object in <code>toPersistenceValue</code>, we will fetch the tweet's embed contents using the client, and assign it to <code>Tweet\Value::$data</code>:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>eZ/Publish/FieldType/Tweet/Type.php</b></div><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: php; gutter: false; theme: Eclipse"><![CDATA[ public function toPersistenceValue( SPIValue $value )
+{
+    // if ( $value === null )
+    // {...}
+
+
+    if ( $value-&gt;contents === null )
+    {
+        $value-&gt;contents = $this-&gt;twitterClient-&gt;getEmbed( $value-&gt;url );
+    }
+    return new PersistenceValue(
+    // array(...)
+}
+
+]]></script>
+</div></div><p>And that's it! When the persistence layer stores content from our type, the value will be completed with what the twitter API returns.</p><p> </p></div></div>
+</div>
+<div class="cell aside" data-type="aside">
+<div class="innerCell">
+<div class="panel" style="border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;"><b>Tutorial path</b></div><div class="panelContent">
+<p>
+
+
+<div class="plugin_pagetree">
+
+        
+        
+    <ul class="plugin_pagetree_children_list plugin_pagetree_children_list_noleftspace">
+        <div class="plugin_pagetree_children">
+        </div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input type="hidden" name="treeId" value="">
+        <input type="hidden" name="treeRequestId" value="/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=false&amp;sort=position&amp;reverse=false&amp;disableLinks=false&amp;expandCurrent=false">
+        <input type="hidden" name="treePageId" value="31429772">
+
+        <input type="hidden" name="noRoot" value="false">
+        <input type="hidden" name="rootPageId" value="31429766">
+
+        <input type="hidden" name="rootPage" value="">
+        <input type="hidden" name="startDepth" value="0">
+        <input type="hidden" name="spaceKey" value="DEVELOPER" >
+
+        <input type="hidden" name="i18n-pagetree.loading" value="Loading...">
+        <input type="hidden" name="i18n-pagetree.error.permission" value="Unable to load page tree. It seems that you do not have permission to view the root page.">
+        <input type="hidden" name="i18n-pagetree.eeror.general" value="There was a problem retrieving the page tree. Please check the server log file for more information.">
+        <input type="hidden" name="loginUrl" value="/login.action?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D31429772">
+        <input type="hidden" name="mobile" value="false">
+
+                <fieldset class="hidden">
+                                                <input type="hidden" name="ancestorId" value="31429766">
+                                    </fieldset>
+    </fieldset>
+</div>
+
+</p>
+</div></div></div>
+</div>
+</div>
+</div>
+
+                
+        
+    
+        </div>
+
+        <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://doc.ez.no/pages/viewpage.action?pageId=31429772"
+    dc:identifier="https://doc.ez.no/pages/viewpage.action?pageId=31429772"
+    dc:title="Implement the Tweet\Type class"
+    trackback:ping="https://doc.ez.no/rpc/trackback/31429772"/>
+</rdf:RDF>
+-->
+
+            
+    
+
+
+
+<div id="labels-section" class="pageSection group">
+    <div class="labels-section-content content-column" entityid="31429772" entitytype="page">
+	<div class="labels-content">
+		
+    <ul class="label-list label-list-right ">
+                    
+        <li class="aui-label " data-label-id="23986206"><a class="aui-label-split-main" href="../label/DEVELOPER/tutorial.html" rel="tag">tutorial</a></li><li class="aui-label " data-label-id="30998543"><a class="aui-label-split-main" href="../label/DEVELOPER/field_type.html" rel="tag">field_type</a></li>
+            </ul>
+
+    </div>
+</div>
+</div>
+
+            
+            
+
+
+
+
+            
+    
+
+
+
+
+
+
+
+
+                        
+    
+<div id="comments-section" class="pageSection group">
+        
+    
+
+
+
+</div>
+
+
+            
+</div>
+
+
+    
+
+
+
+
+    
+    
+
+    
+    
+    
+
+
+
+
+
+
+
+
+</div>
+  
+        <div id="theme-footer">
+            <p>© 1999-2016 <a href="http://ez.no/" class="external-link" rel="nofollow">eZ Systems AS</a> and others</p>
+        </div>
+    
+    </div>
+</div>
+
+
+        
+            
+            
+
+<div id="footer" role="contentinfo">
+    <section class="footer-body">
+
+                                                            <p class="license license-opensource">
+                    Powered by a free <b>Atlassian Confluence Open Source Project License</b> granted to eZ Publish. <a href="http://www.atlassian.com/c/conf/11461">Evaluate Confluence today</a>.<br>
+                </p>
+                    
+        
+
+        <ul id="poweredby">
+            <li class="noprint">Powered by <a href="http://www.atlassian.com/software/confluence" class="hover-footer-link">Atlassian Confluence</a> <span id='footer-build-information'>5.8.5</span>, <a href="http://www.atlassian.com/software/confluence/overview/team-collaboration-software?utm_source=confluence-footer" class="hover-footer-link">Team Collaboration Software</a></li>
+            <li class="print-only">Printed by Atlassian Confluence 5.8.5, Team Collaboration Software.</li>
+            <li class="noprint"><a href="https://jira.atlassian.com/browse/CONF" class="hover-footer-link">Report a bug</a></li>
+            <li class="noprint"><a href="http://www.atlassian.com/about/connected.jsp?s_kwcid=Confluence-stayintouch" class="hover-footer-link">Atlassian News</a></li>
+        </ul>
+
+        
+
+        <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+
+                    <script>
+AJS.toInit(function(){
+ if(AJS.params.spaceKey &&
+    AJS.params.spaceKey === 'MAIN' ||
+    AJS.params.spaceKey === 'EZMA' ||
+    AJS.params.spaceKey === 'ODC' ||
+    AJS.params.spaceKey === 'EZP50' ||
+    AJS.params.spaceKey === 'EZP51' ||
+    AJS.params.spaceKey === 'EZP52' ||
+    AJS.params.spaceKey === 'EZPCLOUD' ||
+    AJS.params.spaceKey === 'EZP' ||
+    AJS.params.spaceKey === 'TECHDOC' ||
+    AJS.params.spaceKey === 'USERGUIDE' ||
+    AJS.params.spaceKey === 'EZRECO'
+){
+
+(function()
+{var isSecure=('https:'==document.location.protocol);var ff=document.createElement('script');ff.type='text/javascript';ff.async=true;ff.src=(isSecure?'https':'http')+'://'+(isSecure?'secure.':'lb.')+'liveviewer.ez.no/statjs/sst-120-1304513615/stat.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ff,s);}
+)();
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-303624-13', 'ez.no');
+  ga('send', 'pageview');
+}}
+);
+</script>
+        
+    </section>
+</div>
+
+    </div>
+</body>
+
+<!-- Mirrored from doc.ez.no/pages/viewpage.action?pageId=31429772 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:34:47 GMT -->
+</html>

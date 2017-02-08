@@ -1,0 +1,104 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711532 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:59:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpageaad4.html?pageId=30711532" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro4170.png?definition=e3RvY30&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="8154e4b4-b1f2-4dec-84c2-f26507b595d3" data-macro-schema-version="1"></p><h2>Description</h2><p>Symfony provides native support for <a href="http://symfony.com/doc/2.3/book/security.html#using-multiple-user-providers">multiple user providers</a>. This makes it easy to integrate any kind of login handlers, including SSO and existing 3rd party bundles (e.g. <a href="https://github.com/Maks3w/FR3DLdapBundle">FR3DLdapBundle</a>, <a href="https://github.com/hwi/HWIOAuthBundle">HWIOauthBundle</a>, <a href="https://github.com/FriendsOfSymfony/FOSUserBundle">FOSUserBundle</a>, <a href="http://github.com/BeSimple/BeSimpleSsoAuthBundle">BeSimpleSsoAuthBundle</a>, etc.).</p><p>However, to be able to use <em>external</em> user providers with eZ, a valid eZ user needs to be injected into the repository. This is mainly for the kernel to be able to manage content-related permissions (but not limited to this).</p><p>Depending on your context, you will either want to create an eZ user <code>on-the-fly</code>, return an existing user, or even always use a generic user.</p><p> </p><h2>Solution</h2><p>Whenever an <em>external</em> user is matched (i.e. that does not come from eZ repository, like coming from LDAP), eZ kernel fires an <code>MVCEvents::INTERACTIVE_LOGIN</code> event. Every service listening to this event will receive an <code>eZ\Publish\Core\MVC\Symfony\Event\InteractiveLoginEvent</code> object which contains the original security token (that holds the matched user) and the request.</p><p>It's then up to the listener to retrieve an eZ user from the repository and to assign it back to the event object. This user will be injected into the repository and used for the rest of the request.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="ac37ed1f-cb66-47c2-adf4-5208db0a3876" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>If no eZ user is returned, the anonymous user will be used.</p></td></tr></table><h3>User exposed and security token</h3><p>When an <em>external</em> user is matched, a different token will be injected into the security context, the <code>InteractiveLoginToken</code>. This token holds a <code>UserWrapped</code> instance which contains the originally matched user and the <em>API user</em> (the one from the eZ repository).</p><p>Note that the <em>API user</em> is mainly used for permission checks against the repository and thus stays <em>under the hood</em>.</p><h3>Customizing the user class</h3><p>It is possible to customize the user class used by extending <code>ezpublish.security.login_listener</code> service, which defaults to <code>eZ\Publish\Core\MVC\Symfony\Security\EventListener\SecurityListener</code>.</p><p>You can override <code>getUser()</code> to return whatever user class you want, as long as it implements <code>eZ\Publish\Core\MVC\Symfony\Security\UserInterface</code>.</p><h2>Example</h2><p><span>Here is a very simple example using the in-memory user provider.</span></p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="3e7e7966-7c08-4fbb-888f-17ab98b60db2" data-macro-parameters="title=app/config/security.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading70f3.png?definition=e2NvZGU6dGl0bGU9YXBwL2NvbmZpZy9zZWN1cml0eS55bWx9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>security:
+    providers:
+        # Chaining in_memory and ezpublish user providers
+        chain_provider:
+            chain:
+                providers: [in_memory, ezpublish]
+        ezpublish:
+            id: ezpublish.security.user_provider
+        in_memory:
+            memory:
+                users:
+                    # You will then be able to login with username "user" and password "userpass"
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+	# The "in memory" provider requires an encoder for Symfony\Component\Security\Core\User\User
+ encoders:
+        Symfony\Component\Security\Core\User\User: plaintext</pre></td></tr></table><h3>Implementing the listener</h3><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="9c7f0020-037e-48cf-95a2-228bc5f6aab4" data-macro-parameters="title=services.yml in your AcmeTestBundle" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headinga314.png?definition=e2NvZGU6dGl0bGU9c2VydmljZXMueW1sIGluIHlvdXIgQWNtZVRlc3RCdW5kbGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>parameters:
+    acme_test.interactive_event_listener.class: Acme\TestBundle\EventListener\InteractiveLoginListener
+
+services:
+    acme_test.interactive_event_listener:
+        class: %acme_test.interactive_event_listener.class%
+        arguments: [@ezpublish.api.service.user]
+        tags:
+            - { name: kernel.event_subscriber } </pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="note" data-macro-id="32b7d82c-0463-424b-bf05-66c0ebedcc5d" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingdd57.png?definition=e25vdGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>Do not mix <code>MVCEvents::INTERACTIVE_LOGIN</code> event (specific to eZ Platform) and <code>SecurityEvents::INTERACTIVE_LOGIN</code> event (fired by Symfony security component)</p></td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="c1a74b00-ec24-4645-9d93-2b0955329064" data-macro-parameters="language=php|title=Interactive login listener" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading3ff9.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRpdGxlPUludGVyYWN0aXZlIGxvZ2luIGxpc3RlbmVyfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;?php
+namespace Acme\TestBundle\EventListener;
+
+use eZ\Publish\API\Repository\UserService;
+use eZ\Publish\Core\MVC\Symfony\Event\InteractiveLoginEvent;
+use eZ\Publish\Core\MVC\Symfony\MVCEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class InteractiveLoginListener implements EventSubscriberInterface
+{
+    /**
+     * @var \eZ\Publish\API\Repository\UserService
+     */
+    private $userService;
+
+    public function __construct( UserService $userService )
+    {
+        $this->userService = $userService;
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return array(
+            MVCEvents::INTERACTIVE_LOGIN => 'onInteractiveLogin'
+        );
+    }
+
+    public function onInteractiveLogin( InteractiveLoginEvent $event )
+    {
+        // We just load a generic user and assign it back to the event.
+        // You may want to create users here, or even load predefined users depending on your own rules.
+        $event->setApiUser( $this->userService->loadUserByLogin( 'lolautruche' ) );
+    }
+} </pre></td></tr></table><p><strong><br /></strong></p><p> </p><p> </p><p> </p><table class="diff-table tab-size-8 confluenceTable"><tbody><tr><td class="blob-code blob-code-addition confluenceTd">+<span class="pl-s2"> <span class="pl-c"># The &quot;in memory&quot; provider requires an encoder for Symfony\Component\Security\Core\User\User</span></span></td></tr></tbody></table><p> </p><p> </p><table class="diff-table tab-size-8 confluenceTable"><tbody><tr><td class="blob-code blob-code-addition confluenceTd"> </td></tr></tbody></table><table class="diff-table tab-size-8 confluenceTable"><tbody><tr><td class="blob-code blob-code-addition confluenceTd">+<span class="pl-s2"> <span class="pl-s1"><span class="pl-ent">encoders:</span></span></span></td></tr></tbody></table><p> </p><p> </p><table class="diff-table tab-size-8 confluenceTable"><tbody><tr><td class="blob-code blob-code-addition confluenceTd"> </td></tr></tbody></table><p>+ <span class="pl-ent">Symfony\Component\Security\Core\User\User:</span></p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711532 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:59:57 GMT -->
+</html>

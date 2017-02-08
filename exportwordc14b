@@ -1,0 +1,410 @@
+Message-ID: <1136120949.3270.1485852570092.JavaMail.confluence@ip-10-127-227-164>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_3269_1575968876.1485852570092"
+
+------=_Part_3269_1575968876.1485852570092
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Implementing the Legacy Storage Engine Converter</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        font-size: 10pt;
+        line-height: 1.2;
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: #fff !important;
+        color: #000 !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: #000;
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        page-break-after: avoid;
+    }
+
+    pre {
+        font-family: Monaco, "Courier New", monospace;
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Implementing the Legacy Storage Engine Converter</h1>
+    <div class=3D"Section1">
+        <p>So far, our Field Type=E2=80=99s value is represented by the <co=
+de>Tweet\Value</code> class. It holds a semantic representation of the type=
+=E2=80=99s data: a url, author url and the tweet's content.</p>
+<p>The next step is to tell the system how to actually&nbsp;<em>store</em> =
+this.</p>
+<h3 id=3D"ImplementingtheLegacyStorageEngineConverter-Aboutconverters">Abou=
+t converters</h3>
+<p>Unlike eZ Publish Legacy, eZ Platform supports (by design) multiple stor=
+age engines. The main, and almost only one right now is the Legacy Storage =
+Engine, based on the legacy database, with a new implementation. Since each=
+ storage engine may have its own way of storing data, we need to map each F=
+ield Type value to something legacy can understand. To do this, we will imp=
+lement a Field Type Converter, each storage engine defining its own interfa=
+ce for those.</p>
+<h3 id=3D"ImplementingtheLegacyStorageEngineConverter-LegacyFieldTypeconver=
+ters">Legacy Field Type converters</h3>
+<p>The legacy storage engine uses the <code> ezcontentobject_attribute </co=
+de> table to store Field values, and <code> ezcontentclass_attribute </code=
+> to store Field definition values (settings, etc.). They're both based on =
+the same principle. Each row represents a Field or a FieldDefinition, and o=
+ffers several free fields, of different types, where the type can store its=
+ data:</p>
+<ul>
+<li><code> ezcontentobject_attribute </code> offers three fields for this p=
+urpose: <code> data_int </code> , <code> data_text </code> and <code> data_=
+float </code></li>
+<li><code> ezcontentclass_attribute </code> offers a few more: four <code>d=
+ata_int</code> (<code>data_int1</code> to <code>data_int4</code>) fields, f=
+our <code> data_float </code> &nbsp;(<code>data_float1</code> to <code>data=
+_float5</code>) ones, and five <code>data_text</code> (<code>data_text1</co=
+de> to <code>data_text5</code>) .</li>
+</ul>
+<p>Each type is free to use those fields in any way it requires. Converters=
+ will map a field=E2=80=99s semantic values to the fields described above, =
+for both settings (validation + configuration) as well as value.</p>
+<h3 id=3D"ImplementingtheLegacyStorageEngineConverter-ImplementingTweet\Leg=
+acyConverter">Implementing Tweet\LegacyConverter</h3>
+<p>The Converter will be placed along with the Type and Value definitions (=
+the Kernel stores them inside the Legacy Storage Engine structure): <code> =
+eZ/Publish/FieldType/Tweet/LegacyConverter.php </code> . A Legacy Converter=
+ must implement the eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\C=
+onverter interface:</p>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">namespace EzSystems\TweetFieldTypeBundle\eZ\Publish\FieldType\Tweet=
+;
+
+use eZ\Publish\Core\Persistence\Legacy\Content\FieldValue\Converter;
+
+class LegacyConverter implements Converter
+{
+}</pre>=20
+</div>
+</div>
+<p>The Converter interface expects us to implement five methods:</p>
+<ul>
+<li><p><code> toStorageValue()</code> and <code>toFieldValue()</code> <br c=
+lass=3D"kix-line-break"> used to convert an API field value to a legacy sto=
+rage value, and a legacy storage value to an API field value. &nbsp;</p></l=
+i>
+<li><p><code>toStorageFieldDefinition()</code> and <code>toFieldDefinition(=
+)</code> <br class=3D"kix-line-break"> used to convert a field definition t=
+o a legacy one, and a stored legacy field definition to an API field defini=
+tion.</p></li>
+<li><p><code>getIndexColumn()</code> <br class=3D"kix-line-break"> Tell the=
+ API which legacy DB field should be used to sort &amp; filter content, eit=
+her <code>sort_key_string</code> or <code>sort_key_int</code></p></li>
+</ul>
+<h4 id=3D"ImplementingtheLegacyStorageEngineConverter-ImplementingFieldValu=
+econverters:toFieldValue()andtoStorageValue()">Implementing Field Value con=
+verters: toFieldValue() and toStorageValue()</h4>
+<p>As said above, those two methods are used to convert from a Field to a v=
+alue that Legacy can store, and the other way around.</p>
+<p>We have defined that we wanted to store the tweet=E2=80=99s URL in <code=
+>data_text</code>, and that sorting would be done on the <code>username-sta=
+tus-tweetid</code> string we extract in <code> getName()</code> and <code> =
+getSortInfo()</code>.&nbsp;</p>
+<p><code>toStorageValue()</code> will fill the provided <code>eZ\Publish\Co=
+re\Persistence\Legacy\Content\StorageFieldValue</code> from a <code> Tweet\=
+Value</code>, while <code> toFieldValue()</code> will do the exact opposite=
+:</p>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldValue;
+use eZ\Publish\SPI\Persistence\Content\FieldValue;
+
+// [...]
+
+public function toStorageValue( FieldValue $value, StorageFieldValue $stora=
+geFieldValue )
+{
+&nbsp;&nbsp;&nbsp;$storageFieldValue-&gt;dataText =3D $value-&gt;url;
+&nbsp;&nbsp;&nbsp;$storageFieldValue-&gt;sortKeyString =3D $value-&gt;sortK=
+ey;
+}
+public function toFieldValue( StorageFieldValue $value, FieldValue $fieldVa=
+lue )
+{
+&nbsp;&nbsp;&nbsp;$fieldValue-&gt;url =3D $value-&gt;dataText;
+&nbsp;&nbsp;&nbsp;$fieldValue-&gt;sortKey =3D $value-&gt;sortKeyString;
+}
+</pre>=20
+</div>
+</div>
+<p>With these two methods, the legacy storage engine is able to convert a <=
+code>Tweet\Value</code>&nbsp;into legacy data, and legacy data back into a =
+<code>Tweet\Value</code> object.</p>
+<h4 id=3D"ImplementingtheLegacyStorageEngineConverter-ImplementingFieldDefi=
+nitionconverters:toStorageFieldDefinition()andtoFieldDefinition()">Implemen=
+ting Field Definition converters: <code>toStorageFieldDefinition()</code> a=
+nd <code>toFieldDefinition()</code></h4>
+<p>The first two methods we have implemented apply to a Field=E2=80=99s val=
+ue . But we also need to convert our Field=E2=80=99s definition. For exampl=
+e, a TextLine=E2=80=99s max length, or any FieldDefinition option.</p>
+<p>This is done using <code>toStorageDefinition()</code> that converts a <c=
+ode>FieldDefinition</code> into a <code>StorageFieldDefinition</code>.&nbsp=
+;<code>toFieldDefinition()</code> does the opposite. In our case, we actual=
+ly don=E2=80=99t need to implement those methods since our Tweet Type doesn=
+=E2=80=99t have settings:</p>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">use eZ\Publish\Core\Persistence\Legacy\Content\StorageFieldDefiniti=
+on;
+use eZ\Publish\SPI\Persistence\Content\Type\FieldDefinition;
+
+// [...]
+
+public function toStorageFieldDefinition( FieldDefinition $fieldDef, Storag=
+eFieldDefinition $storageDef )
+{
+}
+&nbsp;
+public function toFieldDefinition( StorageFieldDefinition $storageDef, Fiel=
+dDefinition $fieldDef )
+{
+}</pre>=20
+</div>
+</div>
+<h4 id=3D"ImplementingtheLegacyStorageEngineConverter-ImplementinggetIndexC=
+olumn()">Implementing <code>getIndexColumn()</code></h4>
+<p>In <code> toFieldValue()</code> and <code> toStorageValue()</code> we ha=
+ve used the <code> sortKeyString </code> property from <code> StorageFieldV=
+alue</code>. <code> getIndexColumn()</code> will tell provide the legacy st=
+orage engine the type of index / sort column it should use: string (<code>s=
+ort_key_string</code>) or int (<code>sort_key_int</code>). Depending on whi=
+ch one is returned, the system will either use the <code> sortKeyString</co=
+de> or the <code> sortKeyInt</code> properties from the <code> StorageField=
+Value</code>.</p>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">public function getIndexColumn()
+{
+&nbsp;&nbsp;&nbsp;return 'sort_key_string';
+}</pre>=20
+</div>
+</div>
+<h3 id=3D"ImplementingtheLegacyStorageEngineConverter-Registeringtheconvert=
+er">Registering the converter</h3>
+<p>Just like a Type, a Legacy Converter needs to be registered and tagged i=
+n the service container.</p>
+<p>The tag is&nbsp;<code>ezpublish.storageEngine.legacy.converter</code>, a=
+nd it requires an&nbsp;<code>alias</code> attribute to be set to the Field =
+Type identifier (<code>eztweet</code>). Let's add this block to&nbsp; <code=
+>Resources/config/services.yml</code>:</p>
+<p>&nbsp;</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>Resources/config/services.yml</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">services:
+    ezsystems.tweetbundle.fieldType.eztweet.converter:
+        class: EzSystems\TweetFieldTypeBundle\eZ\Publish\FieldType\Tweet\Le=
+gacyConverter
+        tags:
+            - {name: ezpublish.storageEngine.legacy.converter, alias: eztwe=
+et}</pre>=20
+</div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+    </div>
+</body>
+</html>
+------=_Part_3269_1575968876.1485852570092--

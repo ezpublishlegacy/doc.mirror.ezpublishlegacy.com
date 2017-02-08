@@ -1,0 +1,78 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=25985739 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:40:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpaged09c.html?pageId=25985739" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/51/_/styles/colorsb538.css?spaceKey=EZP" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/51/_/styles/customb538.css?spaceKey=EZP" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><a class="anchor" href="https://github.com/ezsystems/ezpublish-kernel/blob/master/doc/specifications/cache/context_aware_http_cache.md#workflow" name="workflow" style="text-decoration: none;" />This feature is available from <strong>eZ Publish <img class="editor-inline-macro" height="18" width="88" src="../servlet/status-macro/placeholder8352.png?title=5.2&amp;colour=Yellow" data-macro-name="status" data-macro-parameters="colour=Yellow|title=5.2" data-macro-schema-version="1"> / <img class="editor-inline-macro" height="18" width="88" src="../servlet/status-macro/placeholder75a5.png?title=2013.07&amp;colour=Yellow" data-macro-name="status" data-macro-parameters="colour=Yellow|title=2013.07" data-macro-schema-version="1"></strong></p><h2>Workflow</h2><ol><li>Reverse proxy receives the HTTP request (without the user hash).</li><li><p>Reverse proxy does a sub-request (emulated in the case of <em>HttpCache</em>).</p><p>Sub-request <strong>must</strong> have the following headers:</p><ul><li><code style="margin-left: 2.0px;">X-HTTP-Override: AUTHENTICATE</code></li><li><code style="margin-left: 2.0px;">Accept: application/vnd.ez.UserHash+text</code></li><li>Original cookie (mainly to keep trace of the sessionId)</li></ul></li><li><p>eZ Publish returns an HTTP response containing the user hash in <code>X-User-Hash</code> header.</p></li><li><p>Reverse proxy adds the <code>X-User-Hash</code> header to the original request.</p></li></ol><table class="wysiwyg-macro" data-macro-name="info" data-macro-parameters="title=Note on performance" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingb944.png?definition=e2luZm86dGl0bGU9Tm90ZSBvbiBwZXJmb3JtYW5jZX0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>User hash is <strong>not</strong> generated for each <code>AUTHENTICATE</code> request. It is cached using the <code>Cookie</code> header string as key. <br /><strong>Hence each user has its own hash, generated once per session.</strong></p><p>Hash generation being based by default on roles and limitations, <strong>a user can share the same hash with another one</strong> if their profile are similar. This is precisely what offers the possibility to <em>share HTTP cache</em> between several logged-in users.</p></td></tr></table><table class="wysiwyg-macro" data-macro-name="tip" data-macro-parameters="title=Tip" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading6668.png?definition=e3RpcDp0aXRsZT1UaXB9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>You can customize user hash generation. Read <a class="confluence-link" href="../../display/EZP/How%2bto%2bcustomize%2bUserHash%2bgeneration.html" data-linked-resource-id="14712852" data-linked-resource-version="8" data-linked-resource-type="page" data-linked-resource-default-alias="How to customize UserHash generation" data-base-url="../../index.html">How to customize UserHash generation</a> in the developer cookbook to learn more about this.</p></td></tr></table><h2><span style="color: rgb(0,0,0);">Varnish</span></h2><p>Described behavior comes out of the box with Symfony reverse proxy, but it's of course possible ot use Varnish to achieve the same.</p><p>This can be done thanks to <a href="https://github.com/varnish/libvmod-curl" style="text-decoration: none;">Varnish Curl vmod</a>.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-parameters="language=perl" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headinge73c.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGVybH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>import curl;
+
+sub vcl_recv {
+    # Do a standard lookup on assets
+    # Note that file extension list below is not extensive, so consider completing it to fit your needs.
+    if (req.request == "GET" &amp;&amp; req.url ~ "\.(css|js|gif|jpe?g|bmp|png|tiff?|ico|img|tga|wmf|svg|swf|ico|mp3|mp4|m4a|ogg|mov|avi|wmv|zip|gz|pdf|ttf|eot|wof)$") {
+        return (lookup);
+    }
+
+    if (req.request == "GET") {
+        # Pre-authenticate request to get shared cache, even when authenticated
+        if (req.http.Cookie !~ "eZSESSID" ) {
+            # User don't have session cookie => Set a hardcoded anonymous hash
+            set req.http.X-User-Hash = "38015b703d82206ebc01d17a39c727e5";
+        } else {
+            # User is authenticated => fetch user hash
+            curl.header_add("X-HTTP-Override: AUTHENTICATE");
+            curl.header_add("Accept: application/vnd.ez.UserHash+text");
+            curl.header_add("Cookie: " + req.http.Cookie);
+            # Customize with real backend host
+            # E.g. curl.get("http://www.metalfrance.net");
+            curl.get("http://&lt;host_of_your_backend>/");
+            if (curl.status() == 200) {
+                set req.http.X-User-Hash = curl.header("X-User-Hash");
+            }
+        }
+    }
+
+    # If it passes all these tests, do a lookup anyway;
+    return (lookup);
+}</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="tip" data-macro-parameters="title=Securing hash generation request" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading93d0.png?definition=e3RpcDp0aXRsZT1TZWN1cmluZyBoYXNoIGdlbmVyYXRpb24gcmVxdWVzdH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>By default, hash generation requests are granted for localhost (<code>127.0.0.1</code>, <code>::1</code>, <code>fe80::1</code>).</p><p>If you want to enlarge the scope (e.g. if your Varnish server is not running on the same machine), you can override <code>canGenerateUserHash()</code> protected method in your main kernel class (mostly <code>EzPublishKernel</code>).</p></td></tr></table>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=25985739 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:40:32 GMT -->
+</html>

@@ -1,0 +1,71 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Override-legacy-fatal-error-message/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 01 Feb 2017 00:26:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                              
+    <title>Override legacy fatal error message  / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Override legacy fatal error message </h1>
+</div>
+
+<p>The legacy Fatal Error message is : &quot;Fatal error: The web server did not finish its request&quot;.</p><p>You can override this message without modifying the Kernel. In order to do this, you will need to create your own function, a static and public method of a Class.</p><p>To register your own function, you need to edit the error.ini file (<i>settings/override/error.ini.append.php</i>) adding the following lines :</p><pre class="wordwrap"><span class="line">[ErrorSettings-kernel]</span>
+<span class="line">FatalErrorHandler=CustomFatalErrorHandlerClass::FatalErrorHandlerFunction</span>
+</pre><p>The method will be FatalErrorHandlerFunction() in a PHP Class named CustomFatalErrorHandlerClass :</p><pre class="wordwrap copytoclipboard"><span class="line">&lt;?php</span>
+<span class="line">class CustomFatalErrorHandlerClass</span>
+<span class="line">{</span>
+<span class="line">    public static function FatalErrorHandlerFunction()</span>
+<span class="line">    {</span>
+<span class="line">        header(&quot;HTTP/1.1 500 Internal Server Error&quot;);</span>
+<span class="line">        echo '&lt;strong&gt;Sorry!&lt;/strong&gt; Something has gone wrong. We have logged the error but feel free to &lt;a href=&quot;/contact&quot;&gt;contact us&lt;/a&gt;';</span>
+<span class="line">        eZDisplayResult(null);</span>
+<span class="line">    }</span>
+<span class="line">}</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '&lt;?php\r\nclass CustomFatalErrorHandlerClass\r\n{\r\n    public static function FatalErrorHandlerFunction()\r\n    {\r\n        header(&quot;HTTP/1.1 500 Internal Server Error&quot;);\r\n        echo \'&lt;strong&gt;Sorry!&lt;/strong&gt; Something has gone wrong. We have logged the error but feel free to &lt;a href=&quot;/contact&quot;&gt;contact us&lt;/a&gt;\';\r\n        eZDisplayResult(null);\r\n    }\r\n}' ); return false;" /></p>
+<![endif]--><p>Then clear the caches and regenerate the autoloads:</p><pre class="wordwrap"><span class="line">php bin/php/ezcache.php --clear-all --purge</span>
+<span class="line">php bin/php/ezpgenerateautoloads.php -e -p</span>
+</pre><p>For more informations about this feature, you can <a href="http://share.ez.no/blogs/thiago-campos-viana/custom-fatal-error-message-for-ez-publish-legacy" target="_self">read the Tutorial on Share</a>.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Override-legacy-fatal-error-message/(language)/eng-GB by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 01 Feb 2017 00:26:20 GMT -->
+</html>

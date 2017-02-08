@@ -1,0 +1,59 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711238 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:39:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage152c.html?pageId=30711238" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p style="margin-left: 0.0px;">This page explains the content cache purge <em>(aka invalidate)</em> mechanism used when publishing content from the UI or from a container-aware script, resulting in cache being invalidated either in the built-in Symfony Reverse Proxy, or on the much faster Varnish reverse proxy.</p><h2>Overview</h2><p>As explained on the <a class="confluence-link" href="../../display/TECHDOC/HttpCache.html" data-linked-resource-id="30711237" data-linked-resource-version="9" data-linked-resource-type="page" data-linked-resource-default-alias="HttpCache" data-base-url="../../index.html">HttpCache</a> page, eZ Platform returns content-related responses with an <code>X-Location-Id</code> header that are stored together by the configured HTTP cache. This allows you to clear <em>(invalidate)</em> HTTP cache representing specifically a given Content item. On publishing the content, a cache purger is triggered with the Content ID in question, which in turn figures out affected content Locations based on <a class="confluence-link" href="../../display/TECHDOC/Smart%2bHTTP%2bcache%2bclearing.html" data-linked-resource-id="30711239" data-linked-resource-version="3" data-linked-resource-type="page" data-linked-resource-default-alias="Smart HTTP cache clearing" data-base-url="../../index.html">Smart HTTP cache clearing</a> logic. The returned Location IDs are sent for purge using the purge type explained further below.</p><h2>Purge types</h2><h3>Symfony Proxy: Local purge type</h3><p>By default, invalidation requests will be emulated and sent to the Symfony Proxy cache Store. Cache purge will thus be synchronous, meaning no HTTP purge requests will be sent around when publishing.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="28ecd9c4-77a1-4da5-9656-5e4d3b14befe" data-macro-parameters="title=ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfc7c.png?definition=e2NvZGU6dGl0bGU9ZXpwbGF0Zm9ybS55bWx9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    http_cache:
+        purge_type: local</pre></td></tr></table><h3>Varnish: HTTP purge type</h3><p>With Varnish you can configure one or several servers that should be purged over HTTP. This purge type is asynchronous, and flushed by the end of Symfony kernel-request/console cycle <em>(during terminate event)</em>. Settings for purge servers can be configured per site group or site access:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="e841414f-8228-4c3b-a175-2eb45c4511cf" data-macro-parameters="title=ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfc7c.png?definition=e2NvZGU6dGl0bGU9ZXpwbGF0Zm9ybS55bWx9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    http_cache:
+        purge_type: http
+
+    system:
+        my_siteacess:
+            http_cache:
+                purge_servers: ["http://varnish.server1/", "http://varnish.server2/", "http://varnish.server3/"]</pre></td></tr></table><p>For further information on setting up Varnish, see <a class="confluence-link" href="../../display/TECHDOC/Using%2bVarnish.html" data-linked-resource-id="30711361" data-linked-resource-version="5" data-linked-resource-type="page" data-linked-resource-default-alias="Using Varnish" data-base-url="../../index.html">Using Varnish</a>.</p><h2>Purging</h2><p>While purging on content, updates are handled for you; on actions against the eZ Platform APIs, there are times you might have to purge manually.</p><h3>Manual by code</h3><p>Manual purging from code which takes <a class="confluence-link" href="../../display/TECHDOC/Smart%2bHTTP%2bcache%2bclearing.html" data-linked-resource-id="30711239" data-linked-resource-version="3" data-linked-resource-type="page" data-linked-resource-default-alias="Smart HTTP cache clearing" data-base-url="../../index.html">Smart HttpCache clearing&nbsp;</a>logic into account, this is using the service also used internally for cache clearing on content updates:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="caf72e5e-5a4c-4b2f-bf1d-d07d2c8a041a" data-macro-parameters="language=php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1802.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>// Purging cache based on content id, this will trigger cache clear of all locations found by Smart HttpCache clear
+// typically self, parent, related, ..
+$container->get('ezpublish.http_cache.purger')->purgeForContent(55);</pre></td></tr></table><h3><span style="color: rgb(0,98,147);">Manually by command with Symfony Proxy</span></h3><p>Symfony Proxy stores its cache in the Symfony cache directory, so a regular <code>cache:clear</code> commands will clear it:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="73c0ee25-9445-455c-844e-e555ea40a031" data-macro-parameters="language=bash" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading174f.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>php app/console --env=prod cache:clear</pre></td></tr></table><h3>Manual by HTTP BAN request on Varnish</h3><p>When using Varnish and in need to purge content directly, then the following examples show how this is done internally by our <span style="line-height: 1.42857;">FOSPurgeClient, and in turn </span>FOSHttpCache Varnish proxy client:</p><p>For purging all:</p><pre><code>BAN / HTTP 1.1 <br />Host: localhost <br />X-Location-Id: .* </code></pre><p>Or with given location ids <em>(here 123 and 234)</em>:<span style="color: rgb(0,128,0);"> </span></p><pre><code>BAN / HTTP 1.1 <br />Host: localhost <br />X-Location-Id: </code><span style="color: rgb(0,128,0);">^(123|234</span><span style="color: rgb(0,128,0);">)$</span></pre><p> </p><div class="highlight" style="margin-left: 0.0px;"><pre> </pre></div>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711238 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:39:40 GMT -->
+</html>

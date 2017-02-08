@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from doc.ez.no/display/TECHDOC/Multisite+using+content_root by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 08:45:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <title>Multisite using content_root - TECHDOC - eZ Documentation</title>
+
+        
+
+                        
+    
+                        
+    
+                        
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE,chrome=IE7">
+<meta charset="UTF-8">
+<meta id="confluence-context-path" name="confluence-context-path" content="">
+<meta id="confluence-base-url" name="confluence-base-url" content="../../index.html">
+
+<meta id="atlassian-token" name="atlassian-token" content="9996d8127abd36d1b757536de859090f8b455d10">
+
+
+<meta id="confluence-space-key" name="confluence-space-key" content="TECHDOC">
+<script type="text/javascript">
+        var contextPath = '';
+</script>
+
+    
+
+    <meta name="confluence-request-time" content="1485845557926">
+        
+    
+        
+            <meta name="ajs-is-space-admin" content=""> <meta name="ajs-has-space-config" content="">
+            <meta name="ajs-use-keyboard-shortcuts" content="true">
+            <meta name="ajs-discovered-plugin-features" content="$discoveredList">
+            <meta name="stp-license-product-name" content="Confluence"/> <meta name="stp-license-days-to-expiry" content="807"/> <meta name="stp-license-is-admin" content="false"/> <meta name="stp-license-should-keep-banner-hidden" content="true"/>
+            <meta name="ajs-keyboardshortcut-hash" content="206314443b3cf79696d4ad89324a059c">
+            <meta id="team-calendars-has-jira-link" content="true">
+            <meta name="ajs-team-calendars-display-time-format" content="displayTimeFormat12">
+            <meta id="team-calendars-user-timezone" content="UTC">
+            <script type="text/x-template" id="team-calendars-messages" title="team-calendars-messages"><fieldset class="i18n hidden"><input type="hidden" name="calendar3.month.long.july" value="July"><input type="hidden" name="calendar3.day.short.wednesday" value="Wed"><input type="hidden" name="calendar3.day.short.thursday" value="Thu"><input type="hidden" name="calendar3.month.short.march" value="Mar"><input type="hidden" name="calendar3.month.long.april" value="April"><input type="hidden" name="calendar3.month.long.october" value="October"><input type="hidden" name="calendar3.month.long.august" value="August"><input type="hidden" name="calendar3.month.short.july" value="Jul"><input type="hidden" name="calendar3.month.short.may" value="May"><input type="hidden" name="calendar3.month.short.november" value="Nov"><input type="hidden" name="calendar3.day.long.friday" value="Friday"><input type="hidden" name="calendar3.day.long.sunday" value="Sunday"><input type="hidden" name="calendar3.day.long.saturday" value="Saturday"><input type="hidden" name="calendar3.month.short.april" value="Apr"><input type="hidden" name="calendar3.day.long.wednesday" value="Wednesday"><input type="hidden" name="calendar3.month.long.december" value="December"><input type="hidden" name="calendar3.month.short.october" value="Oct"><input type="hidden" name="calendar3.day.long.monday" value="Monday"><input type="hidden" name="calendar3.month.short.june" value="Jun"><input type="hidden" name="calendar3.day.short.monday" value="Mon"><input type="hidden" name="calendar3.day.short.tuesday" value="Tue"><input type="hidden" name="calendar3.day.short.saturday" value="Sat"><input type="hidden" name="calendar3.month.long.march" value="March"><input type="hidden" name="calendar3.month.long.june" value="June"><input type="hidden" name="calendar3.month.short.february" value="Feb"><input type="hidden" name="calendar3.month.short.august" value="Aug"><input type="hidden" name="calendar3.month.short.december" value="Dec"><input type="hidden" name="calendar3.day.short.sunday" value="Sun"><input type="hidden" name="calendar3.month.long.february" value="February"><input type="hidden" name="calendar3.day.long.tuesday" value="Tuesday"><input type="hidden" name="calendar3.month.long.may" value="May"><input type="hidden" name="calendar3.month.long.september" value="September"><input type="hidden" name="calendar3.month.long.november" value="November"><input type="hidden" name="calendar3.month.short.january" value="Jan"><input type="hidden" name="calendar3.month.short.september" value="Sep"><input type="hidden" name="calendar3.day.long.thursday" value="Thursday"><input type="hidden" name="calendar3.month.long.january" value="January"><input type="hidden" name="calendar3.day.short.friday" value="Fri"></fieldset></script>
+            <meta name="ajs-is-confluence-admin" content="false">
+            <meta name="ajs-connection-timeout" content="10000">
+            
+    
+    
+            <meta name="ajs-page-id" content="30711289">
+            <meta name="ajs-latest-page-id" content="30711289">
+            <meta name="ajs-content-type" content="page">
+            <meta name="ajs-page-title" content="Multisite using content_root">
+            <meta name="ajs-parent-page-title" content="Features">
+            <meta name="ajs-parent-page-id" content="30711934">
+            <meta name="ajs-space-key" content="TECHDOC">
+            <meta name="ajs-space-name" content="TECHDOC">
+            <meta name="ajs-from-page-title" content="">
+            <meta name="ajs-can-remove-page" content="false">
+            <meta name="ajs-context-path" content="">
+            <meta name="ajs-base-url" content="https://doc.ez.no">
+            <meta name="ajs-version-number" content="5.8.5">
+            <meta name="ajs-build-number" content="5983">
+            <meta name="ajs-remote-user" content="">
+            <meta name="ajs-remote-user-key" content="">
+            <meta name="ajs-current-user-fullname" content="">
+            <meta name="ajs-current-user-avatar-url" content="">
+            <meta name="ajs-static-resource-url-prefix" content="/s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_">
+            <meta name="ajs-global-settings-attachment-max-size" content="10485760">
+            <meta name="ajs-user-locale" content="en_GB">
+            <meta name="ajs-enabled-dark-features" content="confluence-inline-comments-resolved,notification.plugin.api.enabled.com.atlassian.confluence.plugins.sharepage.api.ShareContentEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.mentions.api.ConfluenceMentionEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.security.ForgotPasswordEvent,pdf-preview,notification.plugin.api.enabled.com.atlassian.confluence.plugins.tasklist.event.SendTaskEmailEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.async.PageMovedEvent,previews.sharing,previews.versions,notification.plugin.api.enabled.com.atlassian.confluence.plugins.files.notifications.event.FileContentUpdateEvent,file-annotations,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.attachment.AttachmentBatchUploadCompletedEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.comment.CommentCreateEvent,notification.plugin.api.enabled.com.atlassian.confluence.efi.emails.events.OnboardingLessUsersEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.files.notifications.event.FileContentRemoveEvent,atlassian.aui.raphael.disabled,previews.conversion-service,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.comment.CommentUpdateEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.follow.FollowEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.async.PageEditedEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.blogpost.BlogPostCreateEvent,previews.trigger-all-file-types,notification.plugin.api.enabled.com.atlassian.confluence.plugins.inlinecomments.events.InlineCommentResolveEvent,notification.plugin.api.enabled.com.atlassian.confluence.event.events.like.LikeCreatedEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.inlinecomments.events.InlineCommentCreateEvent,previews.sharing.pushstate,confluence-inline-comments-rich-editor,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.blogpost.BlogPostUpdateEvent,file-annotations.likes,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.page.async.PageCreatedEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.files.notifications.event.FileContentMentionUpdateEvent,notification.plugin.api.enabled.com.atlassian.confluence.efi.emails.events.OnboardingNoSpaceCreatedEvent,notification.plugin.api.enabled.com.atlassian.confluence.plugins.hipchat.api.events.HipChatUserMapped,notification.plugin.api.enabled.com.atlassian.confluence.plugins.sharepage.api.ShareAttachmentEvent,confluence-inline-comments,confluence-inline-comments-dangling-comment,notification.plugin.api.enabled.com.atlassian.confluence.event.events.content.blogpost.BlogPostMovedEvent">
+            <meta name="ajs-atl-token" content="9996d8127abd36d1b757536de859090f8b455d10">
+            <meta name="ajs-confluence-flavour" content="VANILLA">
+            <meta name="ajs-user-date-pattern" content="dd MMM yyyy">
+            <meta name="ajs-date.format" content="MMM dd, yyyy">
+    
+    <link rel="shortcut icon" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_/favicon.ico">
+
+<link rel="search" type="application/opensearchdescription+xml" href="../../opensearch/osd.action" title="eZ Documentation"/>
+
+<script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-nps-plugin:atlassian-nps-plugin-resources.is-server-instance-data-provider"]="true";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.confluence.plugins.confluence-license-banner:confluence-license-banner-resources.license-details"]="{\"daysBeforeLicenseExpiry\":0,\"daysBeforeMaintenanceExpiry\":0,\"showLicenseExpiryBanner\":false,\"showMaintenanceExpiryBanner\":false,\"renewUrl\":null,\"salesEmail\":null}";
+WRM._unparsedData["com.atlassian.confluence.plugins.confluence-hipchat-integration-plugin:discovery-javascript-data.link-active"]="{\"linkActive\":false,\"conditionsMet\":true,\"admin\":false}";
+WRM._unparsedData["com.atlassian.plugins.atlassian-nps-plugin:nps-acknowledgement-resources.analytics-enabled-data-provider"]="\"false\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-nps-plugin:nps-acknowledgement-resources.sen-data-provider"]="\"SEN-2255945\"";
+WRM._unparsedData["com.atlassian.confluence.plugins.confluence-feature-discovery-plugin:confluence-feature-discovery-plugin-resources.test-mode"]="false";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:api.feature-data-provider"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/fcf875d0c4710a8c828036f5c6fb7fa5-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/b8d35340d2d85de2791f14a4692ecf7b/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batchd6a4.css?highlightactions=true&amp;flavour=VANILLA&amp;locale=en-GB" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/6c0981174e94142364564819dc0d1413-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/b8d35340d2d85de2791f14a4692ecf7b/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general,page,atl.comments/batch.css?conditionalComment=lt+IE+9&amp;locale=en-GB" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/7893b9affdc3bf828ad93d0610d3d5f3-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/b8d35340d2d85de2791f14a4692ecf7b/_/download/contextbatch/css/atl.confluence.plugins.pagetree-desktop,main,viewcontent,atl.general,page,atl.comments/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/3a21f7b21af4c67045d1e0255f2ac570/_/download/contextbatch/css/theme.doc/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.1.7/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext.newcode-macro-plugin_syntaxhighl" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.1.7/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext.newcode-macro-plugin_sh-theme-ec" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/3.7.2/_/download/batch/confluence.extra.information_information-plugin/confluence.extra.information_information-plugin-adg-styles.cc" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+<script type="text/javascript" src="../../s/1f7b22082ef39a4bb134622dae929bdc-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/js/batch32f4.js?atlassian.aui.raphael.disabled=true&amp;locale=en-GB&amp;build-number=5983" ></script>
+<script type="text/javascript" src="../../s/aa56759c03dcb293b394c4b46058625c-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/b8d35340d2d85de2791f14a4692ecf7b/_/download/contextbatch/js/atl.confluence.plugins.pagetree-desktop%2cmain%2cvi/batcha41c.js?highlightactions=true&amp;flavour=VANILLA&amp;locale=en-GB&amp;anonymous-access-enabled=true&amp;is-server-instance=true&amp;hostenabled=true" ></script>
+<script type="text/javascript" src="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.1.7/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext-2.newcode-macro-plugin_syntaxhighl" ></script>
+<script type="text/javascript" src="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.1.7/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext-3.newcode-macro-plugin_syntaxhighl" ></script>
+<script type="text/javascript" src="../../s/6c0981174e94142364564819dc0d1413-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/2.1.7/_/download/batch/com.atlassian.confluence.ext.newcode-macro-plug/com.atlassian.confluence.ext.newcode-macro-plugin_syntaxhighl?locale=en-GB" ></script>
+
+
+        
+            <meta name="stp-license-product-name" content="Confluence"/> <meta name="stp-license-days-to-expiry" content="807"/> <meta name="stp-license-is-admin" content="false"/> <meta name="stp-license-should-keep-banner-hidden" content="true"/>
+    
+
+        
+        <meta name="ajs-site-title" content="eZ Documentation" />
+
+    
+    
+
+    
+                <link rel="canonical" href="Multisite%2busing%2bcontent_root.html">
+        <link rel="shortlink" href="Multisite%2busing%2bcontent_root.html">
+    <meta name="wikilink" content="[TECHDOC:Multisite using content_root]">
+    <meta name="page-version" content="4">
+
+</head>
+
+<body             onload="placeFocus()"
+     id="com-atlassian-confluence" class="theme-documentation  aui-theme-default aui-layout">
+
+        
+            <div id='stp-licenseStatus-banner'></div>
+    <div id="full-height-container">
+    <div id="header-precursor">
+        
+                    </div>
+
+
+
+
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation"><div class="aui-header-inner"><div class="aui-header-before"><a class=" aui-dropdown2-trigger app-switcher-trigger" aria-owns="app-switcher" aria-controls="app-switcher" aria-haspopup="true" data-aui-trigger href="#app-switcher"><span class="aui-icon aui-icon-small aui-iconfont-appswitcher">Linked Applications</span></a><div id="app-switcher" class="aui-dropdown2 aui-style-default"><div class="app-switcher-loading">Loading&hellip;</div></div><script>
+            (function (NL) {
+                var initialise = function () {
+                    // For some milestones of AUI, the atlassian soy namespace was renamed to aui. Handle that here by ensuring that window.atlassian is defined.
+                    window.atlassian = window.atlassian || window.aui;
+                    new NL.AppSwitcher({
+                        dropdownContents: '#app-switcher'
+                    });
+                };
+                if (NL.AppSwitcher) {
+                    initialise();
+                } else {
+                    NL.onInit = initialise;
+                }
+            }(window.NL = (window.NL || {})));
+            window.NL.isUserAdmin = false</script></div><div class="aui-header-primary"><h1 id="logo" class="aui-header-logo aui-header-logo-custom"><a href="../../index.html"><img src="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_/images/logo/atl.site.logo" alt="eZ Documentation" /></a></h1><ul class="aui-nav">
+                            <li>
+            
+        
+        
+<a  id="space-directory-link" href="../../spacedirectory/view.html"  class=" aui-nav-imagelink"   title="Spaces">
+            <span>Spaces</span>
+    </a>
+        </li>
+                            <li id="browseMenu" role="menu">
+            
+    
+        <a id="browse-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="browse-menu-link-content" title="Browse">
+        <span class="browse">Browse</span>
+    </a>
+    <nav id="browse-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                                <ul  id="browse-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+    
+            
+<a  id="space-pages-link" href="../../pages/listpages-alphaview9287.html?key=TECHDOC" class="    "      title="Browse pages in the TECHDOC space" >
+        Pages
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-blogposts-link" href="../../pages/viewrecentblogposts9287.html?key=TECHDOC" class="    "      title="Browse blogs in the TECHDOC space" >
+        Blog
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-labels-link" href="../../labels/listlabels-heatmap9287.html?key=TECHDOC" class="    "      title="Browse labels in the TECHDOC space" >
+        Labels
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="space-advanced-link" href="../../spaces/viewspacesummary9287.html?key=TECHDOC" class="    "      title="Browse additional space functions in the TECHDOC space" >
+        Space Operations
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    
+        </li>
+        </ul>
+</div><div class="aui-header-secondary"><ul class="aui-nav">
+            <li>
+        
+    
+            
+<a  id="doctheme-anchor" href="#"  class=" aui-nav-imagelink"   title="">
+            <span></span>
+    </a>
+    </li>
+                    <li>
+        <form id="quick-search" class="aui-quicksearch dont-default-focus header-quicksearch" action="https://doc.ez.no/dosearchsite.action" method="get"><fieldset><input type="hidden" name="where" value="TECHDOC"/><input type="hidden" name="spaceSearch" value="true"/><label for="quick-search-query" class="assistive">Quick Search</label><input id="quick-search-query" class="text app-search search quick-search-query" type="text" accessKey="q" autocomplete="off" name="queryString" title="Quick Search" placeholder="Search space" /><input id="quick-search-submit" class="quick-search-submit" type="submit" value="Search"/><div class="aui-dd-parent quick-nav-drop-down"></div></fieldset></form>
+    </li>
+        <li>
+            
+        <a id="help-menu-link" class="aui-nav-link aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="help-menu-link-content" title="Help">
+        <span class="aui-icon aui-icon-small aui-iconfont-help">Help</span>
+    </a>
+    <nav id="help-menu-link-content" class="aui-dropdown2 aui-style-default" aria-hidden="true">
+                    <div class="aui-dropdown2-section">
+                                <ul  id="help-menu-link-leading" class="aui-list-truncate section-leading first">
+                                            <li>
+        
+            
+<a  id="confluence-help-link" href="https://docs.atlassian.com/confluence/docs-58/Getting+Help+And+Support" class="    "      title="Visit the Confluence documentation home"  target="_blank"
+>
+        Online Help
+</a>
+</li>
+                                            <li>
+    
+                
+<a  id="keyboard-shortcuts-link" href="#" class="    "      title="View available keyboard shortcuts" >
+        Keyboard Shortcuts
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="feed-builder-link" href="../../dashboard/configurerssfeed.html" class="    "      title="Create your custom RSS feed." >
+        Feed Builder
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="whats-new-menu-link" href="https://docs.atlassian.com/confluence/docs-58/whatsnew/iframe" class="    "      title="" >
+        What’s new
+</a>
+</li>
+                                            <li>
+    
+                
+<a  id="gadget-directory-link" href="#" class="   user-item administration-link "      title="Browse gadgets provided by Confluence" >
+        Available Gadgets
+</a>
+</li>
+                                            <li>
+    
+            
+<a  id="confluence-about-link" href="../../aboutconfluencepage.html" class="    "      title="Get more information about Confluence" >
+        About Confluence
+</a>
+</li>
+                                    </ul>
+            </div>
+            </nav>
+    
+    </li>
+        <li>
+                
+    
+    </li>
+        <li>
+            
+    </li>
+        <li>
+                                            <li>
+        
+            
+<a  id="login-link" href="../../login27f5.html?os_destination=%2Fdisplay%2FTECHDOC%2FMultisite%2Busing%2Bcontent_root" class="   user-item login-link "      title="" >
+        Log in
+</a>
+</li>
+                        
+    </li>
+    </ul>
+</div></div><!-- .aui-header-inner--></nav><!-- .aui-header -->
+    <br class="clear">
+</header>
+
+    <div id="splitter">
+    <div id="splitter-sidebar"  class="padding-div" >
+        
+        <p>&nbsp;</p>
+<h4><a name="Multisiteusingcontent_root-&amp;nbsp;General"></a>&nbsp; General</h4>
+<p><font color="#999">&bull;</font>&nbsp;&nbsp;<a href="http://ez.no/" class="external-link" rel="nofollow">eZ Systems Website</a><br/>
+<font color="#999">&bull;</font>&nbsp;&nbsp;<a href="../DEVELOPER/Documentation.html" class="external-link" rel="nofollow">Technical documentation</a><br/>
+<font color="#999">&bull;</font>&nbsp;&nbsp;<a href="../USER.html" class="external-link" rel="nofollow">Editor documentation</a></p>
+
+<p>This Documentation contains:<br/>
+&nbsp;<br/>
+<a href="eZ%2bTechnical%2bManual.html"><strong>Technical documentation:</strong></a></p>
+    
+
+                    
+    
+
+
+<div class="plugin_pagetree">
+
+        
+        
+    <ul class="plugin_pagetree_children_list plugin_pagetree_children_list_noleftspace">
+        <div class="plugin_pagetree_children">
+        </div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input type="hidden" name="treeId" value="">
+        <input type="hidden" name="treeRequestId" value="/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=false&amp;sort=position&amp;reverse=false&amp;disableLinks=false&amp;expandCurrent=false">
+        <input type="hidden" name="treePageId" value="30711289">
+
+        <input type="hidden" name="noRoot" value="false">
+        <input type="hidden" name="rootPageId" value="30711113">
+
+        <input type="hidden" name="rootPage" value="">
+        <input type="hidden" name="startDepth" value="0">
+        <input type="hidden" name="spaceKey" value="TECHDOC" >
+
+        <input type="hidden" name="i18n-pagetree.loading" value="Loading...">
+        <input type="hidden" name="i18n-pagetree.error.permission" value="Unable to load page tree. It seems that you do not have permission to view the root page.">
+        <input type="hidden" name="i18n-pagetree.eeror.general" value="There was a problem retrieving the page tree. Please check the server log file for more information.">
+        <input type="hidden" name="loginUrl" value="/login.action?os_destination=%2Fpages%2Fviewpage.action%3FspaceKey%3DTECHDOC%26title%3DMultisite%2Busing%2Bcontent_root">
+        <input type="hidden" name="mobile" value="false">
+
+                <fieldset class="hidden">
+                                                <input type="hidden" name="ancestorId" value="30711934">
+                                    <input type="hidden" name="ancestorId" value="30711113">
+                                    </fieldset>
+    </fieldset>
+</div>
+
+
+
+            </div>
+    <div id="splitter-content">
+
+                    <script type="text/javascript" src="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5.8.5/_/download/resources/com.atlassian.confluence.plugins.doctheme_resources/doc-theme.js"></script>
+    
+                        
+        <div id="theme-header">
+            <div class="sectionColumnWrapper"><div class="sectionMacro">
+<div class="sectionMacroRow"><div class="columnMacro"></div>
+<div class="columnMacro">
+<div class="panel" style="background-color: #EDBB43;border-color: #F58220;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: #EDBB43;">
+<p><br class="atl-forced-newline" /> <br class="atl-forced-newline" />
+<strong>⚠ WARNING ! This documentation is deprecated !</strong><br class="atl-forced-newline" /> <br class="atl-forced-newline" /> </p>
+<h1><a name="Multisiteusingcontent_root-Pleasegoto[thecurrentTechnicalDocumentation|DEVELOPER:]\\\\"></a>Please go to <a href="../DEVELOPER/Documentation.html">the current Technical Documentation</a><br class="atl-forced-newline" /> <br class="atl-forced-newline" /></h1>
+<p><span class="image-wrap" style=""><img src="../../download/attachments/30711113/smashingkeybrdd731.gif?version=1&amp;modificationDate=1464177849000&amp;api=v2" style="border: 0px solid black" /></span></p>
+</div></div></div><div class="columnMacro"></div></div></div></div>
+        </div>
+    
+            
+<div id="main"  class="aui-page-panel" >
+    <div id="main-header">
+        
+        
+    <div id="navigation" class="content-navigation view">
+                    <ul class="ajs-menu-bar">
+                                                        
+                    
+        <li class="normal ajs-menu-item">
+        <a id="action-menu-link" class="action aui-dropdown2-trigger-arrowless aui-button aui-button-subtle ajs-menu-title aui-dropdown2-trigger" href="#" aria-haspopup="true" aria-owns="action-menu" data-container="#navigation">
+            <span>
+                                    <span class="aui-icon aui-icon-small aui-iconfont-more"></span>
+                                
+            </span>
+        </a>         <div id="action-menu" class="aui-dropdown2 aui-style-default">
+                            <ul  id="action-menu-primary"                     class="section-primary first aui-dropdown2-section">
+                                            <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="view-attachments-link" href="../../pages/viewpageattachmentsafca.html?pageId=30711289" rel="nofollow" class="action-view-attachments"  accessKey="t"  title="View Attachments">
+                <span>
+                        A<u>t</u>tachments (0)
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="action-view-history-link" href="../../pages/viewpreviousversionsafca.html?pageId=30711289" rel="nofollow" class="action-view-history"   title="">
+                <span>
+                        Page History
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="action-page-permissions-link" href="../../pages/viewinfoafca.html?pageId=30711289" rel="nofollow" class="action-page-permissions"   title="Edit restrictions">
+                <span>
+                        Restrictions
+        </span>    </a>
+</li>
+                                </ul>
+                            <ul  id="action-menu-secondary"                     class="section-secondary aui-dropdown2-section">
+                                            <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="view-page-info-link" href="../../pages/viewinfoafca.html?pageId=30711289" rel="nofollow" class="action-view-info"   title="">
+                <span>
+                        Page Information
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+            
+                                            
+    
+    
+    <a  id="view-resolved-comments" href="#" rel="nofollow" class=""   title="">
+                <span>
+                        Resolved comments
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="link-to-page-link" href="../../pages/viewinfoafca.html?pageId=30711289" rel="nofollow" class=""   title="Link to this Page">
+                <span>
+                        Link to this Page…
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="view-in-hierarchy-link" href="../../pages/listpages-dirviewc573.html?key=TECHDOC&amp;openId=30711289#selectedPageInHierarchy" rel="nofollow" class=""   title="">
+                <span>
+                        View in Hierarchy
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="action-view-source-link" href="../../plugins/viewsource/viewpagesrcafca.html?pageId=30711289" rel="nofollow" class="action-view-source popup-link"   title="">
+                <span>
+                        View Source
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="action-export-pdf-link" href="../../download/temp/pdfexport-20170131-310117-0845-2833/TECHDOC-Multisiteusingcontent_root-310117-0845-2834f1f7.pdf?pageId=30711289" rel="nofollow" class=""   title="">
+                <span>
+                        Export to PDF
+        </span>    </a>
+</li>
+                                        <li>
+
+    
+        
+                                            
+    
+    
+    <a  id="action-export-word-link" href="../../exportwordafca?pageId=30711289" rel="nofollow" class="action-export-word"   title="">
+                <span>
+                        Export to Word
+        </span>    </a>
+</li>
+                                </ul>
+                    </div>
+    </li>
+            </ul>
+    </div>
+
+        
+                <div id="title-heading" class="pagetitle with-breadcrumbs">
+        
+                            <div class="space-logo " data-key="TECHDOC" data-name="TECHDOC" data-entity-type="confluence.space">
+            <a><img class="logo space custom" src="../../download/attachments/30711109/TECHDOCd78e?version=1&amp;modificationDate=1449834628000&amp;api=v2" alt=""></a>
+        </div>            
+                            <div id="breadcrumb-section">
+                    
+    
+    
+    <ol id="breadcrumbs">
+                                        
+                        
+        <li class="first" >
+                        
+                            <span class=""><a href="eZ%2bTechnical%2bManual.html">TECHDOC</a></span>
+                                                                    
+                        
+        <li>
+                        
+                            <span class=""><a href="eZ%2bTechnical%2bManual.html">eZ Technical Manual</a></span>
+                                                                    
+                        
+        <li>
+                        
+                            <span class=""><a href="Features.html">Features</a></span>
+                                                    </ol>
+
+
+                </div>
+            
+            <h1 id="title-text" class="with-breadcrumbs">
+                                        <a href="Multisite%2busing%2bcontent_root.html">Multisite using content_root</a>
+                            </h1>
+        </div>
+    </div>
+
+    
+
+    
+    
+    
+    
+    
+
+        
+
+
+
+
+        
+
+
+
+
+    
+
+    
+
+    
+
+
+
+
+
+
+
+    
+    
+        
+    
+    
+                    
+    
+
+    
+
+
+<div id="content" class="page view">
+    
+
+
+<div id="action-messages">
+                        </div>
+
+
+
+        <script type="text/x-template" title="searchResultsGrid">
+    <table class="aui">
+        <thead>
+            <tr class="header">
+                <th class="search-result-title">Page Title</th>
+                <th class="search-result-space">Space</th>
+                <th class="search-result-date">Updated</th>
+            </tr>
+        </thead>
+    </table>
+</script>
+<script type="text/x-template" title="searchResultsGridCount">
+    <p class="search-result-count">{0}</p>
+</script>
+<script type="text/x-template" title="searchResultsGridRow">
+    <tr class="search-result">
+        <td class="search-result-title"><a href="{1}" class="content-type-{2}"><span>{0}</span></a></td>
+        <td class="search-result-space"><a class="space" href="/display/{4}/" title="{3}">{3}</a></td>
+        <td class="search-result-date"><span class="date" title="{6}">{5}</span></td>
+    </tr>
+</script>
+        
+    
+    
+        <fieldset class="hidden parameters">
+            <input type="hidden" title="parentPageId" value="30711934">
+        </fieldset>
+
+                            
+    
+
+                    
+
+        
+        <a href="#page-metadata-end" class="assistive">Skip to end of metadata</a>
+<div id="page-metadata-start" class="assistive"></div>
+
+    <div class="page-metadata">
+        <ul>
+                            <li class="page-metadata-item noprint">
+
+    
+            
+                                            
+    
+    
+    <a  id="content-metadata-page-restrictions" href="#" rel="nofollow" class="hidden"   title="Restrictions apply">
+                    <img alt="" src="../../download/resources/com.atlassian.confluence.plugins.confluence-page-banner_page-banner-resources/images/red_padlock.png" height="16" width="16" title="">
+                <span>
+                        
+        </span>    </a>
+</li>
+                        <li class="page-metadata-modification-info">
+                
+        
+    
+        
+    
+        
+            
+            Created by <span class='author'>     <a href="../../login6716.html"
+                       class="url fn"
+                            >Bertrand Dunogier</a></span>, last modified by <span class='editor'>     <a href="../../login2ee6.html"
+                       class="url fn"
+                            >André Rømcke</a></span> on <a class='last-modified' title='Show changes' href='../../pages/diffpagesbyversion8a1c.html?pageId=30711289&amp;selectedPageVersions=3&amp;selectedPageVersions=4'>Feb 10, 2016</a>
+                </li>
+        </ul>
+    </div>
+
+
+<a href="#page-metadata-start" class="assistive">Go to start of metadata</a>
+<div id="page-metadata-end" class="assistive"></div>
+
+        
+        <fieldset class="hidden parameters">
+                        <input type="hidden" title="browsePageTreeMode" value="view">
+        </fieldset>
+
+        <div id="main-content" class="wiki-content">
+                           
+        <p>With eZ Platform it is possible to serve multiple, completely different sites using one eZ Platform instance and database.</p><p>Each site will have its own content root, at a lower level than the default one (location number 2). One backoffice can be used for each site, but it is also possible to use a global one.</p><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>This feature is a reimplementation of the <a href="../../eZ-Publish/Technical-manual/4.x/Reference/Configuration-files/site.ini/SiteAccessSettings/PathPrefix.html" class="external-link" rel="nofollow">PathPrefix</a> one that existed in eZ Publish Legacy.</p></div></div><h2 id="Multisiteusingcontent_root-Configuration">Configuration</h2><p>The feature is configured in <code>ezplatform.yml</code>, either at siteaccess or siteaccess group level:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<script type="syntaxhighlighter" class="brush: plain; gutter: false; theme: Eclipse"><![CDATA[ezpublish:
+	system:
+		ezdemo_site_group:
+			content:
+				tree_root:
+                    # Root locationId. Default is top locationId
+					location_id: 123
+                    # Every URL aliases starting with those prefixes will be considered 
+                    # being outside of the subtree starting at root_location.
+                    # Default value is an empty array.
+                    # Prefixes are not case sensitive.
+					excluded_uri_prefixes: [ /media, /images ]]]></script>
+</div></div><h3 id="Multisiteusingcontent_root-content.tree_root.location_id"><code>content.tree_root.location_id</code></h3><p>This parameter sets the Location ID of the content root. The API is jailed within this root, and nothing above this level will be accessible by default. This parameter can be filtered using the <code>excluded_uri_prefixes</code> parameter described below.</p><h3 id="Multisiteusingcontent_root-content.tree_root.excluded_uri_prefixes"><code>content.tree_root.excluded_uri_prefixes</code></h3><p>Use this parameter to exclude a list of URI from the root jail defined using <code>location_id</code> described above. Add as many locations pathString as you like. In the example above, the Media and Images folders will be accessible using their own URI even though they're not below <code>tree_root.location_id</code>.</p><div class="confluence-information-macro confluence-information-macro-note"><p class="title">Note</p><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p>Leading slashes (<code>/</code>) are automatically trimmed internally by eZ Platform, so they can be ignored.</p></div></div>
+
+                
+        
+    
+        </div>
+
+        <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://doc.ez.no/display/TECHDOC/Multisite+using+content_root"
+    dc:identifier="https://doc.ez.no/display/TECHDOC/Multisite+using+content_root"
+    dc:title="Multisite using content_root"
+    trackback:ping="https://doc.ez.no/rpc/trackback/30711289"/>
+</rdf:RDF>
+-->
+
+            
+    
+
+
+
+<div id="labels-section" class="pageSection group">
+    <div class="labels-section-content content-column" entityid="30711289" entitytype="page">
+	<div class="labels-content">
+		
+    <ul class="label-list label-list-right ">
+                    
+        <li class="aui-label " data-label-id="27262989"><a class="aui-label-split-main" href="../../label/TECHDOC/pathprefix.html" rel="tag">pathprefix</a></li><li class="aui-label " data-label-id="31883276"><a class="aui-label-split-main" href="../../label/TECHDOC/multisite.html" rel="tag">multisite</a></li>
+            </ul>
+
+    </div>
+</div>
+</div>
+
+            
+            
+
+
+
+
+            
+    
+
+
+
+
+
+
+
+
+                        
+    
+<div id="comments-section" class="pageSection group">
+                <div class="section-header">
+            <h2 id="comments-section-title" class="section-title">
+                                    1 Comment
+                            </h2>
+        </div>
+    
+    
+
+            <ol class="comment-threads top-level" id="page-comments">
+                    <li id="comment-thread-30711290" class="comment-thread">
+        <div class="comment  " id="comment-30711290">
+        <p class="comment-user-logo">
+            <img class="userLogo logo anonymous" src="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/_/images/icons/profilepics/anonymous.png"
+           alt="User icon: philippe.vincent-royol@ez.no" title="philippe.vincent-royol@ez.no">        </p>
+        <div class="comment-header">
+            <h4 class="author">    <a href="../../logina3c6.html"
+                       class="url fn"
+                            >Philippe Vincent-Royol</a></h4>
+        </div>
+        <div class="comment-body">
+            <div class="comment-content wiki-content">
+                <p>Same comment as <a href="2caec.html?focusedCommentId=30711123#comment-30711123" rel="nofollow">Re: 2. Browsing, finding, viewing</a></p>
+            </div>
+            <div class="comment-actions">
+                                                <ul class="comment-actions-secondary">
+                                                              <li class="first comment-permalink"><a title="Permanent link to this comment" href="Multisite%2busing%2bcontent_roota357.html?focusedCommentId=30711290#comment-30711290"
+                 id="comment-permalink-30711290"                     ><span>Permalink</span></a></li>
+            </ul>
+                                    <ul class="comment-actions-primary">
+                                                              <li class="first comment-date"><a title="Dec 12, 2015 00:04" href="Multisite%2busing%2bcontent_roota357.html?focusedCommentId=30711290#comment-30711290"
+                                    ><span>Dec 12, 2015</span></a></li>
+            </ul>
+                </div>
+        </div>
+    </div>
+
+    <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+         <rdf:Description
+    rdf:about="https://doc.ez.no/display/TECHDOC/Multisite+using+content_root?focusedCommentId=30711290#comment-30711290"
+    dc:identifier="https://doc.ez.no/display/TECHDOC/Multisite+using+content_root?focusedCommentId=30711290#comment-30711290"
+    dc:title="Multisite using content_root"
+    trackback:ping="https://doc.ez.no/rpc/trackback/30711290"/>
+</rdf:RDF>
+-->
+
+    
+</li>
+            </ol>
+
+
+</div>
+
+
+            
+</div>
+
+
+    
+
+
+
+
+    
+    
+
+    
+    
+    
+
+
+
+
+
+
+
+
+</div>
+  
+        <div id="theme-footer">
+            <p>© 1999-2016 <a href="http://ez.no/" class="external-link" rel="nofollow">eZ Systems AS</a> and others</p>
+        </div>
+    
+    </div>
+</div>
+
+
+        
+            
+            
+
+<div id="footer" role="contentinfo">
+    <section class="footer-body">
+
+                                                            <p class="license license-opensource">
+                    Powered by a free <b>Atlassian Confluence Open Source Project License</b> granted to eZ Publish. <a href="http://www.atlassian.com/c/conf/11461">Evaluate Confluence today</a>.<br>
+                </p>
+                    
+        
+
+        <ul id="poweredby">
+            <li class="noprint">Powered by <a href="http://www.atlassian.com/software/confluence" class="hover-footer-link">Atlassian Confluence</a> <span id='footer-build-information'>5.8.5</span>, <a href="http://www.atlassian.com/software/confluence/overview/team-collaboration-software?utm_source=confluence-footer" class="hover-footer-link">Team Collaboration Software</a></li>
+            <li class="print-only">Printed by Atlassian Confluence 5.8.5, Team Collaboration Software.</li>
+            <li class="noprint"><a href="https://jira.atlassian.com/browse/CONF" class="hover-footer-link">Report a bug</a></li>
+            <li class="noprint"><a href="http://www.atlassian.com/about/connected.jsp?s_kwcid=Confluence-stayintouch" class="hover-footer-link">Atlassian News</a></li>
+        </ul>
+
+        
+
+        <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+
+                    <script>
+AJS.toInit(function(){
+ if(AJS.params.spaceKey &&
+    AJS.params.spaceKey === 'MAIN' ||
+    AJS.params.spaceKey === 'EZMA' ||
+    AJS.params.spaceKey === 'ODC' ||
+    AJS.params.spaceKey === 'EZP50' ||
+    AJS.params.spaceKey === 'EZP51' ||
+    AJS.params.spaceKey === 'EZP52' ||
+    AJS.params.spaceKey === 'EZPCLOUD' ||
+    AJS.params.spaceKey === 'EZP' ||
+    AJS.params.spaceKey === 'TECHDOC' ||
+    AJS.params.spaceKey === 'USERGUIDE' ||
+    AJS.params.spaceKey === 'EZRECO'
+){
+
+(function()
+{var isSecure=('https:'==document.location.protocol);var ff=document.createElement('script');ff.type='text/javascript';ff.async=true;ff.src=(isSecure?'https':'http')+'://'+(isSecure?'secure.':'lb.')+'liveviewer.ez.no/statjs/sst-120-1304513615/stat.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ff,s);}
+)();
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-303624-13', 'ez.no');
+  ga('send', 'pageview');
+}}
+);
+</script>
+        
+    </section>
+</div>
+
+    </div>
+</body>
+
+<!-- Mirrored from doc.ez.no/display/TECHDOC/Multisite+using+content_root by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 08:45:48 GMT -->
+</html>

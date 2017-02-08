@@ -1,0 +1,106 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31429667 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:39:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage1195.html?pageId=31429667" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/6/_/styles/colors74cd.css?spaceKey=DEVELOPER" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/6/_/styles/custom74cd.css?spaceKey=DEVELOPER" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <div class="contentLayout2">
+<div class="columnLayout two-right-sidebar" data-layout="two-right-sidebar">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h1>Introduction</h1><p>Sessions are handled by the Symfony2 framework, specifically API and underlying session handlers provided by HTTP Foundation component. This is further enhanced in eZ Platform with support for siteaccess-aware <span class="confluence-link">session cookie configuration</span>.</p><p><em>Use of Memcached (or experimentally using PDO) as session handler is a requirement in Cluster setup, for details see below. For an overview of clustering feature see <a class="confluence-link" href="../../display/DEVELOPER/Clustering.html" data-linked-resource-id="31430387" data-linked-resource-version="19" data-linked-resource-type="page" data-linked-resource-default-alias="Clustering" data-base-url="https://doc.ez.no">Clustering</a>. </em></p><p><em><br /></em></p><h1>Configuration</h1><p>Symfony offers the possibility to change many session options at application level (i.e. in Symfony <a href="http://symfony.com/doc/master/reference/configuration/framework.html"><code>framework </code>configuration</a>), such as:</p><ul><li><code>cookie_domain</code></li><li><code>cookie_path</code></li><li><code>cookie_lifetime</code></li><li><code>cookie_secure</code></li><li><code>cookie_httponly</code></li></ul><p>However as eZ Platform can be used for setting up several web sites within on Symfony application, session configuration is also possible to define per siteaccess and SiteGroup level.</p><h2><span style="color: rgb(0,98,147);">Session options per siteaccess</span></h2><p>All site-related session configuration can be defined per siteaccess and SiteGroup:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="d8d8c311-3dc1-4719-888a-cb4dcbd4ad8d" data-macro-parameters="language=bash|title=ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading510d.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaHx0aXRsZT1lenBsYXRmb3JtLnltbH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    system:
+        my_siteaccess:
+            session:
+                # By default Session name is eZSESSID{siteaccess_hash}
+                # with setting below you'll get eZSESSID{name},
+                # allowing you to share sessions across SiteAccess
+                name: my_session_name
+                # These are optional. 
+                # If not defined they will fallback to Symfony framework configuration, 
+                # which itself fallback to default php.ini settings
+                cookie_domain: mydomain.com
+                cookie_path: /foo
+                cookie_lifetime: 86400
+                cookie_secure: false
+                cookie_httponly: true</pre></td></tr></table><h2>Session name per siteaccess</h2><p>In 5.x versions prior to 5.3 / 2014.03 the following siteaccess aware session setting where available:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="773ca2fd-d0bc-4a8a-b518-4d1891a4ad49" data-macro-parameters="language=bash|title=ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading510d.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaHx0aXRsZT1lenBsYXRmb3JtLnltbH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    system:
+        my_siteaccess:
+            # By default Session name is eZSESSID{siteaccess_hash}
+            # with setting below you'll get eZSESSID{name},
+            # allowing you to share sessions across SiteAccess
+            # This setting is deprecated as of 5.3
+            session_name: my_session_name</pre></td></tr></table><p> </p><p><em><br /></em></p><h1>Usage<em><br /></em></h1><h2>Session handlers</h2><p>In Symfony, a session handler is configured using <code>framework.session.handler_id.</code> Symfony can be configured to use <span>custom handlers</span>, or just fallback to what is configured in PHP by setting it to null (<code>~</code>).</p><h3>Default configuration</h3><p>eZ Platform uses the same default configuration as recent versions of Symfony standard distribution. This makes sure you can configure sessions purely in PHP by default, and allows Debian/Ubuntu session file cleanup cronjob to work as intended.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="807c698b-68a5-4639-bfad-c2584e40621a" data-macro-parameters="language=powershell|title=Default config.yml session configuration" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading0852.png?definition=e2NvZGU6bGFuZ3VhZ2U9cG93ZXJzaGVsbHx0aXRsZT1EZWZhdWx0IGNvbmZpZy55bWwgc2Vzc2lvbiBjb25maWd1cmF0aW9ufQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>framework:
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~</pre></td></tr></table><h3>Recommendations for production setup</h3><h4>Single server setup</h4><p>For single server, default handler should be preferred.</p><h4>Cluster setup</h4><p>For <a class="confluence-link" href="../../display/DEVELOPER/Clustering.html" data-linked-resource-id="31430387" data-linked-resource-version="19" data-linked-resource-type="page" data-linked-resource-default-alias="Clustering" data-base-url="../../index.html">Cluster</a> setup we need to configure Sessions to use a backend that is shared between web servers and supports locking. Only options out of the box supporting this in Symfony are the native PHP memcached session save handler provided by the php-memcache<u>d</u> extension, and Symfony session handler for PDO (database).</p><h5>Storing sessions in Memcached using php-memcached</h5><p>For setting up eZ Platform using memcached you'll need to configure the session save handler settings in php.ini as documented <a href="http://php.net/manual/en/memcached.sessions.php">here</a>, optionally tweak <a href="http://fr2.php.net/manual/en/memcached.configuration.php">php-memcached session settings</a>.</p><h5>Storing sessions in Redis using pecl package redis</h5><p><img class="editor-inline-macro" height="18" width="88" src="../servlet/status-macro/placeholder3b6d.png?subtle=true&amp;colour=Red&amp;title=Experimental" data-macro-name="status" data-macro-id="689867ae-89d7-45aa-8f71-e82d5e0bfd64" data-macro-parameters="colour=Red|subtle=true|title=Experimental" data-macro-schema-version="1"></p><p>For setting up eZ Platform using <a href="https://pecl.php.net/package/redis">Redis pecl package</a> you'll need to configure the session save handler settings in php.ini as documented <a href="https://github.com/phpredis/phpredis#php-session-handler">here</a>.</p><h5>Alternative storing sessions in database using PDO</h5><p>While not currently our recommendation from performance perspective, for setups where Database is preferred for storing Sessions, you may use Symfony's PdoSessionHandler.<br />Below is an configuration example for eZ Platform, but please refer to <a href="http://symfony.com/doc/current/cookbook/configuration/pdo_session_storage.html">documented in Symfony Cookbook documentation</a> for full documentation.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="a1442776-8d18-4c45-87c3-66268a705921" data-macro-parameters="language=powershell" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading59dd.png?definition=e2NvZGU6bGFuZ3VhZ2U9cG93ZXJzaGVsbH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>framework:
+    session:
+        # ...
+        handler_id: session.handler.pdo
+
+parameters:
+    pdo.db_options:
+        db_table:    session
+        db_id_col:   session_id
+        db_data_col: session_value
+        db_time_col: session_time
+
+services:
+    pdo:
+        class: PDO
+        arguments:
+            dsn:      "mysql:dbname=&lt;mysql_database>"
+            user:     &lt;mysql_user>
+            password: &lt;mysql_password>
+
+    session.handler.pdo:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        arguments: ["@pdo", "%pdo.db_options%"]</pre></td></tr></table><p> </p><p> </p></div>
+</div>
+<div class="cell aside" data-type="aside">
+<div class="innerCell">
+<h4>In this topic:</h4><p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro7c73.png?definition=e3RvYzptYXhMZXZlbD0zfQ&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="22dbcc9b-db6a-4337-a5da-72f9e466fd40" data-macro-parameters="maxLevel=3" data-macro-schema-version="1"></p><h4>Related:</h4><ul><li><a class="confluence-link" href="../../display/DEVELOPER/Steps%2bto%2bset%2bup%2bCluster.html" data-linked-resource-id="31432321" data-linked-resource-version="7" data-linked-resource-type="page" data-linked-resource-default-alias="Steps to set up Cluster" data-base-url="../../index.html">Overview of steps to set up Cluster</a><a class="confluence-link" href="#Sessions-Persistencecacheconfiguration" data-anchor="Persistencecacheconfiguration" data-linked-resource-default-alias="Persistencecacheconfiguration" data-base-url="../../index.html">:</a><ul><li><a class="confluence-link" href="../../display/DEVELOPER/Clustering.html" data-linked-resource-id="31430387" data-linked-resource-version="19" data-linked-resource-type="page" data-linked-resource-default-alias="Clustering" data-base-url="../../index.html">Set up DFS IO Handler</a></li><li><a class="confluence-link" href="../../display/DEVELOPER/Repository.html#Repository-Persistencecacheconfiguration" data-anchor="Persistencecacheconfiguration" data-linked-resource-id="31432023" data-linked-resource-version="48" data-linked-resource-type="page" data-linked-resource-default-alias="Repository#Persistencecacheconfiguration" data-base-url="../../index.html">Configure Persistence Cache</a></li><li><a class="confluence-link" href="../../display/DEVELOPER/HTTP%2bCache.html#HTTPCache-UsingVarnish" data-anchor="UsingVarnish" data-linked-resource-id="31430152" data-linked-resource-version="22" data-linked-resource-type="page" data-linked-resource-default-alias="HTTP Cache#UsingVarnish" data-base-url="../../index.html">Set up Varnish</a></li></ul></li></ul><h4>Further resources:</h4><ul><li><a href="http://symfony.com/doc/current/cookbook/session/index.html">Cookbook Session recipes (symfony.com)</a></li><li><a href="http://symfony.com/doc/current/components/http_foundation/index.html">HTTP Foundation Component documentation (symfony.com)</a></li><li>Source code of <a href="https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Session/Storage/Handler/NativeFileSessionHandler.php">NativeFileSessionHandler (github.com)</a></li><li><a href="http://symfony.com/doc/current/cookbook/configuration/pdo_session_storage.html">Cookbook Configuration recipe for setting-up PdoSessionHandler (symfony.com)</a>, aka <code>session.handler.pdo</code> service</li></ul></div>
+</div>
+</div>
+</div>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=31429667 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:39:32 GMT -->
+</html>

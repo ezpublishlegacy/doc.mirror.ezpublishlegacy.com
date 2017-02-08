@@ -1,0 +1,137 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711121 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:49:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpageeb2b.html?pageId=30711121" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p>In this chapter, we will see two ways of customizing eZ Platform: command line scripts (for import scripts, for instance), and custom controllers, the eZ Platform equivalent of eZ Publish 4.x custom modules.</p><p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro4170.png?definition=e3RvY30&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="535db471-c0c6-4b1d-b6fc-f0f265ab9cbe" data-macro-schema-version="1"></p><h2>Symfony bundle</h2><p>In order to test and use Public API code, you will need to build a custom bundle. Bundles are Symfony's extensions, and are therefore also used to extend eZ Platform. Symfony 2 provides code generation tools that will let you create your own bundle and get started in a few minutes.</p><p>In this chapter, we will show how to create a custom bundle, and implement both a command line script and a custom route with its own controller action and view. All shell commands assume that you use some Linux shell, but those commands would of course also work on Windows systems.</p><h3>Generating a new bundle</h3><p>First, change the directory to your eZ Platform root.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="f981820b-674e-4d59-bb05-09a731231c2a" data-macro-parameters="language=bash" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading174f.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>$ cd /path/to/ezplatform</pre></td></tr></table><p>Then use the app/console application with the <code>generate:bundle</code> command to start the bundle generation wizard.</p><p>Let's follow the instructions provided by the wizard. Our objective is to create a bundle named <code>
+    <a href="https://github.com/docb22/ez-publish-cookbook/tree/master/EzSystems/CookBookBundle/Command">EzSystems/Bundles/CookBookBundle</a>
+  </code>, located in the <code>src</code> directory.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="a4ec5aed-ebc7-43df-a7f1-57f0cc3e4eb3" data-macro-parameters="language=bash" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading174f.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>$ php app/console generate:bundle</pre></td></tr></table><p>The wizard will first ask about our bundle's namespace. Each bundle's namespace should feature a vendor name (in our own case: <code>EzSystems</code>), optionally followed by a sub-namespace (we could have chosen to use <code>Bundle</code>), and end with the actual bundle's name, suffixed with Bundle: <code>CookbookBundle</code>.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="1634423a-da38-4d69-9bac-c6220e4917e4" data-macro-parameters="language=bash|title=Bundle namespace" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading93ba.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaHx0aXRsZT1CdW5kbGUgbmFtZXNwYWNlfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>Your application code must be written in bundles. This command helps you generate them easily.
+
+Each bundle is hosted under a namespace (like Acme/Bundle/BlogBundle).
+
+The namespace should begin with a "vendor" name like your company name, your project name, or your client name, followed by one or more optional category sub-namespaces, and it should end with the bundle name itself (which must have Bundle as a suffix).
+
+See http://symfony.com/doc/current/cookbook/bundles/best_practices.html#index-1 for more details on bundle naming conventions. 
+
+Use / instead of \ for the namespace delimiter to avoid any problem.
+
+Bundle namespace: EzSystems/CookbookBundle
+</pre></td></tr></table><p>You will then be asked about the Bundle's name, used to reference your bundle in your code. We can go with the default, <code>EzSystemsCookbookBundle</code>. Just hit Enter to accept the default.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="f6050edf-a478-4121-8d30-6b2232358edb" data-macro-parameters="language=bash|title=Bundle name" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading6c5d.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaHx0aXRsZT1CdW5kbGUgbmFtZX0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>In your code, a bundle is often referenced by its name. It can be the concatenation of all namespace parts but it's really up to you to come up with a unique name (a good practice is to start with the vendor name).
+
+Based on the namespace, we suggest EzSystemsCookbookBundle.
+
+Bundle name [EzSystemsCookbookBundle]:</pre></td></tr></table><p>The next question is your bundle's location. By default, the script offers to place it in the <code>src</code> folder. This is perfectly acceptable unless you have a good reason to place it somewhere else. Just hit Enter to accept the default.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="bf51eee3-344c-4c62-b4c3-1d156c793f95" data-macro-parameters="language=none|title=Bundle directory" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingb4e0.png?definition=e2NvZGU6bGFuZ3VhZ2U9bm9uZXx0aXRsZT1CdW5kbGUgZGlyZWN0b3J5fQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>The bundle can be generated anywhere. The suggested default directory uses the standard conventions.
+
+
+Target directory [/path/to/ezpublish5/src]:</pre></td></tr></table><p>Next, you need to choose the generated configuration's format, out of YAML, XML, PHP or annotations. We mostly use yaml in eZ Platform, and we will use it in this cookbook. Enter 'yml', and hit Enter.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="38a310c3-aa6b-496a-afd7-d32efaa81d40" data-macro-parameters="language=none|title=Configuration format" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingefb4.png?definition=e2NvZGU6bGFuZ3VhZ2U9bm9uZXx0aXRsZT1Db25maWd1cmF0aW9uIGZvcm1hdH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>Determine the format to use for the generated configuration.                                                                                                                        
+
+Configuration format (yml, xml, php, or annotation) [annotation]: yml</pre></td></tr></table><p>The last choice is to generate code snippets demonstrating the Symfony directory structure. If you're learning Symfony, it is a good idea to accept, as it will create a controller, yaml files, etc.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="f01b1fc2-9043-4f0f-9c88-b3d8a52cd2db" data-macro-parameters="language=none|title=Generate snippets &amp; directory structure" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1567.png?definition=e2NvZGU6bGFuZ3VhZ2U9bm9uZXx0aXRsZT1HZW5lcmF0ZSBzbmlwcGV0cyAmIGRpcmVjdG9yeSBzdHJ1Y3R1cmV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>To help you get started faster, the command can generate some code snippets for you.
+
+Do you want to generate the whole directory structure [no]? yes</pre></td></tr></table><p>The generator will then summarize the previous choices, and ask for confirmation. Hit Enter to confirm.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="9b43283f-0b49-4ad8-ba12-b21dca92bbdc" data-macro-parameters="language=none|title=Summary and confirmation" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading0bd2.png?definition=e2NvZGU6bGFuZ3VhZ2U9bm9uZXx0aXRsZT1TdW1tYXJ5IGFuZCBjb25maXJtYXRpb259&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>You are going to generate a "EzSystems\Bundle\CookbookBundle\EzSystemsCookbookBundle" bundle in "/path/to/ezpublish5/src/" using the "yml" format.
+
+Do you confirm generation [yes]? yes</pre></td></tr></table><p>The wizard will generate the bundle, check autoloading, and ask about the activation of your bundle. Hit Enter in the answer to both questions to have your bundle automatically added to your Kernel (<code>app/AppKernel.php</code>) and routes from your bundle added to the existing routes (<code>app/config/routing.yml</code>).</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="0d4e438c-2c48-4a67-9f07-8e807775364d" data-macro-parameters="title=Activation and generation" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading7a92.png?definition=e2NvZGU6dGl0bGU9QWN0aXZhdGlvbiBhbmQgZ2VuZXJhdGlvbn0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>  Bundle generation
+
+Generating the bundle code: OK
+Checking that the bundle is autoloaded: OK
+Confirm automatic update of your Kernel [yes]?
+Enabling the bundle inside the Kernel: OK
+Confirm automatic update of the Routing [yes]?
+Importing the bundle routing resource: OK
+
+  You can now start using the generated code!
+ </pre></td></tr></table><p>Your bundle should be generated and activated. Let's now see how you can interact with the Public API by creating a command line script, and a custom controller route and action.</p><h3>Creating a command line script in your bundle</h3><p>Writing a command line script with Symfony 2 is <em>very</em> easy. The framework and its bundles ship with a few scripts. They are all started using <code>php app/console &lt;command&gt;</code>. You can get the complete list of existing command line scripts by executing <code>php app/console list</code> from the eZ Platform root.</p><p>In this chapter, we will create a new command, identified as <code>ezpublish:cookbook:hello</code>, that takes an optional name argument, and greets that name. To do so, we need one thing: a class with a name ending with &quot;Command&quot; that extends <code>Symfony\Component\Console\Command\Command</code>. Note that in our case, we use <code>ContainerAwareCommand</code> instead of <code>Command</code>, since we need the dependency injection container to interact with the Public API. In your bundle's directory (<code>src/EzSystems/CookbookBundle</code>), create a new directory named <code>Command</code>, and in this directory, a new file named <code>HelloCommand.php</code>.</p><p>Add this code to the file:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="0cb72e8b-59aa-40dc-b175-1a98e4c945af" data-macro-parameters="language=php|title=HelloCommand.php" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading2bc0.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRpdGxlPUhlbGxvQ29tbWFuZC5waHB9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;?php
+namespace EzSystems\CookBookBundle\Command;
+
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
+
+class HelloCommand extends \Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand
+{
+    /**
+     * Configures the command
+     */
+    protected function configure()
+    {
+    }
+
+    /**
+     * Executes the command
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
+    protected function execute( InputInterface $input, OutputInterface $output )
+    {
+    }
+}
+</pre></td></tr></table><p>This is the skeleton for a command line script.</p><p>One class with a name ending with &quot;Command&quot; (<code>HelloCommand</code>), extends <code>Symfony\Bundle\FrameworkBundle\Command\Command</code>, and is part of our bundle's Command namespace. It has two methods: <code>configure()</code>, and <code>execute()</code>. We also import several classes &amp; interfaces with the use keyword. The first two, <code>InputInterface</code> and <code>OutputInterface</code> are used to 'typehint' the objects that will allow us to provide input &amp; output management in our script.</p><p><code>Configure</code> will be used to set your command's name, as well as its options and arguments. <code>Execute</code> will contain the actual implementation of your command. Let's start by creating the <code>configure()</code> method.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="22d0f0a1-2a00-42dd-9c5c-2b6ef489383d" data-macro-parameters="title=TestCommand::configure()" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading0f5f.png?definition=e2NvZGU6dGl0bGU9VGVzdENvbW1hbmQ6OmNvbmZpZ3VyZSgpfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>protected function configure()
+{
+    $this->setName( 'ezpublish:cookbook:hello' );
+    $this->setDefinition(
+        array(
+            new InputArgument( 'name', InputArgument::OPTIONAL, 'An argument' )
+        )
+    );
+}
+</pre></td></tr></table><p>First, we use <code>setName()</code> to set our command's name to &quot;<code>ezpublish:cookbook:hello</code>&quot;. We then use <code>setDefinition()</code> to add an argument, named <code>name</code>, to our command.</p><p>You can read more about argument definitions and further options in the <a href="http://symfony.com/doc/2.0/components/console/introduction.html">Symfony 2 Console documentation</a>. Once this is done, if you run <code>php app/console list</code>, you should see <code>ezpublish:cookbook:hello</code> listed in the available commands. If you run it, it will however still do nothing.</p><p>Let's just add something very simple to our <code>execute()</code> method so that our command actually does something.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="cf6398af-c1ac-4065-b479-352078571653" data-macro-parameters="title=TestCommand::execute()" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfc9c.png?definition=e2NvZGU6dGl0bGU9VGVzdENvbW1hbmQ6OmV4ZWN1dGUoKX0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>protected function execute( InputInterface $input, OutputInterface $output )
+{
+    // fetch the input argument
+    if ( !$name = $input->getArgument( 'name' ) )
+    {
+        $name = "World";
+    }
+    $output->writeln( "Hello $name" );
+}
+</pre></td></tr></table><p>You can now run the command from the eZ Platform root.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="c25d0afa-6d63-4fb4-82ed-bb5883a598c0" data-macro-parameters="language=bash|title=Hello world" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading10f4.png?definition=e2NvZGU6bGFuZ3VhZ2U9YmFzaHx0aXRsZT1IZWxsbyB3b3JsZH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>$ php app/console ezpublish:cookbook:hello world
+Hello world</pre></td></tr></table><h3>Creating a custom route with a controller action</h3><p>In this short chapter, we will see how to create a new route that will catch a custom URL and execute a controller action. We want to create a new route, <code>/cookbook/test</code>, that displays a simple 'Hello world' message. This tutorial is a simplified version of the official one that can be found on <a href="http://symfony.com/doc/current/book/controller.html">http://symfony.com/doc/current/book/controller.html</a>.</p><p>During our bundle's generation, we have chosen to generate the bundle with default code snippets. Fortunately, almost everything we need is part of those snippets. We just need to do some editing, in particular in two locations: <code>src/EzSystems/Resources/config/routing.yml</code> and <code>src/EzSystems/CookbookBundle/Controllers/DefaultController.php</code>. The first one will be used to configure our route (<code>/cookbook/test</code>) as well as the controller action the route should execute, while the latter will contain the actual action's code.</p><h4>routing.yml</h4><p>This is the file where we define our action's URL matching. The generated file contains this YAML block:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="1b1605b8-9ef6-4ca8-9f9f-5c2b66fcc976" data-macro-parameters="title=Generated routing.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading43b8.png?definition=e2NvZGU6dGl0bGU9R2VuZXJhdGVkIHJvdXRpbmcueW1sfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ez_systems_cookbook_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: EzSystemsCookbookBundle:Default:index }</pre></td></tr></table><p>We can safely remove this default code, and replace it with this:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="162f6658-a086-4f7b-b3b7-aa1cdd61f1ba" data-macro-parameters="title=Edited routing.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading1adb.png?definition=e2NvZGU6dGl0bGU9RWRpdGVkIHJvdXRpbmcueW1sfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezsystems_cookbook_hello:
+    path:     /cookbook/{name}
+    defaults: { _controller: EzSystemsCookbookBundle:Default:hello }</pre></td></tr></table><p>We define a route that matches the URI /cookbook/* and executes the action <code>hello</code> in the Default controller of our bundle. The next step is to create this method in the controller.</p><h4>DefaultController.php</h4><p>This controller was generated by the bundle generator. It contains one method, <code>helloAction()</code>, that matched the YAML configuration we have changed in the previous part. Let's just rename the <code>indexAction()</code> method so that we end up with this code.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="e7af8f21-cdb5-4be9-82c8-21f3f6ec2b92" data-macro-parameters="language=php|title=DefaultController::helloAction()" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfc83.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRpdGxlPURlZmF1bHRDb250cm9sbGVyOjpoZWxsb0FjdGlvbigpfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>public function helloAction( $name )
+{
+    $response = new \Symfony\Component\HttpFoundation\Response;
+    $response->setContent( "Hello $name" );
+    return $response;
+}</pre></td></tr></table><p>We won't go into details about controllers in this cookbook, but let's walk through the code a bit. This method receives the parameter defined in <code>routing.yml</code>. It is called &quot;name&quot; in the route definition, and must be called $name in the matching action. Since the action is named &quot;hello&quot; in <code>routing.yml</code>, the expected method name is <code>helloAction</code>.</p><p>Controller actions <strong>must</strong> return a Response object that will contain the response's content, the headers, and various optional properties that affect the action's behavior. In our case, we simply set the content, using <code>setContent()</code>, to &quot;Hello $name&quot;. Go to http://ezplatform/cookbook/hello/YourName, and you should get &quot;Hello YourName&quot;.</p><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="57aee12f-c35e-4ec2-b30c-90aba3b36f2f" data-macro-parameters="title=The custom EzPublishCoreBundle Controller" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading7766.png?definition=e2luZm86dGl0bGU9VGhlIGN1c3RvbSBFelB1Ymxpc2hDb3JlQnVuZGxlIENvbnRyb2xsZXJ9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>For convenience, a custom controller is available at <a href="http://apidoc.ez.no/sami/trunk/NS/html/eZ/Bundle/EzPublishCoreBundle/Controller.html">eZ\Bundle\EzPublishCoreBundle\Controller</a>. It gives you with a few commodity methods:</p><ul><li><code>getRepository()</code> <br />Returns the Public API repository that gives you access to the various services through <code>getContentService()</code>, <code>getLocationService()</code> and so on; </li><li><code>getLegacyKernel()</code> <br />Returns an instance of the <a href="http://apidoc.ez.no/doxygen/trunk/NS/html/classeZ_1_1Publish_1_1Core_1_1MVC_1_1Legacy_1_1Kernel.html">eZ\Publish\Core\MVC\Legacy\Kernel</a> that you can use to interact with the Legacy eZ Platform kernel</li><li><code>getConfigResolver()</code> <br />Returns the <a href="http://apidoc.ez.no/doxygen/trunk/NS/html/classeZ_1_1Bundle_1_1EzPublishCoreBundle_1_1DependencyInjection_1_1Configuration_1_1ConfigResolver.html">ConfigResolver</a> that gives you access to configuration data.</li></ul><p>You are encouraged to use it for your custom controllers that interact with eZ Platform.</p></td></tr></table><p> </p><p>With both command line scripts and HTTP routes, you have the basics you need to start writing Public API code.</p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711121 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:50:02 GMT -->
+</html>

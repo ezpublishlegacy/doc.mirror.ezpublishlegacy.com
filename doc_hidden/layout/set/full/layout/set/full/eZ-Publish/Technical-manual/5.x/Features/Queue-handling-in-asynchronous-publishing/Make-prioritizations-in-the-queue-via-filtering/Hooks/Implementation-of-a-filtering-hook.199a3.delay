@@ -1,0 +1,76 @@
+
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Queue-handling-in-asynchronous-publishing/Make-prioritizations-in-the-queue-via-filtering-hooks/Hooks/Implementation-of-a-filtering-hook by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 01 Feb 2017 04:35:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>    <link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/stylesheets/core.css" />
+<style type="text/css"></style>
+                                                                
+    <title>Implementation of a filtering hook / Hooks / Make prioritizations in the queue via filtering hooks / Queue handling in asynchronous publishing / Features / 5.x / Technical manual / eZ Publish / Documentation - Doc</title>
+
+    
+    
+    
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+            <meta http-equiv="Content-language" content="en-GB" />
+
+    
+                <meta name="author" content="eZ systems" />
+                    <meta name="copyright" content="eZ systems" />
+                    <meta name="description" content="eZ Publish Documentation" />
+                    <meta name="keywords" content="eZ Publish, documentation, manual, reference, eZ systems" />
+        
+    <meta name="generator" content="eZ Publish" />
+    <link rel="Home" href="../../../../../../../../full.html" title="Doc front page" />
+<link rel="Search" href="../../../../../../../content/advancedsearch.html" title="Search Doc" />
+<link rel="Shortcut icon" href="../../../../../../../../../../../../../../extension/ezdoc/design/doc/images/favicon.ico" type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+<div class="attribute-heading">
+<h1>Implementation of a filtering hook</h1>
+</div>
+
+<p>In order to implement a filter, you must create a class that extends the &quot;eZAsynchronousPublishingFilter&quot; abstract class.</p><p>This class implements the &quot;eZAsynchronousPublishingFilterInterface&quot; interface, and enforces the definition of the &quot;accept()&quot; method. The &quot;accept()&quot; method must return a boolean. &quot;True&quot; means the object can be published asynchronously, while &quot;False&quot; instructs the system to skip the asynchronous publishing feature, and publish the content directly.</p><p>The abstract class provides you with the &quot;eZContentObjectVersion&quot; being published, as the &quot;$version&quot; class property. From this property, you can easily test the content object's property (publishing time, author, content class, section), read attributes, and so on.</p><p><b>Example:</b></p><pre class="wordwrap copytoclipboard"><span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;/**</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Exclude from asynchronous publishing any object that isn't an article</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return bool</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class eZAsynchronousPublishingClassFilter extends eZAsynchronousPublishingFilter</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public function accept()</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$contentObject = $this-&gt;version-&gt;contentObject();</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return in_array( $contentObject-&gt;attribute( 'class_identifier' ), $this-&gt;validClasses );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private $validClasses = array( 'article' );</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span>
+<span class="line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt;</span>
+<span class="line">&nbsp;</span>
+</pre><!--[if IE]>
+<p class="copytoclipboard"><img src="/extension/ezdoc/design/doc/images/copytoclipboard.gif" height="16" width="16" alt="Copy to clipboard" title="Copy to clipboard" onclick="window.clipboardData.setData( 'text', '    &lt;?php\r\n     ;/**\r\n      * Exclude from asynchronous publishing any object that isn\'t an article\r\n      * @return bool\r\n      */\r\n     class eZAsynchronousPublishingClassFilter extends eZAsynchronousPublishingFilter\r\n     {\r\n         public function accept()\r\n         {\r\n             $contentObject = $this-&gt;version-&gt;contentObject();\r\n             return in_array( $contentObject-&gt;attribute( \'class_identifier\' ), $this-&gt;validClasses );\r\n         }\r\n \r\n         private $validClasses = array( \'article\' );\r\n     }\r\n     ?&gt;\r\n \r\n' ); return false;" /></p>
+<![endif]--><p>The class above will only publish asynchronously objects of class article.</p><a name="eztoc132763_0_1" id="eztoc132763_0_1"></a><h3>Settings</h3><p>Each filter must be registered using INI settings from content.ini. Below is an example for the class filtering class above:</p><pre class="wordwrap"><span class="line">[PublishingSettings]</span>
+<span class="line">AsynchronousPublishingFilters[]=eZAsynchronousPublishingClassFilter</span>
+</pre><p>One line similar to the one above must be added for each filter.</p>
+
+
+
+
+<address>
+Powered by <a href="http://ez.no/ezpublish" title="eZ Publish&trade; CMS Open Source Web Content Management">eZ Publish&trade; CMS Open Source Web Content Management</a>. Copyright &copy; 1999-2013 <a href="http://ez.no/" title="eZ Systems AS">eZ Systems AS</a> (except where otherwise noted). All rights reserved.
+</address>
+
+
+</body>
+
+<!-- Mirrored from doc.ez.no/doc_hidden/layout/set/full/layout/set/full/eZ-Publish/Technical-manual/5.x/Features/Queue-handling-in-asynchronous-publishing/Make-prioritizations-in-the-queue-via-filtering-hooks/Hooks/Implementation-of-a-filtering-hook by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 01 Feb 2017 04:35:04 GMT -->
+</html>

@@ -1,0 +1,387 @@
+Message-ID: <1825343956.3072.1485851866889.JavaMail.confluence@ip-10-127-227-164>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_3071_1877862357.1485851866889"
+
+------=_Part_3071_1877862357.1485851866889
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>How to run long-running console commands</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        font-size: 10pt;
+        line-height: 1.2;
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: #fff !important;
+        color: #000 !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: #000;
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        page-break-after: avoid;
+    }
+
+    pre {
+        font-family: Monaco, "Courier New", monospace;
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>How to run long-running console commands</h1>
+    <div class=3D"Section1">
+        <p>This page describes how to execute long-running console commands=
+, to make sure they don't run out of memory. An example is a custom import =
+command or the indexing command provided by the <span class=3D"confluence-l=
+ink"><a href=3D"/display/EZP/Solr+Search+Engine+Bundle">Solr Bundle</a></sp=
+an>.</p>
+<h2 id=3D"Howtorunlong-runningconsolecommands-Reducingmemoryusage">Reducing=
+ memory usage</h2>
+<p>To avoid quickly running out of memory while executing such commands you=
+ should make sure to:</p>
+<ol>
+<li><span class=3D"inline-comment-marker" data-ref=3D"5c1c379e-da6a-435d-ba=
+3e-f3fe7df39d94">Always</span> run in prod environment using:&nbsp;<code>--=
+env=3Dprod</code>&nbsp;
+<ol>
+<li><em>See <a href=3D"/display/EZP/Using+environments">Using environments =
+page</a> for further information on Symfony&nbsp;environments.</em></li>
+<li><em>See&nbsp;<a href=3D"/display/EZP/Logging+configuration">Logging &am=
+p; Debug configuration</a> for some of different features enabled in develo=
+pment&nbsp;<em>environments, which by design uses memory.</em></em></li>
+</ol></li>
+<li><p>Avoid Stash&nbsp;<em>(<a href=3D"/display/EZP/Persistence+cache+conf=
+iguration">Persistence cache</a>)</em>&nbsp;using to much memory in prod:</=
+p>
+<ol>
+<li><p>If your system is running, or you need to use cache, then disable St=
+ash InMemory cache&nbsp;as it does not limit the amount of items in cache a=
+nd grows exponentially:</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>ezpublish.yml (snippet, not a full example for stash config)</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">stash:
+    caches:
+        default:
+            inMemory: false </pre>=20
+</div>
+</div><p>Also if you use FileSystem driver, make sure&nbsp;<code>memKeyLimi=
+t</code>&nbsp;is set to a low number, default should be 200 and can be lowe=
+red like this:</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>ezpublish.yml (snippet, not a full example for stash config)</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">stash:
+    caches:
+        default:
+            FileSystem:
+                memKeyLimit: 100</pre>=20
+</div>
+</div></li>
+<li><p>If your setup is offline and cache is cold, there is no risk of stal=
+e cache and you can actually completely disable Stash cache. This will impr=
+ove performance of import scripts:</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>ezpublish.yml (full example)</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">stash:
+    caches:
+        default:
+            # Note: In eZ Publish 5.3 and earlier "drivers" is called "hand=
+lers"
+            drivers: [ BlackHole ]
+            inMemory: false</pre>=20
+</div>
+</div></li>
+</ol></li>
+<li><p>For logging using monolog, if you use either the default&nbsp;<code>=
+<a href=3D"http://symfony.com/doc/current/cookbook/logging/monolog.html#han=
+dlers-and-channels-writing-logs-to-different-locations" class=3D"external-l=
+ink" rel=3D"nofollow">fingers_crossed</a></code>, or&nbsp;<code>buffer</cod=
+e> handler, make sure to specify <code><span class=3D"inline-comment-marker=
+" data-ref=3D"b6f4845b-de84-415d-bd48-2744c8886ef8">buffer_size</span></cod=
+e><span class=3D"inline-comment-marker" data-ref=3D"b6f4845b-de84-415d-bd48=
+-2744c8886ef8"> to limit how large the buffer grows before it gets flushed<=
+/span>:</p>
+<div class=3D"code panel pdl" style=3D"border-width: 1px;">
+<div class=3D"codeHeader panelHeader pdl" style=3D"border-bottom-width: 1px=
+;">
+<b>config_prod.yml (snippet, not a full example for monolog config)</b>
+</div>
+<div class=3D"codeContent panelContent pdl">=20
+<pre class=3D"brush: php; gutter: false; theme: Eclipse" style=3D"font-size=
+:12px;">monolog:
+    handlers:
+        main:
+            type: fingers_crossed
+            buffer_size: 200</pre>=20
+</div>
+</div></li>
+<li>Run PHP without memory limits using:&nbsp;<code>php&nbsp;</code><code>-=
+d memory_limit=3D-1 app/console &lt;command&gt;</code><span><br></span></li=
+>
+<li>Disable&nbsp;<code>xdebug</code><em>&nbsp;(PHP extension to debug/profi=
+le php use)</em>&nbsp;when running the command, this will cause php to use =
+much more memory.<code><br></code></li>
+</ol>
+<p>&nbsp;</p>
+<div class=3D"confluence-information-macro confluence-information-macro-not=
+e">
+<p class=3D"title">Note: Memory will still grow</p>
+<span class=3D"aui-icon aui-icon-small aui-iconfont-warning confluence-info=
+rmation-macro-icon"></span>
+<div class=3D"confluence-information-macro-body">
+<p>Even when everything is configured like described above, memory will gro=
+w for each iteration of indexing/inserting a content item with at least <em=
+>1kb</em> per iteration after the initial first 100 rounds. This is expecte=
+d behavior; to be able to handle more iterations you will have to do one or=
+ several of the following:</p>
+<ul>
+<li><span>Change the import/index script in question to <a href=3D"#Howtoru=
+nlong-runningconsolecommands-process-forking">use process forking</a> to av=
+oid the issue.</span></li>
+<li>Upgrade PHP: <em>newer versions of PHP are typically more memory-effici=
+ent.</em></li>
+<li>Run the console command on a machine with more memory (RAM)<em>.<br></e=
+m></li>
+</ul>
+</div>
+</div>
+<h2 id=3D"Howtorunlong-runningconsolecommands-ProcessforkingwithSymfonyproc=
+ess-forking">Process forking with Symfony<span class=3D"confluence-anchor-l=
+ink" id=3D"Howtorunlong-runningconsolecommands-process-forking"></span></h2=
+>
+<p>The recommended way to completely avoid "memory leaks" in PHP in the fir=
+st place is to use processes, and for console scripts this is typically don=
+e using process forking which is quite easy to do with Symfony.</p>
+<p>The things you will need to do:</p>
+<ol>
+<li>Change your command so it supports taking slice parameters, like for in=
+stance a batch size and a child-offset parameter.
+<ol>
+<li><em>If defined, child-offset parameter&nbsp;denotes if a process is&nbs=
+p;child, this could have been accomplished with two commands as well.</em><=
+/li>
+<li><em>If not defined, it is master process which will execute the process=
+es until nothing is left to process.</em></li>
+</ol></li>
+<li>Change the command so that the master process takes care of forking chi=
+ld processes in slices.
+<ol>
+<li>For execution in-order, <a href=3D"https://github.com/ezsystems/ezpubli=
+sh-kernel/blob/6.2/eZ/Bundle/PlatformInstallerBundle/src/Command/InstallPla=
+tformCommand.php#L230" class=3D"external-link" rel=3D"nofollow">you may loo=
+k to our eZ Platform installer code </a>used to fork out solr indexing afte=
+r installation to avoid cache issues.</li>
+<li>For parallel execution of the slices, <a href=3D"http://symfony.com/doc=
+/current/components/process.html#process-signals" class=3D"external-link" r=
+el=3D"nofollow">see Symfony doc for further instruction</a>.</li>
+</ol></li>
+</ol>
+<h5 id=3D"Howtorunlong-runningconsolecommands-Relatedtopics">Related topics=
+</h5>
+<ul>
+<li><a href=3D"/display/EZP/Using+environments">Using environments</a></li>
+<li><a href=3D"http://symfony.com/doc/current/components/process.html" clas=
+s=3D"external-link" rel=3D"nofollow">Symfony Process Component [symfony.com=
+]</a></li>
+</ul>
+<p>&nbsp;</p>
+    </div>
+</body>
+</html>
+------=_Part_3071_1877862357.1485851866889--

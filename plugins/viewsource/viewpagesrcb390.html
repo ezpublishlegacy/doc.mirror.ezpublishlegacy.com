@@ -1,0 +1,69 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711361 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:48:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpageb390.html?pageId=30711361" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p>eZ Platform being built on top of Symfony, it uses standard HTTP cache headers. By default the Symfony reverse proxy, written in PHP, is used to handle cache, but it can be easily replaced with any other reverse proxy like Varnish.</p><p><em>Use of Varnish is a requirement for use in Clustering setup, for overview of clustering feature see <a class="confluence-link" href="../../display/TECHDOC/Clustering.html" data-linked-resource-id="30711376" data-linked-resource-version="6" data-linked-resource-type="page" data-linked-resource-default-alias="Clustering" data-base-url="https://doc.ez.no">Clustering</a>. </em></p><p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro4170.png?definition=e3RvY30&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="16de03be-fac0-407d-ac34-8de6aaf08da9" data-macro-schema-version="1"></p><h2>Prerequisites</h2><ul class="task-list"><li>A working Varnish 3 or Varnish 4 setup.</li></ul><h2>Recommended VCL base files</h2><p>For Varnish to work properly with eZ, you'll need to use one of the provided files as a basis:</p><ul class="task-list"><li><a href="https://github.com/ezsystems/ezplatform/blob/master/doc/varnish/vcl/varnish3.vcl">Varnish 3 VCL example</a></li><li><a href="https://github.com/ezsystems/ezplatform/blob/master/doc/varnish/vcl/varnish4.vcl">Varnish 4 VCL example</a></li></ul><blockquote><p><strong>Note:</strong> Http cache management is done with the help of <a href="http://foshttpcachebundle.readthedocs.org/">FOSHttpCacheBundle</a>. You may need to tweak your VCL further on according to <a href="http://foshttpcache.readthedocs.org/en/latest/varnish-configuration.html">FOSHttpCache documentation</a> in order to use features supported by it.</p></blockquote><h2>Configure eZ Publish</h2><h3>Update your Virtual Host</h3><h4>On apache:</h4><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="bdd86f5c-6773-4ab6-b828-ddcb4829190f" data-macro-parameters="language=none|title=my_virtualhost.conf" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading601f.png?definition=e2NvZGU6bGFuZ3VhZ2U9bm9uZXx0aXRsZT1teV92aXJ0dWFsaG9zdC5jb25mfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;VirthualHost *:80>
+    # Configure your VirtualHost with rewrite rules and stuff
+ 
+    # Force front controller NOT to use built-in reverse proxy.
+    SetEnv USE_HTTP_CACHE 0
+ 
+	# Configure IP of your Varnish server to be trusted proxy
+    # Replace fake IP address below by your Varnish IP address
+    SetEnv TRUSTED_PROXIES "193.22.44.22"
+&lt;/VirtualHost></pre></td></tr></table><h4>On nginx:</h4><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="577ee5ed-26f7-42ed-9634-06488d08ddc3" data-macro-parameters="title=mysite.com" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headinga4ff.png?definition=e2NvZGU6dGl0bGU9bXlzaXRlLmNvbX0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>fastcgi_param USE_HTTP_CACHE 0;
+# Configure IP of your Varnish server to be trusted proxy
+# Replace fake IP address below by your Varnish IP address
+fastcgi_param TRUSTED_PROXIES "193.22.44.22";</pre></td></tr></table><h3>Update YML configuration</h3><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="49d9dad1-776b-407d-85df-052d55641f69" data-macro-parameters="title=ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfc7c.png?definition=e2NvZGU6dGl0bGU9ZXpwbGF0Zm9ybS55bWx9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    http_cache:
+        purge_type: http
+ 
+    system:
+        # Assuming that my_siteaccess_group your frontend AND backend siteaccesses
+        my_siteaccess_group:
+            http_cache:
+                # Fill in your Varnish server(s) address(es).
+                purge_servers: [http://my.varnish.server:6081]</pre></td></tr></table>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711361 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 09:48:57 GMT -->
+</html>

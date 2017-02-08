@@ -1,0 +1,186 @@
+                    
+    
+                    
+    
+                    
+    
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711499 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:00:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <title>View Source</title>
+        <link rel="canonical" href="../../pages/viewpage3309.html?pageId=30711499" />
+        <script>
+window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager.resource-base-url-pattern"]="\"(?:(?:/s/.*?/_)?/download)\"";
+WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\"";
+WRM._unparsedData["com.atlassian.plugins.browser.metrics.browser-metrics-plugin:browser-metrics.feature-data-provider-legacy"]="true";
+</script>
+<link type="text/css" rel="stylesheet" href="../../s/1b9968ac17721e3a6947d14e3a43c3f8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch9c16.css?build-number=5983" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/89/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/f3685658010e413141854089096800b5/_/download/contextbatch/css/plugin.viewsource/batch.css" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/df762e50bc83a9608020a1ff1476cda6-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css" media="all">
+<!--[if lt IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/5a0f37b8e5a58a48983bc1f25fb099f6/_/download/contextbatch/css/page/batch.css?conditionalComment=lt+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/5714bd5a5c86641cad10106916cda7c8-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css" media="all">
+<!--[if lte IE 9]>
+<link type="text/css" rel="stylesheet" href="/s/d41d8cd98f00b204e9800998ecf8427e-CDN/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/49f5f7dfc888d48bff618d087d8044cc/_/download/contextbatch/css/editor-content/batch.css?conditionalComment=lte+IE+9" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/colors82a8.css?spaceKey=TECHDOC" media="all">
+<link type="text/css" rel="stylesheet" href="../../s/en_GB/5983/f3e491afc761ac0a6981cfa3dcbc04fc7e88c149.16/8/_/styles/custom82a8.css?spaceKey=TECHDOC" media="all">
+
+    </head>
+
+    <body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>         <p><img class="editor-inline-macro" src="../servlet/confluence/placeholder/macro4170.png?definition=e3RvY30&amp;locale=en_GB&amp;version=2" data-macro-name="toc" data-macro-id="60d69da9-7182-4968-bbab-d8422fad2f04" data-macro-schema-version="1"></p><h1>Enhanced views for Content/Location</h1><p>In some cases, displaying a Content item/Location via the built-in <code>ViewController</code> is not sufficient and will force you to make many sub-requests in order to access different parameters.</p><p>Typical use cases are access to:</p><ul><li>Settings (either coming from <code>ConfigResolver</code> or <code>ServiceContainer</code>)</li><li>Current Content item's <code>ContentType</code> object</li><li>Current Location's parent</li><li>Current Location's children count</li><li>Main Location and alternative Locations for the current Content item</li><li>etc.</li></ul><p>In those cases, you may want to <strong>use your own controller</strong> to display the current Content item/Location instead of using the built-in <code>ViewController</code>.</p><h2>Description</h2><p>This feature covers 2 general use cases:</p><ul><li>Lets you configure a custom controller with the configured matcher rules.</li><li>Lets you override the built-in view controller in a clean way.</li></ul><h2>Matching custom controllers</h2><p>This is possible with the following piece of configuration:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="20f5f6a5-4172-43fc-98c7-4a955d6a7ff1" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    system:
+        my_siteaccess:
+            location_view:
+                full:
+                    # Defining a ruleset matching a location and pointing to a controller
+                    my_ruleset:
+                        # The following will let you use your own custom controller for location #123
+                        # (Here it will use AcmeTestBundle/Controller/DefaultController::viewLocationAction(),
+                        # following the Symfony controller notation convention.
+                        # Method viewLocationAction() must follow the same prototype as in the built-in ViewController
+                        controller: AcmeTestBundle:Default:viewLocation
+                        match:
+                            Id\Location: 123</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="e028e0c4-64c2-45ac-b989-873d3c617dd0" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingd35c.png?definition=e2luZm99&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>You can point to any kind of <a href="http://symfony.com/doc/current/book/page_creation.html#step-2-create-the-controller">controller supported by Symfony</a> (including <a href="http://symfony.com/doc/current/cookbook/controller/service.html">controllers as a service</a>).</p></td></tr></table><p>The only requirement here is that your action method has a similar signature than  <code>ViewController::viewLocation()</code> or  <code>ViewController::viewContent()</code> (depending on what you're matching of course). However, note that all arguments are not mandatory since <a href="http://symfony.com/doc/current/book/routing.html#route-parameters-and-controller-arguments">Symfony is clever enough to know what to inject into your action method</a> . That is why <strong>you aren't forced to mimic the <code>ViewController</code>'s signature strictly</strong>. For example, if you omit <code>$layout</code> and <code>$params</code> arguments, it will still be valid. Symfony will just avoid injecting them into your action method.</p><h3>Original ViewController signatures</h3><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="321c2c25-497f-44e5-af59-b2f97712735f" data-macro-parameters="language=php|title=viewLocation() signature" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading3bc0.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRpdGxlPXZpZXdMb2NhdGlvbigpIHNpZ25hdHVyZX0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>/**
+ * Main action for viewing content through a location in the repository.
+ *
+ * @param int $locationId
+ * @param string $viewType
+ * @param boolean $layout
+ * @param array $params
+ *
+ * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+ * @throws \Exception
+ *
+ * @return \Symfony\Component\HttpFoundation\Response
+ */
+public function viewLocation( $locationId, $viewType, $layout = false, array $params = array() )</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="5089cf17-4541-4de7-88f0-2db08c62f883" data-macro-parameters="language=php|title=viewContent() signature" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingb43e.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRpdGxlPXZpZXdDb250ZW50KCkgc2lnbmF0dXJlfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>/**
+ * Main action for viewing content.
+ *
+ * @param int $contentId
+ * @param string $viewType
+ * @param boolean $layout
+ * @param array $params
+ *
+ * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+ * @throws \Exception
+ *
+ * @return \Symfony\Component\HttpFoundation\Response
+ */
+public function viewContent( $contentId, $viewType, $layout = false, array $params = array() )</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="1217480f-7baf-487c-bb1f-198da7e7749c" data-macro-parameters="title=Note" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingb7a0.png?definition=e2luZm86dGl0bGU9Tm90ZX0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>Controller selection doesn't apply to <code>block_view</code> since you can already <a class="confluence-link" href="../../display/TECHDOC/The%2bPage%2bField%2bType.html#ThePageFieldType-ThePageFieldType-Renderingblocks" data-anchor="ThePageFieldType-Renderingblocks" data-linked-resource-id="30711418" data-linked-resource-version="9" data-linked-resource-type="page" data-linked-resource-default-alias="The Page Field Type#ThePageFieldType-Renderingblocks" data-base-url="../../index.html">use your own controller to display blocks</a>.</p></td></tr></table><table class="wysiwyg-macro" data-macro-name="warning" data-macro-id="3da6494f-6df7-442c-9e0e-1053b2901eca" data-macro-parameters="title=Warning on caching" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading03bf.png?definition=e3dhcm5pbmc6dGl0bGU9V2FybmluZyBvbiBjYWNoaW5nfQ&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>Using your own controller, <u><strong>it is your responsibility to define cache rules</strong></u>, like for every custom controller !</p><p>So don't forget to <strong>set cache rules</strong> and the appropriate <strong> <code>X-Location-Id</code> header</strong> in the returned <code>Response</code> object.</p><p><a href="https://github.com/ezsystems/ezpublish-kernel/blob/master/eZ/Publish/Core/MVC/Symfony/Controller/Content/ViewController.php#L76">See built-in ViewController</a> for more details on this.</p></td></tr></table><h2>Examples</h2><h3>Enriching built-in ViewController</h3><p>This example shows how to use a custom controller to enrich the final configured view template. Your controller will here forward the request to the built-in <code>ViewController</code> with some additional parameters.</p><table class="wysiwyg-macro" data-macro-name="tip" data-macro-id="98ea3931-3981-4bc7-b8b2-8ce677b05755" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading7f8c.png?definition=e3RpcH0&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><strong>This is usually the recommended way to use a custom controller.</strong></td></tr></table><table class="wysiwyg-macro" data-macro-name="note" data-macro-id="9e4da527-fdd7-4493-a871-083ebaeed227" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingdd57.png?definition=e25vdGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>Always ensure that you add new parameters to existing <code>$params</code> associative array, using <a href="http://php.net/manual/en/language.operators.array.php"> <strong> <code>+</code> </strong> union operator</a> or <code>
+        <a href="http://php.net/array_merge">array_merge()</a>
+      </code>. <br /> <strong>Not doing so (e.g. only passing your custom parameters array) can result in unexpected issues with content preview</strong>. Previewed content and other parameters are indeed passed in <code>$params</code>.</p></td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="539dbb38-ef51-459d-918d-9090cfb13778" data-macro-parameters="title=ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfc7c.png?definition=e2NvZGU6dGl0bGU9ZXpwbGF0Zm9ybS55bWx9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    system:
+        ezdemo_frontend_group:
+            location_view:
+                full:
+                    article_test:
+                        # Configuring both controller and template as the controller will forward
+                        # the request to the ViewController which will render the configured template.
+                        controller: AcmeTestBundle:Default:articleViewEnhanced
+                        template: AcmeTestBundle:full:article_test.html.twig
+                        match:
+                            Identifier\ContentType: [article]</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="45c05be1-6eb5-4cc7-9d34-4299bbc2bec4" data-macro-parameters="language=php|title=Controller" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading5439.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRpdGxlPUNvbnRyb2xsZXJ9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;?php
+namespace Acme\TestBundle\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use eZ\Bundle\EzPublishCoreBundle\Controller;
+
+class DefaultController extends Controller
+{
+    public function articleViewEnhancedAction( $locationId, $viewType, $layout = false, array $params = array() )
+    {
+        // Add custom parameters to existing ones.
+        $params += array( 'myCustomVariable' => "Hey, I'm a custom message!" );
+        // Forward the request to the original ViewController
+        // And get the response. Eventually alter it (here we change the smax-age for cache).
+        $response = $this->get( 'ez_content' )->viewLocation( $locationId, $viewType, $layout, $params );
+        $response->setSharedMaxAge( 600 );
+
+        return $response;
+    }
+}</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="85026ed4-e011-44e6-8c5f-9db49e8438d5" data-macro-parameters="title=article_test.html.twig" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading3cf9.png?definition=e2NvZGU6dGl0bGU9YXJ0aWNsZV90ZXN0Lmh0bWwudHdpZ30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{% extends noLayout ? viewbaseLayout : "eZDemoBundle::pagelayout.html.twig" %}
+
+{% block content %}
+    &lt;h1>{{ ez_render_field( content, 'title' ) }}&lt;/h1>
+    &lt;h2>{{ myCustomVariable }}&lt;/h2>
+    {{ ez_render_field( content, 'body' ) }}
+{% endblock %}</pre></td></tr></table><h3>Using a custom controller to get full control</h3><p>This example shows you how to configure and use your own controller to handle a location.</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="09ab7f8b-5d17-4cda-816b-3b0b62b1712d" data-macro-parameters="title=ezplatform.yml" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingfc7c.png?definition=e2NvZGU6dGl0bGU9ZXpwbGF0Zm9ybS55bWx9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>ezpublish:
+    system:
+        ezdemo_frontend_group:
+            location_view:
+                full:
+                    my_ruleset:
+                        controller: AcmeTestBundle:Default:viewFolder
+                        match:
+                            Identifier\ContentType: [folder]
+                            Identifier\Section: [standard]</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="note" data-macro-id="17e2b61b-d59b-49e9-b80f-21fb903812c3" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingdd57.png?definition=e25vdGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>Always ensure to have a <code>$params</code> argument and add new parameters to it, using <a href="http://php.net/manual/en/language.operators.array.php" style="line-height: 1.4285715;"> <strong> <code>+</code> </strong> union operator</a> or <code style="line-height: 1.4285715;">
+        <a href="http://php.net/array_merge">array_merge()</a>
+      </code>.</p><p><strong>Not doing so (e.g. only passing your custom parameters array) can result in unexpected issues with content preview</strong>. Previewed content and other parameters are indeed passed in <code>$params</code>.</p></td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="b9169a78-ebb7-48e2-aef3-0501d0f5c6ed" data-macro-parameters="language=php|title=Controller" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading5439.png?definition=e2NvZGU6bGFuZ3VhZ2U9cGhwfHRpdGxlPUNvbnRyb2xsZXJ9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>&lt;?php
+namespace Acme\TestBundle\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use eZ\Bundle\EzPublishCoreBundle\Controller;
+
+class DefaultController extends Controller
+{
+    public function viewFolderAction( $locationId, $layout = false, $params = array() )
+    {
+        $repository = $this->getRepository();
+        $location = $repository->getLocationService()->loadLocation( $locationId );
+        // Check if content is not already passed. Can be the case when using content preview.
+        $content = isset( $params['content'] ) ? $params['content'] : $repository->getContentService()->loadContentByContentInfo( $location->getContentInfo() )
+        $response = new Response();
+        $response->headers->set( 'X-Location-Id', $locationId );
+        // Caching for 1h and make the cache vary on user hash
+        $response->setSharedMaxAge( 3600 );
+        $response->setVary( 'X-User-Hash' );
+        return $this->render(
+            'AcmeTestBundle::custom_controller_folder.html.twig',
+            array(
+                'location' => $location,
+                'content' => $content,
+                'foo' => 'Hey world!!!',
+                'osTypes' => array( 'osx', 'linux', 'losedows' )
+            ) + $params
+        );
+    }
+}
+
+</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="67cca126-b4df-4dab-87a1-99423d0ed760" data-macro-parameters="title=custom_controller_folder.html.twig" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading5b8b.png?definition=e2NvZGU6dGl0bGU9Y3VzdG9tX2NvbnRyb2xsZXJfZm9sZGVyLmh0bWwudHdpZ30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>{% extends "eZDemoBundle::pagelayout.html.twig" %}
+
+{% block content %}
+&lt;h1>{{ ez_render_field( content, 'title' ) }}&lt;/h1>
+    &lt;h1>{{ foo }}&lt;/h1>
+    &lt;ul>
+    {% for os in osTypes %}
+        &lt;li>{{ os }}&lt;/li>
+    {% endfor %}
+    &lt;/ul>
+{% endblock %}
+</pre></td></tr></table><h2>Overriding the built-in ViewController</h2><p>One other way to keep control of what is passed to the view is to use your own controller instead of the built-in ViewController.</p><p>Base ViewController being defined as a service, with a service alias, this can be easily achieved from your bundle's configuration:</p><table class="wysiwyg-macro" data-macro-name="code" data-macro-id="69e2f42d-5b77-45cc-8eb9-95198a1ed09d" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading34e7.png?definition=e2NvZGV9&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="PLAIN_TEXT"><tr><td class="wysiwyg-macro-body"><pre>parameters:
+    my.custom.view_controller.class: Acme\TestBundle\MyViewController
+
+services:
+    my.custom.view_controller:
+        class: %my.custom.view_controller.class%
+        arguments: [@some_dependency, @other_dependency]
+
+    # Change the alias here and make it point to your own controller
+    ez_content:
+        alias: my.custom.view_controller</pre></td></tr></table><table class="wysiwyg-macro" data-macro-name="warning" data-macro-id="3f2a4d4f-622f-4a0b-8887-ec4107723dae" data-macro-parameters="title=Warning" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-heading340d.png?definition=e3dhcm5pbmc6dGl0bGU9V2FybmluZ30&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>Doing so will completely override the built-in ViewController! Use this at your own risk!</p></td></tr></table><table class="wysiwyg-macro" data-macro-name="info" data-macro-id="9635aca9-5547-4f8f-bd2e-954bdb026bb6" data-macro-parameters="title=See also" data-macro-schema-version="1" style="background-image: url(../servlet/confluence/placeholder/macro-headingdd57-2.png?definition=e2luZm86dGl0bGU9U2VlIGFsc299&amp;locale=en_GB&amp;version=2); background-repeat: no-repeat;" data-macro-body-type="RICH_TEXT"><tr><td class="wysiwyg-macro-body"><p>See also</p><p><a href="https://confluence.ez.no/display/EZP/Content+view#Contentview-Displayadefaulttext">How to Display a default text while asynchronous loading of a controller</a></p><p><a href="../../display/EZP/Content%2bview.html#Contentview-Renderembeddedcontentobjects">How to render an embedded content from a Twig template</a></p></td></tr></table><p> </p><p> </p>
+        <p>&nbsp;</p>
+    </body>
+
+<!-- Mirrored from doc.ez.no/plugins/viewsource/viewpagesrc.action?pageId=30711499 by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 31 Jan 2017 10:00:24 GMT -->
+</html>
